@@ -32,6 +32,9 @@ CacheMiss = CacheMissOffline
 
 OPENROUTER_BASE = "https://openrouter.ai/api/v1"
 MAX_ATTEMPTS = 6
+# Output cap. Kept out of the cache key: it bounds length, not content (responses run ~1k tokens),
+# and it stops OpenRouter reserving credit for its 65k default on every request.
+MAX_OUTPUT_TOKENS = int(os.environ.get("ATLAS_LLM_MAX_TOKENS", "8000"))
 
 
 class _Pacer:
@@ -54,17 +57,34 @@ class _Pacer:
 _pacer = _Pacer()
 
 
+def _retry_after(exc) -> float | None:
+    """Seconds to wait for a retryable provider error, or None if it is not retryable.
+
+    Retryable: rate limits, transient server/network errors, and OpenRouter's 402
+    `in_flight_budget_exhausted` (too many concurrent requests for the credit balance),
+    which says to retry after in-flight requests settle."""
+    from openai import APIConnectionError, APIStatusError, APITimeoutError, InternalServerError, RateLimitError
+    if isinstance(exc, (RateLimitError, APIConnectionError, APITimeoutError, InternalServerError)):
+        return 0.0
+    if isinstance(exc, APIStatusError) and exc.status_code == 402 and "in_flight" in str(exc):
+        try:
+            return float(exc.response.headers.get("retry-after") or 120)
+        except ValueError:
+            return 120.0
+    return None
+
+
 def _with_retry(fn):
-    """Pace, then retry rate-limit and transient errors with exponential backoff."""
-    from openai import APIConnectionError, APITimeoutError, InternalServerError, RateLimitError
+    """Pace, then retry retryable errors with exponential backoff (honouring Retry-After)."""
     for attempt in range(MAX_ATTEMPTS):
         _pacer.wait()
         try:
             return fn()
-        except (RateLimitError, APIConnectionError, APITimeoutError, InternalServerError):
-            if attempt == MAX_ATTEMPTS - 1:
+        except Exception as exc:
+            wait = _retry_after(exc)
+            if wait is None or attempt == MAX_ATTEMPTS - 1:
                 raise
-            time.sleep(min(60, 5 * 2 ** attempt))
+            time.sleep(min(150, max(wait, 5 * 2 ** attempt)))
 
 
 load_env()  # fills unset variables from the repo's .env; the shell's own environment wins
@@ -113,11 +133,12 @@ def parse(system: str, user: str, schema: type[T], *, model: str | None = None) 
         if via_openrouter():
             # OpenRouter's Responses API is beta; Chat Completions structured outputs is the stable path.
             msg = _with_retry(lambda: _openai().chat.completions.parse(
-                model=_wire_model(model), messages=messages, response_format=schema)).choices[0].message
+                model=_wire_model(model), messages=messages, response_format=schema,
+                max_completion_tokens=MAX_OUTPUT_TOKENS)).choices[0].message
             parsed = None if msg.refusal else msg.parsed
         else:
             parsed = _with_retry(lambda: _openai().responses.parse(
-                model=model, input=messages, text_format=schema)).output_parsed
+                model=model, input=messages, text_format=schema, max_output_tokens=MAX_OUTPUT_TOKENS)).output_parsed
         return None if parsed is None else parsed.model_dump(mode="json")
 
     value = cached("llm", request, call)
