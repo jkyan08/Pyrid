@@ -77,7 +77,7 @@ def test_extract_paper_drops_unmatched_quotes(monkeypatch):
     study_type, kept, dropped = claims_mod.extract_paper(paper)
     assert (study_type, len(kept), dropped) == ("case_report", 1, 1)
     assert kept[0]["quote"] == "Drug A improved symptoms."
-    assert kept[0]["pmid"] == "123" and kept[0]["variant"] == ""
+    assert kept[0]["pmid"] == "123" and kept[0]["paper"] == "pmid:123" and kept[0]["variant"] == ""
 
 
 def test_extract_paper_skips_missing_abstract(monkeypatch):
@@ -177,11 +177,10 @@ def test_reconcile_model_pick_must_be_in_shortlist_and_high():
 
 
 def test_low_confidence_links_go_to_review_queue_not_graph():
-    idx = NodeIndex(GRAPH["nodes"], embed=fake_embed)
     claims = [{"id": "c_1", "subject": "Drug A", "predicate": "treats", "object": "the disease", "quote": "q"}]
     p = scripted(Adjudication(choice="n:disX", confidence="medium", reason="ambiguous GoF/LoF"))
-    links, review = link_claims(claims, idx, parser=p)
-    assert links["c_1"] == {"subject": "n:drugA", "object": None}
+    links, review = link_claims(claims, GRAPH["nodes"], embed=fake_embed, parser=p)
+    assert links["c_1"] == {"subject": "n:drugA", "object": None, "variant": ""}
     assert review[0]["proposed"] == "n:disX" and review[0]["confidence"] == "medium"
 
 
