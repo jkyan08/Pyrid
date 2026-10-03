@@ -405,6 +405,8 @@ Times are ET on Sat Oct 3 → Sun Oct 4. If we start late, shift proportionally.
 
 ### Ownership (parallel workstreams)
 
+> For the 3-agent parallel split (lanes, handoffs, sync points), see [AGENT-SPLIT.md](AGENT-SPLIT.md).
+
 The contract is the seam: after M0, each stream works against `graph.json` / the schema and does not need the others to be done.
 
 | Stream | Owns | Depends on | First deliverable |
