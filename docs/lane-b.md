@@ -6,6 +6,7 @@ Owner files: `pipeline/sources/pubmed.py`, `pipeline/extract/*`, `pipeline/llm/*
 
 ```bash
 python -m pipeline.sources.pubmed      # → data/build/papers.json (no OpenAI needed)
+python -m pipeline.extract.investigators  # → data/build/investigators.json (no OpenAI needed)
 python -m pipeline.extract.claims      # → data/build/claims.json
 python -m pipeline.extract.reconcile   # → data/build/claim_links.json, data/review_queue.csv
 python -m pipeline.llm.explain         # → data/build/explanations.json (demo journeys)
@@ -23,6 +24,8 @@ Needs `OPENAI_MODEL` and `OPENAI_EMBED_MODEL`. `ATLAS_CACHE_DIR` points at the s
   Build treatment edges from claims where both ends resolve. `polarity` gives supporting vs contradicting.
   `study_type` and `n_patients` drive `contested` / `small_n`.
 - `claims.json` → `stats` has the quote-check drop rate for README Section 14.
+- `investigators.json`: grouped by ORCID (`high`) or name + affiliation (`low`); `description` is
+  "author of N papers on X"; `contact` only when the paper prints the email (with the source PMID).
 - `papers.json`: per paper, authors with affiliations and ORCID (for Investigator nodes) and `coverage`
   (every search with query, date and hits, for `meta.coverage`). `unresolved` lists Section 11 papers that
   didn't resolve.

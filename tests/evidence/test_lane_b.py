@@ -231,3 +231,29 @@ def test_precision_strict_and_lenient():
     assert (r["n_labelled"], r["strict"], r["lenient"]) == (4, 0.5, 0.75)
     with pytest.raises(ValueError):
         precision([{"label": "maybe"}])
+
+
+# --- investigators ------------------------------------------------------------------
+
+def _paper(ref, authors, found_by=("topic:stat1_gof",)):
+    return {"pmid": ref, "doi": None, "found_by": list(found_by),
+            "authors": [{"last": l, "fore": f, "initials": f[:1], "affiliations": aff, "orcid": o}
+                        for l, f, aff, o in authors]}
+
+
+def test_investigators_group_by_orcid_then_name_and_affiliation():
+    from pipeline.extract.investigators import build as build_investigators
+    papers = [
+        _paper("1", [("Doe", "Jane", ["Placeholder Institute, Springfield. jane@placeholder.org"], "0000-0000-0000-0001")]),
+        _paper("2", [("Doe", "Jane", ["Placeholder Institute, Springfield"], None)]),
+        _paper("3", [("Doe", "Jane", ["Elsewhere Clinic, Shelbyville"], None)]),
+        _paper("4", [("Roe", "Rick", [], None), ("Doe", "Jane", [], None)]),
+    ]
+    invs = {i["id"]: i for i in build_investigators(papers)}
+    orc = invs["orcid:0000-0000-0000-0001"]
+    assert sorted(orc["papers"]) == ["1", "2", "4"]  # 4: identical full name, no affiliation printed
+    assert orc["contact"] == {"email": "jane@placeholder.org", "source": {"kind": "pmid", "id": "1"}}
+    assert orc["description"] == "author of 3 papers on STAT1 gain of function"
+    other = [i for i in invs.values() if i["papers"] == ["3"]]
+    assert other and other[0]["confidence"] == "low" and other[0]["contact"] is None  # never guessed
+    assert "leader" not in " ".join(i["description"] for i in invs.values())
