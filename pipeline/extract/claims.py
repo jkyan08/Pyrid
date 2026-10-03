@@ -5,7 +5,9 @@ contract shape. Every claim must carry a verbatim quote that string-matches its
 abstract after whitespace normalization (hard rule 5); claims that fail are
 dropped and counted, never repaired.
 
-Reads `data/build/papers.json`, writes `data/build/claims.json`.
+Reads `data/build/papers.json`, writes `data/build/claims.raw.json`: claims with
+`subject`/`object`/`variant` still as mention text. `reconcile` resolves them to
+node IDs and writes the contract-valid `data/build/claims.json`.
 Run: `python -m pipeline.extract.claims`
 """
 from __future__ import annotations
@@ -23,9 +25,9 @@ from pipeline.extract._compat import REPO_ROOT
 from pipeline.llm.client import chat_model, parse
 
 PAPERS = REPO_ROOT / "data" / "build" / "papers.json"
-OUT = REPO_ROOT / "data" / "build" / "claims.json"
+OUT = REPO_ROOT / "data" / "build" / "claims.raw.json"
 
-PROMPT_VERSION = "claims-v1"
+PROMPT_VERSION = "claims-v2"
 
 Predicate = Literal["treats", "causes", "has_phenotype", "has_mechanism", "modulates", "associated_with"]
 StudyType = Literal["trial", "cohort", "case_series", "case_report", "in_vitro", "review"]
@@ -57,6 +59,12 @@ Rules:
 disease or variant to clinical features (has_phenotype), drug effects on a molecular readout (modulates).
 - quote MUST be copied exactly from the abstract, including punctuation and capitalization. Never paraphrase, never join \
 non-adjacent text, never fix typos.
+- For 'treats', object is the patients' underlying disease or genetic condition as the abstract names it \
+(e.g. "STAT1 gain-of-function", "STAT1 GOF patients' disease"), not the symptom that improved; the quote carries the outcome. \
+If the abstract never names the condition, use the closest named population.
+- For 'has_phenotype' and 'has_mechanism', subject is the disease, gene variant or mutation class (e.g. "STAT1 GOF"), \
+not the bare gene name when the abstract says which form.
+- Record variant-specific findings as separate claims with `variant` set (protein notation, e.g. "R274W").
 - A treatment that did not work, or that worsened outcomes, is predicate 'treats' with polarity 'contradicts'.
 - Normalize the claim's direction to the positive relation; use polarity for negation.
 - study_type describes the paper: trial, cohort, case_series (2+ patients), case_report (1 patient), in_vitro, review.
@@ -74,7 +82,8 @@ def quote_matches(quote: str, abstract: str) -> bool:
 
 
 def paper_ref(p: dict) -> str:
-    return p["pmid"] or f"doi:{p['doi']}"
+    """Paper node id per the contract: `pmid:<n>`, else `doi:<doi>`."""
+    return f"pmid:{p['pmid']}" if p["pmid"] else f"doi:{p['doi']}"
 
 
 def extract_paper(p: dict) -> tuple[str | None, list[dict], int]:
@@ -91,7 +100,7 @@ def extract_paper(p: dict) -> tuple[str | None, list[dict], int]:
             dropped += 1
             continue
         kept.append({
-            "pmid": paper_ref(p), "quote": normalize_ws(c.quote), "polarity": c.polarity,
+            "pmid": p["pmid"] or "", "paper": paper_ref(p), "quote": normalize_ws(c.quote), "polarity": c.polarity,
             "subject": c.subject, "predicate": c.predicate, "object": c.object,
             "variant": c.variant or "", "study_type": result.study_type, "n_patients": c.n_patients,
         })
@@ -106,7 +115,7 @@ def build(papers: list[dict], workers: int = 8) -> dict:
         dropped_total += dropped
         n_kept = 0
         for c in kept:
-            key = (c["pmid"], c["quote"], c["subject"], c["predicate"], c["object"])
+            key = (c["paper"], c["quote"], c["subject"], c["predicate"], c["object"])
             if key in seen:
                 continue
             seen.add(key)
