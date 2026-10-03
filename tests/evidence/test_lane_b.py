@@ -131,7 +131,8 @@ def test_explain_retries_once_with_errors_then_succeeds():
 
 def test_explain_falls_back_to_template_that_validates():
     p = scripted(cited(("Bad.", ["e_999999"])), None)  # invalid, then refusal
-    out = explain(["n:disX"], GRAPH, parser=p)
+    assert explain(["n:disX"], GRAPH, parser=scripted(cited(("Bad.", ["e_999999"])), None)) is None  # seam default
+    out = explain(["n:disX"], GRAPH, parser=p, fallback=True)
     assert out["mode"] == "template"
     allowed = {"e_000001", "e_000002", "c_000001", "c_000002"}
     assert validate_sentences(out["sentences"], allowed).ok
@@ -139,17 +140,19 @@ def test_explain_falls_back_to_template_that_validates():
 
 
 def test_explain_unsupported_edge_template_says_so():
-    out = explain(["e_000003"], GRAPH, parser=scripted(None, None))
+    out = explain(["e_000003"], GRAPH, parser=scripted(None, None), fallback=True)
     assert "not supported" in out["text"]
 
 
 def test_explain_empty_subgraph_is_honest_gap():
-    out = explain(["n:nothing"], GRAPH, parser=lambda *a: pytest.fail("no model call for an empty subgraph"))
+    no_call = lambda *a: pytest.fail("no model call for an empty subgraph")
+    assert explain(["n:nothing"], GRAPH, parser=no_call) is None
+    out = explain(["n:nothing"], GRAPH, parser=no_call, fallback=True)
     assert out["mode"] == "empty" and out["sentences"] == []
 
 
 def test_draft_carries_never_sent_notice_and_validates():
-    out = draft(["e_000001"], GRAPH, parser=scripted(None, None))
+    out = draft(["e_000001"], GRAPH, parser=scripted(None, None), fallback=True)
     assert out["notice"] == NOTICE and "Nothing is sent" in out["notice"]
     assert validate_sentences(out["sentences"], {"e_000001", "c_000001", "c_000002"}).ok
 
@@ -302,21 +305,28 @@ def test_coverage_keyed_by_entity():
 # --- lane C seam ----------------------------------------------------------------------
 
 def test_lane_c_seam_shapes(monkeypatch):
-    """Mirrors api/llm_seam.py: attribute lookup on the package, `text` + `citations` back,
-    and draft(entity_id, graph, focus=...). A provider failure degrades to the template."""
+    """Mirrors api/llm_seam.py: attribute lookup on the package; a validated LLM answer comes back
+    with `text` + `citations`; a provider failure or empty subgraph returns None so lane C falls
+    through to its precomputed explanations and fallback."""
     import importlib
 
     from pipeline.llm import client
+
+    llm = importlib.import_module("pipeline.llm")
+    monkeypatch.setattr(client, "parse", scripted(cited(("Drug A has mixed reports.", ["e_000001"])),
+                                                  cited(("We propose pooling data.", ["e_000001"]))))
+    out = llm.explain(["n:disX"], GRAPH)
+    assert out["mode"] == "llm" and out["text"] and out["citations"] == ["e_000001"]
+    d = llm.draft("n:disX", GRAPH, focus="treatment_response")
+    assert d["mode"] == "llm" and d["notice"] == NOTICE
 
     def boom(*a, **k):
         raise RuntimeError("provider down")
 
     monkeypatch.setattr(client, "parse", boom)
-    llm = importlib.import_module("pipeline.llm")
-    out = llm.explain(["n:disX"], GRAPH)
-    assert out["mode"] == "template" and out["text"] and set(out["citations"]) >= {"e_000001"}
-    d = llm.draft("n:disX", GRAPH, focus="treatment_response")
-    assert d["mode"] == "template" and d["citations"] and d["notice"] == NOTICE
+    assert llm.explain(["n:disX"], GRAPH) is None
+    assert llm.draft("n:disX", GRAPH) is None
+    assert llm.explain(["x"], {}) is None
 
 
 def test_cache_key_matches_lane_c_lookup():
