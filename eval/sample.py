@@ -13,10 +13,11 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-CLAIMS = ROOT / "data" / "build" / "claims.json"
+# Raw extraction (before reconcile), so precision measures extraction itself.
+CLAIMS = ROOT / "data" / "build" / "claims.raw.json"
 OUT = ROOT / "eval" / "claims_review.csv"
 N, SEED = 40, 20261004
-FIELDS = ["claim_id", "pmid", "subject", "predicate", "object", "polarity", "variant", "study_type", "n_patients",
+FIELDS = ["claim_id", "pmid", "paper", "subject", "predicate", "object", "polarity", "variant", "study_type", "n_patients",
           "quote", "label", "notes"]
 
 
@@ -29,7 +30,7 @@ def main() -> None:
         w = csv.DictWriter(f, fieldnames=FIELDS)
         w.writeheader()
         for c in sorted(sample, key=lambda c: c["id"]):
-            w.writerow({"claim_id": c["id"], **{k: c.get(k, "") for k in FIELDS[1:10]}, "label": "", "notes": ""})
+            w.writerow({"claim_id": c["id"], **{k: c.get(k, "") for k in FIELDS[1:11]}, "label": "", "notes": ""})
     print(f"wrote {len(sample)} claims to {OUT}. Label each: correct | partial | wrong", file=sys.stderr)
 
 
