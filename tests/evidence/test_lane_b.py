@@ -281,3 +281,30 @@ def test_contract_claims_validate_and_drop_unresolved():
     Claim.model_validate(claims[0])
     assert counts == {"raw": 3, "unresolved_subject_or_object": 1, "unresolved_variant": 1, "kept": 1}
     assert paper_nodes[0]["id"] == "pmid:42" and paper_nodes[0]["props"]["abstract"].startswith("Mock Drug X")
+
+
+# --- lane C seam ----------------------------------------------------------------------
+
+def test_lane_c_seam_shapes(monkeypatch):
+    """Mirrors api/llm_seam.py: attribute lookup on the package, `text` + `citations` back,
+    and draft(entity_id, graph, focus=...). A provider failure degrades to the template."""
+    import importlib
+
+    from pipeline.llm import client
+
+    def boom(*a, **k):
+        raise RuntimeError("provider down")
+
+    monkeypatch.setattr(client, "parse", boom)
+    llm = importlib.import_module("pipeline.llm")
+    out = llm.explain(["n:disX"], GRAPH)
+    assert out["mode"] == "template" and out["text"] and set(out["citations"]) >= {"e_000001"}
+    d = llm.draft("n:disX", GRAPH, focus="treatment_response")
+    assert d["mode"] == "template" and d["citations"] and d["notice"] == NOTICE
+
+
+def test_cache_key_matches_lane_c_lookup():
+    from pipeline.llm.explain import cache_key
+    assert cache_key(["n:disX"]) == "n:disX"
+    assert cache_key(["n:a", "n:b"]) == "n:a|n:b"
+    assert cache_key("n:disX", "draft") == "draft:n:disX"
