@@ -12,8 +12,8 @@ always valid, so callers always get cited text.
 """
 from __future__ import annotations
 
-import hashlib
 import json
+import logging
 import sys
 from typing import Callable
 
@@ -22,6 +22,8 @@ from pydantic import BaseModel, Field
 from pipeline.extract._compat import REPO_ROOT
 from pipeline.llm import client
 from pipeline.llm.validate import DOSING, render, validate_sentences
+
+log = logging.getLogger(__name__)
 
 PROMPT_VERSION = "explain-v1"
 MAX_EDGES = 40
@@ -130,6 +132,12 @@ def _fallback(sub: dict) -> list[dict]:
     return out
 
 
+def _result(mode: str, sentences: list[dict], errors: list) -> dict:
+    """`text` and `citations` are what lane C's API reads; `sentences` keeps the per-sentence cites."""
+    citations = list(dict.fromkeys(c for s in sentences for c in s["cites"]))
+    return {"mode": mode, "text": render(sentences), "citations": citations, "sentences": sentences, "errors": errors}
+
+
 def generate_cited(system: str, task: str, sub: dict, fallback: Callable[[dict], list[dict]],
                    parser: Parser | None = None) -> dict:
     """Shared LLM → validate → retry → fallback loop for explain and draft."""
@@ -146,17 +154,19 @@ def generate_cited(system: str, task: str, sub: dict, fallback: Callable[[dict],
                 out = parser(system, user, CitedText)
             except client.CacheMiss:
                 break
+            except Exception as exc:  # provider/auth/network failure: never fail the caller
+                log.warning("LLM call failed; using template: %s", exc)
+                errors_seen.append([f"llm error: {type(exc).__name__}"])
+                break
             if out is None:
                 errors_seen.append(["model refused"])
                 continue
             sentences = [s.model_dump() for s in out.sentences]
             v = validate_sentences(sentences, ids, pmids)
             if v.ok:
-                return {"mode": "llm" if attempt == 0 else "llm_retry", "sentences": sentences,
-                        "text": render(sentences), "errors": errors_seen}
+                return _result("llm" if attempt == 0 else "llm_retry", sentences, errors_seen)
             errors_seen.append(v.errors)
-    sentences = fallback(sub)
-    return {"mode": "template", "sentences": sentences, "text": render(sentences), "errors": errors_seen}
+    return _result("template", fallback(sub), errors_seen)
 
 
 def explain(ids: list[str], graph: dict, *, parser: Parser | None = None) -> dict:
@@ -164,13 +174,17 @@ def explain(ids: list[str], graph: dict, *, parser: Parser | None = None) -> dic
     when the subgraph is empty, which callers should treat as an honest gap)."""
     sub = subgraph(ids, graph)
     if not sub["edges"] and not sub["claims"]:
-        return {"mode": "empty", "sentences": [], "text": "", "errors": []}
+        return _result("empty", [], [])
     task = f"Explain how these connect: {', '.join(ids)}"
     return generate_cited(SYSTEM, task, sub, _fallback, parser)
 
 
-def cache_key(ids: list[str], kind: str = "explain") -> str:
-    return hashlib.sha256(json.dumps([kind, sorted(ids)]).encode()).hexdigest()[:16]
+def cache_key(ids: list[str] | str, kind: str = "explain") -> str:
+    """Key in explanations.json. Lane C looks explanations up by the first requested id, so a
+    single-entity explanation is keyed by that id; a path is its ids joined with '|'.
+    Drafts are keyed 'draft:<key>'."""
+    key = ids if isinstance(ids, str) else "|".join(ids)
+    return key if kind == "explain" else f"{kind}:{key}"
 
 
 # Demo journeys to precompute. Filled with node/edge IDs once graph v0 lands
