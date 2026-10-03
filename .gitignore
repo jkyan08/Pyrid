@@ -1,0 +1,19 @@
+# Python / uv
+.venv/
+__pycache__/
+.pytest_cache/
+
+# Secrets (commit .env.example, never .env)
+.env
+
+# Data: raw downloads and the HTTP/LLM cache are rebuilt from the network.
+# data/build/ (graph.json, graph.mock.json) and data/review_queue.csv stay tracked.
+data/raw/
+data/cache/
+
+# Web
+web/node_modules/
+web/.next/
+
+# OS
+.DS_Store

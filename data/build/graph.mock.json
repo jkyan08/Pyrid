@@ -1,0 +1,1792 @@
+{
+  "meta": {
+    "built_at": "2026-10-03T00:00:00+00:00",
+    "sources": [
+      {
+        "name": "Mock backbone",
+        "version": "mock-0",
+        "retrieved_at": "2026-10-03",
+        "license": "mock"
+      },
+      {
+        "name": "Mock variant database",
+        "version": "",
+        "retrieved_at": "2026-10-03",
+        "license": "mock"
+      },
+      {
+        "name": "Mock phenotype database",
+        "version": "mock-0",
+        "retrieved_at": "2026-10-03",
+        "license": "mock"
+      },
+      {
+        "name": "Mock literature index",
+        "version": "",
+        "retrieved_at": "2026-10-03",
+        "license": "mock"
+      },
+      {
+        "name": "Mock trial registry",
+        "version": "",
+        "retrieved_at": "2026-10-03",
+        "license": "mock"
+      },
+      {
+        "name": "Mock patient group seeds",
+        "version": "",
+        "retrieved_at": "2026-10-03",
+        "license": "mock"
+      }
+    ],
+    "coverage": {
+      "mock:disease:1": {
+        "searched": [
+          {
+            "source": "mock:source:literature_index",
+            "query": "Mock Disease One",
+            "date": "2026-10-03",
+            "hits": 2
+          },
+          {
+            "source": "mock:source:trial_registry",
+            "query": "Mock Disease One",
+            "date": "2026-10-03",
+            "hits": 1
+          },
+          {
+            "source": "mock:source:patient_group_seeds",
+            "query": "Mock Disease One patient group",
+            "date": "2026-10-03",
+            "hits": 1
+          }
+        ]
+      },
+      "mock:disease:3": {
+        "searched": [
+          {
+            "source": "mock:source:literature_index",
+            "query": "Mock Disease Three",
+            "date": "2026-10-03",
+            "hits": 1
+          },
+          {
+            "source": "mock:source:trial_registry",
+            "query": "Mock Disease Three",
+            "date": "2026-10-03",
+            "hits": 0
+          }
+        ]
+      },
+      "mock:disease:4": {
+        "searched": [
+          {
+            "source": "mock:source:trial_registry",
+            "query": "Mock Disease Four",
+            "date": "2026-10-03",
+            "hits": 0
+          },
+          {
+            "source": "mock:source:patient_group_seeds",
+            "query": "Mock Disease Four patient group",
+            "date": "2026-10-03",
+            "hits": 0
+          }
+        ]
+      },
+      "mock:gene:3": {
+        "searched": [
+          {
+            "source": "mock:source:patient_group_seeds",
+            "query": "Mock Gene C patient group",
+            "date": "2026-10-03",
+            "hits": 0
+          }
+        ]
+      },
+      "mock:drug:1": {
+        "searched": [
+          {
+            "source": "mock:source:literature_index",
+            "query": "Mock Drug X Mock Disease One",
+            "date": "2026-10-03",
+            "hits": 2
+          }
+        ]
+      }
+    }
+  },
+  "nodes": [
+    {
+      "id": "mock:gene:1",
+      "type": "Gene",
+      "label": "Mock Gene A",
+      "synonyms": [
+        "Mock gene alpha"
+      ],
+      "props": {
+        "symbol": "MOCKGENE1",
+        "pathway": "mock:pathway:1"
+      }
+    },
+    {
+      "id": "mock:gene:2",
+      "type": "Gene",
+      "label": "Mock Gene B",
+      "synonyms": [
+        "Mock gene beta"
+      ],
+      "props": {
+        "symbol": "MOCKGENE2",
+        "pathway": "mock:pathway:1"
+      }
+    },
+    {
+      "id": "mock:gene:3",
+      "type": "Gene",
+      "label": "Mock Gene C",
+      "synonyms": [
+        "Mock gene gamma"
+      ],
+      "props": {
+        "symbol": "MOCKGENE3",
+        "pathway": "mock:pathway:1"
+      }
+    },
+    {
+      "id": "mock:variant:1",
+      "type": "Variant",
+      "label": "Mock Variant A1",
+      "synonyms": [],
+      "props": {
+        "gene": "mock:gene:1",
+        "gene_symbol": "MOCKGENE1",
+        "protein_change": "Mock change A1",
+        "review": "mock:reviewed"
+      }
+    },
+    {
+      "id": "mock:variant:2",
+      "type": "Variant",
+      "label": "Mock Variant A2",
+      "synonyms": [],
+      "props": {
+        "gene": "mock:gene:1",
+        "gene_symbol": "MOCKGENE1",
+        "protein_change": "Mock change A2",
+        "review": "mock:reviewed"
+      }
+    },
+    {
+      "id": "mock:variant:3",
+      "type": "Variant",
+      "label": "Mock Variant A3",
+      "synonyms": [],
+      "props": {
+        "gene": "mock:gene:1",
+        "gene_symbol": "MOCKGENE1",
+        "protein_change": "Mock change A3",
+        "review": "mock:single_submitter"
+      }
+    },
+    {
+      "id": "mech:MOCKGENE1:GoF",
+      "type": "Mechanism",
+      "label": "Mock Mechanism A gain-of-function",
+      "synonyms": [],
+      "props": {
+        "gene": "mock:gene:1",
+        "direction": "GoF",
+        "origin": "germline"
+      }
+    },
+    {
+      "id": "mech:MOCKGENE1:LoF",
+      "type": "Mechanism",
+      "label": "Mock Mechanism A loss-of-function",
+      "synonyms": [],
+      "props": {
+        "gene": "mock:gene:1",
+        "direction": "LoF",
+        "origin": "germline"
+      }
+    },
+    {
+      "id": "mech:MOCKGENE2:LoF",
+      "type": "Mechanism",
+      "label": "Mock Mechanism B loss-of-function",
+      "synonyms": [],
+      "props": {
+        "gene": "mock:gene:2",
+        "direction": "LoF",
+        "origin": "germline"
+      }
+    },
+    {
+      "id": "mech:MOCKGENE3:GoF:somatic",
+      "type": "Mechanism",
+      "label": "Mock Mechanism C gain-of-function, somatic",
+      "synonyms": [],
+      "props": {
+        "gene": "mock:gene:3",
+        "direction": "GoF",
+        "origin": "somatic"
+      }
+    },
+    {
+      "id": "mock:disease:1",
+      "type": "Disease",
+      "label": "Mock Disease One",
+      "synonyms": [
+        "Mock disease 1",
+        "Mock condition one"
+      ],
+      "props": {
+        "origin": "germline",
+        "mechanism": "mech:MOCKGENE1:GoF"
+      }
+    },
+    {
+      "id": "mock:disease:2",
+      "type": "Disease",
+      "label": "Mock Disease Two",
+      "synonyms": [
+        "Mock disease 2"
+      ],
+      "props": {
+        "origin": "germline",
+        "mechanism": "mech:MOCKGENE1:LoF"
+      }
+    },
+    {
+      "id": "mock:disease:3",
+      "type": "Disease",
+      "label": "Mock Disease Three",
+      "synonyms": [
+        "Mock disease 3"
+      ],
+      "props": {
+        "origin": "germline",
+        "mechanism": "mech:MOCKGENE2:LoF"
+      }
+    },
+    {
+      "id": "mock:disease:4",
+      "type": "Disease",
+      "label": "Mock Disease Four",
+      "synonyms": [
+        "Mock disease 4"
+      ],
+      "props": {
+        "origin": "somatic",
+        "mechanism": "mech:MOCKGENE3:GoF:somatic"
+      }
+    },
+    {
+      "id": "mock:phenotype:1",
+      "type": "Phenotype",
+      "label": "Mock Phenotype P",
+      "synonyms": [
+        "Mock symptom P"
+      ],
+      "props": {
+        "information_content": 3.1
+      }
+    },
+    {
+      "id": "mock:phenotype:2",
+      "type": "Phenotype",
+      "label": "Mock Phenotype Q",
+      "synonyms": [
+        "Mock symptom Q"
+      ],
+      "props": {
+        "information_content": 1.4
+      }
+    },
+    {
+      "id": "mock:phenotype:3",
+      "type": "Phenotype",
+      "label": "Mock Phenotype R",
+      "synonyms": [
+        "Mock symptom R"
+      ],
+      "props": {
+        "information_content": 2.7
+      }
+    },
+    {
+      "id": "mock:phenotype:4",
+      "type": "Phenotype",
+      "label": "Mock Phenotype S",
+      "synonyms": [
+        "Mock symptom S"
+      ],
+      "props": {
+        "information_content": 2.2
+      }
+    },
+    {
+      "id": "mock:pathway:1",
+      "type": "Pathway",
+      "label": "Mock Pathway Alpha",
+      "synonyms": [
+        "Mock signalling pathway alpha"
+      ],
+      "props": {
+        "description": "Mock signalling pathway used only for fixtures"
+      }
+    },
+    {
+      "id": "mock:drug:1",
+      "type": "Drug",
+      "label": "Mock Drug X",
+      "synonyms": [
+        "Mock inhibitor X"
+      ],
+      "props": {
+        "action": "inhibits",
+        "target": "mock:pathway:1"
+      }
+    },
+    {
+      "id": "mock:drug:2",
+      "type": "Drug",
+      "label": "Mock Drug Y",
+      "synonyms": [
+        "Mock inhibitor Y"
+      ],
+      "props": {
+        "action": "inhibits",
+        "target": "mock:gene:1"
+      }
+    },
+    {
+      "id": "mock:paper:1",
+      "type": "Paper",
+      "label": "Mock Paper One",
+      "synonyms": [],
+      "props": {
+        "title": "Mock Paper One: a placeholder cohort of Mock Disease One",
+        "abstract": "Mock abstract for Mock Paper One. This placeholder study describes a mock cohort of twelve\nindividuals with Mock Disease One. In this mock cohort, gain-of-function changes in Mock Gene A\nwere present in every individual with Mock Disease One. In mock cell assays, Mock Variant A1\nincreased signalling through Mock Pathway Alpha compared with the reference sequence, and the\nincrease was larger than for other mock variants of Mock Gene A. In a mock case series of six\ntreated individuals, Mock Drug X was followed by fewer episodes of Mock Phenotype P. Every name,\nnumber and finding in this abstract is a placeholder and describes no real study.",
+        "year": 2000,
+        "journal": "Mock Journal of Placeholder Studies",
+        "authors": [
+          "Mock Investigator One",
+          "Mock Investigator Two"
+        ]
+      }
+    },
+    {
+      "id": "mock:paper:2",
+      "type": "Paper",
+      "label": "Mock Paper Two",
+      "synonyms": [],
+      "props": {
+        "title": "Mock Paper Two: a placeholder treatment report",
+        "abstract": "Mock abstract for Mock Paper Two. This placeholder report describes seven mock individuals with\nMock Disease One: four who received Mock Drug X and three who received Mock Drug Y.  Mock Drug X\ndid not reduce the frequency of Mock Phenotype P in the four mock individuals who received it.\nMock Drug Y was followed by fewer episodes of Mock Phenotype Q in all three mock individuals who\nreceived it. Every statement in this abstract is a placeholder and describes no real study.",
+        "year": 2001,
+        "journal": "Mock Journal of Placeholder Studies",
+        "authors": [
+          "Mock Investigator One"
+        ]
+      }
+    },
+    {
+      "id": "mock:paper:3",
+      "type": "Paper",
+      "label": "Mock Preprint Three",
+      "synonyms": [],
+      "props": {
+        "title": "Mock Preprint Three: a placeholder cohort of Mock Disease Three",
+        "abstract": "Mock abstract for Mock Preprint Three. In a placeholder cohort of nine mock individuals with Mock\nDisease Three, loss-of-function changes in Mock Gene B were identified in nine of nine mock\nindividuals. This mock preprint has not been peer reviewed and describes no real study.",
+        "year": 2002,
+        "journal": "Mock Preprint Server",
+        "authors": [
+          "Mock Investigator Two"
+        ],
+        "preprint": true
+      }
+    },
+    {
+      "id": "c_000001",
+      "type": "Claim",
+      "label": "Mock Claim 1",
+      "synonyms": [],
+      "props": {}
+    },
+    {
+      "id": "mock:investigator:1",
+      "type": "Investigator",
+      "label": "Mock Investigator One",
+      "synonyms": [],
+      "props": {
+        "affiliation": "Mock Institute of Placeholder Studies",
+        "n_papers": 2,
+        "role_label": "author of 2 mock papers on Mock Pathway Alpha",
+        "contact": null
+      }
+    },
+    {
+      "id": "mock:investigator:2",
+      "type": "Investigator",
+      "label": "Mock Investigator Two",
+      "synonyms": [],
+      "props": {
+        "affiliation": "Mock Institute of Placeholder Studies",
+        "n_papers": 2,
+        "role_label": "author of 2 mock papers on Mock Pathway Alpha",
+        "contact": null
+      }
+    },
+    {
+      "id": "mock:patientgroup:1",
+      "type": "PatientGroup",
+      "label": "Mock Patient Group",
+      "synonyms": [
+        "Mock family alliance"
+      ],
+      "props": {
+        "scope": "Mock Disease One",
+        "verified": false,
+        "note": "placeholder; no real organisation"
+      }
+    },
+    {
+      "id": "mock:registry:1",
+      "type": "Registry",
+      "label": "Mock Registry",
+      "synonyms": [],
+      "props": {
+        "scope": "Mock Disease One and related mock conditions",
+        "verified": false,
+        "note": "placeholder; no real registry"
+      }
+    },
+    {
+      "id": "mock:study:1",
+      "type": "Study",
+      "label": "Mock Study One",
+      "synonyms": [],
+      "props": {
+        "status": "mock:recruiting",
+        "conditions": [
+          "mock:disease:1"
+        ],
+        "interventions": [
+          "mock:drug:1"
+        ],
+        "mechanism": "mech:MOCKGENE1:GoF",
+        "eligibility": "Mock eligibility: placeholder criteria limited to Mock Disease One with a gain-of-function mechanism."
+      }
+    }
+  ],
+  "edges": [
+    {
+      "id": "e_000001",
+      "source": "mock:gene:1",
+      "target": "mock:pathway:1",
+      "relation": "in_pathway",
+      "evidence_class": "observed",
+      "confidence": 0.9,
+      "confidence_basis": {
+        "source": "mock:source:backbone",
+        "evidence_code": "mock:curated",
+        "rubric": "curated > automated"
+      },
+      "status": "supported",
+      "sources": [
+        {
+          "kind": "db",
+          "id": "mock:source:backbone",
+          "date": "2026-10-03"
+        }
+      ],
+      "supporting": [],
+      "contradicting": [],
+      "attributes": {}
+    },
+    {
+      "id": "e_000002",
+      "source": "mock:gene:2",
+      "target": "mock:pathway:1",
+      "relation": "in_pathway",
+      "evidence_class": "observed",
+      "confidence": 0.9,
+      "confidence_basis": {
+        "source": "mock:source:backbone",
+        "evidence_code": "mock:curated",
+        "rubric": "curated > automated"
+      },
+      "status": "supported",
+      "sources": [
+        {
+          "kind": "db",
+          "id": "mock:source:backbone",
+          "date": "2026-10-03"
+        }
+      ],
+      "supporting": [],
+      "contradicting": [],
+      "attributes": {}
+    },
+    {
+      "id": "e_000003",
+      "source": "mock:gene:3",
+      "target": "mock:pathway:1",
+      "relation": "in_pathway",
+      "evidence_class": "observed",
+      "confidence": 0.9,
+      "confidence_basis": {
+        "source": "mock:source:backbone",
+        "evidence_code": "mock:curated",
+        "rubric": "curated > automated"
+      },
+      "status": "supported",
+      "sources": [
+        {
+          "kind": "db",
+          "id": "mock:source:backbone",
+          "date": "2026-10-03"
+        }
+      ],
+      "supporting": [],
+      "contradicting": [],
+      "attributes": {}
+    },
+    {
+      "id": "e_000004",
+      "source": "mock:disease:1",
+      "target": "mock:gene:1",
+      "relation": "associated_with",
+      "evidence_class": "observed",
+      "confidence": 0.87,
+      "confidence_basis": {
+        "source": "mock:source:backbone",
+        "evidence_score": 0.82,
+        "evidence_score_range": [
+          0.0,
+          1.0
+        ],
+        "number_of_pmids": 14,
+        "multi_pmid_bonus": 0.05
+      },
+      "status": "supported",
+      "sources": [
+        {
+          "kind": "db",
+          "id": "mock:source:backbone",
+          "date": "2026-10-03"
+        }
+      ],
+      "supporting": [],
+      "contradicting": [],
+      "attributes": {
+        "origin": "germline"
+      }
+    },
+    {
+      "id": "e_000005",
+      "source": "mock:disease:2",
+      "target": "mock:gene:1",
+      "relation": "associated_with",
+      "evidence_class": "observed",
+      "confidence": 0.74,
+      "confidence_basis": {
+        "source": "mock:source:backbone",
+        "evidence_score": 0.74,
+        "evidence_score_range": [
+          0.0,
+          1.0
+        ],
+        "number_of_pmids": 6,
+        "multi_pmid_bonus": 0.0
+      },
+      "status": "supported",
+      "sources": [
+        {
+          "kind": "db",
+          "id": "mock:source:backbone",
+          "date": "2026-10-03"
+        }
+      ],
+      "supporting": [],
+      "contradicting": [],
+      "attributes": {
+        "origin": "germline"
+      }
+    },
+    {
+      "id": "e_000006",
+      "source": "mock:disease:3",
+      "target": "mock:gene:2",
+      "relation": "associated_with",
+      "evidence_class": "observed",
+      "confidence": 0.61,
+      "confidence_basis": {
+        "source": "mock:source:backbone",
+        "evidence_score": 0.61,
+        "evidence_score_range": [
+          0.0,
+          1.0
+        ],
+        "number_of_pmids": 3,
+        "multi_pmid_bonus": 0.0
+      },
+      "status": "supported",
+      "sources": [
+        {
+          "kind": "db",
+          "id": "mock:source:backbone",
+          "date": "2026-10-03"
+        }
+      ],
+      "supporting": [
+        "c_000006"
+      ],
+      "contradicting": [],
+      "attributes": {
+        "origin": "germline",
+        "preprint": true,
+        "labels": [
+          "preprint"
+        ]
+      }
+    },
+    {
+      "id": "e_000007",
+      "source": "mock:disease:4",
+      "target": "mock:gene:3",
+      "relation": "associated_with",
+      "evidence_class": "observed",
+      "confidence": 0.93,
+      "confidence_basis": {
+        "source": "mock:source:backbone",
+        "evidence_score": 0.88,
+        "evidence_score_range": [
+          0.0,
+          1.0
+        ],
+        "number_of_pmids": 22,
+        "multi_pmid_bonus": 0.05
+      },
+      "status": "supported",
+      "sources": [
+        {
+          "kind": "db",
+          "id": "mock:source:backbone",
+          "date": "2026-10-03"
+        }
+      ],
+      "supporting": [],
+      "contradicting": [],
+      "attributes": {
+        "origin": "somatic"
+      }
+    },
+    {
+      "id": "e_000008",
+      "source": "mock:disease:1",
+      "target": "mech:MOCKGENE1:GoF",
+      "relation": "has_mechanism",
+      "evidence_class": "extracted",
+      "confidence": 0.7,
+      "confidence_basis": {
+        "claims": [
+          "c_000001"
+        ],
+        "study_types": [
+          "cohort"
+        ],
+        "max_n_patients": 12,
+        "rubric": "trial > cohort > case_series > case_report > in_vitro"
+      },
+      "status": "supported",
+      "sources": [
+        {
+          "kind": "db",
+          "id": "mock:paper:1",
+          "date": "2000"
+        }
+      ],
+      "supporting": [
+        "c_000001"
+      ],
+      "contradicting": [],
+      "attributes": {
+        "origin": "germline"
+      }
+    },
+    {
+      "id": "e_000009",
+      "source": "mock:disease:2",
+      "target": "mech:MOCKGENE1:LoF",
+      "relation": "has_mechanism",
+      "evidence_class": "observed",
+      "confidence": 0.75,
+      "confidence_basis": {
+        "source": "mock:source:variant_db",
+        "review_status": "mock:reviewed",
+        "n_submitters": 2
+      },
+      "status": "supported",
+      "sources": [
+        {
+          "kind": "db",
+          "id": "mock:source:variant_db",
+          "date": "2026-10-03"
+        }
+      ],
+      "supporting": [],
+      "contradicting": [],
+      "attributes": {
+        "origin": "germline"
+      }
+    },
+    {
+      "id": "e_000010",
+      "source": "mock:disease:3",
+      "target": "mech:MOCKGENE2:LoF",
+      "relation": "has_mechanism",
+      "evidence_class": "observed",
+      "confidence": 0.75,
+      "confidence_basis": {
+        "source": "mock:source:variant_db",
+        "review_status": "mock:reviewed",
+        "n_submitters": 2
+      },
+      "status": "supported",
+      "sources": [
+        {
+          "kind": "db",
+          "id": "mock:source:variant_db",
+          "date": "2026-10-03"
+        }
+      ],
+      "supporting": [],
+      "contradicting": [],
+      "attributes": {
+        "origin": "germline"
+      }
+    },
+    {
+      "id": "e_000011",
+      "source": "mock:disease:4",
+      "target": "mech:MOCKGENE3:GoF:somatic",
+      "relation": "has_mechanism",
+      "evidence_class": "observed",
+      "confidence": 0.75,
+      "confidence_basis": {
+        "source": "mock:source:variant_db",
+        "review_status": "mock:reviewed",
+        "n_submitters": 2
+      },
+      "status": "supported",
+      "sources": [
+        {
+          "kind": "db",
+          "id": "mock:source:variant_db",
+          "date": "2026-10-03"
+        }
+      ],
+      "supporting": [],
+      "contradicting": [],
+      "attributes": {
+        "origin": "somatic"
+      }
+    },
+    {
+      "id": "e_000012",
+      "source": "mock:variant:1",
+      "target": "mock:gene:1",
+      "relation": "variant_of",
+      "evidence_class": "observed",
+      "confidence": 1.0,
+      "confidence_basis": {
+        "source": "mock:source:variant_db",
+        "mapping": "mock:exact"
+      },
+      "status": "supported",
+      "sources": [
+        {
+          "kind": "db",
+          "id": "mock:source:variant_db",
+          "date": "2026-10-03"
+        }
+      ],
+      "supporting": [],
+      "contradicting": [],
+      "attributes": {}
+    },
+    {
+      "id": "e_000013",
+      "source": "mock:variant:2",
+      "target": "mock:gene:1",
+      "relation": "variant_of",
+      "evidence_class": "observed",
+      "confidence": 1.0,
+      "confidence_basis": {
+        "source": "mock:source:variant_db",
+        "mapping": "mock:exact"
+      },
+      "status": "supported",
+      "sources": [
+        {
+          "kind": "db",
+          "id": "mock:source:variant_db",
+          "date": "2026-10-03"
+        }
+      ],
+      "supporting": [],
+      "contradicting": [],
+      "attributes": {}
+    },
+    {
+      "id": "e_000014",
+      "source": "mock:variant:3",
+      "target": "mock:gene:1",
+      "relation": "variant_of",
+      "evidence_class": "observed",
+      "confidence": 1.0,
+      "confidence_basis": {
+        "source": "mock:source:variant_db",
+        "mapping": "mock:exact"
+      },
+      "status": "supported",
+      "sources": [
+        {
+          "kind": "db",
+          "id": "mock:source:variant_db",
+          "date": "2026-10-03"
+        }
+      ],
+      "supporting": [],
+      "contradicting": [],
+      "attributes": {}
+    },
+    {
+      "id": "e_000015",
+      "source": "mock:variant:1",
+      "target": "mech:MOCKGENE1:GoF",
+      "relation": "has_mechanism",
+      "evidence_class": "extracted",
+      "confidence": 0.6,
+      "confidence_basis": {
+        "claims": [
+          "c_000002"
+        ],
+        "study_types": [
+          "in_vitro"
+        ],
+        "max_n_patients": null,
+        "rubric": "trial > cohort > case_series > case_report > in_vitro"
+      },
+      "status": "supported",
+      "sources": [
+        {
+          "kind": "db",
+          "id": "mock:paper:1",
+          "date": "2000"
+        }
+      ],
+      "supporting": [
+        "c_000002"
+      ],
+      "contradicting": [],
+      "attributes": {
+        "origin": "germline",
+        "labels": [
+          "variant_specific"
+        ]
+      }
+    },
+    {
+      "id": "e_000016",
+      "source": "mock:variant:2",
+      "target": "mech:MOCKGENE1:GoF",
+      "relation": "has_mechanism",
+      "evidence_class": "observed",
+      "confidence": 0.8,
+      "confidence_basis": {
+        "source": "mock:source:variant_db",
+        "review_status": "mock:reviewed",
+        "n_submitters": 3
+      },
+      "status": "supported",
+      "sources": [
+        {
+          "kind": "db",
+          "id": "mock:source:variant_db",
+          "date": "2026-10-03"
+        }
+      ],
+      "supporting": [],
+      "contradicting": [],
+      "attributes": {
+        "origin": "germline"
+      }
+    },
+    {
+      "id": "e_000017",
+      "source": "mock:variant:3",
+      "target": "mech:MOCKGENE1:LoF",
+      "relation": "has_mechanism",
+      "evidence_class": "observed",
+      "confidence": 0.55,
+      "confidence_basis": {
+        "source": "mock:source:variant_db",
+        "review_status": "mock:single_submitter",
+        "n_submitters": 1
+      },
+      "status": "supported",
+      "sources": [
+        {
+          "kind": "db",
+          "id": "mock:source:variant_db",
+          "date": "2026-10-03"
+        }
+      ],
+      "supporting": [],
+      "contradicting": [],
+      "attributes": {
+        "origin": "germline"
+      }
+    },
+    {
+      "id": "e_000018",
+      "source": "mock:disease:1",
+      "target": "mock:phenotype:1",
+      "relation": "has_phenotype",
+      "evidence_class": "observed",
+      "confidence": 0.9,
+      "confidence_basis": {
+        "source": "mock:source:phenotype_db",
+        "evidence_code": "mock:curated",
+        "rubric": "curated > automated"
+      },
+      "status": "supported",
+      "sources": [
+        {
+          "kind": "db",
+          "id": "mock:source:phenotype_db",
+          "date": "2026-10-03"
+        }
+      ],
+      "supporting": [],
+      "contradicting": [],
+      "attributes": {}
+    },
+    {
+      "id": "e_000019",
+      "source": "mock:disease:1",
+      "target": "mock:phenotype:2",
+      "relation": "has_phenotype",
+      "evidence_class": "observed",
+      "confidence": 0.85,
+      "confidence_basis": {
+        "source": "mock:source:phenotype_db",
+        "evidence_code": "mock:curated",
+        "rubric": "curated > automated"
+      },
+      "status": "supported",
+      "sources": [
+        {
+          "kind": "db",
+          "id": "mock:source:phenotype_db",
+          "date": "2026-10-03"
+        }
+      ],
+      "supporting": [],
+      "contradicting": [],
+      "attributes": {}
+    },
+    {
+      "id": "e_000020",
+      "source": "mock:disease:2",
+      "target": "mock:phenotype:3",
+      "relation": "has_phenotype",
+      "evidence_class": "observed",
+      "confidence": 0.9,
+      "confidence_basis": {
+        "source": "mock:source:phenotype_db",
+        "evidence_code": "mock:curated",
+        "rubric": "curated > automated"
+      },
+      "status": "supported",
+      "sources": [
+        {
+          "kind": "db",
+          "id": "mock:source:phenotype_db",
+          "date": "2026-10-03"
+        }
+      ],
+      "supporting": [],
+      "contradicting": [],
+      "attributes": {}
+    },
+    {
+      "id": "e_000021",
+      "source": "mock:disease:2",
+      "target": "mock:phenotype:4",
+      "relation": "has_phenotype",
+      "evidence_class": "observed",
+      "confidence": 0.5,
+      "confidence_basis": {
+        "source": "mock:source:phenotype_db",
+        "evidence_code": "mock:automated",
+        "rubric": "curated > automated"
+      },
+      "status": "supported",
+      "sources": [
+        {
+          "kind": "db",
+          "id": "mock:source:phenotype_db",
+          "date": "2026-10-03"
+        }
+      ],
+      "supporting": [],
+      "contradicting": [],
+      "attributes": {}
+    },
+    {
+      "id": "e_000022",
+      "source": "mock:disease:3",
+      "target": "mock:phenotype:3",
+      "relation": "has_phenotype",
+      "evidence_class": "observed",
+      "confidence": 0.9,
+      "confidence_basis": {
+        "source": "mock:source:phenotype_db",
+        "evidence_code": "mock:curated",
+        "rubric": "curated > automated"
+      },
+      "status": "supported",
+      "sources": [
+        {
+          "kind": "db",
+          "id": "mock:source:phenotype_db",
+          "date": "2026-10-03"
+        }
+      ],
+      "supporting": [],
+      "contradicting": [],
+      "attributes": {}
+    },
+    {
+      "id": "e_000023",
+      "source": "mock:disease:3",
+      "target": "mock:phenotype:4",
+      "relation": "has_phenotype",
+      "evidence_class": "observed",
+      "confidence": 0.85,
+      "confidence_basis": {
+        "source": "mock:source:phenotype_db",
+        "evidence_code": "mock:curated",
+        "rubric": "curated > automated"
+      },
+      "status": "supported",
+      "sources": [
+        {
+          "kind": "db",
+          "id": "mock:source:phenotype_db",
+          "date": "2026-10-03"
+        }
+      ],
+      "supporting": [],
+      "contradicting": [],
+      "attributes": {}
+    },
+    {
+      "id": "e_000024",
+      "source": "mock:disease:4",
+      "target": "mock:phenotype:2",
+      "relation": "has_phenotype",
+      "evidence_class": "observed",
+      "confidence": 0.5,
+      "confidence_basis": {
+        "source": "mock:source:phenotype_db",
+        "evidence_code": "mock:automated",
+        "rubric": "curated > automated"
+      },
+      "status": "supported",
+      "sources": [
+        {
+          "kind": "db",
+          "id": "mock:source:phenotype_db",
+          "date": "2026-10-03"
+        }
+      ],
+      "supporting": [],
+      "contradicting": [],
+      "attributes": {}
+    },
+    {
+      "id": "e_000025",
+      "source": "mock:drug:1",
+      "target": "mock:pathway:1",
+      "relation": "inhibits",
+      "evidence_class": "observed",
+      "confidence": 0.9,
+      "confidence_basis": {
+        "source": "mock:source:backbone",
+        "action": "inhibits",
+        "evidence_code": "mock:curated"
+      },
+      "status": "supported",
+      "sources": [
+        {
+          "kind": "db",
+          "id": "mock:source:backbone",
+          "date": "2026-10-03"
+        }
+      ],
+      "supporting": [],
+      "contradicting": [],
+      "attributes": {}
+    },
+    {
+      "id": "e_000026",
+      "source": "mock:drug:1",
+      "target": "mock:disease:1",
+      "relation": "treats",
+      "evidence_class": "extracted",
+      "confidence": 0.35,
+      "confidence_basis": {
+        "supporting": [
+          "c_000003"
+        ],
+        "contradicting": [
+          "c_000004"
+        ],
+        "study_types": [
+          "case_series",
+          "case_series"
+        ],
+        "n_patients": [
+          6,
+          4
+        ],
+        "max_n_patients": 6,
+        "all_small_n": true,
+        "contested_downgrade": 0.2,
+        "rubric": "trial > cohort > case_series > case_report > in_vitro"
+      },
+      "status": "contested",
+      "sources": [
+        {
+          "kind": "db",
+          "id": "mock:paper:1",
+          "date": "2000"
+        },
+        {
+          "kind": "db",
+          "id": "mock:paper:2",
+          "date": "2001"
+        }
+      ],
+      "supporting": [
+        "c_000003"
+      ],
+      "contradicting": [
+        "c_000004"
+      ],
+      "attributes": {
+        "labels": [
+          "promising",
+          "contested",
+          "small_n"
+        ]
+      }
+    },
+    {
+      "id": "e_000027",
+      "source": "mock:drug:2",
+      "target": "mock:disease:1",
+      "relation": "treats",
+      "evidence_class": "extracted",
+      "confidence": 0.3,
+      "confidence_basis": {
+        "supporting": [
+          "c_000005"
+        ],
+        "contradicting": [],
+        "study_types": [
+          "case_report"
+        ],
+        "n_patients": [
+          3
+        ],
+        "max_n_patients": 3,
+        "all_small_n": true,
+        "rubric": "trial > cohort > case_series > case_report > in_vitro"
+      },
+      "status": "small_n",
+      "sources": [
+        {
+          "kind": "db",
+          "id": "mock:paper:2",
+          "date": "2001"
+        }
+      ],
+      "supporting": [
+        "c_000005"
+      ],
+      "contradicting": [],
+      "attributes": {
+        "labels": [
+          "small_n"
+        ]
+      }
+    },
+    {
+      "id": "e_000028",
+      "source": "mock:drug:1",
+      "target": "mock:disease:2",
+      "relation": "treats",
+      "evidence_class": "inferred",
+      "confidence": 0.1,
+      "confidence_basis": {
+        "rule": "pathway_inhibitor_to_lof_mechanism",
+        "drug_action": "inhibits",
+        "drug_target": "mock:pathway:1",
+        "disease_mechanism": "mech:MOCKGENE1:LoF",
+        "mechanism_direction": "LoF",
+        "cap": 0.5
+      },
+      "status": "inferred_unsupported",
+      "sources": [
+        {
+          "kind": "db",
+          "id": "mock:source:rules",
+          "date": "2026-10-03"
+        }
+      ],
+      "supporting": [],
+      "contradicting": [],
+      "attributes": {
+        "reason": "direction mismatch",
+        "labels": [
+          "inferred",
+          "unsupported"
+        ]
+      }
+    },
+    {
+      "id": "e_000029",
+      "source": "mock:disease:2",
+      "target": "mock:disease:3",
+      "relation": "similar_to",
+      "evidence_class": "inferred",
+      "confidence": 0.48,
+      "confidence_basis": {
+        "mechanism_score": 0.7,
+        "phenotype_overlap": 0.5,
+        "conflict_penalty": 0.0,
+        "weights": {
+          "w_m": 0.4,
+          "w_p": 0.4,
+          "w_c": 0.2
+        },
+        "raw_score": 0.48,
+        "cap": 0.5,
+        "clamped": false,
+        "shared_phenotypes": [
+          "mock:phenotype:3",
+          "mock:phenotype:4"
+        ],
+        "same_direction": "LoF",
+        "same_origin": "germline"
+      },
+      "status": "supported",
+      "sources": [
+        {
+          "kind": "db",
+          "id": "mock:source:similarity",
+          "date": "2026-10-03"
+        }
+      ],
+      "supporting": [],
+      "contradicting": [],
+      "attributes": {
+        "labels": [
+          "inferred"
+        ]
+      }
+    },
+    {
+      "id": "e_000030",
+      "source": "mock:disease:1",
+      "target": "mock:disease:4",
+      "relation": "similar_to",
+      "evidence_class": "inferred",
+      "confidence": 0.22,
+      "confidence_basis": {
+        "mechanism_score": 0.5,
+        "phenotype_overlap": 0.3,
+        "conflict_penalty": 0.5,
+        "weights": {
+          "w_m": 0.4,
+          "w_p": 0.4,
+          "w_c": 0.2
+        },
+        "raw_score": 0.22,
+        "cap": 0.5,
+        "clamped": false,
+        "shared_phenotypes": [
+          "mock:phenotype:2"
+        ],
+        "same_direction": "GoF",
+        "penalty_reason": "germline vs somatic"
+      },
+      "status": "supported",
+      "sources": [
+        {
+          "kind": "db",
+          "id": "mock:source:similarity",
+          "date": "2026-10-03"
+        }
+      ],
+      "supporting": [],
+      "contradicting": [],
+      "attributes": {
+        "labels": [
+          "inferred"
+        ]
+      }
+    },
+    {
+      "id": "e_000031",
+      "source": "mock:disease:1",
+      "target": "mock:disease:2",
+      "relation": "similar_to",
+      "evidence_class": "inferred",
+      "confidence": 0.0,
+      "confidence_basis": {
+        "mechanism_score": 0.2,
+        "phenotype_overlap": 0.1,
+        "conflict_penalty": 1.0,
+        "weights": {
+          "w_m": 0.4,
+          "w_p": 0.4,
+          "w_c": 0.2
+        },
+        "raw_score": -0.08,
+        "cap": 0.5,
+        "clamped": true,
+        "shared_phenotypes": [],
+        "penalty_reason": "opposite direction on the same gene"
+      },
+      "status": "supported",
+      "sources": [
+        {
+          "kind": "db",
+          "id": "mock:source:similarity",
+          "date": "2026-10-03"
+        }
+      ],
+      "supporting": [],
+      "contradicting": [],
+      "attributes": {
+        "labels": [
+          "inferred"
+        ]
+      }
+    },
+    {
+      "id": "e_000032",
+      "source": "mock:registry:1",
+      "target": "mock:disease:1",
+      "relation": "covers",
+      "evidence_class": "observed",
+      "confidence": 0.8,
+      "confidence_basis": {
+        "source": "mock:source:patient_group_seeds",
+        "retrieved_at": "2026-10-03",
+        "verified": false
+      },
+      "status": "supported",
+      "sources": [
+        {
+          "kind": "db",
+          "id": "mock:source:patient_group_seeds",
+          "date": "2026-10-03"
+        }
+      ],
+      "supporting": [],
+      "contradicting": [],
+      "attributes": {
+        "verdict": "reusable_now",
+        "differs": [],
+        "needs_review": []
+      }
+    },
+    {
+      "id": "e_000033",
+      "source": "mock:registry:1",
+      "target": "mock:disease:3",
+      "relation": "covers",
+      "evidence_class": "inferred",
+      "confidence": 0.4,
+      "confidence_basis": {
+        "source": "mock:source:patient_group_seeds",
+        "rule": "registry_scope_shares_cluster",
+        "cluster": "cl_002",
+        "cap": 0.5
+      },
+      "status": "supported",
+      "sources": [
+        {
+          "kind": "db",
+          "id": "mock:source:patient_group_seeds",
+          "date": "2026-10-03"
+        }
+      ],
+      "supporting": [],
+      "contradicting": [],
+      "attributes": {
+        "verdict": "adaptable_needs_review",
+        "differs": [
+          "mechanism gene",
+          "phenotype S frequency"
+        ],
+        "needs_review": [
+          "biological",
+          "eligibility"
+        ],
+        "labels": [
+          "inferred"
+        ]
+      }
+    },
+    {
+      "id": "e_000034",
+      "source": "mock:patientgroup:1",
+      "target": "mock:disease:1",
+      "relation": "supports_community",
+      "evidence_class": "observed",
+      "confidence": 0.8,
+      "confidence_basis": {
+        "source": "mock:source:patient_group_seeds",
+        "retrieved_at": "2026-10-03",
+        "verified": false
+      },
+      "status": "supported",
+      "sources": [
+        {
+          "kind": "db",
+          "id": "mock:source:patient_group_seeds",
+          "date": "2026-10-03"
+        }
+      ],
+      "supporting": [],
+      "contradicting": [],
+      "attributes": {
+        "verdict": "reusable_now"
+      }
+    },
+    {
+      "id": "e_000035",
+      "source": "mock:study:1",
+      "target": "mock:disease:1",
+      "relation": "studies",
+      "evidence_class": "observed",
+      "confidence": 0.9,
+      "confidence_basis": {
+        "source": "mock:source:trial_registry",
+        "query": "Mock Disease One",
+        "hits": 1
+      },
+      "status": "supported",
+      "sources": [
+        {
+          "kind": "db",
+          "id": "mock:source:trial_registry",
+          "date": "2026-10-03"
+        }
+      ],
+      "supporting": [],
+      "contradicting": [],
+      "attributes": {
+        "verdict": "adaptable_needs_review",
+        "differs": [
+          "eligibility age range"
+        ],
+        "needs_review": [
+          "eligibility"
+        ]
+      }
+    },
+    {
+      "id": "e_000036",
+      "source": "mock:study:1",
+      "target": "mock:drug:1",
+      "relation": "evaluates",
+      "evidence_class": "observed",
+      "confidence": 0.9,
+      "confidence_basis": {
+        "source": "mock:source:trial_registry",
+        "query": "Mock Disease One",
+        "hits": 1
+      },
+      "status": "supported",
+      "sources": [
+        {
+          "kind": "db",
+          "id": "mock:source:trial_registry",
+          "date": "2026-10-03"
+        }
+      ],
+      "supporting": [],
+      "contradicting": [],
+      "attributes": {}
+    },
+    {
+      "id": "e_000037",
+      "source": "mock:investigator:1",
+      "target": "mock:paper:1",
+      "relation": "author_of",
+      "evidence_class": "observed",
+      "confidence": 1.0,
+      "confidence_basis": {
+        "source": "mock:source:literature_index",
+        "author_position": 1
+      },
+      "status": "supported",
+      "sources": [
+        {
+          "kind": "db",
+          "id": "mock:source:literature_index",
+          "date": "2026-10-03"
+        }
+      ],
+      "supporting": [],
+      "contradicting": [],
+      "attributes": {}
+    },
+    {
+      "id": "e_000038",
+      "source": "mock:investigator:2",
+      "target": "mock:paper:1",
+      "relation": "author_of",
+      "evidence_class": "observed",
+      "confidence": 1.0,
+      "confidence_basis": {
+        "source": "mock:source:literature_index",
+        "author_position": 2
+      },
+      "status": "supported",
+      "sources": [
+        {
+          "kind": "db",
+          "id": "mock:source:literature_index",
+          "date": "2026-10-03"
+        }
+      ],
+      "supporting": [],
+      "contradicting": [],
+      "attributes": {}
+    },
+    {
+      "id": "e_000039",
+      "source": "mock:investigator:1",
+      "target": "mock:paper:2",
+      "relation": "author_of",
+      "evidence_class": "observed",
+      "confidence": 1.0,
+      "confidence_basis": {
+        "source": "mock:source:literature_index",
+        "author_position": 1
+      },
+      "status": "supported",
+      "sources": [
+        {
+          "kind": "db",
+          "id": "mock:source:literature_index",
+          "date": "2026-10-03"
+        }
+      ],
+      "supporting": [],
+      "contradicting": [],
+      "attributes": {}
+    },
+    {
+      "id": "e_000040",
+      "source": "mock:investigator:2",
+      "target": "mock:paper:3",
+      "relation": "author_of",
+      "evidence_class": "observed",
+      "confidence": 1.0,
+      "confidence_basis": {
+        "source": "mock:source:literature_index",
+        "author_position": 1
+      },
+      "status": "supported",
+      "sources": [
+        {
+          "kind": "db",
+          "id": "mock:source:literature_index",
+          "date": "2026-10-03"
+        }
+      ],
+      "supporting": [],
+      "contradicting": [],
+      "attributes": {}
+    },
+    {
+      "id": "e_000041",
+      "source": "c_000001",
+      "target": "mock:paper:1",
+      "relation": "extracted_from",
+      "evidence_class": "observed",
+      "confidence": 1.0,
+      "confidence_basis": {
+        "source": "mock:source:literature_index",
+        "quote_matched": true
+      },
+      "status": "supported",
+      "sources": [
+        {
+          "kind": "db",
+          "id": "mock:paper:1",
+          "date": "2000"
+        }
+      ],
+      "supporting": [],
+      "contradicting": [],
+      "attributes": {}
+    }
+  ],
+  "claims": [
+    {
+      "id": "c_000001",
+      "pmid": "",
+      "paper": "mock:paper:1",
+      "quote": "gain-of-function changes in Mock Gene A were present in every individual with Mock Disease One",
+      "polarity": "supports",
+      "subject": "mech:MOCKGENE1:GoF",
+      "predicate": "causes",
+      "object": "mock:disease:1",
+      "variant": "",
+      "study_type": "cohort",
+      "n_patients": 12
+    },
+    {
+      "id": "c_000002",
+      "pmid": "",
+      "paper": "mock:paper:1",
+      "quote": "Mock Variant A1 increased signalling through Mock Pathway Alpha compared with the reference sequence",
+      "polarity": "supports",
+      "subject": "mock:variant:1",
+      "predicate": "produces",
+      "object": "mech:MOCKGENE1:GoF",
+      "variant": "mock:variant:1",
+      "study_type": "in_vitro",
+      "n_patients": null
+    },
+    {
+      "id": "c_000003",
+      "pmid": "",
+      "paper": "mock:paper:1",
+      "quote": "In a mock case series of six treated individuals, Mock Drug X was followed by fewer episodes of Mock Phenotype P",
+      "polarity": "supports",
+      "subject": "mock:drug:1",
+      "predicate": "improves",
+      "object": "mock:disease:1",
+      "variant": "",
+      "study_type": "case_series",
+      "n_patients": 6
+    },
+    {
+      "id": "c_000004",
+      "pmid": "",
+      "paper": "mock:paper:2",
+      "quote": "Mock Drug X did not reduce the frequency of Mock Phenotype P in the four mock individuals who received it",
+      "polarity": "contradicts",
+      "subject": "mock:drug:1",
+      "predicate": "improves",
+      "object": "mock:disease:1",
+      "variant": "",
+      "study_type": "case_series",
+      "n_patients": 4
+    },
+    {
+      "id": "c_000005",
+      "pmid": "",
+      "paper": "mock:paper:2",
+      "quote": "Mock Drug Y was followed by fewer episodes of Mock Phenotype Q in all three mock individuals who received it",
+      "polarity": "supports",
+      "subject": "mock:drug:2",
+      "predicate": "improves",
+      "object": "mock:disease:1",
+      "variant": "",
+      "study_type": "case_report",
+      "n_patients": 3
+    },
+    {
+      "id": "c_000006",
+      "pmid": "",
+      "paper": "mock:paper:3",
+      "quote": "loss-of-function changes in Mock Gene B were identified in nine of nine mock individuals",
+      "polarity": "supports",
+      "subject": "mock:gene:2",
+      "predicate": "associated_with",
+      "object": "mock:disease:3",
+      "variant": "",
+      "study_type": "cohort",
+      "n_patients": 9
+    }
+  ],
+  "clusters": [
+    {
+      "id": "cl_001",
+      "members": [
+        "mock:disease:1",
+        "mech:MOCKGENE1:GoF",
+        "mock:variant:1",
+        "mock:variant:2"
+      ],
+      "robust": true,
+      "why": {
+        "method": "mock stand-in for Leiden over similar_to edges",
+        "of_weightings": 3,
+        "weightings_agreeing": 3,
+        "shared_mechanism": "mech:MOCKGENE1:GoF",
+        "shared_origin": "germline",
+        "shared_phenotypes": [
+          "mock:phenotype:1",
+          "mock:phenotype:2"
+        ],
+        "not_members": {
+          "mock:disease:2": "same gene, opposite direction; see e_000031",
+          "mock:disease:4": "same direction but somatic origin; see e_000030"
+        }
+      }
+    },
+    {
+      "id": "cl_002",
+      "members": [
+        "mock:disease:2",
+        "mock:disease:3",
+        "mech:MOCKGENE1:LoF",
+        "mech:MOCKGENE2:LoF",
+        "mock:variant:3"
+      ],
+      "robust": false,
+      "why": {
+        "method": "mock stand-in for Leiden over similar_to edges",
+        "of_weightings": 3,
+        "weightings_agreeing": 2,
+        "unstable_member": "mock:disease:3",
+        "shared_direction": "LoF",
+        "shared_origin": "germline",
+        "shared_phenotypes": [
+          "mock:phenotype:3",
+          "mock:phenotype:4"
+        ],
+        "similarity_edges": [
+          "e_000029"
+        ]
+      }
+    }
+  ]
+}
