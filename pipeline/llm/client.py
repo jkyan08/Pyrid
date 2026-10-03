@@ -4,8 +4,10 @@ Model names come from OPENAI_MODEL / OPENAI_EMBED_MODEL (hard rule 9). Every cal
 is cached on disk keyed by a hash of the full request (hard rule 6), so re-runs
 and the demo never depend on live calls.
 
-Provider: OpenAI directly, or OpenAI models through OpenRouter when
-OPENROUTER_API_KEY is set. Model names stay bare (e.g. `gpt-6-astra`); the
+Provider for structured-output calls: ATLAS_LLM_PROVIDER=anthropic uses Claude
+(ANTHROPIC_MODEL, e.g. `claude-sonnet-5-5`) via the Anthropic SDK; otherwise OpenAI
+directly, or OpenAI models through OpenRouter when OPENROUTER_API_KEY is set.
+Embeddings always use OpenAI models (Anthropic has no embeddings endpoint). Model names stay bare (e.g. `gpt-6-astra`); the
 `openai/` prefix OpenRouter needs is added here, and cache keys use the bare
 name, so cached results are shared across providers.
 """
@@ -109,7 +111,48 @@ def _openai():
     return _client
 
 
+def provider() -> str:
+    return "anthropic" if os.environ.get("ATLAS_LLM_PROVIDER", "").lower() == "anthropic" else "openai"
+
+
+_anthropic_client = None
+
+
+def _anthropic():
+    global _anthropic_client
+    if _anthropic_client is None:
+        import anthropic  # not in M0's pyproject yet: run with `uv run --with anthropic`
+        # The SDK retries 429/5xx/connection errors itself with backoff.
+        _anthropic_client = anthropic.Anthropic(max_retries=6)
+    return _anthropic_client
+
+
+def _anthropic_parse(system: str, user: str, schema: type[T], model: str) -> T | None:
+    """Claude structured output. Returns None on a refusal (or a truncated answer).
+
+    `fallbacks: "default"` re-runs a safety-declined request server-side on Anthropic's
+    recommended fallback model (routed by refusal category), so a false-positive decline on
+    biomedical text doesn't cost us the paper."""
+    resp = _anthropic().beta.messages.parse(
+        model=model,
+        max_tokens=16000,
+        betas=["server-side-fallback-2026-07-01"],
+        fallbacks="default",
+        system=system,
+        messages=[{"role": "user", "content": user}],
+        output_format=schema,
+    )
+    if resp.stop_reason in ("refusal", "max_tokens"):
+        return None
+    return resp.parsed_output
+
+
 def chat_model() -> str:
+    if provider() == "anthropic":
+        m = os.environ.get("ANTHROPIC_MODEL")
+        if not m:
+            raise RuntimeError("ANTHROPIC_MODEL is not set (ATLAS_LLM_PROVIDER=anthropic)")
+        return m
     m = os.environ.get("OPENAI_MODEL")
     if not m:
         raise RuntimeError("OPENAI_MODEL is not set (see .env.example)")
@@ -130,7 +173,9 @@ def parse(system: str, user: str, schema: type[T], *, model: str | None = None) 
 
     def call():
         messages = [{"role": "system", "content": system}, {"role": "user", "content": user}]
-        if via_openrouter():
+        if provider() == "anthropic":
+            parsed = _anthropic_parse(system, user, schema, model)
+        elif via_openrouter():
             # OpenRouter's Responses API is beta; Chat Completions structured outputs is the stable path.
             msg = _with_retry(lambda: _openai().chat.completions.parse(
                 model=_wire_model(model), messages=messages, response_format=schema,
