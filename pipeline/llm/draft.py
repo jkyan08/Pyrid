@@ -6,7 +6,7 @@ from the input, validated exactly like `explain`. Drafts are never sent
 """
 from __future__ import annotations
 
-from pipeline.llm.explain import Parser, generate_cited, subgraph
+from pipeline.llm.explain import Parser, _result, generate_cited, subgraph
 
 NOTICE = "Draft only. Nothing is sent. Research navigation, not medical advice."
 
@@ -40,9 +40,14 @@ def _fallback(sub: dict) -> list[dict]:
     return out
 
 
-def draft(ids: list[str], graph: dict, *, parser: Parser | None = None) -> dict:
+def draft(ids: list[str] | str, graph: dict, focus: str | None = None, *, parser: Parser | None = None) -> dict:
+    """`ids` may be one entity id (lane C's `/draft` passes `entity_id`) or a list of ids.
+    `focus` optionally names what the proposal should centre on (e.g. "treatment_response")."""
+    ids = [ids] if isinstance(ids, str) else ids
     sub = subgraph(ids, graph)
     if not sub["edges"] and not sub["claims"]:
-        return {"mode": "empty", "sentences": [], "text": "", "errors": [], "notice": NOTICE}
+        return {**_result("empty", [], []), "notice": NOTICE}
     task = f"Draft a proposal about: {', '.join(ids)}"
+    if focus:
+        task += f"\nFocus the proposal on: {focus.replace('_', ' ')}"
     return {**generate_cited(SYSTEM, task, sub, _fallback, parser), "notice": NOTICE}

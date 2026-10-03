@@ -37,15 +37,16 @@ Needs `OPENAI_MODEL` and `OPENAI_EMBED_MODEL` (bare names, e.g. `gpt-6-astra`), 
 Pure functions; routes just call them and render the result.
 
 ```python
-from pipeline.llm.explain import explain, cache_key
-from pipeline.llm.draft import draft
-explain(ids: list[str], graph: dict) -> {"mode", "sentences": [{"text", "cites"}], "text", "errors"}
-draft(ids, graph)                    -> same, plus "notice" (show it: drafts are never sent)
+import pipeline.llm as llm                  # explain/draft are re-exported on the package
+llm.explain(ids: list[str], graph: dict)    -> {"text", "citations", "mode", "sentences": [{"text", "cites"}], "errors"}
+llm.draft(entity_id_or_ids, graph, focus=None) -> same, plus "notice" (show it: drafts are never sent)
 ```
 
-`mode` is `llm`, `llm_retry`, `template` (validated fallback) or `empty` (nothing to explain: show as a gap).
-Precomputed results live in `explanations.json` under `cache_key(ids)` / `cache_key(ids, "draft")`; check
-there first. Demo journeys are read from `data/build/journeys.json` (`{name: [[ids...], ...]}`).
+Matches `api/llm_seam.py` on lane C's branch (`text` + `citations`). `mode` is `llm`, `llm_retry`,
+`template` (validated fallback, also used if the provider errors) or `empty` (nothing to explain: show as a gap).
+Precomputed results live in `explanations.json` keyed by entity id (a path is its ids joined with `|`;
+drafts are `draft:<key>`), each with `text` and `citations`, which is the lookup `/explain` already does.
+Demo journeys are read from `data/build/journeys.json` (`{name: [[ids...], ...]}`).
 
 Symptom → HPO for Devon: `NodeIndex(graph["nodes"], types={"Phenotype"})` and `link(text, index)`.
 
