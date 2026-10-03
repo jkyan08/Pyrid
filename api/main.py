@@ -179,7 +179,28 @@ def create_app(
     def entity(entity_id: str) -> dict[str, Any]:
         node = store.nodes_by_id.get(entity_id)
         if node is None:
-            raise HTTPException(404, detail=f"unknown entity id: {entity_id}")
+            # Honest-gap response for ids known only to meta.coverage
+            # (ground-truth test 6 shape; eng-review D4).
+            coverage = store.coverage_for(entity_id)
+            if coverage is None:
+                raise HTTPException(404, detail=f"unknown entity id: {entity_id}")
+            return {
+                "node": {
+                    "id": entity_id,
+                    "type": "Unknown",
+                    "label": entity_id,
+                    "synonyms": [],
+                    "props": {},
+                },
+                "summary": [],
+                "neighbors": [],
+                "cluster_ids": [],
+                "assets": [],
+                "investigators": [],
+                "no_supported_route": True,
+                "coverage": coverage,
+                "next_question": _next_question(entity_id),
+            }
         neighbors = store.neighbors(entity_id)
         no_supported_route = not store.has_supported_edge(entity_id)
         assets = [
@@ -338,18 +359,25 @@ def create_app(
         results: list[dict[str, Any]] = []
         excluded: list[dict[str, Any]] = []
 
+        seen: set[str] = set()
         for edge_item in store.edges:
-            if edge_item.get("relation") != "causes":
+            # "causes" (lane-C fixture) or "has_mechanism" (M0 mock vocabulary)
+            if edge_item.get("relation") not in ("causes", "has_mechanism"):
                 continue
-            mechanism = store.nodes_by_id.get(edge_item["source"])
-            disease = store.nodes_by_id.get(edge_item["target"])
-            if (
-                mechanism is None
-                or disease is None
-                or mechanism.get("type") != "Mechanism"
-                or disease.get("type") != "Disease"
-            ):
+            # accept either edge orientation (lane A's convention is not frozen)
+            src = store.nodes_by_id.get(edge_item["source"])
+            tgt = store.nodes_by_id.get(edge_item["target"])
+            if src is None or tgt is None:
                 continue
+            if src.get("type") == "Mechanism" and tgt.get("type") == "Disease":
+                mechanism, disease = src, tgt
+            elif tgt.get("type") == "Mechanism" and src.get("type") == "Disease":
+                mechanism, disease = tgt, src
+            else:
+                continue
+            if disease["id"] in seen:
+                continue
+            seen.add(disease["id"])
             mech_direction = _mechanism_direction(mechanism)
 
             if mech_direction == wanted:

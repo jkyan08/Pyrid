@@ -193,9 +193,10 @@ class GraphStore:
             best: tuple[float, str, str, str] | None = None  # score, kind, matched_on, resolution
 
             lowered_label = label.lower()
+            # substring matches require len(q) >= 3, mirroring the web fallback
             if q == lowered_label:
                 best = (1.0, "label", label, f"matched label '{label}'")
-            elif q in lowered_label:
+            elif len(q) >= 3 and q in lowered_label:
                 best = (0.9, "label", label, f"matched label '{label}'")
             else:
                 for synonym in row["synonyms"]:
@@ -208,7 +209,7 @@ class GraphStore:
                             f"matched synonym '{synonym}' → {label}",
                         )
                         break
-                    if q in lowered and (best is None or best[0] < 0.85):
+                    if len(q) >= 3 and q in lowered and (best is None or best[0] < 0.85):
                         best = (
                             0.85,
                             "synonym",
