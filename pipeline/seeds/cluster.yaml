@@ -1,0 +1,68 @@
+# Seeds for the JAK-STAT test cluster (docs/test-cluster-desc.md section 3).
+#
+# NAMES ONLY (README hard rule 2): HGNC gene symbols, disease names and drug names. The source
+# loaders resolve each name to a backbone id by exact, case-insensitive match on node label and
+# synonyms and record how it was resolved. A term that matches nothing becomes a coverage row
+# with hits 0 (hard rule 3); it is never replaced by a guessed id. Disease names below are taken
+# from the cluster doc and from node labels / synonyms observed in the backbone during the spike
+# (docs/optimuskg-spike.md sections 1 and 4).
+
+genes:  # each must resolve to exactly one Gene node (spike exit criterion 1)
+  - STAT1
+  - STAT3
+  - JAK1
+  - JAK2
+  - JAK3
+  - TYK2
+  - IL2RG
+
+disease_terms:  # matched case-insensitively against Disease label and synonyms
+  - chronic mucocutaneous candidiasis
+  - immunodeficiency 31C
+  - immunodeficiency 31B
+  - STAT1 deficiency
+  - Mendelian susceptibility to mycobacterial diseases
+  - T-B+ severe combined immunodeficiency due to JAK3 deficiency
+  - X-linked severe combined immunodeficiency
+  - X-linked SCID  # the cluster doc's wording; the backbone lists it as a synonym of "gamma chain deficiency"
+  - gamma chain deficiency
+  - hyper-IgE recurrent infection syndrome 1, autosomal dominant
+  - STAT3 gain of function
+  - polycythemia vera
+  - essential thrombocythemia
+  - primary myelofibrosis
+  - immunodeficiency 35
+
+drug_terms:  # names; JAK inhibitors are also found generically: any Drug with an inhibits edge to a JAK-family gene
+  - ruxolitinib
+  - baricitinib
+  - tofacitinib
+  - upadacitinib
+  - itacitinib
+
+thresholds:
+  # OptimusKG disease-gene evidence_score floor. Observed range over all rows: 0.0009095 to
+  # 0.9485794 (docs/optimuskg-spike.md section 1); Open Targets' indirect associations make the
+  # edge set very dense below this.
+  disease_gene_min_score: 0.3
+  # Keep a disease-gene edge below the floor when DISGENET is in sources.direct.
+  keep_disgenet_direct: true
+  # v0 does not expand a pathway to its other member genes.
+  max_pathway_members_to_expand: 0
+  # How many is_a parent levels above each seed disease to include.
+  include_parent_levels: 1
+  # Density safeguards of the OptimusKG loader (pipeline/sources/optimuskg.py docstring). Open
+  # Targets propagates associations up the ontology, so without them the 0.3 floor admits ~830
+  # diseases for the 7 genes and ~609k disease-gene edges (v3.2).
+  # A disease enters through a seed-gene association only when none of its descendants carries
+  # a passing association to the same gene; seed-term matches and parents are exempt.
+  disease_gene_most_specific: true
+  # Per included disease, keep the top N non-seed genes by evidence_score; seed genes never capped.
+  max_other_genes_per_disease: 25
+  # Per included disease, keep the top N drugs by trial phase; drugs acting on a seed gene or
+  # matching a seed drug term never capped.
+  max_drugs_per_disease: 25
+
+# Used only to label the pathway family in reports and the UI; never used to filter or by tests.
+# Compile with re.IGNORECASE (backbone pathway labels are capitalised, e.g. "Interleukin-6 signaling").
+pathway_family_label_regex: "JAK|STAT|interleukin|interferon|cytokine"

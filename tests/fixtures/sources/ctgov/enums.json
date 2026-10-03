@@ -1,0 +1,538 @@
+[
+  {
+    "type": "AgencyClass",
+    "values": [
+      {
+        "value": "NIH",
+        "legacyValue": "NIH"
+      },
+      {
+        "value": "FED",
+        "legacyValue": "FED"
+      },
+      {
+        "value": "OTHER_GOV",
+        "legacyValue": "OTHER_GOV"
+      },
+      {
+        "value": "INDIV",
+        "legacyValue": "INDIV"
+      },
+      {
+        "value": "INDUSTRY",
+        "legacyValue": "INDUSTRY"
+      },
+      {
+        "value": "NETWORK",
+        "legacyValue": "NETWORK"
+      },
+      {
+        "value": "AMBIG",
+        "legacyValue": "AMBIG"
+      },
+      {
+        "value": "OTHER",
+        "legacyValue": "OTHER"
+      },
+      {
+        "value": "UNKNOWN",
+        "legacyValue": "UNKNOWN"
+      }
+    ],
+    "pieces": [
+      "OrgClass",
+      "LeadSponsorClass",
+      "CollaboratorClass"
+    ]
+  },
+  {
+    "type": "Status",
+    "values": [
+      {
+        "value": "ACTIVE_NOT_RECRUITING",
+        "legacyValue": "Active, not recruiting"
+      },
+      {
+        "value": "COMPLETED",
+        "legacyValue": "Completed"
+      },
+      {
+        "value": "ENROLLING_BY_INVITATION",
+        "legacyValue": "Enrolling by invitation"
+      },
+      {
+        "value": "NOT_YET_RECRUITING",
+        "legacyValue": "Not yet recruiting"
+      },
+      {
+        "value": "RECRUITING",
+        "legacyValue": "Recruiting"
+      },
+      {
+        "value": "SUSPENDED",
+        "legacyValue": "Suspended"
+      },
+      {
+        "value": "TERMINATED",
+        "legacyValue": "Terminated"
+      },
+      {
+        "value": "WITHDRAWN",
+        "legacyValue": "Withdrawn"
+      },
+      {
+        "value": "AVAILABLE",
+        "legacyValue": "Available"
+      },
+      {
+        "value": "NO_LONGER_AVAILABLE",
+        "legacyValue": "No longer available"
+      },
+      {
+        "value": "TEMPORARILY_NOT_AVAILABLE",
+        "legacyValue": "Temporarily not available"
+      },
+      {
+        "value": "APPROVED_FOR_MARKETING",
+        "legacyValue": "Approved for marketing"
+      },
+      {
+        "value": "WITHHELD",
+        "legacyValue": "Withheld"
+      },
+      {
+        "value": "UNKNOWN",
+        "legacyValue": "Unknown status"
+      }
+    ],
+    "pieces": [
+      "OverallStatus",
+      "LastKnownStatus"
+    ]
+  },
+  {
+    "type": "ExpandedAccessStatus",
+    "values": [
+      {
+        "value": "AVAILABLE",
+        "legacyValue": "Available"
+      },
+      {
+        "value": "NO_LONGER_AVAILABLE",
+        "legacyValue": "No longer available"
+      },
+      {
+        "value": "TEMPORARILY_NOT_AVAILABLE",
+        "legacyValue": "Temporarily not available"
+      },
+      {
+        "value": "APPROVED_FOR_MARKETING",
+        "legacyValue": "Approved for marketing"
+      }
+    ],
+    "pieces": [
+      "ExpandedAccessStatusForNCTId"
+    ]
+  },
+  {
+    "type": "DateType",
+    "values": [
+      {
+        "value": "ACTUAL",
+        "legacyValue": "Actual"
+      },
+      {
+        "value": "ESTIMATED",
+        "legacyValue": "Estimated",
+        "exceptions": {
+          "StartDateType": "Anticipated",
+          "PrimaryCompletionDateType": "Anticipated",
+          "CompletionDateType": "Anticipated",
+          "StudyFirstPostDateType": "Estimate",
+          "ResultsFirstPostDateType": "Estimate",
+          "DispFirstPostDateType": "Estimate",
+          "LastUpdatePostDateType": "Estimate",
+          "FirstMCPPostDateType": "Anticipated"
+        }
+      }
+    ],
+    "pieces": [
+      "StartDateType",
+      "PrimaryCompletionDateType",
+      "CompletionDateType",
+      "StudyFirstPostDateType",
+      "ResultsFirstPostDateType",
+      "DispFirstPostDateType",
+      "LastUpdatePostDateType",
+      "FirstMCPPostDateType"
+    ]
+  },
+  {
+    "type": "ResponsiblePartyType",
+    "values": [
+      {
+        "value": "SPONSOR",
+        "legacyValue": "Sponsor"
+      },
+      {
+        "value": "PRINCIPAL_INVESTIGATOR",
+        "legacyValue": "Principal Investigator"
+      },
+      {
+        "value": "SPONSOR_INVESTIGATOR",
+        "legacyValue": "Sponsor-Investigator"
+      }
+    ],
+    "pieces": [
+      "ResponsiblePartyType"
+    ]
+  },
+  {
+    "type": "StudyType",
+    "values": [
+      {
+        "value": "EXPANDED_ACCESS",
+        "legacyValue": "Expanded Access"
+      },
+      {
+        "value": "INTERVENTIONAL",
+        "legacyValue": "Interventional"
+      },
+      {
+        "value": "OBSERVATIONAL",
+        "legacyValue": "Observational"
+      }
+    ],
+    "pieces": [
+      "StudyType"
+    ]
+  },
+  {
+    "type": "Phase",
+    "values": [
+      {
+        "value": "NA",
+        "legacyValue": "Not Applicable"
+      },
+      {
+        "value": "EARLY_PHASE1",
+        "legacyValue": "Early Phase 1"
+      },
+      {
+        "value": "PHASE1",
+        "legacyValue": "Phase 1"
+      },
+      {
+        "value": "PHASE2",
+        "legacyValue": "Phase 2"
+      },
+      {
+        "value": "PHASE3",
+        "legacyValue": "Phase 3"
+      },
+      {
+        "value": "PHASE4",
+        "legacyValue": "Phase 4"
+      }
+    ],
+    "pieces": [
+      "Phase"
+    ]
+  },
+  {
+    "type": "DesignAllocation",
+    "values": [
+      {
+        "value": "RANDOMIZED",
+        "legacyValue": "Randomized"
+      },
+      {
+        "value": "NON_RANDOMIZED",
+        "legacyValue": "Non-Randomized"
+      },
+      {
+        "value": "NA",
+        "legacyValue": "N/A"
+      }
+    ],
+    "pieces": [
+      "DesignAllocation"
+    ]
+  },
+  {
+    "type": "PrimaryPurpose",
+    "values": [
+      {
+        "value": "TREATMENT",
+        "legacyValue": "Treatment"
+      },
+      {
+        "value": "PREVENTION",
+        "legacyValue": "Prevention"
+      },
+      {
+        "value": "DIAGNOSTIC",
+        "legacyValue": "Diagnostic"
+      },
+      {
+        "value": "ECT",
+        "legacyValue": "Educational/Counseling/Training"
+      },
+      {
+        "value": "SUPPORTIVE_CARE",
+        "legacyValue": "Supportive Care"
+      },
+      {
+        "value": "SCREENING",
+        "legacyValue": "Screening"
+      },
+      {
+        "value": "HEALTH_SERVICES_RESEARCH",
+        "legacyValue": "Health Services Research"
+      },
+      {
+        "value": "BASIC_SCIENCE",
+        "legacyValue": "Basic Science"
+      },
+      {
+        "value": "DEVICE_FEASIBILITY",
+        "legacyValue": "Device Feasibility"
+      },
+      {
+        "value": "OTHER",
+        "legacyValue": "Other"
+      }
+    ],
+    "pieces": [
+      "DesignPrimaryPurpose"
+    ]
+  },
+  {
+    "type": "EnrollmentType",
+    "values": [
+      {
+        "value": "ACTUAL",
+        "legacyValue": "Actual"
+      },
+      {
+        "value": "ESTIMATED",
+        "legacyValue": "Estimated",
+        "exceptions": {
+          "EnrollmentType": "Anticipated"
+        }
+      }
+    ],
+    "pieces": [
+      "EnrollmentType"
+    ]
+  },
+  {
+    "type": "InterventionType",
+    "values": [
+      {
+        "value": "BEHAVIORAL",
+        "legacyValue": "Behavioral"
+      },
+      {
+        "value": "BIOLOGICAL",
+        "legacyValue": "Biological"
+      },
+      {
+        "value": "COMBINATION_PRODUCT",
+        "legacyValue": "Combination Product"
+      },
+      {
+        "value": "DEVICE",
+        "legacyValue": "Device"
+      },
+      {
+        "value": "DIAGNOSTIC_TEST",
+        "legacyValue": "Diagnostic Test"
+      },
+      {
+        "value": "DIETARY_SUPPLEMENT",
+        "legacyValue": "Dietary Supplement"
+      },
+      {
+        "value": "DRUG",
+        "legacyValue": "Drug"
+      },
+      {
+        "value": "GENETIC",
+        "legacyValue": "Genetic"
+      },
+      {
+        "value": "PROCEDURE",
+        "legacyValue": "Procedure"
+      },
+      {
+        "value": "RADIATION",
+        "legacyValue": "Radiation"
+      },
+      {
+        "value": "OTHER",
+        "legacyValue": "Other"
+      }
+    ],
+    "pieces": [
+      "InterventionType"
+    ]
+  },
+  {
+    "type": "Sex",
+    "values": [
+      {
+        "value": "FEMALE",
+        "legacyValue": "Female"
+      },
+      {
+        "value": "MALE",
+        "legacyValue": "Male"
+      },
+      {
+        "value": "ALL",
+        "legacyValue": "All"
+      }
+    ],
+    "pieces": [
+      "Sex"
+    ]
+  },
+  {
+    "type": "StandardAge",
+    "values": [
+      {
+        "value": "CHILD",
+        "legacyValue": "Child"
+      },
+      {
+        "value": "ADULT",
+        "legacyValue": "Adult"
+      },
+      {
+        "value": "OLDER_ADULT",
+        "legacyValue": "Older Adult"
+      }
+    ],
+    "pieces": [
+      "StdAge"
+    ]
+  },
+  {
+    "type": "ContactRole",
+    "values": [
+      {
+        "value": "STUDY_CHAIR",
+        "legacyValue": "Study Chair"
+      },
+      {
+        "value": "STUDY_DIRECTOR",
+        "legacyValue": "Study Director"
+      },
+      {
+        "value": "PRINCIPAL_INVESTIGATOR",
+        "legacyValue": "Principal Investigator"
+      },
+      {
+        "value": "SUB_INVESTIGATOR",
+        "legacyValue": "Sub-Investigator"
+      },
+      {
+        "value": "CONTACT",
+        "legacyValue": "Contact"
+      }
+    ],
+    "pieces": [
+      "CentralContactRole",
+      "LocationContactRole"
+    ]
+  },
+  {
+    "type": "OfficialRole",
+    "values": [
+      {
+        "value": "STUDY_CHAIR",
+        "legacyValue": "Study Chair"
+      },
+      {
+        "value": "STUDY_DIRECTOR",
+        "legacyValue": "Study Director"
+      },
+      {
+        "value": "PRINCIPAL_INVESTIGATOR",
+        "legacyValue": "Principal Investigator"
+      },
+      {
+        "value": "SUB_INVESTIGATOR",
+        "legacyValue": "Sub-Investigator"
+      }
+    ],
+    "pieces": [
+      "OverallOfficialRole"
+    ]
+  },
+  {
+    "type": "RecruitmentStatus",
+    "values": [
+      {
+        "value": "ACTIVE_NOT_RECRUITING",
+        "legacyValue": "Active, not recruiting"
+      },
+      {
+        "value": "COMPLETED",
+        "legacyValue": "Completed"
+      },
+      {
+        "value": "ENROLLING_BY_INVITATION",
+        "legacyValue": "Enrolling by invitation"
+      },
+      {
+        "value": "NOT_YET_RECRUITING",
+        "legacyValue": "Not yet recruiting"
+      },
+      {
+        "value": "RECRUITING",
+        "legacyValue": "Recruiting"
+      },
+      {
+        "value": "SUSPENDED",
+        "legacyValue": "Suspended"
+      },
+      {
+        "value": "TERMINATED",
+        "legacyValue": "Terminated"
+      },
+      {
+        "value": "WITHDRAWN",
+        "legacyValue": "Withdrawn"
+      },
+      {
+        "value": "AVAILABLE",
+        "legacyValue": "Available"
+      }
+    ],
+    "pieces": [
+      "LocationStatus"
+    ]
+  },
+  {
+    "type": "ReferenceType",
+    "values": [
+      {
+        "value": "BACKGROUND",
+        "legacyValue": "background"
+      },
+      {
+        "value": "RESULT",
+        "legacyValue": "result"
+      },
+      {
+        "value": "DERIVED",
+        "legacyValue": "derived"
+      }
+    ],
+    "pieces": [
+      "ReferenceType"
+    ]
+  }
+]

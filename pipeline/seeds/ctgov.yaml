@@ -1,0 +1,109 @@
+# ClinicalTrials.gov API v2 search seeds for pipeline/sources/ctgov.py.
+#
+# NAMES ONLY (README hard rule 2): Essie query expressions (disease / drug phrases, HGNC gene
+# symbols) and fetch settings. No NCT numbers, no MeSH / MONDO ids. The loader records every query
+# as a coverage row (hits = totalCount, zero included; hard rule 3) and resolves study ids itself.
+#
+# Query forms follow docs/source-apis.md section 2 (verified live 2026-10-03):
+#   cond -> query.cond (ConditionSearch: Condition, titles, MeSH terms, Keyword)
+#   intr -> query.intr (InterventionSearch)
+#   term -> query.term (BasicSearch, 57 pieces)
+# Values are sent exactly as written, so quotes belong in the seed: a quoted phrase is an exact
+# phrase match and is NEVER wrapped in EXPANSION[None] (that is case-sensitive and drops hits,
+# cheat sheet gotcha 1). With gene_symbols_in_term: true, each bare gene symbol in `term` is wrapped
+# as EXPANSION[None]<SYMBOL> so the default Relaxation expansion cannot fuzzy-match it (the i-STAT
+# device noise).
+#
+# The two "gain of function" phrase searches use `term`, the form the cheat sheet verified
+# (query.term="STAT1 gain of function" -> 3 studies; query.term="STAT3 gain of function" -> 1).
+# query.cond searches a subset of those pieces and can miss records whose only match is in the
+# summary, so `term` is the recall-safe choice for a quoted phrase.
+#
+# "JAK inhibitor" + "autoimmune" is deliberately NOT included (too broad).
+
+source: ClinicalTrials.gov API v2
+
+# Hard cap on studies kept per query (pages are followed until the cap or the last page).
+max_studies_per_query: 50
+page_size: 50
+
+# `fields` pieces for GET /studies, exactly the set the cheat sheet verified in one call
+# (HTTP 200 on the upadacitinib record) plus ReferencePMID (verified piece name, docs/source-apis.md 2b).
+# Branch names (Intervention, EligibilityModule, derivedSection.*) expand to all descendants.
+# Contact data (centralContacts, locations[].contacts) is never requested.
+fields:
+  - NCTId
+  - BriefTitle
+  - OfficialTitle
+  - OverallStatus
+  - StartDate
+  - StartDateType
+  - PrimaryCompletionDate
+  - LastUpdatePostDate
+  - StudyFirstPostDate
+  - LeadSponsor
+  - CollaboratorName
+  - ResponsiblePartyType
+  - Condition
+  - Keyword
+  - StudyType
+  - Phase
+  - EnrollmentInfo
+  - DesignAllocation
+  - DesignPrimaryPurpose
+  - Intervention
+  - EligibilityModule
+  - OverallOfficialName
+  - ReferencePMID
+  - ReferenceType
+  - HasResults
+  - derivedSection.conditionBrowseModule
+  - derivedSection.interventionBrowseModule
+  - derivedSection.miscInfoModule
+
+queries:
+  - label: stat1-gof
+    term: '"STAT1 gain of function"'
+
+  - label: cmc
+    cond: '"chronic mucocutaneous candidiasis"'
+
+  # The cluster doc's open question: is there a ruxolitinib trial in STAT1 GoF? Zero is the answer
+  # and is recorded as such.
+  - label: ruxolitinib-stat1
+    intr: ruxolitinib
+    term: STAT1
+    gene_symbols_in_term: true
+
+  - label: jak-inhibitor-pid
+    intr: JAK inhibitor
+    cond: '"primary immunodeficiency"'
+
+  - label: hyper-ige
+    cond: '"hyper IgE syndrome"'
+
+  - label: scid-jak3
+    cond: '"severe combined immunodeficiency"'
+    term: JAK3
+    gene_symbols_in_term: true
+
+  - label: stat3-gof
+    term: '"STAT3 gain of function"'
+
+  # Somatic JAK2 myeloproliferative neoplasms (the counter-example cluster). MPN + ruxolitinib is a
+  # large result set (175 for "myeloproliferative neoplasm" in the recon); capped per disease the
+  # way the README caps MPN literature.
+  - label: pv-ruxolitinib
+    cond: '"polycythemia vera"'
+    intr: ruxolitinib
+    max_studies: 20
+
+  - label: et-ruxolitinib
+    cond: '"essential thrombocythemia"'
+    intr: ruxolitinib
+    max_studies: 20
+
+  - label: pmf-ruxolitinib
+    cond: '"primary myelofibrosis"'
+    intr: ruxolitinib
+    max_studies: 20

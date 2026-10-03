@@ -1,0 +1,61 @@
+# Seeds for the NIH RePORTER API v2 loader (pipeline/sources/reporter.py; docs/source-apis.md §3).
+#
+# NAMES AND SEARCH TERMS ONLY (README hard rule 2): no project numbers, appl_ids, profile_ids or
+# PMIDs live here. The loader resolves every identifier from the API response and records each
+# search, including zero-hit ones, as a coverage row (hard rule 3).
+
+# Free-text searches, one POST /v2/projects/search each. `operator: and` is bag-of-words over the
+# fields in `search_field`, so each query is a topic label, not an exact phrase.
+queries:
+  - "STAT1 gain of function"
+  - "chronic mucocutaneous candidiasis"
+  - "inborn errors of immunity"
+  - "JAK3 severe combined immunodeficiency"
+  - "STAT3 gain of function"
+  - "hyper IgE syndrome"
+
+search:
+  operator: and
+  search_field: "projecttitle,abstracttext,terms"
+  # The last N NIH fiscal years (FY starts 1 October), computed from today's date at run time.
+  # Never a hard-coded year list.
+  fiscal_years_back: 6
+  limit: 50               # one page per query; API cap is 500
+  exclude_subprojects: true
+
+# Values of include_fields are PascalCase data-element names (snake_case values are silently
+# accepted by the API and return {} for every record). Verified live or taken from the Data
+# Elements PDF mapping in docs/recon/reporter.md §10.
+include_fields:
+  - ApplId
+  - ProjectNum
+  - CoreProjectNum
+  - ProjectTitle
+  - AbstractText
+  - FiscalYear
+  - AwardAmount
+  - AgencyIcAdmin
+  - Organization
+  - PrincipalInvestigators
+  - ContactPiName
+  - ProjectStartDate
+  - ProjectEndDate
+  - ProjectDetailUrl
+  - Terms
+  # Raw rubric inputs stored under props.projects[] (is_active, activity_code, award_type,
+  # opportunity_number); a field that is not requested here comes back null for every record.
+  # IsActive verified live; the other three are the PDF mapping (docs/recon/reporter.md §10).
+  - IsActive
+  - ActivityCode
+  - AwardType
+  - OpportunityNumber
+
+# POST /v2/publications/search with the deduped grants' core_project_nums, in batches.
+publications:
+  batch_size: 50
+  limit: 500              # API cap is 500 per page; offset cap 9,999
+
+# Text linking of projects to Gene / Disease nodes already in the store (evidence_class inferred).
+linking:
+  min_gene_symbol_length: 3      # uppercase HGNC symbols only, word-boundary, case-sensitive
+  min_disease_name_length: 12    # case-insensitive exact phrase; shorter names are too noisy
