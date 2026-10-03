@@ -60,10 +60,22 @@ llm.explain(ids: list[str], graph: dict)    -> {"text", "citations", "mode", "se
 llm.draft(entity_id_or_ids, graph, focus=None) -> same, plus "notice" (show it: drafts are never sent)
 ```
 
-Matches `api/llm_seam.py` on lane C's branch (`text` + `citations`). `mode` is `llm`, `llm_retry`,
-`template` (validated fallback, also used if the provider errors) or `empty` (nothing to explain: show as a gap).
-Precomputed results live in `explanations.json` keyed by entity id (a path is its ids joined with `|`;
-drafts are `draft:<key>`), each with `text` and `citations`, which is the lookup `/explain` already does.
+Matches `api/llm_seam.py` (`text` + `citations`). Called as lane C calls them (no `fallback`), `explain`/`draft`
+return a result only when the model produced validated cited text (`mode` `llm` / `llm_retry`), and **None**
+otherwise (provider error, offline cache miss, or nothing to explain), so `/explain` falls through to the
+precomputed `explanations.json` and then lane C's own fallback. `fallback=True` returns lane B's validated
+template instead (used by `precompute`). Precomputed results are keyed by entity id (a path is its ids joined
+with `|`; drafts are `draft:<key>`), each with `text` and `citations`.
+
+**Requested change for lane C** (lane C's files, so not edited here). With lane B merged, 1 of lane C's 68 API
+tests fails:
+- `api/llm_seam.py::_live_call` logs "returned a malformed result" for `None`. `None` now means "no live answer",
+  so it should return quietly: `if result is None: return None` before the malformed-result check.
+- `api/tests/test_review_fixes.py::test_llm_seam_silent_when_module_absent` can't hide `pipeline.llm` once it
+  exists in the repo; monkeypatch `importlib.import_module` to raise `ModuleNotFoundError` instead.
+- Lane C's API tests don't set `ATLAS_OFFLINE=1`; with lane B present and `anthropic` installed, `/explain` on an
+  uncached id makes a live model call. Set it in the API test fixtures.
+
 Demo journeys are read from `data/build/journeys.json` (`{name: [[ids...], ...]}`).
 
 Symptom → HPO for Devon: `NodeIndex(graph["nodes"], types={"Phenotype"})` and `link(text, index)`.

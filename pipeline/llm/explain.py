@@ -169,14 +169,20 @@ def generate_cited(system: str, task: str, sub: dict, fallback: Callable[[dict],
     return _result("template", fallback(sub), errors_seen)
 
 
-def explain(ids: list[str], graph: dict, *, parser: Parser | None = None) -> dict:
-    """Cited plain-language explanation of `ids`. Always returns valid cited text (or no sentences
-    when the subgraph is empty, which callers should treat as an honest gap)."""
+def explain(ids: list[str], graph: dict, *, parser: Parser | None = None, fallback: bool = False) -> dict | None:
+    """Cited plain-language explanation of `ids`.
+
+    By default returns None unless the model produced validated cited text, so lane C's
+    `/explain` chain falls through to its precomputed explanations and its own fallback
+    (api/llm_seam.py treats a dict with `text` as a live answer). `fallback=True` (used by
+    `precompute`) returns the validated template instead, or mode `empty` when there is
+    nothing to explain."""
     sub = subgraph(ids, graph)
     if not sub["edges"] and not sub["claims"]:
-        return _result("empty", [], [])
+        return _result("empty", [], []) if fallback else None
     task = f"Explain how these connect: {', '.join(ids)}"
-    return generate_cited(SYSTEM, task, sub, _fallback, parser)
+    out = generate_cited(SYSTEM, task, sub, _fallback, parser)
+    return out if fallback or out["mode"] in ("llm", "llm_retry") else None
 
 
 def cache_key(ids: list[str] | str, kind: str = "explain") -> str:
@@ -197,8 +203,8 @@ def precompute(graph: dict, journeys: dict[str, list[list[str]]]) -> dict:
     out = {}
     for name, steps in journeys.items():
         for ids in steps:
-            out[cache_key(ids)] = {"journey": name, "ids": ids, **explain(ids, graph)}
-            out[cache_key(ids, "draft")] = {"journey": name, "ids": ids, **draft(ids, graph)}
+            out[cache_key(ids)] = {"journey": name, "ids": ids, **explain(ids, graph, fallback=True)}
+            out[cache_key(ids, "draft")] = {"journey": name, "ids": ids, **draft(ids, graph, fallback=True)}
     return out
 
 
