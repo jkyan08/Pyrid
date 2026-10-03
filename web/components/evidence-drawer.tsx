@@ -23,7 +23,8 @@ import { apiEdge, apiGraph } from "@/lib/api";
 import { claimById } from "@/lib/graph";
 import SmoothDrawer, { DrawerTitle } from "@/components/smoothui/drawer";
 import MotionLoader from "@/components/smoothui/motion-loader";
-import { EvidenceClassBadge, StatusChip } from "./badges";
+import { themeOf } from "@/lib/type-theme";
+import { EvidenceClassBadge, StatusChip, TypeGlyph } from "./badges";
 
 interface EvidenceContextValue {
   openEvidence: (id: string) => void;
@@ -110,10 +111,25 @@ function EdgeEvidence({ view }: { view: EdgeView }) {
   return (
     <div className="space-y-6">
       <div>
-        <p className="text-base font-medium text-gray-900">
-          {view.source_node?.label ?? edge.source}{" "}
-          <span className="text-gray-500">— {edge.relation.replace(/_/g, " ")} —</span>{" "}
-          {view.target_node?.label ?? edge.target}
+        {/* Endpoint type glyphs + a relation chip, so the kind of connection
+            is readable at a glance before the text is. */}
+        <p className="flex flex-wrap items-center gap-x-1.5 gap-y-1 text-base font-medium text-gray-900">
+          <TypeGlyph
+            type={view.source_node?.type ?? "Unknown"}
+            size={16}
+            className={`shrink-0 ${themeOf(view.source_node?.type).text}`}
+          />
+          <span>{view.source_node?.label ?? edge.source}</span>
+          <span className="mx-0.5 inline-flex items-center gap-1 rounded-full border border-gray-200 bg-gray-50 px-2 py-0.5 text-xs font-normal text-gray-600">
+            {edge.relation.replace(/_/g, " ")}
+            <span aria-hidden="true">→</span>
+          </span>
+          <TypeGlyph
+            type={view.target_node?.type ?? "Unknown"}
+            size={16}
+            className={`shrink-0 ${themeOf(view.target_node?.type).text}`}
+          />
+          <span>{view.target_node?.label ?? edge.target}</span>
         </p>
         <p className="mt-1 font-mono text-[11px] text-gray-400">{edge.id}</p>
       </div>
