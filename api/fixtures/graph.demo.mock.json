@@ -1,0 +1,1947 @@
+{
+  "meta": {
+    "built_at": "2026-10-03T12:00:00Z",
+    "sources": [
+      {
+        "name": "DEMO dataset — models the completed product (JAK-STAT cluster shape per docs/test-cluster-desc.md). NOTHING here is sourced: every DEMO:* source, quote, count and investigator is an illustrative placeholder pending the real pipeline. Patient-group/registry URLs are the only verified facts (fetched 2026-10-03, see pipeline/seeds/patient_groups.yaml). Automatically replaced by data/build/graph.json at M1.",
+        "version": "demo-1",
+        "retrieved_at": "2026-10-03",
+        "license": "n/a"
+      }
+    ],
+    "coverage": {
+      "demo:disease:stat1-gof": {
+        "searched": [
+          {
+            "source": "NORD directory (on-site search, logged in pipeline/seeds)",
+            "query": "STAT1 gain of function",
+            "date": "2026-10-03",
+            "hits": 0
+          },
+          {
+            "source": "EURORDIS directory (on-site search, logged in pipeline/seeds)",
+            "query": "STAT1 gain of function",
+            "date": "2026-10-03",
+            "hits": 0
+          },
+          {
+            "source": "Genetic Alliance UK (on-site search, logged in pipeline/seeds)",
+            "query": "STAT1",
+            "date": "2026-10-03",
+            "hits": 0
+          },
+          {
+            "source": "DEMO-CTGOV (placeholder — real ClinicalTrials.gov query lands at M2)",
+            "query": "JAK inhibitor AND STAT1 gain of function, interventional",
+            "date": "2026-10-03",
+            "hits": 0
+          }
+        ]
+      },
+      "demo:gene:orphan": {
+        "searched": [
+          {
+            "source": "DEMO-DB (placeholder)",
+            "query": "DEMOGENE-X disease associations",
+            "date": "2026-10-03",
+            "hits": 0
+          },
+          {
+            "source": "DEMO-PUBMED (placeholder)",
+            "query": "DEMOGENE-X immunodeficiency",
+            "date": "2026-10-03",
+            "hits": 0
+          }
+        ]
+      }
+    }
+  },
+  "nodes": [
+    {
+      "id": "demo:gene:stat1",
+      "type": "Gene",
+      "label": "STAT1",
+      "synonyms": [],
+      "props": {}
+    },
+    {
+      "id": "demo:gene:stat3",
+      "type": "Gene",
+      "label": "STAT3",
+      "synonyms": [],
+      "props": {}
+    },
+    {
+      "id": "demo:gene:jak1",
+      "type": "Gene",
+      "label": "JAK1",
+      "synonyms": [],
+      "props": {}
+    },
+    {
+      "id": "demo:gene:jak2",
+      "type": "Gene",
+      "label": "JAK2",
+      "synonyms": [],
+      "props": {}
+    },
+    {
+      "id": "demo:gene:jak3",
+      "type": "Gene",
+      "label": "JAK3",
+      "synonyms": [],
+      "props": {}
+    },
+    {
+      "id": "demo:gene:tyk2",
+      "type": "Gene",
+      "label": "TYK2",
+      "synonyms": [],
+      "props": {}
+    },
+    {
+      "id": "demo:gene:il2rg",
+      "type": "Gene",
+      "label": "IL2RG",
+      "synonyms": [
+        "common gamma chain"
+      ],
+      "props": {}
+    },
+    {
+      "id": "demo:gene:orphan",
+      "type": "Gene",
+      "label": "DEMOGENE-X (illustrative orphan gene)",
+      "synonyms": [],
+      "props": {}
+    },
+    {
+      "id": "demo:variant:stat1-r274w",
+      "type": "Variant",
+      "label": "STAT1 R274W",
+      "synonyms": [
+        "R274W"
+      ],
+      "props": {
+        "gene": "demo:gene:stat1"
+      }
+    },
+    {
+      "id": "demo:variant:stat1-t419r",
+      "type": "Variant",
+      "label": "STAT1 T419R",
+      "synonyms": [
+        "T419R"
+      ],
+      "props": {
+        "gene": "demo:gene:stat1"
+      }
+    },
+    {
+      "id": "demo:variant:stat1-n574i",
+      "type": "Variant",
+      "label": "STAT1 N574I",
+      "synonyms": [
+        "N574I"
+      ],
+      "props": {
+        "gene": "demo:gene:stat1"
+      }
+    },
+    {
+      "id": "demo:variant:stat1-r321",
+      "type": "Variant",
+      "label": "STAT1 R321 (position-level, demo)",
+      "synonyms": [
+        "R321"
+      ],
+      "props": {
+        "gene": "demo:gene:stat1"
+      }
+    },
+    {
+      "id": "demo:variant:jak2-v617f",
+      "type": "Variant",
+      "label": "JAK2 V617F (somatic)",
+      "synonyms": [
+        "V617F"
+      ],
+      "props": {
+        "gene": "demo:gene:jak2"
+      }
+    },
+    {
+      "id": "mech:STAT1:GoF",
+      "type": "Mechanism",
+      "label": "STAT1 gain-of-function",
+      "synonyms": [],
+      "props": {
+        "gene": "demo:gene:stat1",
+        "direction": "GoF",
+        "origin": "germline"
+      }
+    },
+    {
+      "id": "mech:STAT1:LoF",
+      "type": "Mechanism",
+      "label": "STAT1 loss-of-function",
+      "synonyms": [],
+      "props": {
+        "gene": "demo:gene:stat1",
+        "direction": "LoF",
+        "origin": "germline"
+      }
+    },
+    {
+      "id": "mech:STAT3:GoF",
+      "type": "Mechanism",
+      "label": "STAT3 gain-of-function",
+      "synonyms": [],
+      "props": {
+        "gene": "demo:gene:stat3",
+        "direction": "GoF",
+        "origin": "germline"
+      }
+    },
+    {
+      "id": "mech:STAT3:DN",
+      "type": "Mechanism",
+      "label": "STAT3 dominant-negative",
+      "synonyms": [],
+      "props": {
+        "gene": "demo:gene:stat3",
+        "direction": "DN",
+        "origin": "germline"
+      }
+    },
+    {
+      "id": "mech:JAK3:LoF",
+      "type": "Mechanism",
+      "label": "JAK3 loss-of-function",
+      "synonyms": [],
+      "props": {
+        "gene": "demo:gene:jak3",
+        "direction": "LoF",
+        "origin": "germline"
+      }
+    },
+    {
+      "id": "mech:IL2RG:LoF",
+      "type": "Mechanism",
+      "label": "IL2RG loss-of-function",
+      "synonyms": [],
+      "props": {
+        "gene": "demo:gene:il2rg",
+        "direction": "LoF",
+        "origin": "germline"
+      }
+    },
+    {
+      "id": "mech:JAK2:GoF:somatic",
+      "type": "Mechanism",
+      "label": "JAK2 gain-of-function (somatic)",
+      "synonyms": [],
+      "props": {
+        "gene": "demo:gene:jak2",
+        "direction": "GoF",
+        "origin": "somatic"
+      }
+    },
+    {
+      "id": "mech:TYK2:LoF",
+      "type": "Mechanism",
+      "label": "TYK2 loss-of-function",
+      "synonyms": [],
+      "props": {
+        "gene": "demo:gene:tyk2",
+        "direction": "LoF",
+        "origin": "germline"
+      }
+    },
+    {
+      "id": "mech:JAK1:LoF",
+      "type": "Mechanism",
+      "label": "JAK1 loss-of-function",
+      "synonyms": [],
+      "props": {
+        "gene": "demo:gene:jak1",
+        "direction": "LoF",
+        "origin": "germline"
+      }
+    },
+    {
+      "id": "demo:disease:stat1-gof",
+      "type": "Disease",
+      "label": "STAT1 gain-of-function syndrome",
+      "synonyms": [
+        "chronic mucocutaneous candidiasis with autoimmunity",
+        "CMC",
+        "STAT1 GOF"
+      ],
+      "props": {
+        "tenx_card": {
+          "milestone": "Hypothesis (demo): decide whether a JAK inhibitor is a credible candidate for a specific STAT1 GoF variant, or design a shared variant-level natural-history and treatment-response study",
+          "existing_timeline": "Separate single-patient and small-series reports (demo framing — the real timeline must be sourced before any 10x figure is stated)",
+          "our_route": "One view aligning each reported treatment response to the patient's variant and mechanism class, grading evidence, flagging contradictions, and linking the registry and investigators who could pool data",
+          "assumptions": [
+            "Treatment response depends on variant mechanism (the hypothesis itself — nothing retrieved shows it yet)",
+            "Enough treated patients are reported with enough variant detail to compare",
+            "Registry owners and investigators would share data",
+            "Time saved comes from evidence-assembly and partner-finding, not regulatory or trial steps"
+          ],
+          "sources": [
+            "DEMO: README §16 hypothesis framing — no 10x figure until sourced"
+          ]
+        }
+      }
+    },
+    {
+      "id": "demo:disease:stat1-lof",
+      "type": "Disease",
+      "label": "STAT1 deficiency (loss-of-function)",
+      "synonyms": [
+        "mycobacterial disease susceptibility"
+      ],
+      "props": {}
+    },
+    {
+      "id": "demo:disease:stat3-gof",
+      "type": "Disease",
+      "label": "STAT3 gain-of-function syndrome",
+      "synonyms": [
+        "early-onset multi-organ autoimmunity"
+      ],
+      "props": {}
+    },
+    {
+      "id": "demo:disease:stat3-hies",
+      "type": "Disease",
+      "label": "Autosomal dominant hyper-IgE syndrome",
+      "synonyms": [
+        "AD-HIES"
+      ],
+      "props": {}
+    },
+    {
+      "id": "demo:disease:jak3-scid",
+      "type": "Disease",
+      "label": "JAK3-deficient SCID",
+      "synonyms": [
+        "T-B+NK- SCID (JAK3)"
+      ],
+      "props": {}
+    },
+    {
+      "id": "demo:disease:xscid",
+      "type": "Disease",
+      "label": "X-linked SCID (IL2RG)",
+      "synonyms": [
+        "X-SCID"
+      ],
+      "props": {}
+    },
+    {
+      "id": "demo:disease:pv-mpn",
+      "type": "Disease",
+      "label": "Polycythemia vera (myeloproliferative neoplasm)",
+      "synonyms": [
+        "PV",
+        "MPN"
+      ],
+      "props": {}
+    },
+    {
+      "id": "demo:disease:tyk2-def",
+      "type": "Disease",
+      "label": "TYK2 deficiency",
+      "synonyms": [],
+      "props": {}
+    },
+    {
+      "id": "demo:disease:jak1-id",
+      "type": "Disease",
+      "label": "JAK1 immunodeficiency (few reported patients, demo)",
+      "synonyms": [],
+      "props": {}
+    },
+    {
+      "id": "demo:phenotype:candidiasis",
+      "type": "Phenotype",
+      "label": "Chronic candidiasis",
+      "synonyms": [
+        "recurring candida infections"
+      ],
+      "props": {}
+    },
+    {
+      "id": "demo:phenotype:thyroid",
+      "type": "Phenotype",
+      "label": "Autoimmune thyroid disease",
+      "synonyms": [
+        "thyroid problems"
+      ],
+      "props": {}
+    },
+    {
+      "id": "demo:phenotype:mycobacterial",
+      "type": "Phenotype",
+      "label": "Mycobacterial infections",
+      "synonyms": [],
+      "props": {}
+    },
+    {
+      "id": "demo:phenotype:absent-t",
+      "type": "Phenotype",
+      "label": "Absent T cells",
+      "synonyms": [
+        "T cell deficiency"
+      ],
+      "props": {}
+    },
+    {
+      "id": "demo:phenotype:erythrocytosis",
+      "type": "Phenotype",
+      "label": "Erythrocytosis",
+      "synonyms": [],
+      "props": {}
+    },
+    {
+      "id": "demo:phenotype:autoimmunity",
+      "type": "Phenotype",
+      "label": "Early-onset autoimmunity",
+      "synonyms": [],
+      "props": {}
+    },
+    {
+      "id": "demo:phenotype:recurrent-inf",
+      "type": "Phenotype",
+      "label": "Recurrent infections",
+      "synonyms": [],
+      "props": {}
+    },
+    {
+      "id": "demo:pathway:jak-stat",
+      "type": "Pathway",
+      "label": "JAK-STAT signaling pathway",
+      "synonyms": [],
+      "props": {}
+    },
+    {
+      "id": "demo:drug:ruxolitinib",
+      "type": "Drug",
+      "label": "Ruxolitinib (JAK1/2 inhibitor)",
+      "synonyms": [
+        "rux"
+      ],
+      "props": {}
+    },
+    {
+      "id": "demo:drug:baricitinib",
+      "type": "Drug",
+      "label": "Baricitinib (JAK inhibitor)",
+      "synonyms": [],
+      "props": {}
+    },
+    {
+      "id": "demo:paper:rux-case",
+      "type": "Paper",
+      "label": "Case report: ruxolitinib response in STAT1 GoF (demo placeholder)",
+      "synonyms": [],
+      "props": {}
+    },
+    {
+      "id": "demo:paper:rux-failures",
+      "type": "Paper",
+      "label": "Case series: ruxolitinib failures in severe fungal disease (demo placeholder)",
+      "synonyms": [],
+      "props": {}
+    },
+    {
+      "id": "demo:paper:nk-study",
+      "type": "Paper",
+      "label": "NK-cell study, 16 patients (demo placeholder, models a preprint)",
+      "synonyms": [],
+      "props": {
+        "preprint": true
+      }
+    },
+    {
+      "id": "demo:paper:2024-single",
+      "type": "Paper",
+      "label": "Single-patient study 2024 (demo placeholder)",
+      "synonyms": [],
+      "props": {}
+    },
+    {
+      "id": "demo:paper:variant-fn",
+      "type": "Paper",
+      "label": "Variant functional study: nuclear dynamics (demo placeholder)",
+      "synonyms": [],
+      "props": {}
+    },
+    {
+      "id": "demo:group:idf",
+      "type": "PatientGroup",
+      "label": "Immune Deficiency Foundation",
+      "synonyms": [
+        "IDF"
+      ],
+      "props": {
+        "url": "https://primaryimmune.org/",
+        "note": "URL verified 2026-10-03 (pipeline/seeds); publishes a STAT1/STAT3 GoF handbook chapter"
+      }
+    },
+    {
+      "id": "demo:registry:usidnet",
+      "type": "Registry",
+      "label": "USIDNET registry",
+      "synonyms": [],
+      "props": {
+        "url": "https://usidnet.org/",
+        "note": "URL verified 2026-10-03 (pipeline/seeds)"
+      }
+    },
+    {
+      "id": "demo:group:jmf",
+      "type": "PatientGroup",
+      "label": "Jeffrey Modell Foundation",
+      "synonyms": [
+        "JMF"
+      ],
+      "props": {
+        "url": "https://info4pi.org/",
+        "note": "URL verified 2026-10-03 (pipeline/seeds)"
+      }
+    },
+    {
+      "id": "demo:group:mpnrf",
+      "type": "PatientGroup",
+      "label": "MPN Research Foundation",
+      "synonyms": [],
+      "props": {
+        "url": "https://www.mpnresearchfoundation.org/",
+        "note": "URL verified 2026-10-03 (pipeline/seeds)"
+      }
+    },
+    {
+      "id": "demo:investigator:a",
+      "type": "Investigator",
+      "label": "Demo Investigator A (placeholder — real author resolution lands at M2)",
+      "synonyms": [],
+      "props": {
+        "affiliation": "Demo academic center",
+        "contact": "https://example.invalid/demo-investigator-a",
+        "papers_on_topic": 2
+      }
+    },
+    {
+      "id": "demo:investigator:b",
+      "type": "Investigator",
+      "label": "Demo Investigator B (placeholder, no public contact found)",
+      "synonyms": [],
+      "props": {
+        "affiliation": "Demo children's hospital",
+        "papers_on_topic": 1
+      }
+    },
+    {
+      "id": "demo:study:nathist",
+      "type": "Study",
+      "label": "Natural-history study design (demo asset)",
+      "synonyms": [],
+      "props": {
+        "eligibility": "Demo placeholder eligibility: genetically confirmed STAT1 GoF, any age",
+        "mechanism": "mech:STAT1:GoF"
+      }
+    },
+    {
+      "id": "demo:paper:pv-trial",
+      "type": "Paper",
+      "label": "Trial report: ruxolitinib in polycythemia vera (demo placeholder)",
+      "synonyms": [],
+      "props": {}
+    },
+    {
+      "id": "demo:paper:baricitinib-case",
+      "type": "Paper",
+      "label": "Case report: baricitinib in STAT1 GoF (demo placeholder)",
+      "synonyms": [],
+      "props": {}
+    }
+  ],
+  "edges": [
+    {
+      "id": "e_1001",
+      "source": "demo:variant:stat1-r274w",
+      "target": "mech:STAT1:GoF",
+      "relation": "has_mechanism",
+      "evidence_class": "extracted",
+      "confidence": 0.7,
+      "confidence_basis": {
+        "note": "variant-specific route: faster nuclear accumulation (demo claim c_1005)"
+      },
+      "status": "supported",
+      "sources": [
+        {
+          "kind": "db",
+          "id": "DEMO:variant-fn-study",
+          "date": "2026-10-03"
+        }
+      ],
+      "supporting": [
+        "c_1005"
+      ],
+      "contradicting": [],
+      "attributes": {
+        "origin": "germline"
+      }
+    },
+    {
+      "id": "e_1002",
+      "source": "demo:variant:stat1-t419r",
+      "target": "mech:STAT1:GoF",
+      "relation": "has_mechanism",
+      "evidence_class": "extracted",
+      "confidence": 0.65,
+      "confidence_basis": {
+        "note": "variant-specific route: reduced nuclear mobility (demo claim c_1006)"
+      },
+      "status": "supported",
+      "sources": [
+        {
+          "kind": "db",
+          "id": "DEMO:variant-fn-study",
+          "date": "2026-10-03"
+        }
+      ],
+      "supporting": [
+        "c_1006"
+      ],
+      "contradicting": [],
+      "attributes": {
+        "origin": "germline"
+      }
+    },
+    {
+      "id": "e_1003",
+      "source": "demo:variant:stat1-n574i",
+      "target": "mech:STAT1:GoF",
+      "relation": "has_mechanism",
+      "evidence_class": "extracted",
+      "confidence": 0.65,
+      "confidence_basis": {
+        "note": "variant-specific route: reduced nuclear mobility (demo claim c_1009)"
+      },
+      "status": "supported",
+      "sources": [
+        {
+          "kind": "db",
+          "id": "DEMO:variant-fn-study",
+          "date": "2026-10-03"
+        }
+      ],
+      "supporting": [
+        "c_1009"
+      ],
+      "contradicting": [],
+      "attributes": {
+        "origin": "germline"
+      }
+    },
+    {
+      "id": "e_1004",
+      "source": "demo:variant:stat1-r321",
+      "target": "mech:STAT1:GoF",
+      "relation": "has_mechanism",
+      "evidence_class": "extracted",
+      "confidence": 0.5,
+      "confidence_basis": {
+        "note": "position-level evidence only (demo claim c_1010)"
+      },
+      "status": "supported",
+      "sources": [
+        {
+          "kind": "db",
+          "id": "DEMO:variant-fn-study",
+          "date": "2026-10-03"
+        }
+      ],
+      "supporting": [
+        "c_1010"
+      ],
+      "contradicting": [],
+      "attributes": {
+        "origin": "germline"
+      }
+    },
+    {
+      "id": "e_1005",
+      "source": "demo:variant:jak2-v617f",
+      "target": "mech:JAK2:GoF:somatic",
+      "relation": "has_mechanism",
+      "evidence_class": "observed",
+      "confidence": 0.9,
+      "confidence_basis": {
+        "note": "demo placeholder basis"
+      },
+      "status": "supported",
+      "sources": [
+        {
+          "kind": "db",
+          "id": "DEMO:variant-db",
+          "date": "2026-10-03"
+        }
+      ],
+      "supporting": [],
+      "contradicting": [],
+      "attributes": {
+        "origin": "somatic"
+      }
+    },
+    {
+      "id": "e_1006",
+      "source": "demo:variant:stat1-r274w",
+      "target": "demo:gene:stat1",
+      "relation": "variant_of",
+      "evidence_class": "observed",
+      "confidence": 0.95,
+      "confidence_basis": {
+        "note": "demo placeholder basis"
+      },
+      "status": "supported",
+      "sources": [
+        {
+          "kind": "db",
+          "id": "DEMO:variant-db",
+          "date": "2026-10-03"
+        }
+      ],
+      "supporting": [],
+      "contradicting": [],
+      "attributes": {}
+    },
+    {
+      "id": "e_1007",
+      "source": "demo:variant:stat1-t419r",
+      "target": "demo:gene:stat1",
+      "relation": "variant_of",
+      "evidence_class": "observed",
+      "confidence": 0.95,
+      "confidence_basis": {
+        "note": "demo placeholder basis"
+      },
+      "status": "supported",
+      "sources": [
+        {
+          "kind": "db",
+          "id": "DEMO:variant-db",
+          "date": "2026-10-03"
+        }
+      ],
+      "supporting": [],
+      "contradicting": [],
+      "attributes": {}
+    },
+    {
+      "id": "e_1008",
+      "source": "demo:variant:stat1-n574i",
+      "target": "demo:gene:stat1",
+      "relation": "variant_of",
+      "evidence_class": "observed",
+      "confidence": 0.95,
+      "confidence_basis": {
+        "note": "demo placeholder basis"
+      },
+      "status": "supported",
+      "sources": [
+        {
+          "kind": "db",
+          "id": "DEMO:variant-db",
+          "date": "2026-10-03"
+        }
+      ],
+      "supporting": [],
+      "contradicting": [],
+      "attributes": {}
+    },
+    {
+      "id": "e_1009",
+      "source": "demo:variant:stat1-r321",
+      "target": "demo:gene:stat1",
+      "relation": "variant_of",
+      "evidence_class": "observed",
+      "confidence": 0.9,
+      "confidence_basis": {
+        "note": "demo placeholder basis"
+      },
+      "status": "supported",
+      "sources": [
+        {
+          "kind": "db",
+          "id": "DEMO:variant-db",
+          "date": "2026-10-03"
+        }
+      ],
+      "supporting": [],
+      "contradicting": [],
+      "attributes": {}
+    },
+    {
+      "id": "e_1010",
+      "source": "demo:variant:jak2-v617f",
+      "target": "demo:gene:jak2",
+      "relation": "variant_of",
+      "evidence_class": "observed",
+      "confidence": 0.95,
+      "confidence_basis": {
+        "note": "demo placeholder basis"
+      },
+      "status": "supported",
+      "sources": [
+        {
+          "kind": "db",
+          "id": "DEMO:variant-db",
+          "date": "2026-10-03"
+        }
+      ],
+      "supporting": [],
+      "contradicting": [],
+      "attributes": {}
+    },
+    {
+      "id": "e_1011",
+      "source": "demo:disease:stat1-gof",
+      "target": "mech:STAT1:GoF",
+      "relation": "has_mechanism",
+      "evidence_class": "observed",
+      "confidence": 0.85,
+      "confidence_basis": {
+        "note": "demo placeholder basis"
+      },
+      "status": "supported",
+      "sources": [
+        {
+          "kind": "db",
+          "id": "DEMO:disease-gene-db",
+          "date": "2026-10-03"
+        }
+      ],
+      "supporting": [],
+      "contradicting": [],
+      "attributes": {
+        "origin": "germline"
+      }
+    },
+    {
+      "id": "e_1012",
+      "source": "demo:disease:stat1-lof",
+      "target": "mech:STAT1:LoF",
+      "relation": "has_mechanism",
+      "evidence_class": "observed",
+      "confidence": 0.8,
+      "confidence_basis": {
+        "note": "demo placeholder basis; evidence base smaller than GoF (demo imbalance model)"
+      },
+      "status": "supported",
+      "sources": [
+        {
+          "kind": "db",
+          "id": "DEMO:disease-gene-db",
+          "date": "2026-10-03"
+        }
+      ],
+      "supporting": [],
+      "contradicting": [],
+      "attributes": {
+        "origin": "germline"
+      }
+    },
+    {
+      "id": "e_1013",
+      "source": "demo:disease:stat3-gof",
+      "target": "mech:STAT3:GoF",
+      "relation": "has_mechanism",
+      "evidence_class": "observed",
+      "confidence": 0.8,
+      "confidence_basis": {
+        "note": "demo placeholder basis"
+      },
+      "status": "supported",
+      "sources": [
+        {
+          "kind": "db",
+          "id": "DEMO:disease-gene-db",
+          "date": "2026-10-03"
+        }
+      ],
+      "supporting": [],
+      "contradicting": [],
+      "attributes": {
+        "origin": "germline"
+      }
+    },
+    {
+      "id": "e_1014",
+      "source": "demo:disease:stat3-hies",
+      "target": "mech:STAT3:DN",
+      "relation": "has_mechanism",
+      "evidence_class": "observed",
+      "confidence": 0.8,
+      "confidence_basis": {
+        "note": "dominant-negative is a third mechanism class, distinct from simple LoF (demo)"
+      },
+      "status": "supported",
+      "sources": [
+        {
+          "kind": "db",
+          "id": "DEMO:disease-gene-db",
+          "date": "2026-10-03"
+        }
+      ],
+      "supporting": [],
+      "contradicting": [],
+      "attributes": {
+        "origin": "germline"
+      }
+    },
+    {
+      "id": "e_1015",
+      "source": "demo:disease:jak3-scid",
+      "target": "mech:JAK3:LoF",
+      "relation": "has_mechanism",
+      "evidence_class": "observed",
+      "confidence": 0.85,
+      "confidence_basis": {
+        "note": "demo placeholder basis"
+      },
+      "status": "supported",
+      "sources": [
+        {
+          "kind": "db",
+          "id": "DEMO:disease-gene-db",
+          "date": "2026-10-03"
+        }
+      ],
+      "supporting": [],
+      "contradicting": [],
+      "attributes": {
+        "origin": "germline"
+      }
+    },
+    {
+      "id": "e_1016",
+      "source": "demo:disease:xscid",
+      "target": "mech:IL2RG:LoF",
+      "relation": "has_mechanism",
+      "evidence_class": "observed",
+      "confidence": 0.85,
+      "confidence_basis": {
+        "note": "demo placeholder basis"
+      },
+      "status": "supported",
+      "sources": [
+        {
+          "kind": "db",
+          "id": "DEMO:disease-gene-db",
+          "date": "2026-10-03"
+        }
+      ],
+      "supporting": [],
+      "contradicting": [],
+      "attributes": {
+        "origin": "germline"
+      }
+    },
+    {
+      "id": "e_1017",
+      "source": "demo:disease:pv-mpn",
+      "target": "mech:JAK2:GoF:somatic",
+      "relation": "has_mechanism",
+      "evidence_class": "observed",
+      "confidence": 0.85,
+      "confidence_basis": {
+        "note": "somatic driver — must not cluster with germline immunodeficiencies (demo)"
+      },
+      "status": "supported",
+      "sources": [
+        {
+          "kind": "db",
+          "id": "DEMO:disease-gene-db",
+          "date": "2026-10-03"
+        }
+      ],
+      "supporting": [],
+      "contradicting": [],
+      "attributes": {
+        "origin": "somatic"
+      }
+    },
+    {
+      "id": "e_1018",
+      "source": "demo:disease:tyk2-def",
+      "target": "mech:TYK2:LoF",
+      "relation": "has_mechanism",
+      "evidence_class": "observed",
+      "confidence": 0.6,
+      "confidence_basis": {
+        "note": "demo placeholder basis; direction of common-variant effects needs verification"
+      },
+      "status": "supported",
+      "sources": [
+        {
+          "kind": "db",
+          "id": "DEMO:disease-gene-db",
+          "date": "2026-10-03"
+        }
+      ],
+      "supporting": [],
+      "contradicting": [],
+      "attributes": {
+        "origin": "germline"
+      }
+    },
+    {
+      "id": "e_1019",
+      "source": "demo:disease:jak1-id",
+      "target": "mech:JAK1:LoF",
+      "relation": "has_mechanism",
+      "evidence_class": "extracted",
+      "confidence": 0.4,
+      "confidence_basis": {
+        "note": "very few reported patients (demo low-confidence model)"
+      },
+      "status": "supported",
+      "sources": [
+        {
+          "kind": "db",
+          "id": "DEMO:case-reports",
+          "date": "2026-10-03"
+        }
+      ],
+      "supporting": [],
+      "contradicting": [],
+      "attributes": {
+        "origin": "germline"
+      }
+    },
+    {
+      "id": "e_1020",
+      "source": "demo:drug:ruxolitinib",
+      "target": "demo:disease:stat1-gof",
+      "relation": "treats",
+      "evidence_class": "extracted",
+      "confidence": 0.45,
+      "confidence_basis": {
+        "note": "aggregated demo claims: supporting and contradicting both present -> contested; every study n<20 -> small_n. Models the real mixed ruxolitinib evidence pattern; real claims land at M2 with quote-verified abstracts."
+      },
+      "status": "contested",
+      "sources": [
+        {
+          "kind": "db",
+          "id": "DEMO:aggregated-claims",
+          "date": "2026-10-03"
+        }
+      ],
+      "supporting": [
+        "c_1001",
+        "c_1003",
+        "c_1004"
+      ],
+      "contradicting": [
+        "c_1002"
+      ],
+      "attributes": {
+        "labels": [
+          "promising",
+          "contested",
+          "small_n"
+        ]
+      }
+    },
+    {
+      "id": "e_1021",
+      "source": "demo:drug:ruxolitinib",
+      "target": "demo:disease:jak3-scid",
+      "relation": "treats",
+      "evidence_class": "inferred",
+      "confidence": 0.1,
+      "confidence_basis": {
+        "reason": "direction mismatch: pathway-inhibiting drug vs loss-of-function mechanism (rule, demo)"
+      },
+      "status": "inferred_unsupported",
+      "sources": [
+        {
+          "kind": "db",
+          "id": "DEMO:rules-engine",
+          "date": "2026-10-03"
+        }
+      ],
+      "supporting": [],
+      "contradicting": [],
+      "attributes": {}
+    },
+    {
+      "id": "e_1022",
+      "source": "demo:drug:ruxolitinib",
+      "target": "demo:disease:pv-mpn",
+      "relation": "treats",
+      "evidence_class": "extracted",
+      "confidence": 0.8,
+      "confidence_basis": {
+        "note": "demo placeholder: models an approved indication; real approval evidence must be retrieved, not assumed"
+      },
+      "status": "supported",
+      "sources": [
+        {
+          "kind": "db",
+          "id": "DEMO:label-db",
+          "date": "2026-10-03"
+        }
+      ],
+      "supporting": [
+        "c_1007"
+      ],
+      "contradicting": [],
+      "attributes": {}
+    },
+    {
+      "id": "e_1023",
+      "source": "demo:drug:baricitinib",
+      "target": "demo:disease:stat1-gof",
+      "relation": "treats",
+      "evidence_class": "extracted",
+      "confidence": 0.3,
+      "confidence_basis": {
+        "note": "single demo case report"
+      },
+      "status": "small_n",
+      "sources": [
+        {
+          "kind": "db",
+          "id": "DEMO:aggregated-claims",
+          "date": "2026-10-03"
+        }
+      ],
+      "supporting": [
+        "c_1008"
+      ],
+      "contradicting": [],
+      "attributes": {
+        "labels": [
+          "small_n"
+        ]
+      }
+    },
+    {
+      "id": "e_1024",
+      "source": "demo:gene:stat1",
+      "target": "demo:pathway:jak-stat",
+      "relation": "in_pathway",
+      "evidence_class": "observed",
+      "confidence": 0.95,
+      "confidence_basis": {
+        "note": "demo placeholder basis"
+      },
+      "status": "supported",
+      "sources": [
+        {
+          "kind": "db",
+          "id": "DEMO:pathway-db",
+          "date": "2026-10-03"
+        }
+      ],
+      "supporting": [],
+      "contradicting": [],
+      "attributes": {}
+    },
+    {
+      "id": "e_1025",
+      "source": "demo:gene:stat3",
+      "target": "demo:pathway:jak-stat",
+      "relation": "in_pathway",
+      "evidence_class": "observed",
+      "confidence": 0.95,
+      "confidence_basis": {
+        "note": "demo placeholder basis"
+      },
+      "status": "supported",
+      "sources": [
+        {
+          "kind": "db",
+          "id": "DEMO:pathway-db",
+          "date": "2026-10-03"
+        }
+      ],
+      "supporting": [],
+      "contradicting": [],
+      "attributes": {}
+    },
+    {
+      "id": "e_1026",
+      "source": "demo:gene:jak1",
+      "target": "demo:pathway:jak-stat",
+      "relation": "in_pathway",
+      "evidence_class": "observed",
+      "confidence": 0.95,
+      "confidence_basis": {
+        "note": "demo placeholder basis"
+      },
+      "status": "supported",
+      "sources": [
+        {
+          "kind": "db",
+          "id": "DEMO:pathway-db",
+          "date": "2026-10-03"
+        }
+      ],
+      "supporting": [],
+      "contradicting": [],
+      "attributes": {}
+    },
+    {
+      "id": "e_1027",
+      "source": "demo:gene:jak2",
+      "target": "demo:pathway:jak-stat",
+      "relation": "in_pathway",
+      "evidence_class": "observed",
+      "confidence": 0.95,
+      "confidence_basis": {
+        "note": "demo placeholder basis"
+      },
+      "status": "supported",
+      "sources": [
+        {
+          "kind": "db",
+          "id": "DEMO:pathway-db",
+          "date": "2026-10-03"
+        }
+      ],
+      "supporting": [],
+      "contradicting": [],
+      "attributes": {}
+    },
+    {
+      "id": "e_1028",
+      "source": "demo:gene:jak3",
+      "target": "demo:pathway:jak-stat",
+      "relation": "in_pathway",
+      "evidence_class": "observed",
+      "confidence": 0.95,
+      "confidence_basis": {
+        "note": "demo placeholder basis"
+      },
+      "status": "supported",
+      "sources": [
+        {
+          "kind": "db",
+          "id": "DEMO:pathway-db",
+          "date": "2026-10-03"
+        }
+      ],
+      "supporting": [],
+      "contradicting": [],
+      "attributes": {}
+    },
+    {
+      "id": "e_1029",
+      "source": "demo:gene:tyk2",
+      "target": "demo:pathway:jak-stat",
+      "relation": "in_pathway",
+      "evidence_class": "observed",
+      "confidence": 0.95,
+      "confidence_basis": {
+        "note": "demo placeholder basis"
+      },
+      "status": "supported",
+      "sources": [
+        {
+          "kind": "db",
+          "id": "DEMO:pathway-db",
+          "date": "2026-10-03"
+        }
+      ],
+      "supporting": [],
+      "contradicting": [],
+      "attributes": {}
+    },
+    {
+      "id": "e_1030",
+      "source": "demo:gene:il2rg",
+      "target": "demo:pathway:jak-stat",
+      "relation": "in_pathway",
+      "evidence_class": "observed",
+      "confidence": 0.95,
+      "confidence_basis": {
+        "note": "demo placeholder basis"
+      },
+      "status": "supported",
+      "sources": [
+        {
+          "kind": "db",
+          "id": "DEMO:pathway-db",
+          "date": "2026-10-03"
+        }
+      ],
+      "supporting": [],
+      "contradicting": [],
+      "attributes": {}
+    },
+    {
+      "id": "e_1031",
+      "source": "demo:disease:stat1-gof",
+      "target": "demo:phenotype:candidiasis",
+      "relation": "has_phenotype",
+      "evidence_class": "observed",
+      "confidence": 0.9,
+      "confidence_basis": {
+        "note": "demo placeholder basis"
+      },
+      "status": "supported",
+      "sources": [
+        {
+          "kind": "db",
+          "id": "DEMO:phenotype-db",
+          "date": "2026-10-03"
+        }
+      ],
+      "supporting": [],
+      "contradicting": [],
+      "attributes": {}
+    },
+    {
+      "id": "e_1032",
+      "source": "demo:disease:stat1-gof",
+      "target": "demo:phenotype:thyroid",
+      "relation": "has_phenotype",
+      "evidence_class": "observed",
+      "confidence": 0.8,
+      "confidence_basis": {
+        "note": "demo placeholder basis"
+      },
+      "status": "supported",
+      "sources": [
+        {
+          "kind": "db",
+          "id": "DEMO:phenotype-db",
+          "date": "2026-10-03"
+        }
+      ],
+      "supporting": [],
+      "contradicting": [],
+      "attributes": {}
+    },
+    {
+      "id": "e_1033",
+      "source": "demo:disease:stat1-lof",
+      "target": "demo:phenotype:mycobacterial",
+      "relation": "has_phenotype",
+      "evidence_class": "observed",
+      "confidence": 0.85,
+      "confidence_basis": {
+        "note": "demo placeholder basis"
+      },
+      "status": "supported",
+      "sources": [
+        {
+          "kind": "db",
+          "id": "DEMO:phenotype-db",
+          "date": "2026-10-03"
+        }
+      ],
+      "supporting": [],
+      "contradicting": [],
+      "attributes": {}
+    },
+    {
+      "id": "e_1034",
+      "source": "demo:disease:jak3-scid",
+      "target": "demo:phenotype:absent-t",
+      "relation": "has_phenotype",
+      "evidence_class": "observed",
+      "confidence": 0.9,
+      "confidence_basis": {
+        "note": "demo placeholder basis"
+      },
+      "status": "supported",
+      "sources": [
+        {
+          "kind": "db",
+          "id": "DEMO:phenotype-db",
+          "date": "2026-10-03"
+        }
+      ],
+      "supporting": [],
+      "contradicting": [],
+      "attributes": {}
+    },
+    {
+      "id": "e_1035",
+      "source": "demo:disease:xscid",
+      "target": "demo:phenotype:absent-t",
+      "relation": "has_phenotype",
+      "evidence_class": "observed",
+      "confidence": 0.9,
+      "confidence_basis": {
+        "note": "shared immunophenotype with JAK3 SCID (demo)"
+      },
+      "status": "supported",
+      "sources": [
+        {
+          "kind": "db",
+          "id": "DEMO:phenotype-db",
+          "date": "2026-10-03"
+        }
+      ],
+      "supporting": [],
+      "contradicting": [],
+      "attributes": {}
+    },
+    {
+      "id": "e_1036",
+      "source": "demo:disease:pv-mpn",
+      "target": "demo:phenotype:erythrocytosis",
+      "relation": "has_phenotype",
+      "evidence_class": "observed",
+      "confidence": 0.9,
+      "confidence_basis": {
+        "note": "demo placeholder basis"
+      },
+      "status": "supported",
+      "sources": [
+        {
+          "kind": "db",
+          "id": "DEMO:phenotype-db",
+          "date": "2026-10-03"
+        }
+      ],
+      "supporting": [],
+      "contradicting": [],
+      "attributes": {}
+    },
+    {
+      "id": "e_1037",
+      "source": "demo:disease:stat3-gof",
+      "target": "demo:phenotype:autoimmunity",
+      "relation": "has_phenotype",
+      "evidence_class": "observed",
+      "confidence": 0.85,
+      "confidence_basis": {
+        "note": "demo placeholder basis"
+      },
+      "status": "supported",
+      "sources": [
+        {
+          "kind": "db",
+          "id": "DEMO:phenotype-db",
+          "date": "2026-10-03"
+        }
+      ],
+      "supporting": [],
+      "contradicting": [],
+      "attributes": {}
+    },
+    {
+      "id": "e_1038",
+      "source": "demo:disease:tyk2-def",
+      "target": "demo:phenotype:recurrent-inf",
+      "relation": "has_phenotype",
+      "evidence_class": "observed",
+      "confidence": 0.7,
+      "confidence_basis": {
+        "note": "demo placeholder basis"
+      },
+      "status": "supported",
+      "sources": [
+        {
+          "kind": "db",
+          "id": "DEMO:phenotype-db",
+          "date": "2026-10-03"
+        }
+      ],
+      "supporting": [],
+      "contradicting": [],
+      "attributes": {}
+    },
+    {
+      "id": "e_1039",
+      "source": "demo:disease:stat3-hies",
+      "target": "demo:phenotype:recurrent-inf",
+      "relation": "has_phenotype",
+      "evidence_class": "observed",
+      "confidence": 0.8,
+      "confidence_basis": {
+        "note": "demo placeholder basis"
+      },
+      "status": "supported",
+      "sources": [
+        {
+          "kind": "db",
+          "id": "DEMO:phenotype-db",
+          "date": "2026-10-03"
+        }
+      ],
+      "supporting": [],
+      "contradicting": [],
+      "attributes": {}
+    },
+    {
+      "id": "e_1040",
+      "source": "demo:disease:stat1-gof",
+      "target": "demo:disease:stat3-gof",
+      "relation": "similar_to",
+      "evidence_class": "inferred",
+      "confidence": 0.5,
+      "confidence_basis": {
+        "mechanism_score": 0.8,
+        "ic_weighted_phenotype_overlap": 0.55,
+        "conflict_penalty": 0.0,
+        "note": "same pathway step, same direction (GoF), both germline; capped at 0.5 as inferred (demo). Counterexample: STAT1 LoF scores a high conflict penalty (opposite direction, same gene) and is NOT similar despite the shared gene name."
+      },
+      "status": "supported",
+      "sources": [
+        {
+          "kind": "db",
+          "id": "DEMO:similarity-engine",
+          "date": "2026-10-03"
+        }
+      ],
+      "supporting": [],
+      "contradicting": [],
+      "attributes": {}
+    },
+    {
+      "id": "e_1041",
+      "source": "demo:disease:jak3-scid",
+      "target": "demo:disease:xscid",
+      "relation": "similar_to",
+      "evidence_class": "inferred",
+      "confidence": 0.5,
+      "confidence_basis": {
+        "mechanism_score": 0.9,
+        "ic_weighted_phenotype_overlap": 0.7,
+        "conflict_penalty": 0.0,
+        "note": "same signaling step: JAK3 signals through the chain IL2RG encodes (demo); different gene names, same cluster"
+      },
+      "status": "supported",
+      "sources": [
+        {
+          "kind": "db",
+          "id": "DEMO:similarity-engine",
+          "date": "2026-10-03"
+        }
+      ],
+      "supporting": [],
+      "contradicting": [],
+      "attributes": {}
+    },
+    {
+      "id": "e_1043",
+      "source": "demo:registry:usidnet",
+      "target": "demo:disease:stat1-gof",
+      "relation": "covers",
+      "evidence_class": "observed",
+      "confidence": 0.9,
+      "confidence_basis": {
+        "note": "registry URL verified by fetch 2026-10-03 (pipeline/seeds); coverage of STAT1 GoF specifically is the demo assumption to verify"
+      },
+      "status": "supported",
+      "sources": [
+        {
+          "kind": "url",
+          "id": "https://usidnet.org/",
+          "date": "2026-10-03"
+        }
+      ],
+      "supporting": [],
+      "contradicting": [],
+      "attributes": {
+        "verdict": "adaptable_needs_expert_review",
+        "differs": [
+          "registry spans all inborn errors of immunity, not STAT1-GoF-specific"
+        ],
+        "needs_review": [
+          "eligibility"
+        ]
+      }
+    },
+    {
+      "id": "e_1044",
+      "source": "demo:group:idf",
+      "target": "demo:disease:stat1-gof",
+      "relation": "supports_community",
+      "evidence_class": "observed",
+      "confidence": 0.9,
+      "confidence_basis": {
+        "note": "IDF URL + STAT1/STAT3 GoF handbook chapter page verified by fetch 2026-10-03 (pipeline/seeds)"
+      },
+      "status": "supported",
+      "sources": [
+        {
+          "kind": "url",
+          "id": "https://primaryimmune.org/",
+          "date": "2026-10-03"
+        }
+      ],
+      "supporting": [],
+      "contradicting": [],
+      "attributes": {
+        "verdict": "reusable_now",
+        "differs": [],
+        "needs_review": []
+      }
+    },
+    {
+      "id": "e_1045",
+      "source": "demo:group:jmf",
+      "target": "demo:disease:jak3-scid",
+      "relation": "supports_community",
+      "evidence_class": "observed",
+      "confidence": 0.8,
+      "confidence_basis": {
+        "note": "JMF URL verified by fetch 2026-10-03 (pipeline/seeds); centers network for primary immunodeficiency broadly"
+      },
+      "status": "supported",
+      "sources": [
+        {
+          "kind": "url",
+          "id": "https://info4pi.org/",
+          "date": "2026-10-03"
+        }
+      ],
+      "supporting": [],
+      "contradicting": [],
+      "attributes": {
+        "verdict": "adaptable_needs_expert_review",
+        "differs": [
+          "diagnostic/research centers network, not a SCID-specific community"
+        ],
+        "needs_review": [
+          "eligibility"
+        ]
+      }
+    },
+    {
+      "id": "e_1046",
+      "source": "demo:group:mpnrf",
+      "target": "demo:disease:pv-mpn",
+      "relation": "supports_community",
+      "evidence_class": "observed",
+      "confidence": 0.85,
+      "confidence_basis": {
+        "note": "MPN Research Foundation URL verified by fetch 2026-10-03 (pipeline/seeds); fetched page does not mention JAK2 — the JAK2-MPN link itself comes from the literature pipeline, not the seed"
+      },
+      "status": "supported",
+      "sources": [
+        {
+          "kind": "url",
+          "id": "https://www.mpnresearchfoundation.org/",
+          "date": "2026-10-03"
+        }
+      ],
+      "supporting": [],
+      "contradicting": [],
+      "attributes": {
+        "verdict": "reusable_now",
+        "differs": [],
+        "needs_review": []
+      }
+    },
+    {
+      "id": "e_1047",
+      "source": "demo:study:nathist",
+      "target": "demo:disease:stat1-gof",
+      "relation": "studies",
+      "evidence_class": "inferred",
+      "confidence": 0.4,
+      "confidence_basis": {
+        "note": "demo asset: a study design to adapt, not an existing trial — the demo CTGOV search logged 0 interventional hits (see coverage)"
+      },
+      "status": "supported",
+      "sources": [
+        {
+          "kind": "db",
+          "id": "DEMO:study-design",
+          "date": "2026-10-03"
+        }
+      ],
+      "supporting": [],
+      "contradicting": [],
+      "attributes": {
+        "verdict": "adaptable_needs_expert_review",
+        "differs": [
+          "designed for a single-disease cohort; variant-level pooling needs expert review"
+        ],
+        "needs_review": [
+          "biological",
+          "eligibility"
+        ]
+      }
+    },
+    {
+      "id": "e_1048",
+      "source": "demo:investigator:a",
+      "target": "demo:paper:rux-case",
+      "relation": "author_of",
+      "evidence_class": "observed",
+      "confidence": 0.9,
+      "confidence_basis": {
+        "note": "demo placeholder author list"
+      },
+      "status": "supported",
+      "sources": [
+        {
+          "kind": "db",
+          "id": "DEMO:author-list",
+          "date": "2026-10-03"
+        }
+      ],
+      "supporting": [],
+      "contradicting": [],
+      "attributes": {}
+    },
+    {
+      "id": "e_1049",
+      "source": "demo:investigator:a",
+      "target": "demo:disease:stat1-gof",
+      "relation": "works_on",
+      "evidence_class": "observed",
+      "confidence": 0.7,
+      "confidence_basis": {
+        "note": "author of 2 demo papers on this topic — never 'field leader' (demo labeling rule)"
+      },
+      "status": "supported",
+      "sources": [
+        {
+          "kind": "db",
+          "id": "DEMO:author-list",
+          "date": "2026-10-03"
+        }
+      ],
+      "supporting": [],
+      "contradicting": [],
+      "attributes": {}
+    },
+    {
+      "id": "e_1050",
+      "source": "demo:investigator:b",
+      "target": "demo:paper:nk-study",
+      "relation": "author_of",
+      "evidence_class": "observed",
+      "confidence": 0.9,
+      "confidence_basis": {
+        "note": "demo placeholder author list"
+      },
+      "status": "supported",
+      "sources": [
+        {
+          "kind": "db",
+          "id": "DEMO:author-list",
+          "date": "2026-10-03"
+        }
+      ],
+      "supporting": [],
+      "contradicting": [],
+      "attributes": {}
+    },
+    {
+      "id": "e_1051",
+      "source": "demo:investigator:b",
+      "target": "demo:disease:stat1-gof",
+      "relation": "works_on",
+      "evidence_class": "observed",
+      "confidence": 0.6,
+      "confidence_basis": {
+        "note": "author of 1 demo paper on this topic; no public contact route found (demo)"
+      },
+      "status": "supported",
+      "sources": [
+        {
+          "kind": "db",
+          "id": "DEMO:author-list",
+          "date": "2026-10-03"
+        }
+      ],
+      "supporting": [],
+      "contradicting": [],
+      "attributes": {}
+    }
+  ],
+  "claims": [
+    {
+      "id": "c_1001",
+      "pmid": "DEMO-1",
+      "quote": "Demo placeholder: ruxolitinib reduced interferon hyperresponsiveness and controlled candidiasis in a single patient (real quote must string-match a retrieved abstract at M2).",
+      "polarity": "supports",
+      "subject": "demo:drug:ruxolitinib",
+      "predicate": "treats",
+      "object": "demo:disease:stat1-gof",
+      "variant": "demo:variant:stat1-r274w",
+      "study_type": "case_report",
+      "n_patients": 1,
+      "paper": "demo:paper:rux-case"
+    },
+    {
+      "id": "c_1002",
+      "pmid": "DEMO-2",
+      "quote": "Demo placeholder: therapeutic failure despite clear inhibition of STAT1 phosphorylation in two patients with severe fungal disease.",
+      "polarity": "contradicts",
+      "subject": "demo:drug:ruxolitinib",
+      "predicate": "treats",
+      "object": "demo:disease:stat1-gof",
+      "variant": "",
+      "study_type": "case_series",
+      "n_patients": 2,
+      "paper": "demo:paper:rux-failures"
+    },
+    {
+      "id": "c_1003",
+      "pmid": "DEMO-3",
+      "quote": "Demo placeholder: partial restoration of NK cytotoxic function in 16 patients (models a preprint; preprint flag on the paper node).",
+      "polarity": "supports",
+      "subject": "demo:drug:ruxolitinib",
+      "predicate": "treats",
+      "object": "demo:disease:stat1-gof",
+      "variant": "",
+      "study_type": "in_vitro",
+      "n_patients": 16,
+      "paper": "demo:paper:nk-study"
+    },
+    {
+      "id": "c_1004",
+      "pmid": "DEMO-4",
+      "quote": "Demo placeholder: autoimmune features improved but epigenetic abnormality persisted; features worsened when treatment paused (single patient).",
+      "polarity": "supports",
+      "subject": "demo:drug:ruxolitinib",
+      "predicate": "treats",
+      "object": "demo:disease:stat1-gof",
+      "variant": "demo:variant:stat1-t419r",
+      "study_type": "case_report",
+      "n_patients": 1,
+      "paper": "demo:paper:2024-single"
+    },
+    {
+      "id": "c_1005",
+      "pmid": "DEMO-5",
+      "quote": "Demo placeholder: R274W shows faster nuclear accumulation than wild type.",
+      "polarity": "supports",
+      "subject": "demo:variant:stat1-r274w",
+      "predicate": "has_mechanism",
+      "object": "mech:STAT1:GoF",
+      "variant": "demo:variant:stat1-r274w",
+      "study_type": "in_vitro",
+      "n_patients": null,
+      "paper": "demo:paper:variant-fn"
+    },
+    {
+      "id": "c_1006",
+      "pmid": "DEMO-5",
+      "quote": "Demo placeholder: T419R shows reduced nuclear mobility; transcriptional signatures are partly mutation-specific.",
+      "polarity": "supports",
+      "subject": "demo:variant:stat1-t419r",
+      "predicate": "has_mechanism",
+      "object": "mech:STAT1:GoF",
+      "variant": "demo:variant:stat1-t419r",
+      "study_type": "in_vitro",
+      "n_patients": null,
+      "paper": "demo:paper:variant-fn"
+    },
+    {
+      "id": "c_1007",
+      "pmid": "DEMO-6",
+      "quote": "Demo placeholder: models an approved indication for myeloproliferative disease; real evidence must be retrieved.",
+      "polarity": "supports",
+      "subject": "demo:drug:ruxolitinib",
+      "predicate": "treats",
+      "object": "demo:disease:pv-mpn",
+      "variant": "demo:variant:jak2-v617f",
+      "study_type": "trial",
+      "n_patients": null,
+      "paper": "demo:paper:pv-trial"
+    },
+    {
+      "id": "c_1008",
+      "pmid": "DEMO-7",
+      "quote": "Demo placeholder: single case report of a second JAK inhibitor in STAT1 GoF.",
+      "polarity": "supports",
+      "subject": "demo:drug:baricitinib",
+      "predicate": "treats",
+      "object": "demo:disease:stat1-gof",
+      "variant": "",
+      "study_type": "case_report",
+      "n_patients": 1,
+      "paper": "demo:paper:baricitinib-case"
+    },
+    {
+      "id": "c_1009",
+      "pmid": "DEMO-5",
+      "quote": "Demo placeholder: N574I shows reduced nuclear mobility.",
+      "polarity": "supports",
+      "subject": "demo:variant:stat1-n574i",
+      "predicate": "has_mechanism",
+      "object": "mech:STAT1:GoF",
+      "variant": "demo:variant:stat1-n574i",
+      "study_type": "in_vitro",
+      "n_patients": null,
+      "paper": "demo:paper:variant-fn"
+    },
+    {
+      "id": "c_1010",
+      "pmid": "DEMO-5",
+      "quote": "Demo placeholder: position R321 variants show reduced nuclear mobility (position-level evidence).",
+      "polarity": "supports",
+      "subject": "demo:variant:stat1-r321",
+      "predicate": "has_mechanism",
+      "object": "mech:STAT1:GoF",
+      "variant": "demo:variant:stat1-r321",
+      "study_type": "in_vitro",
+      "n_patients": null,
+      "paper": "demo:paper:variant-fn"
+    }
+  ],
+  "clusters": [
+    {
+      "id": "cl_demo_gof_dysreg",
+      "members": [
+        "demo:disease:stat1-gof",
+        "demo:disease:stat3-gof"
+      ],
+      "robust": true,
+      "why": {
+        "shared": "same pathway step, same direction (GoF), germline; IC-weighted phenotype overlap (demo)",
+        "counterexample": "STAT1 LoF clusters separately despite the same gene name (demo model of ground-truth test 1)"
+      }
+    },
+    {
+      "id": "cl_demo_scid",
+      "members": [
+        "demo:disease:jak3-scid",
+        "demo:disease:xscid"
+      ],
+      "robust": true,
+      "why": {
+        "shared": "same broken signaling step: JAK3 signals through the chain IL2RG encodes (demo model of ground-truth test 2)"
+      }
+    },
+    {
+      "id": "cl_demo_somatic_mpn",
+      "members": [
+        "demo:disease:pv-mpn"
+      ],
+      "robust": true,
+      "why": {
+        "separate": "somatic origin: must not cluster with germline immunodeficiencies (demo model of ground-truth test 3)"
+      }
+    },
+    {
+      "id": "cl_demo_lof_infection",
+      "members": [
+        "demo:disease:stat1-lof",
+        "demo:disease:tyk2-def"
+      ],
+      "robust": false,
+      "why": {
+        "note": "membership varies across similarity weightings — shown as 'sensitive', models the robustness re-run (demo)"
+      }
+    }
+  ]
+}

@@ -1,0 +1,379 @@
+# Hand-curated patient-group / registry seed file (lane C).
+# README hard rule 2: names and search terms only — the pipeline resolves IDs.
+# Every row in `groups` was verified by fetching its URL on meta.date.
+# Every directory search is logged in `searches`, including zero hits and
+# blocked fetches. `hits` counts on-topic results for the query's goal
+# (e.g. a dedicated STAT1 GoF group); raw result noise is described in
+# `outcome`. null hits = the search could not be executed/read.
+
+meta:
+  curated_by: "lane-c"
+  date: "2026-10-03"
+  rule: "every group row verified by fetching url on date; searches logged including zero hits"
+
+groups:
+  - name: "Immune Deficiency Foundation"
+    url: "https://primaryimmune.org/"
+    kind: patient_group
+    diseases:
+      - "primary immunodeficiency (umbrella)"
+      - "STAT1 gain of function"
+      - "STAT3 gain of function"
+      - "severe combined immunodeficiency"
+    scope: umbrella
+    verified:
+      retrieved_at: "2026-10-03"
+      method: webfetch
+      note: >-
+        Homepage fetched. Stated purpose: improve the diagnosis, treatment,
+        and quality of life for every person affected by primary
+        immunodeficiency; peer support, Ask IDF, education. The STAT1/STAT3
+        GoF handbook chapter page was fetched separately the same day and
+        exists: "Chapter 15: Diseases of Immune Dysregulation: STAT1 and
+        STAT3 Gain of Function" (IDF Patient & Family Handbook, 6th edition,
+        page dated 2019-06-30; download gated behind a name/email form) at
+        https://primaryimmune.org/resources/print-material/chapter-15-diseases-of-immune-dysregulation
+    source_of_claim: >-
+      test-cluster-desc.md section 5 (Retrieved); confirmed by fetching both
+      URLs on 2026-10-03.
+
+  - name: "USIDNET (United States Immunodeficiency Network)"
+    url: "https://usidnet.org/"
+    kind: registry
+    diseases:
+      - "primary immunodeficiency / inborn errors of immunity (umbrella)"
+    scope: umbrella
+    verified:
+      retrieved_at: "2026-10-03"
+      method: webfetch
+      note: >-
+        usidnet.org returned HTTP 301 to https://www.usidnet.net/, which was
+        fetched. The site describes USIDNET as a research consortium on
+        inborn errors of immunity that maintains a patient registry
+        ("connects registry data, clinicians, researchers, and participating
+        institutions"). Funding as stated on the site: primary support from
+        an NIH grant (R24AI171055, as printed on the page) administered
+        through NIAID; the Immune Deficiency Foundation provides additional
+        support for the website and network operations. This differs
+        slightly from the cluster doc's phrasing ("an IDF program"); the
+        fetched page frames IDF as a supporter, not the operator.
+    source_of_claim: >-
+      test-cluster-desc.md section 5 (Retrieved); confirmed by fetching the
+      redirect target https://www.usidnet.net/ on 2026-10-03.
+
+  - name: "Jeffrey Modell Foundation"
+    url: "https://info4pi.org/"
+    kind: foundation
+    diseases:
+      - "primary immunodeficiency (umbrella)"
+    scope: umbrella
+    verified:
+      retrieved_at: "2026-10-03"
+      method: webfetch
+      note: >-
+        Homepage fetched. Stated mission: "Accelerating earliest possible
+        diagnosis, connecting patients to life-changing treatments, and
+        finding cures for Primary Immunodeficiency." Operates the Jeffrey
+        Modell Centers Network (JMCN) providing access to expert
+        immunologists and research resources; also research/education
+        grants and genetic sequencing programs. This resolves the cluster
+        doc's "role needs checking" flag: the site confirms it supports a
+        network of diagnostic and research centers for PI.
+    source_of_claim: >-
+      test-cluster-desc.md section 5 (role flagged as needing checking);
+      role confirmed by fetching https://info4pi.org/ on 2026-10-03.
+
+  - name: "SCID Foundation"
+    url: "https://www.scidfoundation.org/"
+    kind: foundation
+    diseases:
+      - "severe combined immunodeficiency (SCID)"
+    scope: dedicated
+    verified:
+      retrieved_at: "2026-10-03"
+      method: webfetch
+      note: >-
+        Found via NORD's organization directory (entry at
+        https://rarediseases.org/organizations/scid-foundation/, fetched
+        2026-10-03, which gives the mission "empower families affected by
+        Severe Combined Immunodeficiency (SCID) through awareness,
+        education, advocacy, and support"). The foundation's own site was
+        then fetched the same day: describes itself as a trusted resource
+        providing information and support, awareness and advocacy, and a
+        safe space for families affected by SCID.
+    source_of_claim: >-
+      NORD organization directory entry plus direct fetch of
+      https://www.scidfoundation.org/ on 2026-10-03.
+
+  - name: "SCID Compass"
+    url: "https://primaryimmune.org/scid-compass"
+    kind: patient_group
+    diseases:
+      - "severe combined immunodeficiency (SCID)"
+    scope: dedicated
+    verified:
+      retrieved_at: "2026-10-03"
+      method: webfetch
+      note: >-
+        Page fetched; exists on the Immune Deficiency Foundation site.
+        Described as a resource to "meet families affected by SCID" and
+        browse a resource library. It is a support program hosted/maintained
+        by IDF, not an independent organization; the fetched page does not
+        state its funding or organizational structure, so no funder is
+        recorded here.
+    source_of_claim: >-
+      Found via a web search for SCID patient advocacy organizations on
+      2026-10-03; confirmed by fetching the page the same day.
+
+  - name: "MPN Research Foundation"
+    url: "https://www.mpnresearchfoundation.org/"
+    kind: foundation
+    diseases:
+      - "polycythemia vera"
+      - "essential thrombocythemia"
+      - "myelofibrosis"
+      - "myeloproliferative neoplasms (umbrella for the three above)"
+    scope: dedicated
+    verified:
+      retrieved_at: "2026-10-03"
+      method: webfetch
+      note: >-
+        Homepage fetched. Stated mission: "to stimulate original research in
+        pursuit of new treatments — and eventually a cure — for polycythemia
+        vera, essential thrombocythemia, and myelofibrosis." Site states it
+        was founded in 1999 as the first organization dedicated specifically
+        to MPNs and operates the MPN Progression Registry. CAUTION: the
+        fetched page does not mention JAK2; the JAK2-MPN mechanism link in
+        our graph must come from the literature pipeline, not this seed.
+    source_of_claim: >-
+      Candidate name from background knowledge (cluster doc section 5 says
+      MPN groups exist but were unverified); verified by direct fetch on
+      2026-10-03. Not surfaced by the NORD on-site search logged below.
+
+  - name: "MPN Advocacy & Education International"
+    url: "https://www.mpnadvocacy.com/"
+    kind: patient_group
+    diseases:
+      - "myelofibrosis"
+      - "polycythemia vera"
+      - "essential thrombocythemia"
+    scope: dedicated
+    verified:
+      retrieved_at: "2026-10-03"
+      method: webfetch
+      note: >-
+        Homepage fetched. Provides "educational programs, materials and
+        resources for patients, caregivers, physicians and entire healthcare
+        teams" for myelofibrosis, polycythemia vera and essential
+        thrombocythemia; "dedicated to making a difference in the lives of
+        those affected by MPNs." Same JAK2 caution as the MPN Research
+        Foundation row: the fetched page does not mention JAK2.
+    source_of_claim: >-
+      Candidate name from background knowledge; verified by direct fetch on
+      2026-10-03.
+
+searches:
+  - directory: "NORD (rarediseases.org) — on-site search"
+    url: "https://rarediseases.org/?s=STAT1+gain+of+function"
+    query: "STAT1 gain of function"
+    date: "2026-10-03"
+    hits: 0
+    outcome: >-
+      Site search returned ~23 pages of partial keyword matches (e.g.
+      "Mendelian susceptibility to mycobacterial diseases due to partial
+      STAT1 deficiency" — a STAT1 deficiency/LoF entry, not GoF), but no
+      NORD rare disease report and no member patient organization dedicated
+      to STAT1 gain of function.
+
+  - directory: "NORD (rarediseases.org) — via web search engine, domain-restricted"
+    url: "https://rarediseases.org/"
+    query: "STAT1 gain of function patient organization"
+    date: "2026-10-03"
+    hits: 0
+    outcome: >-
+      The search engine returned no rarediseases.org URLs despite the domain
+      restriction (it backfilled with clinical literature from other
+      domains, e.g. PMC case reports and a ClinicalTrials.gov expanded-access
+      record). No NORD page for a dedicated STAT1 GoF group surfaced.
+
+  - directory: "Global Genes — on-site search"
+    url: "https://globalgenes.org/?s=STAT1+gain+of+function"
+    query: "STAT1 gain of function"
+    date: "2026-10-03"
+    hits: 0
+    outcome: >-
+      Fetched page rendered only navigation and footer with zero results
+      shown. The search may require JavaScript, so a zero count could not be
+      fully distinguished from an unrendered results pane; no evidence of a
+      dedicated group either way.
+
+  - directory: "Global Genes — via web search engine, domain-restricted"
+    url: "https://globalgenes.org/"
+    query: "STAT1 gain of function"
+    date: "2026-10-03"
+    hits: 0
+    outcome: >-
+      No globalgenes.org URLs returned despite the domain restriction
+      (engine backfilled with other-domain literature). Note: a separate
+      SCID query the same day DID return globalgenes.org disorder pages, so
+      the engine does index the site; nothing surfaced for STAT1 GoF.
+
+  - directory: "Orphanet — disease search (current site)"
+    url: "https://www.orpha.net/en/disease/search?query=STAT1%20gain%20of%20function"
+    query: "STAT1 gain of function"
+    date: "2026-10-03"
+    hits: null
+    outcome: >-
+      BLOCKED. Page served only a bot-protection interstitial
+      ("Vérification de la connexion...", haphash). Search not executed; no
+      conclusion about Orphanet coverage can be drawn.
+
+  - directory: "Orphanet — legacy Disease_Search.php"
+    url: "https://www.orpha.net/consor/cgi-bin/Disease_Search.php?lng=EN&Disease_Disease_Search_diseaseGroup=STAT1"
+    query: "STAT1"
+    date: "2026-10-03"
+    hits: null
+    outcome: >-
+      BLOCKED by the same bot-protection interstitial. Search not executed.
+
+  - directory: "EURORDIS — on-site search"
+    url: "https://www.eurordis.org/?s=STAT1+gain+of+function"
+    query: "STAT1 gain of function"
+    date: "2026-10-03"
+    hits: 0
+    outcome: >-
+      Page explicitly reported "Total Results: 0" / "No results found."
+      Clean zero.
+
+  - directory: "Rare Disease UK — locating its directory"
+    url: "https://geneticalliance.org.uk/rare-disease-uk/"
+    query: "Rare Disease UK official website patient organisation directory"
+    date: "2026-10-03"
+    hits: 0
+    outcome: >-
+      Web search established that Rare Disease UK is a campaign run by
+      Genetic Alliance UK (the UK alliance of 190+ patient organisations),
+      with no standalone searchable directory of its own found. Effort
+      redirected to the Genetic Alliance UK site search (next row). The
+      search also surfaced "Raremap" (a LifeArc / Rare Disease Research UK
+      directory of UK rare-disease organisations) as a possible future
+      lookup — not searched this session.
+
+  - directory: "Genetic Alliance UK — on-site search"
+    url: "https://geneticalliance.org.uk/?s=STAT1"
+    query: "STAT1"
+    date: "2026-10-03"
+    hits: 0
+    outcome: >-
+      Page reported "Sorry, no results were found, try again using new key
+      words." Clean zero for STAT1 across the UK alliance's site.
+
+  - directory: "Genetic Alliance (US) — Disease InfoSearch"
+    url: "https://www.diseaseinfosearch.org/"
+    query: "STAT1 gain of function"
+    date: "2026-10-03"
+    hits: null
+    outcome: >-
+      NOT EXECUTED. The guessed search endpoint
+      (/search?q=STAT1+gain+of+function) returned HTTP 404, and the fetched
+      homepage did not expose a static, fetchable search URL pattern
+      (search appears to be JavaScript-driven). No conclusion can be drawn
+      about Disease InfoSearch coverage.
+
+  - directory: "RareConnect (stretch)"
+    url: "https://www.rareconnect.org/en/search?q=STAT1"
+    query: "STAT1"
+    date: "2026-10-03"
+    hits: null
+    outcome: >-
+      NOT READABLE. The page returned only a JavaScript loading animation
+      with no rendered results, so community listings (if any) could not be
+      read. No conclusion can be drawn about RareConnect coverage.
+
+  - directory: "Web search engine (general) — SCID group resolution"
+    url: "https://rarediseases.org/organizations/scid-foundation/"
+    query: "SCID severe combined immunodeficiency patient advocacy organization foundation"
+    date: "2026-10-03"
+    hits: 3
+    outcome: >-
+      Surfaced three SCID-specific leads: SCID Foundation (via NORD's
+      organization directory entry, then verified by fetching its own
+      site — see groups), SCID Compass (IDF program page, verified by
+      fetch — see groups), and SCID Angels for Life Foundation
+      (angels.scid.net), whose site returned HTTP 503 (Retry-After 3600)
+      when fetched and therefore remains UNVERIFIED and is not a group row.
+
+  - directory: "NORD (rarediseases.org) — on-site search, MPN groups"
+    url: "https://rarediseases.org/?s=myeloproliferative+neoplasm+patient+organization"
+    query: "myeloproliferative neoplasm patient organization"
+    date: "2026-10-03"
+    hits: 0
+    outcome: >-
+      Results excerpt showed NORD disease resources (e.g.
+      "myeloproliferative neoplasm, unclassifiable") but no organization
+      directory entries for MPN patient groups. The two MPN group rows above
+      were instead verified by direct fetch of their own sites.
+
+gaps:
+  - statement: >-
+      No patient group dedicated to STAT1 gain of function alone was found
+      in any directory successfully searched on 2026-10-03 (NORD on-site,
+      EURORDIS on-site, Genetic Alliance UK on-site, plus domain-restricted
+      web searches of NORD and Global Genes). The closest existing
+      communities are umbrella primary-immunodeficiency organizations:
+      Immune Deficiency Foundation (which publishes a STAT1/STAT3 GoF
+      handbook chapter), USIDNET (registry), and the Jeffrey Modell
+      Foundation. This claim is bounded: Orphanet was bot-blocked,
+      RareConnect would not render, and Disease InfoSearch could not be
+      queried, so absence in those three is NOT established.
+    basis:
+      - "NORD on-site search (hits: 0)"
+      - "NORD domain-restricted web search (hits: 0)"
+      - "Global Genes on-site search (0 shown; JS caveat)"
+      - "Global Genes domain-restricted web search (hits: 0)"
+      - "EURORDIS on-site search (explicit 0)"
+      - "Genetic Alliance UK on-site search (explicit 0)"
+      - "Orphanet: blocked (both URLs)"
+      - "RareConnect: not readable"
+      - "Disease InfoSearch: not executed"
+    next_step: >-
+      Retry Orphanet (its patient-organisation listings) and RareConnect
+      with a real JavaScript-rendering browser or an API; query Disease
+      InfoSearch interactively; ask IDF/USIDNET whether a STAT1-GoF-specific
+      community or registry cohort exists; if the gap holds, the honest-gap
+      output is "no dedicated group exists; the closest are IDF, USIDNET and
+      JMF; the IDF handbook chapter authors and USIDNET are who could help
+      build one."
+
+  - statement: >-
+      SCID Angels for Life Foundation (angels.scid.net) is a known SCID
+      group lead but is UNVERIFIED: its site returned HTTP 503
+      (Retry-After 3600) on 2026-10-03.
+    basis:
+      - "Web search engine (general) — SCID group resolution"
+    next_step: >-
+      Retry the fetch after the Retry-After window; if it verifies, add it
+      as a group row with its own retrieved_at.
+
+  - statement: >-
+      Neither fetched MPN organization page mentions JAK2. The JAK2-MPN
+      ("JAK2-driven blood cancers") mechanism link used in the cluster doc
+      must be established by the literature/variant pipeline, not by this
+      seed file.
+    basis:
+      - "MPN Research Foundation homepage fetch (2026-10-03)"
+      - "MPN Advocacy & Education International homepage fetch (2026-10-03)"
+    next_step: >-
+      Lane A/B: connect MPN diseases to the JAK2 somatic mechanism node via
+      retrieved sources (ClinVar/PubMed), then attach these groups to the
+      disease nodes by plain-language disease name.
+
+  - statement: >-
+      usidnet.org permanently redirects (HTTP 301) to www.usidnet.net. The
+      seed keeps the .org URL from the cluster doc as the stable entry
+      point, but consumers should expect the .net landing site.
+    basis:
+      - "usidnet.org fetch (301) and www.usidnet.net fetch, both 2026-10-03"
+    next_step: >-
+      Pipeline should follow redirects when resolving this row; record the
+      final URL in the graph node's props.
