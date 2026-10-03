@@ -1,0 +1,21 @@
+# Render blueprint for the Atlas API (lane C: deploy).
+# Web (Next.js) deploys to Vercel separately — point its NEXT_PUBLIC_API_URL at this service.
+# Fallback mode (README §3): if this deploy is blocked, the web app serves the graph +
+# precomputed explanations as static files and labels LLM features "cached only".
+services:
+  - type: web
+    name: rare-disease-atlas-api
+    runtime: docker
+    dockerfilePath: api/Dockerfile
+    dockerContext: .
+    plan: starter
+    healthCheckPath: /health
+    envVars:
+      - key: OPENAI_API_KEY
+        sync: false # set in Render dashboard; never committed
+      - key: OPENAI_MODEL
+        sync: false
+      - key: ATLAS_GRAPH_PATH
+        value: "" # default loader chain: data/build/graph.json > graph.mock.json > api fixture
+      - key: NCBI_API_KEY
+        sync: false

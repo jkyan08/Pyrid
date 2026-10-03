@@ -1,0 +1,2745 @@
+{
+ "built_at": "2026-10-03T22:26:29+00:00",
+ "resolved_against": "optimuskg backbone",
+ "stats": {
+  "extraction": {
+   "papers": 265,
+   "papers_with_abstract": 250,
+   "extracted": 936,
+   "kept": 935,
+   "dropped_quote_mismatch": 1,
+   "drop_rate": 0.0011,
+   "failed_papers": 0
+  },
+  "reconcile": {
+   "claims": 935,
+   "fully_resolved": 168,
+   "unresolved_subject_or_object": 757,
+   "unresolved_variant": 10
+  },
+  "review_rows": 1090
+ },
+ "nodes": [
+  {
+   "id": "CHEMBL1078178",
+   "type": "Drug",
+   "label": "momelotinib",
+   "synonyms": [
+    "CYT-0387",
+    "CYT-11387",
+    "CYT-387",
+    "CYT387",
+    "GS-0387",
+    "Momelotinib"
+   ],
+   "props": {
+    "backbone_id": "CHEMBL1078178"
+   }
+  },
+  {
+   "id": "CHEMBL1201564",
+   "type": "Drug",
+   "label": "interferon gamma-1b",
+   "synonyms": [
+    "Ifn-.gamma.",
+    "Ifn-.gamma.1b",
+    "Imifn",
+    "Immune ifn",
+    "Interferon .gamma.-1b",
+    "Interferon gama-1b",
+    "Interferon gamma",
+    "Interferon gamma-1b",
+    "Interferon gamma-1b, recombinant",
+    "Interferon gamma-1b,recomb.",
+    "Interferon gamma-2a",
+    "Interferon-.gamma.",
+    "Interferon-.gamma. (human)",
+    "Actimmune",
+    "Immukin"
+   ],
+   "props": {
+    "backbone_id": "CHEMBL1201564"
+   }
+  },
+  {
+   "id": "CHEMBL1421",
+   "type": "Drug",
+   "label": "dasatinib",
+   "synonyms": [
+    "Anh. dasatinib",
+    "Anhydrous dasatinib",
+    "BMS dasatinib",
+    "Dasatinib",
+    "Dasatinib (anh.)",
+    "dasatinib (anhydrous)",
+    "Dasatinib anhydrous",
+    "Dasatinibum",
+    "N-(2-CHLORO-6-methylphenyl)-2-({6-[4-(2-hydroxyethyl)piperazin-1-yl]-2-methylpyrimidin-4-yl}amino)-1,3-thiazole-5-carboxamide",
+    "BMS-354825",
+    "BMS-354825 HYDRATE",
+    "BMS-354825-03",
+    "Dasatinib hydrate",
+    "Dasatinib monohydrate",
+    "NSC-759877",
+    "Dasatinib accordpharma",
+    "Sprycel"
+   ],
+   "props": {
+    "backbone_id": "CHEMBL1421"
+   }
+  },
+  {
+   "id": "CHEMBL1568",
+   "type": "Drug",
+   "label": "fludarabine",
+   "synonyms": [
+    "2-Fluoro-Ara-A",
+    "Fludarabine"
+   ],
+   "props": {
+    "backbone_id": "CHEMBL1568"
+   }
+  },
+  {
+   "id": "CHEMBL1789941",
+   "type": "Drug",
+   "label": "ruxolitinib",
+   "synonyms": [
+    "Ruxolitinib",
+    "INC-424",
+    "INC424",
+    "INCB-018424",
+    "INCB-18424",
+    "INCB018424",
+    "Jakavi"
+   ],
+   "props": {
+    "backbone_id": "CHEMBL1789941"
+   }
+  },
+  {
+   "id": "CHEMBL1908360",
+   "type": "Drug",
+   "label": "everolimus",
+   "synonyms": [
+    "40-O-(2-hydroxyethyl)-rapamycin",
+    "42-O-(2-Hydroxyethyl)rapamycin",
+    "Everolimus",
+    "évérolimus",
+    "RAD 666",
+    "RAD-001",
+    "RAD-666",
+    "RAD001",
+    "SDZ-RAD",
+    "Sdz rad",
+    "Afinitor",
+    "Afinitor disperz",
+    "Certican",
+    "Votubia",
+    "Zortress"
+   ],
+   "props": {
+    "backbone_id": "CHEMBL1908360"
+   }
+  },
+  {
+   "id": "CHEMBL2035187",
+   "type": "Drug",
+   "label": "pacritinib",
+   "synonyms": [
+    "Pacritinib",
+    "Pacritinibum",
+    "ONX-0803",
+    "SB-1518",
+    "SB1518"
+   ],
+   "props": {
+    "backbone_id": "CHEMBL2035187"
+   }
+  },
+  {
+   "id": "CHEMBL2105759",
+   "type": "Drug",
+   "label": "baricitinib",
+   "synonyms": [
+    "Baricitinib",
+    "Baricitinib phosphate",
+    "Baricitinib phosphate salt",
+    "INCB-028050",
+    "INCB028050",
+    "Incb-28050",
+    "LY-3009104",
+    "LY3009104",
+    "Olumiant"
+   ],
+   "props": {
+    "backbone_id": "CHEMBL2105759"
+   }
+  },
+  {
+   "id": "CHEMBL2107784",
+   "type": "Drug",
+   "label": "tasquinimod",
+   "synonyms": [
+    "Tasquinimod"
+   ],
+   "props": {
+    "backbone_id": "CHEMBL2107784"
+   }
+  },
+  {
+   "id": "CHEMBL221959",
+   "type": "Drug",
+   "label": "tofacitinib",
+   "synonyms": [
+    "Tasocitinib",
+    "Tofacitinib",
+    "Tofacitinibum",
+    "550",
+    "CP 690550",
+    "CP- 690 550",
+    "CP-690",
+    "CP-690,550",
+    "CP-690,550 FREE BASE",
+    "CP-690-550",
+    "CP-690550",
+    "CP-690550 FREE BASE",
+    "CP690,550",
+    "CP690550",
+    "Cp-690 free base"
+   ],
+   "props": {
+    "backbone_id": "CHEMBL221959"
+   }
+  },
+  {
+   "id": "CHEMBL267345",
+   "type": "Drug",
+   "label": "amphotericin b",
+   "synonyms": [
+    "Amfotericina B",
+    "AMPH-b",
+    "Amphotericin B",
+    "Amphotéricine B",
+    "Amphotericinum B",
+    "Liposomal amphotericin B",
+    "Abelcet, liposomal amphotericin b",
+    "Ambil",
+    "Amphotericin",
+    "Amphotericin b deoxycholate",
+    "Amphotericin b lipid complex",
+    "Amphotericin b liposomal",
+    "Amphotericin b liposomal complex",
+    "Amphotericin b liposome",
+    "Amphotericin b, liposome",
+    "Amphotericine b",
+    "Amphotocerin",
+    "Halizon",
+    "NSC-527017",
+    "Abelcet",
+    "Ambisome",
+    "Amophotericin B",
+    "Ampho-moronal",
+    "Amphotec",
+    "Amphotercin B",
+    "Amphotericitin B",
+    "Amphotreicin B",
+    "Ampotericin B",
+    "Fungilin",
+    "Fungilin in orabase",
+    "Fungizone"
+   ],
+   "props": {
+    "backbone_id": "CHEMBL267345"
+   }
+  },
+  {
+   "id": "CHEMBL3809489",
+   "type": "Drug",
+   "label": "bemcentinib",
+   "synonyms": [
+    "BGB 324",
+    "BGB-324",
+    "BGB324",
+    "Bemcentinib",
+    "CS-1046",
+    "HY-15150",
+    "KB-80319",
+    "QC-11751",
+    "R 428",
+    "R-428",
+    "R428",
+    "SYN-1131",
+    "SYN1131",
+    "W-5845"
+   ],
+   "props": {
+    "backbone_id": "CHEMBL3809489"
+   }
+  },
+  {
+   "id": "CHEMBL4435170",
+   "type": "Drug",
+   "label": "deucravacitinib",
+   "synonyms": [
+    "BMS-986165",
+    "Deucravacitinib",
+    "Sotyktu"
+   ],
+   "props": {
+    "backbone_id": "CHEMBL4435170"
+   }
+  },
+  {
+   "id": "CHEMBL467",
+   "type": "Drug",
+   "label": "hydroxyurea",
+   "synonyms": [
+    "Carbamohydroxamic acid",
+    "Carbamohydroximic acid",
+    "Carbamoyl oxime",
+    "Carbamyl hydroxamate",
+    "Hidroxicarbamida",
+    "Hydrea",
+    "Hydroxycarbamid",
+    "Hydroxycarbamide",
+    "Hydroxycarbamidum",
+    "Hydroxyharnstoff",
+    "Hydroxyurea",
+    "N-Carbamoylhydroxylamine",
+    "N-Hydroxyurea",
+    "Oxyurea",
+    "NSC-32065",
+    "SQ 1089",
+    "SQ-1089",
+    "Droxia",
+    "Siklos"
+   ],
+   "props": {
+    "backbone_id": "CHEMBL467"
+   }
+  },
+  {
+   "id": "CHEMBL941",
+   "type": "Drug",
+   "label": "imatinib",
+   "synonyms": [
+    "Imatinib",
+    "Imatinibum",
+    "α-(4-methyl-1-piperazinyl)-3'-((4-(3-pyridyl)-2-pyrimidinyl)amino)-p-toluidide",
+    "Glamox",
+    "Gleevec",
+    "NSC-743414",
+    "NSC-759854",
+    "STI-571"
+   ],
+   "props": {
+    "backbone_id": "CHEMBL941"
+   }
+  },
+  {
+   "id": "DRUGBANK:DB05258",
+   "type": "Drug",
+   "label": "interferon alfa",
+   "synonyms": [
+    "HuIFN-alpha-Le",
+    "IFN-α",
+    "Interferon alfa",
+    "Natural alpha interferon"
+   ],
+   "props": {
+    "backbone_id": "DRUGBANK:DB05258"
+   }
+  },
+  {
+   "id": "EFO:0000209",
+   "type": "Disease",
+   "label": "T-cell acute lymphoblastic leukemia",
+   "synonyms": [],
+   "props": {
+    "backbone_id": "EFO_0000209"
+   }
+  },
+  {
+   "id": "EFO:0000220",
+   "type": "Disease",
+   "label": "acute lymphoblastic leukemia",
+   "synonyms": [],
+   "props": {
+    "backbone_id": "EFO_0000220"
+   }
+  },
+  {
+   "id": "EFO:0000479",
+   "type": "Disease",
+   "label": "essential thrombocythemia",
+   "synonyms": [],
+   "props": {
+    "backbone_id": "EFO_0000479"
+   }
+  },
+  {
+   "id": "EFO:0002429",
+   "type": "Disease",
+   "label": "polycythemia vera",
+   "synonyms": [
+    "PRV",
+    "primary polycythemia"
+   ],
+   "props": {
+    "backbone_id": "EFO_0002429"
+   }
+  },
+  {
+   "id": "EFO:0002430",
+   "type": "Disease",
+   "label": "primary myelofibrosis",
+   "synonyms": [
+    "myeloid metaplasia",
+    "myelofibrosis"
+   ],
+   "props": {
+    "backbone_id": "EFO_0002430"
+   }
+  },
+  {
+   "id": "EFO:0005045",
+   "type": "Disease",
+   "label": "visceral Leishmaniasis",
+   "synonyms": [
+    "kala-azar susceptibility",
+    "kala-azar, susceptibility to"
+   ],
+   "props": {
+    "backbone_id": "EFO_0005045"
+   }
+  },
+  {
+   "id": "EFO:0005140",
+   "type": "Disease",
+   "label": "autoimmune disease",
+   "synonyms": [],
+   "props": {
+    "backbone_id": "EFO_0005140"
+   }
+  },
+  {
+   "id": "EFO:0005555",
+   "type": "Disease",
+   "label": "gamma chain deficiency",
+   "synonyms": [
+    "X-linked SCID",
+    "severe combined immunodeficiency, X-linked",
+    "SCIDX",
+    "immunodeficiency 4",
+    "SCID, X-linked",
+    "severe combined immunodeficiency, X-linked, T cell-negative, B cell-positive, NK cell-negative",
+    "severe combined immunodeficiency T- B+ due to gamma chain deficiency",
+    "X-SCID",
+    "severe combined immunodeficiency T- B+, X-linked"
+   ],
+   "props": {
+    "backbone_id": "EFO_0005555"
+   }
+  },
+  {
+   "id": "EFO:0005571",
+   "type": "Disease",
+   "label": "osteochondrodysplasia",
+   "synonyms": [
+    "skeletal dysplasia"
+   ],
+   "props": {
+    "backbone_id": "EFO_0005571"
+   }
+  },
+  {
+   "id": "EFO:0007326",
+   "type": "Disease",
+   "label": "infectious mononucleosis",
+   "synonyms": [],
+   "props": {
+    "backbone_id": "EFO_0007326"
+   }
+  },
+  {
+   "id": "EFO:0009756",
+   "type": "Disease",
+   "label": "autoimmune type 1 diabetes",
+   "synonyms": [],
+   "props": {
+    "backbone_id": "EFO_0009756"
+   }
+  },
+  {
+   "id": "EFO:0010647",
+   "type": "Disease",
+   "label": "STAT3 gain of function",
+   "synonyms": [],
+   "props": {
+    "backbone_id": "EFO_0010647"
+   }
+  },
+  {
+   "id": "EFO:1000649",
+   "type": "Disease",
+   "label": "estrogen-receptor positive breast cancer",
+   "synonyms": [],
+   "props": {
+    "backbone_id": "EFO_1000649"
+   }
+  },
+  {
+   "id": "EFO:1001209",
+   "type": "Disease",
+   "label": "temporal arteritis",
+   "synonyms": [
+    "arteritis temporalis",
+    "GCA",
+    "polymyalgia rheumatica",
+    "Horton's temporal arteritis",
+    "Horton's giant cell arteritis",
+    "Horton’s disease",
+    "arteritis cranialis",
+    "cranial arteritis",
+    "Horton's arteritis",
+    "Horton’s syndrome"
+   ],
+   "props": {
+    "backbone_id": "EFO_1001209"
+   }
+  },
+  {
+   "id": "EFO:1001498",
+   "type": "Disease",
+   "label": "disseminated atypical mycobacterial infection",
+   "synonyms": [],
+   "props": {
+    "backbone_id": "EFO_1001498"
+   }
+  },
+  {
+   "id": "EFO:1001857",
+   "type": "Disease",
+   "label": "Takayasu arteritis",
+   "synonyms": [
+    "TA",
+    "pulseless disease",
+    "Young female arteritis",
+    "Takayasu disease"
+   ],
+   "props": {
+    "backbone_id": "EFO_1001857"
+   }
+  },
+  {
+   "id": "EFO:1001936",
+   "type": "Disease",
+   "label": "adult T acute lymphoblastic leukemia",
+   "synonyms": [],
+   "props": {
+    "backbone_id": "EFO_1001936"
+   }
+  },
+  {
+   "id": "HP:0000778",
+   "type": "Phenotype",
+   "label": "Hypoplasia of the thymus",
+   "synonyms": [],
+   "props": {
+    "backbone_id": "HP_0000778"
+   }
+  },
+  {
+   "id": "HP:0001004",
+   "type": "Phenotype",
+   "label": "Lymphedema",
+   "synonyms": [
+    "Onset of lymphedema around puberty",
+    "Swelling caused by excess lymph fluid under skin",
+    "Lymphatic obstruction",
+    "Lymphoedema"
+   ],
+   "props": {
+    "backbone_id": "HP_0001004"
+   }
+  },
+  {
+   "id": "HP:0001548",
+   "type": "Phenotype",
+   "label": "Overgrowth",
+   "synonyms": [
+    "General overgrowth",
+    "Generalised overgrowth",
+    "Generalized overgrowth"
+   ],
+   "props": {
+    "backbone_id": "HP_0001548"
+   }
+  },
+  {
+   "id": "HP:0001882",
+   "type": "Phenotype",
+   "label": "Leukopenia",
+   "synonyms": [
+    "Decreased blood leukocyte number",
+    "Low white blood cell count",
+    "Leukopenia"
+   ],
+   "props": {
+    "backbone_id": "HP_0001882"
+   }
+  },
+  {
+   "id": "HP:0001888",
+   "type": "Phenotype",
+   "label": "Lymphopenia",
+   "synonyms": [
+    "Absolute lymphocyte count decrease",
+    "Low lymphocyte number",
+    "Lymphocytopenia",
+    "Decreased blood lymphocyte number",
+    "Lymphopenia"
+   ],
+   "props": {
+    "backbone_id": "HP_0001888"
+   }
+  },
+  {
+   "id": "HP:0001907",
+   "type": "Phenotype",
+   "label": "Thromboembolism",
+   "synonyms": [
+    "Blood clot in blood vessel",
+    "Thromboembolic events",
+    "Thromboembolic disease",
+    "Embolism and thrombosis"
+   ],
+   "props": {
+    "backbone_id": "HP_0001907"
+   }
+  },
+  {
+   "id": "HP:0002110",
+   "type": "Phenotype",
+   "label": "Bronchiectasis",
+   "synonyms": [
+    "Permanent enlargement of the airways of the lungs"
+   ],
+   "props": {
+    "backbone_id": "HP_0002110"
+   }
+  },
+  {
+   "id": "HP:0002633",
+   "type": "Phenotype",
+   "label": "Vasculitis",
+   "synonyms": [
+    "Inflammation of blood vessel",
+    "Angiitis"
+   ],
+   "props": {
+    "backbone_id": "HP_0002633"
+   }
+  },
+  {
+   "id": "HP:0002728",
+   "type": "Phenotype",
+   "label": "Chronic mucocutaneous candidiasis",
+   "synonyms": [],
+   "props": {
+    "backbone_id": "HP_0002728"
+   }
+  },
+  {
+   "id": "HP:0002960",
+   "type": "Phenotype",
+   "label": "Autoimmunity",
+   "synonyms": [
+    "Autoimmune condition",
+    "Autoimmune disease",
+    "Autoimmune disorder",
+    "Autoimmunity"
+   ],
+   "props": {
+    "backbone_id": "HP_0002960"
+   }
+  },
+  {
+   "id": "HP:0003212",
+   "type": "Phenotype",
+   "label": "Increased circulating IgE concentration",
+   "synonyms": [
+    "Elevated serum IgE",
+    "Increased circulating IgE level",
+    "High immunoglobulin E",
+    "Elevated immunoglobulin E"
+   ],
+   "props": {
+    "backbone_id": "HP_0003212"
+   }
+  },
+  {
+   "id": "HP:0004315",
+   "type": "Phenotype",
+   "label": "Decreased circulating IgG concentration",
+   "synonyms": [
+    "Decreased IgG level in blood",
+    "Reduced IgG levels",
+    "Decreased serum IgG",
+    "Decreased immunoglobulin G",
+    "IgG deficiency",
+    "Decreased IgG level",
+    "Decreased circulating IgG level",
+    "Decreased gamma-globin expression"
+   ],
+   "props": {
+    "backbone_id": "HP_0004315"
+   }
+  },
+  {
+   "id": "HP:0004322",
+   "type": "Phenotype",
+   "label": "Short stature",
+   "synonyms": [
+    "Short stature",
+    "Small stature",
+    "Stature below 3rd percentile",
+    "Decreased body height",
+    "Height less than 3rd percentile"
+   ],
+   "props": {
+    "backbone_id": "HP_0004322"
+   }
+  },
+  {
+   "id": "HP:0005387",
+   "type": "Phenotype",
+   "label": "Combined immunodeficiency",
+   "synonyms": [],
+   "props": {
+    "backbone_id": "HP_0005387"
+   }
+  },
+  {
+   "id": "HP:0005403",
+   "type": "Phenotype",
+   "label": "Decreased total T cell count",
+   "synonyms": [],
+   "props": {
+    "backbone_id": "HP_0005403"
+   }
+  },
+  {
+   "id": "HP:0005526",
+   "type": "Phenotype",
+   "label": "Lymphoid leukemia",
+   "synonyms": [],
+   "props": {
+    "backbone_id": "HP_0005526"
+   }
+  },
+  {
+   "id": "HP:0006532",
+   "type": "Phenotype",
+   "label": "Recurrent pneumonia",
+   "synonyms": [],
+   "props": {
+    "backbone_id": "HP_0006532"
+   }
+  },
+  {
+   "id": "HP:0010515",
+   "type": "Phenotype",
+   "label": "Aplasia/Hypoplasia of the thymus",
+   "synonyms": [
+    "Absent/small thymus",
+    "Absent/underdeveloped thymus",
+    "Thymic hypoplasia or aplasia"
+   ],
+   "props": {
+    "backbone_id": "HP_0010515"
+   }
+  },
+  {
+   "id": "HP:0011123",
+   "type": "Phenotype",
+   "label": "Inflammatory abnormality of the skin",
+   "synonyms": [
+    "Inflammatory abnormality of the skin",
+    "Abnormal tendency to infections of the skin",
+    "Skin inflammation",
+    "Inflammatory skin disease",
+    "Dermatitis"
+   ],
+   "props": {
+    "backbone_id": "HP_0011123"
+   }
+  },
+  {
+   "id": "HP:0011368",
+   "type": "Phenotype",
+   "label": "Epidermal thickening",
+   "synonyms": [
+    "Abnormality of keratinization"
+   ],
+   "props": {
+    "backbone_id": "HP_0011368"
+   }
+  },
+  {
+   "id": "HP:0012156",
+   "type": "Phenotype",
+   "label": "Hemophagocytosis",
+   "synonyms": [],
+   "props": {
+    "backbone_id": "HP_0012156"
+   }
+  },
+  {
+   "id": "HP:0012410",
+   "type": "Phenotype",
+   "label": "Pure red cell aplasia",
+   "synonyms": [
+    "Red cell aplasia"
+   ],
+   "props": {
+    "backbone_id": "HP_0012410"
+   }
+  },
+  {
+   "id": "HP:0012819",
+   "type": "Phenotype",
+   "label": "Myocarditis",
+   "synonyms": [],
+   "props": {
+    "backbone_id": "HP_0012819"
+   }
+  },
+  {
+   "id": "HP:0020087",
+   "type": "Phenotype",
+   "label": "BCGosis",
+   "synonyms": [],
+   "props": {
+    "backbone_id": "HP_0020087"
+   }
+  },
+  {
+   "id": "HP:0025832",
+   "type": "Phenotype",
+   "label": "Decreased Th17 T cell proportion",
+   "synonyms": [],
+   "props": {
+    "backbone_id": "HP_0025832"
+   }
+  },
+  {
+   "id": "HP:0025834",
+   "type": "Phenotype",
+   "label": "Decreased PHA-induced T-cell proliferation",
+   "synonyms": [],
+   "props": {
+    "backbone_id": "HP_0025834"
+   }
+  },
+  {
+   "id": "HP:0030887",
+   "type": "Phenotype",
+   "label": "Increased T cell apoptosis",
+   "synonyms": [],
+   "props": {
+    "backbone_id": "HP_0030887"
+   }
+  },
+  {
+   "id": "HP:0031545",
+   "type": "Phenotype",
+   "label": "Abnormally low T cell receptor excision circle level",
+   "synonyms": [],
+   "props": {
+    "backbone_id": "HP_0031545"
+   }
+  },
+  {
+   "id": "HP:0031691",
+   "type": "Phenotype",
+   "label": "Severe viral infection",
+   "synonyms": [],
+   "props": {
+    "backbone_id": "HP_0031691"
+   }
+  },
+  {
+   "id": "HP:0100806",
+   "type": "Phenotype",
+   "label": "Sepsis",
+   "synonyms": [
+    "Infection in blood stream"
+   ],
+   "props": {
+    "backbone_id": "HP_0100806"
+   }
+  },
+  {
+   "id": "MONDO:0002026",
+   "type": "Disease",
+   "label": "candidiasis",
+   "synonyms": [
+    "Candida <Debaryomycetaceae> infection",
+    "Candida infection",
+    "thrush",
+    "Candidosis",
+    "disseminated candidiasis",
+    "systemic candidiasis",
+    "infections, Candida <Debaryomycetaceae>"
+   ],
+   "props": {
+    "backbone_id": "MONDO_0002026"
+   }
+  },
+  {
+   "id": "MONDO:0002406",
+   "type": "Disease",
+   "label": "dermatitis",
+   "synonyms": [
+    "inflammatory skin disease",
+    "skin inflammation",
+    "zone of skin inflammation",
+    "inflammation of the skin",
+    "inflammation of zone of skin",
+    "inflammation of skin"
+   ],
+   "props": {
+    "backbone_id": "MONDO_0002406"
+   }
+  },
+  {
+   "id": "MONDO:0003778",
+   "type": "Disease",
+   "label": "inborn error of immunity",
+   "synonyms": [
+    "inborn errors of immunity",
+    "IEI",
+    "primary immunodeficiency disease",
+    "hypoimmunity",
+    "antibody deficiency syndrome",
+    "antibody deficiency syndromes",
+    "deficiency syndrome, antibody",
+    "deficiency syndrome, immunologic",
+    "deficiency syndrome, immunological",
+    "deficiency syndromes, antibody",
+    "deficiency syndromes, immunologic",
+    "deficiency syndromes, immunological",
+    "immune deficiency disorder",
+    "immunodeficiency syndrome",
+    "immunologic deficiency syndrome",
+    "immunological deficiency syndrome",
+    "immunological deficiency syndromes",
+    "primary immunodeficiency",
+    "syndrome, antibody deficiency",
+    "syndrome, immunologic deficiency",
+    "syndrome, immunological deficiency",
+    "syndromes, antibody deficiency",
+    "syndromes, immunologic deficiency",
+    "syndromes, immunological deficiency"
+   ],
+   "props": {
+    "backbone_id": "MONDO_0003778"
+   }
+  },
+  {
+   "id": "MONDO:0003783",
+   "type": "Disease",
+   "label": "lymphopenia",
+   "synonyms": [
+    "lymphopenia",
+    "lymphocytopenia",
+    "lymphopenia (disease)"
+   ],
+   "props": {
+    "backbone_id": "MONDO_0003783"
+   }
+  },
+  {
+   "id": "MONDO:0005147",
+   "type": "Disease",
+   "label": "type 1 diabetes mellitus",
+   "synonyms": [
+    "type I diabetes",
+    "type I diabetes mellitus",
+    "T1DM",
+    "T1D",
+    "IDDM",
+    "diabetes mellitis type 1",
+    "insulin dependent diabetes",
+    "insulin-dependent diabetes mellitus",
+    "juvenile diabetes",
+    "type 1 diabetes",
+    "diabetes mellitis type I",
+    "immune mediated diabetes"
+   ],
+   "props": {
+    "backbone_id": "MONDO_0005147"
+   }
+  },
+  {
+   "id": "MONDO:0005184",
+   "type": "Disease",
+   "label": "pancreatic ductal adenocarcinoma",
+   "synonyms": [
+    "pancreas tubular adenocarcinoma",
+    "ductal adenocarcinoma of pancreas",
+    "malignant neoplasm of duct of Wirsung",
+    "pancreatic duct adenocarcinoma",
+    "pancreatic duct cancer",
+    "pancreatic ductal carcinoma",
+    "pancreatic tubular adenocarcinoma",
+    "pancreas ductal adenocarcinoma",
+    "ductal adenocarcinoma of the pancreas",
+    "pancreatic ductal adenocarcinoma"
+   ],
+   "props": {
+    "backbone_id": "MONDO_0005184"
+   }
+  },
+  {
+   "id": "MONDO:0005265",
+   "type": "Disease",
+   "label": "inflammatory bowel disease",
+   "synonyms": [],
+   "props": {
+    "backbone_id": "MONDO_0005265"
+   }
+  },
+  {
+   "id": "MONDO:0007179",
+   "type": "Disease",
+   "label": "autoimmune disease",
+   "synonyms": [],
+   "props": {
+    "backbone_id": "MONDO_0007179"
+   }
+  },
+  {
+   "id": "MONDO:0007818",
+   "type": "Disease",
+   "label": "hyper-IgE recurrent infection syndrome 1, autosomal dominant",
+   "synonyms": [
+    "Job syndrome autosomal dominant",
+    "hyper Ig E syndrome, autosomal dominant",
+    "hyperimmunoglobulin E syndrome type 1",
+    "hyper-IgE recurrent infection syndrome, autosomal dominant",
+    "HIES, autosomal dominant",
+    "autosomal dominant hyperimmunoglobulin E syndrome",
+    "immunodeficiency with defective leukocyte and lymphocyte function and with response to histamine-1 antagonist",
+    "Buckley syndrome",
+    "Job's syndrome",
+    "hyper-IgE syndrome, autosomal dominant",
+    "autosomal dominant HIES",
+    "autosomal dominant hyper IgE syndrome",
+    "autosomal dominant hyper-IgE syndrome",
+    "JOB syndrome",
+    "STAT3 deficiency",
+    "HIES autosomal dominant",
+    "hyperimmunoglobulin E recurrent infection syndrome, autosomal dominant",
+    "AD hyperimmunoglobulin E syndrome",
+    "AD-HIES",
+    "hyper-IgE recurrent infection syndrome",
+    "hyperimmunoglobulin E-recurrent infection syndrome"
+   ],
+   "props": {
+    "backbone_id": "MONDO_0007818"
+   }
+  },
+  {
+   "id": "MONDO:0007915",
+   "type": "Disease",
+   "label": "systemic lupus erythematosus",
+   "synonyms": [
+    "systemic lupus erythematosus, susceptibility to",
+    "lupus erythematosus, systemic",
+    "SLE - lupus erythematosus, systemic",
+    "systemic lupus erythematosus susceptibility to",
+    "SLE",
+    "systemic lupus erythematosus (disease)",
+    "Lupus",
+    "disseminated lupus erythematosus",
+    "systemic lupus erythematosus",
+    "excess LMW-DNA",
+    "excess lymphocyte low molecular weight DNA",
+    "lupus nephritis, susceptibility to"
+   ],
+   "props": {
+    "backbone_id": "MONDO_0007915"
+   }
+  },
+  {
+   "id": "MONDO:0008383",
+   "type": "Disease",
+   "label": "rheumatoid arthritis",
+   "synonyms": [],
+   "props": {
+    "backbone_id": "MONDO_0008383"
+   }
+  },
+  {
+   "id": "MONDO:0009411",
+   "type": "Disease",
+   "label": "autoimmune polyendocrine syndrome type 1",
+   "synonyms": [
+    "autoimmune hypoparathyroidism-chronic candidiasis-Addison disease syndrome",
+    "MEDAC syndrome",
+    "APS1",
+    "autoimmune polyendocrinopathy-candidiasis-ectodermal dystrophy syndrome",
+    "autoimmune polyglandular syndrome I",
+    "autoimmune polyendocrinopathy caused by mutation in aire",
+    "APS type 1",
+    "polyglandular autoimmune syndrome type 1",
+    "AIRE autoimmune polyendocrinopathy",
+    "autoimmune polyendocrinopathy syndrome , type I, with or without reversible metaphyseal dysplasia",
+    "autoimmune polyendocrine syndrome type 1",
+    "Autoimmune Polyglandular Syndrome Type 1",
+    "APECED syndrome",
+    "autoimmune polyendocrinopathy-candidiasis-ectodermal dystrophy",
+    "ham syndrome",
+    "multiple endocrine deficiency-Addison disease-candidiasis syndrome",
+    "Whitaker syndrom",
+    "hypoparathyroidism-Addison disease-mucocutaneous candidiasis syndrome",
+    "APS 1",
+    "PGA 1",
+    "Whitaker syndrome",
+    "autoimmune polyendocrine syndrome, type I, with or without reversible metaphyseal dysplasia",
+    "autoimmune polyendocrinopathy syndrome type 1",
+    "autoimmune polyendocrinopathy syndrome, type I, autosomal dominant",
+    "autoimmune polyendocrinopathy type 1",
+    "autoimmune polyendocrinopathy-candidiasis-ectodermal dystrophy (APECED)",
+    "autoimmune polyglandular syndrome, type 1",
+    "hypoadrenocorticism with hypoparathyroidism and superficial Moniliasis",
+    "polyglandular autoimmune syndrome, type 1",
+    "polyglandular deficiency syndrome, Persian-Jewish type"
+   ],
+   "props": {
+    "backbone_id": "MONDO_0009411"
+   }
+  },
+  {
+   "id": "MONDO:0009478",
+   "type": "Disease",
+   "label": "combined immunodeficiency due to DOCK8 deficiency",
+   "synonyms": [
+    "DOCK8 immunodeficiency syndrome",
+    "combined immunodeficiency due to DOCK8 deficiency",
+    "dedicator of cytokinesis 8 deficiency",
+    "Cid due to DOCK8 deficiency",
+    "combined immunodeficiency due to dedicator of cytokinesis 8 protein deficiency",
+    "AR hyperimmunoglobulin E syndrome",
+    "AR-HIES",
+    "DOCK8 deficiency",
+    "HIES autosomal recessive",
+    "HIES, autosomal recessive",
+    "autosomal recessive hyper IgE syndrome",
+    "hyper Ig E syndrome, autosomal recessive",
+    "hyper-IgE recurrent infection syndrome, autosomal recessive",
+    "hyper-IgE syndrome, autosomal recessive",
+    "hyperimmunoglobulin E recurrent infection syndrome, autosomal recessive"
+   ],
+   "props": {
+    "backbone_id": "MONDO_0009478"
+   }
+  },
+  {
+   "id": "MONDO:0009813",
+   "type": "Disease",
+   "label": "chronic recurrent multifocal osteomyelitis",
+   "synonyms": [
+    "chronic multifocal osteomyelitis",
+    "CNO/CRMO",
+    "non-bacterial osteomyelitis",
+    "CRMO",
+    "chronic recurrent multifocal osteomyelitis",
+    "chronic recurrent multifocal osteomyelitis (disease)",
+    "NBO",
+    "CMO",
+    "chronic nonbacterial osteomyelitis/chronic recurrent multifocal osteomyelitis",
+    "multifocal osteomyelitis, chronic",
+    "osteomyelitis, chronic multifocal"
+   ],
+   "props": {
+    "backbone_id": "MONDO_0009813"
+   }
+  },
+  {
+   "id": "MONDO:0010938",
+   "type": "Disease",
+   "label": "T-B+ severe combined immunodeficiency due to JAK3 deficiency",
+   "synonyms": [
+    "T-B+ SCID due to JAK3 deficiency",
+    "SCID, autosomal recessive, T-negative/B-positive type",
+    "T-cell negative B-cell positive severe combined immunodeficiency due to JAK3 deficiency",
+    "T-B+ severe combined immunodeficiency due to JAK3 deficiency",
+    "SCID, T cell-negative, B cell-positive, NK cell-negative",
+    "severe combined immunodeficiency T-cell negative B-cell positive due to janus kinase-3 deficiency",
+    "severe combined immunodeficiency, autosomal recessive, T cell-NEGATIVE, B cell-POSITIVE, NK cell-NEGATIVE"
+   ],
+   "props": {
+    "backbone_id": "MONDO_0010938"
+   }
+  },
+  {
+   "id": "MONDO:0012521",
+   "type": "Disease",
+   "label": "herpes simplex encephalitis",
+   "synonyms": [
+    "HSV encephalitis",
+    "herpetic encephalitis",
+    "Encephalitis, Herpes Simplex",
+    "HSVE",
+    "Herpes simplex meningo-encephalitis",
+    "Simplexvirus caused infectious encephalitis",
+    "Herpes simplex neuroinvasion",
+    "Simplexvirus infectious encephalitis",
+    "HSE",
+    "Herpes simplex virus encephalitis"
+   ],
+   "props": {
+    "backbone_id": "MONDO_0012521"
+   }
+  },
+  {
+   "id": "MONDO:0012682",
+   "type": "Disease",
+   "label": "immunodeficiency 35",
+   "synonyms": [
+    "immunodeficiency type 35",
+    "susceptibility to infection due to TYK2 deficiency",
+    "HIES with atypical Mycobacteriosis, autosomal recessive",
+    "IMD35",
+    "tyrosine kinase 2 deficiency",
+    "hyper-IgE syndrome with atypical Mycobacteriosis, autosomal recessive",
+    "immunodeficiency 35",
+    "autosomal recessive hyper-IgE syndrome due to TYK2 deficiency",
+    "TYK2 deficiency",
+    "autosomal recessive mendelian susceptibility to mycobacterial diseases due to a partial deficiency caused by mutation in TYK2",
+    "TYK2 autosomal recessive mendelian susceptibility to mycobacterial diseases due to a partial deficiency"
+   ],
+   "props": {
+    "backbone_id": "MONDO_0012682"
+   }
+  },
+  {
+   "id": "MONDO:0013427",
+   "type": "Disease",
+   "label": "immunodeficiency 31B",
+   "synonyms": [
+    "STAT1 deficiency",
+    "immunodeficiency 31B",
+    "immunodeficiency type 31B",
+    "susceptibility to viral and mycobacterial infections",
+    "IMD31B",
+    "Stat1 deficiency, autosomal recessive",
+    "immunodeficiency 31B, mycobacterial and viral infections, autosomal recessive"
+   ],
+   "props": {
+    "backbone_id": "MONDO_0013427"
+   }
+  },
+  {
+   "id": "MONDO:0013599",
+   "type": "Disease",
+   "label": "autoimmune enteropathy and endocrinopathy - susceptibility to chronic infections syndrome",
+   "synonyms": [
+    "immunodeficiency type 31C",
+    "immunodeficiency 31C, chronic mucocutaneous candidiasis, autosomal dominant",
+    "CANDF7",
+    "IMD31C",
+    "candidiasis familial chronic mucocutaneous, autosomal dominant",
+    "candidiasis familial, 7",
+    "candidiasis, familial chronic mucocutaneous, autosomal dominant",
+    "candidiasis, familial, 7",
+    "familial chronic mucocutaneous, autosomal dominant",
+    "immunodeficiency 31C"
+   ],
+   "props": {
+    "backbone_id": "MONDO_0013599"
+   }
+  },
+  {
+   "id": "MONDO:0013730",
+   "type": "Disease",
+   "label": "graft versus host disease",
+   "synonyms": [
+    "diseases, graft-vs-host",
+    "graft vs. host disease",
+    "graft-versus-host-disease",
+    "graft-vs-host disease",
+    "graft-versus-host disease",
+    "runt disease",
+    "diseases, graft-versus-host",
+    "graft vs host disease",
+    "disease, graft-versus-host",
+    "graft versus host disease",
+    "GVHD",
+    "GVH",
+    "disease, graft-vs-host",
+    "disease, homologous wasting",
+    "disease, runt",
+    "graft-VS-host diseases",
+    "graft-versus-host disease, resistance to",
+    "graft-versus-host disease, susceptibility to",
+    "graft-versus-host diseases",
+    "homologous wasting disease"
+   ],
+   "props": {
+    "backbone_id": "MONDO_0013730"
+   }
+  },
+  {
+   "id": "MONDO:0013863",
+   "type": "Disease",
+   "label": "combined immunodeficiency due to LRBA deficiency",
+   "synonyms": [
+    "CID due to LRBA deficiency",
+    "combined immunodeficiency due to LRBA deficiency",
+    "CVID8",
+    "immunodeficiency, common variable, 8, with autoimmunity"
+   ],
+   "props": {
+    "backbone_id": "MONDO_0013863"
+   }
+  },
+  {
+   "id": "MONDO:0013953",
+   "type": "Disease",
+   "label": "immunodeficiency 28",
+   "synonyms": [
+    "immunodeficiency 28",
+    "IFNGR2 primary immunodeficiency disease",
+    "immunodeficiency type 28",
+    "primary immunodeficiency disease caused by mutation in IFNGR2",
+    "IMD28",
+    "Ifngr2 deficiency",
+    "immunodeficiency 28, Mycobacteriosis"
+   ],
+   "props": {
+    "backbone_id": "MONDO_0013953"
+   }
+  },
+  {
+   "id": "MONDO:0013999",
+   "type": "Disease",
+   "label": "retinal dystrophy, optic nerve edema, splenomegaly, anhidrosis, and migraine headache syndrome",
+   "synonyms": [
+    "optic nerve edema-splenomegaly syndrome",
+    "ROSAH",
+    "retinal dystrophy, optic nerve edema, splenomegaly, anhidrosis, and headache",
+    "ROSAH syndrome",
+    "splenomegaly, cytopenia, and vision loss"
+   ],
+   "props": {
+    "backbone_id": "MONDO_0013999"
+   }
+  },
+  {
+   "id": "MONDO:0014367",
+   "type": "Disease",
+   "label": "Aicardi-Goutieres syndrome 7",
+   "synonyms": [
+    "Aicardi-Goutieres syndrome 7",
+    "Aicardi-Goutieres syndrome type 7",
+    "IFIH1 Aicardi-Goutieres syndrome",
+    "Aicardi-Goutieres syndrome caused by mutation in IFIH1",
+    "AGS7"
+   ],
+   "props": {
+    "backbone_id": "MONDO_0014367"
+   }
+  },
+  {
+   "id": "MONDO:0014405",
+   "type": "Disease",
+   "label": "STING-associated vasculopathy with onset in infancy",
+   "synonyms": [
+    "SAVI",
+    "STING-associated vasculopathy, infantile-onset"
+   ],
+   "props": {
+    "backbone_id": "MONDO_0014405"
+   }
+  },
+  {
+   "id": "MONDO:0014453",
+   "type": "Disease",
+   "label": "immunodeficiency 36",
+   "synonyms": [
+    "immunodeficiency 36",
+    "immunodeficiency type 36",
+    "APDS2",
+    "IMD36",
+    "activated PI3K-delta syndrome-2"
+   ],
+   "props": {
+    "backbone_id": "MONDO_0014453"
+   }
+  },
+  {
+   "id": "MONDO:0015131",
+   "type": "Disease",
+   "label": "combined immunodeficiency",
+   "synonyms": [
+    "combined immunodeficiency",
+    "CID",
+    "congenital combined immunodeficiency",
+    "X-linked combined immunodeficiency",
+    "combined T and B cell immunodeficiency",
+    "combined T cell and B cell immunodeficiency"
+   ],
+   "props": {
+    "backbone_id": "MONDO_0015131"
+   }
+  },
+  {
+   "id": "MONDO:0015279",
+   "type": "Disease",
+   "label": "chronic mucocutaneous candidiasis",
+   "synonyms": [
+    "familial CMC",
+    "chronic mucocutaneous candidiasis",
+    "CANDF",
+    "familial candidiasis",
+    "chronic mucocutaneous candidiasis (disease)",
+    "familial chronic mucocutaneous candidiasis",
+    "CMC"
+   ],
+   "props": {
+    "backbone_id": "MONDO_0015279"
+   }
+  },
+  {
+   "id": "MONDO:0015517",
+   "type": "Disease",
+   "label": "common variable immunodeficiency",
+   "synonyms": [
+    "sporadic hypogammaglobulinemia",
+    "idiopathic immunoglobulin deficiency",
+    "common variable agammaglobulinemia",
+    "secondary hypogammaglobulinemia",
+    "primary hypogammaglobulinemia",
+    "CVID",
+    "Common Variable Immune Deficiency",
+    "primary antibody deficiency",
+    "Immunoglobulin deficiency, late-onset",
+    "acquired agammaglobulinemia",
+    "acquired hypogammaglobulinemia",
+    "common variable hypogamma-globulinemia",
+    "hypogamma-globulinemia, acquired"
+   ],
+   "props": {
+    "backbone_id": "MONDO_0015517"
+   }
+  },
+  {
+   "id": "MONDO:0015974",
+   "type": "Disease",
+   "label": "severe combined immunodeficiency",
+   "synonyms": [
+    "severe combined immunodeficiency (disease)",
+    "SCID",
+    "combined T and B cell inborn immunodeficiency",
+    "severe combined immunodeficiency disease",
+    "severe combined immunodeficiency"
+   ],
+   "props": {
+    "backbone_id": "MONDO_0015974"
+   }
+  },
+  {
+   "id": "MONDO:0017617",
+   "type": "Disease",
+   "label": "acquired adult-onset immunodeficiency",
+   "synonyms": [
+    "acquired immunodeficiency of adults",
+    "adult acquired immunodeficiency",
+    "adult-onset immunodeficiency with anti-interferon-gamma autoantibodies",
+    "adult onset immunodeficiency syndrome",
+    "adult-onset immunodeficiency due to anti-interferon-gamma autoantibody",
+    "adult-onset immunodeficiency with acquired Anti-interferon-gamma autoantibodies",
+    "anti-IFN-gamma autoantibody syndrome"
+   ],
+   "props": {
+    "backbone_id": "MONDO_0017617"
+   }
+  },
+  {
+   "id": "MONDO:0018037",
+   "type": "Disease",
+   "label": "hyper-IgE syndrome",
+   "synonyms": [
+    "HIES",
+    "hyper-IgE recurrent infection syndrome",
+    "hyperimmunoglobulin E syndrome"
+   ],
+   "props": {
+    "backbone_id": "MONDO_0018037"
+   }
+  },
+  {
+   "id": "MONDO:0018076",
+   "type": "Disease",
+   "label": "tuberculosis",
+   "synonyms": [
+    "tuberculosis disease",
+    "active tuberculosis",
+    "Kochs disease",
+    "TB"
+   ],
+   "props": {
+    "backbone_id": "MONDO_0018076"
+   }
+  },
+  {
+   "id": "MONDO:0018338",
+   "type": "Disease",
+   "label": "activated PI3K-delta syndrome",
+   "synonyms": [
+    "senescent T-cells-lymphadenopathy-immunodeficiency syndrome due to p110delta-activating mutation",
+    "APDS"
+   ],
+   "props": {
+    "backbone_id": "MONDO_0018338"
+   }
+  },
+  {
+   "id": "MONDO:0018866",
+   "type": "Disease",
+   "label": "Aicardi-Goutieres syndrome",
+   "synonyms": [
+    "encephalopathy with intracranial calcification and chronic lymphocytosis of cerebrospinal fluid",
+    "Cree encephalitis",
+    "encephalopathy with basal ganglia calcification",
+    "Aicardi Goutieres syndrome",
+    "Aicardi-Goutières Syndrome",
+    "AGS",
+    "encephalopathy, familial infantile, with calcification of basal ganglia and chronic cerebrospinal fluid lymphocytosis",
+    "pseudotoxoplasmosis syndrome"
+   ],
+   "props": {
+    "backbone_id": "MONDO_0018866"
+   }
+  },
+  {
+   "id": "MONDO:0019469",
+   "type": "Disease",
+   "label": "T-cell large granular lymphocyte leukemia",
+   "synonyms": [
+    "large granular lymphocytosis",
+    "Tgamma large granular lymphocyte leukaemia",
+    "T-cell large granular lymphocyte leukemia",
+    "proliferation of large granular lymphocytes",
+    "T-LGL",
+    "large granular lymphocytic leukemia",
+    "leukemia, large granular LYMPHOCYTIC, malignant",
+    "T-gamma lymphoproliferative disorder",
+    "T-cell large granular lymphocytic leukemia",
+    "large cell granular lymphogenous leukaemia",
+    "large cell granular lymphoid leukaemia",
+    "T-LGL leukaemia",
+    "large cell granular lymphogenous leukemia",
+    "Tgamma large granular lymphocyte leukemia",
+    "T-cell large granular lymphocytic leukaemia",
+    "T-LGL leukemia",
+    "LGLL",
+    "T gamma lymphoproliferative disorder",
+    "T-cell LGL leukaemia",
+    "T-cell large gran. lymph. leuk.",
+    "large cell granular lymphoid leukemia",
+    "T-cell LGL leukemia",
+    "large granular lymphocytic leukaemia",
+    "LGL leukaemia",
+    "LGL leukemia",
+    "TLGL",
+    "large granular lymphocyte leukaemia",
+    "large granular lymphocyte leukemia"
+   ],
+   "props": {
+    "backbone_id": "MONDO_0019469"
+   }
+  },
+  {
+   "id": "MONDO:0020546",
+   "type": "Disease",
+   "label": "acute graft versus host disease",
+   "synonyms": [
+    "fulminant graft versus host disease",
+    "acute graft vs. host disease",
+    "GVHD, acute",
+    "graft versus host disease, acute",
+    "acute GVHD"
+   ],
+   "props": {
+    "backbone_id": "MONDO_0020546"
+   }
+  },
+  {
+   "id": "MONDO:0021094",
+   "type": "Disease",
+   "label": "immunodeficiency disease",
+   "synonyms": [
+    "immunodeficiency",
+    "immunodeficiency disorder",
+    "immuno-deficiency",
+    "immunodeficiency syndrome"
+   ],
+   "props": {
+    "backbone_id": "MONDO_0021094"
+   }
+  },
+  {
+   "id": "MONDO:0026767",
+   "type": "Disease",
+   "label": "immunodeficiency 74, COVID-19-related, X-linked",
+   "synonyms": [
+    "immunodeficiency 74, COVID19-related, X-linked, X-linked recessive",
+    "IMD74",
+    "IMMUNODEFICIENCY 74, COVID19-RELATED, X-LINKED",
+    "TLR7 deficiency",
+    "respiratory insufficiency due to SARS-CoV-2 viral infection"
+   ],
+   "props": {
+    "backbone_id": "MONDO_0026767"
+   }
+  },
+  {
+   "id": "MONDO:0030970",
+   "type": "Disease",
+   "label": "immunodeficiency 106, susceptibility to viral infections",
+   "synonyms": [
+    "IMD106",
+    "immunodeficiency 106, susceptibility to viral infections",
+    "IFNAR1 deficiency"
+   ],
+   "props": {
+    "backbone_id": "MONDO_0030970"
+   }
+  },
+  {
+   "id": "MONDO:0033558",
+   "type": "Disease",
+   "label": "autoinflammation, immune dysregulation, and eosinophilia",
+   "synonyms": [
+    "AIIDE",
+    "AUTOINFLAMMATION, IMMUNE DYSREGULATION, AND EOSINOPHILIA",
+    "Atopic Dermatitis, Enteritis, Colitis, and Eosinophilia"
+   ],
+   "props": {
+    "backbone_id": "MONDO_0033558"
+   }
+  },
+  {
+   "id": "MONDO:0044200",
+   "type": "Disease",
+   "label": "T-B+ severe combined immunodeficiency",
+   "synonyms": [
+    "T-cell negative B-cell positive SCID",
+    "T-B+ SCID"
+   ],
+   "props": {
+    "backbone_id": "MONDO_0044200"
+   }
+  },
+  {
+   "id": "MONDO:0044903",
+   "type": "Disease",
+   "label": "myelofibrosis",
+   "synonyms": [
+    "myelofibrosis"
+   ],
+   "props": {
+    "backbone_id": "MONDO_0044903"
+   }
+  },
+  {
+   "id": "MONDO:0100096",
+   "type": "Disease",
+   "label": "COVID-19",
+   "synonyms": [
+    "2019 novel coronavirus infection",
+    "2019-nCoV infection",
+    "CoV-2 infection",
+    "coronavirus disease 2019",
+    "severe acute respiratory syndrome coronavirus 2 infectious disease",
+    "2019 novel coronavirus",
+    "2019-nCoV",
+    "SARS-CoV-2",
+    "SARS-coronavirus 2",
+    "beta-CoV",
+    "beta-CoVs",
+    "betacoronavirus",
+    "severe acute respiratory syndrome coronavirus 2",
+    "β-CoV",
+    "β-CoVs",
+    "β-coronavirus"
+   ],
+   "props": {
+    "backbone_id": "MONDO_0100096"
+   }
+  },
+  {
+   "id": "Orphanet:2314",
+   "type": "Disease",
+   "label": "Autosomal dominant hyper-IgE syndrome",
+   "synonyms": [],
+   "props": {
+    "backbone_id": "Orphanet_2314"
+   }
+  },
+  {
+   "id": "Orphanet:331226",
+   "type": "Disease",
+   "label": "Autosomal recessive hyper-IgE syndrome due to TYK2 deficiency",
+   "synonyms": [],
+   "props": {
+    "backbone_id": "Orphanet_331226"
+   }
+  },
+  {
+   "id": "Orphanet:748",
+   "type": "Disease",
+   "label": "Mendelian susceptibility to mycobacterial diseases",
+   "synonyms": [],
+   "props": {
+    "backbone_id": "Orphanet_748"
+   }
+  },
+  {
+   "id": "REACT:R-HSA-1266695",
+   "type": "Pathway",
+   "label": "Interleukin-7 signaling",
+   "synonyms": [],
+   "props": {}
+  },
+  {
+   "id": "clinvar:10027",
+   "type": "Variant",
+   "label": "NM_000206.3(IL2RG):c.664C>T (p.Arg222Cys)",
+   "synonyms": [
+    "R222C",
+    "IL2RG R222C"
+   ],
+   "props": {
+    "gene_symbol": "IL2RG",
+    "protein_change": "R222C",
+    "clinical_significance": "Pathogenic"
+   }
+  },
+  {
+   "id": "clinvar:1019308",
+   "type": "Variant",
+   "label": "NM_007315.4(STAT1):c.976C>T (p.Pro326Ser)",
+   "synonyms": [
+    "P326S",
+    "STAT1 P326S"
+   ],
+   "props": {
+    "gene_symbol": "STAT1",
+    "protein_change": "P273S, P293S, P296S, P326S, P328S, P338S",
+    "clinical_significance": "Uncertain significance"
+   }
+  },
+  {
+   "id": "clinvar:137869",
+   "type": "Variant",
+   "label": "NM_003331.5(TYK2):c.3310C>G (p.Pro1104Ala)",
+   "synonyms": [
+    "P1104A",
+    "TYK2 P1104A"
+   ],
+   "props": {
+    "gene_symbol": "TYK2",
+    "protein_change": "P1104A",
+    "clinical_significance": "Benign/Likely benign"
+   }
+  },
+  {
+   "id": "clinvar:144005",
+   "type": "Variant",
+   "label": "NM_007315.4(STAT1):c.854A>G (p.Gln285Arg)",
+   "synonyms": [
+    "Q285R",
+    "STAT1 Q285R"
+   ],
+   "props": {
+    "gene_symbol": "STAT1",
+    "protein_change": "Q285R, Q252R, Q255R, Q287R, Q297R",
+    "clinical_significance": "Pathogenic"
+   }
+  },
+  {
+   "id": "clinvar:144006",
+   "type": "Variant",
+   "label": "NM_007315.4(STAT1):c.1154C>T (p.Thr385Met)",
+   "synonyms": [
+    "T385M",
+    "STAT1 T385M"
+   ],
+   "props": {
+    "gene_symbol": "STAT1",
+    "protein_change": "T385M, T332M, T352M, T354M, T355M, T365M, T375M, T383M, T387M, T397M",
+    "clinical_significance": "Pathogenic"
+   }
+  },
+  {
+   "id": "clinvar:14662",
+   "type": "Variant",
+   "label": "NM_004972.4(JAK2):c.1849G>T (p.Val617Phe)",
+   "synonyms": [
+    "V617F",
+    "JAK2 V617F"
+   ],
+   "props": {
+    "gene_symbol": "JAK2",
+    "protein_change": "V617F, V212F, V468F",
+    "clinical_significance": "Pathogenic/Likely pathogenic"
+   }
+  },
+  {
+   "id": "clinvar:224844",
+   "type": "Variant",
+   "label": "NM_139276.3(STAT3):c.1261G>A (p.Gly421Arg)",
+   "synonyms": [
+    "G421R",
+    "STAT3 G421R"
+   ],
+   "props": {
+    "gene_symbol": "STAT3",
+    "protein_change": "G421R, G389R, G395R, G401R, G426R",
+    "clinical_significance": "Pathogenic/Likely pathogenic"
+   }
+  },
+  {
+   "id": "clinvar:225075",
+   "type": "Variant",
+   "label": "NM_002227.4(JAK1):c.1901C>A (p.Ala634Asp)",
+   "synonyms": [
+    "A634D",
+    "JAK1 A634D"
+   ],
+   "props": {
+    "gene_symbol": "JAK1",
+    "protein_change": "A634D, A633D",
+    "clinical_significance": "Likely pathogenic"
+   }
+  },
+  {
+   "id": "clinvar:30083",
+   "type": "Variant",
+   "label": "NM_007315.4(STAT1):c.820C>T (p.Arg274Trp)",
+   "synonyms": [
+    "R274W",
+    "STAT1 R274W"
+   ],
+   "props": {
+    "gene_symbol": "STAT1",
+    "protein_change": "R274W, R241W, R244W, R276W, R286W",
+    "clinical_significance": "Pathogenic"
+   }
+  },
+  {
+   "id": "clinvar:30084",
+   "type": "Variant",
+   "label": "NM_007315.4(STAT1):c.800C>T (p.Ala267Val)",
+   "synonyms": [
+    "A267V",
+    "STAT1 A267V"
+   ],
+   "props": {
+    "gene_symbol": "STAT1",
+    "protein_change": "A267V, A234V, A237V, A269V, A279V",
+    "clinical_significance": "Pathogenic"
+   }
+  },
+  {
+   "id": "clinvar:30085",
+   "type": "Variant",
+   "label": "NM_007315.4(STAT1):c.821G>A (p.Arg274Gln)",
+   "synonyms": [
+    "R274Q",
+    "STAT1 R274Q"
+   ],
+   "props": {
+    "gene_symbol": "STAT1",
+    "protein_change": "R274Q, R241Q, R244Q, R276Q, R286Q",
+    "clinical_significance": "Pathogenic"
+   }
+  },
+  {
+   "id": "clinvar:36783",
+   "type": "Variant",
+   "label": "NM_139276.3(STAT3):c.1003C>T (p.Arg335Trp)",
+   "synonyms": [
+    "R335W",
+    "STAT3 R335W"
+   ],
+   "props": {
+    "gene_symbol": "STAT3",
+    "protein_change": "R335W, R303W, R309W",
+    "clinical_significance": "Pathogenic/Likely pathogenic"
+   }
+  },
+  {
+   "id": "clinvar:3776300",
+   "type": "Variant",
+   "label": "NM_007315.4(STAT1):c.1199T>C (p.Leu400Pro)",
+   "synonyms": [
+    "L400P",
+    "STAT1 L400P"
+   ],
+   "props": {
+    "gene_symbol": "STAT1",
+    "protein_change": "L347P, L367P, L369P, L370P, L380P, L390P, L398P, L400P, L402P, L412P",
+    "clinical_significance": "Likely pathogenic"
+   }
+  },
+  {
+   "id": "clinvar:4082102",
+   "type": "Variant",
+   "label": "NM_000215.4(JAK3):c.1048C>T (p.Arg350Trp)",
+   "synonyms": [
+    "R350W",
+    "JAK3 R350W"
+   ],
+   "props": {
+    "gene_symbol": "JAK3",
+    "protein_change": "R350W",
+    "clinical_significance": "Likely pathogenic"
+   }
+  },
+  {
+   "id": "clinvar:650110",
+   "type": "Variant",
+   "label": "NM_007315.4(STAT1):c.1256C>G (p.Thr419Arg)",
+   "synonyms": [
+    "T419R",
+    "STAT1 T419R"
+   ],
+   "props": {
+    "gene_symbol": "STAT1",
+    "protein_change": "T419R, T366R, T386R, T388R, T389R, T399R, T409R, T417R, T421R, T431R",
+    "clinical_significance": "Uncertain significance"
+   }
+  },
+  {
+   "id": "ensembl:ENSG00000004799",
+   "type": "Gene",
+   "label": "PDK4",
+   "synonyms": [
+    "pyruvate dehydrogenase kinase 4",
+    "PDK4",
+    "PDHK4"
+   ],
+   "props": {
+    "symbol": "PDK4",
+    "backbone_id": "ENSG00000004799"
+   }
+  },
+  {
+   "id": "ensembl:ENSG00000007171",
+   "type": "Gene",
+   "label": "NOS2",
+   "synonyms": [
+    "nitric oxide synthase 2",
+    "NOS2",
+    "NOS2A",
+    "HEP-NOS",
+    "Inducible NOS",
+    "iNOS",
+    "NOS"
+   ],
+   "props": {
+    "symbol": "NOS2",
+    "backbone_id": "ENSG00000007171"
+   }
+  },
+  {
+   "id": "ensembl:ENSG00000073861",
+   "type": "Gene",
+   "label": "TBX21",
+   "synonyms": [
+    "T-box transcription factor 21",
+    "TBX21",
+    "TBET",
+    "TBLYM",
+    "T-box protein 21",
+    "T-bet",
+    "IMD88",
+    "T-PET"
+   ],
+   "props": {
+    "symbol": "TBX21",
+    "backbone_id": "ENSG00000073861"
+   }
+  },
+  {
+   "id": "ensembl:ENSG00000091831",
+   "type": "Gene",
+   "label": "ESR1",
+   "synonyms": [
+    "estrogen receptor 1",
+    "ESR1",
+    "ESR",
+    "NR3A1",
+    "ER",
+    "Era",
+    "ER-alpha",
+    "ESRA",
+    "ESTRR"
+   ],
+   "props": {
+    "symbol": "ESR1",
+    "backbone_id": "ENSG00000091831"
+   }
+  },
+  {
+   "id": "ensembl:ENSG00000104365",
+   "type": "Gene",
+   "label": "IKBKB",
+   "synonyms": [
+    "inhibitor of nuclear factor kappa B kinase subunit beta",
+    "IKBKB",
+    "IKKB",
+    "I-kappa-B-kinase beta",
+    "IKK-B",
+    "IKK-beta",
+    "IKK-2",
+    "IKK2",
+    "NFKBIKB",
+    "IMD15",
+    "IMD15A",
+    "IMD15B"
+   ],
+   "props": {
+    "symbol": "IKBKB",
+    "backbone_id": "ENSG00000104365"
+   }
+  },
+  {
+   "id": "ensembl:ENSG00000104432",
+   "type": "Gene",
+   "label": "IL7",
+   "synonyms": [
+    "interleukin 7",
+    "IL7",
+    "IL-7",
+    "IMD130"
+   ],
+   "props": {
+    "symbol": "IL7",
+    "backbone_id": "ENSG00000104432"
+   }
+  },
+  {
+   "id": "ensembl:ENSG00000105397",
+   "type": "Gene",
+   "label": "TYK2",
+   "synonyms": [
+    "tyrosine kinase 2",
+    "TYK2",
+    "JTK1",
+    "IMD35"
+   ],
+   "props": {
+    "symbol": "TYK2",
+    "backbone_id": "ENSG00000105397"
+   }
+  },
+  {
+   "id": "ensembl:ENSG00000105639",
+   "type": "Gene",
+   "label": "JAK3",
+   "synonyms": [
+    "Janus kinase 3",
+    "JAK3",
+    "JAK-3",
+    "L-JAK",
+    "JAKL",
+    "LJAK",
+    "JAK3_HUMAN"
+   ],
+   "props": {
+    "symbol": "JAK3",
+    "backbone_id": "ENSG00000105639"
+   }
+  },
+  {
+   "id": "ensembl:ENSG00000105697",
+   "type": "Gene",
+   "label": "HAMP",
+   "synonyms": [
+    "hepcidin antimicrobial peptide",
+    "HAMP",
+    "HEPC",
+    "LEAP1",
+    "UNQ487/PRO1003",
+    "LEAP-1",
+    "PLTR",
+    "Hepc25",
+    "Hepc20",
+    "HFE2B"
+   ],
+   "props": {
+    "symbol": "HAMP",
+    "backbone_id": "ENSG00000105697"
+   }
+  },
+  {
+   "id": "ensembl:ENSG00000105835",
+   "type": "Gene",
+   "label": "NAMPT",
+   "synonyms": [
+    "nicotinamide phosphoribosyltransferase",
+    "NAMPT",
+    "PBEF",
+    "PBEF1",
+    "NAmPRTase",
+    "Pre-B cell-enhancing factor",
+    "1110035O14Rik",
+    "VF",
+    "VISFATIN"
+   ],
+   "props": {
+    "symbol": "NAMPT",
+    "backbone_id": "ENSG00000105835"
+   }
+  },
+  {
+   "id": "ensembl:ENSG00000105971",
+   "type": "Gene",
+   "label": "CAV2",
+   "synonyms": [
+    "caveolin 2",
+    "CAV2",
+    "CAV"
+   ],
+   "props": {
+    "symbol": "CAV2",
+    "backbone_id": "ENSG00000105971"
+   }
+  },
+  {
+   "id": "ensembl:ENSG00000105974",
+   "type": "Gene",
+   "label": "CAV1",
+   "synonyms": [
+    "caveolin 1",
+    "CAV1",
+    "CAV",
+    "BSCL3",
+    "CGL3",
+    "LCCNS",
+    "MSTP085",
+    "PPH3",
+    "VIP21"
+   ],
+   "props": {
+    "symbol": "CAV1",
+    "backbone_id": "ENSG00000105974"
+   }
+  },
+  {
+   "id": "ensembl:ENSG00000106266",
+   "type": "Gene",
+   "label": "SNX8",
+   "synonyms": [
+    "sorting nexin 8",
+    "SNX8",
+    "Mvp1"
+   ],
+   "props": {
+    "symbol": "SNX8",
+    "backbone_id": "ENSG00000106266"
+   }
+  },
+  {
+   "id": "ensembl:ENSG00000109471",
+   "type": "Gene",
+   "label": "IL2",
+   "synonyms": [
+    "interleukin 2",
+    "IL2",
+    "IL-2",
+    "TCGF",
+    "lymphokine"
+   ],
+   "props": {
+    "symbol": "IL2",
+    "backbone_id": "ENSG00000109471"
+   }
+  },
+  {
+   "id": "ensembl:ENSG00000111537",
+   "type": "Gene",
+   "label": "IFNG",
+   "synonyms": [
+    "interferon gamma",
+    "IFNG",
+    "IFN-gamma",
+    "IFG",
+    "IFI",
+    "IMD69"
+   ],
+   "props": {
+    "symbol": "IFNG",
+    "backbone_id": "ENSG00000111537"
+   }
+  },
+  {
+   "id": "ensembl:ENSG00000113721",
+   "type": "Gene",
+   "label": "PDGFRB",
+   "synonyms": [
+    "platelet derived growth factor receptor beta",
+    "PDGFRB",
+    "PDGFR",
+    "PDGFR1",
+    "CD140b",
+    "PDGF-R-beta",
+    "PDGFR-beta",
+    "PDGFR-1",
+    "JTK12",
+    "IBGC4",
+    "IMF1",
+    "KOGS",
+    "OPDKD",
+    "PENTT"
+   ],
+   "props": {
+    "symbol": "PDGFRB",
+    "backbone_id": "ENSG00000113721"
+   }
+  },
+  {
+   "id": "ensembl:ENSG00000115415",
+   "type": "Gene",
+   "label": "STAT1",
+   "synonyms": [
+    "signal transducer and activator of transcription 1",
+    "STAT1",
+    "STAT91",
+    "ISGF-3",
+    "CANDF7",
+    "IMD31A",
+    "IMD31B",
+    "IMD31C"
+   ],
+   "props": {
+    "symbol": "STAT1",
+    "backbone_id": "ENSG00000115415"
+   }
+  },
+  {
+   "id": "ensembl:ENSG00000117595",
+   "type": "Gene",
+   "label": "IRF6",
+   "synonyms": [
+    "interferon regulatory factor 6",
+    "IRF6",
+    "IRF-6",
+    "OFC6",
+    "VWS1",
+    "LPS",
+    "PIT",
+    "PPS",
+    "PPS1",
+    "VWS"
+   ],
+   "props": {
+    "symbol": "IRF6",
+    "backbone_id": "ENSG00000117595"
+   }
+  },
+  {
+   "id": "ensembl:ENSG00000124256",
+   "type": "Gene",
+   "label": "ZBP1",
+   "synonyms": [
+    "Z-DNA binding protein 1",
+    "ZBP1",
+    "C20orf183",
+    "DLM1",
+    "DAI",
+    "dJ718J7.3",
+    "DLM-1"
+   ],
+   "props": {
+    "symbol": "ZBP1",
+    "backbone_id": "ENSG00000124256"
+   }
+  },
+  {
+   "id": "ensembl:ENSG00000134352",
+   "type": "Gene",
+   "label": "IL6ST",
+   "synonyms": [
+    "interleukin 6 cytokine family signal transducer",
+    "IL6ST",
+    "CD130",
+    "IL-6 receptor subunit beta",
+    "IL-6R subunit beta",
+    "IL-6R-beta",
+    "IL-6RB",
+    "gp130",
+    "sGP130",
+    "CDW130",
+    "HIES4",
+    "HIES4A",
+    "HIES4B",
+    "IMD94",
+    "STWS2"
+   ],
+   "props": {
+    "symbol": "IL6ST",
+    "backbone_id": "ENSG00000134352"
+   }
+  },
+  {
+   "id": "ensembl:ENSG00000147168",
+   "type": "Gene",
+   "label": "IL2RG",
+   "synonyms": [
+    "interleukin 2 receptor subunit gamma",
+    "IL2RG",
+    "CD132",
+    "IL-2 receptor subunit gamma",
+    "IL-2R subunit gamma",
+    "IL-2RG",
+    "CIDX",
+    "IMD4",
+    "P64",
+    "SCIDX",
+    "SCIDX1"
+   ],
+   "props": {
+    "symbol": "IL2RG",
+    "backbone_id": "ENSG00000147168"
+   }
+  },
+  {
+   "id": "ensembl:ENSG00000162434",
+   "type": "Gene",
+   "label": "JAK1",
+   "synonyms": [
+    "Janus kinase 1",
+    "JAK1",
+    "JAK1A",
+    "JAK1B",
+    "JAK-1",
+    "JTK3",
+    "AIIDE"
+   ],
+   "props": {
+    "symbol": "JAK1",
+    "backbone_id": "ENSG00000162434"
+   }
+  },
+  {
+   "id": "ensembl:ENSG00000163737",
+   "type": "Gene",
+   "label": "PF4",
+   "synonyms": [
+    "platelet factor 4",
+    "PF4",
+    "CXCL4",
+    "SCYB4",
+    "PF-4"
+   ],
+   "props": {
+    "symbol": "PF4",
+    "backbone_id": "ENSG00000163737"
+   }
+  },
+  {
+   "id": "ensembl:ENSG00000164430",
+   "type": "Gene",
+   "label": "CGAS",
+   "synonyms": [
+    "cyclic GMP-AMP synthase",
+    "CGAS",
+    "C6orf150",
+    "MB21D1",
+    "cGAMP synthase",
+    "h-cGAS",
+    "D4"
+   ],
+   "props": {
+    "symbol": "CGAS",
+    "backbone_id": "ENSG00000164430"
+   }
+  },
+  {
+   "id": "ensembl:ENSG00000167671",
+   "type": "Gene",
+   "label": "UBXN6",
+   "synonyms": [
+    "UBX domain protein 6",
+    "UBXN6",
+    "UBXD1 {ECO:0000303|PubMed:11342112",
+    "ECO:0000312|HGNC:HGNC:14928}",
+    "UBXDC2",
+    "UBXD1"
+   ],
+   "props": {
+    "symbol": "UBXN6",
+    "backbone_id": "ENSG00000167671"
+   }
+  },
+  {
+   "id": "ensembl:ENSG00000168610",
+   "type": "Gene",
+   "label": "STAT3",
+   "synonyms": [
+    "signal transducer and activator of transcription 3",
+    "STAT3",
+    "APRF",
+    "ADMIO",
+    "ADMIO1",
+    "HIES"
+   ],
+   "props": {
+    "symbol": "STAT3",
+    "backbone_id": "ENSG00000168610"
+   }
+  },
+  {
+   "id": "ensembl:ENSG00000168685",
+   "type": "Gene",
+   "label": "IL7R",
+   "synonyms": [
+    "interleukin 7 receptor",
+    "IL7R",
+    "CD127",
+    "IL-7 receptor subunit alpha",
+    "IL-7R subunit alpha",
+    "IL-7R-alpha",
+    "IL-7RA",
+    "IL7RA",
+    "lnc-IL7R",
+    "IL-7Ralpha",
+    "IL7Ralpha",
+    "sIL-7R",
+    "CDw127",
+    "ILRA",
+    "IMD104"
+   ],
+   "props": {
+    "symbol": "IL7R",
+    "backbone_id": "ENSG00000168685"
+   }
+  },
+  {
+   "id": "ensembl:ENSG00000171611",
+   "type": "Gene",
+   "label": "PTCRA",
+   "synonyms": [
+    "pre T cell antigen receptor alpha",
+    "PTCRA",
+    "pT-alpha",
+    "pTa",
+    "IMD126"
+   ],
+   "props": {
+    "symbol": "PTCRA",
+    "backbone_id": "ENSG00000171611"
+   }
+  },
+  {
+   "id": "ensembl:ENSG00000172716",
+   "type": "Gene",
+   "label": "SLFN11",
+   "synonyms": [
+    "schlafen family member 11",
+    "SLFN11",
+    "FLJ34922",
+    "SLFN8/9"
+   ],
+   "props": {
+    "symbol": "SLFN11",
+    "backbone_id": "ENSG00000172716"
+   }
+  },
+  {
+   "id": "ensembl:ENSG00000184584",
+   "type": "Gene",
+   "label": "STING1",
+   "synonyms": [
+    "stimulator of interferon response cGAMP interactor 1",
+    "STING1",
+    "ERIS",
+    "MITA",
+    "STING",
+    "TMEM173",
+    "hSTING",
+    "hMITA",
+    "FLJ38577",
+    "NET23",
+    "MPYS",
+    "SAVI",
+    "STING-beta"
+   ],
+   "props": {
+    "symbol": "STING1",
+    "backbone_id": "ENSG00000184584"
+   }
+  },
+  {
+   "id": "ensembl:ENSG00000184979",
+   "type": "Gene",
+   "label": "USP18",
+   "synonyms": [
+    "ubiquitin specific peptidase 18",
+    "USP18",
+    "ISG43",
+    "hUBP43",
+    "PTORCH2",
+    "UBP43"
+   ],
+   "props": {
+    "symbol": "USP18",
+    "backbone_id": "ENSG00000184979"
+   }
+  },
+  {
+   "id": "ensembl:ENSG00000243414",
+   "type": "Gene",
+   "label": "TICAM2",
+   "synonyms": [
+    "TIR domain containing adaptor molecule 2",
+    "TICAM2",
+    "TIRAP3",
+    "TIRP",
+    "TRAM",
+    "TICAM-2",
+    "MyD88-4"
+   ],
+   "props": {
+    "symbol": "TICAM2",
+    "backbone_id": "ENSG00000243414"
+   }
+  },
+  {
+   "id": "ensembl:ENSG00000248599",
+   "type": "Gene",
+   "label": "SLEAR",
+   "synonyms": [
+    "STAT1 regulated ILF2 complex interacting lncRNA",
+    "FLJ42969",
+    "SLEAR"
+   ],
+   "props": {
+    "symbol": "SLEAR",
+    "backbone_id": "ENSG00000248599"
+   }
+  },
+  {
+   "id": "mech:IL2RG:LoF",
+   "type": "Mechanism",
+   "label": "IL2RG loss of function",
+   "synonyms": [
+    "IL2RG LoF",
+    "IL2RG loss of function",
+    "IL2RG loss-of-function",
+    "IL2RG LoF mutations",
+    "loss of function IL2RG mutations",
+    "IL2RG loss of function variants"
+   ],
+   "props": {
+    "gene_symbol": "IL2RG",
+    "direction": "LoF"
+   }
+  },
+  {
+   "id": "mech:JAK1:GoF",
+   "type": "Mechanism",
+   "label": "JAK1 gain of function",
+   "synonyms": [
+    "JAK1 GoF",
+    "JAK1 gain of function",
+    "JAK1 gain-of-function",
+    "JAK1 GoF mutations",
+    "gain of function JAK1 mutations",
+    "JAK1 gain of function variants"
+   ],
+   "props": {
+    "gene_symbol": "JAK1",
+    "direction": "GoF"
+   }
+  },
+  {
+   "id": "mech:JAK2:GoF:somatic",
+   "type": "Mechanism",
+   "label": "JAK2 gain of function (somatic)",
+   "synonyms": [
+    "somatic JAK2 GoF",
+    "JAK2 V617F",
+    "somatic JAK2 gain-of-function"
+   ],
+   "props": {
+    "gene_symbol": "JAK2",
+    "direction": "GoF",
+    "somatic": true
+   }
+  },
+  {
+   "id": "mech:JAK3:GoF",
+   "type": "Mechanism",
+   "label": "JAK3 gain of function",
+   "synonyms": [
+    "JAK3 GoF",
+    "JAK3 gain of function",
+    "JAK3 gain-of-function",
+    "JAK3 GoF mutations",
+    "gain of function JAK3 mutations",
+    "JAK3 gain of function variants"
+   ],
+   "props": {
+    "gene_symbol": "JAK3",
+    "direction": "GoF"
+   }
+  },
+  {
+   "id": "mech:JAK3:LoF",
+   "type": "Mechanism",
+   "label": "JAK3 loss of function",
+   "synonyms": [
+    "JAK3 LoF",
+    "JAK3 loss of function",
+    "JAK3 loss-of-function",
+    "JAK3 LoF mutations",
+    "loss of function JAK3 mutations",
+    "JAK3 loss of function variants"
+   ],
+   "props": {
+    "gene_symbol": "JAK3",
+    "direction": "LoF"
+   }
+  },
+  {
+   "id": "mech:STAT1:GoF",
+   "type": "Mechanism",
+   "label": "STAT1 gain of function",
+   "synonyms": [
+    "STAT1 GoF",
+    "STAT1 gain of function",
+    "STAT1 gain-of-function",
+    "STAT1 GoF mutations",
+    "gain of function STAT1 mutations",
+    "STAT1 gain of function variants"
+   ],
+   "props": {
+    "gene_symbol": "STAT1",
+    "direction": "GoF"
+   }
+  },
+  {
+   "id": "mech:STAT1:LoF",
+   "type": "Mechanism",
+   "label": "STAT1 loss of function",
+   "synonyms": [
+    "STAT1 LoF",
+    "STAT1 loss of function",
+    "STAT1 loss-of-function",
+    "STAT1 LoF mutations",
+    "loss of function STAT1 mutations",
+    "STAT1 loss of function variants"
+   ],
+   "props": {
+    "gene_symbol": "STAT1",
+    "direction": "LoF"
+   }
+  },
+  {
+   "id": "mech:STAT3:DN",
+   "type": "Mechanism",
+   "label": "STAT3 dominant negative",
+   "synonyms": [
+    "STAT3 DN",
+    "STAT3 dominant negative",
+    "STAT3 dominant-negative",
+    "STAT3 DN mutations",
+    "dominant negative STAT3 mutations",
+    "STAT3 dominant negative variants"
+   ],
+   "props": {
+    "gene_symbol": "STAT3",
+    "direction": "DN"
+   }
+  },
+  {
+   "id": "mech:STAT3:GoF",
+   "type": "Mechanism",
+   "label": "STAT3 gain of function",
+   "synonyms": [
+    "STAT3 GoF",
+    "STAT3 gain of function",
+    "STAT3 gain-of-function",
+    "STAT3 GoF mutations",
+    "gain of function STAT3 mutations",
+    "STAT3 gain of function variants"
+   ],
+   "props": {
+    "gene_symbol": "STAT3",
+    "direction": "GoF"
+   }
+  },
+  {
+   "id": "mech:STAT3:LoF",
+   "type": "Mechanism",
+   "label": "STAT3 loss of function",
+   "synonyms": [
+    "STAT3 LoF",
+    "STAT3 loss of function",
+    "STAT3 loss-of-function",
+    "STAT3 LoF mutations",
+    "loss of function STAT3 mutations",
+    "STAT3 loss of function variants"
+   ],
+   "props": {
+    "gene_symbol": "STAT3",
+    "direction": "LoF"
+   }
+  },
+  {
+   "id": "mech:TYK2:GoF",
+   "type": "Mechanism",
+   "label": "TYK2 gain of function",
+   "synonyms": [
+    "TYK2 GoF",
+    "TYK2 gain of function",
+    "TYK2 gain-of-function",
+    "TYK2 GoF mutations",
+    "gain of function TYK2 mutations",
+    "TYK2 gain of function variants"
+   ],
+   "props": {
+    "gene_symbol": "TYK2",
+    "direction": "GoF"
+   }
+  },
+  {
+   "id": "mech:TYK2:LoF",
+   "type": "Mechanism",
+   "label": "TYK2 loss of function",
+   "synonyms": [
+    "TYK2 LoF",
+    "TYK2 loss of function",
+    "TYK2 loss-of-function",
+    "TYK2 LoF mutations",
+    "loss of function TYK2 mutations",
+    "TYK2 loss of function variants"
+   ],
+   "props": {
+    "gene_symbol": "TYK2",
+    "direction": "LoF"
+   }
+  }
+ ]
+}
