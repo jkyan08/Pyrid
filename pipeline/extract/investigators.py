@@ -90,7 +90,9 @@ def build(papers: list[dict]) -> list[dict]:
                     if len(set(same)) == 1:
                         gid = same[0]
                 if gid is None:
-                    gid = "inv:" + hashlib.sha1(f"{name_key}|{sorted(toks)[:5]}|{ref}".encode()).hexdigest()[:10]
+                    slug = re.sub(r"[^a-z0-9]+", "-", f"{a['fore']} {a['last']}".lower()).strip("-")
+                    h = hashlib.sha1(f"{name_key}|{sorted(toks)[:5]}|{ref}".encode()).hexdigest()[:6]
+                    gid = f"person:{slug}-{h}"
                     by_name[name_key].append(gid)
             g = groups.setdefault(gid, {
                 "id": gid, "name": f"{a['fore']} {a['last']}".strip(), "orcid": a.get("orcid"),
@@ -114,7 +116,7 @@ def build(papers: list[dict]) -> list[dict]:
                 g["_last_author_count"] += 1
 
     # Merge ORCID-less groups into an ORCID group with the same name and a shared affiliation token.
-    for gid in [g for g in groups if g.startswith("inv:")]:
+    for gid in [g for g in groups if g.startswith("person:")]:
         g = groups[gid]
         for oid, o in groups.items():
             same_name = o["name"].lower() == g["name"].lower()

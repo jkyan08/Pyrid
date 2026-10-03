@@ -12,37 +12,62 @@ name, so cached results are shared across providers.
 from __future__ import annotations
 
 import os
+import threading
+import time
 from typing import TypeVar
 
 from pydantic import BaseModel
 
-from pipeline.extract._compat import REPO_ROOT, cache_lookup, cached
+from pipeline.cache import is_offline
+from pipeline.extract._compat import CacheMissOffline, cache_lookup, cached, load_env
 
 T = TypeVar("T", bound=BaseModel)
 
 _client = None
 
 
-class CacheMiss(RuntimeError):
-    """Raised in offline mode (ATLAS_OFFLINE=1) when a call is not already cached."""
+# Offline (ATLAS_OFFLINE=1) cache misses raise M0's CacheMissOffline.
+CacheMiss = CacheMissOffline
 
 
 OPENROUTER_BASE = "https://openrouter.ai/api/v1"
+MAX_ATTEMPTS = 6
 
 
-def _load_dotenv() -> None:
-    """Fill unset variables from the repo's .env (the shell's own environment wins)."""
-    path = REPO_ROOT / ".env"
-    if not path.exists():
-        return
-    for line in path.read_text().splitlines():
-        line = line.strip()
-        if line and not line.startswith("#") and "=" in line:
-            k, v = line.split("=", 1)
-            os.environ.setdefault(k.strip(), v.strip().strip('"').strip("'"))
+class _Pacer:
+    """Spaces live model calls to at most ATLAS_LLM_RPM per minute (default 18: OpenRouter
+    limits new accounts to 20 rpm per model). Cache hits never wait."""
+
+    def __init__(self) -> None:
+        self.lock = threading.Lock()
+        self.next_at = 0.0
+
+    def wait(self) -> None:
+        interval = 60.0 / float(os.environ.get("ATLAS_LLM_RPM", "18"))
+        with self.lock:
+            now = time.monotonic()
+            start = max(now, self.next_at)
+            self.next_at = start + interval
+        time.sleep(max(0.0, start - now))
 
 
-_load_dotenv()
+_pacer = _Pacer()
+
+
+def _with_retry(fn):
+    """Pace, then retry rate-limit and transient errors with exponential backoff."""
+    from openai import APIConnectionError, APITimeoutError, InternalServerError, RateLimitError
+    for attempt in range(MAX_ATTEMPTS):
+        _pacer.wait()
+        try:
+            return fn()
+        except (RateLimitError, APIConnectionError, APITimeoutError, InternalServerError):
+            if attempt == MAX_ATTEMPTS - 1:
+                raise
+            time.sleep(min(60, 5 * 2 ** attempt))
+
+
+load_env()  # fills unset variables from the repo's .env; the shell's own environment wins
 
 
 def via_openrouter() -> bool:
@@ -78,26 +103,21 @@ def embed_model() -> str:
     return m
 
 
-def _offline() -> bool:
-    return os.environ.get("ATLAS_OFFLINE") == "1"
-
-
 def parse(system: str, user: str, schema: type[T], *, model: str | None = None) -> T | None:
     """Structured-output call. Returns None on a model refusal."""
     model = model or chat_model()
     request = {"model": model, "system": system, "user": user, "schema": schema.model_json_schema()}
 
     def call():
-        if _offline():
-            raise CacheMiss(f"uncached {schema.__name__} call in offline mode")
         messages = [{"role": "system", "content": system}, {"role": "user", "content": user}]
         if via_openrouter():
             # OpenRouter's Responses API is beta; Chat Completions structured outputs is the stable path.
-            msg = _openai().chat.completions.parse(
-                model=_wire_model(model), messages=messages, response_format=schema).choices[0].message
+            msg = _with_retry(lambda: _openai().chat.completions.parse(
+                model=_wire_model(model), messages=messages, response_format=schema)).choices[0].message
             parsed = None if msg.refusal else msg.parsed
         else:
-            parsed = _openai().responses.parse(model=model, input=messages, text_format=schema).output_parsed
+            parsed = _with_retry(lambda: _openai().responses.parse(
+                model=model, input=messages, text_format=schema)).output_parsed
         return None if parsed is None else parsed.model_dump(mode="json")
 
     value = cached("llm", request, call)
@@ -113,11 +133,11 @@ def embed(texts: list[str], *, model: str | None = None) -> list[list[float]]:
         out[i] = cache_lookup("embed", {"model": model, "text": t}, None)
         if out[i] is None:
             missing.append(i)
-    if missing and _offline():
-        raise CacheMiss(f"{len(missing)} uncached embeddings in offline mode")
+    if missing and is_offline():
+        raise CacheMissOffline("embed", "", {"model": model, "missing": len(missing)})
     for start in range(0, len(missing), 256):
         idx = missing[start:start + 256]
-        resp = _openai().embeddings.create(model=_wire_model(model), input=[texts[i] for i in idx])
+        resp = _with_retry(lambda: _openai().embeddings.create(model=_wire_model(model), input=[texts[i] for i in idx]))
         for i, d in zip(idx, resp.data):
             out[i] = cached("embed", {"model": model, "text": texts[i]}, lambda v=d.embedding: list(v))
     return out  # type: ignore[return-value]
