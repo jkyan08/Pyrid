@@ -46,6 +46,10 @@ def _graph_candidates(root: Path, env: Mapping[str, str]) -> list[Path]:
         candidates.append(Path(override))
     candidates += [
         root / "data" / "build" / "graph.json",
+        # demo dataset models the finished product; beats the skeleton mocks,
+        # always loses to real build output above ("mock" in name keeps the
+        # not-sourced ribbon on)
+        root / "api" / "fixtures" / "graph.demo.mock.json",
         root / "data" / "build" / "graph.mock.json",
         root / "api" / "fixtures" / "graph.mock.json",
     ]
@@ -79,6 +83,7 @@ def resolve_explanations_path(
         candidates.append(Path(override))
     candidates += [
         root / "data" / "build" / "explanations.json",
+        root / "api" / "fixtures" / "explanations.demo.mock.json",
         root / "api" / "fixtures" / "explanations.mock.json",
     ]
     return _resolve(candidates)
