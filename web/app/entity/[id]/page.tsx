@@ -11,7 +11,8 @@ import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import type { EntityView, ExplainResponse, Graph } from "@/lib/types";
 import { apiEntity, apiExplain, apiGraph, NotFoundError } from "@/lib/api";
-import { SourceLabel, TypeBadge } from "@/components/badges";
+import { SourceLabel, TypeBadge, TypeGlyph } from "@/components/badges";
+import { themeOf } from "@/lib/type-theme";
 import { CitationChip, CitationText } from "@/components/citation-text";
 import { CoverageTable } from "@/components/coverage-table";
 import { ActTab } from "@/components/act-tab";
@@ -74,25 +75,38 @@ function EntityPageView({ id }: { id: string }) {
     { key: "gaps", label: "Gaps" },
   ];
 
+  const theme = themeOf(entity.node.type);
+
   return (
     <div className="space-y-6">
-      <header className="space-y-2">
-        <div className="flex flex-wrap items-center gap-2">
-          <h1 className="text-xl font-semibold tracking-tight text-gray-900">
-            {entity.node.label}
-          </h1>
-          <TypeBadge type={entity.node.type} />
+      {/* Type-tinted header band: a Drug page is instantly distinct from a
+          Disease page (accent border, tint and a big hand-drawn glyph). */}
+      <header
+        className={`flex items-start gap-4 rounded-xl border border-l-4 px-5 py-4 ${theme.band} ${theme.accent}`}
+      >
+        <span
+          className={`mt-0.5 flex h-12 w-12 shrink-0 items-center justify-center rounded-lg border border-white/80 bg-white/90 shadow-sm ${theme.text}`}
+        >
+          <TypeGlyph type={entity.node.type} size={28} />
+        </span>
+        <div className="min-w-0 space-y-1.5">
+          <div className="flex flex-wrap items-center gap-2">
+            <h1 className="text-xl font-semibold tracking-tight text-gray-900 sm:text-2xl">
+              {entity.node.label}
+            </h1>
+            <TypeBadge type={entity.node.type} />
+          </div>
+          {(entity.node.synonyms?.length ?? 0) > 0 && (
+            <p className="text-xs text-gray-500">
+              Also known as: {entity.node.synonyms!.join(", ")}
+            </p>
+          )}
+          {entity.cluster_ids.length > 0 && (
+            <p className="text-xs text-gray-400">
+              Cluster: {entity.cluster_ids.join(", ")}
+            </p>
+          )}
         </div>
-        {(entity.node.synonyms?.length ?? 0) > 0 && (
-          <p className="text-xs text-gray-500">
-            Also known as: {entity.node.synonyms!.join(", ")}
-          </p>
-        )}
-        {entity.cluster_ids.length > 0 && (
-          <p className="text-xs text-gray-400">
-            Cluster: {entity.cluster_ids.join(", ")}
-          </p>
-        )}
       </header>
 
       {entity.no_supported_route && <HonestGapBanner entity={entity} />}
@@ -108,7 +122,13 @@ function EntityPageView({ id }: { id: string }) {
       </div>
 
       {tab === "summary" && <SummaryTab entity={entity} />}
-      {tab === "map" && <MapTab centerId={entity.node.id} />}
+      {tab === "map" && (
+        /* The map breaks out of the text column: centered, up to max-w-6xl
+           (min with the viewport so no horizontal scroll appears). */
+        <div className="relative left-1/2 w-[min(72rem,calc(100vw-2rem))] -translate-x-1/2">
+          <MapTab centerId={entity.node.id} />
+        </div>
+      )}
       {tab === "act" && <ActTab entity={entity} />}
       {tab === "gaps" && <GapsTab entityId={entity.node.id} />}
     </div>
