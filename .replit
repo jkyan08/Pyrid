@@ -19,3 +19,6 @@ run = ["bash", "scripts/replit-start.sh"]
 [[ports]]
 localPort = 3000
 externalPort = 80
+
+[nix]
+packages = ["arrow-cpp", "libiconv", "libxcrypt", "libyaml", "pkg-config"]
