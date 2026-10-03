@@ -58,9 +58,17 @@ Entire loaded graph verbatim (for Cytoscape map + static-fallback parity).
 ```
 Searches labels + synonyms of every node type (disease, gene, variant, symptom/phenotype,
 patient group, mechanism). Case-insensitive token overlap is enough until lane B's
-reconcile exists.
+reconcile exists. Parity rules (both sides): substring matches require a query of
+≥3 chars; exact matches any length.
 
 ### GET /entity/{id}
+
+**Coverage-only ids (eng-review D4):** when `{id}` is not a node but
+`meta.coverage[{id}]` exists, the response is the honest-gap shape with a
+synthetic node (`type: "Unknown"`, label = id), empty neighbors/assets,
+`no_supported_route: true`, the coverage entry, and a `next_question` —
+HTTP 200. Only ids absent from both nodes and coverage 404.
+
 ```json
 {
   "node": { …node… },
@@ -126,7 +134,8 @@ Built from `meta.coverage` + edges: zero-hit searches, `contested`/`small_n` edg
 ```
 `direction=dampen` → diseases caused by a `GoF` mechanism rank; `LoF`-caused diseases
 are listed under `excluded` with the reason. (`direction=boost` mirrors it; anything
-else → 422.)
+else → 422.) Parity rules (both sides): only `relation == "causes"` edges count,
+either edge orientation is accepted, and each disease appears at most once.
 
 ## Frontend expectations (web/)
 
