@@ -10,12 +10,14 @@ M0 may settle open contract questions differently.
 Resolve the graph file as the first existing of:
 
 1. `$ATLAS_GRAPH_PATH` (env override)
-2. `<repo>/data/build/graph.json` (real, M1+)
-3. `<repo>/data/build/graph.mock.json` (M0 mock)
-4. `<repo>/api/fixtures/graph.mock.json` (lane C dev fixture — placeholder only)
+2. `<repo>/data/build/graph.json` (real, M1+ — always wins over every demo/mock)
+3. `<repo>/api/fixtures/graph.demo.mock.json` (demo dataset modeling the finished
+   product; all sources DEMO-labeled, name contains "mock" so the ribbon stays on)
+4. `<repo>/data/build/graph.mock.json` (M0 mock)
+5. `<repo>/api/fixtures/graph.mock.json` (lane C dev fixture — placeholder only)
 
 Precomputed explanations: `$ATLAS_EXPLANATIONS_PATH` → `data/build/explanations.json`
-→ `api/fixtures/explanations.mock.json`.
+→ `api/fixtures/explanations.demo.mock.json` → `api/fixtures/explanations.mock.json`.
 
 The API exposes which file it loaded via `GET /health` → `{"status": "ok",
 "graph_path": "...", "graph_built_at": "...", "nodes": N, "edges": N, "mode": "real" | "mock"}`
