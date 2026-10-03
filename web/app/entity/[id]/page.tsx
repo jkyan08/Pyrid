@@ -26,16 +26,18 @@ type Tab = "summary" | "map" | "act" | "gaps";
 export default function EntityPage() {
   const params = useParams<{ id: string }>();
   const id = decodeURIComponent(params.id);
+  // key={id} remounts the view per entity, so entity/error/tab reset without
+  // synchronous setState inside the fetch effect.
+  return <EntityPageView key={id} id={id} />;
+}
 
+function EntityPageView({ id }: { id: string }) {
   const [entity, setEntity] = useState<EntityView | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [tab, setTab] = useState<Tab>("summary");
 
   useEffect(() => {
     let cancelled = false;
-    setEntity(null);
-    setError(null);
-    setTab("summary");
     apiEntity(id)
       .then((v) => {
         if (!cancelled) setEntity(v);

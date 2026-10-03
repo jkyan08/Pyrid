@@ -17,24 +17,6 @@ type Direction = "dampen" | "boost";
 
 export default function MechanismPage() {
   const [direction, setDirection] = useState<Direction>("dampen");
-  const [data, setData] = useState<MechanismSearchResponse | null>(null);
-  const [error, setError] = useState<string | null>(null);
-
-  useEffect(() => {
-    let cancelled = false;
-    setData(null);
-    setError(null);
-    apiMechanismSearch(direction)
-      .then((d) => {
-        if (!cancelled) setData(d);
-      })
-      .catch((e) => {
-        if (!cancelled) setError(String(e));
-      });
-    return () => {
-      cancelled = true;
-    };
-  }, [direction]);
 
   return (
     <div className="space-y-8">
@@ -65,6 +47,33 @@ export default function MechanismPage() {
         ))}
       </div>
 
+      {/* key={direction} remounts the results block, so its fetch state
+          resets without synchronous setState inside the effect */}
+      <MechanismResults key={direction} direction={direction} />
+    </div>
+  );
+}
+
+function MechanismResults({ direction }: { direction: Direction }) {
+  const [data, setData] = useState<MechanismSearchResponse | null>(null);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    let cancelled = false;
+    apiMechanismSearch(direction)
+      .then((d) => {
+        if (!cancelled) setData(d);
+      })
+      .catch((e) => {
+        if (!cancelled) setError(String(e));
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, [direction]);
+
+  return (
+    <div className="space-y-8">
       {error && <p className="text-sm text-red-700">{error}</p>}
       {!data && !error && (
         <p className="flex items-center gap-2 text-sm text-gray-400">
