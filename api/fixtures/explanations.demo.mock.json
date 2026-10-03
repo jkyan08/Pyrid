@@ -1,0 +1,23 @@
+{
+  "_comment": "Demo precomputed explanations for the modeled journeys (Maria/Devon/Priya shapes). Every sentence cites edge/claim ids present in graph.demo.mock.json. Replaced by data/build/explanations.json (lane B) automatically.",
+  "demo:disease:stat1-gof": {
+    "text": "STAT1 gain-of-function syndrome is driven by overactive STAT1 signaling [e_1011]. It clusters with STAT3 gain-of-function syndrome because both share the same pathway step and direction [e_1040], while STAT1 loss-of-function disease sits in a different cluster despite the same gene name [e_1012]. Treatment evidence for ruxolitinib is mixed: supporting and contradicting reports sit side by side, all from small studies [e_1020, c_1001, c_1002, c_1003]. The USIDNET registry and IDF materials are existing assets, with eligibility questions flagged for expert review [e_1043, e_1044].",
+    "citations": ["e_1011", "e_1040", "e_1012", "e_1020", "c_1001", "c_1002", "c_1003", "e_1043", "e_1044"],
+    "source": "precomputed"
+  },
+  "demo:variant:stat1-r274w": {
+    "text": "STAT1 R274W acts through a gain-of-function mechanism with a variant-specific route: faster nuclear accumulation [e_1001, c_1005]. That mechanism drives STAT1 gain-of-function syndrome [e_1011]. Other variants reach the same mechanism through different routes, which is why variants are kept as distinct nodes [e_1002, c_1006].",
+    "citations": ["e_1001", "c_1005", "e_1011", "e_1002", "c_1006"],
+    "source": "precomputed"
+  },
+  "demo:drug:ruxolitinib": {
+    "text": "Ruxolitinib dampens JAK-STAT signaling, making it a mechanism-based hypothesis for gain-of-function diseases [e_1020]. The recorded evidence in STAT1 gain-of-function is contested and small-n, with both supporting and contradicting reports [e_1020, c_1001, c_1002]. For loss-of-function disease such as JAK3 SCID the link is inferred and unsupported — a direction mismatch [e_1021].",
+    "citations": ["e_1020", "c_1001", "c_1002", "e_1021"],
+    "source": "precomputed"
+  },
+  "demo:disease:jak3-scid": {
+    "text": "JAK3-deficient SCID clusters with X-linked SCID because JAK3 signals through the chain IL2RG encodes — different gene names, same broken step [e_1041]. A JAK inhibitor is not a lead here: inhibition is the wrong direction for a loss-of-function mechanism [e_1021].",
+    "citations": ["e_1041", "e_1021"],
+    "source": "precomputed"
+  }
+}

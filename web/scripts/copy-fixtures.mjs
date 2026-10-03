@@ -30,10 +30,19 @@ function copyFirst(candidates, destName) {
 }
 
 copyFirst(
-  ["data/build/graph.json", "data/build/graph.mock.json", "api/fixtures/graph.mock.json"],
+  [
+    "data/build/graph.json",
+    "api/fixtures/graph.demo.mock.json",
+    "data/build/graph.mock.json",
+    "api/fixtures/graph.mock.json",
+  ],
   "graph.mock.json"
 );
 copyFirst(
-  ["data/build/explanations.json", "api/fixtures/explanations.mock.json"],
+  [
+    "data/build/explanations.json",
+    "api/fixtures/explanations.demo.mock.json",
+    "api/fixtures/explanations.mock.json",
+  ],
   "explanations.mock.json"
 );
