@@ -11,6 +11,7 @@ import Link from "next/link";
 import type { MechanismSearchResponse } from "@/lib/types";
 import { apiMechanismSearch } from "@/lib/api";
 import { StatusChip, TypeBadge } from "@/components/badges";
+import MotionLoader from "@/components/smoothui/motion-loader";
 
 type Direction = "dampen" | "boost";
 
@@ -65,7 +66,12 @@ export default function MechanismPage() {
       </div>
 
       {error && <p className="text-sm text-red-700">{error}</p>}
-      {!data && !error && <p className="text-sm text-gray-400">Searching mechanisms…</p>}
+      {!data && !error && (
+        <p className="flex items-center gap-2 text-sm text-gray-400">
+          <MotionLoader variant="dot-ring" size={16} label="Searching mechanisms" />
+          Searching mechanisms…
+        </p>
+      )}
 
       {data && (
         <>

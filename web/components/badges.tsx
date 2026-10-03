@@ -1,5 +1,11 @@
 /** Small, low-ink badge primitives shared across the app. */
 
+/**
+ * Subtle CSS-only entrance for chips (tw-animate-css, installed with
+ * SmoothUI): fade + slight zoom, disabled under prefers-reduced-motion.
+ */
+const CHIP_ANIM = "animate-in fade-in zoom-in-95 duration-300 motion-reduce:animate-none";
+
 const TYPE_COLORS: Record<string, string> = {
   Gene: "bg-sky-50 text-sky-800 border-sky-200",
   Variant: "bg-indigo-50 text-indigo-800 border-indigo-200",
@@ -19,7 +25,9 @@ const TYPE_COLORS: Record<string, string> = {
 export function TypeBadge({ type }: { type: string }) {
   const cls = TYPE_COLORS[type] ?? "bg-gray-50 text-gray-700 border-gray-200";
   return (
-    <span className={`inline-block rounded-full border px-2 py-0.5 text-[11px] font-medium ${cls}`}>
+    <span
+      className={`inline-block rounded-full border px-2 py-0.5 text-[11px] font-medium ${CHIP_ANIM} ${cls}`}
+    >
       {type}
     </span>
   );
@@ -34,7 +42,9 @@ const EVIDENCE_COLORS: Record<string, string> = {
 export function EvidenceClassBadge({ evidenceClass }: { evidenceClass: string }) {
   const cls = EVIDENCE_COLORS[evidenceClass] ?? "bg-gray-50 text-gray-700 border-gray-200";
   return (
-    <span className={`inline-block rounded-full border px-2 py-0.5 text-[11px] font-medium ${cls}`}>
+    <span
+      className={`inline-block rounded-full border px-2 py-0.5 text-[11px] font-medium ${CHIP_ANIM} ${cls}`}
+    >
       {evidenceClass}
     </span>
   );
@@ -51,7 +61,9 @@ const STATUS_COLORS: Record<string, string> = {
 export function StatusChip({ label }: { label: string }) {
   const cls = STATUS_COLORS[label] ?? "bg-gray-50 text-gray-700 border-gray-200";
   return (
-    <span className={`inline-block rounded-full border px-2 py-0.5 text-[11px] font-medium ${cls}`}>
+    <span
+      className={`inline-block rounded-full border px-2 py-0.5 text-[11px] font-medium ${CHIP_ANIM} ${cls}`}
+    >
       {label.replace(/_/g, " ")}
     </span>
   );
@@ -74,7 +86,9 @@ export function VerdictChip({ verdict }: { verdict?: string }) {
     cls: "bg-gray-50 text-gray-700 border-gray-200",
   };
   return (
-    <span className={`inline-block rounded-full border px-2 py-0.5 text-[11px] font-medium ${v.cls}`}>
+    <span
+      className={`inline-block rounded-full border px-2 py-0.5 text-[11px] font-medium ${CHIP_ANIM} ${v.cls}`}
+    >
       {v.text}
     </span>
   );

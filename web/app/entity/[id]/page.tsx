@@ -17,6 +17,9 @@ import { CoverageTable } from "@/components/coverage-table";
 import { ActTab } from "@/components/act-tab";
 import { GapsTab } from "@/components/gaps-tab";
 import { GraphMap } from "@/components/graph-map";
+import AnimatedTabs from "@/components/smoothui/animated-tabs";
+import MotionLoader from "@/components/smoothui/motion-loader";
+import SmoothButton from "@/components/smoothui/smooth-button";
 
 type Tab = "summary" | "map" | "act" | "gaps";
 
@@ -54,7 +57,12 @@ export default function EntityPage() {
     return <p className="py-10 text-center text-sm text-red-700">{error}</p>;
   }
   if (!entity) {
-    return <p className="py-10 text-center text-sm text-gray-400">Loading entity…</p>;
+    return (
+      <p className="flex items-center justify-center gap-2 py-10 text-center text-sm text-gray-400">
+        <MotionLoader variant="orbit" size={18} label="Loading entity" />
+        Loading entity…
+      </p>
+    );
   }
 
   const tabs: { key: Tab; label: string }[] = [
@@ -87,22 +95,15 @@ export default function EntityPage() {
 
       {entity.no_supported_route && <HonestGapBanner entity={entity} />}
 
-      <nav className="flex gap-1 overflow-x-auto border-b border-gray-200" aria-label="Entity tabs">
-        {tabs.map((t) => (
-          <button
-            key={t.key}
-            onClick={() => setTab(t.key)}
-            className={`whitespace-nowrap px-4 py-2 text-sm ${
-              tab === t.key
-                ? "border-b-2 border-gray-900 font-medium text-gray-900"
-                : "text-gray-500 hover:text-gray-800"
-            }`}
-            aria-current={tab === t.key ? "page" : undefined}
-          >
-            {t.label}
-          </button>
-        ))}
-      </nav>
+      <div className="overflow-x-auto">
+        <AnimatedTabs
+          tabs={tabs.map((t) => ({ id: t.key, label: t.label }))}
+          activeTab={tab}
+          onChange={(id) => setTab(id as Tab)}
+          variant="underline"
+          className="w-full min-w-max border-gray-200"
+        />
+      </div>
 
       {tab === "summary" && <SummaryTab entity={entity} />}
       {tab === "map" && <MapTab centerId={entity.node.id} />}
@@ -162,13 +163,14 @@ function ExplainPanel({ entityId }: { entityId: string }) {
 
   return (
     <div>
-      <button
+      <SmoothButton
         onClick={explain}
-        disabled={busy}
-        className="rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50"
+        loading={busy}
+        variant="outline"
+        className="text-gray-800 hover:bg-gray-50"
       >
         {busy ? "Explaining…" : "Explain this entity"}
-      </button>
+      </SmoothButton>
       {error && <p className="mt-2 text-sm text-red-700">{error}</p>}
       {explanation && (
         <div className="mt-4 rounded-lg border border-gray-200 bg-gray-50/60 p-4">
@@ -212,6 +214,12 @@ function MapTab({ centerId }: { centerId: string }) {
   }, []);
 
   if (error) return <p className="text-sm text-red-700">{error}</p>;
-  if (!graph) return <p className="text-sm text-gray-400">Loading map…</p>;
+  if (!graph)
+    return (
+      <p className="flex items-center gap-2 text-sm text-gray-400">
+        <MotionLoader variant="orbit" size={18} label="Loading map" />
+        Loading map…
+      </p>
+    );
   return <GraphMap graph={graph} centerId={centerId} />;
 }
