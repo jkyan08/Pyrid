@@ -260,12 +260,12 @@ def test_investigators_group_by_orcid_then_name_and_affiliation():
 
 # --- contract output ----------------------------------------------------------------
 
-def test_contract_claims_validate_and_drop_unresolved():
+def test_contract_claims_keep_unresolved_as_text_and_bundle_validates():
     from pipeline.extract.reconcile import contract_claims
-    from pipeline.models import Claim
+    from pipeline.models import ClaimsBundle
     papers = [{"pmid": "42", "doi": None, "title": "Mock Paper", "abstract": "Mock Drug X helped. Other text.",
                "journal": "Mock Journal", "year": 2000, "pub_types": [], "preprint": False,
-               "authors": [{"fore": "Jane", "last": "Doe"}]}]
+               "authors": [{"fore": "Jane", "last": "Doe", "affiliations": ["Mock Institute"], "orcid": None}]}]
     base = {"pmid": "42", "paper": "pmid:42", "quote": "Mock Drug X helped.", "polarity": "supports",
             "predicate": "treats", "study_type": "case_report", "n_patients": 1}
     raw = [
@@ -277,10 +277,26 @@ def test_contract_claims_validate_and_drop_unresolved():
              "c_000002": {"subject": "mock:drug:1", "object": None, "variant": ""},
              "c_000003": {"subject": "mock:drug:1", "object": "mock:disease:1", "variant": None}}
     claims, paper_nodes, counts = contract_claims(raw, links, papers)
-    assert [c["id"] for c in claims] == ["c_000001"]
-    Claim.model_validate(claims[0])
-    assert counts == {"raw": 3, "unresolved_subject_or_object": 1, "unresolved_variant": 1, "kept": 1}
-    assert paper_nodes[0]["id"] == "pmid:42" and paper_nodes[0]["props"]["abstract"].startswith("Mock Drug X")
+    assert [c["object"] for c in claims] == ["mock:disease:1", "text:unknown thing", "mock:disease:1"]
+    assert claims[2]["variant"] == "text:Z99Q"
+    assert counts == {"claims": 3, "fully_resolved": 1, "unresolved_subject_or_object": 1, "unresolved_variant": 1}
+    assert paper_nodes[0]["props"]["authors"] == [{"name": "Jane Doe", "affiliation": "Mock Institute"}]
+    ClaimsBundle.model_validate({"extracted_at": "2026-10-03T00:00:00+00:00", "model": "m", "papers": paper_nodes,
+                                 "claims": claims, "unresolved": [], "coverage": {}})
+
+
+def test_coverage_keyed_by_entity():
+    from pipeline.extract.reconcile import coverage_by_entity
+    log = [{"source": "pubmed", "query": "q1", "date": "2026-10-03", "hits": 0, "for": "topic:stat1_gof"},
+           {"source": "pubmed", "query": "q2", "date": "2026-10-03", "hits": 1, "for": "paperA"},
+           {"source": "pubmed", "query": "q3", "date": "2026-10-03", "hits": 0, "for": "paperB"}]
+    papers = [{"pmid": "42", "doi": None, "found_by": ["section11:paperA"]}]
+    cov = coverage_by_entity(log, papers, {"STAT1": "ensembl:G1"})
+    assert cov["ensembl:G1"]["searched"][0]["hits"] == 0  # zero-hit searches are kept
+    assert set(cov) == {"ensembl:G1", "pmid:42", "text:paperB"}
+    from pipeline.models import Coverage
+    for v in cov.values():
+        Coverage.model_validate(v)
 
 
 # --- lane C seam ----------------------------------------------------------------------
@@ -308,3 +324,72 @@ def test_cache_key_matches_lane_c_lookup():
     assert cache_key(["n:disX"]) == "n:disX"
     assert cache_key(["n:a", "n:b"]) == "n:a|n:b"
     assert cache_key("n:disX", "draft") == "draft:n:disX"
+
+
+# --- backbone resolution ---------------------------------------------------------------
+
+def test_backbone_id_normalisation_and_mechanisms():
+    from pipeline.extract.backbone import gene_id, mechanism_nodes, norm_curie
+    assert norm_curie("MONDO_0000001") == "MONDO:0000001"
+    assert norm_curie("HP_0000001") == "HP:0000001"
+    assert norm_curie("REACT:R-HSA-1") == "REACT:R-HSA-1"
+    assert norm_curie("CHEMBL1") == "CHEMBL1"  # ChEMBL ids are kept as the backbone gives them
+    assert gene_id("ENSG00000000001") == "ensembl:ENSG00000000001"
+    ids = {n["id"] for n in mechanism_nodes()}
+    assert {"mech:STAT1:GoF", "mech:STAT1:LoF", "mech:STAT1:DN", "mech:JAK2:GoF:somatic"} <= ids
+    from pipeline.models import Node
+    for n in mechanism_nodes():
+        Node.model_validate(n)
+
+
+def test_lexical_index_ranks_rare_tokens():
+    from pipeline.extract.backbone import LexicalIndex
+    nodes = [{"id": f"n{i}", "type": "Disease", "label": f"common disease {i}", "synonyms": []} for i in range(50)]
+    nodes.append({"id": "target", "type": "Disease", "label": "placeholdritis familial", "synonyms": ["PLHD"]})
+    idx = LexicalIndex(nodes)
+    assert idx.search("familial placeholdritis")[0] == "target"
+    assert idx.search("PLHD")[0] == "target"
+
+
+def test_role_types_and_variant_candidates():
+    """treats objects resolve only to Diseases; has_mechanism objects to Mechanisms; a variant
+    mention gets its candidates from the injected ClinVar lookup."""
+    nodes = GRAPH["nodes"] + [
+        {"id": "mech:STAT1:GoF", "type": "Mechanism", "label": "STAT1 gain of function", "synonyms": ["STAT1 GoF"], "props": {}},
+    ]
+    seen = []
+
+    def lookup(gene, change):
+        seen.append((gene, change))
+        return [{"id": "clinvar:1", "type": "Variant", "label": f"{gene} p.{change}", "synonyms": [change], "props": {}}]
+
+    claims = [
+        {"id": "c_1", "subject": "Drug A", "predicate": "treats", "object": "GENEG", "quote": "q", "variant": ""},
+        {"id": "c_2", "subject": "STAT1 R1W", "predicate": "has_mechanism", "object": "STAT1 GoF", "quote": "q",
+         "variant": "R1W"},
+    ]
+    p = scripted(Adjudication(choice="none", confidence="low", reason="gene is not a disease"),
+                 Adjudication(choice="clinvar:1", confidence="high", reason="same variant"))
+    links, review = link_claims(claims, nodes, embed=fake_embed, parser=p, variant_lookup=lookup)
+    assert links["c_1"]["subject"] == "n:drugA" and links["c_1"]["object"] is None  # GENEG is a Gene, not a Disease
+    assert links["c_2"]["object"] == "mech:STAT1:GoF"
+    assert links["c_2"]["variant"] == "clinvar:1" and ("STAT1", "R1W") in seen
+
+
+def test_check_against_graph_nulls_missing_ids_but_keeps_variants():
+    from pipeline.extract.reconcile import check_against_graph
+    links = {"c_1": {"subject": "CHEMBL1", "object": "MONDO:1", "variant": "clinvar:9"}}
+    review = check_against_graph(links, {"CHEMBL1"})
+    assert links["c_1"] == {"subject": "CHEMBL1", "object": None, "variant": "clinvar:9"}
+    assert review[0]["proposed"] == "MONDO:1"
+
+
+def test_norm_keeps_greek_letters_and_gene_mechanism_check():
+    from pipeline.extract.reconcile import NodeIndex, _gene_mechanism_mismatches, norm
+    assert norm("IFN-γ") != norm("IFN") and norm("STAT1 GoF") == norm("stat1-gof")
+    nodes = [{"id": "g:IFNA1", "type": "Gene", "label": "IFNA1", "synonyms": ["IFN"], "props": {}},
+             {"id": "mech:STAT1:GoF", "type": "Mechanism", "label": "STAT1 gain of function", "synonyms": [],
+              "props": {"gene_symbol": "STAT1"}}]
+    links = {"c_1": {"subject": "g:IFNA1", "object": "mech:STAT1:GoF", "variant": ""}}
+    review = _gene_mechanism_mismatches(links, NodeIndex(nodes, embed=fake_embed))
+    assert links["c_1"]["subject"] is None and "gene mismatch" in review[0]["reason"]

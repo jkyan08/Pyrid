@@ -8,7 +8,7 @@ Owner files: `pipeline/sources/pubmed.py`, `pipeline/extract/*`, `pipeline/llm/*
 python -m pipeline.sources.pubmed      # → data/build/papers.json (no OpenAI needed)
 python -m pipeline.extract.investigators  # → data/build/investigators.json (no OpenAI needed)
 python -m pipeline.extract.claims      # → data/build/claims.raw.json (mentions as text)
-python -m pipeline.extract.reconcile   # → data/build/claims.json (contract), data/review_queue.csv
+python -m pipeline.extract.reconcile   # → data/build/claims.json (ClaimsBundle), claims.meta.json, data/review_queue.csv
 python -m pipeline.llm.explain         # → data/build/explanations.json (demo journeys)
 python -m eval.sample                  # → eval/claims_review.csv (40 claims to label)
 python -m eval.precision
@@ -29,12 +29,21 @@ commands with `uv run --with anthropic ...`.
 
 ## For lane A (graph)
 
-- `claims.json`: `claims` validated against `pipeline.models.Claim`; `subject`/`object`/`variant` are node IDs,
-  `paper` is `pmid:<n>`. Only claims whose ends all resolved are included; the rest are in the review queue.
-  `papers` holds the Paper nodes those claims cite, with `props.abstract` (the contract test checks quotes
-  against it). Build treatment edges from `treats` claims; `polarity` gives supporting vs contradicting,
-  `study_type` and `n_patients` drive `contested` / `small_n`.
-- `claims.json` → `stats` has the quote-check drop rate for README Section 14.
+- `claims.json` is M0's `ClaimsBundle` (`ClaimsBundle.load` passes): all 935 quote-verified claims;
+  `subject`/`object`/`variant` are node ids where reconcile was confident, else `text:<mention>`. Link only
+  claims whose ends are node ids. `papers` carry `props.abstract` and author dicts (`name`, `affiliation`,
+  `orcid`) for Investigator nodes. `coverage` is keyed by cluster gene id (topic searches) or paper id.
+- Reconcile does **not** wait for graph v0: it resolves against the OptimusKG backbone files you load
+  (`data/raw/optimuskg/`, contract id formats), `mech:<GENE>:<dir>` nodes, and ClinVar (`clinvar:<id>`).
+  When `data/build/graph.json` exists it re-checks every id against it. Role-aware: `treats` = Drug → Disease,
+  `has_mechanism` = Variant/Disease/Gene → Mechanism, `causes` → Disease, `has_phenotype` → HPO.
+- `claims.meta.json` → `nodes`: every node a claim references (incl. ClinVar variants, mech: nodes), in contract
+  shape, to add if you have not loaded them. Drug ids are the backbone's bare ChEMBL ids (`CHEMBL1789941`);
+  tell lane B if you normalise them differently.
+- Evidence for the tests: ruxolitinib (`CHEMBL1789941`) → STAT1 GoF disease `MONDO:0013599`: 11 supporting,
+  4 contradicting (test 4). Six STAT1 ClinVar variants → `mech:STAT1:GoF` (test 7).
+  Disease → mechanism claims for STAT1 GoF, STAT3 GoF/DN, TYK2 LoF, JAK3 LoF.
+- `claims.meta.json` → `stats` has the quote-check drop rate and reconcile counts for README Section 14.
 - `investigators.json`: grouped by ORCID (`high`) or name + affiliation (`low`); `description` is
   "author of N papers on X"; `contact` only when the paper prints the email (with the source PMID).
 - `papers.json`: per paper, authors with affiliations and ORCID (for Investigator nodes) and `coverage`
