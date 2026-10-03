@@ -14,7 +14,8 @@ python -m eval.sample                  # → eval/claims_review.csv (40 claims t
 python -m eval.precision
 ```
 
-Needs `OPENAI_MODEL` and `OPENAI_EMBED_MODEL`. `ATLAS_CACHE_DIR` points at the shared cache.
+Needs `OPENAI_MODEL` and `OPENAI_EMBED_MODEL` (bare names, e.g. `gpt-6-astra`), plus `OPENAI_API_KEY` or `OPENROUTER_API_KEY`
+(OpenRouter is used when its key is set; values in `.env` fill unset variables). `ATLAS_CACHE_DIR` points at the shared cache.
 `ATLAS_OFFLINE=1` makes any uncached LLM call fail fast; `explain` and `draft` then fall back to the template.
 
 ## For lane A (graph)
