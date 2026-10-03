@@ -1,0 +1,268 @@
+{
+  "meta": {
+    "built_at": "2026-10-03T00:00:00Z",
+    "sources": [
+      {
+        "name": "MOCK (placeholder fixture — no real data; replaced by data/build/graph.mock.json from M0, then data/build/graph.json from M1)",
+        "version": "0",
+        "retrieved_at": "2026-10-03",
+        "license": "n/a"
+      }
+    ],
+    "coverage": {
+      "mock:gene:orphan": {
+        "searched": [
+          { "source": "MOCK-DB", "query": "placeholder orphan gene (mock)", "date": "2026-10-03", "hits": 0 },
+          { "source": "MOCK-TRIALS", "query": "placeholder orphan gene interventional (mock)", "date": "2026-10-03", "hits": 0 }
+        ]
+      },
+      "mock:disease:gof": {
+        "searched": [
+          { "source": "MOCK-DB", "query": "mock immune dysregulation syndrome", "date": "2026-10-03", "hits": 3 },
+          { "source": "MOCK-TRIALS", "query": "mockinib mock immune dysregulation", "date": "2026-10-03", "hits": 0 }
+        ]
+      }
+    }
+  },
+  "nodes": [
+    { "id": "mock:gene:alpha", "type": "Gene", "label": "Gene Alpha (mock)", "synonyms": ["ALPHA1 (mock)", "alpha kinase (mock)"], "props": {} },
+    { "id": "mock:gene:beta", "type": "Gene", "label": "Gene Beta (mock)", "synonyms": ["BETA1 (mock)"], "props": {} },
+    { "id": "mock:gene:orphan", "type": "Gene", "label": "Gene Orphan (mock, no connections)", "synonyms": [], "props": {} },
+    { "id": "mock:variant:alpha-1", "type": "Variant", "label": "Alpha p.Placeholder1 (mock variant)", "synonyms": ["Alpha-var-1 (mock)"], "props": { "gene": "mock:gene:alpha" } },
+    { "id": "mock:variant:alpha-2", "type": "Variant", "label": "Alpha p.Placeholder2 (mock variant)", "synonyms": [], "props": { "gene": "mock:gene:alpha" } },
+    { "id": "mech:ALPHA:GoF", "type": "Mechanism", "label": "Alpha gain-of-function (mock)", "synonyms": [], "props": { "direction": "GoF" } },
+    { "id": "mech:ALPHA:LoF", "type": "Mechanism", "label": "Alpha loss-of-function (mock)", "synonyms": [], "props": { "direction": "LoF" } },
+    { "id": "mech:BETA:LoF", "type": "Mechanism", "label": "Beta loss-of-function (mock)", "synonyms": [], "props": { "direction": "LoF" } },
+    { "id": "mock:disease:gof", "type": "Disease", "label": "Mock immune dysregulation syndrome (Alpha GoF)", "synonyms": ["MIDS (mock)", "chronic mock candidiasis"], "props": {} },
+    { "id": "mock:disease:lof", "type": "Disease", "label": "Mock infection susceptibility (Alpha LoF)", "synonyms": [], "props": {} },
+    { "id": "mock:disease:beta-lof", "type": "Disease", "label": "Mock severe immunodeficiency (Beta LoF)", "synonyms": ["MSID (mock)"], "props": {} },
+    { "id": "mock:disease:gamma-gof", "type": "Disease", "label": "Mock autoimmunity syndrome (Gamma GoF)", "synonyms": [], "props": {} },
+    { "id": "mock:phenotype:1", "type": "Phenotype", "label": "Recurrent mock infections", "synonyms": ["recurring candida infections (mock)"], "props": {} },
+    { "id": "mock:phenotype:2", "type": "Phenotype", "label": "Mock autoimmunity", "synonyms": ["thyroid problems (mock)"], "props": {} },
+    { "id": "mock:pathway:1", "type": "Pathway", "label": "Mock signaling pathway", "synonyms": [], "props": {} },
+    { "id": "mock:drug:x", "type": "Drug", "label": "Mockinib (placeholder drug)", "synonyms": ["mock inhibitor X"], "props": {} },
+    { "id": "mock:paper:1", "type": "Paper", "label": "Placeholder case report (mock)", "synonyms": [], "props": { "year": "2026" } },
+    { "id": "mock:group:umbrella", "type": "PatientGroup", "label": "Mock Umbrella Patient Organization", "synonyms": [], "props": { "url": "https://example.invalid/mock-umbrella" } },
+    { "id": "mock:registry:1", "type": "Registry", "label": "Mock Immunodeficiency Registry", "synonyms": [], "props": { "url": "https://example.invalid/mock-registry" } },
+    { "id": "mock:investigator:1", "type": "Investigator", "label": "Mock Investigator A", "synonyms": [], "props": { "affiliation": "Mock Institute", "contact": "https://example.invalid/mock-investigator-page", "papers_on_topic": 1 } },
+    { "id": "mock:study:1", "type": "Study", "label": "Mock interventional study", "synonyms": [], "props": { "eligibility": "placeholder eligibility text (mock)", "mechanism": "mech:ALPHA:GoF" } }
+  ],
+  "edges": [
+    {
+      "id": "e_000001",
+      "source": "mock:variant:alpha-1", "target": "mech:ALPHA:GoF", "relation": "has_mechanism",
+      "evidence_class": "observed", "confidence": 0.8,
+      "confidence_basis": { "note": "placeholder basis (mock)" },
+      "status": "supported",
+      "sources": [{ "kind": "db", "id": "MOCK-DB:placeholder-1", "date": "2026-10-03" }],
+      "supporting": [], "contradicting": [],
+      "attributes": { "origin": "germline" }
+    },
+    {
+      "id": "e_000002",
+      "source": "mock:variant:alpha-2", "target": "mech:ALPHA:GoF", "relation": "has_mechanism",
+      "evidence_class": "extracted", "confidence": 0.6,
+      "confidence_basis": { "note": "variant-specific route claim (mock)" },
+      "status": "supported",
+      "sources": [{ "kind": "db", "id": "MOCK-DB:placeholder-2", "date": "2026-10-03" }],
+      "supporting": ["c_000003"], "contradicting": [],
+      "attributes": { "origin": "germline" }
+    },
+    {
+      "id": "e_000003",
+      "source": "mech:ALPHA:GoF", "target": "mock:disease:gof", "relation": "causes",
+      "evidence_class": "observed", "confidence": 0.85,
+      "confidence_basis": { "note": "placeholder basis (mock)" },
+      "status": "supported",
+      "sources": [{ "kind": "db", "id": "MOCK-DB:placeholder-3", "date": "2026-10-03" }],
+      "supporting": [], "contradicting": [],
+      "attributes": { "origin": "germline" }
+    },
+    {
+      "id": "e_000004",
+      "source": "mech:ALPHA:LoF", "target": "mock:disease:lof", "relation": "causes",
+      "evidence_class": "observed", "confidence": 0.8,
+      "confidence_basis": { "note": "placeholder basis (mock)" },
+      "status": "supported",
+      "sources": [{ "kind": "db", "id": "MOCK-DB:placeholder-4", "date": "2026-10-03" }],
+      "supporting": [], "contradicting": [],
+      "attributes": { "origin": "germline" }
+    },
+    {
+      "id": "e_000005",
+      "source": "mock:disease:gof", "target": "mock:phenotype:1", "relation": "has_phenotype",
+      "evidence_class": "observed", "confidence": 0.9,
+      "confidence_basis": { "note": "placeholder basis (mock)" },
+      "status": "supported",
+      "sources": [{ "kind": "db", "id": "MOCK-DB:placeholder-5", "date": "2026-10-03" }],
+      "supporting": [], "contradicting": [],
+      "attributes": {}
+    },
+    {
+      "id": "e_000006",
+      "source": "mock:disease:gof", "target": "mock:phenotype:2", "relation": "has_phenotype",
+      "evidence_class": "observed", "confidence": 0.9,
+      "confidence_basis": { "note": "placeholder basis (mock)" },
+      "status": "supported",
+      "sources": [{ "kind": "db", "id": "MOCK-DB:placeholder-6", "date": "2026-10-03" }],
+      "supporting": [], "contradicting": [],
+      "attributes": {}
+    },
+    {
+      "id": "e_000007",
+      "source": "mock:disease:lof", "target": "mock:phenotype:1", "relation": "has_phenotype",
+      "evidence_class": "observed", "confidence": 0.85,
+      "confidence_basis": { "note": "placeholder basis (mock)" },
+      "status": "supported",
+      "sources": [{ "kind": "db", "id": "MOCK-DB:placeholder-7", "date": "2026-10-03" }],
+      "supporting": [], "contradicting": [],
+      "attributes": {}
+    },
+    {
+      "id": "e_000008",
+      "source": "mock:gene:alpha", "target": "mock:pathway:1", "relation": "participates_in",
+      "evidence_class": "observed", "confidence": 0.95,
+      "confidence_basis": { "note": "placeholder basis (mock)" },
+      "status": "supported",
+      "sources": [{ "kind": "db", "id": "MOCK-DB:placeholder-8", "date": "2026-10-03" }],
+      "supporting": [], "contradicting": [],
+      "attributes": {}
+    },
+    {
+      "id": "e_000009",
+      "source": "mock:gene:beta", "target": "mock:pathway:1", "relation": "participates_in",
+      "evidence_class": "observed", "confidence": 0.95,
+      "confidence_basis": { "note": "placeholder basis (mock)" },
+      "status": "supported",
+      "sources": [{ "kind": "db", "id": "MOCK-DB:placeholder-9", "date": "2026-10-03" }],
+      "supporting": [], "contradicting": [],
+      "attributes": {}
+    },
+    {
+      "id": "e_000010",
+      "source": "mech:BETA:LoF", "target": "mock:disease:beta-lof", "relation": "causes",
+      "evidence_class": "observed", "confidence": 0.8,
+      "confidence_basis": { "note": "placeholder basis (mock)" },
+      "status": "supported",
+      "sources": [{ "kind": "db", "id": "MOCK-DB:placeholder-10", "date": "2026-10-03" }],
+      "supporting": [], "contradicting": [],
+      "attributes": { "origin": "germline" }
+    },
+    {
+      "id": "e_000011",
+      "source": "mock:drug:x", "target": "mock:disease:gof", "relation": "treats",
+      "evidence_class": "extracted", "confidence": 0.45,
+      "confidence_basis": { "note": "aggregated placeholder claims; all n<10 (mock)" },
+      "status": "contested",
+      "sources": [{ "kind": "db", "id": "MOCK-DB:placeholder-11", "date": "2026-10-03" }],
+      "supporting": ["c_000001"], "contradicting": ["c_000002"],
+      "attributes": { "labels": ["promising", "contested", "small_n"] }
+    },
+    {
+      "id": "e_000012",
+      "source": "mock:drug:x", "target": "mock:disease:beta-lof", "relation": "treats",
+      "evidence_class": "inferred", "confidence": 0.2,
+      "confidence_basis": { "reason": "direction mismatch: pathway-inhibiting drug vs LoF mechanism (mock rule)" },
+      "status": "inferred_unsupported",
+      "sources": [{ "kind": "db", "id": "MOCK-DB:placeholder-12", "date": "2026-10-03" }],
+      "supporting": [], "contradicting": [],
+      "attributes": {}
+    },
+    {
+      "id": "e_000013",
+      "source": "mock:disease:gof", "target": "mock:disease:gamma-gof", "relation": "similar_to",
+      "evidence_class": "inferred", "confidence": 0.5,
+      "confidence_basis": { "mechanism_score": 0.6, "ic_weighted_phenotype_overlap": 0.4, "conflict_penalty": 0.1 },
+      "status": "supported",
+      "sources": [{ "kind": "db", "id": "MOCK-DB:placeholder-13", "date": "2026-10-03" }],
+      "supporting": [], "contradicting": [],
+      "attributes": {}
+    },
+    {
+      "id": "e_000014",
+      "source": "mock:registry:1", "target": "mock:disease:gof", "relation": "covers",
+      "evidence_class": "observed", "confidence": 0.9,
+      "confidence_basis": { "note": "placeholder basis (mock)" },
+      "status": "supported",
+      "sources": [{ "kind": "url", "id": "https://example.invalid/mock-registry", "date": "2026-10-03" }],
+      "supporting": [], "contradicting": [],
+      "attributes": { "verdict": "adaptable_needs_expert_review", "differs": ["placeholder difference between diseases (mock)"], "needs_review": ["eligibility"] }
+    },
+    {
+      "id": "e_000015",
+      "source": "mock:group:umbrella", "target": "mock:disease:gof", "relation": "supports_community",
+      "evidence_class": "observed", "confidence": 0.9,
+      "confidence_basis": { "note": "placeholder basis (mock)" },
+      "status": "supported",
+      "sources": [{ "kind": "url", "id": "https://example.invalid/mock-umbrella", "date": "2026-10-03" }],
+      "supporting": [], "contradicting": [],
+      "attributes": {}
+    },
+    {
+      "id": "e_000016",
+      "source": "mock:investigator:1", "target": "mock:paper:1", "relation": "author_of",
+      "evidence_class": "observed", "confidence": 0.95,
+      "confidence_basis": { "note": "placeholder basis (mock)" },
+      "status": "supported",
+      "sources": [{ "kind": "db", "id": "MOCK-DB:placeholder-14", "date": "2026-10-03" }],
+      "supporting": [], "contradicting": [],
+      "attributes": {}
+    },
+    {
+      "id": "e_000017",
+      "source": "mock:investigator:1", "target": "mock:disease:gof", "relation": "works_on",
+      "evidence_class": "observed", "confidence": 0.7,
+      "confidence_basis": { "note": "author of 1 placeholder paper on topic (mock)" },
+      "status": "supported",
+      "sources": [{ "kind": "db", "id": "MOCK-DB:placeholder-15", "date": "2026-10-03" }],
+      "supporting": [], "contradicting": [],
+      "attributes": {}
+    },
+    {
+      "id": "e_000018",
+      "source": "mock:study:1", "target": "mock:disease:gof", "relation": "studies",
+      "evidence_class": "observed", "confidence": 0.8,
+      "confidence_basis": { "note": "placeholder basis (mock)" },
+      "status": "supported",
+      "sources": [{ "kind": "db", "id": "MOCK-DB:placeholder-16", "date": "2026-10-03" }],
+      "supporting": [], "contradicting": [],
+      "attributes": { "needs_review": ["eligibility", "biological"] }
+    }
+  ],
+  "claims": [
+    {
+      "id": "c_000001",
+      "pmid": "MOCK",
+      "quote": "Placeholder supporting quote from a mock abstract.",
+      "polarity": "supports",
+      "subject": "mock:drug:x", "predicate": "treats", "object": "mock:disease:gof",
+      "variant": "mock:variant:alpha-1",
+      "study_type": "case_report",
+      "n_patients": 1
+    },
+    {
+      "id": "c_000002",
+      "pmid": "MOCK",
+      "quote": "Placeholder contradicting quote from a mock abstract.",
+      "polarity": "contradicts",
+      "subject": "mock:drug:x", "predicate": "treats", "object": "mock:disease:gof",
+      "variant": "",
+      "study_type": "case_series",
+      "n_patients": 2
+    },
+    {
+      "id": "c_000003",
+      "pmid": "MOCK",
+      "quote": "Placeholder quote describing a variant-specific mechanism route.",
+      "polarity": "supports",
+      "subject": "mock:variant:alpha-2", "predicate": "has_mechanism", "object": "mech:ALPHA:GoF",
+      "variant": "mock:variant:alpha-2",
+      "study_type": "in_vitro",
+      "n_patients": null
+    }
+  ],
+  "clusters": [
+    { "id": "cl_mock_gof", "members": ["mock:disease:gof", "mock:disease:gamma-gof"], "robust": true, "why": { "shared": "same pathway step, same direction (mock)" } },
+    { "id": "cl_mock_lof", "members": ["mock:disease:lof", "mock:disease:beta-lof"], "robust": true, "why": { "shared": "same pathway step, same direction (mock)" } }
+  ]
+}

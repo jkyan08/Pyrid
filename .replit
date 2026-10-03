@@ -1,0 +1,24 @@
+# Replit config for the Rare Disease Atlas (lane C deploy).
+# One app serves both: FastAPI on 127.0.0.1:8000 (internal) and Next.js on the
+# exposed port, with Next rewriting /api/* to the internal API (same-origin).
+# NEXT_PUBLIC_API_URL=/api is inlined into the web build (see web/next.config.ts).
+
+modules = ["nodejs-20", "python-3.12"]
+entrypoint = "README.md"
+
+run = ["bash", "scripts/replit-dev.sh"]
+
+[env]
+NEXT_PUBLIC_API_URL = "/api"
+
+[deployment]
+deploymentTarget = "autoscale"
+build = ["bash", "scripts/replit-build.sh"]
+run = ["bash", "scripts/replit-start.sh"]
+
+[[ports]]
+localPort = 3000
+externalPort = 80
+
+[nix]
+packages = ["arrow-cpp", "libiconv", "libxcrypt", "libyaml", "pkg-config"]
