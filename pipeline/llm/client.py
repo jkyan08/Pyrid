@@ -127,7 +127,7 @@ def _anthropic():
     return _anthropic_client
 
 
-def _anthropic_parse(system: str, user: str, schema: type[T], model: str) -> T | None:
+def _anthropic_parse(system: str, user: str, schema: type[T], model: str, effort: str | None = None) -> T | None:
     """Claude structured output. Returns None on a refusal (or a truncated answer).
 
     `fallbacks: "default"` re-runs a safety-declined request server-side on Anthropic's
@@ -141,6 +141,7 @@ def _anthropic_parse(system: str, user: str, schema: type[T], model: str) -> T |
         system=system,
         messages=[{"role": "user", "content": user}],
         output_format=schema,
+        **({"output_config": {"effort": effort}} if effort else {}),
     )
     if resp.stop_reason in ("refusal", "max_tokens"):
         return None
@@ -166,15 +167,18 @@ def embed_model() -> str:
     return m
 
 
-def parse(system: str, user: str, schema: type[T], *, model: str | None = None) -> T | None:
-    """Structured-output call. Returns None on a model refusal."""
+def parse(system: str, user: str, schema: type[T], *, model: str | None = None, effort: str | None = None) -> T | None:
+    """Structured-output call. Returns None on a model refusal. `effort` ("low" for simple
+    selection tasks) is passed to Claude; the OpenAI path ignores it."""
     model = model or chat_model()
     request = {"model": model, "system": system, "user": user, "schema": schema.model_json_schema()}
+    if effort and provider() == "anthropic":
+        request["effort"] = effort
 
     def call():
         messages = [{"role": "system", "content": system}, {"role": "user", "content": user}]
         if provider() == "anthropic":
-            parsed = _anthropic_parse(system, user, schema, model)
+            parsed = _anthropic_parse(system, user, schema, model, effort)
         elif via_openrouter():
             # OpenRouter's Responses API is beta; Chat Completions structured outputs is the stable path.
             msg = _with_retry(lambda: _openai().chat.completions.parse(
