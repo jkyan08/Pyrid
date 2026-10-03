@@ -14,6 +14,7 @@ from __future__ import annotations
 
 import datetime as dt
 import json
+import os
 import re
 import sys
 from concurrent.futures import ThreadPoolExecutor
@@ -144,7 +145,7 @@ def build(papers: list[dict], workers: int = 8) -> dict:
 
 def main() -> None:
     papers = json.loads(PAPERS.read_text())["papers"]
-    result = build(papers)
+    result = build(papers, workers=int(os.environ.get("ATLAS_LLM_WORKERS", "16")))
     OUT.write_text(json.dumps(result, indent=1, ensure_ascii=False))
     print(json.dumps(result["stats"]), file=sys.stderr)
 

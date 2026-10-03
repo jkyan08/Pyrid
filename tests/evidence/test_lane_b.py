@@ -256,3 +256,28 @@ def test_investigators_group_by_orcid_then_name_and_affiliation():
     other = [i for i in invs.values() if i["papers"] == ["3"]]
     assert other and other[0]["confidence"] == "low" and other[0]["contact"] is None  # never guessed
     assert "leader" not in " ".join(i["description"] for i in invs.values())
+
+
+# --- contract output ----------------------------------------------------------------
+
+def test_contract_claims_validate_and_drop_unresolved():
+    from pipeline.extract.reconcile import contract_claims
+    from pipeline.models import Claim
+    papers = [{"pmid": "42", "doi": None, "title": "Mock Paper", "abstract": "Mock Drug X helped. Other text.",
+               "journal": "Mock Journal", "year": 2000, "pub_types": [], "preprint": False,
+               "authors": [{"fore": "Jane", "last": "Doe"}]}]
+    base = {"pmid": "42", "paper": "pmid:42", "quote": "Mock Drug X helped.", "polarity": "supports",
+            "predicate": "treats", "study_type": "case_report", "n_patients": 1}
+    raw = [
+        {**base, "id": "c_000001", "subject": "Mock Drug X", "object": "Mock Disease", "variant": ""},
+        {**base, "id": "c_000002", "subject": "Mock Drug X", "object": "unknown thing", "variant": ""},
+        {**base, "id": "c_000003", "subject": "Mock Drug X", "object": "Mock Disease", "variant": "Z99Q"},
+    ]
+    links = {"c_000001": {"subject": "mock:drug:1", "object": "mock:disease:1", "variant": ""},
+             "c_000002": {"subject": "mock:drug:1", "object": None, "variant": ""},
+             "c_000003": {"subject": "mock:drug:1", "object": "mock:disease:1", "variant": None}}
+    claims, paper_nodes, counts = contract_claims(raw, links, papers)
+    assert [c["id"] for c in claims] == ["c_000001"]
+    Claim.model_validate(claims[0])
+    assert counts == {"raw": 3, "unresolved_subject_or_object": 1, "unresolved_variant": 1, "kept": 1}
+    assert paper_nodes[0]["id"] == "pmid:42" and paper_nodes[0]["props"]["abstract"].startswith("Mock Drug X")
