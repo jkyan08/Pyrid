@@ -5,19 +5,24 @@
  * Edge ids (e_…) show the full edge evidence view; claim ids (c_…) show the
  * claim detail. Exposed through context so any component can call
  * `openEvidence(id)`.
+ *
+ * Built on the SmoothUI drawer (motion-staggered content over the base-ui
+ * drawer primitive): slides in from the right, Esc / backdrop / swipe close
+ * it, and animations respect prefers-reduced-motion.
  */
 
 import {
   createContext,
   useCallback,
   useContext,
-  useEffect,
   useState,
   type ReactNode,
 } from "react";
 import type { Claim, EdgeView } from "@/lib/types";
 import { apiEdge, apiGraph } from "@/lib/api";
 import { claimById } from "@/lib/graph";
+import SmoothDrawer, { DrawerTitle } from "@/components/smoothui/drawer";
+import MotionLoader from "@/components/smoothui/motion-loader";
 import { EvidenceClassBadge, StatusChip } from "./badges";
 
 interface EvidenceContextValue {
@@ -39,8 +44,12 @@ type DrawerState =
 
 export function EvidenceProvider({ children }: { children: ReactNode }) {
   const [state, setState] = useState<DrawerState>({ kind: "closed" });
+  // Kept separate from `state` so the content stays mounted while the
+  // drawer's slide-out transition plays.
+  const [open, setOpen] = useState(false);
 
   const openEvidence = useCallback((id: string) => {
+    setOpen(true);
     setState({ kind: "loading", id });
     if (/^c_/.test(id)) {
       apiGraph()
@@ -57,52 +66,40 @@ export function EvidenceProvider({ children }: { children: ReactNode }) {
     }
   }, []);
 
-  const close = useCallback(() => setState({ kind: "closed" }), []);
-
-  useEffect(() => {
-    if (state.kind === "closed") return;
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") close();
-    };
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-  }, [state.kind, close]);
+  const close = useCallback(() => setOpen(false), []);
 
   return (
     <EvidenceContext.Provider value={{ openEvidence }}>
       {children}
-      {state.kind !== "closed" && (
-        <div className="fixed inset-0 z-50">
-          <div
-            className="absolute inset-0 bg-black/20"
+      <SmoothDrawer
+        open={open}
+        onOpenChange={(next) => {
+          if (!next) close();
+        }}
+        side="right"
+        className="data-[swipe-axis=x]:[--drawer-content-width:100%] data-[swipe-axis=x]:sm:[--drawer-content-width:36rem]"
+      >
+        <div className="sticky top-0 z-10 -mx-4 mb-4 flex items-start justify-between gap-4 bg-popover px-4 pt-5 pb-3">
+          <DrawerTitle className="font-semibold text-gray-500 text-sm uppercase tracking-wide">
+            Evidence
+          </DrawerTitle>
+          <button
             onClick={close}
-            aria-hidden="true"
-          />
-          <aside
-            className="absolute right-0 top-0 h-full w-full max-w-xl overflow-y-auto bg-white p-5 shadow-xl sm:p-7"
-            role="dialog"
-            aria-label="Evidence"
+            className="rounded border border-gray-200 px-2 py-1 text-xs text-gray-600 hover:bg-gray-50"
           >
-            <div className="mb-4 flex items-start justify-between gap-4">
-              <h2 className="text-sm font-semibold uppercase tracking-wide text-gray-500">
-                Evidence
-              </h2>
-              <button
-                onClick={close}
-                className="rounded border border-gray-200 px-2 py-1 text-xs text-gray-600 hover:bg-gray-50"
-              >
-                Close (esc)
-              </button>
-            </div>
-            {state.kind === "loading" && <p className="text-sm text-gray-500">Loading {state.id}…</p>}
-            {state.kind === "error" && (
-              <p className="text-sm text-red-700">{state.message}</p>
-            )}
-            {state.kind === "edge" && <EdgeEvidence view={state.view} />}
-            {state.kind === "claim" && <ClaimCard claim={state.claim} standalone />}
-          </aside>
+            Close (esc)
+          </button>
         </div>
-      )}
+        {state.kind === "loading" && (
+          <p className="flex items-center gap-2 text-sm text-gray-500">
+            <MotionLoader variant="orbit" size={18} label="Loading evidence" />
+            Loading {state.id}…
+          </p>
+        )}
+        {state.kind === "error" && <p className="text-sm text-red-700">{state.message}</p>}
+        {state.kind === "edge" && <EdgeEvidence view={state.view} />}
+        {state.kind === "claim" && <ClaimCard claim={state.claim} standalone />}
+      </SmoothDrawer>
     </EvidenceContext.Provider>
   );
 }

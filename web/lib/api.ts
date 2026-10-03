@@ -29,8 +29,22 @@ import {
   DISCLAIMER,
 } from "./graph";
 
-export const API_BASE =
-  process.env.NEXT_PUBLIC_API_URL?.replace(/\/$/, "") || "http://localhost:8000";
+/**
+ * API base URL. Three forms are supported:
+ *   - unset/empty          → http://localhost:8000 (local dev default)
+ *   - absolute URL         → used as-is (trailing slashes stripped)
+ *   - relative path "/api" → same-origin fetches (e.g. the Replit/Next
+ *     rewrite in next.config.ts proxying /api/* → 127.0.0.1:8000/*)
+ */
+function normalizeApiBase(raw: string | undefined): string {
+  const trimmed = (raw ?? "").trim().replace(/\/+$/, "");
+  if (!trimmed) return "http://localhost:8000";
+  // Absolute URL → as-is; otherwise treat as a same-origin path ("/api").
+  if (/^[a-z][a-z0-9+.-]*:\/\//i.test(trimmed)) return trimmed;
+  return trimmed.startsWith("/") ? trimmed : `/${trimmed}`;
+}
+
+export const API_BASE = normalizeApiBase(process.env.NEXT_PUBLIC_API_URL);
 
 export type ApiMode = "unknown" | "live" | "fallback";
 

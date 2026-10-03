@@ -4,12 +4,19 @@
  * The ONE global search box: disease, gene, variant, free-text symptom,
  * patient group or mechanism. Debounced GET /search; each result shows the
  * label, a type badge and the resolution line.
+ *
+ * Styled with SmoothUI: AnimatedInput (floating label) for the box, a
+ * MotionLoader while searching, and a staggered motion entrance for result
+ * rows (disabled under prefers-reduced-motion).
  */
 
 import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
+import { motion, useReducedMotion } from "motion/react";
 import type { SearchResult } from "@/lib/types";
 import { apiSearch } from "@/lib/api";
+import AnimatedInput from "@/components/smoothui/animated-input";
+import MotionLoader from "@/components/smoothui/motion-loader";
 import { TypeBadge } from "./badges";
 
 export function SearchBox({ autoFocus = false }: { autoFocus?: boolean }) {
@@ -18,6 +25,7 @@ export function SearchBox({ autoFocus = false }: { autoFocus?: boolean }) {
   const [busy, setBusy] = useState(false);
   const router = useRouter();
   const seq = useRef(0);
+  const shouldReduceMotion = useReducedMotion();
 
   useEffect(() => {
     const query = q.trim();
@@ -47,16 +55,20 @@ export function SearchBox({ autoFocus = false }: { autoFocus?: boolean }) {
 
   return (
     <div>
-      <input
-        type="search"
+      <AnimatedInput
         value={q}
-        onChange={(e) => setQ(e.target.value)}
+        onChange={setQ}
         autoFocus={autoFocus}
-        placeholder="Search a disease, gene, variant, symptom, patient group or mechanism…"
-        className="w-full rounded-lg border border-gray-300 px-4 py-3 text-base shadow-sm outline-none placeholder:text-gray-400 focus:border-sky-400 focus:ring-2 focus:ring-sky-100"
-        aria-label="Search the atlas"
+        label="Search the atlas"
+        placeholder="disease, gene, variant, symptom, patient group or mechanism…"
+        inputClassName="rounded-lg px-4 py-3 text-base shadow-sm placeholder:text-gray-400"
       />
-      {busy && <p className="mt-3 text-xs text-gray-400">Searching…</p>}
+      {busy && (
+        <p className="mt-3 flex items-center gap-2 text-xs text-gray-400">
+          <MotionLoader variant="dot-ring" size={16} label="Searching" />
+          Searching…
+        </p>
+      )}
       {results !== null && !busy && (
         <ul className="mt-4 divide-y divide-gray-100 rounded-lg border border-gray-200">
           {results.length === 0 && (
@@ -65,8 +77,24 @@ export function SearchBox({ autoFocus = false }: { autoFocus?: boolean }) {
               is invented to fill the gap.
             </li>
           )}
-          {results.map((r) => (
-            <li key={r.id}>
+          {results.map((r, i) => (
+            <motion.li
+              key={r.id}
+              initial={
+                shouldReduceMotion ? { opacity: 1 } : { opacity: 0, y: 6 }
+              }
+              animate={{ opacity: 1, y: 0 }}
+              transition={
+                shouldReduceMotion
+                  ? { duration: 0 }
+                  : {
+                      type: "spring",
+                      bounce: 0.1,
+                      duration: 0.3,
+                      delay: Math.min(i * 0.04, 0.3),
+                    }
+              }
+            >
               <button
                 onClick={() => router.push(`/entity/${encodeURIComponent(r.id)}`)}
                 className="flex w-full flex-col items-start gap-1 px-4 py-3 text-left hover:bg-gray-50"
@@ -77,7 +105,7 @@ export function SearchBox({ autoFocus = false }: { autoFocus?: boolean }) {
                 </span>
                 <span className="text-xs text-gray-500">{r.resolution}</span>
               </button>
-            </li>
+            </motion.li>
           ))}
         </ul>
       )}

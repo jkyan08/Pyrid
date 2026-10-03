@@ -11,6 +11,7 @@ import {
   neighborhoodElements,
   extractCitations,
   hasSupportedRoute,
+  STUDY_RANK,
 } from "../graph";
 
 // The dev fixture is the only graph we can rely on existing pre-M1.
@@ -221,6 +222,101 @@ describe("mechanismSearch", () => {
     const res = mechanismSearch(graph, "dampen");
     expect(res.results.length).toBeGreaterThan(0);
     expect(res.results[0].ranked_by).toContain("study_type");
+  });
+});
+
+describe("STUDY_RANK parity with the API", () => {
+  it("matches api/main.py _EVIDENCE_RANK exactly", () => {
+    expect(STUDY_RANK).toEqual({
+      observed: 6,
+      trial: 5,
+      cohort: 4,
+      case_series: 3,
+      case_report: 2,
+      extracted: 2,
+      in_vitro: 1,
+      review: 1,
+      inferred: 0,
+    });
+  });
+});
+
+describe("mechanismSearch relation filter (API parity)", () => {
+  // Minimal graph exercising the M0 mock vocabulary: Disease
+  // --has_mechanism--> Mechanism, plus a wrong-relation edge and a
+  // duplicate mechanism link for the same disease.
+  const mini: Graph = {
+    nodes: [
+      { id: "mech:G1:GoF", type: "Mechanism", label: "G1 gain of function" },
+      { id: "mech:G1:LoF", type: "Mechanism", label: "G1 loss of function" },
+      { id: "d1", type: "Disease", label: "Disease One" },
+      { id: "d2", type: "Disease", label: "Disease Two" },
+      { id: "d3", type: "Disease", label: "Disease Three" },
+    ],
+    edges: [
+      // M0 vocabulary + orientation: Disease --has_mechanism--> Mechanism
+      {
+        id: "m1",
+        source: "d1",
+        target: "mech:G1:GoF",
+        relation: "has_mechanism",
+        evidence_class: "observed",
+        status: "supported",
+      },
+      {
+        id: "m2",
+        source: "d2",
+        target: "mech:G1:LoF",
+        relation: "has_mechanism",
+        evidence_class: "observed",
+        status: "supported",
+      },
+      // Same disease linked again via the lane-C vocabulary → deduped
+      {
+        id: "m3",
+        source: "mech:G1:GoF",
+        target: "d1",
+        relation: "causes",
+        evidence_class: "observed",
+        status: "supported",
+      },
+      // Mechanism–disease edge with a non-link relation → ignored entirely
+      {
+        id: "m4",
+        source: "mech:G1:GoF",
+        target: "d3",
+        relation: "similar_to",
+        evidence_class: "inferred",
+        status: "supported",
+      },
+    ],
+    claims: [],
+  };
+
+  it("ranks a Disease --has_mechanism--> Mechanism edge for dampen", () => {
+    const res = mechanismSearch(mini, "dampen");
+    const included = res.results.map((r) => r.node.id);
+    expect(included).toContain("d1");
+    const d1 = res.results.find((r) => r.node.id === "d1")!;
+    expect(d1.mechanism.id).toBe("mech:G1:GoF");
+    expect(d1.evidence_level).toBe("observed");
+  });
+
+  it("excludes the LoF disease with a reason", () => {
+    const res = mechanismSearch(mini, "dampen");
+    const ex = res.excluded.find((e) => e.node.id === "d2")!;
+    expect(ex.reason.toLowerCase()).toContain("loss-of-function");
+  });
+
+  it("counts each disease once across duplicate mechanism links", () => {
+    const res = mechanismSearch(mini, "dampen");
+    expect(res.results.filter((r) => r.node.id === "d1")).toHaveLength(1);
+  });
+
+  it("ignores mechanism-disease edges whose relation is not causes/has_mechanism", () => {
+    const res = mechanismSearch(mini, "dampen");
+    expect(res.results.map((r) => r.node.id)).not.toContain("d3");
+    expect(res.excluded.map((e) => e.node.id)).not.toContain("d3");
   });
 });
 

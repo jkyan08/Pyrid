@@ -10,6 +10,7 @@ import type { GapsView } from "@/lib/types";
 import { apiGaps } from "@/lib/api";
 import { CitationText } from "./citation-text";
 import { CoverageTable } from "./coverage-table";
+import MotionLoader from "@/components/smoothui/motion-loader";
 
 export function GapsTab({ entityId }: { entityId: string }) {
   const [gaps, setGaps] = useState<GapsView | null>(null);
@@ -30,7 +31,13 @@ export function GapsTab({ entityId }: { entityId: string }) {
   }, [entityId]);
 
   if (error) return <p className="text-sm text-red-700">{error}</p>;
-  if (!gaps) return <p className="text-sm text-gray-400">Loading gaps…</p>;
+  if (!gaps)
+    return (
+      <p className="flex items-center gap-2 text-sm text-gray-400">
+        <MotionLoader variant="orbit" size={18} label="Loading gaps" />
+        Loading gaps…
+      </p>
+    );
 
   return (
     <div className="space-y-8">

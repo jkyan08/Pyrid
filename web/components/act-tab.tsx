@@ -9,11 +9,40 @@
  */
 
 import { useState } from "react";
+import { motion, useReducedMotion } from "motion/react";
 import type { DraftResponse, EntityView } from "@/lib/types";
 import { apiDraft } from "@/lib/api";
 import { CitationChip } from "./citation-text";
 import { useEvidence } from "./evidence-drawer";
 import { SourceLabel, TypeBadge, VerdictChip } from "./badges";
+import SmoothButton from "@/components/smoothui/smooth-button";
+
+/** Shared card entrance: subtle rise+fade, off under prefers-reduced-motion. */
+function CardLi({
+  children,
+  index,
+  className,
+}: {
+  children: React.ReactNode;
+  index: number;
+  className?: string;
+}) {
+  const shouldReduceMotion = useReducedMotion();
+  return (
+    <motion.li
+      className={className}
+      initial={shouldReduceMotion ? { opacity: 1 } : { opacity: 0, y: 8 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={
+        shouldReduceMotion
+          ? { duration: 0 }
+          : { type: "spring", bounce: 0.1, duration: 0.35, delay: Math.min(index * 0.05, 0.3) }
+      }
+    >
+      {children}
+    </motion.li>
+  );
+}
 
 export function ActTab({ entity }: { entity: EntityView }) {
   return (
@@ -37,7 +66,7 @@ function AssetsSection({ entity }: { entity: EntityView }) {
         </p>
       )}
       <ul className="space-y-4">
-        {entity.assets.map(({ edge, node }) => {
+        {entity.assets.map(({ edge, node }, index) => {
           const attrs = edge.attributes ?? {};
           const differs = Array.isArray(attrs.differs) ? (attrs.differs as string[]) : [];
           const needsReview = Array.isArray(attrs.needs_review)
@@ -45,7 +74,7 @@ function AssetsSection({ entity }: { entity: EntityView }) {
             : [];
           const url = typeof node.props?.url === "string" ? (node.props.url as string) : null;
           return (
-            <li key={edge.id} className="rounded-lg border border-gray-200 p-4">
+            <CardLi key={edge.id} index={index} className="rounded-lg border border-gray-200 p-4">
               <div className="flex flex-wrap items-center gap-2">
                 <span className="text-sm font-medium text-gray-900">{node.label}</span>
                 <TypeBadge type={node.type} />
@@ -97,7 +126,7 @@ function AssetsSection({ entity }: { entity: EntityView }) {
                   ))}
                 </div>
               )}
-            </li>
+            </CardLi>
           );
         })}
       </ul>
@@ -116,13 +145,13 @@ function InvestigatorsSection({ entity }: { entity: EntityView }) {
         </p>
       )}
       <ul className="space-y-3">
-        {entity.investigators.map(({ edge, node }) => {
+        {entity.investigators.map(({ edge, node }, index) => {
           const contact =
             typeof node.props?.contact === "string" ? (node.props.contact as string) : null;
           const affiliation =
             typeof node.props?.affiliation === "string" ? (node.props.affiliation as string) : null;
           return (
-            <li key={edge.id} className="rounded-lg border border-gray-200 p-4">
+            <CardLi key={edge.id} index={index} className="rounded-lg border border-gray-200 p-4">
               <div className="flex flex-wrap items-center gap-2">
                 <span className="text-sm font-medium text-gray-900">{node.label}</span>
                 {affiliation && <span className="text-xs text-gray-500">{affiliation}</span>}
@@ -150,7 +179,7 @@ function InvestigatorsSection({ entity }: { entity: EntityView }) {
                   No public contact route on record — none is guessed.
                 </p>
               )}
-            </li>
+            </CardLi>
           );
         })}
       </ul>
@@ -180,13 +209,14 @@ function NextStepSection({ entity }: { entity: EntityView }) {
         patient-group leader could act on this week. The draft cites its evidence and is never
         sent by this tool.
       </p>
-      <button
+      <SmoothButton
         onClick={makeDraft}
-        disabled={busy}
-        className="mt-3 rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50"
+        loading={busy}
+        variant="outline"
+        className="mt-3 text-gray-800 hover:bg-gray-50"
       >
         {busy ? "Drafting…" : "Draft outreach proposal"}
-      </button>
+      </SmoothButton>
       {error && <p className="mt-2 text-sm text-red-700">{error}</p>}
       {draft && (
         <div className="mt-4 rounded-lg border border-gray-300 bg-gray-50/70 p-4">
