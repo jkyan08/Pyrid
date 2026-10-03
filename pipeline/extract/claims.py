@@ -87,12 +87,20 @@ def paper_ref(p: dict) -> str:
     return f"pmid:{p['pmid']}" if p["pmid"] else f"doi:{p['doi']}"
 
 
+class ExtractionFailed(Exception):
+    pass
+
+
 def extract_paper(p: dict) -> tuple[str | None, list[dict], int]:
-    """Returns (study_type, kept claims, dropped count) for one paper."""
+    """Returns (study_type, kept claims, dropped count) for one paper. Raises ExtractionFailed
+    if the provider call fails after retries, so one paper never sinks the whole run."""
     if not p["abstract"]:
         return None, [], 0
     user = f"[{PROMPT_VERSION}]\nTitle: {p['title']}\nPublication types: {', '.join(p['pub_types'])}\n\nAbstract:\n{p['abstract']}"
-    result = parse(SYSTEM, user, PaperExtraction)
+    try:
+        result = parse(SYSTEM, user, PaperExtraction)
+    except Exception as exc:
+        raise ExtractionFailed(f"{type(exc).__name__}: {str(exc)[:200]}") from exc
     if result is None:
         return None, [], 0
     kept, dropped = [], 0
@@ -109,10 +117,20 @@ def extract_paper(p: dict) -> tuple[str | None, list[dict], int]:
 
 
 def build(papers: list[dict], workers: int = 8) -> dict:
+    def safe(p: dict):
+        try:
+            return extract_paper(p)
+        except ExtractionFailed as exc:
+            return exc
+
     with ThreadPoolExecutor(workers) as pool:
-        results = list(pool.map(extract_paper, papers))
+        results = list(pool.map(safe, papers))
+    failed = [{"ref": paper_ref(p), "error": str(r)} for p, r in zip(papers, results) if isinstance(r, ExtractionFailed)]
     claims, per_paper, dropped_total, seen = [], [], 0, set()
-    for p, (study_type, kept, dropped) in zip(papers, results):
+    for p, r in zip(papers, results):
+        if isinstance(r, ExtractionFailed):
+            continue
+        study_type, kept, dropped = r
         dropped_total += dropped
         n_kept = 0
         for c in kept:
@@ -138,14 +156,16 @@ def build(papers: list[dict], workers: int = 8) -> dict:
             "kept": len(claims),
             "dropped_quote_mismatch": dropped_total,
             "drop_rate": round(dropped_total / extracted, 4) if extracted else 0.0,
+            "failed_papers": len(failed),
         },
+        "failed": failed,
         "per_paper": per_paper,
     }
 
 
 def main() -> None:
     papers = json.loads(PAPERS.read_text())["papers"]
-    result = build(papers, workers=int(os.environ.get("ATLAS_LLM_WORKERS", "16")))
+    result = build(papers, workers=int(os.environ.get("ATLAS_LLM_WORKERS", "6")))
     OUT.write_text(json.dumps(result, indent=1, ensure_ascii=False))
     print(json.dumps(result["stats"]), file=sys.stderr)
 
