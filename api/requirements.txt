@@ -1,0 +1,4 @@
+# Deploy-image deps only (api/Dockerfile). The root pyproject.toml (M0-owned)
+# stays canonical for local dev; keep this list minimal and dependency-light.
+fastapi>=0.110,<1
+uvicorn>=0.29,<1
