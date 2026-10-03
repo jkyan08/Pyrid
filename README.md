@@ -104,7 +104,7 @@ flowchart LR
 
 | Layer | Choice |
 | --- | --- |
-| Language / tooling | Python 3.11+, `uv` |
+| Language / tooling | Python 3.12 (`optimuskg` 1.0.0 requires ≥3.12), `uv` |
 | Tabular data | Polars |
 | Evidence store | SQLite |
 | Graph / clustering | NetworkX, `igraph` + `leidenalg` |
@@ -183,13 +183,16 @@ Defined as Pydantic models in `pipeline/models.py`; JSON Schema generated to `do
 
 **Germline vs somatic:** `attributes.origin` on disease–gene and disease–mechanism edges.
 
-**Contract decisions to settle in M0** (open questions, not yet decided):
-- Add `doi` to `sources[].kind` for preprints (bioRxiv NK-cell study), plus a `preprint` flag.
-- Asset comparison fields, so the Act tab can show what differs and what needs expert review: e.g. `attributes.verdict`, `attributes.differs: [...]`, `attributes.needs_review: ["biological" | "eligibility"]` on asset→disease edges.
-- Investigator `props.contact`: only a public source URL, never a guessed address.
-- `status` is a single enum, but treatment edges need a combined label ("promising, contested, small-n"). Proposal: keep `status` as the dominant value and add `attributes.labels: [...]` for the full set — decide before freeze.
-- Where cluster-level information lives for mechanism-level disease entities vs. raw disease nodes.
-- Similarity edges: `relation: "similar_to"`, `evidence_class: "inferred"`, score breakdown in `confidence_basis`.
+**Contract decisions settled in M0** (frozen; changing any of these now needs team sign-off):
+- Top-level shape exactly as above. Extensions live only in `Node.props`, `Edge.attributes`, `Edge.confidence_basis`, `Cluster.why`; every structured model is `extra="forbid"`.
+- `sources[].kind` ∈ `pmid | pmc | doi | db | url | nct`; ids are shape-checked per kind (`doi` for preprints such as the bioRxiv NK-cell study, with `attributes.preprint: true` on edges that rely on one).
+- `Claim.paper` (required) is the `Paper` node id; `pmid` is `""` for preprints. Every Paper node referenced by a claim carries `props.abstract`, so the quote check (hard rule 5) is enforced by `Graph.load` itself, not only in tests.
+- `status` is the single dominant value; `attributes.labels` carries the full display set (vocabulary in §6). Inferred edges that no rule flags use `status: supported` and must be rendered with the `evidence_class` badge; only rule violations use `inferred_unsupported`.
+- Disease/Phenotype/Pathway ids are colon CURIEs (`MONDO:…`, `HP:…`, `EFO:…`, `Orphanet:…`); the backbone's underscore spelling is kept in `props.backbone_id`.
+- Relation vocabulary (the frontend and tests build against it; constants in `tests/conftest.py`): `associated_with` (Disease→Gene, `attributes.origin`), `has_mechanism` (Disease→Mechanism and Variant→Mechanism), `has_phenotype`, `in_pathway`, `variant_of`, `inhibits` (Drug→Gene/Pathway), `treats` (Drug→Disease), `similar_to` (Disease→Disease, inferred, score breakdown in `confidence_basis`); plus `author_of`, `extracted_from`, `covers`, `supports_community`, `studies`, `evaluates` for the paper/asset layers.
+- Asset edges carry `attributes.verdict` (`reusable_now | adaptable_needs_review | not_transferable`), `attributes.differs: [...]`, `attributes.needs_review: ["biological" | "eligibility"]`. Investigator contact routes are `attributes.contact_source` (a public URL), never a guessed address.
+- Clusters are a partition over Disease nodes (members may also list the mechanism and variant nodes that travel with a disease); `robust` means the membership held across all three Leiden weightings.
+- Lane B → Lane A handoff is `data/build/claims.json`, validated by `ClaimsBundle` in `pipeline/models.py` (papers with abstracts, quote-verified claims with resolved node ids or `text:` mentions, unresolved rows, PubMed coverage).
 
 ---
 
@@ -245,7 +248,7 @@ Raw inputs are always kept in `confidence_basis`.
 | HPO edges | PCS / TAS above IEA |
 | `relation_conflict` set | Downgrade; surface conflicting assertions in the evidence drawer |
 | Extracted claims | trial > cohort > case series > case report > in vitro; verified quote required |
-| Treatment edges | Aggregate claims. Supporting + contradicting both present → `contested`. Every study < 10 patients → `small_n`. Combined display label, e.g. "promising, contested, small-n" |
+| Treatment edges | Aggregate claims. Supporting + contradicting both present → `contested` (dominant `status`). Every **patient-level** study behind the edge (trial, cohort, case series, case report) has < 10 patients → `small_n`; in-vitro and review claims carry no patients and never count toward n. The full label set goes in `attributes.labels` from the vocabulary `promising` (≥1 supporting clinical claim), `contested`, `small_n`, `preprint` (≥1 claim from a preprint); the UI renders e.g. "promising, contested, small-n" |
 | Inferred edges (rules / similarity) | Capped at 0.5; always labeled inferred |
 
 ### Similarity (`pipeline/graph/similarity.py`)
@@ -366,16 +369,16 @@ Times are ET on Sat Oct 3 → Sun Oct 4. If we start late, shift proportionally.
 
 ### Milestones
 
-- [ ] **M0 — Scaffold and contracts** (first hour) · *done when: contract frozen*
-  - [ ] `uv` project, `pyproject.toml`, `.gitignore` (`data/raw`, `data/cache`, `.env`), `.env.example`
-  - [ ] `Makefile` with `data`, `test`, `dev` targets (stubs OK)
-  - [ ] Move `test-cluster-desc.md` → `docs/`
-  - [ ] `pipeline/cache.py`: hash-keyed disk cache + rate-limited HTTP client
-  - [ ] `pipeline/models.py` Pydantic contract → `docs/graph.schema.json`
-  - [ ] Hand-written mock `data/build/graph.mock.json` (clearly placeholder labels, no fake IDs/PMIDs) that validates
-  - [ ] `tests/test_contract.py` passing on the mock
-  - [ ] `tests/test_ground_truth.py` tests 1–7 as `xfail`
-  - [ ] `web/` Next.js shell rendering the mock in Cytoscape
+- [x] **M0 — Scaffold and contracts** (done 2026-10-03 ~4:30 PM ET) · *contract frozen*
+  - [x] `uv` project, `pyproject.toml`, `.gitignore` (`data/raw`, `data/cache`, `.env`), `.env.example`
+  - [x] `Makefile` with `data`, `test`, `dev` targets (stubs OK)
+  - [x] Move `test-cluster-desc.md` → `docs/`
+  - [x] `pipeline/cache.py`: hash-keyed disk cache + rate-limited HTTP client (`tests/test_cache.py`, offline)
+  - [x] `pipeline/models.py` Pydantic contract → `docs/graph.schema.json` (`make schema`)
+  - [x] Generated mock `data/build/graph.mock.json` via `tests/fixtures/make_mock.py` (`mock:` ids, "Mock " labels, no real IDs/PMIDs)
+  - [x] `tests/test_contract.py` passing on the mock
+  - [x] `tests/test_ground_truth.py` tests 1–7 as `xfail` (helpers + relation vocabulary in `tests/conftest.py`)
+  - [ ] `web/` Next.js shell rendering the mock in Cytoscape — **moved to Lane C** per [AGENT-SPLIT.md](AGENT-SPLIT.md); builds against the mock
 - [ ] **M1 — Backbone** (~5 PM) · *done when: frontend renders real data*
   - [ ] OptimusKG spike (45 min) → `docs/optimuskg-spike.md` → go / fallback decision
   - [ ] Cluster genes, diseases, phenotypes, pathways, drugs loaded into SQLite
