@@ -40,14 +40,17 @@ def _fallback(sub: dict) -> list[dict]:
     return out
 
 
-def draft(ids: list[str] | str, graph: dict, focus: str | None = None, *, parser: Parser | None = None) -> dict:
+def draft(ids: list[str] | str, graph: dict, focus: str | None = None, *, parser: Parser | None = None,
+          fallback: bool = False) -> dict | None:
     """`ids` may be one entity id (lane C's `/draft` passes `entity_id`) or a list of ids.
-    `focus` optionally names what the proposal should centre on (e.g. "treatment_response")."""
+    `focus` optionally names what the proposal should centre on (e.g. "treatment_response").
+    Like `explain`, returns None unless the model produced validated text, unless `fallback=True`."""
     ids = [ids] if isinstance(ids, str) else ids
     sub = subgraph(ids, graph)
     if not sub["edges"] and not sub["claims"]:
-        return {**_result("empty", [], []), "notice": NOTICE}
+        return {**_result("empty", [], []), "notice": NOTICE} if fallback else None
     task = f"Draft a proposal about: {', '.join(ids)}"
     if focus:
         task += f"\nFocus the proposal on: {focus.replace('_', ' ')}"
-    return {**generate_cited(SYSTEM, task, sub, _fallback, parser), "notice": NOTICE}
+    out = {**generate_cited(SYSTEM, task, sub, _fallback, parser), "notice": NOTICE}
+    return out if fallback or out["mode"] in ("llm", "llm_retry") else None
