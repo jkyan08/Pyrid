@@ -1,0 +1,41 @@
+# Seeds for the ClinVar loader (pipeline/sources/clinvar.py).
+#
+# NAMES, TERMS AND THRESHOLDS ONLY (README hard rule 2): no ClinVar Variation IDs, VCV/RCV/SCV
+# accessions, MONDO/OMIM/Orphanet ids or PMIDs appear here. The loader resolves every record id
+# from the E-utilities responses and records how (coverage rows, hard rule 3).
+#
+# Genes are NOT listed here: the loader reads `genes` from pipeline/seeds/cluster.yaml so the two
+# files cannot drift apart.
+
+# Protein-change tokens the cluster doc names for STAT1 (docs/test-cluster-desc.md section 3,
+# "Variant-level heterogeneity inside STAT1 gain of function"). Keyed by HGNC symbol: a token only
+# counts when the record's genes[] include that symbol. Matching is exact on ClinVar's one-letter
+# `protein_change` tokens (e.g. R274W), with one general rule: a term that is a bare position
+# (letter + residue number, no trailing letter, e.g. R321) matches any token at that position
+# (R321G, R321*, ...). Every term gets two coverage rows (stored records carrying the token, and a
+# live esearch count), so a term that is absent from ClinVar shows up as an honest 0, not an error.
+variant_terms:
+  STAT1:
+    - R274W
+    - T419R
+    - N574I
+    - R321
+
+# A record naming more genes than this is a structural CNV (whole-arm gains/losses list hundreds
+# of genes) and is excluded; the count is written to coverage as "excluded_cnv". General rule from
+# docs/source-apis.md section 1c gotcha 2: 2- and 3-gene SNVs (e.g. JAK2 variants co-annotated with
+# the overlapping INSL6) are normal and must be kept.
+max_genes_per_record: 3
+
+# esummary JSON pages: the JSON transform fails above ~100 records on CNV-heavy pages (10 MB
+# intermediate-XML cap, docs/source-apis.md section 1c gotcha 1). On an error payload the loader
+# halves the page size for that range.
+page_size: 100
+
+# Germline `germline_classification.description` values that mark a record as keep_in_graph
+# (strings exactly as ClinVar spells them). A record whose protein_change matches a variant_term
+# is kept regardless of classification (T419R is "Uncertain significance" in ClinVar).
+keep_classifications:
+  - Pathogenic
+  - Likely pathogenic
+  - Pathogenic/Likely pathogenic
