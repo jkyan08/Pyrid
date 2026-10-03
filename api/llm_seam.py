@@ -12,26 +12,40 @@ those ids in brackets.
 from __future__ import annotations
 
 import importlib
+import logging
 from typing import Any, TYPE_CHECKING
 
 if TYPE_CHECKING:  # pragma: no cover
     from api.graph_store import GraphStore
 
+logger = logging.getLogger("api.llm_seam")
+
 
 def _live_call(func_name: str, *args: Any, **kwargs: Any) -> dict[str, Any] | None:
-    """Call pipeline.llm.<func_name> if importable; None on any failure."""
+    """Call pipeline.llm.<func_name> if importable; None on any failure.
+
+    An absent module is the expected pre-merge state and stays silent; a
+    module that is present but broken gets a warning so a 3 AM wiring bug is
+    distinguishable from "lane B not merged yet" (eng-review R3).
+    """
     try:
         module = importlib.import_module("pipeline.llm")
+    except ModuleNotFoundError:
+        return None  # lane B not merged yet — expected, silent
     except Exception:
+        logger.warning("pipeline.llm failed to import; using fallback", exc_info=True)
         return None
     func = getattr(module, func_name, None)
     if func is None:
+        logger.warning("pipeline.llm.%s not found; using fallback", func_name)
         return None
     try:
         result = func(*args, **kwargs)
     except Exception:
+        logger.warning("pipeline.llm.%s raised; using fallback", func_name, exc_info=True)
         return None
     if not isinstance(result, dict) or "text" not in result:
+        logger.warning("pipeline.llm.%s returned a malformed result; using fallback", func_name)
         return None
     return result
 
