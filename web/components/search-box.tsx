@@ -21,37 +21,36 @@ import { TypeBadge } from "./badges";
 
 export function SearchBox({ autoFocus = false }: { autoFocus?: boolean }) {
   const [q, setQ] = useState("");
-  const [results, setResults] = useState<SearchResult[] | null>(null);
-  const [busy, setBusy] = useState(false);
+  // Results are keyed by the query they answer; "busy" and the visible list
+  // are derived during render instead of set inside the effect.
+  const [resultsFor, setResultsFor] = useState<{
+    query: string;
+    results: SearchResult[];
+  } | null>(null);
   const router = useRouter();
   const seq = useRef(0);
   const shouldReduceMotion = useReducedMotion();
 
+  const query = q.trim();
+  const active = query.length >= 2;
+
   useEffect(() => {
-    const query = q.trim();
-    if (query.length < 2) {
-      setResults(null);
-      setBusy(false);
-      return;
-    }
-    setBusy(true);
+    if (!active) return;
     const mySeq = ++seq.current;
     const t = setTimeout(() => {
       apiSearch(query)
         .then((res) => {
-          if (seq.current !== mySeq) return;
-          setResults(res.results);
+          if (seq.current === mySeq) setResultsFor({ query, results: res.results });
         })
         .catch(() => {
-          if (seq.current !== mySeq) return;
-          setResults([]);
-        })
-        .finally(() => {
-          if (seq.current === mySeq) setBusy(false);
+          if (seq.current === mySeq) setResultsFor({ query, results: [] });
         });
     }, 300);
     return () => clearTimeout(t);
-  }, [q]);
+  }, [query, active]);
+
+  const results = active && resultsFor?.query === query ? resultsFor.results : null;
+  const busy = active && resultsFor?.query !== query;
 
   return (
     <div>
