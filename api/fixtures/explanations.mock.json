@@ -1,0 +1,13 @@
+{
+  "_comment": "Placeholder precomputed explanations keyed by entity/path key. Replaced by data/build/explanations.json (lane B). Every sentence must cite >=1 edge or claim id.",
+  "mock:disease:gof": {
+    "text": "Mock immune dysregulation syndrome is caused by Alpha gain-of-function [e_000003]. Treatment evidence for Mockinib is mixed, with supporting and contradicting placeholder reports side by side [e_000011, c_000001, c_000002].",
+    "citations": ["e_000003", "e_000011", "c_000001", "c_000002"],
+    "source": "precomputed"
+  },
+  "mock:variant:alpha-1": {
+    "text": "Alpha p.Placeholder1 acts through Alpha gain-of-function [e_000001]. That mechanism causes Mock immune dysregulation syndrome [e_000003].",
+    "citations": ["e_000001", "e_000003"],
+    "source": "precomputed"
+  }
+}
