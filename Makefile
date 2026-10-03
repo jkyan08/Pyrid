@@ -1,0 +1,38 @@
+# Rare Disease Atlas: JAK-STAT MVP
+#
+#   make data    rebuild data/build/graph.json (uses data/cache/ when present)
+#   make test    contract + ground-truth tests
+#   make dev     API on :8000 and, if web/package.json exists, the Next.js dev server
+#   make schema  regenerate docs/graph.schema.json from pipeline/models.py
+
+.PHONY: help data test dev dev-api dev-web schema
+
+UV ?= uv
+API_PORT ?= 8000
+
+help:
+	@sed -n 's/^#   //p' Makefile
+
+# pipeline/export.py is written in M1; until then this target fails with "No module named pipeline.export".
+data:
+	$(UV) run python -m pipeline.export
+
+test:
+	$(UV) run pytest -q
+
+schema:
+	$(UV) run python -m pipeline.schema
+
+# `make -j2` runs the two dev servers side by side; Ctrl-C stops both.
+dev:
+	$(MAKE) -j2 dev-api dev-web
+
+dev-api:
+	$(UV) run uvicorn api.main:app --reload --port $(API_PORT)
+
+dev-web:
+	@if [ -f web/package.json ]; then \
+		cd web && npm run dev; \
+	else \
+		echo "dev-web: web/package.json not found, skipping the web dev server"; \
+	fi
