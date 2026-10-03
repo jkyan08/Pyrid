@@ -1,0 +1,294 @@
+{
+ "header": {
+  "type": "einfo",
+  "version": "0.3"
+ },
+ "einforesult": {
+  "dbinfo": [
+   {
+    "dbname": "clinvar",
+    "menuname": "ClinVar",
+    "description": "ClinVar Database",
+    "dbbuild": "Build260929-0200.1",
+    "count": "4647675",
+    "lastupdate": "2026/09/29 05:12",
+    "fieldlist": [
+     {
+      "name": "ALL",
+      "fullname": "All Fields",
+      "description": "All terms from all searchable fields",
+      "termcount": "197623060",
+      "isdate": "N",
+      "isnumerical": "N",
+      "singletoken": "N",
+      "hierarchy": "N",
+      "ishidden": "N"
+     },
+     {
+      "name": "UID",
+      "fullname": "UID",
+      "description": "Unique number assigned to variation",
+      "termcount": "0",
+      "isdate": "N",
+      "isnumerical": "Y",
+      "singletoken": "Y",
+      "hierarchy": "N",
+      "ishidden": "Y"
+     },
+     {
+      "name": "FILT",
+      "fullname": "Filter",
+      "description": "Limits the records",
+      "termcount": "130",
+      "isdate": "N",
+      "isnumerical": "N",
+      "singletoken": "Y",
+      "hierarchy": "N",
+      "ishidden": "N"
+     },
+     {
+      "name": "TITL",
+      "fullname": "Name of the ClinVar record",
+      "description": "Constructed from variant and phenotype names",
+      "termcount": "6352947",
+      "isdate": "N",
+      "isnumerical": "N",
+      "singletoken": "Y",
+      "hierarchy": "N",
+      "ishidden": "N"
+     },
+     {
+      "name": "WORD",
+      "fullname": "Text Word",
+      "description": "Free text associated with record",
+      "termcount": "86766844",
+      "isdate": "N",
+      "isnumerical": "N",
+      "singletoken": "Y",
+      "hierarchy": "N",
+      "ishidden": "N"
+     },
+     {
+      "name": "MDAT",
+      "fullname": "Modification Date",
+      "description": "The last date on which the record was updated",
+      "termcount": "293",
+      "isdate": "Y",
+      "isnumerical": "N",
+      "singletoken": "Y",
+      "hierarchy": "N",
+      "ishidden": "N"
+     },
+     {
+      "name": "GENE",
+      "fullname": "Gene Name",
+      "description": "Symbol or symbols of the gene",
+      "termcount": "93310",
+      "isdate": "N",
+      "isnumerical": "N",
+      "singletoken": "Y",
+      "hierarchy": "N",
+      "ishidden": "N"
+     },
+     {
+      "name": "MIM",
+      "fullname": "MIM",
+      "description": "MIM number from OMIM",
+      "termcount": "17647",
+      "isdate": "N",
+      "isnumerical": "N",
+      "singletoken": "Y",
+      "hierarchy": "N",
+      "ishidden": "N"
+     },
+     {
+      "name": "DIS",
+      "fullname": "Disease/Phenotype",
+      "description": "Diseases or traits associated with this record",
+      "termcount": "60383",
+      "isdate": "N",
+      "isnumerical": "N",
+      "singletoken": "Y",
+      "hierarchy": "N",
+      "ishidden": "N"
+     },
+     {
+      "name": "ACCN",
+      "fullname": "ClinVar accession",
+      "description": "Accession of the genotype/phenotype assertion",
+      "termcount": "13500706",
+      "isdate": "N",
+      "isnumerical": "N",
+      "singletoken": "Y",
+      "hierarchy": "N",
+      "ishidden": "N"
+     },
+     {
+      "name": "VRID",
+      "fullname": "External allele ID",
+      "description": "Public ID of a variant",
+      "termcount": "8297973",
+      "isdate": "N",
+      "isnumerical": "N",
+      "singletoken": "Y",
+      "hierarchy": "N",
+      "ishidden": "N"
+     },
+     {
+      "name": "TRID",
+      "fullname": "Trait identifier",
+      "description": "Public identifier for a trait (e.g. CUI, HPO)",
+      "termcount": "43808",
+      "isdate": "N",
+      "isnumerical": "N",
+      "singletoken": "Y",
+      "hierarchy": "N",
+      "ishidden": "N"
+     },
+     {
+      "name": "PROP",
+      "fullname": "Properties",
+      "description": "Properties of ClinVar record",
+      "termcount": "82",
+      "isdate": "N",
+      "isnumerical": "N",
+      "singletoken": "Y",
+      "hierarchy": "N",
+      "ishidden": "N"
+     },
+     {
+      "name": "VRTP",
+      "fullname": "Type of variation",
+      "description": "Type of sequence change/variant call",
+      "termcount": "18",
+      "isdate": "N",
+      "isnumerical": "N",
+      "singletoken": "Y",
+      "hierarchy": "N",
+      "ishidden": "N"
+     },
+     {
+      "name": "MCNS",
+      "fullname": "Molecular consequence",
+      "description": "Consequence of the variation at the molecular level.",
+      "termcount": "36",
+      "isdate": "N",
+      "isnumerical": "N",
+      "singletoken": "Y",
+      "hierarchy": "N",
+      "ishidden": "N"
+     },
+     {
+      "name": "RVST",
+      "fullname": "Review status",
+      "description": "Review status",
+      "termcount": "10",
+      "isdate": "N",
+      "isnumerical": "N",
+      "singletoken": "Y",
+      "hierarchy": "N",
+      "ishidden": "N"
+     },
+     {
+      "name": "ORIG",
+      "fullname": "Origin",
+      "description": "Origin",
+      "termcount": "12",
+      "isdate": "N",
+      "isnumerical": "N",
+      "singletoken": "Y",
+      "hierarchy": "N",
+      "ishidden": "N"
+     },
+     {
+      "name": "ACCN",
+      "fullname": "Nucleotide/Protein Accession",
+      "description": "Nucleotide or protein accession",
+      "termcount": "0",
+      "isdate": "N",
+      "isnumerical": "N",
+      "singletoken": "Y",
+      "hierarchy": "N",
+      "ishidden": "N"
+     },
+     {
+      "name": "HGNC",
+      "fullname": "HGNC identifier for human gene",
+      "description": "Identifier for Gene assigned by HUGO Gene Nomenclature Committee (HGNC)",
+      "termcount": "57480",
+      "isdate": "N",
+      "isnumerical": "N",
+      "singletoken": "Y",
+      "hierarchy": "N",
+      "ishidden": "N"
+     },
+     {
+      "name": "VID",
+      "fullname": "Variation ID",
+      "description": "Unique number assigned to variation",
+      "termcount": "4647675",
+      "isdate": "N",
+      "isnumerical": "Y",
+      "singletoken": "Y",
+      "hierarchy": "N",
+      "ishidden": "N"
+     },
+     {
+      "name": "VACC",
+      "fullname": "Variant Accession",
+      "description": "Accession number for the Variant",
+      "termcount": "4647675",
+      "isdate": "N",
+      "isnumerical": "N",
+      "singletoken": "Y",
+      "hierarchy": "N",
+      "ishidden": "N"
+     },
+     {
+      "name": "CSPDI",
+      "fullname": "Canonical SPDI",
+      "description": "Canonical SPDI for variation",
+      "termcount": "4548552",
+      "isdate": "N",
+      "isnumerical": "N",
+      "singletoken": "Y",
+      "hierarchy": "N",
+      "ishidden": "N"
+     }
+    ],
+    "linklist": [
+     {
+      "name": "clinvar_gene",
+      "menu": "Gene",
+      "description": "Related genes",
+      "dbto": "gene"
+     },
+     {
+      "name": "clinvar_medgen",
+      "menu": "MedGen",
+      "description": "Related phenotypes in MedGen",
+      "dbto": "medgen"
+     },
+     {
+      "name": "clinvar_omim",
+      "menu": "OMIM",
+      "description": "Gene or disease records in OMIM",
+      "dbto": "omim"
+     },
+     {
+      "name": "clinvar_pubmed",
+      "menu": "PubMed",
+      "description": "Publications associated with clinical variation",
+      "dbto": "pubmed"
+     },
+     {
+      "name": "clinvar_snp",
+      "menu": "dbSNP",
+      "description": "Related record in dbSNP",
+      "dbto": "snp"
+     }
+    ]
+   }
+  ]
+ }
+}

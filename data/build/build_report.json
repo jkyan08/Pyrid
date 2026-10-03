@@ -1,0 +1,938 @@
+{
+  "built_at": "2026-10-03T23:49:19+00:00",
+  "thresholds": {
+    "disease_gene_min_score": 0.3,
+    "keep_disgenet_direct": true,
+    "max_pathway_members_to_expand": 0,
+    "include_parent_levels": 1,
+    "disease_gene_most_specific": true,
+    "max_other_genes_per_disease": 25,
+    "max_drugs_per_disease": 25
+  },
+  "mechanisms": {
+    "diseases_considered": 643,
+    "diseases_with_associated_genes": 643,
+    "assignments": 14,
+    "mechanism_nodes": 9,
+    "mechanism_edges": 14,
+    "by_rule": {
+      "R1.gof": 1,
+      "R1.lof.deficiency": 7,
+      "R4.curated": 6
+    },
+    "curated_edges": 6,
+    "claim_edges": 0,
+    "claims_unlinked": [],
+    "seed_term_resolution": {
+      "seed:mechanism:STAT1:GoF": {
+        "chronic mucocutaneous candidiasis": [
+          "MONDO:0015279"
+        ],
+        "immunodeficiency 31C": [
+          "MONDO:0013599"
+        ]
+      },
+      "seed:mechanism:STAT1:LoF": {
+        "susceptibility to mycobacterial disease": []
+      },
+      "seed:mechanism:JAK3:LoF": {
+        "autosomal recessive severe combined immunodeficiency": []
+      },
+      "seed:mechanism:IL2RG:LoF": {
+        "X-linked SCID": [
+          "EFO:0005555"
+        ]
+      },
+      "seed:mechanism:JAK2:GoF": {
+        "polycythemia vera": [
+          "EFO:0002429"
+        ],
+        "essential thrombocythemia": [
+          "EFO:0000479"
+        ],
+        "primary myelofibrosis": [
+          "EFO:0002430"
+        ]
+      },
+      "seed:mechanism:STAT3:DN": {
+        "autosomal dominant hyper-IgE syndrome": [
+          "Orphanet:2314",
+          "MONDO:0007818"
+        ]
+      },
+      "seed:mechanism:STAT3:GoF": {
+        "STAT3 gain of function": [
+          "EFO:0010647"
+        ],
+        "early-onset multi-organ autoimmunity and lymphoproliferation": []
+      },
+      "seed:mechanism:JAK1:LoF": {
+        "rare immunodeficiency with mycobacterial susceptibility": []
+      },
+      "seed:mechanism:JAK1:GoF": {
+        "rare immune dysregulation with eosinophilia": []
+      },
+      "seed:mechanism:TYK2:LoF": {
+        "recessive infection susceptibility": []
+      }
+    },
+    "coverage_rows": 642,
+    "thresholds": {
+      "disease_gene_min_score": 0.3,
+      "keep_disgenet_direct": true,
+      "max_pathway_members_to_expand": 0,
+      "include_parent_levels": 1,
+      "disease_gene_most_specific": true,
+      "max_other_genes_per_disease": 25,
+      "max_drugs_per_disease": 25
+    }
+  },
+  "score_range": {
+    "min": 0.0009095429946858309,
+    "max": 0.9485794097813081,
+    "how": "sources.notes of 'OptimusKG'"
+  },
+  "counts": {
+    "nodes": 7681,
+    "edges": 30140,
+    "claims": 0,
+    "clusters": 0,
+    "nodes_by_type": {
+      "Disease": 643,
+      "Drug": 2038,
+      "Gene": 2688,
+      "Mechanism": 9,
+      "Pathway": 335,
+      "Phenotype": 1968
+    },
+    "edges_by_relation": {
+      "associated_with": 17949,
+      "contraindicated_for": 210,
+      "has_clinical_course": 80,
+      "has_clinical_modifier": 1,
+      "has_inheritance": 148,
+      "has_mechanism": 14,
+      "has_phenotype": 1444,
+      "in_pathway": 552,
+      "indicated_for": 5771,
+      "inhibits": 94,
+      "is_a": 3847,
+      "targets": 30
+    },
+    "edges_by_evidence_class": {
+      "inferred": 6,
+      "observed": 30134
+    },
+    "edges_by_status": {
+      "supported": 30140
+    },
+    "edges_by_label": {
+      "below_score_threshold": 1704,
+      "conflicting_assertions": 45,
+      "curated_unverified": 6
+    },
+    "edges_with_origin": {
+      "germline": 19,
+      "somatic": 3
+    },
+    "phenotype_ic": {
+      "nodes": 1968,
+      "nodes_without_ic": 47,
+      "is_a_edges": 2979,
+      "is_a_edges_with_ic_on_both_ends": 2932,
+      "is_a_edges_child_ic_below_parent": 68
+    },
+    "coverage": {
+      "entities": 684,
+      "searches": 2630,
+      "zero_hit_searches": 1535,
+      "by_source": {
+        "HPO hp.json": 1,
+        "HPO phenotype.hpoa": 3,
+        "OptimusKG biological_process_gene": 7,
+        "OptimusKG disease": 15,
+        "OptimusKG disease_disease": 643,
+        "OptimusKG disease_gene": 7,
+        "OptimusKG disease_phenotype": 643,
+        "OptimusKG drug": 5,
+        "OptimusKG drug_disease": 643,
+        "OptimusKG drug_gene": 7,
+        "OptimusKG gene": 7,
+        "OptimusKG pathway_gene": 7,
+        "mechanism rules": 642
+      }
+    },
+    "sources": [
+      "HPO",
+      "OptimusKG",
+      "OptimusKG upstream: ATC",
+      "OptimusKG upstream: BGEE",
+      "OptimusKG upstream: CGI",
+      "OptimusKG upstream: CLINGEN",
+      "OptimusKG upstream: CLINICAL_TRIALS",
+      "OptimusKG upstream: CTD",
+      "OptimusKG upstream: DAILY_MED",
+      "OptimusKG upstream: DISGENET",
+      "OptimusKG upstream: DRUG_BANK",
+      "OptimusKG upstream: DRUG_CENTRAL",
+      "OptimusKG upstream: EMA",
+      "OptimusKG upstream: EXPERT",
+      "OptimusKG upstream: FDA",
+      "OptimusKG upstream: GENOMICS_ENGLAND",
+      "OptimusKG upstream: GO",
+      "OptimusKG upstream: HPO",
+      "OptimusKG upstream: INN",
+      "OptimusKG upstream: MEDDRA",
+      "OptimusKG upstream: MONDO",
+      "OptimusKG upstream: OPEN_TARGETS",
+      "OptimusKG upstream: ORPHANET",
+      "OptimusKG upstream: OTHER",
+      "OptimusKG upstream: PSYGENET",
+      "OptimusKG upstream: PUBMED",
+      "OptimusKG upstream: REACTOME",
+      "OptimusKG upstream: UNIPROT",
+      "OptimusKG upstream: USAN",
+      "curated mechanism seeds: docs/test-cluster-desc.md (section 3 table)"
+    ]
+  },
+  "edges_dropped_dangling": [],
+  "edges_below_threshold": 1704,
+  "edges_with_relation_conflict": 45,
+  "claims": {
+    "in_bundle": 0,
+    "in_graph": 0,
+    "attached_to_edges": 0,
+    "unattached": [],
+    "dropped": []
+  },
+  "seed_resolution": {
+    "genes": {
+      "STAT1": [
+        "ensembl:ENSG00000115415"
+      ],
+      "STAT3": [
+        "ensembl:ENSG00000168610"
+      ],
+      "JAK1": [
+        "ensembl:ENSG00000162434"
+      ],
+      "JAK2": [
+        "ensembl:ENSG00000096968"
+      ],
+      "JAK3": [
+        "ensembl:ENSG00000105639"
+      ],
+      "TYK2": [
+        "ensembl:ENSG00000105397"
+      ],
+      "IL2RG": [
+        "ensembl:ENSG00000147168"
+      ]
+    },
+    "disease_terms": {
+      "chronic mucocutaneous candidiasis": [
+        "MONDO:0015279"
+      ],
+      "immunodeficiency 31C": [
+        "MONDO:0013599"
+      ],
+      "immunodeficiency 31B": [
+        "MONDO:0013427"
+      ],
+      "STAT1 deficiency": [
+        "MONDO:0013427"
+      ],
+      "Mendelian susceptibility to mycobacterial diseases": [
+        "Orphanet:748"
+      ],
+      "T-B+ severe combined immunodeficiency due to JAK3 deficiency": [
+        "MONDO:0010938"
+      ],
+      "X-linked severe combined immunodeficiency": [],
+      "X-linked SCID": [
+        "EFO:0005555"
+      ],
+      "gamma chain deficiency": [
+        "EFO:0005555"
+      ],
+      "hyper-IgE recurrent infection syndrome 1, autosomal dominant": [
+        "MONDO:0007818"
+      ],
+      "STAT3 gain of function": [
+        "EFO:0010647"
+      ],
+      "polycythemia vera": [
+        "EFO:0002429"
+      ],
+      "essential thrombocythemia": [
+        "EFO:0000479"
+      ],
+      "primary myelofibrosis": [
+        "EFO:0002430"
+      ],
+      "immunodeficiency 35": [
+        "MONDO:0012682"
+      ]
+    },
+    "drug_terms": {
+      "ruxolitinib": [
+        "CHEMBL:CHEMBL1789941"
+      ],
+      "baricitinib": [
+        "CHEMBL:CHEMBL2105759"
+      ],
+      "tofacitinib": [
+        "CHEMBL:CHEMBL221959"
+      ],
+      "upadacitinib": [
+        "CHEMBL:CHEMBL3622821"
+      ],
+      "itacitinib": [
+        "CHEMBL:CHEMBL3622820"
+      ]
+    },
+    "unresolved": {
+      "genes": [],
+      "disease_terms": [
+        "X-linked severe combined immunodeficiency"
+      ],
+      "drug_terms": []
+    }
+  },
+  "graph_path": "/Users/jonathanyan/Desktop/projects/Pyrid/.claude/worktrees/lane-graph/data/build/graph.json",
+  "store_path": "/Users/jonathanyan/Desktop/projects/Pyrid/.claude/worktrees/lane-graph/data/build/evidence.sqlite",
+  "claims_bundle": "none",
+  "offline": true,
+  "loaders": {
+    "pipeline.sources.optimuskg": {
+      "status": "ok",
+      "summary": {
+        "dataset": {
+          "doi": "doi:10.7910/DVN/IYNGEV",
+          "version": "3.2",
+          "release_time": "2026-09-09T04:14:10Z",
+          "license": "CC BY-NC-SA 4.0",
+          "retrieved_at": "2026-10-03T21:26:39+00:00"
+        },
+        "files": {
+          "nodes/gene.parquet": "/Users/jonathanyan/Desktop/projects/Pyrid/data/raw/optimuskg/3.2/nodes/gene.parquet",
+          "nodes/disease.parquet": "/Users/jonathanyan/Desktop/projects/Pyrid/data/raw/optimuskg/3.2/nodes/disease.parquet",
+          "nodes/phenotype.parquet": "/Users/jonathanyan/Desktop/projects/Pyrid/data/raw/optimuskg/3.2/nodes/phenotype.parquet",
+          "nodes/pathway.parquet": "/Users/jonathanyan/Desktop/projects/Pyrid/data/raw/optimuskg/3.2/nodes/pathway.parquet",
+          "nodes/biological_process.parquet": "/Users/jonathanyan/Desktop/projects/Pyrid/data/raw/optimuskg/3.2/nodes/biological_process.parquet",
+          "nodes/drug.parquet": "/Users/jonathanyan/Desktop/projects/Pyrid/data/raw/optimuskg/3.2/nodes/drug.parquet",
+          "edges/disease_gene.parquet": "/Users/jonathanyan/Desktop/projects/Pyrid/data/raw/optimuskg/3.2/edges/disease_gene.parquet",
+          "edges/disease_phenotype.parquet": "/Users/jonathanyan/Desktop/projects/Pyrid/data/raw/optimuskg/3.2/edges/disease_phenotype.parquet",
+          "edges/phenotype_phenotype.parquet": "/Users/jonathanyan/Desktop/projects/Pyrid/data/raw/optimuskg/3.2/edges/phenotype_phenotype.parquet",
+          "edges/disease_disease.parquet": "/Users/jonathanyan/Desktop/projects/Pyrid/data/raw/optimuskg/3.2/edges/disease_disease.parquet",
+          "edges/pathway_gene.parquet": "/Users/jonathanyan/Desktop/projects/Pyrid/data/raw/optimuskg/3.2/edges/pathway_gene.parquet",
+          "edges/biological_process_gene.parquet": "/Users/jonathanyan/Desktop/projects/Pyrid/data/raw/optimuskg/3.2/edges/biological_process_gene.parquet",
+          "edges/drug_gene.parquet": "/Users/jonathanyan/Desktop/projects/Pyrid/data/raw/optimuskg/3.2/edges/drug_gene.parquet",
+          "edges/drug_disease.parquet": "/Users/jonathanyan/Desktop/projects/Pyrid/data/raw/optimuskg/3.2/edges/drug_disease.parquet"
+        },
+        "thresholds": {
+          "disease_gene_min_score": 0.3,
+          "keep_disgenet_direct": true,
+          "max_pathway_members_to_expand": 0,
+          "include_parent_levels": 1,
+          "disease_gene_most_specific": true,
+          "max_other_genes_per_disease": 25,
+          "max_drugs_per_disease": 25
+        },
+        "evidence_score": {
+          "min": 0.0009095429946858309,
+          "max": 0.9485794097813081,
+          "rows": 9734774
+        },
+        "seed_resolution": {
+          "genes": {
+            "STAT1": {
+              "node_id": "ensembl:ENSG00000115415",
+              "backbone_id": "ENSG00000115415",
+              "disease_gene_edges": 2326
+            },
+            "STAT3": {
+              "node_id": "ensembl:ENSG00000168610",
+              "backbone_id": "ENSG00000168610",
+              "disease_gene_edges": 2777
+            },
+            "JAK1": {
+              "node_id": "ensembl:ENSG00000162434",
+              "backbone_id": "ENSG00000162434",
+              "disease_gene_edges": 1987
+            },
+            "JAK2": {
+              "node_id": "ensembl:ENSG00000096968",
+              "backbone_id": "ENSG00000096968",
+              "disease_gene_edges": 2570
+            },
+            "JAK3": {
+              "node_id": "ensembl:ENSG00000105639",
+              "backbone_id": "ENSG00000105639",
+              "disease_gene_edges": 1874
+            },
+            "TYK2": {
+              "node_id": "ensembl:ENSG00000105397",
+              "backbone_id": "ENSG00000105397",
+              "disease_gene_edges": 1288
+            },
+            "IL2RG": {
+              "node_id": "ensembl:ENSG00000147168",
+              "backbone_id": "ENSG00000147168",
+              "disease_gene_edges": 1364
+            }
+          },
+          "disease_terms": {
+            "chronic mucocutaneous candidiasis": [
+              "MONDO:0015279"
+            ],
+            "immunodeficiency 31C": [
+              "MONDO:0013599"
+            ],
+            "immunodeficiency 31B": [
+              "MONDO:0013427"
+            ],
+            "STAT1 deficiency": [
+              "MONDO:0013427"
+            ],
+            "Mendelian susceptibility to mycobacterial diseases": [
+              "Orphanet:748"
+            ],
+            "T-B+ severe combined immunodeficiency due to JAK3 deficiency": [
+              "MONDO:0010938"
+            ],
+            "X-linked severe combined immunodeficiency": [],
+            "X-linked SCID": [
+              "EFO:0005555"
+            ],
+            "gamma chain deficiency": [
+              "EFO:0005555"
+            ],
+            "hyper-IgE recurrent infection syndrome 1, autosomal dominant": [
+              "MONDO:0007818"
+            ],
+            "STAT3 gain of function": [
+              "EFO:0010647"
+            ],
+            "polycythemia vera": [
+              "EFO:0002429"
+            ],
+            "essential thrombocythemia": [
+              "EFO:0000479"
+            ],
+            "primary myelofibrosis": [
+              "EFO:0002430"
+            ],
+            "immunodeficiency 35": [
+              "MONDO:0012682"
+            ]
+          },
+          "drug_terms": {
+            "ruxolitinib": [
+              "CHEMBL:CHEMBL1789941"
+            ],
+            "baricitinib": [
+              "CHEMBL:CHEMBL2105759"
+            ],
+            "tofacitinib": [
+              "CHEMBL:CHEMBL221959"
+            ],
+            "upadacitinib": [
+              "CHEMBL:CHEMBL3622821"
+            ],
+            "itacitinib": [
+              "CHEMBL:CHEMBL3622820"
+            ]
+          }
+        },
+        "diseases": {
+          "passing_before_specificity": 830,
+          "direct": 334,
+          "term_matched": 12,
+          "parents": 307,
+          "included": 643
+        },
+        "disease_gene_rows": {
+          "before_cap": 436487,
+          "after_cap": 17949
+        },
+        "drug_disease_rows": {
+          "before_cap": 27985,
+          "after_cap": 5981
+        },
+        "phenotypes": {
+          "annotated": 973,
+          "with_ancestors": 1968,
+          "unmapped_aspect_rows": 0
+        },
+        "nodes_by_type": {
+          "Gene": 2688,
+          "Disease": 643,
+          "Phenotype": 1968,
+          "Pathway": 335,
+          "Drug": 2038
+        },
+        "edges_by_relation": {
+          "is_a": 3847,
+          "associated_with": 17949,
+          "has_inheritance": 148,
+          "has_phenotype": 1444,
+          "has_clinical_course": 80,
+          "has_clinical_modifier": 1,
+          "in_pathway": 552,
+          "inhibits": 94,
+          "targets": 30,
+          "indicated_for": 5771,
+          "contraindicated_for": 210
+        },
+        "dropped_dangling_edges": {},
+        "upstream_sources": {
+          "ATC": {
+            "version": "",
+            "license": "UNVERIFIED (per-source terms not fetched; docs/optimuskg-spike.md section 5)",
+            "direct": 0,
+            "indirect": 214
+          },
+          "BGEE": {
+            "version": "",
+            "license": "UNVERIFIED (per-source terms not fetched; docs/optimuskg-spike.md section 5)",
+            "direct": 2688,
+            "indirect": 0
+          },
+          "CGI": {
+            "version": "",
+            "license": "UNVERIFIED (per-source terms not fetched; docs/optimuskg-spike.md section 5)",
+            "direct": 0,
+            "indirect": 299
+          },
+          "CLINGEN": {
+            "version": "",
+            "license": "UNVERIFIED (per-source terms not fetched; docs/optimuskg-spike.md section 5)",
+            "direct": 0,
+            "indirect": 8
+          },
+          "CLINICAL_TRIALS": {
+            "version": "",
+            "license": "UNVERIFIED (per-source terms not fetched; docs/optimuskg-spike.md section 5)",
+            "direct": 0,
+            "indirect": 4304
+          },
+          "CTD": {
+            "version": "",
+            "license": "UNVERIFIED (per-source terms not fetched; docs/optimuskg-spike.md section 5)",
+            "direct": 0,
+            "indirect": 809
+          },
+          "DAILY_MED": {
+            "version": "",
+            "license": "UNVERIFIED (per-source terms not fetched; docs/optimuskg-spike.md section 5)",
+            "direct": 0,
+            "indirect": 768
+          },
+          "DISGENET": {
+            "version": "7.0",
+            "license": "CC BY-NC-SA 4.0 (DisGeNET v7.0, January 2020; verified in docs/optimuskg-spike.md section 5)",
+            "direct": 1191,
+            "indirect": 0
+          },
+          "DRUG_BANK": {
+            "version": "",
+            "license": "UNVERIFIED (DrugBank's own terms were not fetched; docs/optimuskg-spike.md section 5)",
+            "direct": 1019,
+            "indirect": 0
+          },
+          "DRUG_CENTRAL": {
+            "version": "",
+            "license": "UNVERIFIED (per-source terms not fetched; docs/optimuskg-spike.md section 5)",
+            "direct": 2106,
+            "indirect": 0
+          },
+          "EMA": {
+            "version": "",
+            "license": "UNVERIFIED (per-source terms not fetched; docs/optimuskg-spike.md section 5)",
+            "direct": 0,
+            "indirect": 158
+          },
+          "EXPERT": {
+            "version": "",
+            "license": "UNVERIFIED (per-source terms not fetched; docs/optimuskg-spike.md section 5)",
+            "direct": 0,
+            "indirect": 8
+          },
+          "FDA": {
+            "version": "",
+            "license": "UNVERIFIED (per-source terms not fetched; docs/optimuskg-spike.md section 5)",
+            "direct": 0,
+            "indirect": 112
+          },
+          "GENOMICS_ENGLAND": {
+            "version": "",
+            "license": "UNVERIFIED (per-source terms not fetched; docs/optimuskg-spike.md section 5)",
+            "direct": 0,
+            "indirect": 182
+          },
+          "GO": {
+            "version": "2025-07-22",
+            "license": "Gene Ontology license: http://creativecommons.org/licenses/by/4.0/ (as embedded in OptimusKG, version 2025-07-22)",
+            "direct": 260,
+            "indirect": 0
+          },
+          "HPO": {
+            "version": "2025-05-06",
+            "license": "Human Phenotype Ontology license: https://hpo.jax.org/app/license (as embedded in OptimusKG, version 2025-05-06)",
+            "direct": 4520,
+            "indirect": 1673
+          },
+          "INN": {
+            "version": "",
+            "license": "UNVERIFIED (per-source terms not fetched; docs/optimuskg-spike.md section 5)",
+            "direct": 0,
+            "indirect": 16
+          },
+          "MEDDRA": {
+            "version": "",
+            "license": "UNVERIFIED (per-source terms not fetched; docs/optimuskg-spike.md section 5)",
+            "direct": 1968,
+            "indirect": 0
+          },
+          "MONDO": {
+            "version": "",
+            "license": "UNVERIFIED (per-source terms not fetched; docs/optimuskg-spike.md section 5)",
+            "direct": 643,
+            "indirect": 0
+          },
+          "OPEN_TARGETS": {
+            "version": "",
+            "license": "UNVERIFIED (per-source terms not fetched; docs/optimuskg-spike.md section 5)",
+            "direct": 34566,
+            "indirect": 0
+          },
+          "ORPHANET": {
+            "version": "",
+            "license": "UNVERIFIED (per-source terms not fetched; docs/optimuskg-spike.md section 5)",
+            "direct": 0,
+            "indirect": 118
+          },
+          "OTHER": {
+            "version": "",
+            "license": "UNVERIFIED (per-source terms not fetched; docs/optimuskg-spike.md section 5)",
+            "direct": 0,
+            "indirect": 18
+          },
+          "PSYGENET": {
+            "version": "",
+            "license": "UNVERIFIED (per-source terms not fetched; docs/optimuskg-spike.md section 5)",
+            "direct": 0,
+            "indirect": 38
+          },
+          "PUBMED": {
+            "version": "",
+            "license": "UNVERIFIED (per-source terms not fetched; docs/optimuskg-spike.md section 5)",
+            "direct": 0,
+            "indirect": 64
+          },
+          "REACTOME": {
+            "version": "",
+            "license": "UNVERIFIED (per-source terms not fetched; docs/optimuskg-spike.md section 5)",
+            "direct": 75,
+            "indirect": 174
+          },
+          "UNIPROT": {
+            "version": "",
+            "license": "UNVERIFIED (per-source terms not fetched; docs/optimuskg-spike.md section 5)",
+            "direct": 0,
+            "indirect": 133
+          },
+          "USAN": {
+            "version": "",
+            "license": "UNVERIFIED (per-source terms not fetched; docs/optimuskg-spike.md section 5)",
+            "direct": 0,
+            "indirect": 84
+          }
+        },
+        "upstream_reference_ids": {
+          "GO_REF": {
+            "distinct": 7,
+            "direct": 0,
+            "indirect": 310
+          },
+          "PMID": {
+            "distinct": 134,
+            "direct": 0,
+            "indirect": 289
+          },
+          "Reactome": {
+            "distinct": 8,
+            "direct": 0,
+            "indirect": 14
+          }
+        },
+        "cleared_previous_run": {
+          "nodes": 7672,
+          "edges": 30126,
+          "coverage": 1984
+        },
+        "timings_s": {
+          "clear_previous": 0.216,
+          "genes": 0.97,
+          "disease_gene_seed": 0.783,
+          "disease_terms": 0.202,
+          "diseases": 0.217,
+          "disease_gene_included": 4.834,
+          "phenotypes": 0.238,
+          "pathways": 0.069,
+          "drugs": 0.939,
+          "write": 0.386,
+          "resolve_files": 0.333,
+          "total": 9.268
+        }
+      }
+    },
+    "pipeline.sources.hpo": {
+      "status": "ok",
+      "summary": {
+        "source": "HPO",
+        "version": "2026-09-02",
+        "hp_json_version": "2026-09-01",
+        "directory": "/Users/jonathanyan/Desktop/projects/Pyrid/data/raw/hpo/2026-09-02",
+        "retrieved_at": "2026-10-03T21:19:47+00:00",
+        "n_total": 12865,
+        "n_terms": 19677,
+        "stats": {
+          "rows": 286651,
+          "aspect_P_rows": 268906,
+          "qualifier_NOT_rows": 726,
+          "zero_frequency_rows": 3072,
+          "excluded_frequency_terms": [
+            "HP:0040285"
+          ],
+          "kept_rows": 265108,
+          "kept_rows_by_evidence": {
+            "IEA": 28082,
+            "PCS": 102541,
+            "TAS": 134485
+          },
+          "obsolete_terms_remapped": 0,
+          "distinct_terms": 11495,
+          "distinct_diseases": 12865
+        }
+      }
+    }
+  },
+  "store_counts": {
+    "nodes": 7672,
+    "edges": 30126,
+    "coverage": 1988,
+    "sources": 2,
+    "hpo_ic": 19677,
+    "nodes_by_type": {
+      "Disease": 643,
+      "Drug": 2038,
+      "Gene": 2688,
+      "Pathway": 335,
+      "Phenotype": 1968
+    },
+    "edges_by_relation": {
+      "associated_with": 17949,
+      "contraindicated_for": 210,
+      "has_clinical_course": 80,
+      "has_clinical_modifier": 1,
+      "has_inheritance": 148,
+      "has_phenotype": 1444,
+      "in_pathway": 552,
+      "indicated_for": 5771,
+      "inhibits": 94,
+      "is_a": 3847,
+      "targets": 30
+    }
+  },
+  "source_versions": [
+    {
+      "name": "HPO",
+      "version": "2026-09-02",
+      "retrieved_at": "2026-10-03T21:19:47+00:00",
+      "license": "HPO custom (cite, show version, don't alter; IEA rows: OMIM reuse caveat)"
+    },
+    {
+      "name": "OptimusKG",
+      "version": "3.2",
+      "retrieved_at": "2026-10-03T21:26:39+00:00",
+      "license": "CC BY-NC-SA 4.0"
+    },
+    {
+      "name": "OptimusKG upstream: ATC",
+      "version": "",
+      "retrieved_at": "2026-10-03T21:26:39+00:00",
+      "license": "UNVERIFIED (per-source terms not fetched; docs/optimuskg-spike.md section 5)"
+    },
+    {
+      "name": "OptimusKG upstream: BGEE",
+      "version": "",
+      "retrieved_at": "2026-10-03T21:26:39+00:00",
+      "license": "UNVERIFIED (per-source terms not fetched; docs/optimuskg-spike.md section 5)"
+    },
+    {
+      "name": "OptimusKG upstream: CGI",
+      "version": "",
+      "retrieved_at": "2026-10-03T21:26:39+00:00",
+      "license": "UNVERIFIED (per-source terms not fetched; docs/optimuskg-spike.md section 5)"
+    },
+    {
+      "name": "OptimusKG upstream: CLINGEN",
+      "version": "",
+      "retrieved_at": "2026-10-03T21:26:39+00:00",
+      "license": "UNVERIFIED (per-source terms not fetched; docs/optimuskg-spike.md section 5)"
+    },
+    {
+      "name": "OptimusKG upstream: CLINICAL_TRIALS",
+      "version": "",
+      "retrieved_at": "2026-10-03T21:26:39+00:00",
+      "license": "UNVERIFIED (per-source terms not fetched; docs/optimuskg-spike.md section 5)"
+    },
+    {
+      "name": "OptimusKG upstream: CTD",
+      "version": "",
+      "retrieved_at": "2026-10-03T21:26:39+00:00",
+      "license": "UNVERIFIED (per-source terms not fetched; docs/optimuskg-spike.md section 5)"
+    },
+    {
+      "name": "OptimusKG upstream: DAILY_MED",
+      "version": "",
+      "retrieved_at": "2026-10-03T21:26:39+00:00",
+      "license": "UNVERIFIED (per-source terms not fetched; docs/optimuskg-spike.md section 5)"
+    },
+    {
+      "name": "OptimusKG upstream: DISGENET",
+      "version": "7.0",
+      "retrieved_at": "2026-10-03T21:26:39+00:00",
+      "license": "CC BY-NC-SA 4.0 (DisGeNET v7.0, January 2020; verified in docs/optimuskg-spike.md section 5)"
+    },
+    {
+      "name": "OptimusKG upstream: DRUG_BANK",
+      "version": "",
+      "retrieved_at": "2026-10-03T21:26:39+00:00",
+      "license": "UNVERIFIED (DrugBank's own terms were not fetched; docs/optimuskg-spike.md section 5)"
+    },
+    {
+      "name": "OptimusKG upstream: DRUG_CENTRAL",
+      "version": "",
+      "retrieved_at": "2026-10-03T21:26:39+00:00",
+      "license": "UNVERIFIED (per-source terms not fetched; docs/optimuskg-spike.md section 5)"
+    },
+    {
+      "name": "OptimusKG upstream: EMA",
+      "version": "",
+      "retrieved_at": "2026-10-03T21:26:39+00:00",
+      "license": "UNVERIFIED (per-source terms not fetched; docs/optimuskg-spike.md section 5)"
+    },
+    {
+      "name": "OptimusKG upstream: EXPERT",
+      "version": "",
+      "retrieved_at": "2026-10-03T21:26:39+00:00",
+      "license": "UNVERIFIED (per-source terms not fetched; docs/optimuskg-spike.md section 5)"
+    },
+    {
+      "name": "OptimusKG upstream: FDA",
+      "version": "",
+      "retrieved_at": "2026-10-03T21:26:39+00:00",
+      "license": "UNVERIFIED (per-source terms not fetched; docs/optimuskg-spike.md section 5)"
+    },
+    {
+      "name": "OptimusKG upstream: GENOMICS_ENGLAND",
+      "version": "",
+      "retrieved_at": "2026-10-03T21:26:39+00:00",
+      "license": "UNVERIFIED (per-source terms not fetched; docs/optimuskg-spike.md section 5)"
+    },
+    {
+      "name": "OptimusKG upstream: GO",
+      "version": "2025-07-22",
+      "retrieved_at": "2026-10-03T21:26:39+00:00",
+      "license": "Gene Ontology license: http://creativecommons.org/licenses/by/4.0/ (as embedded in OptimusKG, version 2025-07-22)"
+    },
+    {
+      "name": "OptimusKG upstream: HPO",
+      "version": "2025-05-06",
+      "retrieved_at": "2026-10-03T21:26:39+00:00",
+      "license": "Human Phenotype Ontology license: https://hpo.jax.org/app/license (as embedded in OptimusKG, version 2025-05-06)"
+    },
+    {
+      "name": "OptimusKG upstream: INN",
+      "version": "",
+      "retrieved_at": "2026-10-03T21:26:39+00:00",
+      "license": "UNVERIFIED (per-source terms not fetched; docs/optimuskg-spike.md section 5)"
+    },
+    {
+      "name": "OptimusKG upstream: MEDDRA",
+      "version": "",
+      "retrieved_at": "2026-10-03T21:26:39+00:00",
+      "license": "UNVERIFIED (per-source terms not fetched; docs/optimuskg-spike.md section 5)"
+    },
+    {
+      "name": "OptimusKG upstream: MONDO",
+      "version": "",
+      "retrieved_at": "2026-10-03T21:26:39+00:00",
+      "license": "UNVERIFIED (per-source terms not fetched; docs/optimuskg-spike.md section 5)"
+    },
+    {
+      "name": "OptimusKG upstream: OPEN_TARGETS",
+      "version": "",
+      "retrieved_at": "2026-10-03T21:26:39+00:00",
+      "license": "UNVERIFIED (per-source terms not fetched; docs/optimuskg-spike.md section 5)"
+    },
+    {
+      "name": "OptimusKG upstream: ORPHANET",
+      "version": "",
+      "retrieved_at": "2026-10-03T21:26:39+00:00",
+      "license": "UNVERIFIED (per-source terms not fetched; docs/optimuskg-spike.md section 5)"
+    },
+    {
+      "name": "OptimusKG upstream: OTHER",
+      "version": "",
+      "retrieved_at": "2026-10-03T21:26:39+00:00",
+      "license": "UNVERIFIED (per-source terms not fetched; docs/optimuskg-spike.md section 5)"
+    },
+    {
+      "name": "OptimusKG upstream: PSYGENET",
+      "version": "",
+      "retrieved_at": "2026-10-03T21:26:39+00:00",
+      "license": "UNVERIFIED (per-source terms not fetched; docs/optimuskg-spike.md section 5)"
+    },
+    {
+      "name": "OptimusKG upstream: PUBMED",
+      "version": "",
+      "retrieved_at": "2026-10-03T21:26:39+00:00",
+      "license": "UNVERIFIED (per-source terms not fetched; docs/optimuskg-spike.md section 5)"
+    },
+    {
+      "name": "OptimusKG upstream: REACTOME",
+      "version": "",
+      "retrieved_at": "2026-10-03T21:26:39+00:00",
+      "license": "UNVERIFIED (per-source terms not fetched; docs/optimuskg-spike.md section 5)"
+    },
+    {
+      "name": "OptimusKG upstream: UNIPROT",
+      "version": "",
+      "retrieved_at": "2026-10-03T21:26:39+00:00",
+      "license": "UNVERIFIED (per-source terms not fetched; docs/optimuskg-spike.md section 5)"
+    },
+    {
+      "name": "OptimusKG upstream: USAN",
+      "version": "",
+      "retrieved_at": "2026-10-03T21:26:39+00:00",
+      "license": "UNVERIFIED (per-source terms not fetched; docs/optimuskg-spike.md section 5)"
+    },
+    {
+      "name": "curated mechanism seeds: docs/test-cluster-desc.md (section 3 table)",
+      "version": "",
+      "retrieved_at": "2026-10-03",
+      "license": "team-authored project document (docs/test-cluster-desc.md); not a licensed database"
+    }
+  ],
+  "timings_seconds": {
+    "pipeline.sources.optimuskg": 9.268,
+    "pipeline.sources.hpo": 0.592,
+    "build": 2.797,
+    "write_and_reload": 1.029,
+    "total": 13.693
+  }
+}
