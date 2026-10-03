@@ -14,7 +14,8 @@ import type { DraftResponse, EntityView } from "@/lib/types";
 import { apiDraft } from "@/lib/api";
 import { CitationChip } from "./citation-text";
 import { useEvidence } from "./evidence-drawer";
-import { SourceLabel, TypeBadge, VerdictChip } from "./badges";
+import { themeOf } from "@/lib/type-theme";
+import { SourceLabel, TypeBadge, TypeGlyph, VerdictChip } from "./badges";
 import SmoothButton from "@/components/smoothui/smooth-button";
 
 /** Shared card entrance: subtle rise+fade, off under prefers-reduced-motion. */
@@ -73,9 +74,15 @@ function AssetsSection({ entity }: { entity: EntityView }) {
             ? (attrs.needs_review as string[])
             : [];
           const url = typeof node.props?.url === "string" ? (node.props.url as string) : null;
+          const theme = themeOf(node.type);
           return (
-            <CardLi key={edge.id} index={index} className="rounded-lg border border-gray-200 p-4">
+            <CardLi
+              key={edge.id}
+              index={index}
+              className={`rounded-lg border border-gray-200 border-l-4 p-4 ${theme.accent}`}
+            >
               <div className="flex flex-wrap items-center gap-2">
+                <TypeGlyph type={node.type} size={15} className={theme.text} />
                 <span className="text-sm font-medium text-gray-900">{node.label}</span>
                 <TypeBadge type={node.type} />
                 <VerdictChip verdict={typeof attrs.verdict === "string" ? attrs.verdict : undefined} />
@@ -150,9 +157,15 @@ function InvestigatorsSection({ entity }: { entity: EntityView }) {
             typeof node.props?.contact === "string" ? (node.props.contact as string) : null;
           const affiliation =
             typeof node.props?.affiliation === "string" ? (node.props.affiliation as string) : null;
+          const theme = themeOf(node.type);
           return (
-            <CardLi key={edge.id} index={index} className="rounded-lg border border-gray-200 p-4">
+            <CardLi
+              key={edge.id}
+              index={index}
+              className={`rounded-lg border border-gray-200 border-l-4 p-4 ${theme.accent}`}
+            >
               <div className="flex flex-wrap items-center gap-2">
+                <TypeGlyph type={node.type} size={15} className={theme.text} />
                 <span className="text-sm font-medium text-gray-900">{node.label}</span>
                 {affiliation && <span className="text-xs text-gray-500">{affiliation}</span>}
                 <button

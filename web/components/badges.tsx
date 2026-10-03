@@ -1,34 +1,55 @@
 /** Small, low-ink badge primitives shared across the app. */
 
+import { evidenceLevelChipClass, themeOf, TYPE_THEMES } from "@/lib/type-theme";
+
 /**
  * Subtle CSS-only entrance for chips (tw-animate-css, installed with
  * SmoothUI): fade + slight zoom, disabled under prefers-reduced-motion.
  */
 const CHIP_ANIM = "animate-in fade-in zoom-in-95 duration-300 motion-reduce:animate-none";
 
-const TYPE_COLORS: Record<string, string> = {
-  Gene: "bg-sky-50 text-sky-800 border-sky-200",
-  Variant: "bg-indigo-50 text-indigo-800 border-indigo-200",
-  Mechanism: "bg-violet-50 text-violet-800 border-violet-200",
-  Disease: "bg-rose-50 text-rose-800 border-rose-200",
-  Phenotype: "bg-amber-50 text-amber-800 border-amber-200",
-  Pathway: "bg-teal-50 text-teal-800 border-teal-200",
-  Drug: "bg-emerald-50 text-emerald-800 border-emerald-200",
-  Paper: "bg-stone-50 text-stone-700 border-stone-200",
-  Claim: "bg-stone-50 text-stone-700 border-stone-200",
-  Investigator: "bg-cyan-50 text-cyan-800 border-cyan-200",
-  PatientGroup: "bg-fuchsia-50 text-fuchsia-800 border-fuchsia-200",
-  Registry: "bg-lime-50 text-lime-800 border-lime-200",
-  Study: "bg-orange-50 text-orange-800 border-orange-200",
-};
+/**
+ * Hand-drawn type glyph from the type-theme source of truth. Inherits
+ * currentColor, so wrap it in the theme's `text` class (or any ink class).
+ */
+export function TypeGlyph({
+  type,
+  size = 14,
+  className,
+}: {
+  type: string;
+  size?: number;
+  className?: string;
+}) {
+  const t = themeOf(type);
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      width={size}
+      height={size}
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={1.8}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+      className={className}
+      dangerouslySetInnerHTML={{ __html: t.glyph }}
+    />
+  );
+}
 
 export function TypeBadge({ type }: { type: string }) {
-  const cls = TYPE_COLORS[type] ?? "bg-gray-50 text-gray-700 border-gray-200";
+  const t = themeOf(type);
+  // Unrecognized types keep their raw name (styled as Unknown), so nothing
+  // in the graph is silently relabeled.
+  const label = type in TYPE_THEMES ? t.label : type;
   return (
     <span
-      className={`inline-block rounded-full border px-2 py-0.5 text-[11px] font-medium ${CHIP_ANIM} ${cls}`}
+      className={`inline-flex items-center gap-1 rounded-full border px-2 py-0.5 text-[11px] font-medium ${CHIP_ANIM} ${t.badge}`}
     >
-      {type}
+      <TypeGlyph type={type} size={11} />
+      {label}
     </span>
   );
 }
@@ -46,6 +67,21 @@ export function EvidenceClassBadge({ evidenceClass }: { evidenceClass: string })
       className={`inline-block rounded-full border px-2 py-0.5 text-[11px] font-medium ${CHIP_ANIM} ${cls}`}
     >
       {evidenceClass}
+    </span>
+  );
+}
+
+/**
+ * Evidence-level chip, color-scaled by study rank (observed/trial strongest
+ * → in_vitro weakest → inferred gray). Used on mechanism candidate cards.
+ */
+export function EvidenceLevelChip({ level }: { level: string }) {
+  return (
+    <span
+      className={`inline-block rounded-full border px-2 py-0.5 text-[11px] font-semibold ${CHIP_ANIM} ${evidenceLevelChipClass(level)}`}
+      title={`evidence level: ${level}`}
+    >
+      {level.replace(/_/g, " ")}
     </span>
   );
 }
