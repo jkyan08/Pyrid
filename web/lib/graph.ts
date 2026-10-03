@@ -333,14 +333,17 @@ export function getGaps(graph: Graph, id: string): GapsView | null {
 
 /* ------------------------- mechanism search ------------------------ */
 
-const STUDY_RANK: Record<string, number> = {
-  observed: 7,
-  trial: 6,
-  cohort: 5,
-  case_series: 4,
-  case_report: 3,
-  in_vitro: 2,
+/** Mirrors the API's _EVIDENCE_RANK table (api/main.py) exactly. */
+export const STUDY_RANK: Record<string, number> = {
+  observed: 6,
+  trial: 5,
+  cohort: 4,
+  case_series: 3,
+  case_report: 2,
+  extracted: 2,
+  in_vitro: 1,
   review: 1,
+  inferred: 0,
 };
 
 function evidenceLevelForEdge(graph: Graph, edge: GraphEdge): string {
@@ -362,10 +365,16 @@ function mechanismDirection(mech: GraphNode): string | null {
 
 const COMMUNITY_TYPES = new Set(["PatientGroup", "Registry"]);
 
+/** Mechanism↔disease link relations (mirrors api/main.py): "causes" is the
+ * lane-C fixture vocabulary, "has_mechanism" the M0 mock vocabulary. */
+const MECHANISM_LINK_RELATIONS = new Set(["causes", "has_mechanism"]);
+
 /**
  * direction=dampen → diseases caused by a GoF mechanism rank; LoF-caused
  * diseases are excluded with the reason. boost mirrors it. DN mechanisms are
- * excluded in both directions as needing expert review.
+ * excluded in both directions as needing expert review. Only "causes" /
+ * "has_mechanism" edges are considered (either orientation, one entry per
+ * disease), mirroring the API.
  */
 export function mechanismSearch(
   graph: Graph,
@@ -383,6 +392,7 @@ export function mechanismSearch(
   const seen = new Set<string>();
 
   for (const edge of graph.edges) {
+    if (!MECHANISM_LINK_RELATIONS.has(edge.relation)) continue;
     const src = nodeById(graph, edge.source);
     const tgt = nodeById(graph, edge.target);
     if (!src || !tgt) continue;

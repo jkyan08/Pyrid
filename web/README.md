@@ -1,7 +1,10 @@
 # web/ — Rare Disease Atlas frontend
 
 Next.js (App Router, TypeScript, Tailwind) frontend for the atlas. Consumes the
-lane-C API (see `../api/CONTRACT.md`) with a static-file fallback.
+lane-C API (see `../api/CONTRACT.md`) with a static-file fallback. UI components
+are styled with [SmoothUI](https://smoothui.dev) (motion-animated, shadcn
+registry `@smoothui/*`, vendored under `components/smoothui/`); all animations
+respect `prefers-reduced-motion`.
 
 > Research navigation, not medical advice. Drafts are never sent.
 
@@ -13,6 +16,17 @@ npm run dev        # predev copies the graph fixture into public/, then starts :
 ```
 
 - `NEXT_PUBLIC_API_URL` — API base URL (default `http://localhost:8000`).
+  - **Absolute URL** (`https://api.example.com`): used as-is.
+  - **Relative path** (`/api`): same-origin fetches. `next.config.ts` rewrites
+    `/api/:path*` → `http://127.0.0.1:8000/:path*`, so on single-port hosts
+    (e.g. Replit) set `NEXT_PUBLIC_API_URL=/api` and run the FastAPI app on
+    port 8000 next to the Next server — the browser only ever talks to one
+    origin.
+  - **Unset/empty**: keeps the `http://localhost:8000` default.
+- On load the app fetches `GET /health` once; when the API reports
+  `mode: "mock"` a slim amber ribbon ("Placeholder (mock) data — not sourced")
+  is shown. An unreachable `/health` is a silent no-op (the fallback banner
+  below covers that case).
 - If the API is unreachable, the app falls back to the bundled static graph
   (`public/graph.mock.json`, copied at predev/prebuild from
   `data/build/graph.json` → `data/build/graph.mock.json` →
