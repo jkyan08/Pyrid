@@ -18,6 +18,15 @@ Needs `OPENAI_MODEL` and `OPENAI_EMBED_MODEL` (bare names, e.g. `gpt-6-astra`), 
 (OpenRouter is used when its key is set; values in `.env` fill unset variables). `ATLAS_CACHE_DIR` points at the shared cache.
 `ATLAS_OFFLINE=1` makes any uncached LLM call fail fast; `explain` and `draft` then fall back to the template.
 
+### Provider (temporary: Claude, OpenAI later)
+
+Structured-output calls (extract, reconcile adjudication, explain, draft) currently run on Claude:
+`ATLAS_LLM_PROVIDER=anthropic`, `ANTHROPIC_MODEL=claude-sonnet-5-5`, `ANTHROPIC_API_KEY`, with Anthropic's
+server-side refusal fallback (`fallbacks: "default"`). Unset `ATLAS_LLM_PROVIDER` to go back to OpenAI;
+earlier `gpt-6-astra` results are still cached. Embeddings always use OpenAI models (Anthropic has none).
+The `anthropic` package is not in M0's `pyproject.toml` yet (locked: integrator sign-off), so run lane B
+commands with `uv run --with anthropic ...`.
+
 ## For lane A (graph)
 
 - `claims.json`: `claims` validated against `pipeline.models.Claim`; `subject`/`object`/`variant` are node IDs,
