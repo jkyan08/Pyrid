@@ -1,0 +1,511 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$defs": {
+    "Claim": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "minLength": 1,
+          "title": "Id",
+          "type": "string"
+        },
+        "pmid": {
+          "default": "",
+          "description": "\"\" when the paper has no PMID (preprints)",
+          "title": "Pmid",
+          "type": "string"
+        },
+        "paper": {
+          "description": "Id of the Paper node this claim was extracted from",
+          "minLength": 1,
+          "title": "Paper",
+          "type": "string"
+        },
+        "quote": {
+          "description": "Verbatim span that string-matches the source abstract after whitespace normalization",
+          "minLength": 1,
+          "title": "Quote",
+          "type": "string"
+        },
+        "polarity": {
+          "$ref": "#/$defs/Polarity"
+        },
+        "subject": {
+          "minLength": 1,
+          "title": "Subject",
+          "type": "string"
+        },
+        "predicate": {
+          "minLength": 1,
+          "title": "Predicate",
+          "type": "string"
+        },
+        "object": {
+          "minLength": 1,
+          "title": "Object",
+          "type": "string"
+        },
+        "variant": {
+          "default": "",
+          "description": "Variant node id when the claim is variant-specific",
+          "title": "Variant",
+          "type": "string"
+        },
+        "study_type": {
+          "$ref": "#/$defs/StudyType"
+        },
+        "n_patients": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "N Patients"
+        }
+      },
+      "required": [
+        "id",
+        "paper",
+        "quote",
+        "polarity",
+        "subject",
+        "predicate",
+        "object",
+        "study_type"
+      ],
+      "title": "Claim",
+      "type": "object"
+    },
+    "Cluster": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "minLength": 1,
+          "title": "Id",
+          "type": "string"
+        },
+        "members": {
+          "description": "Node ids; clusters are disjoint",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Members",
+          "type": "array"
+        },
+        "robust": {
+          "description": "Membership held across all three Leiden weightings",
+          "title": "Robust",
+          "type": "boolean"
+        },
+        "why": {
+          "additionalProperties": true,
+          "description": "Free-form explanation inputs",
+          "title": "Why",
+          "type": "object"
+        }
+      },
+      "required": [
+        "id",
+        "members",
+        "robust"
+      ],
+      "title": "Cluster",
+      "type": "object"
+    },
+    "Coverage": {
+      "additionalProperties": false,
+      "properties": {
+        "searched": {
+          "items": {
+            "$ref": "#/$defs/CoverageSearch"
+          },
+          "title": "Searched",
+          "type": "array"
+        }
+      },
+      "title": "Coverage",
+      "type": "object"
+    },
+    "CoverageSearch": {
+      "additionalProperties": false,
+      "description": "One search the pipeline ran for an entity. Zero hits are recorded, not dropped\n(README hard rule 3: failed lookups are data).",
+      "properties": {
+        "source": {
+          "minLength": 1,
+          "title": "Source",
+          "type": "string"
+        },
+        "query": {
+          "minLength": 1,
+          "title": "Query",
+          "type": "string"
+        },
+        "date": {
+          "description": "ISO 8601 date or timestamp",
+          "minLength": 1,
+          "title": "Date",
+          "type": "string"
+        },
+        "hits": {
+          "minimum": 0,
+          "title": "Hits",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "source",
+        "query",
+        "date",
+        "hits"
+      ],
+      "title": "CoverageSearch",
+      "type": "object"
+    },
+    "Edge": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "minLength": 1,
+          "title": "Id",
+          "type": "string"
+        },
+        "source": {
+          "description": "Node id",
+          "minLength": 1,
+          "title": "Source",
+          "type": "string"
+        },
+        "target": {
+          "description": "Node id",
+          "minLength": 1,
+          "title": "Target",
+          "type": "string"
+        },
+        "relation": {
+          "minLength": 1,
+          "title": "Relation",
+          "type": "string"
+        },
+        "evidence_class": {
+          "$ref": "#/$defs/EvidenceClass"
+        },
+        "confidence": {
+          "maximum": 1.0,
+          "minimum": 0.0,
+          "title": "Confidence",
+          "type": "number"
+        },
+        "confidence_basis": {
+          "additionalProperties": true,
+          "description": "Raw inputs the confidence was computed from; never empty",
+          "minProperties": 1,
+          "title": "Confidence Basis",
+          "type": "object"
+        },
+        "status": {
+          "$ref": "#/$defs/EdgeStatus"
+        },
+        "sources": {
+          "items": {
+            "$ref": "#/$defs/EdgeSource"
+          },
+          "minItems": 1,
+          "title": "Sources",
+          "type": "array"
+        },
+        "supporting": {
+          "description": "Claim ids (polarity 'supports')",
+          "items": {
+            "type": "string"
+          },
+          "title": "Supporting",
+          "type": "array"
+        },
+        "contradicting": {
+          "description": "Claim ids (polarity 'contradicts')",
+          "items": {
+            "type": "string"
+          },
+          "title": "Contradicting",
+          "type": "array"
+        },
+        "attributes": {
+          "additionalProperties": true,
+          "description": "Free-form; standard keys in the module docstring",
+          "title": "Attributes",
+          "type": "object"
+        }
+      },
+      "required": [
+        "id",
+        "source",
+        "target",
+        "relation",
+        "evidence_class",
+        "confidence",
+        "confidence_basis",
+        "status",
+        "sources",
+        "supporting",
+        "contradicting"
+      ],
+      "title": "Edge",
+      "type": "object"
+    },
+    "EdgeSource": {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "$ref": "#/$defs/SourceKind"
+        },
+        "id": {
+          "description": "PMID, PMC id, DOI, database record id, URL or NCT number",
+          "minLength": 1,
+          "title": "Id",
+          "type": "string"
+        },
+        "date": {
+          "description": "ISO 8601 publication or retrieval date",
+          "minLength": 1,
+          "title": "Date",
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind",
+        "id",
+        "date"
+      ],
+      "title": "EdgeSource",
+      "type": "object"
+    },
+    "EdgeStatus": {
+      "enum": [
+        "supported",
+        "contested",
+        "small_n",
+        "inferred_unsupported"
+      ],
+      "title": "EdgeStatus",
+      "type": "string"
+    },
+    "EvidenceClass": {
+      "description": "observed: read from a database; extracted: quote-verified claim from a paper;\ninferred: produced by a rule or similarity score (never above 0.5 confidence).",
+      "enum": [
+        "observed",
+        "extracted",
+        "inferred"
+      ],
+      "title": "EvidenceClass",
+      "type": "string"
+    },
+    "Meta": {
+      "additionalProperties": false,
+      "properties": {
+        "built_at": {
+          "description": "ISO 8601 timestamp of the build",
+          "minLength": 1,
+          "title": "Built At",
+          "type": "string"
+        },
+        "sources": {
+          "items": {
+            "$ref": "#/$defs/SourceRecord"
+          },
+          "minItems": 1,
+          "title": "Sources",
+          "type": "array"
+        },
+        "coverage": {
+          "additionalProperties": {
+            "$ref": "#/$defs/Coverage"
+          },
+          "description": "Keyed by entity id: every search run for that entity, including empty ones",
+          "title": "Coverage",
+          "type": "object"
+        }
+      },
+      "required": [
+        "built_at",
+        "sources",
+        "coverage"
+      ],
+      "title": "Meta",
+      "type": "object"
+    },
+    "Node": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "description": "Resolved CURIE or internal id; see the module docstring",
+          "minLength": 1,
+          "title": "Id",
+          "type": "string"
+        },
+        "type": {
+          "$ref": "#/$defs/NodeType"
+        },
+        "label": {
+          "minLength": 1,
+          "title": "Label",
+          "type": "string"
+        },
+        "synonyms": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Synonyms",
+          "type": "array"
+        },
+        "props": {
+          "additionalProperties": true,
+          "description": "Free-form, type-specific",
+          "title": "Props",
+          "type": "object"
+        }
+      },
+      "required": [
+        "id",
+        "type",
+        "label"
+      ],
+      "title": "Node",
+      "type": "object"
+    },
+    "NodeType": {
+      "enum": [
+        "Gene",
+        "Variant",
+        "Mechanism",
+        "Disease",
+        "Phenotype",
+        "Pathway",
+        "Drug",
+        "Claim",
+        "Paper",
+        "Investigator",
+        "PatientGroup",
+        "Registry",
+        "Study"
+      ],
+      "title": "NodeType",
+      "type": "string"
+    },
+    "Polarity": {
+      "enum": [
+        "supports",
+        "contradicts"
+      ],
+      "title": "Polarity",
+      "type": "string"
+    },
+    "SourceKind": {
+      "enum": [
+        "pmid",
+        "pmc",
+        "doi",
+        "db",
+        "url",
+        "nct"
+      ],
+      "title": "SourceKind",
+      "type": "string"
+    },
+    "SourceRecord": {
+      "additionalProperties": false,
+      "description": "A data source the build read from, with its version, retrieval date and license.\n``retrieved_at`` and ``license`` are required (README section 5 license table).",
+      "properties": {
+        "name": {
+          "minLength": 1,
+          "title": "Name",
+          "type": "string"
+        },
+        "version": {
+          "default": "",
+          "description": "\"\" when the source has no meaningful version",
+          "title": "Version",
+          "type": "string"
+        },
+        "retrieved_at": {
+          "description": "ISO 8601 date or timestamp",
+          "minLength": 1,
+          "title": "Retrieved At",
+          "type": "string"
+        },
+        "license": {
+          "minLength": 1,
+          "title": "License",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "retrieved_at",
+        "license"
+      ],
+      "title": "SourceRecord",
+      "type": "object"
+    },
+    "StudyType": {
+      "enum": [
+        "trial",
+        "cohort",
+        "case_series",
+        "case_report",
+        "in_vitro",
+        "review"
+      ],
+      "title": "StudyType",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "meta": {
+      "$ref": "#/$defs/Meta"
+    },
+    "nodes": {
+      "items": {
+        "$ref": "#/$defs/Node"
+      },
+      "title": "Nodes",
+      "type": "array"
+    },
+    "edges": {
+      "items": {
+        "$ref": "#/$defs/Edge"
+      },
+      "title": "Edges",
+      "type": "array"
+    },
+    "claims": {
+      "items": {
+        "$ref": "#/$defs/Claim"
+      },
+      "title": "Claims",
+      "type": "array"
+    },
+    "clusters": {
+      "items": {
+        "$ref": "#/$defs/Cluster"
+      },
+      "title": "Clusters",
+      "type": "array"
+    }
+  },
+  "required": [
+    "meta",
+    "nodes",
+    "edges",
+    "claims",
+    "clusters"
+  ],
+  "title": "Graph",
+  "type": "object"
+}
