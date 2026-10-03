@@ -7,8 +7,8 @@ Owner files: `pipeline/sources/pubmed.py`, `pipeline/extract/*`, `pipeline/llm/*
 ```bash
 python -m pipeline.sources.pubmed      # → data/build/papers.json (no OpenAI needed)
 python -m pipeline.extract.investigators  # → data/build/investigators.json (no OpenAI needed)
-python -m pipeline.extract.claims      # → data/build/claims.json
-python -m pipeline.extract.reconcile   # → data/build/claim_links.json, data/review_queue.csv
+python -m pipeline.extract.claims      # → data/build/claims.raw.json (mentions as text)
+python -m pipeline.extract.reconcile   # → data/build/claims.json (contract), data/review_queue.csv
 python -m pipeline.llm.explain         # → data/build/explanations.json (demo journeys)
 python -m eval.sample                  # → eval/claims_review.csv (40 claims to label)
 python -m eval.precision
@@ -20,9 +20,10 @@ Needs `OPENAI_MODEL` and `OPENAI_EMBED_MODEL` (bare names, e.g. `gpt-6-astra`), 
 
 ## For lane A (graph)
 
-- `claims.json`: `claims` in the contract shape. `subject` and `object` are mention text; resolved node IDs
-  are in `claim_links.json` as `{claim_id: {subject, object}}` (null = unresolved, see review queue).
-  Build treatment edges from claims where both ends resolve. `polarity` gives supporting vs contradicting.
+- `claims.json`: `claims` validated against `pipeline.models.Claim`; `subject`/`object`/`variant` are node IDs,
+  `paper` is `pmid:<n>`. Only claims whose ends all resolved are included; the rest are in the review queue.
+  `papers` holds the Paper nodes those claims cite, with `props.abstract` (the contract test checks quotes
+  against it). Build treatment edges from `treats` claims; `polarity` gives supporting vs contradicting,
   `study_type` and `n_patients` drive `contested` / `small_n`.
 - `claims.json` → `stats` has the quote-check drop rate for README Section 14.
 - `investigators.json`: grouped by ORCID (`high`) or name + affiliation (`low`); `description` is
@@ -50,7 +51,8 @@ Symptom → HPO for Devon: `NodeIndex(graph["nodes"], types={"Phenotype"})` and 
 
 ## Status / open items
 
-- M0 not landed yet: `pipeline/extract/_compat.py` stands in for `pipeline/cache.py`. Swap its bodies for
-  `pipeline.cache` calls when M0 merges. Deps used: `httpx`, `openai`, `pydantic`, `pytest`.
+- On M0: `pipeline/extract/_compat.py` is a thin wrapper over `pipeline.cache`.
+- OpenRouter limits new accounts to 20 requests/min per model; `ATLAS_LLM_RPM` (default 18) paces live calls
+  and `ATLAS_LLM_WORKERS` (default 16) sets concurrency.
 - All 7 Section 11 papers resolve to PMIDs by title. The NK-cell bioRxiv preprint has a published JACI version,
   so it resolves via PubMed; the bioRxiv path remains as fallback.
