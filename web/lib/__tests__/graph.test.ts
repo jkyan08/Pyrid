@@ -9,10 +9,36 @@ import {
   getGaps,
   mechanismSearch,
   neighborhoodElements,
+  discoveryRoutes,
   extractCitations,
   hasSupportedRoute,
   STUDY_RANK,
 } from "../graph";
+
+describe("discoveryRoutes", () => {
+  it("returns a real, source-carrying multi-hop route and no invented destinations", () => {
+    const small: Graph = {
+      nodes: [
+        { id: "d", type: "Disease", label: "Disease" },
+        { id: "g", type: "Gene", label: "Gene" },
+        { id: "g2", type: "Gene", label: "Another Gene" },
+        { id: "p", type: "Pathway", label: "Pathway" },
+        { id: "r", type: "Registry", label: "Registry" },
+      ],
+      edges: [
+        { id: "e1", source: "d", target: "g", relation: "associated_with", evidence_class: "observed", status: "supported", sources: [{ kind: "db", id: "source-1" }] },
+        { id: "e2", source: "g", target: "p", relation: "in_pathway", evidence_class: "observed", status: "supported", sources: [{ kind: "db", id: "source-2" }] },
+        { id: "e3", source: "p", target: "g2", relation: "in_pathway", evidence_class: "observed", status: "supported", sources: [{ kind: "db", id: "source-3" }] },
+      ],
+    };
+    const routes = discoveryRoutes(small, "d");
+    expect(routes.map((route) => route.type)).toEqual(["Pathway", "Gene", "AnotherGene"]);
+    expect(routes[0].steps.map((step) => step.edge.id)).toEqual(["e1", "e2"]);
+    expect(routes[2].steps.map((step) => step.edge.id)).toEqual(["e1", "e2", "e3"]);
+    expect(routes[0].steps.every((step) => step.edge.sources?.length)).toBe(true);
+    expect(discoveryRoutes(small, "r")).toEqual([]);
+  });
+});
 
 // The dev fixture is the only graph we can rely on existing pre-M1.
 const graph: Graph = JSON.parse(
