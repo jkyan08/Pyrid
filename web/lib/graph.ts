@@ -5,6 +5,7 @@
  * only from fields already present in the graph. Nothing is invented.
  */
 
+import { displayLabel } from "./display";
 import type {
   Claim,
   Cluster,
@@ -210,7 +211,7 @@ export function citationLabel(graph: Graph, id: string): string {
     const edge = edgeById(graph, id);
     if (!edge) return id;
     const target = nodeById(graph, edge.target);
-    return `${humanRelation(edge.relation)} → ${truncate(target?.label ?? edge.target)}`;
+    return `${humanRelation(edge.relation)} → ${truncate(target ? displayLabel(target.label, target.type) : edge.target)}`;
   }
   if (id.startsWith("c_")) {
     const claim = claimById(graph, id);

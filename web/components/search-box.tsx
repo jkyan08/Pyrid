@@ -18,6 +18,7 @@ import { motion, useReducedMotion } from "motion/react";
 import type { SearchResult } from "@/lib/types";
 import { apiSearch } from "@/lib/api";
 import { SEARCH_TYPE_RANK } from "@/lib/graph";
+import { displayLabel } from "@/lib/display";
 import { themeOf } from "@/lib/type-theme";
 import AnimatedInput from "@/components/smoothui/animated-input";
 import MotionLoader from "@/components/smoothui/motion-loader";
@@ -136,7 +137,7 @@ export function SearchBox({
                       <span
                         className={`font-medium text-gray-900 ${hero ? "text-base" : "text-sm"}`}
                       >
-                        {r.label}
+                        {displayLabel(r.label, r.type)}
                       </span>
                       <TypeBadge type={r.type} />
                     </span>
