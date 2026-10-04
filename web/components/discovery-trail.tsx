@@ -41,7 +41,7 @@ export function DiscoveryTrail({ graph, centerId, onAct }: {
       </div>
       {routes.length === 0 ? (
         <div className="rounded-2xl border border-amber-200 bg-amber-50 p-6 text-sm text-amber-950">
-          No connected pathway, gene, related disease or research asset was found in the current graph. Check Open questions for the search coverage and a next question to test.
+          No connected pathway, gene, related disease or research asset was found in the current graph. Check the Evidence brief&apos;s Open questions section for the search coverage and a next question to test.
         </div>
       ) : (
         <div className="grid items-start gap-4 md:grid-cols-2 xl:grid-cols-3">
