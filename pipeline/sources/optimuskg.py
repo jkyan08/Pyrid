@@ -119,6 +119,17 @@ curated database is among ``sources.direct`` (``disease_gene_curated_sources``, 
 without an ``evidence_score`` (not an OptimusKG aggregate) is included. The thresholds live in
 ``pipeline/seeds/cluster.yaml``.
 
+Gap probe (ground-truth test 6)
+-------------------------------
+:func:`select_gap_probe` chooses the "obscure gene with no connections" the README asks for by
+a general rule over the WHOLE backbone, never by name: the alphabetically first protein-coding
+HGNC symbol among the genes with zero rows in ``disease_gene``, ``drug_gene``, ``pathway_gene``
+and ``biological_process_gene`` (the gene side of all four files is the Ensembl id in ``to``;
+spike section 3). The rule and the biotype live in ``pipeline/seeds/cluster.yaml``
+(``gap_probe``); the export (``pipeline.export.run_gap_probe``) writes the chosen gene into the
+store as a Gene node with ``props.gap_probe = true`` and records its backbone counts and live
+lookups as coverage rows, so the API can answer ``no_supported_route`` with the searches shown.
+
 No identifier value is written in this module; only formats and names (README hard rule 2).
 """
 
@@ -149,9 +160,17 @@ __all__ = [
     "ASPECT_RELATIONS",
     "ChecksumMismatch",
     "DEFAULT_CURATED_SOURCES",
+    "DEFAULT_GAP_PROBE_BIOTYPE",
+    "DEFAULT_GAP_PROBE_RULE",
     "DEFAULT_HIGH_SCORE",
     "DatasetFile",
     "DatasetInfo",
+    "GAP_PROBE_COVERAGE",
+    "GAP_PROBE_EDGE_FILES",
+    "GAP_PROBE_FILES",
+    "GAP_PROBE_PROP",
+    "GAP_PROBE_XREF_SOURCE",
+    "GapProbeError",
     "GeneResolutionError",
     "LocalFile",
     "NEEDED_FILES",
@@ -176,6 +195,7 @@ __all__ = [
     "most_specific",
     "parse_dataset",
     "resolve_files",
+    "select_gap_probe",
     "slice_into_store",
     "reference_sources",
     "upstream_sources",
@@ -328,6 +348,33 @@ COV_PROCESS_GENE = "OptimusKG biological_process_gene"
 COV_DRUG_GENE = "OptimusKG drug_gene"
 COV_DRUG_DISEASE = "OptimusKG drug_disease"
 
+# Gap probe (module docstring "Gap probe"; cluster.yaml `gap_probe`). The four edge files whose
+# gene side (`to`, an Ensembl id) must hold ZERO rows for the probe, keyed by the name the counts
+# and the build report use, and the coverage source label each count is written under.
+GAP_PROBE_EDGE_FILES: dict[str, str] = {
+    "disease_gene": DISEASE_GENE,
+    "drug_gene": DRUG_GENE,
+    "pathway_gene": PATHWAY_GENE,
+    "biological_process_gene": PROCESS_GENE,
+}
+GAP_PROBE_COVERAGE: dict[str, str] = {
+    "disease_gene": COV_DISEASE_GENE,
+    "drug_gene": COV_DRUG_GENE,
+    "pathway_gene": COV_PATHWAY_GENE,
+    "biological_process_gene": COV_PROCESS_GENE,
+}
+GAP_PROBE_FILES: tuple[str, ...] = (GENE_NODES, *GAP_PROBE_EDGE_FILES.values())
+# The node prop that marks the probe (pipeline.graph.build exports such a node without edges).
+GAP_PROBE_PROP = "gap_probe"
+DEFAULT_GAP_PROBE_BIOTYPE = "protein_coding"
+# "HGNC symbol" means: `properties.symbol` present, different from the node id (a gene without a
+# symbol carries its own Ensembl id there), unique among gene nodes, and an xref of this source.
+GAP_PROBE_XREF_SOURCE = "HGNC"
+DEFAULT_GAP_PROBE_RULE = (
+    "alphabetically first protein-coding HGNC symbol among backbone genes with zero "
+    "disease_gene, drug_gene, pathway_gene and biological_process_gene rows"
+)
+
 # A few disease ids are "PREFIX_alnum" (OBA_VT…, NCIT_C…) rather than "PREFIX_digits", which
 # pipeline.ids does not recognise; the same OBO rule (first underscore -> colon) applies.
 _OBO_ALNUM = re.compile(r"^(?P<prefix>[A-Za-z][A-Za-z0-9]*)_(?P<local>[A-Za-z0-9.-]+)$")
@@ -343,6 +390,10 @@ class OfflineUnavailable(RuntimeError):
 
 class GeneResolutionError(ValueError):
     """A seed gene symbol did not resolve to exactly one gene node."""
+
+
+class GapProbeError(ValueError):
+    """No backbone gene satisfies the gap-probe rule (cluster.yaml ``gap_probe``)."""
 
 
 # --------------------------------------------------------------------------------------
@@ -1289,6 +1340,118 @@ def slice_into_store(
         "upstream_reference_ids": references,
         "cleared_previous_run": cleared,
         "timings_s": timings,
+    }
+
+
+# --------------------------------------------------------------------------------------
+# Gap probe (ground-truth test 6)
+# --------------------------------------------------------------------------------------
+
+
+def _local_path(entry: LocalFile | Path | str) -> Path:
+    return Path(entry.local) if isinstance(entry, LocalFile) else Path(entry)
+
+
+def _retrieved_at(entry: LocalFile | Path | str) -> str:
+    """The file's recorded retrieval time, or its mtime for a bare path (never the current time)."""
+    if isinstance(entry, LocalFile):
+        return entry.retrieved_at
+    stat = Path(entry).stat()
+    return datetime.fromtimestamp(stat.st_mtime, timezone.utc).isoformat(timespec="seconds")
+
+
+def select_gap_probe(files: Mapping[str, LocalFile | Path | str], cfg: Mapping[str, Any] | None = None) -> dict[str, Any]:
+    """Choose the gap-probe gene (module docstring "Gap probe") from the WHOLE backbone.
+
+    ``files`` maps at least every path in :data:`GAP_PROBE_FILES` to its local file
+    (:class:`LocalFile` from :func:`resolve_files`, or a bare path). ``cfg`` is the
+    ``gap_probe`` block of ``pipeline/seeds/cluster.yaml``: ``biotype`` (default
+    :data:`DEFAULT_GAP_PROBE_BIOTYPE`) and ``rule`` (the sentence recorded with the result; default
+    :data:`DEFAULT_GAP_PROBE_RULE`). The rule itself is fixed here:
+
+    1. candidate genes are the gene nodes whose ``properties.biotype`` equals ``biotype`` and whose
+       ``properties.symbol`` is an HGNC symbol (present, different from the node id, unique among
+       all gene nodes, with an xref whose source is :data:`GAP_PROBE_XREF_SOURCE`);
+    2. a candidate must have ZERO rows in every file of :data:`GAP_PROBE_EDGE_FILES` (gene side:
+       the ``to`` column, lazy scans reading only that column; the files are never materialised);
+    3. the survivor with the alphabetically first ``(symbol, id)`` wins (plain string order, so two
+       builds of one dataset choose the same gene).
+
+    Returns ``{symbol, gene_id, backbone_id, name, biotype, counts, file_dates, rule, candidates,
+    node}``: ``counts`` are the rows actually counted for the chosen gene in each edge file (all 0
+    by construction, recorded so coverage rows are measured, not assumed), ``file_dates`` the
+    retrieval date of each edge file (for those coverage rows), ``candidates`` how many genes
+    passed steps 1 and 2, and ``node`` the store-ready Gene row (``props.gap_probe = true``,
+    ``props.gap_probe_rule``, ``props.gap_probe_counts``; backbone props as the loader keeps them).
+    Raises :class:`GapProbeError` when nothing qualifies. No symbol appears in code or seeds.
+    """
+    cfg = dict(cfg or {})
+    biotype = str(cfg.get("biotype") or DEFAULT_GAP_PROBE_BIOTYPE)
+    rule = str(cfg.get("rule") or DEFAULT_GAP_PROBE_RULE)
+    missing = [p for p in GAP_PROBE_FILES if p not in files]
+    if missing:
+        raise KeyError(f"gap probe needs the files {missing}")
+
+    genes_lf = _scan_nodes(_local_path(files[GENE_NODES]), "GEN")
+    fields = set(_struct_fields(genes_lf))
+    symbol_col = pl.col("properties").struct.field("symbol")
+    has_xref = (
+        pl.col("properties").struct.field("xrefs").list.eval(pl.element().struct.field("source")).list.contains(GAP_PROBE_XREF_SOURCE)
+        if "xrefs" in fields
+        else pl.lit(False)
+    )
+    # symbols shared by more than one gene node are not a resolvable HGNC symbol (seed rule, exit criterion 1)
+    symbol_counts = genes_lf.select(symbol_col.alias("symbol")).drop_nulls().group_by("symbol").len()
+    typed = (
+        genes_lf.filter(
+            (pl.col("properties").struct.field("biotype") == biotype)
+            & symbol_col.is_not_null()
+            & (symbol_col != pl.col("id"))
+            & has_xref
+        )
+        .with_columns(symbol_col.alias("symbol"))
+        .join(symbol_counts, on="symbol", how="left")
+        .filter(pl.col("len") == 1)
+        .select("id", "symbol")
+        .collect()
+    )
+    connected: set[str] = set()
+    for path in GAP_PROBE_EDGE_FILES.values():
+        connected |= set(pl.scan_parquet(_local_path(files[path])).select(pl.col("to").unique()).collect()["to"].to_list())
+    unconnected = sorted(
+        ((row["symbol"], row["id"]) for row in typed.iter_rows(named=True) if row["id"] not in connected),
+    )
+    if not unconnected:
+        raise GapProbeError(f"no {biotype} gene with an HGNC symbol has zero rows in {sorted(GAP_PROBE_EDGE_FILES)}")
+    symbol, raw_id = unconnected[0]
+
+    counts: dict[str, int] = {}
+    file_dates: dict[str, str] = {}
+    for key, path in GAP_PROBE_EDGE_FILES.items():
+        counts[key] = int(pl.scan_parquet(_local_path(files[path])).filter(pl.col("to") == raw_id).select(pl.len()).collect().item())
+        file_dates[key] = _retrieved_at(files[path])[:10]
+
+    row = genes_lf.filter(pl.col("id") == raw_id).collect().to_dicts()[0]
+    props = row.get("properties") or {}
+    node = _node_row(
+        row,
+        "GEN",
+        label=props.get("symbol"),
+        synonyms=_labels(props.get("symbol_synonyms")) + _labels(props.get("obsolete_symbols")),
+        retrieved_at=_retrieved_at(files[GENE_NODES]),
+        extra={GAP_PROBE_PROP: True, f"{GAP_PROBE_PROP}_rule": rule, f"{GAP_PROBE_PROP}_counts": dict(counts)},
+    )
+    return {
+        "symbol": symbol,
+        "gene_id": node["id"],
+        "backbone_id": raw_id,
+        "name": props.get("name"),
+        "biotype": biotype,
+        "counts": counts,
+        "file_dates": file_dates,
+        "rule": rule,
+        "candidates": len(unconnected),
+        "node": node,
     }
 
 

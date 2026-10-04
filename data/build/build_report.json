@@ -1,5 +1,5 @@
 {
-  "built_at": "2026-10-04T02:33:24+00:00",
+  "built_at": "2026-10-04T03:12:13+00:00",
   "thresholds": {
     "disease_gene_min_score": 0.3,
     "keep_disgenet_direct": true,
@@ -458,7 +458,7 @@
     "nodes_before": {
       "Disease": 644,
       "Drug": 2038,
-      "Gene": 2688,
+      "Gene": 2689,
       "Investigator": 247,
       "Mechanism": 12,
       "Paper": 243,
@@ -472,7 +472,7 @@
     "nodes_after": {
       "Disease": 147,
       "Drug": 107,
-      "Gene": 248,
+      "Gene": 249,
       "Investigator": 209,
       "Mechanism": 11,
       "Paper": 243,
@@ -494,7 +494,7 @@
       },
       "Gene": {
         "n": 2440,
-        "reason": "not a seed gene, not referenced by evidence or a claim, beyond max_genes_per_disease or below the inclusion rule"
+        "reason": "not a seed gene, not the gap probe, not referenced by evidence or a claim, beyond max_genes_per_disease or below the inclusion rule"
       },
       "Investigator": {
         "n": 38,
@@ -588,8 +588,11 @@
       "seed": 7,
       "anchored_by_evidence": 22,
       "claim_referenced": 18,
+      "gap_probe": [
+        "ensembl:ENSG00000285292"
+      ],
       "capped_away_per_disease": 1533,
-      "kept": 248
+      "kept": 249
     },
     "drugs": {
       "kept": 107,
@@ -608,14 +611,14 @@
     "go_in_pathway_edges_dropped_non_seed_gene": 0
   },
   "counts": {
-    "nodes": 2902,
+    "nodes": 2903,
     "edges": 8501,
     "claims": 935,
     "clusters": 117,
     "nodes_by_type": {
       "Disease": 147,
       "Drug": 107,
-      "Gene": 248,
+      "Gene": 249,
       "Investigator": 209,
       "Mechanism": 11,
       "Paper": 243,
@@ -689,16 +692,16 @@
       "is_a_edges_child_ic_below_parent": 32
     },
     "coverage": {
-      "entities": 946,
-      "searches": 2502,
-      "zero_hit_searches": 1634,
+      "entities": 947,
+      "searches": 2509,
+      "zero_hit_searches": 1640,
       "by_source": {
-        "ClinVar esearch": 11,
+        "ClinVar esearch": 12,
         "ClinVar esummary": 7,
         "ClinVar esummary protein_change": 4,
         "ClinVar trait link": 610,
         "ClinicalTrials.gov": 54,
-        "ClinicalTrials.gov studies": 22,
+        "ClinicalTrials.gov studies": 23,
         "EURORDIS — on-site search": 1,
         "Genetic Alliance (US) — Disease InfoSearch": 1,
         "Genetic Alliance UK — on-site search": 1,
@@ -707,21 +710,21 @@
         "HPO hp.json": 1,
         "HPO phenotype.hpoa": 3,
         "NIH RePORTER project links": 6,
-        "NIH RePORTER projects": 6,
+        "NIH RePORTER projects": 7,
         "NIH RePORTER publications": 3,
         "NORD (rarediseases.org) — on-site search": 1,
         "NORD (rarediseases.org) — on-site search, MPN groups": 1,
         "NORD (rarediseases.org) — via web search engine, domain-restricted": 1,
-        "OptimusKG biological_process_gene": 7,
+        "OptimusKG biological_process_gene": 8,
         "OptimusKG disease": 16,
         "OptimusKG disease_disease": 147,
-        "OptimusKG disease_gene": 7,
+        "OptimusKG disease_gene": 8,
         "OptimusKG disease_phenotype": 147,
         "OptimusKG drug": 5,
         "OptimusKG drug_disease": 147,
-        "OptimusKG drug_gene": 7,
+        "OptimusKG drug_gene": 8,
         "OptimusKG gene": 7,
-        "OptimusKG pathway_gene": 7,
+        "OptimusKG pathway_gene": 8,
         "Orphanet — disease search (current site)": 1,
         "Orphanet — legacy Disease_Search.php": 1,
         "Rare Disease UK — locating its directory": 1,
@@ -773,12 +776,12 @@
     ]
   },
   "sizes": {
-    "total_bytes": 7788830,
+    "total_bytes": 7790126,
     "total_mb": 7.79,
     "nodes_by_type": {
       "Disease": 82658,
       "Drug": 51751,
-      "Gene": 76089,
+      "Gene": 76647,
       "Investigator": 279086,
       "Mechanism": 2107,
       "Paper": 525739,
@@ -814,8 +817,8 @@
       "variant_of": 306521
     },
     "claims": 404079,
-    "meta": 361868,
-    "graph_json_bytes": 7790519
+    "meta": 362605,
+    "graph_json_bytes": 7791815
   },
   "edges_dropped_dangling": [],
   "edges_below_threshold": 1704,
@@ -1730,6 +1733,71 @@
     "status": "applied",
     "report": null
   },
+  "gap_probe": {
+    "enabled": true,
+    "status": "ok",
+    "symbol": "ABCF2-H2BK1",
+    "gene_id": "ensembl:ENSG00000285292",
+    "backbone_id": "ENSG00000285292",
+    "name": "ABCF2-H2BK1 readthrough",
+    "biotype": "protein_coding",
+    "rule": "alphabetically first protein-coding HGNC symbol among backbone genes with zero disease_gene, drug_gene, pathway_gene and biological_process_gene rows",
+    "candidates": 58,
+    "counts": {
+      "disease_gene": 0,
+      "drug_gene": 0,
+      "pathway_gene": 0,
+      "biological_process_gene": 0
+    },
+    "searches": [
+      {
+        "source": "OptimusKG disease_gene",
+        "query": "ABCF2-H2BK1",
+        "date": "2026-10-03",
+        "hits": 0
+      },
+      {
+        "source": "OptimusKG drug_gene",
+        "query": "ABCF2-H2BK1",
+        "date": "2026-10-03",
+        "hits": 0
+      },
+      {
+        "source": "OptimusKG pathway_gene",
+        "query": "ABCF2-H2BK1",
+        "date": "2026-10-03",
+        "hits": 0
+      },
+      {
+        "source": "OptimusKG biological_process_gene",
+        "query": "ABCF2-H2BK1",
+        "date": "2026-10-03",
+        "hits": 0
+      },
+      {
+        "source": "ClinVar esearch",
+        "query": "ABCF2-H2BK1[gene]",
+        "date": "2026-10-04",
+        "hits": 76
+      },
+      {
+        "source": "ClinicalTrials.gov studies",
+        "query": "query.term=EXPANSION%5BNone%5DABCF2-H2BK1&countTotal=true&pageSize=1",
+        "date": "2026-10-04",
+        "hits": 0
+      },
+      {
+        "source": "NIH RePORTER projects",
+        "query": "ABCF2-H2BK1",
+        "date": "2026-10-04",
+        "hits": 0
+      }
+    ],
+    "zero_hit_searches": 6,
+    "errors": [],
+    "stale_probe_nodes_removed": [],
+    "seconds": 2.315
+  },
   "graph_path": "/Users/jonathanyan/Desktop/projects/Pyrid/.claude/worktrees/lane-graph/data/build/graph.json",
   "store_path": "/Users/jonathanyan/Desktop/projects/Pyrid/.claude/worktrees/lane-graph/data/build/evidence.sqlite",
   "claims_bundle": "/Users/jonathanyan/Desktop/projects/Pyrid/.claude/worktrees/lane-graph/data/build/claims.json",
@@ -2113,23 +2181,23 @@
           }
         },
         "cleared_previous_run": {
-          "nodes": 7673,
+          "nodes": 7674,
           "edges": 30127,
-          "coverage": 1988
+          "coverage": 1992
         },
         "timings_s": {
-          "clear_previous": 0.469,
-          "genes": 1.009,
-          "disease_gene_seed": 0.7,
-          "disease_terms": 0.162,
-          "diseases": 0.201,
-          "disease_gene_included": 3.938,
+          "clear_previous": 0.586,
+          "genes": 1.12,
+          "disease_gene_seed": 0.796,
+          "disease_terms": 0.172,
+          "diseases": 0.247,
+          "disease_gene_included": 4.527,
           "phenotypes": 0.227,
-          "pathways": 0.064,
-          "drugs": 0.862,
-          "write": 0.376,
-          "resolve_files": 0.311,
-          "total": 8.393
+          "pathways": 0.079,
+          "drugs": 0.8,
+          "write": 0.369,
+          "resolve_files": 0.32,
+          "total": 9.314
         }
       }
     },
@@ -2280,7 +2348,7 @@
         "requests": 87,
         "requests_from_cache": 87,
         "backbone_present": true,
-        "elapsed_s": 2.96
+        "elapsed_s": 3.58
       }
     },
     "pipeline.sources.ctgov": {
@@ -2955,20 +3023,20 @@
         "grants_with_pmids": 92,
         "errors": [],
         "retrieved_at": "2026-10-03T21:41:37+00:00",
-        "seconds": 27.66
+        "seconds": 27.64
       }
     }
   },
   "store_counts": {
-    "nodes": 14398,
+    "nodes": 14399,
     "edges": 45863,
-    "coverage": 8626,
+    "coverage": 8633,
     "sources": 5,
     "hpo_ic": 19677,
     "nodes_by_type": {
       "Disease": 644,
       "Drug": 2038,
-      "Gene": 2688,
+      "Gene": 2689,
       "Investigator": 150,
       "Pathway": 335,
       "Phenotype": 1968,
@@ -3207,14 +3275,15 @@
     }
   ],
   "timings_seconds": {
-    "pipeline.sources.optimuskg": 8.393,
-    "pipeline.sources.hpo": 0.626,
-    "pipeline.sources.clinvar": 2.985,
-    "pipeline.sources.ctgov": 0.173,
-    "pipeline.sources.reporter": 27.66,
-    "build": 3.723,
-    "graph_logic": 1.174,
-    "write_and_reload": 0.225,
-    "total": 45.005
+    "pipeline.sources.optimuskg": 9.314,
+    "pipeline.sources.hpo": 0.625,
+    "pipeline.sources.clinvar": 3.601,
+    "pipeline.sources.ctgov": 0.191,
+    "pipeline.sources.reporter": 27.645,
+    "gap_probe": 2.315,
+    "build": 3.875,
+    "graph_logic": 1.156,
+    "write_and_reload": 0.331,
+    "total": 49.113
   }
 }

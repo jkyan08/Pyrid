@@ -943,9 +943,10 @@ def test_export_main_writes_graph_and_report(tmp_path: Path, capsys: pytest.Capt
     graph = Graph.load(out)
     assert graph.nodes and graph.edges
     data = json.loads(report.read_text(encoding="utf-8"))
-    for key in ("built_at", "counts", "sizes", "thresholds", "seed_resolution", "mechanisms", "evidence", "prune", "patient_groups", "graph_logic", "timings_seconds", "source_versions", "store_counts", "loaders", "score_range"):
+    for key in ("built_at", "counts", "sizes", "thresholds", "seed_resolution", "mechanisms", "evidence", "prune", "patient_groups", "graph_logic", "gap_probe", "timings_seconds", "source_versions", "store_counts", "loaders", "score_range"):
         assert key in data, key
     assert data["loaders"] == {spec.module: {"status": "skipped (--skip-download)"} for spec in export.LOADERS}
+    assert data["gap_probe"]["enabled"] is False, "the mock cluster seeds carry no gap_probe block (tests/test_gap_probe.py covers the enabled path)"
     assert [spec.name for spec in export.LOADERS] == ["optimuskg", "hpo", "clinvar", "ctgov", "reporter"]
     assert data["counts"]["edges"] == len(graph.edges) and data["store_counts"]["edges"] == 10
     assert data["sizes"]["graph_json_bytes"] == out.stat().st_size and data["claims_bundle"] == "disabled (--no-claims)"
