@@ -1,5 +1,5 @@
 {
- "built_at": "2026-10-04T02:18:05+00:00",
+ "built_at": "2026-10-04T03:19:05+00:00",
  "resolved_against": "optimuskg backbone + graph.json",
  "stats": {
   "extraction": {
@@ -13,11 +13,11 @@
   },
   "reconcile": {
    "claims": 935,
-   "fully_resolved": 179,
-   "unresolved_subject_or_object": 743,
-   "unresolved_variant": 13
+   "fully_resolved": 156,
+   "unresolved_subject_or_object": 768,
+   "unresolved_variant": 11
   },
-  "review_rows": 1074,
+  "review_rows": 1131,
   "human_decisions_applied": 0
  },
  "nodes": [
@@ -350,15 +350,6 @@
    }
   },
   {
-   "id": "EFO:0000220",
-   "type": "Disease",
-   "label": "acute lymphoblastic leukemia",
-   "synonyms": [],
-   "props": {
-    "backbone_id": "EFO_0000220"
-   }
-  },
-  {
    "id": "EFO:0002429",
    "type": "Disease",
    "label": "polycythemia vera",
@@ -420,17 +411,6 @@
    ],
    "props": {
     "backbone_id": "EFO_0005555"
-   }
-  },
-  {
-   "id": "EFO:0005571",
-   "type": "Disease",
-   "label": "osteochondrodysplasia",
-   "synonyms": [
-    "skeletal dysplasia"
-   ],
-   "props": {
-    "backbone_id": "EFO_0005571"
    }
   },
   {
@@ -879,22 +859,6 @@
    }
   },
   {
-   "id": "MONDO:0002406",
-   "type": "Disease",
-   "label": "dermatitis",
-   "synonyms": [
-    "inflammatory skin disease",
-    "skin inflammation",
-    "zone of skin inflammation",
-    "inflammation of the skin",
-    "inflammation of zone of skin",
-    "inflammation of skin"
-   ],
-   "props": {
-    "backbone_id": "MONDO_0002406"
-   }
-  },
-  {
    "id": "MONDO:0003778",
    "type": "Disease",
    "label": "inborn error of immunity",
@@ -939,28 +903,6 @@
    ],
    "props": {
     "backbone_id": "MONDO_0003783"
-   }
-  },
-  {
-   "id": "MONDO:0005147",
-   "type": "Disease",
-   "label": "type 1 diabetes mellitus",
-   "synonyms": [
-    "type I diabetes",
-    "type I diabetes mellitus",
-    "T1DM",
-    "T1D",
-    "IDDM",
-    "diabetes mellitis type 1",
-    "insulin dependent diabetes",
-    "insulin-dependent diabetes mellitus",
-    "juvenile diabetes",
-    "type 1 diabetes",
-    "diabetes mellitis type I",
-    "immune mediated diabetes"
-   ],
-   "props": {
-    "backbone_id": "MONDO_0005147"
    }
   },
   {
@@ -1245,36 +1187,6 @@
    }
   },
   {
-   "id": "MONDO:0013730",
-   "type": "Disease",
-   "label": "graft versus host disease",
-   "synonyms": [
-    "diseases, graft-vs-host",
-    "graft vs. host disease",
-    "graft-versus-host-disease",
-    "graft-vs-host disease",
-    "graft-versus-host disease",
-    "runt disease",
-    "diseases, graft-versus-host",
-    "graft vs host disease",
-    "disease, graft-versus-host",
-    "graft versus host disease",
-    "GVHD",
-    "GVH",
-    "disease, graft-vs-host",
-    "disease, homologous wasting",
-    "disease, runt",
-    "graft-VS-host diseases",
-    "graft-versus-host disease, resistance to",
-    "graft-versus-host disease, susceptibility to",
-    "graft-versus-host diseases",
-    "homologous wasting disease"
-   ],
-   "props": {
-    "backbone_id": "MONDO_0013730"
-   }
-  },
-  {
    "id": "MONDO:0013863",
    "type": "Disease",
    "label": "combined immunodeficiency due to LRBA deficiency",
@@ -1360,39 +1272,6 @@
    ],
    "props": {
     "backbone_id": "MONDO_0014453"
-   }
-  },
-  {
-   "id": "MONDO:0015131",
-   "type": "Disease",
-   "label": "combined immunodeficiency",
-   "synonyms": [
-    "combined immunodeficiency",
-    "CID",
-    "congenital combined immunodeficiency",
-    "X-linked combined immunodeficiency",
-    "combined T and B cell immunodeficiency",
-    "combined T cell and B cell immunodeficiency"
-   ],
-   "props": {
-    "backbone_id": "MONDO_0015131"
-   }
-  },
-  {
-   "id": "MONDO:0015279",
-   "type": "Disease",
-   "label": "chronic mucocutaneous candidiasis",
-   "synonyms": [
-    "familial CMC",
-    "chronic mucocutaneous candidiasis",
-    "CANDF",
-    "familial candidiasis",
-    "chronic mucocutaneous candidiasis (disease)",
-    "familial chronic mucocutaneous candidiasis",
-    "CMC"
-   ],
-   "props": {
-    "backbone_id": "MONDO_0015279"
    }
   },
   {
@@ -1558,20 +1437,6 @@
    ],
    "props": {
     "backbone_id": "MONDO_0020546"
-   }
-  },
-  {
-   "id": "MONDO:0021094",
-   "type": "Disease",
-   "label": "immunodeficiency disease",
-   "synonyms": [
-    "immunodeficiency",
-    "immunodeficiency disorder",
-    "immuno-deficiency",
-    "immunodeficiency syndrome"
-   ],
-   "props": {
-    "backbone_id": "MONDO_0021094"
    }
   },
   {

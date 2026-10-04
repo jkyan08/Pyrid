@@ -35,7 +35,9 @@ commands with `uv run --with anthropic ...`.
   `orcid`) for Investigator nodes. `coverage` is keyed by cluster gene id (topic searches) or paper id.
 - Reconcile does **not** wait for graph v0: it resolves against the OptimusKG backbone files you load
   (`data/raw/optimuskg/`, contract id formats), `mech:<GENE>:<dir>` nodes, and ClinVar (`clinvar:<id>`).
-  When `data/build/graph.json` exists it re-checks every id against it. Role-aware: `treats` = Drug → Disease,
+  Re-checking ids against `graph.json` is opt-in (`ATLAS_RECHECK_GRAPH=1`), since the graph is built from
+  `claims.json`. Grouping diseases (2+ subtypes in the backbone hierarchy, e.g. CMC, SCID) can't carry one
+  gene's mechanism in `causes`/`has_mechanism` claims; those links go to review. Role-aware: `treats` = Drug → Disease,
   `has_mechanism` = Variant/Disease/Gene → Mechanism, `causes` → Disease, `has_phenotype` → HPO.
 - `claims.meta.json` → `nodes`: every node a claim references (incl. ClinVar variants, mech: nodes), in contract
   shape, to add if you have not loaded them. Drug ids follow lane A's `pipeline/ids.py` rule
@@ -64,7 +66,9 @@ Matches `api/llm_seam.py` (`text` + `citations`). Called as lane C calls them (n
 return a result only when the model produced validated cited text (`mode` `llm` / `llm_retry`), and **None**
 otherwise (provider error, offline cache miss, or nothing to explain), so `/explain` falls through to the
 precomputed `explanations.json` and then lane C's own fallback. `fallback=True` returns lane B's validated
-template instead (used by `precompute`). Precomputed results are keyed by entity id (a path is its ids joined
+template instead (used by `precompute`). `python -m pipeline.llm.explain` precomputes every disease, mechanism, drug, patient group and registry with an
+evidence edge, plus variants/phenotypes/genes on claim-backed edges (291 on lane A's graph). Rerun it after every
+`make data`: explanations cite edge ids. Precomputed results are keyed by entity id (a path is its ids joined
 with `|`; drafts are `draft:<key>`), each with `text` and `citations`.
 
 **Requested change for lane C** (lane C's files, so not edited here). With lane B merged, 1 of lane C's 68 API

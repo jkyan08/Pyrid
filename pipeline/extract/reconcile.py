@@ -249,7 +249,7 @@ def _disease_extras(mention: str, claim: dict, gene_diseases: dict[str, list[str
 
 def link_claims(claims: list[dict], nodes: list[dict], embed: Embedder | None = None,
                 parser: Parser | None = None, *, gene_diseases: dict[str, list[str]] | None = None,
-                titles: dict[str, str] | None = None,
+                titles: dict[str, str] | None = None, disease_children: dict[str, int] | None = None,
                 variant_lookup: Callable[[str, str], list[dict]] | None = None,
                 index: NodeIndex | None = None, workers: int = 1) -> tuple[dict, list[dict]]:
     """Returns ({claim_id: {"subject": id|None, "object": id|None, "variant": id|None|""}}, review rows).
@@ -312,7 +312,35 @@ def link_claims(claims: list[dict], nodes: list[dict], embed: Embedder | None = 
             review.append({"claim_id": cid, "role": role, "mention": mention, "proposed": l.node_id or "",
                            "confidence": l.confidence, "shortlist": " | ".join(l.shortlist), "reason": l.reason})
     review += _gene_mechanism_mismatches(links, index)
+    if disease_children:
+        review += _umbrella_mechanism_links(claims, links, disease_children)
     return links, review
+
+
+MECHANISM_BEARING = {"causes", "has_mechanism"}
+
+
+def _umbrella_mechanism_links(claims: list[dict], links: dict, children: dict[str, int],
+                              min_children: int | None = None) -> list[dict]:
+    """A grouping disease (one with at least `min_children` child diseases in the backbone hierarchy)
+    must not carry a gene's mechanism: in `causes` / `has_mechanism` claims such a link goes to review.
+    Otherwise one sentence about "combined immunodeficiency" gives the whole grouping term STAT1's
+    mechanism and bridges unrelated clusters. Specific (leaf) diseases are unaffected."""
+    from pipeline.extract.backbone import MIN_CHILDREN_FOR_GROUPING
+    min_children = min_children or MIN_CHILDREN_FOR_GROUPING
+    review = []
+    for c in claims:
+        if c["predicate"] not in MECHANISM_BEARING:
+            continue
+        row = links[c["id"]]
+        for role in ("subject", "object"):
+            nid = row.get(role)
+            if nid and children.get(nid, 0) >= min_children:
+                review.append({"claim_id": c["id"], "role": role, "mention": c[role], "proposed": nid,
+                               "confidence": "high", "shortlist": "",
+                               "reason": f"grouping disease ({children[nid]} subtypes) cannot carry one gene's mechanism"})
+                row[role] = None
+    return review
 
 
 def _node_gene(n: dict) -> str | None:
@@ -485,7 +513,7 @@ def main() -> None:
     index = NodeIndex(nodes)
     titles = {(f"pmid:{p['pmid']}" if p["pmid"] else f"doi:{p['doi']}"): p["title"] for p in papers}
     links, review = link_claims(raw["claims"], nodes, index=index, gene_diseases=backbone.gene_linked_diseases(),
-                                titles=titles,
+                                titles=titles, disease_children=backbone.disease_children(),
                                 variant_lookup=backbone.clinvar_variants,
                                 workers=int(os.environ.get("ATLAS_LLM_WORKERS", "8")))
     n_applied = 0

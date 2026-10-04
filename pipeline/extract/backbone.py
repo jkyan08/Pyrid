@@ -130,6 +130,24 @@ def mechanism_nodes() -> list[dict]:
 MAX_GENES_PER_SPECIFIC_DISEASE = 60
 
 
+MIN_CHILDREN_FOR_GROUPING = 2
+
+
+@lru_cache(maxsize=1)
+def disease_children() -> dict[str, int]:
+    """Disease id (contract form) → number of child diseases in the backbone hierarchy
+    (`edges/disease_disease.parquet`, DIS-DIS PARENT, `from` = parent). Diseases with children are
+    grouping terms ("combined immunodeficiency", "SCID", "CMC"); leaves are specific entities."""
+    import polars as pl
+
+    path = raw_dir() / "disease_disease.parquet"
+    if not path.exists():
+        return {}
+    kids = (pl.scan_parquet(path).filter(pl.col("relation") == "PARENT")
+            .group_by("from").agg(pl.len().alias("n")).collect())
+    return {norm_curie(r["from"]): r["n"] for r in kids.iter_rows(named=True)}
+
+
 @lru_cache(maxsize=1)
 def gene_linked_diseases() -> dict[str, list[str]]:
     """Cluster gene symbol → specific disease ids (contract form) the backbone links to it.

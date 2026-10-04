@@ -411,7 +411,7 @@ def test_demo_entities_and_precompute_keys():
     from pipeline.llm.explain import demo_entities, precompute
     from pipeline.llm import client
     ents = demo_entities(GRAPH)
-    assert ents == ["n:disX", "n:disY", "n:drugA", "n:geneG"]
+    assert ents == ["n:disX", "n:disY", "n:drugA"]  # n:geneG sits only on an edge without claims
     import pytest as _pt
     mp = _pt.MonkeyPatch()
     mp.setattr(client, "parse", lambda *a, **k: None)  # refusals -> validated templates
@@ -419,7 +419,7 @@ def test_demo_entities_and_precompute_keys():
         out = precompute(GRAPH, {"maria": [["n:disX"]]}, workers=2)
     finally:
         mp.undo()
-    assert set(out) == {"n:disX", "n:disY", "n:drugA", "n:geneG", "draft:n:disX"}
+    assert set(out) == {"n:disX", "n:disY", "n:drugA", "draft:n:disX"}
     assert all(r["text"] and r["citations"] for r in out.values())
 
 
@@ -433,3 +433,14 @@ def test_human_review_decisions_apply_only_accepts_and_known_ids():
     rest, n = apply_review_decisions(links, review, decisions, known={"MONDO:1"})
     assert n == 1 and links["c_1"]["object"] == "MONDO:1" and links["c_2"]["object"] is None
     assert rest == [{"claim_id": "c_2", "role": "object"}]
+
+
+def test_umbrella_diseases_cannot_carry_a_mechanism():
+    from pipeline.extract.reconcile import _umbrella_mechanism_links
+    claims = [{"id": "c_1", "predicate": "causes", "subject": "STAT1 mutations", "object": "combined immunodeficiency"},
+              {"id": "c_2", "predicate": "has_phenotype", "subject": "x", "object": "y"}]
+    links = {"c_1": {"subject": "mech:STAT1:GoF", "object": "MONDO:BROAD", "variant": ""},
+             "c_2": {"subject": "MONDO:BROAD", "object": "HP:1", "variant": ""}}
+    review = _umbrella_mechanism_links(claims, links, {"MONDO:BROAD": 15, "MONDO:NARROW": 0}, min_children=2)
+    assert links["c_1"]["object"] is None and "grouping disease" in review[0]["reason"]
+    assert links["c_2"]["subject"] == "MONDO:BROAD"  # only mechanism-bearing predicates are restricted
