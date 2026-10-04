@@ -149,6 +149,23 @@ def test_claim_confidence(study_type, expected: float) -> None:
     assert basis["n_patients"] == 7 and basis["study_type"] == study_type
 
 
+def test_in_vitro_only_rule() -> None:
+    vitro = {"id": "c_1", "polarity": "supports", "study_type": "in_vitro", "n_patients": None}
+    review = {"id": "c_2", "polarity": "supports", "study_type": "review", "n_patients": None}
+    case = {"id": "c_3", "polarity": "supports", "study_type": "case_report", "n_patients": 1}
+    assert c.in_vitro_only([vitro, review]) and not c.in_vitro_only([vitro, case]) and not c.in_vitro_only([])
+    edge = {"relation": "has_mechanism", "evidence_class": "extracted", "confidence": 0.75, "confidence_basis": {"rule": "x"}, "attributes": {"labels": ["promising"]}}
+    assert c.apply_in_vitro_only(edge, [vitro, review]) is True
+    assert edge["confidence"] == 0.5 and edge["attributes"]["labels"] == ["promising", c.IN_VITRO_ONLY_LABEL]
+    assert edge["confidence_basis"]["in_vitro_only"] == {"study_types": ["in_vitro", "review"], "cap": c.IN_VITRO_ONLY_CAP, "uncapped_confidence": 0.75}
+    # recomputed from scratch: a patient-level claim removes the label and the basis entry (the cap is not undone here; callers recompute the confidence first)
+    assert c.apply_in_vitro_only(edge, [vitro, case]) is False
+    assert edge["attributes"]["labels"] == ["promising"] and "in_vitro_only" not in edge["confidence_basis"]
+    for untouched in ({"relation": "treats", "evidence_class": "extracted"}, {"relation": "has_mechanism", "evidence_class": "observed"}, {"relation": "has_mechanism", "evidence_class": "inferred"}):
+        e = {**untouched, "confidence": 0.9, "confidence_basis": {}, "attributes": {}}
+        assert c.apply_in_vitro_only(e, [vitro]) is False and e["confidence"] == 0.9 and e["attributes"] == {}
+
+
 def test_cap_inferred() -> None:
     assert c.cap_inferred(0.9) == 0.5
     assert c.cap_inferred(0.5) == 0.5

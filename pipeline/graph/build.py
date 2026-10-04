@@ -71,6 +71,23 @@ Pipeline inside :func:`build`
    then counts every disease it reached (direct + via mechanism + via ancestor) and a second row
    per route (``"<term> [resolution: mechanism label]"`` / ``"<term> [resolution: ancestor]"``)
    records how the asset was linked; a term that resolves to nothing stays a zero-hit row.
+   Every asset edge carries the Act tab's attributes by route (:func:`asset_attributes`,
+   ``pipeline.models`` names): a direct match ``verdict: reusable_now`` with empty ``differs`` /
+   ``needs_review``; ``via_mechanism`` ``adaptable_needs_review``, ``needs_review ["eligibility"]``,
+   ``differs ["organisation names the mechanism, not this disease"]``; ``via_ancestor``
+   ``adaptable_needs_review``, ``needs_review ["eligibility", "biological"]``, ``differs
+   ["organisation serves the umbrella disease <ancestor label>, <depth> level(s) above"]``.
+5c. **Directory-search gap on the disease page** (:func:`attach_directory_searches`): for every seed
+   term that reached disease ids by any of the three routes, each ZERO-hit
+   ``seed:patient_group_search:*`` row whose query or recorded outcome contains the normalised term
+   (case-insensitive, trailing parenthetical dropped, plural ``s`` optional) is repeated under those
+   disease ids, so "no dedicated group was found in NORD / EURORDIS / ..." is visible on the
+   disease's Gaps tab; the ``seed:*`` row stays.
+5d. **Investigator contact routes** (:func:`contact_routes`, README section 4 / 5): an ``orcid:``
+   Investigator gets its public ORCID page, a RePORTER PI its project detail page
+   (``props.source_url``); never an e-mail or phone. Written to ``props.contact_source`` (the
+   contract's name), ``props.contact`` (the key the Act tab reads) and ``attributes.contact_source``
+   on the person's ``publishes_on`` / ``has_funded_project`` edges.
 6. **Pruning** (:func:`prune_graph`, thresholds in ``pipeline/seeds/cluster.yaml``): the store
    keeps a wide slice so that Lane B's resolved endpoints stay resolvable; the export applies the
    stricter inclusion rule :func:`pipeline.sources.optimuskg.disease_gene_included` (a curated
@@ -110,9 +127,9 @@ Pipeline inside :func:`build`
    fired, one for the claims bundle and one for the patient-group seed file; ``coverage`` from the
    store, the mechanism rules, the evidence integration, the patient-group seeds and the prune
    step, restricted to exported node ids plus ``seed:*`` / ``source:*`` / ``claims:*`` / ``mech:*``
-   keys and every ``claims.json endpoint`` row (a claim's failed link stays visible even when its
-   resolved side was pruned); rows for other pruned entities stay in the store and are counted in
-   the report.
+   keys and every ``unresolved literature mention`` row (a claim's failed link stays visible even
+   when its resolved side was pruned); rows for other pruned entities stay in the store and are
+   counted in the report.
 9. Edge ids ``e_000001...`` are assigned after sorting by (relation, source, target), so two builds
    of one store give identical ids. ``clusters`` is empty here (``pipeline.graph.logic`` fills it).
 
@@ -170,10 +187,13 @@ __all__ = [
     "VARIANT_OF_CONFIDENCE",
     "VIA_ANCESTOR_LABEL",
     "VIA_MECHANISM_LABEL",
+    "asset_attributes",
+    "attach_directory_searches",
     "build",
     "build_graph",
     "build_patient_groups",
     "compact_edge",
+    "contact_routes",
     "finalize_edges",
     "normalize_mechanism_term",
     "patient_group_options",
@@ -268,7 +288,25 @@ EVIDENCE_CLASS_RANK = {"inferred": 0, "observed": 1, "extracted": 2}
 # CLAIMS_COVERAGE_SOURCE (a claim in claims[] whose endpoint failed keeps its gap even when the
 # resolved side was pruned; the API serves coverage-only ids as honest gaps, api/CONTRACT.md).
 COVERAGE_KEEP_PREFIXES = ("seed:", "source:", "claims:", "mech:")
-CLAIMS_COVERAGE_SOURCE = "claims.json endpoint"  # pipeline.graph.evidence.COVERAGE_SOURCE
+CLAIMS_COVERAGE_SOURCE = "unresolved literature mention"  # pipeline.graph.evidence.COVERAGE_SOURCE (kept literal: that module is optional)
+# Asset edges (Org -> Disease / Mechanism ``supports_community`` / ``covers``) carry the Act tab's
+# attributes by the route that produced them (pipeline.models docstring: verdict, differs,
+# needs_review). A direct seed match is reusable as is; a rule-derived route is adaptable but needs
+# an eligibility check (the organisation names a mechanism, not this disease) and, one level
+# further out, a biological check too (it serves the umbrella disease <depth> level(s) above).
+ASSET_VERDICT_DIRECT = "reusable_now"
+ASSET_VERDICT_RULE = "adaptable_needs_review"
+ASSET_REVIEW_ELIGIBILITY = "eligibility"
+ASSET_REVIEW_BIOLOGICAL = "biological"
+ASSET_DIFFERS_VIA_MECHANISM = "organisation names the mechanism, not this disease"
+ASSET_DIFFERS_VIA_ANCESTOR = "organisation serves the umbrella disease {ancestor}, {depth} level(s) above"
+# Investigator contact routes (README section 4 / 5: a public page, never a guessed address): an
+# ``orcid:`` node's public ORCID page, a RePORTER PI's project detail page (``props.source_url``).
+# Written to ``props.contact_source`` (the contract's name) AND ``props.contact`` (the key
+# web/components/act-tab.tsx reads) on the node, and to ``attributes.contact_source`` on the
+# person's ``publishes_on`` / ``has_funded_project`` edges.
+ORCID_PUBLIC_URL = "https://orcid.org/{orcid}"
+CONTACT_EDGE_RELATIONS = frozenset({"publishes_on", "has_funded_project"})
 # A Gene node carrying this prop (true) is the gap probe: exported without edges (prune_graph).
 GAP_PROBE_PROP = optimuskg.GAP_PROBE_PROP
 
@@ -318,7 +356,7 @@ EXPORT_PROPS_KEEP: dict[str, dict[str, int | None]] = {
         "name": None, "affiliations": None, "orcid": None, "match_confidence": None, "n_papers": None, "papers": None,
         "papers_by_match": None, "role_label": None, "title": None, "organization": None, "profile_id": None, "record_id": None,
         "n_projects": None, "projects": None, "found_by_queries": None, "source_url": None, "pmids": None,
-        "unlinked_projects": None,
+        "unlinked_projects": None, "contact_source": None, "contact": None, "contact_source_kind": None,
     },
 }
 GENE_XREF_SOURCES = frozenset({"hgnc", "omim", "uniprot"})
@@ -402,6 +440,9 @@ class PatientGroupResult:
     coverage: list[dict[str, Any]] = field(default_factory=list)
     source: dict[str, str] | None = None
     report: dict[str, Any] = field(default_factory=dict)
+    # the directory searches the seed file logged, with the outcome text the coverage row does not
+    # carry (attach_directory_searches matches seed terms against query + outcome)
+    searches: list[dict[str, Any]] = field(default_factory=list)
     # (org id, seed term) -> disease ids the term reached, in total and per resolution route
     # (RESOLUTION_MECHANISM_LABEL / RESOLUTION_ANCESTOR); propagate_patient_groups extends them and
     # rewrites the coverage rows' hits from them.
@@ -825,6 +866,10 @@ def _reconcile_claim_edges(
         if "preprint" in labels:
             attrs["preprint"] = True
         edge["confidence_basis"]["claim_status"] = status_basis
+        # the in-vitro / review-only rule over the FINAL claim set (a dropped quote may have changed it)
+        conf_rubric.apply_in_vitro_only(edge, [claims_by_id[i] for i in sup])
+        if attrs.get("labels") == []:
+            attrs.pop("labels", None)
     return {"claim_ids_removed_from_edges": removed_ids, "edges_dropped_without_claims": dropped_edges}
 
 
@@ -891,14 +936,41 @@ def _org_sources(url: str, name: str, retrieved_at: str) -> list[dict[str, str]]
     return [{"kind": "db", "id": f"{PATIENT_GROUP_SOURCE_DB} {name}", "date": retrieved_at}]
 
 
+def asset_attributes(route: str | None = None, *, ancestor_label: str = "", depth: int = 0) -> dict[str, Any]:
+    """The Act tab's ``verdict`` / ``differs`` / ``needs_review`` for an asset edge by the route
+    that produced it (module constants): a direct seed match is ``reusable_now`` with nothing to
+    review; :data:`VIA_MECHANISM_LABEL` is ``adaptable_needs_review`` with an eligibility question
+    (the organisation names the mechanism, not this disease); :data:`VIA_ANCESTOR_LABEL` adds a
+    biological question and names the umbrella disease and how many ``is_a`` levels above it sits."""
+    if route == VIA_MECHANISM_LABEL:
+        return {"verdict": ASSET_VERDICT_RULE, "differs": [ASSET_DIFFERS_VIA_MECHANISM], "needs_review": [ASSET_REVIEW_ELIGIBILITY]}
+    if route == VIA_ANCESTOR_LABEL:
+        return {
+            "verdict": ASSET_VERDICT_RULE,
+            "differs": [ASSET_DIFFERS_VIA_ANCESTOR.format(ancestor=ancestor_label, depth=int(depth))],
+            "needs_review": [ASSET_REVIEW_ELIGIBILITY, ASSET_REVIEW_BIOLOGICAL],
+        }
+    return {"verdict": ASSET_VERDICT_DIRECT, "differs": [], "needs_review": []}
+
+
 def _org_edge(
-    org: Mapping[str, Any], target: str, relation: str, conf: float, basis: dict[str, Any], labels: Sequence[str] = (), *, evidence_class: str = "observed"
+    org: Mapping[str, Any],
+    target: str,
+    relation: str,
+    conf: float,
+    basis: dict[str, Any],
+    labels: Sequence[str] = (),
+    *,
+    evidence_class: str = "observed",
+    asset: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     """An Org -> ``target`` edge sourced from the organisation's verified URL: observed for an exact
     match; for a rule-derived route (``evidence_class="inferred"``) the confidence is capped at
-    :data:`conf_rubric.INFERRED_CAP` and :data:`conf_rubric.INFERRED_LABEL` joins the labels."""
+    :data:`conf_rubric.INFERRED_CAP` and :data:`conf_rubric.INFERRED_LABEL` joins the labels.
+    ``asset`` is the Act-tab attribute set (:func:`asset_attributes`; default: the direct match)."""
     props = org.get("props") or {}
     attributes: dict[str, Any] = {"scope": props["scope"]} if props.get("scope") else {}
+    attributes.update(asset if asset is not None else asset_attributes())
     edge_labels = list(labels)
     if evidence_class == "inferred":
         conf = conf_rubric.cap_inferred(conf)
@@ -1041,7 +1113,9 @@ def build_patient_groups(seeds_pg: Mapping[str, Any] | None, nodes: Mapping[str,
         if hits is None:
             text += " [not executable]"
             hits = 0
-        out.coverage.append({"entity_id": f"{PATIENT_GROUP_SEARCH_PREFIX}{directory}", "source": directory, "query": text, "date": str(s.get("date") or seed_date), "hits": int(hits)})
+        row = {"entity_id": f"{PATIENT_GROUP_SEARCH_PREFIX}{directory}", "source": directory, "query": text, "date": str(s.get("date") or seed_date), "hits": int(hits)}
+        out.coverage.append(row)
+        out.searches.append({**row, "raw_query": query, "outcome": _normalize_ws(str(s.get("outcome") or ""))})
         searches += 1
     out.source = {"name": "patient group seeds: pipeline/seeds/patient_groups.yaml", "version": "", "retrieved_at": seed_date, "license": PATIENT_GROUP_SEED_LICENSE}
     out.report = {
@@ -1128,7 +1202,8 @@ def propagate_patient_groups(
     def add(org: Mapping[str, Any], disease_id: str, relation: str, conf: float, basis: dict[str, Any], label: str, route: str) -> None:
         # both routes are rule-derived: inferred, capped at 0.5 (see COMMUNITY_RULE_EVIDENCE_CLASS)
         basis["rule_evidence_class_note"] = COMMUNITY_RULE_EVIDENCE_CLASS_NOTE
-        new_edge = _org_edge(org, disease_id, relation, conf, basis, labels=[label], evidence_class=COMMUNITY_RULE_EVIDENCE_CLASS)
+        asset = asset_attributes(label, ancestor_label=str((nodes.get(str(basis.get("via_ancestor"))) or {}).get("label") or basis.get("via_ancestor") or ""), depth=int(basis.get("depth") or 0))
+        new_edge = _org_edge(org, disease_id, relation, conf, basis, labels=[label], evidence_class=COMMUNITY_RULE_EVIDENCE_CLASS, asset=asset)
         _merge_edge(edges, new_edge)
         result.edges.append(new_edge)
         for term in basis.get("seed_terms") or []:
@@ -1206,6 +1281,113 @@ def propagate_patient_groups(
         }
     )
     return result.report
+
+
+def _normalize_search_term(term: str) -> str:
+    """The form a seed term is looked for in a directory search's text: trailing parenthetical
+    dropped, lower-case, whitespace collapsed."""
+    return _normalize_ws(_TRAILING_PAREN.sub("", str(term or "")).lower())
+
+
+def _term_pattern(term: str) -> re.Pattern[str] | None:
+    """Case-insensitive containment of the normalised term; a trailing plural ``s`` on its last
+    word is optional ("myeloproliferative neoplasms" is found in "myeloproliferative neoplasm
+    patient organization")."""
+    norm = _normalize_search_term(term)
+    if not norm:
+        return None
+    body = re.escape(norm[:-1]) + "s?" if norm.endswith("s") and len(norm) > 1 else re.escape(norm) + "s?"
+    return re.compile(r"(?<![a-z0-9])" + body + r"(?![a-z0-9])", re.I)
+
+
+def attach_directory_searches(result: PatientGroupResult, nodes: Mapping[str, Mapping[str, Any]]) -> dict[str, Any]:
+    """Module docstring step 5c: the directory-search gap on the disease page. For every seed term
+    that reached disease ids (directly, via the mechanism label or via the ancestor root:
+    ``result.reached``), every ZERO-hit ``seed:patient_group_search:*`` row whose query or outcome
+    text contains the normalised term (:func:`_term_pattern`) is repeated under each of those
+    disease ids in ``result.coverage`` (same source, query text and date, hits 0); the ``seed:*``
+    row stays. Call after :func:`propagate_patient_groups`. Returns the report entry."""
+    pattern_cache: dict[str, re.Pattern[str] | None] = {}
+    diseases_by_search: dict[int, set[str]] = defaultdict(set)
+    terms_by_search: dict[int, set[str]] = defaultdict(set)
+    for (_org_id, term), diseases in result.reached.items():
+        if not diseases:
+            continue
+        if term not in pattern_cache:
+            pattern_cache[term] = _term_pattern(term)
+        pat = pattern_cache[term]
+        if pat is None:
+            continue
+        for i, s in enumerate(result.searches):
+            if int(s.get("hits") or 0) != 0:
+                continue
+            if pat.search(f"{s.get('raw_query', '')} {s.get('outcome', '')}"):
+                diseases_by_search[i] |= {d for d in diseases if nodes.get(d, {}).get("type") == NodeType.Disease.value}
+                terms_by_search[i].add(term)
+    seen = {(r["entity_id"], r["source"], r["query"], r["date"]) for r in result.coverage}
+    attached = 0
+    by_search: dict[str, dict[str, Any]] = {}
+    for i in sorted(diseases_by_search):
+        s = result.searches[i]
+        for disease_id in sorted(diseases_by_search[i]):
+            key = (disease_id, s["source"], s["query"], s["date"])
+            if key in seen:
+                continue
+            seen.add(key)
+            result.coverage.append({"entity_id": disease_id, "source": s["source"], "query": s["query"], "date": s["date"], "hits": 0})
+            attached += 1
+        by_search[s["entity_id"]] = {"query": s["raw_query"], "matched_terms": sorted(terms_by_search[i]), "diseases": len(diseases_by_search[i])}
+    report = {
+        "rule": "zero-hit directory search attached to every disease a matching seed term reached (query/outcome contains the normalised term)",
+        "rows_attached": attached,
+        "diseases": len({d for ds in diseases_by_search.values() for d in ds}),
+        "by_search": dict(sorted(by_search.items())),
+    }
+    result.report["directory_search_gaps"] = report
+    return report
+
+
+# --------------------------------------------------------------------------------------
+# investigator contact routes (README section 4 / 5)
+# --------------------------------------------------------------------------------------
+
+
+def contact_routes(nodes: Mapping[str, dict[str, Any]], edges: Mapping[tuple[str, str, str], dict[str, Any]]) -> dict[str, Any]:
+    """A public contact route for every Investigator node, by a general rule and never an address:
+    an ``orcid:<id>`` node gets its public ORCID page (:data:`ORCID_PUBLIC_URL`); otherwise a node
+    whose ``props.source_url`` is an http(s) URL (a RePORTER PI's project detail page) gets that
+    page. The route is written to ``props.contact_source`` (the contract's name) and
+    ``props.contact`` (what the Act tab reads), with ``props.contact_source_kind`` saying which
+    rule fired, and to ``attributes.contact_source`` on the person's :data:`CONTACT_EDGE_RELATIONS`
+    edges. Nodes with neither stay without a route (nothing is guessed). Returns the report."""
+    routes: dict[str, str] = {}
+    kinds: Counter[str] = Counter()
+    for nid, n in nodes.items():
+        if n.get("type") != NodeType.Investigator.value:
+            continue
+        props = n.setdefault("props", {})
+        url: str | None = None
+        kind: str | None = None
+        if nid.startswith("orcid:") and nid[len("orcid:"):].strip() and not re.search(r"\s", nid):
+            url, kind = ORCID_PUBLIC_URL.format(orcid=nid[len("orcid:"):].strip()), "orcid_public_page"
+        else:
+            source_url = props.get("source_url")
+            if isinstance(source_url, str) and source_url.startswith(("http://", "https://")):
+                url, kind = source_url.strip(), "reporter_project_page"
+        if url is None:
+            kinds["none"] += 1
+            continue
+        props["contact_source"] = url
+        props["contact"] = url
+        props["contact_source_kind"] = kind
+        routes[nid] = url
+        kinds[str(kind)] += 1
+    edges_touched = 0
+    for (s, _t, rel), e in edges.items():
+        if rel in CONTACT_EDGE_RELATIONS and s in routes:
+            e.setdefault("attributes", {})["contact_source"] = routes[s]
+            edges_touched += 1
+    return {"rule": "orcid: id -> public ORCID page; else props.source_url (RePORTER project page); never an e-mail or phone", "by_kind": dict(sorted(kinds.items())), "edges_with_contact_source": edges_touched}
 
 
 # --------------------------------------------------------------------------------------
@@ -1688,6 +1870,10 @@ def build(store: Any, seeds: Mapping[str, Any], claims_bundle: Any = None, *, no
     # -- patient groups, step 5b: mechanism and umbrella routes over the exported graph -----
     if groups.nodes:
         report["patient_groups"] = propagate_patient_groups(groups, nodes, edges, options=patient_group_options(seeds))
+        # step 5c: the zero-hit directory searches that name a seed term reach the term's diseases
+        attach_directory_searches(groups, nodes)
+    # -- investigator contact routes (public pages only) over the exported people --------
+    report["contact_routes"] = contact_routes(nodes, edges)
 
     # -- slim + scrub, then make the claim-bearing edges consistent ----------------
     for n in nodes.values():
