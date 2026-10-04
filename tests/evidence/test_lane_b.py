@@ -403,3 +403,19 @@ def test_norm_keeps_greek_letters_and_gene_mechanism_check():
     links = {"c_1": {"subject": "g:IFNA1", "object": "mech:STAT1:GoF", "variant": ""}}
     review = _gene_mechanism_mismatches(links, NodeIndex(nodes, embed=fake_embed))
     assert links["c_1"]["subject"] is None and "gene mismatch" in review[0]["reason"]
+
+
+def test_demo_entities_and_precompute_keys():
+    from pipeline.llm.explain import demo_entities, precompute
+    from pipeline.llm import client
+    ents = demo_entities(GRAPH)
+    assert ents == ["n:disX", "n:disY", "n:drugA", "n:geneG"]
+    import pytest as _pt
+    mp = _pt.MonkeyPatch()
+    mp.setattr(client, "parse", lambda *a, **k: None)  # refusals -> validated templates
+    try:
+        out = precompute(GRAPH, {"maria": [["n:disX"]]}, workers=2)
+    finally:
+        mp.undo()
+    assert set(out) == {"n:disX", "n:disY", "n:drugA", "n:geneG", "draft:n:disX"}
+    assert all(r["text"] and r["citations"] for r in out.values())

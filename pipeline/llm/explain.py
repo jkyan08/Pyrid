@@ -198,17 +198,48 @@ def cache_key(ids: list[str] | str, kind: str = "explain") -> str:
 JOURNEYS: dict[str, list[list[str]]] = {}
 
 
-def precompute(graph: dict, journeys: dict[str, list[list[str]]]) -> dict:
+ENTITY_TYPES = {"Disease", "Mechanism", "Variant", "Drug", "Phenotype", "Gene", "Pathway", "Registry", "PatientGroup"}
+AUTHORSHIP = {"author_of", "works_on"}
+
+
+def demo_entities(graph: dict) -> list[str]:
+    """Every entity node with at least one evidence edge (authorship edges don't count): the set
+    `/explain` can be asked about on the demo site, which covers every journey in README §11."""
+    types = {n["id"]: n["type"] for n in graph["nodes"]}
+    ids = set()
+    for e in graph["edges"]:
+        if e["relation"] in AUTHORSHIP:
+            continue
+        ids |= {i for i in (e["source"], e["target"]) if types.get(i) in ENTITY_TYPES}
+    return sorted(ids)
+
+
+def precompute(graph: dict, journeys: dict[str, list[list[str]]], workers: int = 8) -> dict:
+    """Explanations keyed by entity id (what `/explain` looks up first), plus any multi-id journey
+    steps from journeys.json keyed by their joined ids, plus a draft for each journey step."""
+    from concurrent.futures import ThreadPoolExecutor
+
     from pipeline.llm.draft import draft
-    out = {}
+
+    jobs: list[tuple[str, str, list[str]]] = [("explain", "entity", [i]) for i in demo_entities(graph)]
     for name, steps in journeys.items():
         for ids in steps:
-            out[cache_key(ids)] = {"journey": name, "ids": ids, **explain(ids, graph, fallback=True)}
-            out[cache_key(ids, "draft")] = {"journey": name, "ids": ids, **draft(ids, graph, fallback=True)}
-    return out
+            if len(ids) > 1:
+                jobs.append(("explain", name, ids))
+            jobs.append(("draft", name, ids))
+
+    def run(job):
+        kind, name, ids = job
+        fn = explain if kind == "explain" else draft
+        return cache_key(ids, kind), {"journey": name, "ids": ids, **fn(ids, graph, fallback=True)}
+
+    with ThreadPoolExecutor(workers) as pool:
+        return dict(pool.map(run, jobs))
 
 
 def main() -> None:
+    import os
+
     build = REPO_ROOT / "data" / "build"
     graph_path = build / "graph.json"
     if not graph_path.exists():
@@ -216,7 +247,7 @@ def main() -> None:
     graph = json.loads(graph_path.read_text())
     jpath = build / "journeys.json"
     journeys = json.loads(jpath.read_text()) if jpath.exists() else JOURNEYS
-    result = precompute(graph, journeys)
+    result = precompute(graph, journeys, workers=int(os.environ.get("ATLAS_LLM_WORKERS", "8")))
     (build / "explanations.json").write_text(json.dumps(result, indent=1, ensure_ascii=False))
     modes = {}
     for r in result.values():
