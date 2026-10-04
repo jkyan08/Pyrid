@@ -189,7 +189,7 @@ Defined as Pydantic models in `pipeline/models.py`; JSON Schema generated to `do
 - `Claim.paper` (required) is the `Paper` node id; `pmid` is `""` for preprints. Every Paper node referenced by a claim carries `props.abstract`, so the quote check (hard rule 5) is enforced by `Graph.load` itself, not only in tests.
 - `status` is the single dominant value; `attributes.labels` carries the full display set (vocabulary in §6). Inferred edges that no rule flags use `status: supported` and must be rendered with the `evidence_class` badge; only rule violations use `inferred_unsupported`.
 - Disease/Phenotype/Pathway ids are colon CURIEs (`MONDO:…`, `HP:…`, `EFO:…`, `Orphanet:…`); the backbone's underscore spelling is kept in `props.backbone_id`.
-- Relation vocabulary (the frontend and tests build against it; constants in `tests/conftest.py`): `associated_with` (Disease→Gene, `attributes.origin`), `has_mechanism` (Disease→Mechanism and Variant→Mechanism), `has_phenotype`, `in_pathway`, `variant_of`, `inhibits` (Drug→Gene/Pathway), `treats` (Drug→Disease), `similar_to` (Disease→Disease, inferred, score breakdown in `confidence_basis`); plus `author_of`, `extracted_from`, `covers`, `supports_community`, `studies`, `evaluates` for the paper/asset layers.
+- Relation vocabulary (the frontend and tests build against it; constants in `tests/conftest.py`). Backbone: `associated_with` (Disease→Gene, `attributes.origin`), `has_mechanism` (Disease→Mechanism and Variant→Mechanism), `has_phenotype` (Disease→Phenotype, HPO aspect P only; other aspects are `has_inheritance`, `has_clinical_course`, `has_clinical_modifier`, `has_medical_history`), `is_a` (child→parent for phenotypes and diseases), `in_pathway` (Gene→Pathway; Reactome and GO processes), `inhibits` / `targets` (Drug→Gene), `indicated_for` / `contraindicated_for` (Drug→Disease, backbone). Variants: `variant_of` (Variant→Gene), `has_condition` (Variant→Disease, ClinVar). Studies: `studies` (Study→Disease), `evaluates` (Study→Drug), `mentions` (Study→Gene, inferred). People: `author_of` (Investigator→Paper), `publishes_on` (Investigator→Disease/Mechanism, aggregated authorship), `has_funded_project` (Investigator→Gene/Disease, RePORTER text match, inferred). Communities: `supports_community` (PatientGroup→Disease), `covers` (Registry→Disease). Literature: `treats` (Drug→Disease, claim-backed or rule-inferred), `modulates` (Drug→Gene/Pathway/Mechanism). Analytics: `similar_to` (Disease→Disease, inferred, score breakdown in `confidence_basis`).
 - Asset edges carry `attributes.verdict` (`reusable_now | adaptable_needs_review | not_transferable`), `attributes.differs: [...]`, `attributes.needs_review: ["biological" | "eligibility"]`. Investigator contact routes are `attributes.contact_source` (a public URL), never a guessed address.
 - Clusters are a partition over Disease nodes (members may also list the mechanism and variant nodes that travel with a disease); `robust` means the membership held across all three Leiden weightings.
 - Lane B → Lane A handoff is `data/build/claims.json`, validated by `ClaimsBundle` in `pipeline/models.py` (papers with abstracts, quote-verified claims with resolved node ids or `text:` mentions, unresolved rows, PubMed coverage).
@@ -249,29 +249,35 @@ Raw inputs are always kept in `confidence_basis`.
 | `relation_conflict` set | Downgrade; surface conflicting assertions in the evidence drawer |
 | Extracted claims | trial > cohort > case series > case report > in vitro; verified quote required |
 | Treatment edges | Aggregate claims. Supporting + contradicting both present → `contested` (dominant `status`). Every **patient-level** study behind the edge (trial, cohort, case series, case report) has < 10 patients → `small_n`; in-vitro and review claims carry no patients and never count toward n. The full label set goes in `attributes.labels` from the vocabulary `promising` (≥1 supporting clinical claim), `contested`, `small_n`, `preprint` (≥1 claim from a preprint); the UI renders e.g. "promising, contested, small-n" |
-| Inferred edges (rules / similarity) | Capped at 0.5; always labeled inferred |
+| ClinVar variant edges | `variant_of` 0.95 (ClinVar gene annotation). `has_condition` from the review status: practice guideline 1.0 · expert panel 0.9 · multiple submitters, no conflicts 0.8 · single submitter 0.6 · conflicting interpretations 0.4 · no assertion criteria 0.3; classification and last-evaluated date kept in the basis |
+| Registry / directory records | ClinicalTrials.gov `studies` / `evaluates` 0.8 (registry record, data-processed date in basis); patient-group `supports_community` / `covers` 0.8 (URL fetched on the recorded date) |
+| Text-matched links | `mentions` (study found by a gene-term query) 0.3 and `has_funded_project` (RePORTER title/abstract match) 0.4 — both inferred, matched text in the basis |
+| Authorship | `author_of` 0.9 (PubMed record); `publishes_on` min(0.9, 0.3 + 0.1 × papers) with the paper ids in the basis; people without an ORCID are flagged `match_confidence: low` |
+| Claim-backed edges | Per-claim weight by study type (trial 1.0 · cohort 0.8 · case series 0.6 · case report 0.4 · in vitro 0.3 · review 0.5). Edge confidence = min(1, best supporting weight + 0.05 × (supporting − 1)) × (1 − 0.3 × min(1, contradicting ⁄ supporting)); an observed edge with claims takes the max of its database and claim confidence |
+| Inferred edges (rules / similarity) | Capped at 0.5; always labeled inferred. Similarity edges carry 0.5 × score; `direction mismatch` rule edges 0.1 (× 0.5 when the link is only pathway-level); direction-match candidates 0.3 |
 
 ### Similarity (`pipeline/graph/similarity.py`)
 
-Between mechanism-level disease entities:
+Between candidate diseases (every Disease node with ≥ 1 mechanism edge or ≥ 1 phenotype that carries information content):
 
 ```
-sim = w_m · mechanism_score          # same pathway step, same direction, same origin
-    + w_p · ic_weighted_phenotype_overlap
-    − w_c · conflict_penalty         # opposite direction on same gene/pathway; germline vs somatic
+score = w_m · mechanism_score          # mean of same_direction, same_origin, shared_pathway (Jaccard of the genes' Reactome/GO pathways)
+      + w_p · phenotype_overlap         # IC-weighted Jaccard over ancestor-closed HPO sets (IC from all 12,882 HPO-annotated diseases)
+      − w_c · conflict_penalty          # 1.0 opposite direction on the same gene · 0.5 opposite direction in a shared pathway · 1.0 germline vs somatic
 ```
 
-Full score breakdown stored on every similarity edge so the UI can say *why* two diseases are neighbours. Penalties are **general rules** documented here — never special-cased for specific genes.
+An unknown origin scores 0 (no evidence of a shared origin), edges need `score ≥ 0.2` (a shared pathway set alone, w_m/3 ≈ 0.17, never makes an edge) and survive if they are in either disease's top 10. Every `similar_to` edge is `inferred`, confidence = 0.5 × score, with the full breakdown (components, weights, shared phenotypes with their IC) in `confidence_basis` so the UI can say *why* two diseases are neighbours. All numbers live in `pipeline/seeds/logic.yaml`; nothing names a gene or disease.
 
 ### Clustering (`pipeline/graph/cluster.py`)
 
-- Leiden on the similarity graph.
-- Re-run at three weightings of (w_m, w_p, w_c); a cluster whose membership holds across all three is `robust`, otherwise `sensitive`.
-- **Ablation:** re-run with penalties off (phenotype + pathway only) and report whether tests 1–3 still pass. _(results to fill)_
+- **Signed Leiden**: positive layer = `similar_to` edges; negative layer = *repulsions*, the candidate pairs whose conflict penalty outweighs their similarity (never exported as edges). `leidenalg` optimises both layers jointly with a fixed seed, so penalised pairs are pushed apart instead of relying on modularity alone.
+- Three weightings (`balanced` 0.5/0.4/0.6 → primary; `phenotype_heavy` 0.35/0.55/0.6; `mechanism_heavy` 0.6/0.25/0.5). A cluster is `robust` when its primary membership matches a cluster in **every** other weighting with Jaccard ≥ 0.8, else `sensitive`. Clusters are a partition over Disease nodes; `why` carries dominant direction/origin, shared pathways, top shared phenotypes by IC and the robustness Jaccards.
+- **Ablation (penalties off, phenotype + pathway only):** ground-truth tests 1–3 **still pass** — the within-group similarity is strong enough that Leiden separates the groups anyway. The penalties still matter for what the atlas shows: with them off, 13 directly conflicting pairs (e.g. STAT1 GoF ↔ STAT1 LoF at score 0.34) become `similar_to` edges and the immunodeficiency cluster absorbs four extra diseases. Reproduce with `uv run python -m pipeline.graph.logic --in data/build/graph.json --out /tmp/g.json --ablation`.
 
 ### Rules (`pipeline/graph/rules.py`)
 
-- Pathway-inhibiting drug → LoF mechanism ⇒ edge with `status: inferred_unsupported`, reason "direction mismatch".
+- **Direction mismatch**: a drug with an `inhibits` edge to gene *g* (directly, or via a pathway it inhibits) gets an edge to every disease whose mechanism on *g* is loss-type (`LoF`, `DN`): `treats`, `inferred_unsupported`, confidence 0.1, reason "direction mismatch". Never added where literature or a backbone indication already asserts a treatment.
+- **Direction match (hypothesis)**: the same scan for `GoF` mechanisms adds a `treats` candidate (inferred, 0.3, labels `candidate`, `hypothesis`) so Priya's ranking can show mechanism-only leads clearly separated from literature-backed ones.
 
 ---
 
@@ -378,12 +384,12 @@ Times are ET on Sat Oct 3 → Sun Oct 4. If we start late, shift proportionally.
   - [x] Generated mock `data/build/graph.mock.json` via `tests/fixtures/make_mock.py` (`mock:` ids, "Mock " labels, no real IDs/PMIDs)
   - [x] `tests/test_contract.py` passing on the mock
   - [x] `tests/test_ground_truth.py` tests 1–7 as `xfail` (helpers + relation vocabulary in `tests/conftest.py`)
-  - [ ] `web/` Next.js shell rendering the mock as a force graph — **moved to Lane C** per [AGENT-SPLIT.md](AGENT-SPLIT.md); builds against the mock
-- [ ] **M1 — Backbone** (~5 PM) · *done when: frontend renders real data*
-  - [ ] OptimusKG spike (45 min) → `docs/optimuskg-spike.md` → go / fallback decision
-  - [ ] Cluster genes, diseases, phenotypes, pathways, drugs loaded into SQLite
-  - [ ] HPO information content over all annotated diseases
-  - [ ] `export.py` writes graph v0; frontend switched from mock to real
+  - [x] `web/` Next.js shell rendering the graph as a force graph — **Lane C** per [AGENT-SPLIT.md](AGENT-SPLIT.md); built against the mock, now reads `data/build/graph.json`
+- [x] **M1 — Backbone** (graph v0 built 2026-10-03 ~6 PM ET) · *done when: frontend renders real data*
+  - [x] OptimusKG spike → `docs/optimuskg-spike.md` → **GO** (both exit criteria met; client bypassed because Dataverse 403s the default Python user agent)
+  - [x] Cluster genes, diseases, phenotypes, pathways, drugs loaded into SQLite (`data/build/evidence.sqlite`, rebuilt by `make data`)
+  - [x] HPO information content over all 12,882 annotated diseases (Phenotypic-abnormality subtree; inheritance/course terms are separate relations)
+  - [x] `export.py` writes graph v0; frontend switched from mock to real at the M1 sync point
 - [ ] **M2 — New layers** (~9 PM) · *done when: all layers in the graph*
   - [ ] ClinVar variants (incl. required STAT1 variants) + mechanism nodes
   - [ ] PubMed: Section 11 papers resolved; abstracts fetched (caps enforced)
@@ -391,9 +397,9 @@ Times are ET on Sat Oct 3 → Sun Oct 4. If we start late, shift proportionally.
   - [ ] ClinicalTrials.gov studies (queries logged, incl. zero hits)
   - [ ] Investigators from author lists; RePORTER grants
   - [ ] `patient_groups.yaml` verified; directory searches logged
-- [ ] **M3 — Graph logic** (~10 PM) · *done when: tests 1–5 and 7 pass*
-  - [ ] `confidence.py`, `similarity.py`, `cluster.py` (×3 weightings), `rules.py`
-  - [ ] Ablation run recorded
+- [x] **M3 — Graph logic** (tests 1–5 and 7 pass against the built graph, 2026-10-03 ~9 PM ET)
+  - [x] `confidence.py`, `similarity.py`, `cluster.py` (×3 weightings, signed Leiden), `rules.py`, orchestrated by `pipeline/graph/logic.py`
+  - [x] Ablation run recorded (§6: tests 1–3 pass with penalties on and off)
 - [ ] **GATE** (10 PM) · *Maria's journey works end to end on the deployed site, with cached explanations*
 - [ ] **M4 — Remaining features** (~1 AM) · *done when: test 6 passes*
   - [ ] `/explain` + validator, `/draft`, `/gaps`, `/mechanism-search`

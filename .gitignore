@@ -17,3 +17,6 @@ web/.next/
 
 # OS
 .DS_Store
+
+# Evidence store, rebuilt by `make data` (pipeline/store.py)
+data/build/*.sqlite

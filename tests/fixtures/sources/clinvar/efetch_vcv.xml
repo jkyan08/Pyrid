@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+                        
+<ClinVarResult-Set><VariationArchive VariationID="4959183" VariationName="NM_007315.4(STAT1):c.986C&gt;T (p.Pro329Leu)" VariationType="single nucleotide variant" Accession="VCV004959183" Version="1" RecordType="classified" NumberOfSubmissions="1" NumberOfSubmitters="1" DateLastUpdated="2026-09-27" DateCreated="2026-09-22" MostRecentSubmission="2026-09-22">
+  <RecordStatus>current</RecordStatus>
+  <Species>Homo sapiens</Species>
+  <ClassifiedRecord>
+    <SimpleAllele AlleleID="5070057" VariationID="4959183">
+      <GeneList>
+        <Gene Symbol="STAT1" FullName="signal transducer and activator of transcription 1" GeneID="6772" HGNC_ID="HGNC:11362" Source="calculated" RelationshipType="within single gene">
+          <Location>
+            <CytogeneticLocation>2q32.2</CytogeneticLocation>
+            <SequenceLocation Assembly="GRCh38" AssemblyAccessionVersion="GCF_000001405.38" AssemblyStatus="current" Chr="2" Accession="NC_000002.12" start="190969149" stop="191014171" display_start="190969149" display_stop="191014171" Strand="-"/>
+            <SequenceLocation Assembly="GRCh37" AssemblyAccessionVersion="GCF_000001405.25" AssemblyStatus="previous" Chr="2" Accession="NC_000002.11" start="191833761" stop="191878975" display_start="191833761" display_stop="191878975" Strand="-"/>
+          </Location>
+          <OMIM>600555</OMIM>
+          <Haploinsufficiency last_evaluated="2013-09-18" ClinGen="https://www.ncbi.nlm.nih.gov/projects/dbvar/ISCA/isca_gene.cgi?sym=STAT1">No evidence available</Haploinsufficiency>
+          <Triplosensitivity last_evaluated="2013-09-18" ClinGen="https://www.ncbi.nlm.nih.gov/projects/dbvar/ISCA/isca_gene.cgi?sym=STAT1">No evidence available</Triplosensitivity>
+        </Gene>
+      </GeneList>
+      <Name>NM_007315.4(STAT1):c.986C&gt;T (p.Pro329Leu)</Name>
+      <CanonicalSPDI>NC_000002.12:190991278:G:A</CanonicalSPDI>
+      <VariantType>single nucleotide variant</VariantType>
+      <Location>
+        <CytogeneticLocation>2q32.2</CytogeneticLocation>
+        <SequenceLocation Assembly="GRCh38" AssemblyAccessionVersion="GCF_000001405.38" forDisplay="true" AssemblyStatus="current" Chr="2" Accession="NC_000002.12" start="190991279" stop="190991279" display_start="190991279" display_stop="190991279" variantLength="1" positionVCF="190991279" referenceAlleleVCF="G" alternateAlleleVCF="A"/>
+        <SequenceLocation Assembly="GRCh37" AssemblyAccessionVersion="GCF_000001405.25" AssemblyStatus="previous" Chr="2" Accession="NC_000002.11" start="191856005" stop="191856005" display_start="191856005" display_stop="191856005" variantLength="1" positionVCF="191856005" referenceAlleleVCF="G" alternateAlleleVCF="A"/>
+      </Location>
+      <ProteinChange>P299L</ProteinChange>
+      <ProteinChange>P329L</ProteinChange>
+      <ProteinChange>P296L</ProteinChange>
+      <ProteinChange>P276L</ProteinChange>
+      <ProteinChange>P331L</ProteinChange>
+      <ProteinChange>P341L</ProteinChange>
+      <HGVSlist>
+        <HGVS Type="genomic">
+          <NucleotideExpression sequenceAccessionVersion="LRG_111" sequenceAccession="LRG_111">
+            <Expression>LRG_111:g.27972C&gt;T</Expression>
+          </NucleotideExpression>
+        </HGVS>
+        <HGVS Type="coding">
+          <NucleotideExpression sequenceAccessionVersion="LRG_111t1" sequenceAccession="LRG_111t1">
+            <Expression>LRG_111t1:c.986C&gt;T</Expression>
+          </NucleotideExpression>
+          <ProteinExpression sequenceAccessionVersion="LRG_111p1" sequenceAccession="LRG_111p1" change="p.Pro329Leu">
+            <Expression>LRG_111p1:p.Pro329Leu</Expression>
+          </ProteinExpression>
+        </HGVS>
+        <HGVS Assembly="GRCh37" Type="genomic, top-level">
+          <NucleotideExpression sequenceAccessionVersion="NC_000002.11" sequenceAccession="NC_000002" sequenceVersion="11" change="g.191856005G&gt;A" Assembly="GRCh37">
+            <Expression>NC_000002.11:g.191856005G&gt;A</Expression>
+          </NucleotideExpression>
+        </HGVS>
+        <HGVS Assembly="GRCh38" Type="genomic, top-level">
+          <NucleotideExpression sequenceAccessionVersion="NC_000002.12" sequenceAccession="NC_000002" sequenceVersion="12" change="g.190991279G&gt;A" Assembly="GRCh38">
+            <Expression>NC_000002.12:g.190991279G&gt;A</Expression>
+          </NucleotideExpression>
+        </HGVS>
+        <HGVS Type="genomic">
+          <NucleotideExpression sequenceAccessionVersion="NG_008294.1" sequenceAccession="NG_008294" sequenceVersion="1" change="g.27972C&gt;T">
+            <Expression>NG_008294.1:g.27972C&gt;T</Expression>
+          </NucleotideExpression>
+        </HGVS>
+        <HGVS Type="coding">
+          <NucleotideExpression sequenceAccessionVersion="NM_001384880.1" sequenceAccession="NM_001384880" sequenceVersion="1" change="c.986C&gt;T">
+            <Expression>NM_001384880.1:c.986C&gt;T</Expression>
+          </NucleotideExpression>
+          <ProteinExpression sequenceAccessionVersion="NP_001371809.1" sequenceAccession="NP_001371809" sequenceVersion="1" change="p.Pro329Leu" singleLetterProteinChange="P329L">
+            <Expression>NP_001371809.1:p.Pro329Leu</Expression>
+          </ProteinExpression>
+          <MolecularConsequence ID="SO:0001583" Type="missense variant" DB="SO"/>
+        </HGVS>
+        <HGVS Type="coding">
+          <NucleotideExpression sequenceAccessionVersion="NM_001384881.1" sequenceAccession="NM_001384881" sequenceVersion="1" change="c.992C&gt;T">
+            <Expression>NM_001384881.1:c.992C&gt;T</Expression>
+          </NucleotideExpression>
+          <ProteinExpression sequenceAccessionVersion="NP_001371810.1" sequenceAccession="NP_001371810" sequenceVersion="1" change="p.Pro331Leu" singleLetterProteinChange="P331L">
+            <Expression>NP_001371810.1:p.Pro331Leu</Expression>
+          </ProteinExpression>
+          <MolecularConsequence ID="SO:0001583" Type="missense variant" DB="SO"/>
+        </HGVS>
+        <HGVS Type="coding">
+          <NucleotideExpression sequenceAccessionVersion="NM_001384882.1" sequenceAccession="NM_001384882" sequenceVersion="1" change="c.986C&gt;T">
+            <Expression>NM_001384882.1:c.986C&gt;T</Expression>
+          </NucleotideExpression>
+          <ProteinExpression sequenceAccessionVersion="NP_001371811.1" sequenceAccession="NP_001371811" sequenceVersion="1" change="p.Pro329Leu" singleLetterProteinChange="P329L">
+            <Expression>NP_001371811.1:p.Pro329Leu</Expression>
+          </ProteinExpression>
+          <MolecularConsequence ID="SO:0001583" Type="missense variant" DB="SO"/>
+        </HGVS>
+        <HGVS Type="coding">
+          <NucleotideExpression sequenceAccessionVersion="NM_001384883.1" sequenceAccession="NM_001384883" sequenceVersion="1" change="c.887C&gt;T">
+            <Expression>NM_001384883.1:c.887C&gt;T</Expression>
+          </NucleotideExpression>
+          <ProteinExpression sequenceAccessionVersion="NP_001371812.1" sequenceAccession="NP_001371812" sequenceVersion="1" change="p.Pro296Leu" singleLetterProteinChange="P296L">
+            <Expression>NP_001371812.1:p.Pro296Leu</Expression>
+          </ProteinExpression>
+          <MolecularConsequence ID="SO:0001583" Type="missense variant" DB="SO"/>
+        </HGVS>
+        <HGVS Type="coding">
+          <NucleotideExpression sequenceAccessionVersion="NM_001384884.1" sequenceAccession="NM_001384884" sequenceVersion="1" change="c.992C&gt;T">
+            <Expression>NM_001384884.1:c.992C&gt;T</Expression>
+          </NucleotideExpression>
+          <ProteinExpression sequenceAccessionVersion="NP_001371813.1" sequenceAccession="NP_001371813" sequenceVersion="1" change="p.Pro331Leu" singleLetterProteinChange="P331L">
+            <Expression>NP_001371813.1:p.Pro331Leu</Expression>
+          </ProteinExpression>
+          <MolecularConsequence ID="SO:0001583" Type="missense variant" DB="SO"/>
+        </HGVS>
+        <HGVS Type="coding">
+          <NucleotideExpression sequenceAccessionVersion="NM_001384885.1" sequenceAccession="NM_001384885" sequenceVersion="1" change="c.827C&gt;T">
+            <Expression>NM_001384885.1:c.827C&gt;T</Expression>
+          </NucleotideExpression>
+          <ProteinExpression sequenceAccessionVersion="NP_001371814.1" sequenceAccession="NP_001371814" sequenceVersion="1" change="p.Pro276Leu" singleLetterProteinChange="P276L">
+            <Expression>NP_001371814.1:p.Pro276Leu</Expression>
+          </ProteinExpression>
+          <MolecularConsequence ID="SO:0001583" Type="missense variant" DB="SO"/>
+        </HGVS>
+        <HGVS Type="coding">
+          <NucleotideExpression sequenceAccessionVersion="NM_001384886.1" sequenceAccession="NM_001384886" sequenceVersion="1" change="c.986C&gt;T">
+            <Expression>NM_001384886.1:c.986C&gt;T</Expression>
+          </NucleotideExpression>
+          <ProteinExpression sequenceAccessionVersion="NP_001371815.1" sequenceAccession="NP_001371815" sequenceVersion="1" change="p.Pro329Leu" singleLetterProteinChange="P329L">
+            <Expression>NP_001371815.1:p.Pro329Leu</Expression>
+          </ProteinExpression>
+          <MolecularConsequence ID="SO:0001583" Type="missense variant" DB="SO"/>
+        </HGVS>
+        <HGVS Type="coding">
+          <NucleotideExpression sequenceAccessionVersion="NM_001384888.1" sequenceAccession="NM_001384888" sequenceVersion="1" change="c.986C&gt;T">
+            <Expression>NM_001384888.1:c.986C&gt;T</Expression>
+          </NucleotideExpression>
+          <ProteinExpression sequenceAccessionVersion="NP_001371817.1" sequenceAccession="NP_001371817" sequenceVersion="1" change="p.Pro329Leu" singleLetterProteinChange="P329L">
+            <Expression>NP_001371817.1:p.Pro329Leu</Expression>
+          </ProteinExpression>
+          <MolecularConsequence ID="SO:0001583" Type="missense variant" DB="SO"/>
+        </HGVS>
+        <HGVS Type="coding">
+          <NucleotideExpression sequenceAccessionVersion="NM_001384889.1" sequenceAccession="NM_001384889" sequenceVersion="1" change="c.986C&gt;T">
+            <Expression>NM_001384889.1:c.986C&gt;T</Expression>
+          </NucleotideExpression>
+          <ProteinExpression sequenceAccessionVersion="NP_001371818.1" sequenceAccession="NP_001371818" sequenceVersion="1" change="p.Pro329Leu" singleLetterProteinChange="P329L">
+            <Expression>NP_001371818.1:p.Pro329Leu</Expression>
+          </ProteinExpression>
+          <MolecularConsequence ID="SO:0001583" Type="missense variant" DB="SO"/>
+        </HGVS>
+        <HGVS Type="coding">
+          <NucleotideExpression sequenceAccessionVersion="NM_001384890.1" sequenceAccession="NM_001384890" sequenceVersion="1" change="c.896C&gt;T">
+            <Expression>NM_001384890.1:c.896C&gt;T</Expression>
+          </NucleotideExpression>
+          <ProteinExpression sequenceAccessionVersion="NP_001371819.1" sequenceAccession="NP_001371819" sequenceVersion="1" change="p.Pro299Leu" singleLetterProteinChange="P299L">
+            <Expression>NP_001371819.1:p.Pro299Leu</Expression>
+          </ProteinExpression>
+          <MolecularConsequence ID="SO:0001583" Type="missense variant" DB="SO"/>
+        </HGVS>
+        <HGVS Type="coding">
+          <NucleotideExpression sequenceAccessionVersion="NM_001384891.1" sequenceAccession="NM_001384891" sequenceVersion="1" change="c.1022C&gt;T">
+            <Expression>NM_001384891.1:c.1022C&gt;T</Expression>
+          </NucleotideExpression>
+          <ProteinExpression sequenceAccessionVersion="NP_001371820.1" sequenceAccession="NP_001371820" sequenceVersion="1" change="p.Pro341Leu" singleLetterProteinChange="P341L">
+            <Expression>NP_001371820.1:p.Pro341Leu</Expression>
+          </ProteinExpression>
+          <MolecularConsequence ID="SO:0001583" Type="missense variant" DB="SO"/>
+        </HGVS>
+        <HGVS Type="coding">
+          <NucleotideExpression sequenceAccessionVersion="NM_001437284.1" sequenceAccession="NM_001437284" sequenceVersion="1" change="c.986C&gt;T">
+            <Expression>NM_001437284.1:c.986C&gt;T</Expression>
+          </NucleotideExpression>
+          <ProteinExpression sequenceAccessionVersion="NP_001424213.1" sequenceAccession="NP_001424213" sequenceVersion="1" change="p.Pro329Leu" singleLetterProteinChange="P329L">
+            <Expression>NP_001424213.1:p.Pro329Leu</Expression>
+          </ProteinExpression>
+          <MolecularConsequence ID="SO:0001583" Type="missense variant" DB="SO"/>
+        </HGVS>
+        <HGVS Type="coding">
+          <NucleotideExpression sequenceAccessionVersion="NM_007315.4" sequenceAccession="NM_007315" sequenceVersion="4" change="c.986C&gt;T" MANESelect="true">
+            <Expression>NM_007315.4:c.986C&gt;T</Expression>
+          </NucleotideExpression>
+          <ProteinExpression sequenceAccessionVersion="NP_009330.1" sequenceAccession="NP_009330" sequenceVersion="1" change="p.Pro329Leu" singleLetterProteinChange="P329L">
+            <Expression>NP_009330.1:p.Pro329Leu</Expression>
+          </ProteinExpression>
+          <MolecularConsequence ID="SO:0001583" Type="missense variant" DB="SO"/>
+        </HGVS>
+        <HGVS Type="coding">
+          <NucleotideExpression sequenceAccessionVersion="NM_139266.3" sequenceAccession="NM_139266" sequenceVersion="3" change="c.986C&gt;T">
+            <Expression>NM_139266.3:c.986C&gt;T</Expression>
+          </NucleotideExpression>
+          <ProteinExpression sequenceAccessionVersion="NP_644671.1" sequenceAccession="NP_644671" sequenceVersion="1" change="p.Pro329Leu" singleLetterProteinChange="P329L">
+            <Expression>NP_644671.1:p.Pro329Leu</Expression>
+          </ProteinExpression>
+          <MolecularConsequence ID="SO:0001583" Type="missense variant" DB="SO"/>
+        </HGVS>
+        <HGVS Type="coding">
+          <NucleotideExpression sequenceAccessionVersion="NM_001384887.1" sequenceAccession="NM_001384887" sequenceVersion="1" change="c.945-1605C&gt;T">
+            <Expression>NM_001384887.1:c.945-1605C&gt;T</Expression>
+          </NucleotideExpression>
+          <MolecularConsequence ID="SO:0001627" Type="intron variant" DB="SO"/>
+        </HGVS>
+      </HGVSlist>
+    </SimpleAllele>
+    <RCVList>
+      <RCVAccession Title="NM_007315.4(STAT1):c.986C&gt;T (p.Pro329Leu) AND STAT1-related disorder" Accession="RCV006944190" Version="1">
+        <ClassifiedConditionList TraitSetID="37442">
+          <ClassifiedCondition>STAT1-related disorder</ClassifiedCondition>
+        </ClassifiedConditionList>
+        <RCVClassifications>
+          <GermlineClassification>
+            <ReviewStatus>criteria provided, single submitter</ReviewStatus>
+            <Description DateLastEvaluated="2021-04-12" SubmissionCount="1">Likely pathogenic</Description>
+          </GermlineClassification>
+        </RCVClassifications>
+      </RCVAccession>
+    </RCVList>
+    <Classifications>
+      <GermlineClassification DateLastEvaluated="2021-04-12" NumberOfSubmissions="1" NumberOfSubmitters="1" DateCreated="2026-09-22" MostRecentSubmission="2026-09-22">
+        <ReviewStatus>criteria provided, single submitter</ReviewStatus>
+        <Description>Likely pathogenic</Description>
+        <Explanation DataSource="ClinVar" Type="public">Likely pathogenic (1)</Explanation>
+        <ConditionList>
+          <TraitSet ID="37442" Type="Disease" ContributesToAggregateClassification="true">
+            <Trait ID="38215" Type="Disease">
+              <Name>
+                <ElementValue Type="Alternate">STAT1-related condition</ElementValue>
+              </Name>
+              <Name>
+                <ElementValue Type="Preferred">STAT1-related disorder</ElementValue>
+              </Name>
+            </Trait>
+          </TraitSet>
+        </ConditionList>
+      </GermlineClassification>
+    </Classifications>
+    <ClinicalAssertionList>
+      <ClinicalAssertion ID="14899253" SubmissionDate="2026-08-20" ContributesToAggregateClassification="true" DateLastUpdated="2026-09-22" DateCreated="2026-09-22">
+        <ClinVarSubmissionID localKey=":Chr.2_191856005_G_A|STAT1-related disorders" submittedAssembly="GRCh37"/>
+        <ClinVarAccession Accession="SCV007922732" DateUpdated="2026-09-22" DateCreated="2026-09-22" Type="SCV" Version="1" SubmitterName="Blueprint Genetics" OrgID="500188" OrganizationCategory="laboratory"/>
+        <RecordStatus>current</RecordStatus>
+        <Classification DateLastEvaluated="2021-04-12">
+          <ReviewStatus>criteria provided, single submitter</ReviewStatus>
+          <GermlineClassification>Likely pathogenic</GermlineClassification>
+        </Classification>
+        <Assertion>variation to disease</Assertion>
+        <AttributeSet>
+          <Attribute Type="AssertionMethod">ACMG Guidelines, 2015</Attribute>
+          <Citation>
+            <ID Source="PubMed">25741868</ID>
+          </Citation>
+        </AttributeSet>
+        <ObservedInList>
+          <ObservedIn>
+            <Sample>
+              <Origin>germline</Origin>
+              <Species TaxonomyId="9606">human</Species>
+              <AffectedStatus>yes</AffectedStatus>
+            </Sample>
+            <Method>
+              <MethodType>clinical testing</MethodType>
+              <MethodAttribute>
+                <Attribute Type="TestName">Comprehensive Immune and Cytopenia Panel (Hematology)</Attribute>
+              </MethodAttribute>
+            </Method>
+            <ObservedData>
+              <Attribute Type="VariantAlleles" integerValue="1"/>
+            </ObservedData>
+          </ObservedIn>
+        </ObservedInList>
+        <SimpleAllele>
+          <VariantType>Variation</VariantType>
+          <Location>
+            <SequenceLocation Assembly="GRCh37" Chr="2" alternateAllele="A" referenceAllele="G" start="191856005" stop="191856005" variantLength="1"/>
+          </Location>
+        </SimpleAllele>
+        <TraitSet Type="Disease">
+          <Trait Type="Disease">
+            <Name>
+              <ElementValue Type="Preferred">STAT1-related disorders</ElementValue>
+            </Name>
+          </Trait>
+        </TraitSet>
+        <SubmissionNameList>
+          <SubmissionName>SUB16423224</SubmissionName>
+        </SubmissionNameList>
+      </ClinicalAssertion>
+    </ClinicalAssertionList>
+    <TraitMappingList>
+      <TraitMapping ClinicalAssertionID="14899253" TraitType="Disease" MappingType="Name" MappingValue="STAT1-related disorders" MappingRef="Preferred">
+        <MedGen CUI="None" Name="STAT1-related disorder"/>
+      </TraitMapping>
+    </TraitMappingList>
+  </ClassifiedRecord>
+</VariationArchive>
+</ClinVarResult-Set>
