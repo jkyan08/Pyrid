@@ -1,5 +1,5 @@
 {
- "built_at": "2026-10-04T02:11:35+00:00",
+ "built_at": "2026-10-04T02:18:05+00:00",
  "resolved_against": "optimuskg backbone + graph.json",
  "stats": {
   "extraction": {
@@ -22,7 +22,7 @@
  },
  "nodes": [
   {
-   "id": "CHEMBL1078178",
+   "id": "CHEMBL:CHEMBL1078178",
    "type": "Drug",
    "label": "momelotinib",
    "synonyms": [
@@ -38,7 +38,7 @@
    }
   },
   {
-   "id": "CHEMBL1201564",
+   "id": "CHEMBL:CHEMBL1201564",
    "type": "Drug",
    "label": "interferon gamma-1b",
    "synonyms": [
@@ -63,7 +63,7 @@
    }
   },
   {
-   "id": "CHEMBL1421",
+   "id": "CHEMBL:CHEMBL1421",
    "type": "Drug",
    "label": "dasatinib",
    "synonyms": [
@@ -90,19 +90,7 @@
    }
   },
   {
-   "id": "CHEMBL1568",
-   "type": "Drug",
-   "label": "fludarabine",
-   "synonyms": [
-    "2-Fluoro-Ara-A",
-    "Fludarabine"
-   ],
-   "props": {
-    "backbone_id": "CHEMBL1568"
-   }
-  },
-  {
-   "id": "CHEMBL1789941",
+   "id": "CHEMBL:CHEMBL1789941",
    "type": "Drug",
    "label": "ruxolitinib",
    "synonyms": [
@@ -119,7 +107,32 @@
    }
   },
   {
-   "id": "CHEMBL2035187",
+   "id": "CHEMBL:CHEMBL1908360",
+   "type": "Drug",
+   "label": "everolimus",
+   "synonyms": [
+    "40-O-(2-hydroxyethyl)-rapamycin",
+    "42-O-(2-Hydroxyethyl)rapamycin",
+    "Everolimus",
+    "évérolimus",
+    "RAD 666",
+    "RAD-001",
+    "RAD-666",
+    "RAD001",
+    "SDZ-RAD",
+    "Sdz rad",
+    "Afinitor",
+    "Afinitor disperz",
+    "Certican",
+    "Votubia",
+    "Zortress"
+   ],
+   "props": {
+    "backbone_id": "CHEMBL1908360"
+   }
+  },
+  {
+   "id": "CHEMBL:CHEMBL2035187",
    "type": "Drug",
    "label": "pacritinib",
    "synonyms": [
@@ -134,7 +147,7 @@
    }
   },
   {
-   "id": "CHEMBL2105759",
+   "id": "CHEMBL:CHEMBL2105759",
    "type": "Drug",
    "label": "baricitinib",
    "synonyms": [
@@ -153,7 +166,7 @@
    }
   },
   {
-   "id": "CHEMBL2107784",
+   "id": "CHEMBL:CHEMBL2107784",
    "type": "Drug",
    "label": "tasquinimod",
    "synonyms": [
@@ -164,7 +177,7 @@
    }
   },
   {
-   "id": "CHEMBL221959",
+   "id": "CHEMBL:CHEMBL221959",
    "type": "Drug",
    "label": "tofacitinib",
    "synonyms": [
@@ -189,7 +202,7 @@
    }
   },
   {
-   "id": "CHEMBL267345",
+   "id": "CHEMBL:CHEMBL267345",
    "type": "Drug",
    "label": "amphotericin b",
    "synonyms": [
@@ -230,7 +243,7 @@
    }
   },
   {
-   "id": "CHEMBL3809489",
+   "id": "CHEMBL:CHEMBL3809489",
    "type": "Drug",
    "label": "bemcentinib",
    "synonyms": [
@@ -254,7 +267,7 @@
    }
   },
   {
-   "id": "CHEMBL4435170",
+   "id": "CHEMBL:CHEMBL4435170",
    "type": "Drug",
    "label": "deucravacitinib",
    "synonyms": [
@@ -267,7 +280,7 @@
    }
   },
   {
-   "id": "CHEMBL467",
+   "id": "CHEMBL:CHEMBL467",
    "type": "Drug",
    "label": "hydroxyurea",
    "synonyms": [
@@ -296,7 +309,7 @@
    }
   },
   {
-   "id": "CHEMBL941",
+   "id": "CHEMBL:CHEMBL941",
    "type": "Drug",
    "label": "imatinib",
    "synonyms": [

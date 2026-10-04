@@ -1,55 +1,49 @@
 {
- "CHEMBL1078178": {
+ "CHEMBL:CHEMBL1078178": {
   "journey": "entity",
   "ids": [
-   "CHEMBL1078178"
+   "CHEMBL:CHEMBL1078178"
   ],
   "mode": "llm",
-  "text": "This piece of the graph links the drug momelotinib to the gene HAMP. [e_000001] The link is described as 'modulates', meaning the drug is reported to change how the gene is used. [e_000001] The evidence is marked as supported, drawn from a review article, with no reports contradicting it. [e_000001, c_000816] The confidence score is low, at 0.35, so this should be treated as a modest signal rather than a firm conclusion. [e_000001] The review says momelotinib has shown benefits for red blood cell production by lowering levels of hepcidin, a protein, through blocking a receptor called ACVR1. [c_000816] The same review says the drug also reduced spleen enlargement and symptoms. [c_000816] This is research information only and is not medical advice. [e_000001]",
+  "text": "The graph links the drug momelotinib to the gene HAMP, and the link is described as 'modulates'. [e_000001] This link is marked as supported, and it was extracted from a review article rather than measured directly in this graph. [e_000001, c_000816] The review says momelotinib has shown benefits for red blood cell production by lowering hepcidin, a product of HAMP, through blocking a protein called ACVR1. [c_000816] The same review also says the drug reduced an enlarged spleen and symptoms, though the graph does not tie those effects to HAMP. [c_000816] The confidence score is low at 0.35, so this should be treated as a lead to explore and not a settled finding. [e_000001] No reports in the graph contradict this link. [e_000001]",
   "citations": [
    "e_000001",
    "c_000816"
   ],
   "sentences": [
    {
-    "text": "This piece of the graph links the drug momelotinib to the gene HAMP.",
+    "text": "The graph links the drug momelotinib to the gene HAMP, and the link is described as 'modulates'.",
     "cites": [
      "e_000001"
     ]
    },
    {
-    "text": "The link is described as 'modulates', meaning the drug is reported to change how the gene is used.",
-    "cites": [
-     "e_000001"
-    ]
-   },
-   {
-    "text": "The evidence is marked as supported, drawn from a review article, with no reports contradicting it.",
+    "text": "This link is marked as supported, and it was extracted from a review article rather than measured directly in this graph.",
     "cites": [
      "e_000001",
      "c_000816"
     ]
    },
    {
-    "text": "The confidence score is low, at 0.35, so this should be treated as a modest signal rather than a firm conclusion.",
+    "text": "The review says momelotinib has shown benefits for red blood cell production by lowering hepcidin, a product of HAMP, through blocking a protein called ACVR1.",
+    "cites": [
+     "c_000816"
+    ]
+   },
+   {
+    "text": "The same review also says the drug reduced an enlarged spleen and symptoms, though the graph does not tie those effects to HAMP.",
+    "cites": [
+     "c_000816"
+    ]
+   },
+   {
+    "text": "The confidence score is low at 0.35, so this should be treated as a lead to explore and not a settled finding.",
     "cites": [
      "e_000001"
     ]
    },
    {
-    "text": "The review says momelotinib has shown benefits for red blood cell production by lowering levels of hepcidin, a protein, through blocking a receptor called ACVR1.",
-    "cites": [
-     "c_000816"
-    ]
-   },
-   {
-    "text": "The same review says the drug also reduced spleen enlargement and symptoms.",
-    "cites": [
-     "c_000816"
-    ]
-   },
-   {
-    "text": "This is research information only and is not medical advice.",
+    "text": "No reports in the graph contradict this link.",
     "cites": [
      "e_000001"
     ]
@@ -57,278 +51,249 @@
   ],
   "errors": []
  },
- "CHEMBL1201564": {
+ "CHEMBL:CHEMBL1201564": {
   "journey": "entity",
   "ids": [
-   "CHEMBL1201564"
+   "CHEMBL:CHEMBL1201564"
   ],
   "mode": "llm",
-  "text": "The graph links the drug interferon gamma-1b to the disease immunodeficiency 35 with a \"treats\" connection. [e_000002] The evidence for this link is reported in one patient, so it is very limited. [e_000002, c_000598] That report describes a woman who showed significant clinical improvement after interferon-gamma was added to her anti-tuberculosis medications. [c_000598] Because the drug was given alongside other medicines, this single report cannot show the drug alone caused the improvement. [c_000598] The graph labels the link as promising but based on a small number of cases, and its confidence score is moderate at 0.50. [e_000002] No reports in the input contradict the link, but there is also only one supporting report. [e_000002, c_000598]",
+  "text": "The graph links the drug interferon gamma-1b to the condition immunodeficiency 35 with a \"treats\" connection. [e_000002] The evidence for this link is very limited: it is reported in one patient, in a single case report. [e_000002, c_000598] In that report, a significant clinical improvement was observed after interferon-gamma was added to the patient's anti-tuberculosis medicines. [c_000598] Because the interferon-gamma was given alongside other medicines, this one report cannot show on its own that the drug caused the improvement. [c_000598] The link is labeled promising but based on a small number of cases, and its confidence score is moderate at 0.50. [e_000002] No reports in the input contradict the link, but the evidence is too thin to draw firm conclusions, and this is research navigation rather than medical advice. [e_000002]",
   "citations": [
    "e_000002",
    "c_000598"
   ],
   "sentences": [
    {
-    "text": "The graph links the drug interferon gamma-1b to the disease immunodeficiency 35 with a \"treats\" connection.",
+    "text": "The graph links the drug interferon gamma-1b to the condition immunodeficiency 35 with a \"treats\" connection.",
     "cites": [
      "e_000002"
     ]
    },
    {
-    "text": "The evidence for this link is reported in one patient, so it is very limited.",
+    "text": "The evidence for this link is very limited: it is reported in one patient, in a single case report.",
     "cites": [
      "e_000002",
      "c_000598"
     ]
    },
    {
-    "text": "That report describes a woman who showed significant clinical improvement after interferon-gamma was added to her anti-tuberculosis medications.",
+    "text": "In that report, a significant clinical improvement was observed after interferon-gamma was added to the patient's anti-tuberculosis medicines.",
     "cites": [
      "c_000598"
     ]
    },
    {
-    "text": "Because the drug was given alongside other medicines, this single report cannot show the drug alone caused the improvement.",
+    "text": "Because the interferon-gamma was given alongside other medicines, this one report cannot show on its own that the drug caused the improvement.",
     "cites": [
      "c_000598"
     ]
    },
    {
-    "text": "The graph labels the link as promising but based on a small number of cases, and its confidence score is moderate at 0.50.",
+    "text": "The link is labeled promising but based on a small number of cases, and its confidence score is moderate at 0.50.",
     "cites": [
      "e_000002"
     ]
    },
    {
-    "text": "No reports in the input contradict the link, but there is also only one supporting report.",
+    "text": "No reports in the input contradict the link, but the evidence is too thin to draw firm conclusions, and this is research navigation rather than medical advice.",
     "cites": [
-     "e_000002",
-     "c_000598"
+     "e_000002"
     ]
    }
   ],
   "errors": []
  },
- "CHEMBL1789941": {
+ "CHEMBL:CHEMBL1789941": {
   "journey": "entity",
   "ids": [
-   "CHEMBL1789941"
+   "CHEMBL:CHEMBL1789941"
   ],
   "mode": "llm",
-  "text": "Ruxolitinib is a drug that blocks a family of signaling enzymes, and this graph links it to blood disorders, immune disorders and some cancers. [e_000007, e_000013, e_000012, e_000009] For polycythemia vera, the link is supported by reviews, which describe ruxolitinib as an option for people who did not respond to, or could not tolerate, the usual first-line drug. [e_000007, c_000458, c_000838] For myelofibrosis, a review calls ruxolitinib a centerpiece of therapy, but a link to primary myelofibrosis is weakened by one patient report of poor spleen and blood responses. [e_000013, c_000261, e_000008, c_000476] A review also notes that ruxolitinib does not greatly reduce the mutated JAK2 cells or bone marrow scarring, so its link to that somatic JAK2 change is contradicted. [e_000005, c_000253] For the autoimmune and chronic infection syndrome tied to STAT1 overactivity, the evidence is contested: many case reports describe improvement, while others report failures, such as fungal infections persisting or immune markers not recovering. [e_000012, c_000001, c_000747, c_000011, c_000378, c_000481, c_000694] For STAT3 overactivity, a small series of four patients reported substantial control of symptoms, so this is early evidence from very few people. [e_000009, c_000791] Links to breast cancer and pancreatic cancer rest on laboratory studies only, and many researchers are recorded as working on this drug. [e_000010, e_000011, c_000428, c_000486, e_000162, e_000281]",
+  "text": "Ruxolitinib is linked in this graph to blood-related conditions: for polycythemia vera and myelofibrosis, the link is observed in a database and backed by review articles that describe it as a second-line option or a centerpiece of therapy. [e_000007, e_000013, c_000261, c_000838] The link to primary myelofibrosis is weak: it is listed, but the only evidence is a single patient report of a poor spleen and blood response. [e_000008, c_000476] A review also noted that ruxolitinib reduces spleen size and symptoms but does not greatly lower the burden of the JAK2 mutation or bone marrow scarring, so the link to that mutation is not well supported. [e_000005, c_000253] For the immune syndrome with autoimmunity and chronic infections, the evidence is contested: some reports support it and some contradict it. [e_000012] Supporting reports, mostly single patients, describe improvement in fungal skin and mouth infections and autoimmune features, while others describe treatment failures or persistent immune problems. [c_000001, c_000479, c_000011, c_000481] For the related STAT3 gain-of-function condition, the evidence comes from a small series of four patients, and for STAT1 gain-of-function it rests on a few patient reports. [e_000009, c_000791, e_000006, c_000330] Links to two cancers and to the genes IFNG and PF4 rest on lab studies or single reports, and many investigators are recorded as working on ruxolitinib. [e_000010, e_000011, e_000003, e_000004, e_000162]",
   "citations": [
    "e_000007",
    "e_000013",
-   "e_000012",
-   "e_000009",
-   "c_000458",
-   "c_000838",
    "c_000261",
+   "c_000838",
    "e_000008",
    "c_000476",
    "e_000005",
    "c_000253",
+   "e_000012",
    "c_000001",
-   "c_000747",
+   "c_000479",
    "c_000011",
-   "c_000378",
    "c_000481",
-   "c_000694",
+   "e_000009",
    "c_000791",
+   "e_000006",
+   "c_000330",
    "e_000010",
    "e_000011",
-   "c_000428",
-   "c_000486",
-   "e_000162",
-   "e_000281"
+   "e_000003",
+   "e_000004",
+   "e_000162"
   ],
   "sentences": [
    {
-    "text": "Ruxolitinib is a drug that blocks a family of signaling enzymes, and this graph links it to blood disorders, immune disorders and some cancers.",
+    "text": "Ruxolitinib is linked in this graph to blood-related conditions: for polycythemia vera and myelofibrosis, the link is observed in a database and backed by review articles that describe it as a second-line option or a centerpiece of therapy.",
     "cites": [
      "e_000007",
      "e_000013",
-     "e_000012",
-     "e_000009"
-    ]
-   },
-   {
-    "text": "For polycythemia vera, the link is supported by reviews, which describe ruxolitinib as an option for people who did not respond to, or could not tolerate, the usual first-line drug.",
-    "cites": [
-     "e_000007",
-     "c_000458",
+     "c_000261",
      "c_000838"
     ]
    },
    {
-    "text": "For myelofibrosis, a review calls ruxolitinib a centerpiece of therapy, but a link to primary myelofibrosis is weakened by one patient report of poor spleen and blood responses.",
+    "text": "The link to primary myelofibrosis is weak: it is listed, but the only evidence is a single patient report of a poor spleen and blood response.",
     "cites": [
-     "e_000013",
-     "c_000261",
      "e_000008",
      "c_000476"
     ]
    },
    {
-    "text": "A review also notes that ruxolitinib does not greatly reduce the mutated JAK2 cells or bone marrow scarring, so its link to that somatic JAK2 change is contradicted.",
+    "text": "A review also noted that ruxolitinib reduces spleen size and symptoms but does not greatly lower the burden of the JAK2 mutation or bone marrow scarring, so the link to that mutation is not well supported.",
     "cites": [
      "e_000005",
      "c_000253"
     ]
    },
    {
-    "text": "For the autoimmune and chronic infection syndrome tied to STAT1 overactivity, the evidence is contested: many case reports describe improvement, while others report failures, such as fungal infections persisting or immune markers not recovering.",
+    "text": "For the immune syndrome with autoimmunity and chronic infections, the evidence is contested: some reports support it and some contradict it.",
     "cites": [
-     "e_000012",
-     "c_000001",
-     "c_000747",
-     "c_000011",
-     "c_000378",
-     "c_000481",
-     "c_000694"
+     "e_000012"
     ]
    },
    {
-    "text": "For STAT3 overactivity, a small series of four patients reported substantial control of symptoms, so this is early evidence from very few people.",
+    "text": "Supporting reports, mostly single patients, describe improvement in fungal skin and mouth infections and autoimmune features, while others describe treatment failures or persistent immune problems.",
+    "cites": [
+     "c_000001",
+     "c_000479",
+     "c_000011",
+     "c_000481"
+    ]
+   },
+   {
+    "text": "For the related STAT3 gain-of-function condition, the evidence comes from a small series of four patients, and for STAT1 gain-of-function it rests on a few patient reports.",
     "cites": [
      "e_000009",
-     "c_000791"
+     "c_000791",
+     "e_000006",
+     "c_000330"
     ]
    },
    {
-    "text": "Links to breast cancer and pancreatic cancer rest on laboratory studies only, and many researchers are recorded as working on this drug.",
+    "text": "Links to two cancers and to the genes IFNG and PF4 rest on lab studies or single reports, and many investigators are recorded as working on ruxolitinib.",
     "cites": [
      "e_000010",
      "e_000011",
-     "c_000428",
-     "c_000486",
-     "e_000162",
-     "e_000281"
+     "e_000003",
+     "e_000004",
+     "e_000162"
     ]
    }
   ],
   "errors": []
  },
- "CHEMBL2105759": {
+ "CHEMBL:CHEMBL2105759": {
   "journey": "entity",
   "ids": [
-   "CHEMBL2105759"
+   "CHEMBL:CHEMBL2105759"
   ],
   "mode": "llm",
-  "text": "In this graph, baricitinib is connected to one gene, IFNG, and to three rare conditions. [e_000014, e_000015, e_000016, e_000017] The link to IFNG comes from a small group of 3 patients, where levels of the IFN-gamma signal went down after 3 months. [e_000014, c_000603] For the autoimmune enteropathy and endocrinopathy syndrome, a small series of 5 patients reported that baricitinib worked without side effects, which is promising but early. [e_000015, c_000769] For STING-associated vasculopathy with onset in infancy, the evidence is reported in one patient, whose vasculitic ulcer improved, hair regrew and overall well-being improved. [e_000017, c_000394] For Aicardi-Goutieres syndrome 7, the evidence is weakest: one case report found the drug blocked an inflammation signal but did not change the progression of the neurological disease. [e_000016, c_000665] That link is labeled supported but has low confidence, and the only claim attached to it contradicts it. [e_000016, c_000665] Overall, these are early research leads based on very small numbers of patients, not settled findings. [e_000014, e_000015, e_000017, e_000016]",
+  "text": "Baricitinib is linked to the gene IFNG as something that changes its activity, based on a small report of three patients where IFN-gamma levels went down after 3 months. [e_000014, c_000603] For autoimmune enteropathy and endocrinopathy with susceptibility to chronic infections, a small series of five patients reported that baricitinib worked without side effects, which looks promising but rests on very few people. [e_000015, c_000769] For STING-associated vasculopathy with onset in infancy, the evidence is reported in one patient, who had a healed vasculitic ulcer, hair regrowth and better overall well-being. [e_000017, c_000394] For Aicardi-Goutieres syndrome 7, the evidence points the other way: in one case report, baricitinib blocked an immune signal and reduced STAT1 signaling but did not change how the neurological disease progressed. [e_000016, c_000665] That Aicardi-Goutieres link is labeled supported in the graph, yet it lists no supporting reports, only the one contradicting report, and its confidence is low at 0.20. [e_000016]",
   "citations": [
    "e_000014",
-   "e_000015",
-   "e_000016",
-   "e_000017",
    "c_000603",
+   "e_000015",
    "c_000769",
+   "e_000017",
    "c_000394",
+   "e_000016",
    "c_000665"
   ],
   "sentences": [
    {
-    "text": "In this graph, baricitinib is connected to one gene, IFNG, and to three rare conditions.",
-    "cites": [
-     "e_000014",
-     "e_000015",
-     "e_000016",
-     "e_000017"
-    ]
-   },
-   {
-    "text": "The link to IFNG comes from a small group of 3 patients, where levels of the IFN-gamma signal went down after 3 months.",
+    "text": "Baricitinib is linked to the gene IFNG as something that changes its activity, based on a small report of three patients where IFN-gamma levels went down after 3 months.",
     "cites": [
      "e_000014",
      "c_000603"
     ]
    },
    {
-    "text": "For the autoimmune enteropathy and endocrinopathy syndrome, a small series of 5 patients reported that baricitinib worked without side effects, which is promising but early.",
+    "text": "For autoimmune enteropathy and endocrinopathy with susceptibility to chronic infections, a small series of five patients reported that baricitinib worked without side effects, which looks promising but rests on very few people.",
     "cites": [
      "e_000015",
      "c_000769"
     ]
    },
    {
-    "text": "For STING-associated vasculopathy with onset in infancy, the evidence is reported in one patient, whose vasculitic ulcer improved, hair regrew and overall well-being improved.",
+    "text": "For STING-associated vasculopathy with onset in infancy, the evidence is reported in one patient, who had a healed vasculitic ulcer, hair regrowth and better overall well-being.",
     "cites": [
      "e_000017",
      "c_000394"
     ]
    },
    {
-    "text": "For Aicardi-Goutieres syndrome 7, the evidence is weakest: one case report found the drug blocked an inflammation signal but did not change the progression of the neurological disease.",
+    "text": "For Aicardi-Goutieres syndrome 7, the evidence points the other way: in one case report, baricitinib blocked an immune signal and reduced STAT1 signaling but did not change how the neurological disease progressed.",
     "cites": [
      "e_000016",
      "c_000665"
     ]
    },
    {
-    "text": "That link is labeled supported but has low confidence, and the only claim attached to it contradicts it.",
+    "text": "That Aicardi-Goutieres link is labeled supported in the graph, yet it lists no supporting reports, only the one contradicting report, and its confidence is low at 0.20.",
     "cites": [
-     "e_000016",
-     "c_000665"
-    ]
-   },
-   {
-    "text": "Overall, these are early research leads based on very small numbers of patients, not settled findings.",
-    "cites": [
-     "e_000014",
-     "e_000015",
-     "e_000017",
      "e_000016"
     ]
    }
   ],
   "errors": []
  },
- "CHEMBL2107784": {
+ "CHEMBL:CHEMBL2107784": {
   "journey": "entity",
   "ids": [
-   "CHEMBL2107784"
+   "CHEMBL:CHEMBL2107784"
   ],
   "mode": "llm",
-  "text": "The graph links the drug tasquinimod to a biological pathway called Interleukin-6 signaling, which is part of how cells send inflammation-related messages. [e_000018] The link is described as modulating, meaning the drug appears to change the activity of this pathway. [e_000018] The evidence comes from one laboratory-based (in vitro) report, with no reports contradicting it. [e_000018, c_000860] In that report, tasquinimod-treated cells from a myeloproliferative neoplasm that progressed to acute myeloid leukemia showed lower activity in genes tied to interleukin-6 signaling. [c_000860] The same cells also showed lower activity in genes tied to inflammatory response and in two other gene groups, called MYC targets and E2F targets. [c_000860] The graph gives this link a low confidence score of 0.40, so it should be treated as an early lead rather than an established finding. [e_000018]",
+  "text": "The research graph links the drug tasquinimod to a biological pathway called Interleukin-6 signaling, which is involved in inflammation. [e_000018] The link is described as modulates, meaning the drug appears to change how this pathway behaves. [e_000018] The graph marks this link as supported, but with a low confidence score of 0.40, so it is early and tentative evidence. [e_000018] The support comes from one laboratory study in cells grown outside the body, not from patients. [c_000860] In that study, leukemia cells from a blood cancer type treated with tasquinimod showed lower activity in genes tied to interleukin-6 signaling and to inflammatory response. [c_000860] No reports in the input contradict this link. [e_000018]",
   "citations": [
    "e_000018",
    "c_000860"
   ],
   "sentences": [
    {
-    "text": "The graph links the drug tasquinimod to a biological pathway called Interleukin-6 signaling, which is part of how cells send inflammation-related messages.",
+    "text": "The research graph links the drug tasquinimod to a biological pathway called Interleukin-6 signaling, which is involved in inflammation.",
     "cites": [
      "e_000018"
     ]
    },
    {
-    "text": "The link is described as modulating, meaning the drug appears to change the activity of this pathway.",
+    "text": "The link is described as modulates, meaning the drug appears to change how this pathway behaves.",
     "cites": [
      "e_000018"
     ]
    },
    {
-    "text": "The evidence comes from one laboratory-based (in vitro) report, with no reports contradicting it.",
+    "text": "The graph marks this link as supported, but with a low confidence score of 0.40, so it is early and tentative evidence.",
     "cites": [
-     "e_000018",
-     "c_000860"
+     "e_000018"
     ]
    },
    {
-    "text": "In that report, tasquinimod-treated cells from a myeloproliferative neoplasm that progressed to acute myeloid leukemia showed lower activity in genes tied to interleukin-6 signaling.",
-    "cites": [
-     "c_000860"
-    ]
-   },
-   {
-    "text": "The same cells also showed lower activity in genes tied to inflammatory response and in two other gene groups, called MYC targets and E2F targets.",
+    "text": "The support comes from one laboratory study in cells grown outside the body, not from patients.",
     "cites": [
      "c_000860"
     ]
    },
    {
-    "text": "The graph gives this link a low confidence score of 0.40, so it should be treated as an early lead rather than an established finding.",
+    "text": "In that study, leukemia cells from a blood cancer type treated with tasquinimod showed lower activity in genes tied to interleukin-6 signaling and to inflammatory response.",
+    "cites": [
+     "c_000860"
+    ]
+   },
+   {
+    "text": "No reports in the input contradict this link.",
     "cites": [
      "e_000018"
     ]
@@ -336,13 +301,13 @@
   ],
   "errors": []
  },
- "CHEMBL221959": {
+ "CHEMBL:CHEMBL221959": {
   "journey": "entity",
   "ids": [
-   "CHEMBL221959"
+   "CHEMBL:CHEMBL221959"
   ],
   "mode": "llm",
-  "text": "Tofacitinib is a drug that the graph links to four things: rheumatoid arthritis, temporal arteritis, JAK1 gain of function, and STAT1 gain of function. [e_000022, e_000021, e_000019, e_000020] The link to treating rheumatoid arthritis is the best backed: it was reported in a clinical trial of 140 patients, where the main improvement measure at week 12 was significant for all tofacitinib groups. [e_000022, c_000104] The link to treating temporal arteritis is weaker, because it rests on a laboratory study that found tofacitinib suppressed immune activity in the blood vessel wall, not on patient results. [e_000021, c_000297] The link to JAK1 gain of function comes from only two patients, so it is very small evidence; in those two patients, tofacitinib reduced JAK1 overactivity, normalized immune markers, and improved symptoms. [e_000019, c_000889] The link to STAT1 gain of function is contested, and the only evidence listed contradicts it: a laboratory study found that two other drugs calmed STAT1 overactivity, but tofacitinib did not. [e_000020, c_000726] This is research navigation only and not medical advice. [e_000022, e_000021, e_000019, e_000020]",
+  "text": "Tofacitinib is a drug that the graph links to two diseases and to two altered-signaling mechanisms. [e_000022, e_000021, e_000019, e_000020] The link to rheumatoid arthritis has the strongest evidence: a trial of 140 patients reported that more of them improved on tofacitinib at week 12 than the trial's measure required for significance. [e_000022, c_000104] The link to temporal arteritis is weaker, because it rests on a lab study (not patients) reporting that tofacitinib suppressed immune activity in the vessel wall. [e_000021, c_000297] The link to JAK1 gain of function is based on very little data: a report of two patients, in whom tofacitinib reduced JAK1 overactivity and symptoms improved. [e_000019, c_000889] The link to STAT1 gain of function is contested by the only evidence listed: a lab study found two other drugs calmed STAT1 overactivity but tofacitinib did not. [e_000020, c_000726] The graph marks that STAT1 link as supported, but no supporting claim is listed for it, so it should be treated with caution. [e_000020]",
   "citations": [
    "e_000022",
    "e_000021",
@@ -355,7 +320,7 @@
   ],
   "sentences": [
    {
-    "text": "Tofacitinib is a drug that the graph links to four things: rheumatoid arthritis, temporal arteritis, JAK1 gain of function, and STAT1 gain of function.",
+    "text": "Tofacitinib is a drug that the graph links to two diseases and to two altered-signaling mechanisms.",
     "cites": [
      "e_000022",
      "e_000021",
@@ -364,52 +329,49 @@
     ]
    },
    {
-    "text": "The link to treating rheumatoid arthritis is the best backed: it was reported in a clinical trial of 140 patients, where the main improvement measure at week 12 was significant for all tofacitinib groups.",
+    "text": "The link to rheumatoid arthritis has the strongest evidence: a trial of 140 patients reported that more of them improved on tofacitinib at week 12 than the trial's measure required for significance.",
     "cites": [
      "e_000022",
      "c_000104"
     ]
    },
    {
-    "text": "The link to treating temporal arteritis is weaker, because it rests on a laboratory study that found tofacitinib suppressed immune activity in the blood vessel wall, not on patient results.",
+    "text": "The link to temporal arteritis is weaker, because it rests on a lab study (not patients) reporting that tofacitinib suppressed immune activity in the vessel wall.",
     "cites": [
      "e_000021",
      "c_000297"
     ]
    },
    {
-    "text": "The link to JAK1 gain of function comes from only two patients, so it is very small evidence; in those two patients, tofacitinib reduced JAK1 overactivity, normalized immune markers, and improved symptoms.",
+    "text": "The link to JAK1 gain of function is based on very little data: a report of two patients, in whom tofacitinib reduced JAK1 overactivity and symptoms improved.",
     "cites": [
      "e_000019",
      "c_000889"
     ]
    },
    {
-    "text": "The link to STAT1 gain of function is contested, and the only evidence listed contradicts it: a laboratory study found that two other drugs calmed STAT1 overactivity, but tofacitinib did not.",
+    "text": "The link to STAT1 gain of function is contested by the only evidence listed: a lab study found two other drugs calmed STAT1 overactivity but tofacitinib did not.",
     "cites": [
      "e_000020",
      "c_000726"
     ]
    },
    {
-    "text": "This is research navigation only and not medical advice.",
+    "text": "The graph marks that STAT1 link as supported, but no supporting claim is listed for it, so it should be treated with caution.",
     "cites": [
-     "e_000022",
-     "e_000021",
-     "e_000019",
      "e_000020"
     ]
    }
   ],
   "errors": []
  },
- "CHEMBL4435170": {
+ "CHEMBL:CHEMBL4435170": {
   "journey": "entity",
   "ids": [
-   "CHEMBL4435170"
+   "CHEMBL:CHEMBL4435170"
   ],
   "mode": "llm",
-  "text": "The research graph links the drug deucravacitinib to autoimmune type 1 diabetes with a \"treats\" connection. [e_000023] This link is marked as supported, but the confidence score is modest at 0.40, and it is labeled promising rather than established. [e_000023] The support comes from one claim in a published paper, and no claims in the input contradict it. [e_000023, c_000732] That paper reports that a selective TYK2 inhibitor called BMS-986165 reduced the growth of a type of immune cell, reduced inflammation in insulin-producing cells, and delayed the start of autoimmune type 1 diabetes in mice. [c_000732] The claim is tagged as in vitro evidence, so it is early-stage laboratory research and not a result in people. [c_000732] This is meant only to help you navigate the research and is not medical advice. [e_000023]",
+  "text": "The research graph links the drug deucravacitinib to autoimmune type 1 diabetes with a \"treats\" connection. [e_000023] This link is marked as supported, but the confidence is low (0.40) and it is labeled \"promising\" rather than established. [e_000023] The support comes from one claim in a published paper, and it is classed as laboratory (in vitro) evidence. [c_000732] That paper reports that a selective TYK2 inhibitor called BMS-986165 reduced the growth of certain immune cells, reduced inflammation in insulin-producing cells, and delayed the start of autoimmune type 1 diabetes in a mouse model. [c_000732] No claims in the input contradict this link. [e_000023] The evidence shown here comes from mice and lab work, so it does not by itself show an effect in people. [c_000732, e_000023]",
   "citations": [
    "e_000023",
    "c_000732"
@@ -422,87 +384,87 @@
     ]
    },
    {
-    "text": "This link is marked as supported, but the confidence score is modest at 0.40, and it is labeled promising rather than established.",
+    "text": "This link is marked as supported, but the confidence is low (0.40) and it is labeled \"promising\" rather than established.",
     "cites": [
      "e_000023"
     ]
    },
    {
-    "text": "The support comes from one claim in a published paper, and no claims in the input contradict it.",
-    "cites": [
-     "e_000023",
-     "c_000732"
-    ]
-   },
-   {
-    "text": "That paper reports that a selective TYK2 inhibitor called BMS-986165 reduced the growth of a type of immune cell, reduced inflammation in insulin-producing cells, and delayed the start of autoimmune type 1 diabetes in mice.",
+    "text": "The support comes from one claim in a published paper, and it is classed as laboratory (in vitro) evidence.",
     "cites": [
      "c_000732"
     ]
    },
    {
-    "text": "The claim is tagged as in vitro evidence, so it is early-stage laboratory research and not a result in people.",
+    "text": "That paper reports that a selective TYK2 inhibitor called BMS-986165 reduced the growth of certain immune cells, reduced inflammation in insulin-producing cells, and delayed the start of autoimmune type 1 diabetes in a mouse model.",
     "cites": [
      "c_000732"
     ]
    },
    {
-    "text": "This is meant only to help you navigate the research and is not medical advice.",
+    "text": "No claims in the input contradict this link.",
     "cites": [
+     "e_000023"
+    ]
+   },
+   {
+    "text": "The evidence shown here comes from mice and lab work, so it does not by itself show an effect in people.",
+    "cites": [
+     "c_000732",
      "e_000023"
     ]
    }
   ],
   "errors": []
  },
- "CHEMBL467": {
+ "CHEMBL:CHEMBL467": {
   "journey": "entity",
   "ids": [
-   "CHEMBL467"
+   "CHEMBL:CHEMBL467"
   ],
   "mode": "llm",
-  "text": "The graph links the drug hydroxyurea to the disease polycythemia vera with a \"treats\" connection. [e_000024] This link was automatically extracted into the graph and is labeled supported, but its confidence score is low, at 0.20. [e_000024] No individual supporting reports are listed for the link. [e_000024] One review contradicts it, saying that the ability of hydroxyurea and similar agents to influence certain elements of the disease is limited. [c_000557, e_000024] So the evidence here is thin and leans against the link, and the input does not say which elements of the disease the review means. [e_000024, c_000557] This is a research map only and is not advice about any treatment. [e_000024]",
+  "text": "The graph links hydroxyurea, a drug, to polycythemia vera, a disease, with a connection labeled \"treats\". [e_000024] This link was automatically extracted from text, and the graph gives it a low confidence score of 0.20. [e_000024] Although the link is marked as supported, no supporting reports are listed for it in this piece of the graph. [e_000024] One review contradicts the link, so the evidence is best described as contested. [e_000024, c_000557] That review says blood removal (phlebotomy) cannot achieve certain disease goals, and that drugs like hydroxyurea have only a limited ability to influence those parts of the disease. [c_000557] This is research navigation only, not medical advice, and it shows the link needs closer checking in the original sources. [e_000024, c_000557]",
   "citations": [
    "e_000024",
    "c_000557"
   ],
   "sentences": [
    {
-    "text": "The graph links the drug hydroxyurea to the disease polycythemia vera with a \"treats\" connection.",
+    "text": "The graph links hydroxyurea, a drug, to polycythemia vera, a disease, with a connection labeled \"treats\".",
     "cites": [
      "e_000024"
     ]
    },
    {
-    "text": "This link was automatically extracted into the graph and is labeled supported, but its confidence score is low, at 0.20.",
+    "text": "This link was automatically extracted from text, and the graph gives it a low confidence score of 0.20.",
     "cites": [
      "e_000024"
     ]
    },
    {
-    "text": "No individual supporting reports are listed for the link.",
+    "text": "Although the link is marked as supported, no supporting reports are listed for it in this piece of the graph.",
     "cites": [
      "e_000024"
     ]
    },
    {
-    "text": "One review contradicts it, saying that the ability of hydroxyurea and similar agents to influence certain elements of the disease is limited.",
-    "cites": [
-     "c_000557",
-     "e_000024"
-    ]
-   },
-   {
-    "text": "So the evidence here is thin and leans against the link, and the input does not say which elements of the disease the review means.",
+    "text": "One review contradicts the link, so the evidence is best described as contested.",
     "cites": [
      "e_000024",
      "c_000557"
     ]
    },
    {
-    "text": "This is a research map only and is not advice about any treatment.",
+    "text": "That review says blood removal (phlebotomy) cannot achieve certain disease goals, and that drugs like hydroxyurea have only a limited ability to influence those parts of the disease.",
     "cites": [
-     "e_000024"
+     "c_000557"
+    ]
+   },
+   {
+    "text": "This is research navigation only, not medical advice, and it shows the link needs closer checking in the original sources.",
+    "cites": [
+     "e_000024",
+     "c_000557"
     ]
    }
   ],
@@ -514,23 +476,24 @@
    "EFO:0002429"
   ],
   "mode": "llm",
-  "text": "Polycythemia vera is linked in this graph to a specific change in the JAK2 gene (V617F) and to a switched-on, overactive JAK2 mechanism that arises during life; both links come from published review articles. [e_000049, e_000050, e_000075, c_000251, c_000913] One review says this JAK2 change is present in more than 95% of patients with this condition. [c_000836, e_000049] Thromboembolism (blood clots) is linked to the disease as a feature; the evidence is extracted from reviews, one of which calls it the most important complication. [e_000025, c_000918, c_000338] Ruxolitinib is linked as a treatment, with the label 'promising'; reviews describe it as approved for people who are resistant to or intolerant of hydroxyurea. [e_000007, c_000838, c_000914] The hydroxyurea link is weaker and contested: it is described as a common first-line medicine, but one review says its ability to influence some disease features is limited. [e_000024, c_000458, c_000557, c_000838] Four investigators are recorded in a database as working on polycythemia vera: Prithviraj Bose, Claire N Harrison, Martin H Ellis and Tiziano Barbui. [e_000326, e_000467, e_000974, e_001107] Two patient groups, MPN Research Foundation and MPN Advocacy & Education International, are recorded in a database as supporting the community around this disease. [e_001197, e_001202]",
+  "text": "Polycythemia vera is linked in this graph to a specific change in the JAK2 gene, and the evidence comes from claims extracted from review articles. [e_000049, e_000050, c_000836] Reviews state that this JAK2 change, and more broadly an acquired overactive JAK2, causes the disease, and one review says the change is present in more than 95% of patients. [e_000050, e_000075, c_000251, c_000913, c_000836] Ruxolitinib is linked as a treatment, with reviews describing it as available for people who do not respond to, or cannot tolerate, hydroxyurea; this evidence is extracted from reviews and labeled promising. [e_000007, c_000340, c_000458, c_000838, c_000914] Hydroxyurea is also linked as a treatment, but this link is contested: one review says the ability of drugs like hydroxyurea to influence key parts of the disease is limited, and no review in the input directly supports the link, though other reviews call hydroxyurea a preferred or popular first-line option. [e_000024, c_000557, c_000838, c_000458] Thromboembolism, meaning blood clots, is listed as a feature of polycythemia vera, and a review says it occurs in about 20% of patients and is the most important complication. [e_000025, c_000338, c_000918] Four investigators are recorded as working on polycythemia vera, and two patient groups, the MPN Research Foundation and MPN Advocacy & Education International, are recorded as supporting its community, all observed in a database. [e_000326, e_000467, e_000974, e_001107, e_001197, e_001202]",
   "citations": [
    "e_000049",
    "e_000050",
+   "c_000836",
    "e_000075",
    "c_000251",
    "c_000913",
-   "c_000836",
-   "e_000025",
-   "c_000918",
-   "c_000338",
    "e_000007",
+   "c_000340",
+   "c_000458",
    "c_000838",
    "c_000914",
    "e_000024",
-   "c_000458",
    "c_000557",
+   "e_000025",
+   "c_000338",
+   "c_000918",
    "e_000326",
    "e_000467",
    "e_000974",
@@ -540,59 +503,57 @@
   ],
   "sentences": [
    {
-    "text": "Polycythemia vera is linked in this graph to a specific change in the JAK2 gene (V617F) and to a switched-on, overactive JAK2 mechanism that arises during life; both links come from published review articles.",
+    "text": "Polycythemia vera is linked in this graph to a specific change in the JAK2 gene, and the evidence comes from claims extracted from review articles.",
     "cites": [
      "e_000049",
      "e_000050",
+     "c_000836"
+    ]
+   },
+   {
+    "text": "Reviews state that this JAK2 change, and more broadly an acquired overactive JAK2, causes the disease, and one review says the change is present in more than 95% of patients.",
+    "cites": [
+     "e_000050",
      "e_000075",
      "c_000251",
-     "c_000913"
+     "c_000913",
+     "c_000836"
     ]
    },
    {
-    "text": "One review says this JAK2 change is present in more than 95% of patients with this condition.",
-    "cites": [
-     "c_000836",
-     "e_000049"
-    ]
-   },
-   {
-    "text": "Thromboembolism (blood clots) is linked to the disease as a feature; the evidence is extracted from reviews, one of which calls it the most important complication.",
-    "cites": [
-     "e_000025",
-     "c_000918",
-     "c_000338"
-    ]
-   },
-   {
-    "text": "Ruxolitinib is linked as a treatment, with the label 'promising'; reviews describe it as approved for people who are resistant to or intolerant of hydroxyurea.",
+    "text": "Ruxolitinib is linked as a treatment, with reviews describing it as available for people who do not respond to, or cannot tolerate, hydroxyurea; this evidence is extracted from reviews and labeled promising.",
     "cites": [
      "e_000007",
+     "c_000340",
+     "c_000458",
      "c_000838",
      "c_000914"
     ]
    },
    {
-    "text": "The hydroxyurea link is weaker and contested: it is described as a common first-line medicine, but one review says its ability to influence some disease features is limited.",
+    "text": "Hydroxyurea is also linked as a treatment, but this link is contested: one review says the ability of drugs like hydroxyurea to influence key parts of the disease is limited, and no review in the input directly supports the link, though other reviews call hydroxyurea a preferred or popular first-line option.",
     "cites": [
      "e_000024",
-     "c_000458",
      "c_000557",
-     "c_000838"
+     "c_000838",
+     "c_000458"
     ]
    },
    {
-    "text": "Four investigators are recorded in a database as working on polycythemia vera: Prithviraj Bose, Claire N Harrison, Martin H Ellis and Tiziano Barbui.",
+    "text": "Thromboembolism, meaning blood clots, is listed as a feature of polycythemia vera, and a review says it occurs in about 20% of patients and is the most important complication.",
+    "cites": [
+     "e_000025",
+     "c_000338",
+     "c_000918"
+    ]
+   },
+   {
+    "text": "Four investigators are recorded as working on polycythemia vera, and two patient groups, the MPN Research Foundation and MPN Advocacy & Education International, are recorded as supporting its community, all observed in a database.",
     "cites": [
      "e_000326",
      "e_000467",
      "e_000974",
-     "e_001107"
-    ]
-   },
-   {
-    "text": "Two patient groups, MPN Research Foundation and MPN Advocacy & Education International, are recorded in a database as supporting the community around this disease.",
-    "cites": [
+     "e_001107",
      "e_001197",
      "e_001202"
     ]
@@ -606,7 +567,7 @@
    "EFO:0002430"
   ],
   "mode": "llm",
-  "text": "Two patient groups, the MPN Research Foundation and MPN Advocacy & Education International, are each linked to primary myelofibrosis as supporting its community. [e_001198, e_001200] Both of those community links were observed in a database, with moderate confidence. [e_001198, e_001200] The graph also links the drug ruxolitinib to primary myelofibrosis as a treatment. [e_000008] That treatment link was extracted from the literature and carries low confidence. [e_000008] The treatment link is contested: a report in one patient said spleen and blood responses to ruxolitinib were poor. [e_000008, c_000476] Because that contradicting report covers only one patient, it is a single case and not a broad finding. [c_000476]",
+  "text": "Primary myelofibrosis is linked in this graph to two patient groups: the MPN Research Foundation and MPN Advocacy & Education International. [e_001198, e_001200] Both group links are observed in a database, and each has a moderate confidence score of 0.70. [e_001198, e_001200] The graph also links the drug ruxolitinib to primary myelofibrosis as a treatment. [e_000008] That drug link was extracted from text, and its confidence is low at 0.20. [e_000008] It is contested: it has no supporting claims listed, and one claim contradicts it. [e_000008, c_000476] That contradicting claim is a report in one patient, who was diagnosed with the disease and took ruxolitinib, but whose spleen and blood responses were poor. [c_000476] This is research navigation only, and one patient report does not settle how well the drug works. [c_000476]",
   "citations": [
    "e_001198",
    "e_001200",
@@ -615,14 +576,14 @@
   ],
   "sentences": [
    {
-    "text": "Two patient groups, the MPN Research Foundation and MPN Advocacy & Education International, are each linked to primary myelofibrosis as supporting its community.",
+    "text": "Primary myelofibrosis is linked in this graph to two patient groups: the MPN Research Foundation and MPN Advocacy & Education International.",
     "cites": [
      "e_001198",
      "e_001200"
     ]
    },
    {
-    "text": "Both of those community links were observed in a database, with moderate confidence.",
+    "text": "Both group links are observed in a database, and each has a moderate confidence score of 0.70.",
     "cites": [
      "e_001198",
      "e_001200"
@@ -635,20 +596,26 @@
     ]
    },
    {
-    "text": "That treatment link was extracted from the literature and carries low confidence.",
+    "text": "That drug link was extracted from text, and its confidence is low at 0.20.",
     "cites": [
      "e_000008"
     ]
    },
    {
-    "text": "The treatment link is contested: a report in one patient said spleen and blood responses to ruxolitinib were poor.",
+    "text": "It is contested: it has no supporting claims listed, and one claim contradicts it.",
     "cites": [
      "e_000008",
      "c_000476"
     ]
    },
    {
-    "text": "Because that contradicting report covers only one patient, it is a single case and not a broad finding.",
+    "text": "That contradicting claim is a report in one patient, who was diagnosed with the disease and took ruxolitinib, but whose spleen and blood responses were poor.",
+    "cites": [
+     "c_000476"
+    ]
+   },
+   {
+    "text": "This is research navigation only, and one patient report does not settle how well the drug works.",
     "cites": [
      "c_000476"
     ]
@@ -774,52 +741,51 @@
    "EFO:0009756"
   ],
   "mode": "llm",
-  "text": "The research graph links the drug deucravacitinib to autoimmune type 1 diabetes with a \"treats\" relationship. [e_000023] This link is marked as supported, but the confidence is low (0.40), and it is labeled promising rather than established. [e_000023] The support comes from one claim that was extracted from a published paper. [e_000023, c_000732] That paper reports that a selective inhibitor of a protein called TYK2, named BMS-986165, reduced the growth of certain immune cells and inflammation in insulin-making cells. [c_000732] The same paper reports that the treatment delayed the onset of autoimmune type 1 diabetes in NOD mice, a mouse model of the disease. [c_000732] The claim is tagged as in vitro evidence, and no contradicting reports are listed in the input. [c_000732, e_000023] This is a research finding to help navigate the literature, not guidance on treatment. [e_000023]",
+  "text": "The graph links the drug deucravacitinib to autoimmune type 1 diabetes with a \"treats\" relationship. [e_000023] This link is marked as supported, with one supporting report and no contradicting reports. [e_000023, c_000732] The information was extracted from a published paper, and the confidence score is low to moderate at 0.40, so it is an early signal and not a settled finding. [e_000023] The edge carries a label of \"promising\". [e_000023] The supporting report says that BMS-986165, a selective TYK2 inhibitor, reduced the growth of certain immune cells, reduced inflammation in insulin-producing cells, and reduced the onset of autoimmune type 1 diabetes in NOD mice. [c_000732] That report is tagged as laboratory-type evidence, not as evidence from patients. [c_000732] This is research navigation only and not medical advice. [e_000023]",
   "citations": [
    "e_000023",
    "c_000732"
   ],
   "sentences": [
    {
-    "text": "The research graph links the drug deucravacitinib to autoimmune type 1 diabetes with a \"treats\" relationship.",
+    "text": "The graph links the drug deucravacitinib to autoimmune type 1 diabetes with a \"treats\" relationship.",
     "cites": [
      "e_000023"
     ]
    },
    {
-    "text": "This link is marked as supported, but the confidence is low (0.40), and it is labeled promising rather than established.",
-    "cites": [
-     "e_000023"
-    ]
-   },
-   {
-    "text": "The support comes from one claim that was extracted from a published paper.",
+    "text": "This link is marked as supported, with one supporting report and no contradicting reports.",
     "cites": [
      "e_000023",
      "c_000732"
     ]
    },
    {
-    "text": "That paper reports that a selective inhibitor of a protein called TYK2, named BMS-986165, reduced the growth of certain immune cells and inflammation in insulin-making cells.",
+    "text": "The information was extracted from a published paper, and the confidence score is low to moderate at 0.40, so it is an early signal and not a settled finding.",
     "cites": [
-     "c_000732"
-    ]
-   },
-   {
-    "text": "The same paper reports that the treatment delayed the onset of autoimmune type 1 diabetes in NOD mice, a mouse model of the disease.",
-    "cites": [
-     "c_000732"
-    ]
-   },
-   {
-    "text": "The claim is tagged as in vitro evidence, and no contradicting reports are listed in the input.",
-    "cites": [
-     "c_000732",
      "e_000023"
     ]
    },
    {
-    "text": "This is a research finding to help navigate the literature, not guidance on treatment.",
+    "text": "The edge carries a label of \"promising\".",
+    "cites": [
+     "e_000023"
+    ]
+   },
+   {
+    "text": "The supporting report says that BMS-986165, a selective TYK2 inhibitor, reduced the growth of certain immune cells, reduced inflammation in insulin-producing cells, and reduced the onset of autoimmune type 1 diabetes in NOD mice.",
+    "cites": [
+     "c_000732"
+    ]
+   },
+   {
+    "text": "That report is tagged as laboratory-type evidence, not as evidence from patients.",
+    "cites": [
+     "c_000732"
+    ]
+   },
+   {
+    "text": "This is research navigation only and not medical advice.",
     "cites": [
      "e_000023"
     ]
@@ -833,14 +799,13 @@
    "EFO:0010647"
   ],
   "mode": "llm",
-  "text": "The mechanism link for STAT3 gain of function is backed by several published reports, including a case series of 13 people, several reviews, and lab work on cells, and nothing in the input contradicts it. [e_000029, c_000183, c_000274, c_000670, c_000750, c_000845] These reports describe the changes as making STAT3 overactive, which is linked to problems in T cells that may contribute to autoimmunity. [c_000183, c_000670, c_000274] The link between ruxolitinib and this condition rests on a very small group: a case series of 4 people reported that it achieved substantial control over clinical manifestations. [e_000009, c_000791] This treatment link is labeled promising but small-number evidence, so it is early and not firmly established. [e_000009] Two investigators, Megan A Cooper and Tiphanie P Vogel, are recorded as working on this condition, as observed in a database. [e_000262, e_000449] The Immune Deficiency Foundation is also recorded, as observed in a database, as supporting the community around this condition. [e_001174]",
+  "text": "STAT3 gain of function is linked in this graph to a described mechanism, which is that the STAT3 protein is overactive; this link is supported by several published reports. [e_000029, c_000750, c_000845] One small case series reported that cells carrying a specific STAT3 change showed higher STAT3 activity than normal cells. [c_000845] A 13-patient case series reported that these mutations cause gain of function and knock-on defects in other immune signaling and in regulatory T cells. [c_000183] A review suggests that defects in T cells may contribute to autoimmunity. [c_000670] The drug ruxolitinib is linked to this condition as a possible treatment, but the evidence is thin: it was extracted from a 4-patient case series reporting substantial control of clinical manifestations, and it is labeled promising but small-sample. [e_000009, c_000791] Two investigators, Megan A Cooper and Tiphanie P Vogel, are recorded as working on this condition, observed in a database. [e_000262, e_000449] The Immune Deficiency Foundation is also recorded as supporting the community for this condition, observed in a database. [e_001174]",
   "citations": [
    "e_000029",
-   "c_000183",
-   "c_000274",
-   "c_000670",
    "c_000750",
    "c_000845",
+   "c_000183",
+   "c_000670",
    "e_000009",
    "c_000791",
    "e_000262",
@@ -849,46 +814,47 @@
   ],
   "sentences": [
    {
-    "text": "The mechanism link for STAT3 gain of function is backed by several published reports, including a case series of 13 people, several reviews, and lab work on cells, and nothing in the input contradicts it.",
+    "text": "STAT3 gain of function is linked in this graph to a described mechanism, which is that the STAT3 protein is overactive; this link is supported by several published reports.",
     "cites": [
      "e_000029",
-     "c_000183",
-     "c_000274",
-     "c_000670",
      "c_000750",
      "c_000845"
     ]
    },
    {
-    "text": "These reports describe the changes as making STAT3 overactive, which is linked to problems in T cells that may contribute to autoimmunity.",
+    "text": "One small case series reported that cells carrying a specific STAT3 change showed higher STAT3 activity than normal cells.",
     "cites": [
-     "c_000183",
-     "c_000670",
-     "c_000274"
+     "c_000845"
     ]
    },
    {
-    "text": "The link between ruxolitinib and this condition rests on a very small group: a case series of 4 people reported that it achieved substantial control over clinical manifestations.",
+    "text": "A 13-patient case series reported that these mutations cause gain of function and knock-on defects in other immune signaling and in regulatory T cells.",
+    "cites": [
+     "c_000183"
+    ]
+   },
+   {
+    "text": "A review suggests that defects in T cells may contribute to autoimmunity.",
+    "cites": [
+     "c_000670"
+    ]
+   },
+   {
+    "text": "The drug ruxolitinib is linked to this condition as a possible treatment, but the evidence is thin: it was extracted from a 4-patient case series reporting substantial control of clinical manifestations, and it is labeled promising but small-sample.",
     "cites": [
      "e_000009",
      "c_000791"
     ]
    },
    {
-    "text": "This treatment link is labeled promising but small-number evidence, so it is early and not firmly established.",
-    "cites": [
-     "e_000009"
-    ]
-   },
-   {
-    "text": "Two investigators, Megan A Cooper and Tiphanie P Vogel, are recorded as working on this condition, as observed in a database.",
+    "text": "Two investigators, Megan A Cooper and Tiphanie P Vogel, are recorded as working on this condition, observed in a database.",
     "cites": [
      "e_000262",
      "e_000449"
     ]
    },
    {
-    "text": "The Immune Deficiency Foundation is also recorded, as observed in a database, as supporting the community around this condition.",
+    "text": "The Immune Deficiency Foundation is also recorded as supporting the community for this condition, observed in a database.",
     "cites": [
      "e_001174"
     ]
@@ -901,56 +867,58 @@
   "ids": [
    "EFO:1000649"
   ],
-  "mode": "llm_retry",
-  "text": "The research graph links the drug ruxolitinib to estrogen-receptor positive breast cancer with a 'treats' connection. [e_000010] This link is marked as supported, based on information extracted from a published research report. [e_000010, c_000428] The report says that blocking a protein activity called STAT3 with ruxolitinib reduced how much breast cancer invaded surrounding tissue. [c_000428] The claim is labeled as coming from an in vitro setting, meaning lab-based work rather than patient studies, even though the quote mentions in vivo. [c_000428] The confidence score for this link is modest at 0.40, and it carries the label 'promising'. [e_000010] No reports in the input contradict this link, but this is research navigation only and not medical advice. [e_000010]",
+  "mode": "llm",
+  "text": "The graph links the drug ruxolitinib to estrogen-receptor positive breast cancer with a \"treats\" relationship. [e_000010] This link is marked as supported, and it was extracted from a published report rather than confirmed in people. [e_000010, c_000428] The support comes from one claim that says blocking a protein activity called STAT3 with ruxolitinib reduced how much breast cancer invaded surrounding tissue. [c_000428] That claim is labeled as an in vitro finding, meaning it comes from lab experiments rather than from patients. [c_000428] The confidence score on the link is modest at 0.40, and the link is tagged as promising. [e_000010] No reports in the input contradict this link. [e_000010] This is research navigation only and does not tell anyone whether ruxolitinib would help a patient. [e_000010]",
   "citations": [
    "e_000010",
    "c_000428"
   ],
   "sentences": [
    {
-    "text": "The research graph links the drug ruxolitinib to estrogen-receptor positive breast cancer with a 'treats' connection.",
+    "text": "The graph links the drug ruxolitinib to estrogen-receptor positive breast cancer with a \"treats\" relationship.",
     "cites": [
      "e_000010"
     ]
    },
    {
-    "text": "This link is marked as supported, based on information extracted from a published research report.",
+    "text": "This link is marked as supported, and it was extracted from a published report rather than confirmed in people.",
     "cites": [
      "e_000010",
      "c_000428"
     ]
    },
    {
-    "text": "The report says that blocking a protein activity called STAT3 with ruxolitinib reduced how much breast cancer invaded surrounding tissue.",
+    "text": "The support comes from one claim that says blocking a protein activity called STAT3 with ruxolitinib reduced how much breast cancer invaded surrounding tissue.",
     "cites": [
      "c_000428"
     ]
    },
    {
-    "text": "The claim is labeled as coming from an in vitro setting, meaning lab-based work rather than patient studies, even though the quote mentions in vivo.",
+    "text": "That claim is labeled as an in vitro finding, meaning it comes from lab experiments rather than from patients.",
     "cites": [
      "c_000428"
     ]
    },
    {
-    "text": "The confidence score for this link is modest at 0.40, and it carries the label 'promising'.",
+    "text": "The confidence score on the link is modest at 0.40, and the link is tagged as promising.",
     "cites": [
      "e_000010"
     ]
    },
    {
-    "text": "No reports in the input contradict this link, but this is research navigation only and not medical advice.",
+    "text": "No reports in the input contradict this link.",
+    "cites": [
+     "e_000010"
+    ]
+   },
+   {
+    "text": "This is research navigation only and does not tell anyone whether ruxolitinib would help a patient.",
     "cites": [
      "e_000010"
     ]
    }
   ],
-  "errors": [
-   [
-    "sentence 6: looks like dosing information"
-   ]
-  ]
+  "errors": []
  },
  "EFO:1001209": {
   "journey": "entity",
@@ -958,7 +926,7 @@
    "EFO:1001209"
   ],
   "mode": "llm",
-  "text": "The graph links the drug tofacitinib to the disease temporal arteritis with a \"treats\" connection. [e_000021] This link is marked as supported, and it was pulled out of a published report rather than being a guess. [e_000021] The one piece of backing is a laboratory study, not a study in patients, which reported that tofacitinib suppressed immune activity in the blood vessel wall. [c_000297] Nothing in the input contradicts this link. [e_000021] The confidence score is modest at 0.40, and the link is labeled promising, so this is an early signal and not a settled result. [e_000021] This is research navigation only and does not say whether anyone should use this drug. [e_000021]",
+  "text": "The graph links the drug tofacitinib to the disease temporal arteritis with a \"treats\" connection. [e_000021] This link is marked as supported, and it was extracted from a research report rather than confirmed in patients. [e_000021] The confidence score is low to moderate at 0.40, and the link carries a label of promising. [e_000021] The supporting claim comes from a laboratory (in vitro) study, which reported that tofacitinib suppressed immune activity in the blood vessel wall. [c_000297] No claims in the input contradict this link. [e_000021] This is research navigation only, and it does not say whether the drug works for any person. [e_000021, c_000297]",
   "citations": [
    "e_000021",
    "c_000297"
@@ -971,33 +939,34 @@
     ]
    },
    {
-    "text": "This link is marked as supported, and it was pulled out of a published report rather than being a guess.",
+    "text": "This link is marked as supported, and it was extracted from a research report rather than confirmed in patients.",
     "cites": [
      "e_000021"
     ]
    },
    {
-    "text": "The one piece of backing is a laboratory study, not a study in patients, which reported that tofacitinib suppressed immune activity in the blood vessel wall.",
+    "text": "The confidence score is low to moderate at 0.40, and the link carries a label of promising.",
+    "cites": [
+     "e_000021"
+    ]
+   },
+   {
+    "text": "The supporting claim comes from a laboratory (in vitro) study, which reported that tofacitinib suppressed immune activity in the blood vessel wall.",
     "cites": [
      "c_000297"
     ]
    },
    {
-    "text": "Nothing in the input contradicts this link.",
+    "text": "No claims in the input contradict this link.",
     "cites": [
      "e_000021"
     ]
    },
    {
-    "text": "The confidence score is modest at 0.40, and the link is labeled promising, so this is an early signal and not a settled result.",
+    "text": "This is research navigation only, and it does not say whether the drug works for any person.",
     "cites": [
-     "e_000021"
-    ]
-   },
-   {
-    "text": "This is research navigation only and does not say whether anyone should use this drug.",
-    "cites": [
-     "e_000021"
+     "e_000021",
+     "c_000297"
     ]
    }
   ],
@@ -2331,7 +2300,7 @@
    "MONDO:0005184"
   ],
   "mode": "llm",
-  "text": "The graph links the drug ruxolitinib to pancreatic ductal adenocarcinoma with a \"treats\" connection. [e_000011] This link is marked as supported, with one supporting report and no contradicting reports. [e_000011, c_000486] The supporting evidence comes from laboratory (in vitro) work, not from patients. [c_000486] That work reported that ruxolitinib blocked a signaling pathway (called JAK/STAT) that helps tumors protect themselves, and that this improved the effect of another therapy called anti-PD-1. [c_000486] The confidence score for this link is modest at 0.40, and it is labeled \"promising\" rather than established. [e_000011] This is a research lead only and not medical advice. [e_000011]",
+  "text": "The graph links the drug ruxolitinib to pancreatic ductal adenocarcinoma with a \"treats\" connection. [e_000011] This link is marked as supported, and it was extracted from the research literature rather than confirmed in patients. [e_000011] The confidence score is low (0.40), and the link carries a label of \"promising\". [e_000011] The support comes from one claim based on laboratory (in vitro) work, not from a study in people. [c_000486] That claim reports that blocking a signaling pathway called JAK/STAT with ruxolitinib overcame tumor-protective responses and improved the effect of a therapy called anti-PD-1. [c_000486] No claims in the input contradict this link. [e_000011] This is research navigation only and is not advice about treatment. [e_000011]",
   "citations": [
    "e_000011",
    "c_000486"
@@ -2344,32 +2313,37 @@
     ]
    },
    {
-    "text": "This link is marked as supported, with one supporting report and no contradicting reports.",
-    "cites": [
-     "e_000011",
-     "c_000486"
-    ]
-   },
-   {
-    "text": "The supporting evidence comes from laboratory (in vitro) work, not from patients.",
-    "cites": [
-     "c_000486"
-    ]
-   },
-   {
-    "text": "That work reported that ruxolitinib blocked a signaling pathway (called JAK/STAT) that helps tumors protect themselves, and that this improved the effect of another therapy called anti-PD-1.",
-    "cites": [
-     "c_000486"
-    ]
-   },
-   {
-    "text": "The confidence score for this link is modest at 0.40, and it is labeled \"promising\" rather than established.",
+    "text": "This link is marked as supported, and it was extracted from the research literature rather than confirmed in patients.",
     "cites": [
      "e_000011"
     ]
    },
    {
-    "text": "This is a research lead only and not medical advice.",
+    "text": "The confidence score is low (0.40), and the link carries a label of \"promising\".",
+    "cites": [
+     "e_000011"
+    ]
+   },
+   {
+    "text": "The support comes from one claim based on laboratory (in vitro) work, not from a study in people.",
+    "cites": [
+     "c_000486"
+    ]
+   },
+   {
+    "text": "That claim reports that blocking a signaling pathway called JAK/STAT with ruxolitinib overcame tumor-protective responses and improved the effect of a therapy called anti-PD-1.",
+    "cites": [
+     "c_000486"
+    ]
+   },
+   {
+    "text": "No claims in the input contradict this link.",
+    "cites": [
+     "e_000011"
+    ]
+   },
+   {
+    "text": "This is research navigation only and is not advice about treatment.",
     "cites": [
      "e_000011"
     ]
@@ -2534,8 +2508,8 @@
   "ids": [
    "MONDO:0008383"
   ],
-  "mode": "llm",
-  "text": "This piece of the research graph links rheumatoid arthritis to two other things: a drug called tofacitinib and a blood cancer called T-cell large granular lymphocyte leukemia. [e_000022, e_000043] The graph lists tofacitinib as a treatment for rheumatoid arthritis, and this link is marked as supported and labeled promising. [e_000022] The support is a trial of 140 patients, in which every tofacitinib group had a significant improvement in an arthritis response measure at week 12 compared with the study's comparison design. [c_000104] The graph also links T-cell large granular lymphocyte leukemia to rheumatoid arthritis as an association, meaning the two are found together, not that one causes the other. [e_000043] This association comes from a review that says the leukemia is often seen with autoimmune disorders, most often rheumatoid arthritis. [c_000752] The association link has lower confidence than the treatment link, and no contradicting reports are listed for either one. [e_000043, e_000022] This is research navigation only and not medical advice. [e_000022]",
+  "mode": "llm_retry",
+  "text": "This piece of the graph centers on rheumatoid arthritis and links it to one drug and one blood cancer. [e_000022, e_000043] The graph says tofacitinib treats rheumatoid arthritis, and this link is marked as supported and labeled promising. [e_000022] The support comes from a trial of 140 patients, which reported that patients on tofacitinib did significantly better than those on placebo on a standard improvement measure at week 12. [c_000104] The graph also links T-cell large granular lymphocyte leukemia to rheumatoid arthritis as an association, not as a cause or a treatment. [e_000043] This association is supported by a review stating that this leukemia is frequently seen with autoimmune disorders, most often rheumatoid arthritis. [c_000752, e_000043] The confidence in the association is lower than for the drug link, and no contradicting reports are listed for either connection. [e_000043, e_000022] This is research navigation only and not medical advice. [e_000022]",
   "citations": [
    "e_000022",
    "e_000043",
@@ -2544,38 +2518,39 @@
   ],
   "sentences": [
    {
-    "text": "This piece of the research graph links rheumatoid arthritis to two other things: a drug called tofacitinib and a blood cancer called T-cell large granular lymphocyte leukemia.",
+    "text": "This piece of the graph centers on rheumatoid arthritis and links it to one drug and one blood cancer.",
     "cites": [
      "e_000022",
      "e_000043"
     ]
    },
    {
-    "text": "The graph lists tofacitinib as a treatment for rheumatoid arthritis, and this link is marked as supported and labeled promising.",
+    "text": "The graph says tofacitinib treats rheumatoid arthritis, and this link is marked as supported and labeled promising.",
     "cites": [
      "e_000022"
     ]
    },
    {
-    "text": "The support is a trial of 140 patients, in which every tofacitinib group had a significant improvement in an arthritis response measure at week 12 compared with the study's comparison design.",
+    "text": "The support comes from a trial of 140 patients, which reported that patients on tofacitinib did significantly better than those on placebo on a standard improvement measure at week 12.",
     "cites": [
      "c_000104"
     ]
    },
    {
-    "text": "The graph also links T-cell large granular lymphocyte leukemia to rheumatoid arthritis as an association, meaning the two are found together, not that one causes the other.",
+    "text": "The graph also links T-cell large granular lymphocyte leukemia to rheumatoid arthritis as an association, not as a cause or a treatment.",
     "cites": [
      "e_000043"
     ]
    },
    {
-    "text": "This association comes from a review that says the leukemia is often seen with autoimmune disorders, most often rheumatoid arthritis.",
+    "text": "This association is supported by a review stating that this leukemia is frequently seen with autoimmune disorders, most often rheumatoid arthritis.",
     "cites": [
-     "c_000752"
+     "c_000752",
+     "e_000043"
     ]
    },
    {
-    "text": "The association link has lower confidence than the treatment link, and no contradicting reports are listed for either one.",
+    "text": "The confidence in the association is lower than for the drug link, and no contradicting reports are listed for either connection.",
     "cites": [
      "e_000043",
      "e_000022"
@@ -2588,7 +2563,11 @@
     ]
    }
   ],
-  "errors": []
+  "errors": [
+   [
+    "sentence 2: looks like dosing information"
+   ]
+  ]
  },
  "MONDO:0009411": {
   "journey": "entity",
@@ -2701,7 +2680,7 @@
    "MONDO:0012682"
   ],
   "mode": "llm",
-  "text": "Immunodeficiency 35 is linked in this graph to a mechanism called TYK2 loss of function, meaning a protein named TYK2 does not work properly. [e_000037] This link is marked as supported, and it rests on a review and a case report. [e_000037, c_000414, c_000599] The review says that TYK2 deficiency, a rare inherited immune problem, was first identified in only a few patients. [c_000414] The case report says that severe tuberculosis spreading through the body, together with weak immune responses to one immune signal (IL-23) caused by TYK2 deficiency, has rarely been reported. [c_000599] The graph also links the drug interferon gamma-1b to immunodeficiency 35 as a possible treatment, but the evidence is very small and labeled promising. [e_000002] That treatment link rests on a single case report, in which one patient showed clear clinical improvement after interferon-gamma was added to her tuberculosis medications. [e_000002, c_000598] No claims in the input contradict either link, but one patient is not enough to know whether the drug works more broadly. [e_000002, e_000037]",
+  "text": "Immunodeficiency 35 is linked in this graph to a mechanism called TYK2 loss of function, meaning a protein called TYK2 does not work properly. [e_000037] This link is marked as supported, and it rests on two literature claims, one from a review and one from a case report. [e_000037, c_000414, c_000599] The review says TYK2 deficiency was first identified in only a few patients, so the evidence base is small. [c_000414] The case report says that severe tuberculosis spread caused by TYK2 deficiency has rarely been reported. [c_000599] The drug interferon gamma-1b is linked to immunodeficiency 35 as a possible treatment, but this evidence is very limited. [e_000002] It rests on a report in one patient, who showed clear clinical improvement after interferon-gamma was added to her tuberculosis medications. [e_000002, c_000598] No contradicting reports are listed for either link, but a single-patient report is only an early signal, and this is not medical advice. [e_000002, e_000037, c_000598]",
   "citations": [
    "e_000037",
    "c_000414",
@@ -2711,13 +2690,13 @@
   ],
   "sentences": [
    {
-    "text": "Immunodeficiency 35 is linked in this graph to a mechanism called TYK2 loss of function, meaning a protein named TYK2 does not work properly.",
+    "text": "Immunodeficiency 35 is linked in this graph to a mechanism called TYK2 loss of function, meaning a protein called TYK2 does not work properly.",
     "cites": [
      "e_000037"
     ]
    },
    {
-    "text": "This link is marked as supported, and it rests on a review and a case report.",
+    "text": "This link is marked as supported, and it rests on two literature claims, one from a review and one from a case report.",
     "cites": [
      "e_000037",
      "c_000414",
@@ -2725,35 +2704,36 @@
     ]
    },
    {
-    "text": "The review says that TYK2 deficiency, a rare inherited immune problem, was first identified in only a few patients.",
+    "text": "The review says TYK2 deficiency was first identified in only a few patients, so the evidence base is small.",
     "cites": [
      "c_000414"
     ]
    },
    {
-    "text": "The case report says that severe tuberculosis spreading through the body, together with weak immune responses to one immune signal (IL-23) caused by TYK2 deficiency, has rarely been reported.",
+    "text": "The case report says that severe tuberculosis spread caused by TYK2 deficiency has rarely been reported.",
     "cites": [
      "c_000599"
     ]
    },
    {
-    "text": "The graph also links the drug interferon gamma-1b to immunodeficiency 35 as a possible treatment, but the evidence is very small and labeled promising.",
+    "text": "The drug interferon gamma-1b is linked to immunodeficiency 35 as a possible treatment, but this evidence is very limited.",
     "cites": [
      "e_000002"
     ]
    },
    {
-    "text": "That treatment link rests on a single case report, in which one patient showed clear clinical improvement after interferon-gamma was added to her tuberculosis medications.",
+    "text": "It rests on a report in one patient, who showed clear clinical improvement after interferon-gamma was added to her tuberculosis medications.",
     "cites": [
      "e_000002",
      "c_000598"
     ]
    },
    {
-    "text": "No claims in the input contradict either link, but one patient is not enough to know whether the drug works more broadly.",
+    "text": "No contradicting reports are listed for either link, but a single-patient report is only an early signal, and this is not medical advice.",
     "cites": [
      "e_000002",
-     "e_000037"
+     "e_000037",
+     "c_000598"
     ]
    }
   ],
@@ -2764,19 +2744,19 @@
   "ids": [
    "MONDO:0013599"
   ],
-  "mode": "llm_retry",
-  "text": "Researchers link this condition to a change called STAT1 gain of function, and the 'causes' link is marked as supported by the literature. [e_000081, c_000216, c_000227] The separate link saying this change is the condition's mechanism is contested: many reports support it and a few contradict it. [e_000038, c_000009, c_000366, c_000370] For the drug ruxolitinib, the evidence is contested: some reports, including single-patient reports, describe improvement, while others describe treatment failures or immune problems that persisted. [e_000012, c_000001, c_000027, c_000011, c_000378, c_000481] For the drug baricitinib, the evidence is very limited, with only a small number of reports and a promising but early signal. [e_000015] A large group of investigators, including Jean-Laurent Casanova, Anne Puel and Satoshi Okada, are recorded in a database as working on this condition. [e_000125, e_000145, e_000163] This is a research map only and does not say what anyone should do about treatment. [e_000012, e_000015]",
+  "mode": "llm",
+  "text": "This disease is linked to a change called STAT1 gain of function, where a protein that controls immune signals becomes overactive. [e_000081, e_000038] The link in which this change causes the disease is supported, including by a study of 274 patients and by review articles. [e_000081, c_000216, c_000227] The wider claim that this is the disease's mechanism is contested: many reports support it, but two measurements in one 14-patient study did not fit the picture. [e_000038, c_000366, c_000370] Ruxolitinib as a treatment is contested, with some reports supporting it and some contradicting it. [e_000012] Supporting reports include single-patient accounts of improvement in fungal skin and mucosal infections and in autoimmune features. [c_000001, c_000027, c_000479] Contradicting reports describe treatment failures in two patients, and single patients whose immune problems or infections persisted. [c_000011, c_000378, c_000481] Baricitinib has only small-number evidence, from one supporting report so far. [e_000015] A large group of researchers, including Jean-Laurent Casanova, Anne Puel and Satoshi Okada, are recorded in a database as working on this disease. [e_000125, e_000145, e_000163]",
   "citations": [
    "e_000081",
+   "e_000038",
    "c_000216",
    "c_000227",
-   "e_000038",
-   "c_000009",
    "c_000366",
    "c_000370",
    "e_000012",
    "c_000001",
    "c_000027",
+   "c_000479",
    "c_000011",
    "c_000378",
    "c_000481",
@@ -2787,7 +2767,14 @@
   ],
   "sentences": [
    {
-    "text": "Researchers link this condition to a change called STAT1 gain of function, and the 'causes' link is marked as supported by the literature.",
+    "text": "This disease is linked to a change called STAT1 gain of function, where a protein that controls immune signals becomes overactive.",
+    "cites": [
+     "e_000081",
+     "e_000038"
+    ]
+   },
+   {
+    "text": "The link in which this change causes the disease is supported, including by a study of 274 patients and by review articles.",
     "cites": [
      "e_000081",
      "c_000216",
@@ -2795,53 +2782,51 @@
     ]
    },
    {
-    "text": "The separate link saying this change is the condition's mechanism is contested: many reports support it and a few contradict it.",
+    "text": "The wider claim that this is the disease's mechanism is contested: many reports support it, but two measurements in one 14-patient study did not fit the picture.",
     "cites": [
      "e_000038",
-     "c_000009",
      "c_000366",
      "c_000370"
     ]
    },
    {
-    "text": "For the drug ruxolitinib, the evidence is contested: some reports, including single-patient reports, describe improvement, while others describe treatment failures or immune problems that persisted.",
+    "text": "Ruxolitinib as a treatment is contested, with some reports supporting it and some contradicting it.",
     "cites": [
-     "e_000012",
+     "e_000012"
+    ]
+   },
+   {
+    "text": "Supporting reports include single-patient accounts of improvement in fungal skin and mucosal infections and in autoimmune features.",
+    "cites": [
      "c_000001",
      "c_000027",
+     "c_000479"
+    ]
+   },
+   {
+    "text": "Contradicting reports describe treatment failures in two patients, and single patients whose immune problems or infections persisted.",
+    "cites": [
      "c_000011",
      "c_000378",
      "c_000481"
     ]
    },
    {
-    "text": "For the drug baricitinib, the evidence is very limited, with only a small number of reports and a promising but early signal.",
+    "text": "Baricitinib has only small-number evidence, from one supporting report so far.",
     "cites": [
      "e_000015"
     ]
    },
    {
-    "text": "A large group of investigators, including Jean-Laurent Casanova, Anne Puel and Satoshi Okada, are recorded in a database as working on this condition.",
+    "text": "A large group of researchers, including Jean-Laurent Casanova, Anne Puel and Satoshi Okada, are recorded in a database as working on this disease.",
     "cites": [
      "e_000125",
      "e_000145",
      "e_000163"
     ]
-   },
-   {
-    "text": "This is a research map only and does not say what anyone should do about treatment.",
-    "cites": [
-     "e_000012",
-     "e_000015"
-    ]
    }
   ],
-  "errors": [
-   [
-    "sentence 0: cites 'c_000852', which is not in the input",
-    "sentence 5: cites 'c_000769', which is not in the input"
-   ]
-  ]
+  "errors": []
  },
  "MONDO:0013730": {
   "journey": "entity",
@@ -2946,7 +2931,7 @@
    "MONDO:0014367"
   ],
   "mode": "llm",
-  "text": "The graph links the drug baricitinib to Aicardi-Goutieres syndrome 7 with a \"treats\" connection. [e_000016] This link is labeled supported and was extracted from the literature, but its confidence score is low, at 0.20. [e_000016] The link has no supporting reports listed, so nothing in the input backs it up directly. [e_000016] One report contradicts the link, so the evidence is contested rather than settled. [e_000016, c_000665] That report describes one patient, in whom baricitinib blocked an immune-signaling activity and reduced related signaling but had no effect on how the neurological disease progressed. [c_000665] This is a single case report, so it is very limited evidence, and this is research navigation only, not advice about treatment. [c_000665]",
+  "text": "The graph links the drug baricitinib to Aicardi-Goutieres syndrome 7 with a \"treats\" connection. [e_000016] That link is labeled as supported and was extracted from the literature, but its confidence score is low at 0.20. [e_000016] No claims in the input back up this link; the only claim attached to it contradicts it. [e_000016, c_000665] That contradicting claim is a report in one patient, so the evidence is very limited. [c_000665] In that patient, baricitinib blocked an immune signal called IFN-α and reduced STAT1 signaling, but it had no effect on how the neurological disease progressed. [c_000665] This is research navigation only and not medical advice. [e_000016]",
   "citations": [
    "e_000016",
    "c_000665"
@@ -2959,34 +2944,34 @@
     ]
    },
    {
-    "text": "This link is labeled supported and was extracted from the literature, but its confidence score is low, at 0.20.",
+    "text": "That link is labeled as supported and was extracted from the literature, but its confidence score is low at 0.20.",
     "cites": [
      "e_000016"
     ]
    },
    {
-    "text": "The link has no supporting reports listed, so nothing in the input backs it up directly.",
-    "cites": [
-     "e_000016"
-    ]
-   },
-   {
-    "text": "One report contradicts the link, so the evidence is contested rather than settled.",
+    "text": "No claims in the input back up this link; the only claim attached to it contradicts it.",
     "cites": [
      "e_000016",
      "c_000665"
     ]
    },
    {
-    "text": "That report describes one patient, in whom baricitinib blocked an immune-signaling activity and reduced related signaling but had no effect on how the neurological disease progressed.",
+    "text": "That contradicting claim is a report in one patient, so the evidence is very limited.",
     "cites": [
      "c_000665"
     ]
    },
    {
-    "text": "This is a single case report, so it is very limited evidence, and this is research navigation only, not advice about treatment.",
+    "text": "In that patient, baricitinib blocked an immune signal called IFN-α and reduced STAT1 signaling, but it had no effect on how the neurological disease progressed.",
     "cites": [
      "c_000665"
+    ]
+   },
+   {
+    "text": "This is research navigation only and not medical advice.",
+    "cites": [
+     "e_000016"
     ]
    }
   ],
@@ -2998,56 +2983,56 @@
    "MONDO:0014405"
   ],
   "mode": "llm",
-  "text": "This small map links a disease called STING-associated vasculopathy with onset in infancy to a gene, STING1, and to a drug, baricitinib. [e_000071, e_000017] The gene STING1 is reported as a cause of the disease, but the evidence is small: it comes from a case series of 3 patients. [e_000071, c_000246] In those patients, lab and molecular data pointed to changes at three positions of the STING protein as the source of the disease. [c_000246] Baricitinib is linked to the disease as a possible treatment, and this link is labeled promising but based on very little data. [e_000017] The support is a report in one patient, in whom baricitinib was described as helping a skin ulcer from blood vessel inflammation, regrowing hair, and improving overall well-being. [c_000394, e_000017] Neither link has any contradicting reports in the input, but both rest on very few patients, so they are early findings and not settled. [e_000017, e_000071] This is for research navigation only and is not medical advice. [e_000017]",
+  "text": "This small map links one rare disease, a blood-vessel condition called STING-associated vasculopathy with onset in infancy, to a gene and to a drug. [e_000017, e_000071] The gene STING1 is linked as a cause of the disease, based on a small case series of 3 patients. [e_000071, c_000246] In that report, lab and molecular data pointed to changes at three positions in the STING protein as the source of the illness in those patients. [c_000246] The drug baricitinib is linked to the disease as a possible treatment, but this rests on a report of just one patient. [e_000017, c_000394] In that patient, the report describes benefit for a skin ulcer caused by vessel inflammation, hair regrowth, and better overall well-being. [c_000394] Both links are labeled small-sample evidence, with no contradicting reports in the input, so they should be seen as early findings, not settled facts. [e_000017, e_000071] This is research navigation only and not medical advice. [e_000017]",
   "citations": [
-   "e_000071",
    "e_000017",
+   "e_000071",
    "c_000246",
    "c_000394"
   ],
   "sentences": [
    {
-    "text": "This small map links a disease called STING-associated vasculopathy with onset in infancy to a gene, STING1, and to a drug, baricitinib.",
-    "cites": [
-     "e_000071",
-     "e_000017"
-    ]
-   },
-   {
-    "text": "The gene STING1 is reported as a cause of the disease, but the evidence is small: it comes from a case series of 3 patients.",
-    "cites": [
-     "e_000071",
-     "c_000246"
-    ]
-   },
-   {
-    "text": "In those patients, lab and molecular data pointed to changes at three positions of the STING protein as the source of the disease.",
-    "cites": [
-     "c_000246"
-    ]
-   },
-   {
-    "text": "Baricitinib is linked to the disease as a possible treatment, and this link is labeled promising but based on very little data.",
-    "cites": [
-     "e_000017"
-    ]
-   },
-   {
-    "text": "The support is a report in one patient, in whom baricitinib was described as helping a skin ulcer from blood vessel inflammation, regrowing hair, and improving overall well-being.",
-    "cites": [
-     "c_000394",
-     "e_000017"
-    ]
-   },
-   {
-    "text": "Neither link has any contradicting reports in the input, but both rest on very few patients, so they are early findings and not settled.",
+    "text": "This small map links one rare disease, a blood-vessel condition called STING-associated vasculopathy with onset in infancy, to a gene and to a drug.",
     "cites": [
      "e_000017",
      "e_000071"
     ]
    },
    {
-    "text": "This is for research navigation only and is not medical advice.",
+    "text": "The gene STING1 is linked as a cause of the disease, based on a small case series of 3 patients.",
+    "cites": [
+     "e_000071",
+     "c_000246"
+    ]
+   },
+   {
+    "text": "In that report, lab and molecular data pointed to changes at three positions in the STING protein as the source of the illness in those patients.",
+    "cites": [
+     "c_000246"
+    ]
+   },
+   {
+    "text": "The drug baricitinib is linked to the disease as a possible treatment, but this rests on a report of just one patient.",
+    "cites": [
+     "e_000017",
+     "c_000394"
+    ]
+   },
+   {
+    "text": "In that patient, the report describes benefit for a skin ulcer caused by vessel inflammation, hair regrowth, and better overall well-being.",
+    "cites": [
+     "c_000394"
+    ]
+   },
+   {
+    "text": "Both links are labeled small-sample evidence, with no contradicting reports in the input, so they should be seen as early findings, not settled facts.",
+    "cites": [
+     "e_000017",
+     "e_000071"
+    ]
+   },
+   {
+    "text": "This is research navigation only and not medical advice.",
     "cites": [
      "e_000017"
     ]
@@ -3714,57 +3699,52 @@
    "MONDO:0044903"
   ],
   "mode": "llm",
-  "text": "This small map centers on myelofibrosis, a disease, and links it to one drug and two patient groups. [e_000013, e_001199, e_001201] The MPN Research Foundation is linked to myelofibrosis as a group that supports the community, and this is observed in a database. [e_001199] MPN Advocacy & Education International has the same kind of community-support link to myelofibrosis, also observed in a database. [e_001201] The drug ruxolitinib is linked to myelofibrosis as a treatment, and this link was extracted from published text rather than directly observed. [e_000013] The evidence for the ruxolitinib link is modest, with a confidence of 0.35 and a label of promising. [e_000013] It rests on one review article that describes ruxolitinib as having become the centerpiece of therapy for myelofibrosis since its approval in 2011, and nothing in the input contradicts it. [c_000261, e_000013] This is research navigation only and not medical advice. [e_000013]",
+  "text": "This piece of the graph centers on myelofibrosis, a disease that is linked here to one drug and two patient groups. [e_001199, e_001201, e_000013] The MPN Research Foundation is shown as supporting the myelofibrosis community, and this was observed in a database. [e_001199] MPN Advocacy & Education International is also shown as supporting the myelofibrosis community, again observed in a database. [e_001201] The drug ruxolitinib is linked to myelofibrosis as a treatment, but this link was extracted from published text and carries fairly low confidence. [e_000013] The supporting source is a review article that describes ruxolitinib as having become the centerpiece of therapy for myelofibrosis since its approval in 2011. [c_000261, e_000013] No contradicting reports are listed for the ruxolitinib link, but the evidence rests on that single review claim, and this is research navigation, not medical advice. [e_000013, c_000261]",
   "citations": [
-   "e_000013",
    "e_001199",
    "e_001201",
+   "e_000013",
    "c_000261"
   ],
   "sentences": [
    {
-    "text": "This small map centers on myelofibrosis, a disease, and links it to one drug and two patient groups.",
+    "text": "This piece of the graph centers on myelofibrosis, a disease that is linked here to one drug and two patient groups.",
     "cites": [
-     "e_000013",
      "e_001199",
-     "e_001201"
+     "e_001201",
+     "e_000013"
     ]
    },
    {
-    "text": "The MPN Research Foundation is linked to myelofibrosis as a group that supports the community, and this is observed in a database.",
+    "text": "The MPN Research Foundation is shown as supporting the myelofibrosis community, and this was observed in a database.",
     "cites": [
      "e_001199"
     ]
    },
    {
-    "text": "MPN Advocacy & Education International has the same kind of community-support link to myelofibrosis, also observed in a database.",
+    "text": "MPN Advocacy & Education International is also shown as supporting the myelofibrosis community, again observed in a database.",
     "cites": [
      "e_001201"
     ]
    },
    {
-    "text": "The drug ruxolitinib is linked to myelofibrosis as a treatment, and this link was extracted from published text rather than directly observed.",
+    "text": "The drug ruxolitinib is linked to myelofibrosis as a treatment, but this link was extracted from published text and carries fairly low confidence.",
     "cites": [
      "e_000013"
     ]
    },
    {
-    "text": "The evidence for the ruxolitinib link is modest, with a confidence of 0.35 and a label of promising.",
-    "cites": [
-     "e_000013"
-    ]
-   },
-   {
-    "text": "It rests on one review article that describes ruxolitinib as having become the centerpiece of therapy for myelofibrosis since its approval in 2011, and nothing in the input contradicts it.",
+    "text": "The supporting source is a review article that describes ruxolitinib as having become the centerpiece of therapy for myelofibrosis since its approval in 2011.",
     "cites": [
      "c_000261",
      "e_000013"
     ]
    },
    {
-    "text": "This is research navigation only and not medical advice.",
+    "text": "No contradicting reports are listed for the ruxolitinib link, but the evidence rests on that single review claim, and this is research navigation, not medical advice.",
     "cites": [
-     "e_000013"
+     "e_000013",
+     "c_000261"
     ]
    }
   ],
@@ -3776,52 +3756,45 @@
    "REACT:R-HSA-1059683"
   ],
   "mode": "llm",
-  "text": "The graph links the drug tasquinimod to a biological pathway called Interleukin-6 signaling, and the link is described as one that modulates (changes) the pathway. [e_000018] This link is marked as supported, but the confidence score is fairly low at 0.40. [e_000018] The support comes from one laboratory-based (in vitro) study claim, where the cells were studied outside a living body. [c_000860] In that study, leukemia cells from a myeloproliferative neoplasm that had progressed to acute myeloid leukemia were treated with tasquinimod. [c_000860] Gene activity measurements in those treated cells showed reduced activity in gene sets tied to interleukin-6 signaling and to inflammatory response. [c_000860] No contradicting evidence is listed for this link in the input. [e_000018] This is research information only and does not show what the drug would do in patients. [e_000018, c_000860]",
+  "text": "The research graph links the drug tasquinimod to a biological pathway called Interleukin-6 signaling, and the link is described as modulating, meaning the drug appears to change the pathway's activity. [e_000018] This link is marked as supported, based on information extracted from a published study, and no reports in the graph contradict it. [e_000018] The confidence score for this link is fairly low at 0.40, so it should be treated as an early signal rather than a settled finding. [e_000018] The supporting study was done in vitro, meaning in laboratory cells and not in patients. [c_000860] In that study, cells from a type of acute myeloid leukemia that followed a myeloproliferative neoplasm were treated with tasquinimod. [c_000860] Gene activity measurements in those treated cells showed reduced activity for gene sets tied to interleukin-6 signaling, and also for inflammatory response and for MYC and E2F targets. [c_000860]",
   "citations": [
    "e_000018",
    "c_000860"
   ],
   "sentences": [
    {
-    "text": "The graph links the drug tasquinimod to a biological pathway called Interleukin-6 signaling, and the link is described as one that modulates (changes) the pathway.",
+    "text": "The research graph links the drug tasquinimod to a biological pathway called Interleukin-6 signaling, and the link is described as modulating, meaning the drug appears to change the pathway's activity.",
     "cites": [
      "e_000018"
     ]
    },
    {
-    "text": "This link is marked as supported, but the confidence score is fairly low at 0.40.",
+    "text": "This link is marked as supported, based on information extracted from a published study, and no reports in the graph contradict it.",
     "cites": [
      "e_000018"
     ]
    },
    {
-    "text": "The support comes from one laboratory-based (in vitro) study claim, where the cells were studied outside a living body.",
-    "cites": [
-     "c_000860"
-    ]
-   },
-   {
-    "text": "In that study, leukemia cells from a myeloproliferative neoplasm that had progressed to acute myeloid leukemia were treated with tasquinimod.",
-    "cites": [
-     "c_000860"
-    ]
-   },
-   {
-    "text": "Gene activity measurements in those treated cells showed reduced activity in gene sets tied to interleukin-6 signaling and to inflammatory response.",
-    "cites": [
-     "c_000860"
-    ]
-   },
-   {
-    "text": "No contradicting evidence is listed for this link in the input.",
+    "text": "The confidence score for this link is fairly low at 0.40, so it should be treated as an early signal rather than a settled finding.",
     "cites": [
      "e_000018"
     ]
    },
    {
-    "text": "This is research information only and does not show what the drug would do in patients.",
+    "text": "The supporting study was done in vitro, meaning in laboratory cells and not in patients.",
     "cites": [
-     "e_000018",
+     "c_000860"
+    ]
+   },
+   {
+    "text": "In that study, cells from a type of acute myeloid leukemia that followed a myeloproliferative neoplasm were treated with tasquinimod.",
+    "cites": [
+     "c_000860"
+    ]
+   },
+   {
+    "text": "Gene activity measurements in those treated cells showed reduced activity for gene sets tied to interleukin-6 signaling, and also for inflammatory response and for MYC and E2F targets.",
+    "cites": [
      "c_000860"
     ]
    }
@@ -4723,45 +4696,52 @@
    "ensembl:ENSG00000105697"
   ],
   "mode": "llm",
-  "text": "The input links the drug momelotinib to the gene HAMP, and the link is described as 'modulates'. [e_000001] This link is marked as supported, with one supporting report and no contradicting reports. [e_000001, c_000816] The support comes from a review article, so it is information pulled from published literature rather than a direct test shown here. [c_000816] The review says momelotinib has shown benefits for red blood cell production by lowering hepcidin expression through blocking a protein called ACVR1. [c_000816] The review also mentions reduced spleen enlargement and fewer symptoms, but these are not directly part of the link to HAMP. [c_000816] The confidence score for this link is fairly low at 0.35, so it should be treated as a lead to follow up and not a settled fact. [e_000001]",
+  "text": "The graph links the drug momelotinib to the gene HAMP, and the connection is described as 'modulates'. [e_000001] This link is marked as supported, and the evidence was extracted from a published review article. [e_000001, c_000816] The review says momelotinib has shown benefits for red blood cell production by lowering the activity of hepcidin, which is the product tied to HAMP. [c_000816] The review says this happens by blocking a protein called ACVR1. [c_000816] No reports in the input contradict this link. [e_000001] The confidence score is fairly low at 0.35, and only one supporting claim is listed, so this is a modest amount of evidence. [e_000001, c_000816] This is research navigation only and not medical advice. [e_000001]",
   "citations": [
    "e_000001",
    "c_000816"
   ],
   "sentences": [
    {
-    "text": "The input links the drug momelotinib to the gene HAMP, and the link is described as 'modulates'.",
+    "text": "The graph links the drug momelotinib to the gene HAMP, and the connection is described as 'modulates'.",
     "cites": [
      "e_000001"
     ]
    },
    {
-    "text": "This link is marked as supported, with one supporting report and no contradicting reports.",
+    "text": "This link is marked as supported, and the evidence was extracted from a published review article.",
     "cites": [
      "e_000001",
      "c_000816"
     ]
    },
    {
-    "text": "The support comes from a review article, so it is information pulled from published literature rather than a direct test shown here.",
+    "text": "The review says momelotinib has shown benefits for red blood cell production by lowering the activity of hepcidin, which is the product tied to HAMP.",
     "cites": [
      "c_000816"
     ]
    },
    {
-    "text": "The review says momelotinib has shown benefits for red blood cell production by lowering hepcidin expression through blocking a protein called ACVR1.",
+    "text": "The review says this happens by blocking a protein called ACVR1.",
     "cites": [
      "c_000816"
     ]
    },
    {
-    "text": "The review also mentions reduced spleen enlargement and fewer symptoms, but these are not directly part of the link to HAMP.",
+    "text": "No reports in the input contradict this link.",
     "cites": [
+     "e_000001"
+    ]
+   },
+   {
+    "text": "The confidence score is fairly low at 0.35, and only one supporting claim is listed, so this is a modest amount of evidence.",
+    "cites": [
+     "e_000001",
      "c_000816"
     ]
    },
    {
-    "text": "The confidence score for this link is fairly low at 0.35, so it should be treated as a lead to follow up and not a settled fact.",
+    "text": "This is research navigation only and not medical advice.",
     "cites": [
      "e_000001"
     ]
@@ -4929,18 +4909,18 @@
    "ensembl:ENSG00000111537"
   ],
   "mode": "llm",
-  "text": "The gene IFNG is linked in this graph to two drugs, ruxolitinib and baricitinib, and to one other gene, NAMPT. [e_000003, e_000014, e_000064] For baricitinib, the link comes from a small case series of 3 people, which reported that IFN-gamma was lower after 3 months, so the evidence is thin. [e_000014, c_000603] For ruxolitinib, the link rests on a report in one patient, who had lower IFN-gamma after 4 months of therapy, so this is also very limited evidence. [e_000003, c_000417] Neither drug link has any contradicting reports in the input, but small numbers mean they should be treated as early signals. [e_000014, e_000003] NAMPT is linked to IFNG through a laboratory study on cells, not in patients. [e_000064, c_000564] In that study, blocking NAMPT in healthy immune cells called monocytes completely removed the oxygen use triggered by IFN-gamma, bringing it to levels seen in cells from people with CGD. [c_000564]",
+  "text": "IFNG is a gene, and in this small piece of the research graph three other items are linked to it: two drugs (ruxolitinib and baricitinib) and a gene called NAMPT. [e_000003, e_000014, e_000064] Ruxolitinib is linked to IFNG based on a report in one patient, where the IFN-γ level went down after 4 months of therapy; this is very limited evidence. [e_000003, c_000417] Baricitinib is linked to IFNG based on a small series of 3 patients, where IFN-γ was lower after 3 months; this is also limited evidence. [e_000014, c_000603] NAMPT is linked to IFNG through a laboratory experiment on cells, where blocking NAMPT in healthy immune cells stopped a response that IFNγ normally triggers. [e_000064, c_000564] No contradicting reports appear for any of these three links. [e_000003, e_000014, e_000064] The patient-based links come from very small numbers of people, and the NAMPT link comes from cells in a lab, so none of this shows what would happen in patients generally. [c_000417, c_000603, c_000564]",
   "citations": [
    "e_000003",
    "e_000014",
    "e_000064",
-   "c_000603",
    "c_000417",
+   "c_000603",
    "c_000564"
   ],
   "sentences": [
    {
-    "text": "The gene IFNG is linked in this graph to two drugs, ruxolitinib and baricitinib, and to one other gene, NAMPT.",
+    "text": "IFNG is a gene, and in this small piece of the research graph three other items are linked to it: two drugs (ruxolitinib and baricitinib) and a gene called NAMPT.",
     "cites": [
      "e_000003",
      "e_000014",
@@ -4948,36 +4928,39 @@
     ]
    },
    {
-    "text": "For baricitinib, the link comes from a small case series of 3 people, which reported that IFN-gamma was lower after 3 months, so the evidence is thin.",
-    "cites": [
-     "e_000014",
-     "c_000603"
-    ]
-   },
-   {
-    "text": "For ruxolitinib, the link rests on a report in one patient, who had lower IFN-gamma after 4 months of therapy, so this is also very limited evidence.",
+    "text": "Ruxolitinib is linked to IFNG based on a report in one patient, where the IFN-γ level went down after 4 months of therapy; this is very limited evidence.",
     "cites": [
      "e_000003",
      "c_000417"
     ]
    },
    {
-    "text": "Neither drug link has any contradicting reports in the input, but small numbers mean they should be treated as early signals.",
+    "text": "Baricitinib is linked to IFNG based on a small series of 3 patients, where IFN-γ was lower after 3 months; this is also limited evidence.",
     "cites": [
      "e_000014",
-     "e_000003"
+     "c_000603"
     ]
    },
    {
-    "text": "NAMPT is linked to IFNG through a laboratory study on cells, not in patients.",
+    "text": "NAMPT is linked to IFNG through a laboratory experiment on cells, where blocking NAMPT in healthy immune cells stopped a response that IFNγ normally triggers.",
     "cites": [
      "e_000064",
      "c_000564"
     ]
    },
    {
-    "text": "In that study, blocking NAMPT in healthy immune cells called monocytes completely removed the oxygen use triggered by IFN-gamma, bringing it to levels seen in cells from people with CGD.",
+    "text": "No contradicting reports appear for any of these three links.",
     "cites": [
+     "e_000003",
+     "e_000014",
+     "e_000064"
+    ]
+   },
+   {
+    "text": "The patient-based links come from very small numbers of people, and the NAMPT link comes from cells in a lab, so none of this shows what would happen in patients generally.",
+    "cites": [
+     "c_000417",
+     "c_000603",
      "c_000564"
     ]
    }
@@ -5162,54 +5145,48 @@
    "ensembl:ENSG00000163737"
   ],
   "mode": "llm",
-  "text": "This small graph links one drug, ruxolitinib, to one gene, PF4. [e_000004] The link is described as ruxolitinib modulating PF4, meaning it changes how the gene behaves. [e_000004] The link is marked as supported, and it was extracted from a published report rather than confirmed independently. [e_000004, c_000760] The supporting report says high levels of a signal called TPO kept PF4 being made and released in cultured cells grown in the lab. [c_000760] The same report says ruxolitinib restrains the abnormal PF4 expression in vivo. [c_000760] Only one supporting report is listed and none contradict it, but the confidence score is low at 0.40. [e_000004, c_000760] This is research navigation only and not medical advice. [e_000004]",
+  "text": "The graph links the drug ruxolitinib to the gene PF4 with a relationship called \"modulates,\" meaning the drug appears to change how PF4 is active. [e_000004] This link is marked as supported, and it was extracted from a published report rather than confirmed independently. [e_000004, c_000760] The report describes lab experiments where high levels of a signaling molecule called TPO kept cultured cells producing and releasing PF4. [c_000760] The same report says ruxolitinib restrains abnormal PF4 activity in vivo. [c_000760] The confidence score for this link is low, at 0.40, so it should be treated as an early lead. [e_000004] No claims in the input contradict the link, but only one supporting claim is listed. [e_000004, c_000760]",
   "citations": [
    "e_000004",
    "c_000760"
   ],
   "sentences": [
    {
-    "text": "This small graph links one drug, ruxolitinib, to one gene, PF4.",
+    "text": "The graph links the drug ruxolitinib to the gene PF4 with a relationship called \"modulates,\" meaning the drug appears to change how PF4 is active.",
     "cites": [
      "e_000004"
     ]
    },
    {
-    "text": "The link is described as ruxolitinib modulating PF4, meaning it changes how the gene behaves.",
-    "cites": [
-     "e_000004"
-    ]
-   },
-   {
-    "text": "The link is marked as supported, and it was extracted from a published report rather than confirmed independently.",
+    "text": "This link is marked as supported, and it was extracted from a published report rather than confirmed independently.",
     "cites": [
      "e_000004",
      "c_000760"
     ]
    },
    {
-    "text": "The supporting report says high levels of a signal called TPO kept PF4 being made and released in cultured cells grown in the lab.",
+    "text": "The report describes lab experiments where high levels of a signaling molecule called TPO kept cultured cells producing and releasing PF4.",
     "cites": [
      "c_000760"
     ]
    },
    {
-    "text": "The same report says ruxolitinib restrains the abnormal PF4 expression in vivo.",
+    "text": "The same report says ruxolitinib restrains abnormal PF4 activity in vivo.",
     "cites": [
      "c_000760"
     ]
    },
    {
-    "text": "Only one supporting report is listed and none contradict it, but the confidence score is low at 0.40.",
+    "text": "The confidence score for this link is low, at 0.40, so it should be treated as an early lead.",
+    "cites": [
+     "e_000004"
+    ]
+   },
+   {
+    "text": "No claims in the input contradict the link, but only one supporting claim is listed.",
     "cites": [
      "e_000004",
      "c_000760"
-    ]
-   },
-   {
-    "text": "This is research navigation only and not medical advice.",
-    "cites": [
-     "e_000004"
     ]
    }
   ],
@@ -5913,7 +5890,7 @@
    "mech:JAK1:GoF"
   ],
   "mode": "llm",
-  "text": "The research graph links a change called JAK1 gain of function, which means the JAK1 protein is overactive, to a disease called autoinflammation, immune dysregulation, and eosinophilia. [e_000074] This link is marked as supported, based on a case series (a write-up of a group of patients) reporting that inherited overactive JAK1 variants cause severe allergy-type disease and high eosinophil counts. [e_000074, c_000659] The graph also connects the drug tofacitinib to JAK1 gain of function, saying the drug modulates it. [e_000019] This drug link rests on very little evidence: a report of just two patients. [e_000019, c_000889] In those two patients, the report says tofacitinib reduced the JAK1 overactivity, normalized certain immune signals, and improved clinical symptoms. [c_000889] No contradicting reports appear for either link in this piece of the graph. [e_000019, e_000074] This is research navigation only, and the small size of the drug evidence means it should be read as an early signal, not a settled finding. [e_000019, c_000889]",
+  "text": "The research graph links a mechanism, JAK1 gain of function (an overactive JAK1 gene), to a condition called autoinflammation, immune dysregulation, and eosinophilia. [e_000074] This link is supported: a case series reported that inherited overactive JAK1 variants are a cause of severe allergic-type disease and high eosinophil counts. [e_000074, c_000659] The graph also connects the drug tofacitinib to this JAK1 overactivity, saying the drug modulates it. [e_000019] The evidence for the drug link is weak because it rests on a very small number of patients: a case series of just two people. [e_000019, c_000889] In those two patients, the report says tofacitinib reduced JAK1 overactivity, normalized blood cytokine levels and interferon signatures, and improved clinical symptoms. [c_000889] No contradicting reports are listed for either link, but the evidence is early and this is for research navigation only, not medical advice. [e_000019, e_000074]",
   "citations": [
    "e_000074",
    "c_000659",
@@ -5922,49 +5899,42 @@
   ],
   "sentences": [
    {
-    "text": "The research graph links a change called JAK1 gain of function, which means the JAK1 protein is overactive, to a disease called autoinflammation, immune dysregulation, and eosinophilia.",
+    "text": "The research graph links a mechanism, JAK1 gain of function (an overactive JAK1 gene), to a condition called autoinflammation, immune dysregulation, and eosinophilia.",
     "cites": [
      "e_000074"
     ]
    },
    {
-    "text": "This link is marked as supported, based on a case series (a write-up of a group of patients) reporting that inherited overactive JAK1 variants cause severe allergy-type disease and high eosinophil counts.",
+    "text": "This link is supported: a case series reported that inherited overactive JAK1 variants are a cause of severe allergic-type disease and high eosinophil counts.",
     "cites": [
      "e_000074",
      "c_000659"
     ]
    },
    {
-    "text": "The graph also connects the drug tofacitinib to JAK1 gain of function, saying the drug modulates it.",
+    "text": "The graph also connects the drug tofacitinib to this JAK1 overactivity, saying the drug modulates it.",
     "cites": [
      "e_000019"
     ]
    },
    {
-    "text": "This drug link rests on very little evidence: a report of just two patients.",
+    "text": "The evidence for the drug link is weak because it rests on a very small number of patients: a case series of just two people.",
     "cites": [
      "e_000019",
      "c_000889"
     ]
    },
    {
-    "text": "In those two patients, the report says tofacitinib reduced the JAK1 overactivity, normalized certain immune signals, and improved clinical symptoms.",
+    "text": "In those two patients, the report says tofacitinib reduced JAK1 overactivity, normalized blood cytokine levels and interferon signatures, and improved clinical symptoms.",
     "cites": [
      "c_000889"
     ]
    },
    {
-    "text": "No contradicting reports appear for either link in this piece of the graph.",
+    "text": "No contradicting reports are listed for either link, but the evidence is early and this is for research navigation only, not medical advice.",
     "cites": [
      "e_000019",
      "e_000074"
-    ]
-   },
-   {
-    "text": "This is research navigation only, and the small size of the drug evidence means it should be read as an early signal, not a settled finding.",
-    "cites": [
-     "e_000019",
-     "c_000889"
     ]
    }
   ],
@@ -5976,7 +5946,7 @@
    "mech:JAK2:GoF:somatic"
   ],
   "mode": "llm",
-  "text": "A specific change in the JAK2 gene, called Val617Phe (or V617F), is linked to a mechanism in which the JAK2 protein becomes overactive, and this overactivity arises in body cells rather than being inherited. [e_000051, c_000636] This link comes from information extracted from a review article, which describes this overactive JAK2 change as a hallmark of a group of blood-cell disorders. [e_000051, c_000636] The overactive JAK2 mechanism is in turn linked to causing polycythemia vera, a blood cancer-like disorder, and a review says it arises from acquired JAK2 mutations that keep the JAK-STAT signaling pathway constantly switched on. [e_000075, c_000913] Both of these links are marked as supported, but the confidence scores are low (0.35), so they are best read as early signposts rather than settled findings. [e_000051, e_000075] The drug ruxolitinib is connected to this overactive JAK2 mechanism, but the evidence for that link is weak, with a confidence of only 0.20 and no supporting claim listed. [e_000005] One review contradicts part of the picture, noting that ruxolitinib reduces spleen enlargement and symptoms but does not greatly lower the amount of cells carrying the JAK2 V617F change or reduce bone marrow scarring. [e_000005, c_000253]",
+  "text": "The JAK2 V617F change is linked to a mechanism called somatic gain of function, meaning an acquired change that switches the JAK2 protein on more than it should be; this link was extracted from a review article and is supported by it. [e_000051, c_000636] That review describes the V617F change as a hallmark of myeloproliferative disorders and notes it is also seen in clonal hematopoiesis of indeterminate potential. [c_000636] This mechanism is linked to polycythemia vera as a cause, a link extracted from a review that supports it. [e_000075, c_000913] That review says polycythemia vera arises from acquired JAK2 changes that leave the JAK-STAT pathway constantly switched on. [c_000913] Ruxolitinib is connected to this mechanism as a modulator, but the evidence is weak and contested, with no supporting claim and one contradicting claim. [e_000005, c_000253] The contradicting review says ruxolitinib reduced spleen enlargement and symptoms but did not lead to major reductions in the amount of cells carrying JAK2 V617F or in bone marrow scarring. [c_000253]",
   "citations": [
    "e_000051",
    "c_000636",
@@ -5987,43 +5957,41 @@
   ],
   "sentences": [
    {
-    "text": "A specific change in the JAK2 gene, called Val617Phe (or V617F), is linked to a mechanism in which the JAK2 protein becomes overactive, and this overactivity arises in body cells rather than being inherited.",
+    "text": "The JAK2 V617F change is linked to a mechanism called somatic gain of function, meaning an acquired change that switches the JAK2 protein on more than it should be; this link was extracted from a review article and is supported by it.",
     "cites": [
      "e_000051",
      "c_000636"
     ]
    },
    {
-    "text": "This link comes from information extracted from a review article, which describes this overactive JAK2 change as a hallmark of a group of blood-cell disorders.",
+    "text": "That review describes the V617F change as a hallmark of myeloproliferative disorders and notes it is also seen in clonal hematopoiesis of indeterminate potential.",
     "cites": [
-     "e_000051",
      "c_000636"
     ]
    },
    {
-    "text": "The overactive JAK2 mechanism is in turn linked to causing polycythemia vera, a blood cancer-like disorder, and a review says it arises from acquired JAK2 mutations that keep the JAK-STAT signaling pathway constantly switched on.",
+    "text": "This mechanism is linked to polycythemia vera as a cause, a link extracted from a review that supports it.",
     "cites": [
      "e_000075",
      "c_000913"
     ]
    },
    {
-    "text": "Both of these links are marked as supported, but the confidence scores are low (0.35), so they are best read as early signposts rather than settled findings.",
+    "text": "That review says polycythemia vera arises from acquired JAK2 changes that leave the JAK-STAT pathway constantly switched on.",
     "cites": [
-     "e_000051",
-     "e_000075"
+     "c_000913"
     ]
    },
    {
-    "text": "The drug ruxolitinib is connected to this overactive JAK2 mechanism, but the evidence for that link is weak, with a confidence of only 0.20 and no supporting claim listed.",
-    "cites": [
-     "e_000005"
-    ]
-   },
-   {
-    "text": "One review contradicts part of the picture, noting that ruxolitinib reduces spleen enlargement and symptoms but does not greatly lower the amount of cells carrying the JAK2 V617F change or reduce bone marrow scarring.",
+    "text": "Ruxolitinib is connected to this mechanism as a modulator, but the evidence is weak and contested, with no supporting claim and one contradicting claim.",
     "cites": [
      "e_000005",
+     "c_000253"
+    ]
+   },
+   {
+    "text": "The contradicting review says ruxolitinib reduced spleen enlargement and symptoms but did not lead to major reductions in the amount of cells carrying JAK2 V617F or in bone marrow scarring.",
+    "cites": [
      "c_000253"
     ]
    }
@@ -6115,48 +6083,32 @@
    "mech:STAT1:GoF"
   ],
   "mode": "llm",
-  "text": "STAT1 gain of function means the STAT1 protein is overactive, and reports describe it as staying switched on and sending stronger signals than normal. [c_000224, c_000273] The best-supported link is to chronic mucocutaneous candidiasis, a long-lasting yeast infection of skin and mucous membranes, which was observed repeatedly, including in a large group of 274 patients where 98% had it. [e_000085, e_000083, c_000217] Autoimmunity and a lower share of Th17 immune cells are also supported by several reports, such as autoimmune problems in 37% of that same group. [e_000086, e_000090, c_000218, c_000021] The autoimmune enteropathy and endocrinopathy syndrome is reported as caused by STAT1 gain of function, but the reverse link from that syndrome to the mechanism is contested, with many reports supporting it and two contradicting it. [e_000081, e_000038] Takayasu arteritis, BCGosis, combined immunodeficiency, pure red cell aplasia, myocarditis and increased T cell death each rest on one small report, so they are early findings, while acute graft versus host disease is supported by a single claim. [e_000079, e_000080, e_000082, e_000087, e_000088, e_000089, e_000091, e_000084] Several specific gene changes are linked to this mechanism, with L400P, R274Q, R274W and T419R supported, while P326S, Q285R and T385M are each reported in only a few cases. [e_000056, e_000053, e_000052, e_000057, e_000045, e_000047, e_000048] For drugs, ruxolitinib has a small body of reports, including lab work where one child's STAT1 change was reversed, while the tofacitinib link has no supporting reports listed and one contradicting report. [e_000006, c_000330, e_000020]",
+  "text": "STAT1 gain of function is linked to chronic mucocutaneous candidiasis, and this link is supported by many reports, including a large group of 274 patients where almost all had it. [e_000085, e_000083, c_000217] It is also supported as a cause of autoimmunity and of a lowered share of Th17 immune cells, with reports of autoimmune problems in about a third of the patients in that large group. [e_000086, e_000090, c_000218] Its link to the autoimmune enteropathy and endocrinopathy syndrome with chronic infections is contested: many reports support it, but two contradict it, so the picture is not settled. [e_000038] The reverse direction, in which gain of function is said to cause that same syndrome, is supported by three reports. [e_000081] Several other links rest on very small numbers, such as combined immunodeficiency, myocarditis, pure red cell aplasia, Takayasu arteritis and BCGosis, and each is reported in only one source. [e_000082, e_000089, e_000088, e_000079, e_000080] Some specific gene changes, such as Arg274Gln and Leu400Pro, are supported as producing gain of function, while others, such as Pro326Ser and Gln285Arg, have only one supporting report each. [e_000053, e_000056, e_000045, e_000047] Ruxolitinib is linked to this mechanism in only a few reports, including a single-patient report where the effect was reversed in laboratory tests, and the tofacitinib link has no supporting reports and one contradicting report. [e_000006, c_000330, e_000020]",
   "citations": [
-   "c_000224",
-   "c_000273",
    "e_000085",
    "e_000083",
    "c_000217",
    "e_000086",
    "e_000090",
    "c_000218",
-   "c_000021",
-   "e_000081",
    "e_000038",
+   "e_000081",
+   "e_000082",
+   "e_000089",
+   "e_000088",
    "e_000079",
    "e_000080",
-   "e_000082",
-   "e_000087",
-   "e_000088",
-   "e_000089",
-   "e_000091",
-   "e_000084",
-   "e_000056",
    "e_000053",
-   "e_000052",
-   "e_000057",
+   "e_000056",
    "e_000045",
    "e_000047",
-   "e_000048",
    "e_000006",
    "c_000330",
    "e_000020"
   ],
   "sentences": [
    {
-    "text": "STAT1 gain of function means the STAT1 protein is overactive, and reports describe it as staying switched on and sending stronger signals than normal.",
-    "cites": [
-     "c_000224",
-     "c_000273"
-    ]
-   },
-   {
-    "text": "The best-supported link is to chronic mucocutaneous candidiasis, a long-lasting yeast infection of skin and mucous membranes, which was observed repeatedly, including in a large group of 274 patients where 98% had it.",
+    "text": "STAT1 gain of function is linked to chronic mucocutaneous candidiasis, and this link is supported by many reports, including a large group of 274 patients where almost all had it.",
     "cites": [
      "e_000085",
      "e_000083",
@@ -6164,48 +6116,46 @@
     ]
    },
    {
-    "text": "Autoimmunity and a lower share of Th17 immune cells are also supported by several reports, such as autoimmune problems in 37% of that same group.",
+    "text": "It is also supported as a cause of autoimmunity and of a lowered share of Th17 immune cells, with reports of autoimmune problems in about a third of the patients in that large group.",
     "cites": [
      "e_000086",
      "e_000090",
-     "c_000218",
-     "c_000021"
+     "c_000218"
     ]
    },
    {
-    "text": "The autoimmune enteropathy and endocrinopathy syndrome is reported as caused by STAT1 gain of function, but the reverse link from that syndrome to the mechanism is contested, with many reports supporting it and two contradicting it.",
+    "text": "Its link to the autoimmune enteropathy and endocrinopathy syndrome with chronic infections is contested: many reports support it, but two contradict it, so the picture is not settled.",
     "cites": [
-     "e_000081",
      "e_000038"
     ]
    },
    {
-    "text": "Takayasu arteritis, BCGosis, combined immunodeficiency, pure red cell aplasia, myocarditis and increased T cell death each rest on one small report, so they are early findings, while acute graft versus host disease is supported by a single claim.",
+    "text": "The reverse direction, in which gain of function is said to cause that same syndrome, is supported by three reports.",
     "cites": [
-     "e_000079",
-     "e_000080",
+     "e_000081"
+    ]
+   },
+   {
+    "text": "Several other links rest on very small numbers, such as combined immunodeficiency, myocarditis, pure red cell aplasia, Takayasu arteritis and BCGosis, and each is reported in only one source.",
+    "cites": [
      "e_000082",
-     "e_000087",
-     "e_000088",
      "e_000089",
-     "e_000091",
-     "e_000084"
+     "e_000088",
+     "e_000079",
+     "e_000080"
     ]
    },
    {
-    "text": "Several specific gene changes are linked to this mechanism, with L400P, R274Q, R274W and T419R supported, while P326S, Q285R and T385M are each reported in only a few cases.",
+    "text": "Some specific gene changes, such as Arg274Gln and Leu400Pro, are supported as producing gain of function, while others, such as Pro326Ser and Gln285Arg, have only one supporting report each.",
     "cites": [
-     "e_000056",
      "e_000053",
-     "e_000052",
-     "e_000057",
+     "e_000056",
      "e_000045",
-     "e_000047",
-     "e_000048"
+     "e_000047"
     ]
    },
    {
-    "text": "For drugs, ruxolitinib has a small body of reports, including lab work where one child's STAT1 change was reversed, while the tofacitinib link has no supporting reports listed and one contradicting report.",
+    "text": "Ruxolitinib is linked to this mechanism in only a few reports, including a single-patient report where the effect was reversed in laboratory tests, and the tofacitinib link has no supporting reports and one contradicting report.",
     "cites": [
      "e_000006",
      "c_000330",

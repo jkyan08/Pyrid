@@ -38,8 +38,8 @@ commands with `uv run --with anthropic ...`.
   When `data/build/graph.json` exists it re-checks every id against it. Role-aware: `treats` = Drug → Disease,
   `has_mechanism` = Variant/Disease/Gene → Mechanism, `causes` → Disease, `has_phenotype` → HPO.
 - `claims.meta.json` → `nodes`: every node a claim references (incl. ClinVar variants, mech: nodes), in contract
-  shape, to add if you have not loaded them. Drug ids are the backbone's bare ChEMBL ids (`CHEMBL1789941`);
-  tell lane B if you normalise them differently.
+  shape, to add if you have not loaded them. Drug ids follow lane A's `pipeline/ids.py` rule
+  (`CHEMBL:CHEMBL1789941`; `DRUGBANK:` ids kept).
 - Evidence for the tests: ruxolitinib (`CHEMBL1789941`) → STAT1 GoF disease `MONDO:0013599`: 11 supporting,
   4 contradicting (test 4). Six STAT1 ClinVar variants → `mech:STAT1:GoF` (test 7).
   Disease → mechanism claims for STAT1 GoF, STAT3 GoF/DN, TYK2 LoF, JAK3 LoF.

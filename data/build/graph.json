@@ -1,6 +1,6 @@
 {
   "meta": {
-    "built_at": "2026-10-04T02:12:48Z",
+    "built_at": "2026-10-04T02:18:21Z",
     "sources": [
       {
         "name": "PubMed abstracts via lane B extraction (model claude-sonnet-5-5; 935 kept claims, 192 fully resolved against the backbone and exported; unresolved mentions are NOT bridged)",
@@ -324,7 +324,7 @@
   },
   "nodes": [
     {
-      "id": "CHEMBL1078178",
+      "id": "CHEMBL:CHEMBL1078178",
       "type": "Drug",
       "label": "momelotinib",
       "synonyms": [
@@ -340,7 +340,7 @@
       }
     },
     {
-      "id": "CHEMBL1201564",
+      "id": "CHEMBL:CHEMBL1201564",
       "type": "Drug",
       "label": "interferon gamma-1b",
       "synonyms": [
@@ -365,7 +365,7 @@
       }
     },
     {
-      "id": "CHEMBL1421",
+      "id": "CHEMBL:CHEMBL1421",
       "type": "Drug",
       "label": "dasatinib",
       "synonyms": [
@@ -392,19 +392,7 @@
       }
     },
     {
-      "id": "CHEMBL1568",
-      "type": "Drug",
-      "label": "fludarabine",
-      "synonyms": [
-        "2-Fluoro-Ara-A",
-        "Fludarabine"
-      ],
-      "props": {
-        "backbone_id": "CHEMBL1568"
-      }
-    },
-    {
-      "id": "CHEMBL1789941",
+      "id": "CHEMBL:CHEMBL1789941",
       "type": "Drug",
       "label": "ruxolitinib",
       "synonyms": [
@@ -421,7 +409,32 @@
       }
     },
     {
-      "id": "CHEMBL2035187",
+      "id": "CHEMBL:CHEMBL1908360",
+      "type": "Drug",
+      "label": "everolimus",
+      "synonyms": [
+        "40-O-(2-hydroxyethyl)-rapamycin",
+        "42-O-(2-Hydroxyethyl)rapamycin",
+        "Everolimus",
+        "évérolimus",
+        "RAD 666",
+        "RAD-001",
+        "RAD-666",
+        "RAD001",
+        "SDZ-RAD",
+        "Sdz rad",
+        "Afinitor",
+        "Afinitor disperz",
+        "Certican",
+        "Votubia",
+        "Zortress"
+      ],
+      "props": {
+        "backbone_id": "CHEMBL1908360"
+      }
+    },
+    {
+      "id": "CHEMBL:CHEMBL2035187",
       "type": "Drug",
       "label": "pacritinib",
       "synonyms": [
@@ -436,7 +449,7 @@
       }
     },
     {
-      "id": "CHEMBL2105759",
+      "id": "CHEMBL:CHEMBL2105759",
       "type": "Drug",
       "label": "baricitinib",
       "synonyms": [
@@ -455,7 +468,7 @@
       }
     },
     {
-      "id": "CHEMBL2107784",
+      "id": "CHEMBL:CHEMBL2107784",
       "type": "Drug",
       "label": "tasquinimod",
       "synonyms": [
@@ -466,7 +479,7 @@
       }
     },
     {
-      "id": "CHEMBL221959",
+      "id": "CHEMBL:CHEMBL221959",
       "type": "Drug",
       "label": "tofacitinib",
       "synonyms": [
@@ -491,7 +504,7 @@
       }
     },
     {
-      "id": "CHEMBL267345",
+      "id": "CHEMBL:CHEMBL267345",
       "type": "Drug",
       "label": "amphotericin b",
       "synonyms": [
@@ -532,7 +545,7 @@
       }
     },
     {
-      "id": "CHEMBL3809489",
+      "id": "CHEMBL:CHEMBL3809489",
       "type": "Drug",
       "label": "bemcentinib",
       "synonyms": [
@@ -556,7 +569,7 @@
       }
     },
     {
-      "id": "CHEMBL4435170",
+      "id": "CHEMBL:CHEMBL4435170",
       "type": "Drug",
       "label": "deucravacitinib",
       "synonyms": [
@@ -569,7 +582,7 @@
       }
     },
     {
-      "id": "CHEMBL467",
+      "id": "CHEMBL:CHEMBL467",
       "type": "Drug",
       "label": "hydroxyurea",
       "synonyms": [
@@ -598,7 +611,7 @@
       }
     },
     {
-      "id": "CHEMBL941",
+      "id": "CHEMBL:CHEMBL941",
       "type": "Drug",
       "label": "imatinib",
       "synonyms": [
@@ -10601,7 +10614,7 @@
   "edges": [
     {
       "id": "e_000001",
-      "source": "CHEMBL1078178",
+      "source": "CHEMBL:CHEMBL1078178",
       "target": "ensembl:ENSG00000105697",
       "relation": "modulates",
       "evidence_class": "extracted",
@@ -10631,7 +10644,7 @@
     },
     {
       "id": "e_000002",
-      "source": "CHEMBL1201564",
+      "source": "CHEMBL:CHEMBL1201564",
       "target": "MONDO:0012682",
       "relation": "treats",
       "evidence_class": "extracted",
@@ -10666,7 +10679,7 @@
     },
     {
       "id": "e_000003",
-      "source": "CHEMBL1789941",
+      "source": "CHEMBL:CHEMBL1789941",
       "target": "ensembl:ENSG00000111537",
       "relation": "modulates",
       "evidence_class": "extracted",
@@ -10700,7 +10713,7 @@
     },
     {
       "id": "e_000004",
-      "source": "CHEMBL1789941",
+      "source": "CHEMBL:CHEMBL1789941",
       "target": "ensembl:ENSG00000163737",
       "relation": "modulates",
       "evidence_class": "extracted",
@@ -10730,7 +10743,7 @@
     },
     {
       "id": "e_000005",
-      "source": "CHEMBL1789941",
+      "source": "CHEMBL:CHEMBL1789941",
       "target": "mech:JAK2:GoF:somatic",
       "relation": "modulates",
       "evidence_class": "extracted",
@@ -10758,7 +10771,7 @@
     },
     {
       "id": "e_000006",
-      "source": "CHEMBL1789941",
+      "source": "CHEMBL:CHEMBL1789941",
       "target": "mech:STAT1:GoF",
       "relation": "modulates",
       "evidence_class": "extracted",
@@ -10806,7 +10819,7 @@
     },
     {
       "id": "e_000007",
-      "source": "CHEMBL1789941",
+      "source": "CHEMBL:CHEMBL1789941",
       "target": "EFO:0002429",
       "relation": "treats",
       "evidence_class": "extracted",
@@ -10868,7 +10881,7 @@
     },
     {
       "id": "e_000008",
-      "source": "CHEMBL1789941",
+      "source": "CHEMBL:CHEMBL1789941",
       "target": "EFO:0002430",
       "relation": "treats",
       "evidence_class": "extracted",
@@ -10896,7 +10909,7 @@
     },
     {
       "id": "e_000009",
-      "source": "CHEMBL1789941",
+      "source": "CHEMBL:CHEMBL1789941",
       "target": "EFO:0010647",
       "relation": "treats",
       "evidence_class": "extracted",
@@ -10931,7 +10944,7 @@
     },
     {
       "id": "e_000010",
-      "source": "CHEMBL1789941",
+      "source": "CHEMBL:CHEMBL1789941",
       "target": "EFO:1000649",
       "relation": "treats",
       "evidence_class": "extracted",
@@ -10965,7 +10978,7 @@
     },
     {
       "id": "e_000011",
-      "source": "CHEMBL1789941",
+      "source": "CHEMBL:CHEMBL1789941",
       "target": "MONDO:0005184",
       "relation": "treats",
       "evidence_class": "extracted",
@@ -10999,7 +11012,7 @@
     },
     {
       "id": "e_000012",
-      "source": "CHEMBL1789941",
+      "source": "CHEMBL:CHEMBL1789941",
       "target": "MONDO:0013599",
       "relation": "treats",
       "evidence_class": "extracted",
@@ -11102,7 +11115,7 @@
     },
     {
       "id": "e_000013",
-      "source": "CHEMBL1789941",
+      "source": "CHEMBL:CHEMBL1789941",
       "target": "MONDO:0044903",
       "relation": "treats",
       "evidence_class": "extracted",
@@ -11136,7 +11149,7 @@
     },
     {
       "id": "e_000014",
-      "source": "CHEMBL2105759",
+      "source": "CHEMBL:CHEMBL2105759",
       "target": "ensembl:ENSG00000111537",
       "relation": "modulates",
       "evidence_class": "extracted",
@@ -11170,7 +11183,7 @@
     },
     {
       "id": "e_000015",
-      "source": "CHEMBL2105759",
+      "source": "CHEMBL:CHEMBL2105759",
       "target": "MONDO:0013599",
       "relation": "treats",
       "evidence_class": "extracted",
@@ -11205,7 +11218,7 @@
     },
     {
       "id": "e_000016",
-      "source": "CHEMBL2105759",
+      "source": "CHEMBL:CHEMBL2105759",
       "target": "MONDO:0014367",
       "relation": "treats",
       "evidence_class": "extracted",
@@ -11233,7 +11246,7 @@
     },
     {
       "id": "e_000017",
-      "source": "CHEMBL2105759",
+      "source": "CHEMBL:CHEMBL2105759",
       "target": "MONDO:0014405",
       "relation": "treats",
       "evidence_class": "extracted",
@@ -11268,7 +11281,7 @@
     },
     {
       "id": "e_000018",
-      "source": "CHEMBL2107784",
+      "source": "CHEMBL:CHEMBL2107784",
       "target": "REACT:R-HSA-1059683",
       "relation": "modulates",
       "evidence_class": "extracted",
@@ -11298,7 +11311,7 @@
     },
     {
       "id": "e_000019",
-      "source": "CHEMBL221959",
+      "source": "CHEMBL:CHEMBL221959",
       "target": "mech:JAK1:GoF",
       "relation": "modulates",
       "evidence_class": "extracted",
@@ -11332,7 +11345,7 @@
     },
     {
       "id": "e_000020",
-      "source": "CHEMBL221959",
+      "source": "CHEMBL:CHEMBL221959",
       "target": "mech:STAT1:GoF",
       "relation": "modulates",
       "evidence_class": "extracted",
@@ -11360,7 +11373,7 @@
     },
     {
       "id": "e_000021",
-      "source": "CHEMBL221959",
+      "source": "CHEMBL:CHEMBL221959",
       "target": "EFO:1001209",
       "relation": "treats",
       "evidence_class": "extracted",
@@ -11394,7 +11407,7 @@
     },
     {
       "id": "e_000022",
-      "source": "CHEMBL221959",
+      "source": "CHEMBL:CHEMBL221959",
       "target": "MONDO:0008383",
       "relation": "treats",
       "evidence_class": "extracted",
@@ -11428,7 +11441,7 @@
     },
     {
       "id": "e_000023",
-      "source": "CHEMBL4435170",
+      "source": "CHEMBL:CHEMBL4435170",
       "target": "EFO:0009756",
       "relation": "treats",
       "evidence_class": "extracted",
@@ -11462,7 +11475,7 @@
     },
     {
       "id": "e_000024",
-      "source": "CHEMBL467",
+      "source": "CHEMBL:CHEMBL467",
       "target": "EFO:0002429",
       "relation": "treats",
       "evidence_class": "extracted",
@@ -15710,7 +15723,7 @@
     {
       "id": "e_000162",
       "source": "orcid:0000-0002-4622-5657",
-      "target": "CHEMBL1789941",
+      "target": "CHEMBL:CHEMBL1789941",
       "relation": "works_on",
       "evidence_class": "observed",
       "confidence": 0.6,
@@ -16133,7 +16146,7 @@
     {
       "id": "e_000178",
       "source": "person:peter-olbrich-543fb9",
-      "target": "CHEMBL1789941",
+      "target": "CHEMBL:CHEMBL1789941",
       "relation": "works_on",
       "evidence_class": "observed",
       "confidence": 0.6,
@@ -16488,7 +16501,7 @@
     {
       "id": "e_000193",
       "source": "orcid:0000-0003-3207-5464",
-      "target": "CHEMBL1789941",
+      "target": "CHEMBL:CHEMBL1789941",
       "relation": "works_on",
       "evidence_class": "observed",
       "confidence": 0.6,
@@ -16812,7 +16825,7 @@
     {
       "id": "e_000206",
       "source": "person:alexandra-f-freeman-b42820",
-      "target": "CHEMBL1789941",
+      "target": "CHEMBL:CHEMBL1789941",
       "relation": "works_on",
       "evidence_class": "observed",
       "confidence": 0.6,
@@ -17136,7 +17149,7 @@
     {
       "id": "e_000219",
       "source": "person:sergio-d-rosenzweig-0d7039",
-      "target": "CHEMBL1789941",
+      "target": "CHEMBL:CHEMBL1789941",
       "relation": "works_on",
       "evidence_class": "observed",
       "confidence": 0.6,
@@ -18372,7 +18385,7 @@
     {
       "id": "e_000271",
       "source": "orcid:0000-0002-4730-9422",
-      "target": "CHEMBL1789941",
+      "target": "CHEMBL:CHEMBL1789941",
       "relation": "works_on",
       "evidence_class": "observed",
       "confidence": 0.6,
@@ -18617,7 +18630,7 @@
     {
       "id": "e_000281",
       "source": "orcid:0000-0002-6912-8569",
-      "target": "CHEMBL1789941",
+      "target": "CHEMBL:CHEMBL1789941",
       "relation": "works_on",
       "evidence_class": "observed",
       "confidence": 0.6,
@@ -18829,7 +18842,7 @@
     {
       "id": "e_000290",
       "source": "orcid:0000-0003-3489-5036",
-      "target": "CHEMBL1789941",
+      "target": "CHEMBL:CHEMBL1789941",
       "relation": "works_on",
       "evidence_class": "observed",
       "confidence": 0.6,
@@ -19235,7 +19248,7 @@
     {
       "id": "e_000307",
       "source": "person:lisa-r-forbes-2c67d9",
-      "target": "CHEMBL1789941",
+      "target": "CHEMBL:CHEMBL1789941",
       "relation": "works_on",
       "evidence_class": "observed",
       "confidence": 0.6,
@@ -19452,7 +19465,7 @@
     {
       "id": "e_000316",
       "source": "orcid:0000-0001-5330-9341",
-      "target": "CHEMBL1789941",
+      "target": "CHEMBL:CHEMBL1789941",
       "relation": "works_on",
       "evidence_class": "observed",
       "confidence": 0.6,
@@ -19674,7 +19687,7 @@
     {
       "id": "e_000325",
       "source": "orcid:0000-0002-4343-5712",
-      "target": "CHEMBL1789941",
+      "target": "CHEMBL:CHEMBL1789941",
       "relation": "works_on",
       "evidence_class": "observed",
       "confidence": 0.6,
@@ -20948,7 +20961,7 @@
     {
       "id": "e_000378",
       "source": "person:ahmet-ozen-5a235e",
-      "target": "CHEMBL1789941",
+      "target": "CHEMBL:CHEMBL1789941",
       "relation": "works_on",
       "evidence_class": "observed",
       "confidence": 0.6,
@@ -21206,7 +21219,7 @@
     {
       "id": "e_000389",
       "source": "person:christa-s-zerbe-f1cbce",
-      "target": "CHEMBL1789941",
+      "target": "CHEMBL:CHEMBL1789941",
       "relation": "works_on",
       "evidence_class": "observed",
       "confidence": 0.6,
@@ -23170,7 +23183,7 @@
     {
       "id": "e_000472",
       "source": "person:elif-karakoc-aydiner-b9fcf3",
-      "target": "CHEMBL1789941",
+      "target": "CHEMBL:CHEMBL1789941",
       "relation": "works_on",
       "evidence_class": "observed",
       "confidence": 0.6,
@@ -24327,7 +24340,7 @@
     {
       "id": "e_000521",
       "source": "person:ofer-zimmerman-576d16",
-      "target": "CHEMBL1789941",
+      "target": "CHEMBL:CHEMBL1789941",
       "relation": "works_on",
       "evidence_class": "observed",
       "confidence": 0.6,
@@ -25586,7 +25599,7 @@
     {
       "id": "e_000574",
       "source": "person:gulbu-uzel-da930b",
-      "target": "CHEMBL1789941",
+      "target": "CHEMBL:CHEMBL1789941",
       "relation": "works_on",
       "evidence_class": "observed",
       "confidence": 0.6,
@@ -25711,7 +25724,7 @@
     {
       "id": "e_000579",
       "source": "person:hye-sun-kuehn-081fdb",
-      "target": "CHEMBL1789941",
+      "target": "CHEMBL:CHEMBL1789941",
       "relation": "works_on",
       "evidence_class": "observed",
       "confidence": 0.6,
@@ -25836,7 +25849,7 @@
     {
       "id": "e_000584",
       "source": "person:imelda-c-hanson-947510",
-      "target": "CHEMBL1789941",
+      "target": "CHEMBL:CHEMBL1789941",
       "relation": "works_on",
       "evidence_class": "observed",
       "confidence": 0.6,
@@ -26845,7 +26858,7 @@
     {
       "id": "e_000627",
       "source": "person:louis-marie-charbonnier-4da0aa",
-      "target": "CHEMBL1789941",
+      "target": "CHEMBL:CHEMBL1789941",
       "relation": "works_on",
       "evidence_class": "observed",
       "confidence": 0.6,
@@ -28007,7 +28020,7 @@
     {
       "id": "e_000676",
       "source": "person:talal-a-chatila-4c8f28",
-      "target": "CHEMBL1789941",
+      "target": "CHEMBL:CHEMBL1789941",
       "relation": "works_on",
       "evidence_class": "observed",
       "confidence": 0.6,
@@ -29210,7 +29223,7 @@
     {
       "id": "e_000727",
       "source": "orcid:0000-0001-5755-0730",
-      "target": "CHEMBL1789941",
+      "target": "CHEMBL:CHEMBL1789941",
       "relation": "works_on",
       "evidence_class": "observed",
       "confidence": 0.6,
@@ -29376,7 +29389,7 @@
     {
       "id": "e_000734",
       "source": "person:amy-p-hsu-8c3ce5",
-      "target": "CHEMBL1789941",
+      "target": "CHEMBL:CHEMBL1789941",
       "relation": "works_on",
       "evidence_class": "observed",
       "confidence": 0.6,
@@ -29938,7 +29951,7 @@
     {
       "id": "e_000758",
       "source": "person:basak-kayaoglu-efd907",
-      "target": "CHEMBL1789941",
+      "target": "CHEMBL:CHEMBL1789941",
       "relation": "works_on",
       "evidence_class": "observed",
       "confidence": 0.6,
@@ -31596,7 +31609,7 @@
     {
       "id": "e_000829",
       "source": "person:elizabeth-p-sampaio-840580",
-      "target": "CHEMBL1789941",
+      "target": "CHEMBL:CHEMBL1789941",
       "relation": "works_on",
       "evidence_class": "observed",
       "confidence": 0.6,
@@ -34182,7 +34195,7 @@
     {
       "id": "e_000941",
       "source": "person:lindsey-b-rosen-d8ecb8",
-      "target": "CHEMBL1789941",
+      "target": "CHEMBL:CHEMBL1789941",
       "relation": "works_on",
       "evidence_class": "observed",
       "confidence": 0.6,
@@ -35352,7 +35365,7 @@
     {
       "id": "e_000991",
       "source": "person:mayda-gursel-89d269",
-      "target": "CHEMBL1789941",
+      "target": "CHEMBL:CHEMBL1789941",
       "relation": "works_on",
       "evidence_class": "observed",
       "confidence": 0.6,
@@ -38002,7 +38015,7 @@
     {
       "id": "e_001106",
       "source": "orcid:0000-0003-2747-6327",
-      "target": "CHEMBL1789941",
+      "target": "CHEMBL:CHEMBL1789941",
       "relation": "works_on",
       "evidence_class": "observed",
       "confidence": 0.6,
@@ -40253,7 +40266,7 @@
       "paper": "pmid:28139313",
       "quote": "Treatment with the Janus kinase 1/2 inhibitor ruxolitinib reduced hyperresponsiveness to type I and II interferons, normalized TH1 and follicular T helper cell responses, improved TH17 differentiation, cured mucocutaneous candidiasis, and maintained remission of immune-mediated cytopenias.",
       "polarity": "supports",
-      "subject": "CHEMBL1789941",
+      "subject": "CHEMBL:CHEMBL1789941",
       "predicate": "treats",
       "object": "MONDO:0013599",
       "variant": "",
@@ -40266,7 +40279,7 @@
       "paper": "pmid:29111217",
       "quote": "Upstream inhibition of STAT1 signaling with the small-molecule Janus kinase 1/2 inhibitor ruxolitinib in vitro and in vivo restored perforin expression in CD56dim NK cells and partially restored NK cell cytotoxic function.",
       "polarity": "supports",
-      "subject": "CHEMBL1789941",
+      "subject": "CHEMBL:CHEMBL1789941",
       "predicate": "treats",
       "object": "MONDO:0013599",
       "variant": "",
@@ -40292,7 +40305,7 @@
       "paper": "pmid:29226168",
       "quote": "We describe therapeutic failures with the Janus Kinase (JAK) inhibitor ruxolitinib in 2 STAT1 GOF patients with severe invasive or cutaneous fungal infections.",
       "polarity": "contradicts",
-      "subject": "CHEMBL1789941",
+      "subject": "CHEMBL:CHEMBL1789941",
       "predicate": "treats",
       "object": "MONDO:0013599",
       "variant": "",
@@ -40383,7 +40396,7 @@
       "paper": "pmid:38578320",
       "quote": "Ruxolitinib treatment substantially downregulated aberrantly overexpressed ISGs, and improved autoimmune features.",
       "polarity": "supports",
-      "subject": "CHEMBL1789941",
+      "subject": "CHEMBL:CHEMBL1789941",
       "predicate": "treats",
       "object": "MONDO:0013599",
       "variant": "clinvar:30084",
@@ -40396,7 +40409,7 @@
       "paper": "pmid:38578320",
       "quote": "When ruxolitinib was temporarily discontinued, the patient's autoimmune features were aggravated, which is in line with sustained epigenetic abnormality.",
       "polarity": "supports",
-      "subject": "CHEMBL1789941",
+      "subject": "CHEMBL:CHEMBL1789941",
       "predicate": "treats",
       "object": "MONDO:0013599",
       "variant": "clinvar:30084",
@@ -40526,7 +40539,7 @@
       "paper": "pmid:22460142",
       "quote": "A total of 140 patients were randomised to tofacitinib 1, 3, 5, 10 mg or placebo twice daily and the American College of Rheumatology 20% improvement criteria (ACR20) response rate at week 12, a primary end point, was significant for all tofacitinib treatment groups.",
       "polarity": "supports",
-      "subject": "CHEMBL221959",
+      "subject": "CHEMBL:CHEMBL221959",
       "predicate": "treats",
       "object": "MONDO:0008383",
       "variant": "",
@@ -40825,7 +40838,7 @@
       "paper": "pmid:27873163",
       "quote": "Therapies reported to be potential use in case reports include abatacept in CTLA4 haploinsufficiency and LRBA deficiency, ruxolitinib in gain-of-function STAT1, tocilizumab in gain-of-function STAT3 defect, mTOR inhibitors in PIK3CD activation, magnesium in XMEN syndrome, and pioglitazone in CGD.",
       "polarity": "supports",
-      "subject": "CHEMBL1789941",
+      "subject": "CHEMBL:CHEMBL1789941",
       "predicate": "treats",
       "object": "MONDO:0013599",
       "variant": "",
@@ -40877,7 +40890,7 @@
       "paper": "pmid:28395559",
       "quote": "Despite significant reduction of splenomegaly and improvement of symptom burden and a signal for survival improvement, ruxolitinib does not lead to major reductions in JAK2 V617F allele burden and bone marrow fibrosis.",
       "polarity": "contradicts",
-      "subject": "CHEMBL1789941",
+      "subject": "CHEMBL:CHEMBL1789941",
       "predicate": "modulates",
       "object": "mech:JAK2:GoF:somatic",
       "variant": "clinvar:14662",
@@ -40903,7 +40916,7 @@
       "paper": "pmid:28500170",
       "quote": "Since its approval in 2011, the Janus kinase 1/2 (JAK1/2) inhibitor ruxolitinib has evolved to become the centerpiece of therapy for myelofibrosis (MF), and its use in patients with hydroxyurea resistant or intolerant polycythemia vera (PV) is steadily increasing.",
       "polarity": "supports",
-      "subject": "CHEMBL1789941",
+      "subject": "CHEMBL:CHEMBL1789941",
       "predicate": "treats",
       "object": "MONDO:0044903",
       "variant": "",
@@ -40942,7 +40955,7 @@
       "paper": "pmid:29254929",
       "quote": "Tofacitinib effectively suppressed innate and adaptive immunity in the vessel wall.",
       "polarity": "supports",
-      "subject": "CHEMBL221959",
+      "subject": "CHEMBL:CHEMBL221959",
       "predicate": "treats",
       "object": "EFO:1001209",
       "variant": "",
@@ -41046,7 +41059,7 @@
       "paper": "pmid:29934865",
       "quote": "Major clinical improvement was achieved after 8 weeks of ruxolitinib treatment, while sustained suppression of IFNγ- and IFNα-induced phosphorylation of STAT1, STAT3, and STAT5, as well as increased STAT3-inducible and Th17-related gene expression, was demonstrated ex vivo.",
       "polarity": "supports",
-      "subject": "CHEMBL1789941",
+      "subject": "CHEMBL:CHEMBL1789941",
       "predicate": "treats",
       "object": "MONDO:0013599",
       "variant": "",
@@ -41059,7 +41072,7 @@
       "paper": "pmid:29934865",
       "quote": "A novel STAT1 GOF mutation (c.617T > C; p.L206P), detected in a child with recalcitrant CMC, was shown to be reversible in vitro with ruxolitinib.",
       "polarity": "supports",
-      "subject": "CHEMBL1789941",
+      "subject": "CHEMBL:CHEMBL1789941",
       "predicate": "modulates",
       "object": "mech:STAT1:GoF",
       "variant": "",
@@ -41098,7 +41111,7 @@
       "paper": "pmid:30027395",
       "quote": "For patients unresponsive to first-line therapy ruxolitinib is available.",
       "polarity": "supports",
-      "subject": "CHEMBL1789941",
+      "subject": "CHEMBL:CHEMBL1789941",
       "predicate": "treats",
       "object": "EFO:0002429",
       "variant": "",
@@ -41189,7 +41202,7 @@
       "paper": "pmid:31354696",
       "quote": "One patient in our cohort was treated with the oral JAK inhibitor ruxolitinib. Treatment was associated with normalization of both STAT1 protein and peak pSTAT1 levels.",
       "polarity": "supports",
-      "subject": "CHEMBL1789941",
+      "subject": "CHEMBL:CHEMBL1789941",
       "predicate": "modulates",
       "object": "mech:STAT1:GoF",
       "variant": "",
@@ -41241,7 +41254,7 @@
       "paper": "pmid:31512162",
       "quote": "IL-17 and IL-22 production was, however, not restored with jakinib therapy (ruxolitinib), and the patient remained susceptible to opportunistic infection.",
       "polarity": "contradicts",
-      "subject": "CHEMBL1789941",
+      "subject": "CHEMBL:CHEMBL1789941",
       "predicate": "treats",
       "object": "MONDO:0013599",
       "variant": "",
@@ -41267,7 +41280,7 @@
       "paper": "pmid:31516686",
       "quote": "The associations of leukocytosis with clotting risk (in both conditions) and mortality (in PV) have drawn increased attention with the availability of ruxolitinib as a second-line treatment in PV.",
       "polarity": "supports",
-      "subject": "CHEMBL1789941",
+      "subject": "CHEMBL:CHEMBL1789941",
       "predicate": "treats",
       "object": "EFO:0002429",
       "variant": "",
@@ -41319,7 +41332,7 @@
       "paper": "pmid:31866997",
       "quote": "Treatment with Janus kinase 1 and 2 (JAK1/2) inhibitor baricitinib was beneficiary for a vasculitic ulcer, induced hair regrowth and improved overall well-being in one patient.",
       "polarity": "supports",
-      "subject": "CHEMBL2105759",
+      "subject": "CHEMBL:CHEMBL2105759",
       "predicate": "treats",
       "object": "MONDO:0014405",
       "variant": "",
@@ -41423,7 +41436,7 @@
       "paper": "pmid:32180118",
       "quote": "We report the potential of JAK1/2 inhibition with ruxolitinib for both CMC and steroid-dependent autoimmunity.",
       "polarity": "supports",
-      "subject": "CHEMBL1789941",
+      "subject": "CHEMBL:CHEMBL1789941",
       "predicate": "treats",
       "object": "MONDO:0013599",
       "variant": "clinvar:144006",
@@ -41436,7 +41449,7 @@
       "paper": "pmid:32180118",
       "quote": "The peripheral IL-17A level did not increase, but the IFN-γ level decreased after 4 months of therapy.",
       "polarity": "supports",
-      "subject": "CHEMBL1789941",
+      "subject": "CHEMBL:CHEMBL1789941",
       "predicate": "modulates",
       "object": "ensembl:ENSG00000111537",
       "variant": "clinvar:144006",
@@ -41501,7 +41514,7 @@
       "paper": "pmid:32679107",
       "quote": "Instead, inhibition of STAT3 activity using the JAK inhibitor ruxolitinib decreases breast cancer invasion in vivo.",
       "polarity": "supports",
-      "subject": "CHEMBL1789941",
+      "subject": "CHEMBL:CHEMBL1789941",
       "predicate": "treats",
       "object": "EFO:1000649",
       "variant": "",
@@ -41592,7 +41605,7 @@
       "paper": "pmid:33162515",
       "quote": "Although hydroxyurea (HU) is the most popular agent for PV treatment, the advantages of ruxolitinib, a JAK inhibitor, for patients who are intolerant or resistant to HU were recently reported.",
       "polarity": "supports",
-      "subject": "CHEMBL1789941",
+      "subject": "CHEMBL:CHEMBL1789941",
       "predicate": "treats",
       "object": "EFO:0002429",
       "variant": "",
@@ -41631,7 +41644,7 @@
       "paper": "pmid:33344552",
       "quote": "Therefore, the patient was diagnosed with PMF and received oral ruxolitinib. However, the spleen and hematologic responses were poor.",
       "polarity": "contradicts",
-      "subject": "CHEMBL1789941",
+      "subject": "CHEMBL:CHEMBL1789941",
       "predicate": "treats",
       "object": "EFO:0002430",
       "variant": "",
@@ -41644,7 +41657,7 @@
       "paper": "pmid:33475942",
       "quote": "Ruxolitinib provided favorable responses by controlling candidiasis and autoimmune hemolytic anemia in the patient.",
       "polarity": "supports",
-      "subject": "CHEMBL1789941",
+      "subject": "CHEMBL:CHEMBL1789941",
       "predicate": "treats",
       "object": "MONDO:0013599",
       "variant": "clinvar:144006",
@@ -41657,7 +41670,7 @@
       "paper": "pmid:33475942",
       "quote": "TH17 deficiency persisted after ruxolitinib treatment, but normalized following HSCT.",
       "polarity": "contradicts",
-      "subject": "CHEMBL1789941",
+      "subject": "CHEMBL:CHEMBL1789941",
       "predicate": "treats",
       "object": "MONDO:0013599",
       "variant": "clinvar:144006",
@@ -41670,7 +41683,7 @@
       "paper": "pmid:33475942",
       "quote": "Dysregulated gene expression was partially improved with ruxolitinib treatment and normalized after transplantation.",
       "polarity": "supports",
-      "subject": "CHEMBL1789941",
+      "subject": "CHEMBL:CHEMBL1789941",
       "predicate": "modulates",
       "object": "mech:STAT1:GoF",
       "variant": "clinvar:144006",
@@ -41683,7 +41696,7 @@
       "paper": "pmid:33509790",
       "quote": "Targeting the Janus Kinase (JAK)/STAT signaling pathway using the FDA-approved drug ruxolitinib overcame these tumor-protective responses and improved anti-PD-1 therapeutic efficacy.",
       "polarity": "supports",
-      "subject": "CHEMBL1789941",
+      "subject": "CHEMBL:CHEMBL1789941",
       "predicate": "treats",
       "object": "MONDO:0005184",
       "variant": "",
@@ -41735,7 +41748,7 @@
       "paper": "pmid:35387553",
       "quote": "Clearly, phlebotomy is not able to accomplish these goals, and the ability of cytoreductive agents such as hydroxyurea (HU), to influence these elements of the disease is limited.",
       "polarity": "contradicts",
-      "subject": "CHEMBL467",
+      "subject": "CHEMBL:CHEMBL467",
       "predicate": "treats",
       "object": "EFO:0002429",
       "variant": "",
@@ -41800,7 +41813,7 @@
       "paper": "pmid:35999022",
       "quote": "A significant clinical improvement was observed after introduction of adjunctive interferon-gamma therapy to her anti-tuberculous medications.",
       "polarity": "supports",
-      "subject": "CHEMBL1201564",
+      "subject": "CHEMBL:CHEMBL1201564",
       "predicate": "treats",
       "object": "MONDO:0012682",
       "variant": "",
@@ -41826,7 +41839,7 @@
       "paper": "pmid:36050429",
       "quote": "After 3 months, IFN-ɣ and CXCL10 were downregulated.",
       "polarity": "supports",
-      "subject": "CHEMBL2105759",
+      "subject": "CHEMBL:CHEMBL2105759",
       "predicate": "modulates",
       "object": "ensembl:ENSG00000111537",
       "variant": "",
@@ -41878,7 +41891,7 @@
       "paper": "pmid:36105803",
       "quote": "Furthermore, ruxolitinib may be a viable therapeutic option before HSCT to improve disease management.",
       "polarity": "supports",
-      "subject": "CHEMBL1789941",
+      "subject": "CHEMBL:CHEMBL1789941",
       "predicate": "treats",
       "object": "MONDO:0013599",
       "variant": "clinvar:144005",
@@ -41982,7 +41995,7 @@
       "paper": "pmid:36685504",
       "quote": "In this case, therapy with baricitinib effectively blocked IFN-α activation and reduced STAT1 signaling but had no effect on the progression of the neurological disease.",
       "polarity": "contradicts",
-      "subject": "CHEMBL2105759",
+      "subject": "CHEMBL:CHEMBL2105759",
       "predicate": "treats",
       "object": "MONDO:0014367",
       "variant": "",
@@ -42034,7 +42047,7 @@
       "paper": "pmid:37358695",
       "quote": "The patient treatment with JAKinib ruxolitinib does not ameliorate the observed neutrophil aberrations.",
       "polarity": "contradicts",
-      "subject": "CHEMBL1789941",
+      "subject": "CHEMBL:CHEMBL1789941",
       "predicate": "treats",
       "object": "MONDO:0013599",
       "variant": "",
@@ -42086,7 +42099,7 @@
       "paper": "pmid:38072195",
       "quote": "Addition of ruxolitinib and baricitinib inhibited STAT1 hyperactivation in STAT1-GoF EPSC in a dose-dependent manner, which was not observed with tofacitinib.",
       "polarity": "contradicts",
-      "subject": "CHEMBL221959",
+      "subject": "CHEMBL:CHEMBL221959",
       "predicate": "modulates",
       "object": "mech:STAT1:GoF",
       "variant": "",
@@ -42112,7 +42125,7 @@
       "paper": "pmid:38351043",
       "quote": "Furthermore, treatment with BMS-986165, a selective TYK2 inhibitor, inhibits the expansion of T-BET+ CTLs, inflammation in β-cells and the onset of autoimmune T1D in NOD mice.",
       "polarity": "supports",
-      "subject": "CHEMBL4435170",
+      "subject": "CHEMBL:CHEMBL4435170",
       "predicate": "treats",
       "object": "EFO:0009756",
       "variant": "",
@@ -42164,7 +42177,7 @@
       "paper": "pmid:38578354",
       "quote": "In two adult STAT1-GOF patients, the JAKinib treatment ameliorated chronic mucocutaneous candidiasis and lymphopenia.",
       "polarity": "supports",
-      "subject": "CHEMBL1789941",
+      "subject": "CHEMBL:CHEMBL1789941",
       "predicate": "treats",
       "object": "MONDO:0013599",
       "variant": "",
@@ -42229,7 +42242,7 @@
       "paper": "pmid:39025985",
       "quote": "High TPO concentrations sustained in vitro PF4 synthesis and secretion in cultured Mks, while Ruxolitinib restrains the abnormal PF4 expression in vivo.",
       "polarity": "supports",
-      "subject": "CHEMBL1789941",
+      "subject": "CHEMBL:CHEMBL1789941",
       "predicate": "modulates",
       "object": "ensembl:ENSG00000163737",
       "variant": "",
@@ -42242,7 +42255,7 @@
       "paper": "pmid:39177867",
       "quote": "Baricitinib showed therapeutic effectiveness without side effects.",
       "polarity": "supports",
-      "subject": "CHEMBL2105759",
+      "subject": "CHEMBL:CHEMBL2105759",
       "predicate": "treats",
       "object": "MONDO:0013599",
       "variant": "",
@@ -42281,7 +42294,7 @@
       "paper": "pmid:39631446",
       "quote": "Ruxolitinib achieved substantial control over the clinical manifestations.",
       "polarity": "supports",
-      "subject": "CHEMBL1789941",
+      "subject": "CHEMBL:CHEMBL1789941",
       "predicate": "treats",
       "object": "EFO:0010647",
       "variant": "",
@@ -42294,7 +42307,7 @@
       "paper": "pmid:40062529",
       "quote": "The latter has shown erythropoietic benefits by suppressing hepcidin expression via activin A receptor type 1 (ACVR1) inhibition, as well as reducing splenomegaly and symptoms.",
       "polarity": "supports",
-      "subject": "CHEMBL1078178",
+      "subject": "CHEMBL:CHEMBL1078178",
       "predicate": "modulates",
       "object": "ensembl:ENSG00000105697",
       "variant": "",
@@ -42359,7 +42372,7 @@
       "paper": "pmid:40246933",
       "quote": "Hydroxyurea or interferons remain the preferred first-line cytoreductive agents, with the JAK1 and JAK2 inhibitor, ruxolitinib, currently approved for the treatment of patients who are resistant to, or intolerant of, hydroxyurea.",
       "polarity": "supports",
-      "subject": "CHEMBL1789941",
+      "subject": "CHEMBL:CHEMBL1789941",
       "predicate": "treats",
       "object": "EFO:0002429",
       "variant": "",
@@ -42398,7 +42411,7 @@
       "paper": "pmid:40704637",
       "quote": "She was started on the JAK inhibitor, ruxolitinib, with clinical improvement.",
       "polarity": "supports",
-      "subject": "CHEMBL1789941",
+      "subject": "CHEMBL:CHEMBL1789941",
       "predicate": "treats",
       "object": "MONDO:0013599",
       "variant": "",
@@ -42437,7 +42450,7 @@
       "paper": "pmid:40829105",
       "quote": "In TQ-treated PD MPN-acute myeloid leukemia (AML) cells, RNA-sequencing analysis showed negative enrichment of the gene sets of MYC and E2F targets, interleukin-6-JAK-STAT3 signaling, and of inflammatory response.",
       "polarity": "supports",
-      "subject": "CHEMBL2107784",
+      "subject": "CHEMBL:CHEMBL2107784",
       "predicate": "modulates",
       "object": "REACT:R-HSA-1059683",
       "variant": "",
@@ -42502,7 +42515,7 @@
       "paper": "pmid:41026300",
       "quote": "Topical application of ruxolitinib demonstrated therapeutic efficacy.",
       "polarity": "supports",
-      "subject": "CHEMBL1789941",
+      "subject": "CHEMBL:CHEMBL1789941",
       "predicate": "treats",
       "object": "MONDO:0013599",
       "variant": "",
@@ -42554,7 +42567,7 @@
       "paper": "pmid:41136770",
       "quote": "Furthermore, treatment of two patients with Tofacitinib suppressed JAK1 hyperactivation, normalized plasma cytokine levels and interferon signatures, and significantly improved clinical symptoms.",
       "polarity": "supports",
-      "subject": "CHEMBL221959",
+      "subject": "CHEMBL:CHEMBL221959",
       "predicate": "modulates",
       "object": "mech:JAK1:GoF",
       "variant": "",
@@ -42580,7 +42593,7 @@
       "paper": "pmid:41288843",
       "quote": "Both patients showed significant clinical improvement with the Janus kinase (JAK) inhibitor ruxolitinib.",
       "polarity": "supports",
-      "subject": "CHEMBL1789941",
+      "subject": "CHEMBL:CHEMBL1789941",
       "predicate": "treats",
       "object": "MONDO:0013599",
       "variant": "clinvar:1019308",
@@ -42632,7 +42645,7 @@
       "paper": "pmid:41902804",
       "quote": "Ruxolitinib, a JAK1/JAK2 inhibitor, is effective for patients intolerant or resistant to hydroxyurea, improving hematocrit control, spleen volume, and symptoms.",
       "polarity": "supports",
-      "subject": "CHEMBL1789941",
+      "subject": "CHEMBL:CHEMBL1789941",
       "predicate": "treats",
       "object": "EFO:0002429",
       "variant": "",
@@ -42658,7 +42671,7 @@
       "paper": "pmid:42319627",
       "quote": "Ruxolitinib was initiated as bridging therapy, resulting in partial clinical improvement, and hematopoietic stem cell transplantation (HSCT) was planned as definitive therapy.",
       "polarity": "supports",
-      "subject": "CHEMBL1789941",
+      "subject": "CHEMBL:CHEMBL1789941",
       "predicate": "treats",
       "object": "MONDO:0013599",
       "variant": "",
@@ -42710,7 +42723,7 @@
       "paper": "pmid:42773575",
       "quote": "Ruxolitinib led to clinical improvement and was used as bridging therapy before haematopoietic stem cell transplantation (HSCT).",
       "polarity": "supports",
-      "subject": "CHEMBL1789941",
+      "subject": "CHEMBL:CHEMBL1789941",
       "predicate": "treats",
       "object": "MONDO:0013599",
       "variant": "",

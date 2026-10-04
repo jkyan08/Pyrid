@@ -16486,7 +16486,7 @@
       "paper": "pmid:28139313",
       "quote": "Treatment with the Janus kinase 1/2 inhibitor ruxolitinib reduced hyperresponsiveness to type I and II interferons, normalized TH1 and follicular T helper cell responses, improved TH17 differentiation, cured mucocutaneous candidiasis, and maintained remission of immune-mediated cytopenias.",
       "polarity": "supports",
-      "subject": "CHEMBL1789941",
+      "subject": "CHEMBL:CHEMBL1789941",
       "predicate": "treats",
       "object": "MONDO:0013599",
       "variant": "",
@@ -16538,7 +16538,7 @@
       "paper": "pmid:28139313",
       "quote": "Treatment with the Janus kinase 1/2 inhibitor ruxolitinib reduced hyperresponsiveness to type I and II interferons, normalized TH1 and follicular T helper cell responses, improved TH17 differentiation, cured mucocutaneous candidiasis, and maintained remission of immune-mediated cytopenias.",
       "polarity": "supports",
-      "subject": "CHEMBL1789941",
+      "subject": "CHEMBL:CHEMBL1789941",
       "predicate": "modulates",
       "object": "text:type I and II interferon responsiveness and T helper cell responses",
       "variant": "",
@@ -16577,7 +16577,7 @@
       "paper": "pmid:29111217",
       "quote": "Upstream inhibition of STAT1 signaling with the small-molecule Janus kinase 1/2 inhibitor ruxolitinib in vitro and in vivo restored perforin expression in CD56dim NK cells and partially restored NK cell cytotoxic function.",
       "polarity": "supports",
-      "subject": "CHEMBL1789941",
+      "subject": "CHEMBL:CHEMBL1789941",
       "predicate": "treats",
       "object": "MONDO:0013599",
       "variant": "",
@@ -16603,7 +16603,7 @@
       "paper": "pmid:29111217",
       "quote": "Upstream inhibition of STAT1 signaling with the small-molecule Janus kinase 1/2 inhibitor ruxolitinib in vitro and in vivo restored perforin expression in CD56dim NK cells and partially restored NK cell cytotoxic function.",
       "polarity": "supports",
-      "subject": "CHEMBL1789941",
+      "subject": "CHEMBL:CHEMBL1789941",
       "predicate": "modulates",
       "object": "text:perforin expression in CD56dim NK cells",
       "variant": "",
@@ -16616,7 +16616,7 @@
       "paper": "pmid:29226168",
       "quote": "We describe therapeutic failures with the Janus Kinase (JAK) inhibitor ruxolitinib in 2 STAT1 GOF patients with severe invasive or cutaneous fungal infections.",
       "polarity": "contradicts",
-      "subject": "CHEMBL1789941",
+      "subject": "CHEMBL:CHEMBL1789941",
       "predicate": "treats",
       "object": "MONDO:0013599",
       "variant": "",
@@ -16824,7 +16824,7 @@
       "paper": "pmid:38578320",
       "quote": "Ruxolitinib treatment substantially downregulated aberrantly overexpressed ISGs, and improved autoimmune features.",
       "polarity": "supports",
-      "subject": "CHEMBL1789941",
+      "subject": "CHEMBL:CHEMBL1789941",
       "predicate": "treats",
       "object": "MONDO:0013599",
       "variant": "clinvar:30084",
@@ -16837,7 +16837,7 @@
       "paper": "pmid:38578320",
       "quote": "Ruxolitinib treatment substantially downregulated aberrantly overexpressed ISGs, and improved autoimmune features.",
       "polarity": "supports",
-      "subject": "CHEMBL1789941",
+      "subject": "CHEMBL:CHEMBL1789941",
       "predicate": "modulates",
       "object": "text:interferon-stimulated genes",
       "variant": "clinvar:30084",
@@ -16850,7 +16850,7 @@
       "paper": "pmid:38578320",
       "quote": "However, epigenetic analysis demonstrated that genetic regions of ISGs-e.g., STAT1, IRF1, MX1, and OAS1-were highly accessible even after ruxolitinib treatment.",
       "polarity": "contradicts",
-      "subject": "CHEMBL1789941",
+      "subject": "CHEMBL:CHEMBL1789941",
       "predicate": "modulates",
       "object": "text:epigenetic accessibility of ISGs",
       "variant": "clinvar:30084",
@@ -16863,7 +16863,7 @@
       "paper": "pmid:38578320",
       "quote": "When ruxolitinib was temporarily discontinued, the patient's autoimmune features were aggravated, which is in line with sustained epigenetic abnormality.",
       "polarity": "supports",
-      "subject": "CHEMBL1789941",
+      "subject": "CHEMBL:CHEMBL1789941",
       "predicate": "treats",
       "object": "MONDO:0013599",
       "variant": "clinvar:30084",
@@ -17825,7 +17825,7 @@
       "paper": "pmid:22460142",
       "quote": "A total of 140 patients were randomised to tofacitinib 1, 3, 5, 10 mg or placebo twice daily and the American College of Rheumatology 20% improvement criteria (ACR20) response rate at week 12, a primary end point, was significant for all tofacitinib treatment groups.",
       "polarity": "supports",
-      "subject": "CHEMBL221959",
+      "subject": "CHEMBL:CHEMBL221959",
       "predicate": "treats",
       "object": "MONDO:0008383",
       "variant": "",
@@ -17838,7 +17838,7 @@
       "paper": "pmid:22460142",
       "quote": "Tofacitinib reduced serum levels of human IL-6 and IL-8 in the mice and also reduced synovial inflammation and invasion into the implanted cartilage.",
       "polarity": "supports",
-      "subject": "CHEMBL221959",
+      "subject": "CHEMBL:CHEMBL221959",
       "predicate": "modulates",
       "object": "text:serum IL-6 and IL-8 levels",
       "variant": "",
@@ -17851,7 +17851,7 @@
       "paper": "pmid:22460142",
       "quote": "In vitro experiments indicated that the effects of tofacitinib were mediated through suppression of interleukin 17 (IL-17) and interferon γ production and proliferation of CD4 T cells, presumably Th1 and Th17.",
       "polarity": "supports",
-      "subject": "CHEMBL221959",
+      "subject": "CHEMBL:CHEMBL221959",
       "predicate": "modulates",
       "object": "text:IL-17 and interferon γ production and CD4 T cell proliferation",
       "variant": "",
@@ -18345,7 +18345,7 @@
       "paper": "pmid:24290217",
       "quote": "In in vitro studies, everolimus has been shown to inhibit cell proliferation and clonogenic potential in human and murine JAK2 V617F mutated cell lines.",
       "polarity": "supports",
-      "subject": "text:everolimus",
+      "subject": "CHEMBL:CHEMBL1908360",
       "predicate": "modulates",
       "object": "text:proliferation and clonogenic potential of JAK2 V617F mutated cell lines",
       "variant": "clinvar:14662",
@@ -18579,7 +18579,7 @@
       "paper": "pmid:24756798",
       "quote": "Ruxolitinib treatment results in a meaningful reduction in spleen size and symptom burden in the majority of myelofibrosis patients, and it may also have a favorable effect on survival.",
       "polarity": "supports",
-      "subject": "CHEMBL1789941",
+      "subject": "CHEMBL:CHEMBL1789941",
       "predicate": "treats",
       "object": "text:myelofibrosis",
       "variant": "",
@@ -18592,7 +18592,7 @@
       "paper": "pmid:24756798",
       "quote": "Ruxolitinib, formerly known as INCB018424 or INC424, is a potent and selective oral inhibitor of JAK1 and JAK2.",
       "polarity": "supports",
-      "subject": "CHEMBL1789941",
+      "subject": "CHEMBL:CHEMBL1789941",
       "predicate": "modulates",
       "object": "text:JAK1 and JAK2",
       "variant": "",
@@ -18605,7 +18605,7 @@
       "paper": "pmid:24756798",
       "quote": "Treatment response apparently does not depend on the presence of a JAK2 V617F mutation.",
       "polarity": "supports",
-      "subject": "CHEMBL1789941",
+      "subject": "CHEMBL:CHEMBL1789941",
       "predicate": "treats",
       "object": "text:JAK2 V617F-mutated myelofibrosis",
       "variant": "clinvar:14662",
@@ -18644,7 +18644,7 @@
       "paper": "pmid:24856675",
       "quote": "The results from Phase I/II studies in patients with MF showed that ruxolitinib led to durable improvements in splenomegaly, and symptoms associated with MF.",
       "polarity": "supports",
-      "subject": "CHEMBL1789941",
+      "subject": "CHEMBL:CHEMBL1789941",
       "predicate": "treats",
       "object": "text:myelofibrosis",
       "variant": "",
@@ -18657,7 +18657,7 @@
       "paper": "pmid:24856675",
       "quote": "Two Phase III trials have compared ruxolitinib against placebo and best available therapy, and in both studies ruxolitinib demonstrated superior rates of spleen control and symptom improvement, and additional analysis demonstrated a survival benefit with ruxolitinib treatment.",
       "polarity": "supports",
-      "subject": "CHEMBL1789941",
+      "subject": "CHEMBL:CHEMBL1789941",
       "predicate": "treats",
       "object": "text:myelofibrosis",
       "variant": "",
@@ -18709,7 +18709,7 @@
       "paper": "pmid:24896661",
       "quote": "Ruxolitinib has radically altered the therapeutic landscape for MF with demonstrated advantages over standard therapy, irrespective of JAK2 mutational status and a signal suggesting survival benefit.",
       "polarity": "supports",
-      "subject": "CHEMBL1789941",
+      "subject": "CHEMBL:CHEMBL1789941",
       "predicate": "treats",
       "object": "text:myelofibrosis",
       "variant": "",
@@ -18826,7 +18826,7 @@
       "paper": "pmid:25189729",
       "quote": "JAK2 inhibition became a reality with first patients receiving drugs that targeted JAK2 in 2007 and was marked by the first approval in 2011 of Ruxolitinib a JAK 1 and 2-inhibitor to treat myelofibrosis (MF).",
       "polarity": "supports",
-      "subject": "CHEMBL1789941",
+      "subject": "CHEMBL:CHEMBL1789941",
       "predicate": "treats",
       "object": "text:myelofibrosis",
       "variant": "",
@@ -18982,7 +18982,7 @@
       "paper": "pmid:25870379",
       "quote": "Biological advances in MPN have translated into the rapid development of novel therapeutics, culminating in the approval of the first treatment for MF, the JAK1/JAK2 inhibitor ruxolitinib.",
       "polarity": "supports",
-      "subject": "CHEMBL1789941",
+      "subject": "CHEMBL:CHEMBL1789941",
       "predicate": "treats",
       "object": "text:myelofibrosis",
       "variant": "",
@@ -18995,7 +18995,7 @@
       "paper": "pmid:25993201",
       "quote": "However, only one new drug (ruxolitinib) has been approved during the past 40 years, and, although promising new therapies are evaluated, the armamentarium to treat MPN still relies on conventional drugs, like cytotoxic agents and anagrelide.",
       "polarity": "supports",
-      "subject": "CHEMBL1789941",
+      "subject": "CHEMBL:CHEMBL1789941",
       "predicate": "treats",
       "object": "text:Philadelphia-negative myeloproliferative neoplasms",
       "variant": "",
@@ -19086,7 +19086,7 @@
       "paper": "pmid:26255980",
       "quote": "Reduced STAT3-dependent gene transcription was reversed by inhibiting STAT1 activation with fludarabine or enhancing histone, but not STAT1 or STAT3 acetylation with histone deacetylase (HDAC) inhibitors trichostatin A or ITF2357.",
       "polarity": "supports",
-      "subject": "CHEMBL1568",
+      "subject": "text:fludarabine",
       "predicate": "modulates",
       "object": "text:STAT3-dependent gene transcription",
       "variant": "",
@@ -19229,7 +19229,7 @@
       "paper": "pmid:26648193",
       "quote": "Ruxolitinib can significantly improve the quality of life of patients with myelofibrosis. There is also increasing evidence of a positive impact on survival.",
       "polarity": "supports",
-      "subject": "CHEMBL1789941",
+      "subject": "CHEMBL:CHEMBL1789941",
       "predicate": "treats",
       "object": "text:myelofibrosis",
       "variant": "",
@@ -19450,7 +19450,7 @@
       "paper": "pmid:27379765",
       "quote": "They also exhibited increased IFN-β and -γ-induced STAT1 phosphorylation that was reversed upon treatment with the JAK kinase inhibitor ruxolitinib.",
       "polarity": "supports",
-      "subject": "CHEMBL1789941",
+      "subject": "CHEMBL:CHEMBL1789941",
       "predicate": "modulates",
       "object": "text:IFN-induced STAT1 phosphorylation",
       "variant": "",
@@ -19619,7 +19619,7 @@
       "paper": "pmid:27873163",
       "quote": "Therapies reported to be potential use in case reports include abatacept in CTLA4 haploinsufficiency and LRBA deficiency, ruxolitinib in gain-of-function STAT1, tocilizumab in gain-of-function STAT3 defect, mTOR inhibitors in PIK3CD activation, magnesium in XMEN syndrome, and pioglitazone in CGD.",
       "polarity": "supports",
-      "subject": "CHEMBL1789941",
+      "subject": "CHEMBL:CHEMBL1789941",
       "predicate": "treats",
       "object": "MONDO:0013599",
       "variant": "",
@@ -19658,7 +19658,7 @@
       "paper": "pmid:28087229",
       "quote": "This constitutive activation was abrogated by ex vivo treatment with the janus kinase 1/2 inhibitor ruxolitinib.",
       "polarity": "supports",
-      "subject": "CHEMBL1789941",
+      "subject": "CHEMBL:CHEMBL1789941",
       "predicate": "modulates",
       "object": "text:constitutive type I interferon signaling in STING mutants",
       "variant": "",
@@ -19749,7 +19749,7 @@
       "paper": "pmid:28395559",
       "quote": "Despite significant reduction of splenomegaly and improvement of symptom burden and a signal for survival improvement, ruxolitinib does not lead to major reductions in JAK2 V617F allele burden and bone marrow fibrosis.",
       "polarity": "supports",
-      "subject": "CHEMBL1789941",
+      "subject": "CHEMBL:CHEMBL1789941",
       "predicate": "treats",
       "object": "text:myelofibrosis",
       "variant": "",
@@ -19762,7 +19762,7 @@
       "paper": "pmid:28395559",
       "quote": "Despite significant reduction of splenomegaly and improvement of symptom burden and a signal for survival improvement, ruxolitinib does not lead to major reductions in JAK2 V617F allele burden and bone marrow fibrosis.",
       "polarity": "contradicts",
-      "subject": "CHEMBL1789941",
+      "subject": "CHEMBL:CHEMBL1789941",
       "predicate": "modulates",
       "object": "mech:JAK2:GoF:somatic",
       "variant": "clinvar:14662",
@@ -19775,7 +19775,7 @@
       "paper": "pmid:28395559",
       "quote": "No ruxolitinib-based combination approach has so far demonstrated superiority over ruxolitinib monotherapy.",
       "polarity": "contradicts",
-      "subject": "CHEMBL1789941",
+      "subject": "CHEMBL:CHEMBL1789941",
       "predicate": "treats",
       "object": "text:myelofibrosis",
       "variant": "",
@@ -19788,7 +19788,7 @@
       "paper": "pmid:28441920",
       "quote": "However, ruxolitinib, approved in 2011, remains the only one currently available for treatment of myelofibrosis, with many others having been discontinued for toxicity, and considerable uncertainty surrounding the future of those still in development.",
       "polarity": "supports",
-      "subject": "CHEMBL1789941",
+      "subject": "CHEMBL:CHEMBL1789941",
       "predicate": "treats",
       "object": "text:myelofibrosis",
       "variant": "",
@@ -19801,7 +19801,7 @@
       "paper": "pmid:28441920",
       "quote": "The data from the pivotal trials of momelotinib do not support its approval, although improvement of anemia is an important benefit.",
       "polarity": "contradicts",
-      "subject": "CHEMBL1078178",
+      "subject": "CHEMBL:CHEMBL1078178",
       "predicate": "treats",
       "object": "text:myelofibrosis",
       "variant": "",
@@ -19827,7 +19827,7 @@
       "paper": "pmid:28441920",
       "quote": "If approved, the JAK2-specific non-myelosuppressive inhibitor pacritinib could fulfill a major unmet need, that of patients with significant cytopenias.",
       "polarity": "supports",
-      "subject": "CHEMBL2035187",
+      "subject": "CHEMBL:CHEMBL2035187",
       "predicate": "treats",
       "object": "text:myelofibrosis with significant cytopenias",
       "variant": "",
@@ -19840,7 +19840,7 @@
       "paper": "pmid:28491265",
       "quote": "The findings of the phase II trial RESPONSE and the preliminary data from RESPONSE 2 trial have identified a role for ruxolitinib in PV patients who are resistant or intolerant to HC.",
       "polarity": "supports",
-      "subject": "CHEMBL1789941",
+      "subject": "CHEMBL:CHEMBL1789941",
       "predicate": "treats",
       "object": "text:polycythaemia vera resistant or intolerant to hydroxycarbamide",
       "variant": "",
@@ -19866,7 +19866,7 @@
       "paper": "pmid:28500170",
       "quote": "Since its approval in 2011, the Janus kinase 1/2 (JAK1/2) inhibitor ruxolitinib has evolved to become the centerpiece of therapy for myelofibrosis (MF), and its use in patients with hydroxyurea resistant or intolerant polycythemia vera (PV) is steadily increasing.",
       "polarity": "supports",
-      "subject": "CHEMBL1789941",
+      "subject": "CHEMBL:CHEMBL1789941",
       "predicate": "treats",
       "object": "MONDO:0044903",
       "variant": "",
@@ -20334,7 +20334,7 @@
       "paper": "pmid:29254929",
       "quote": "Tofacitinib effectively suppressed innate and adaptive immunity in the vessel wall.",
       "polarity": "supports",
-      "subject": "CHEMBL221959",
+      "subject": "CHEMBL:CHEMBL221959",
       "predicate": "treats",
       "object": "EFO:1001209",
       "variant": "",
@@ -20347,7 +20347,7 @@
       "paper": "pmid:29254929",
       "quote": "Lesional T cells responded to tofacitinib with reduced proliferation rates (<10%) and minimal production of the effector molecules interferon-γ, interleukin-17, and interleukin-21.",
       "polarity": "supports",
-      "subject": "CHEMBL221959",
+      "subject": "CHEMBL:CHEMBL221959",
       "predicate": "modulates",
       "object": "text:lesional T cell proliferation and interferon-γ, interleukin-17, interleukin-21 production",
       "variant": "",
@@ -20360,7 +20360,7 @@
       "paper": "pmid:29254929",
       "quote": "Tofacitinib disrupted adventitial microvascular angiogenesis, reduced outgrowth of hyperplastic intima, and minimized CD4+CD103+ tissue-resident memory T cells.",
       "polarity": "supports",
-      "subject": "CHEMBL221959",
+      "subject": "CHEMBL:CHEMBL221959",
       "predicate": "modulates",
       "object": "text:adventitial angiogenesis, intimal hyperplasia and CD4+CD103+ tissue-resident memory T cells",
       "variant": "",
@@ -20373,7 +20373,7 @@
       "paper": "pmid:29254929",
       "quote": "The JAK inhibitor tofacitinib effectively suppresses tissue-resident memory T cells and inhibits core vasculitogenic effector pathways.",
       "polarity": "supports",
-      "subject": "CHEMBL221959",
+      "subject": "CHEMBL:CHEMBL221959",
       "predicate": "treats",
       "object": "text:medium and large vessel vasculitis",
       "variant": "",
@@ -20412,7 +20412,7 @@
       "paper": "pmid:29270166",
       "quote": "Signal transduction and activator of transcription 1 (STAT1) was hyperphosphorylated at tyrosine 701 in response to IFN-γ and -α, as demonstrated by flow cytometry and Western blotting in fresh blood mononuclear cells and in Epstein-Barr virus lymphoblastoid cell lines (EBV-LCLs); phosphorylation of STAT1 in EBV-LCLs from the patient was resistant to inhibition by staurosporine but sensitive to ruxolitinib, a Jak phosphorylation inhibitor.",
       "polarity": "supports",
-      "subject": "CHEMBL1789941",
+      "subject": "CHEMBL:CHEMBL1789941",
       "predicate": "modulates",
       "object": "text:STAT1 phosphorylation",
       "variant": "clinvar:144006",
@@ -20607,7 +20607,7 @@
       "paper": "pmid:29741513",
       "quote": "Although ruxolitinib decreases symptoms and is associated with a survival advantage, it has no clear disease-altering activity, and allogeneic hematopoietic stem cell transplant remains the sole curative option for myelofibrosis.",
       "polarity": "supports",
-      "subject": "CHEMBL1789941",
+      "subject": "CHEMBL:CHEMBL1789941",
       "predicate": "treats",
       "object": "text:myelofibrosis",
       "variant": "",
@@ -20750,7 +20750,7 @@
       "paper": "pmid:29934865",
       "quote": "Major clinical improvement was achieved after 8 weeks of ruxolitinib treatment, while sustained suppression of IFNγ- and IFNα-induced phosphorylation of STAT1, STAT3, and STAT5, as well as increased STAT3-inducible and Th17-related gene expression, was demonstrated ex vivo.",
       "polarity": "supports",
-      "subject": "CHEMBL1789941",
+      "subject": "CHEMBL:CHEMBL1789941",
       "predicate": "treats",
       "object": "MONDO:0013599",
       "variant": "text:L206P",
@@ -20763,7 +20763,7 @@
       "paper": "pmid:29934865",
       "quote": "A novel STAT1 GOF mutation (c.617T > C; p.L206P), detected in a child with recalcitrant CMC, was shown to be reversible in vitro with ruxolitinib.",
       "polarity": "supports",
-      "subject": "CHEMBL1789941",
+      "subject": "CHEMBL:CHEMBL1789941",
       "predicate": "modulates",
       "object": "mech:STAT1:GoF",
       "variant": "text:L206P",
@@ -20776,7 +20776,7 @@
       "paper": "pmid:29934865",
       "quote": "Clinical relapse and spike of all monitored phosphorylated STAT activity was registered shortly after unplanned withdrawal, decreasing again after ruxolitinib reintroduction.",
       "polarity": "supports",
-      "subject": "CHEMBL1789941",
+      "subject": "CHEMBL:CHEMBL1789941",
       "predicate": "modulates",
       "object": "text:phosphorylated STAT activity",
       "variant": "text:L206P",
@@ -20893,7 +20893,7 @@
       "paper": "pmid:30027395",
       "quote": "For patients unresponsive to first-line therapy ruxolitinib is available.",
       "polarity": "supports",
-      "subject": "CHEMBL1789941",
+      "subject": "CHEMBL:CHEMBL1789941",
       "predicate": "treats",
       "object": "EFO:0002429",
       "variant": "",
@@ -21153,7 +21153,7 @@
       "paper": "pmid:31228096",
       "quote": "The advances in molecular insights, especially the discovery of the Janus kinase 2 (JAK2) V617F mutation and its role in JAK-STAT pathway dysregulation, led to the development of the JAK inhibitor ruxolitinib, which currently represents the cornerstone of medical therapy in MF and hydroxyurea-resistant/intolerant PV.",
       "polarity": "supports",
-      "subject": "CHEMBL1789941",
+      "subject": "CHEMBL:CHEMBL1789941",
       "predicate": "treats",
       "object": "text:myelofibrosis and hydroxyurea-resistant/intolerant polycythemia vera",
       "variant": "",
@@ -21270,7 +21270,7 @@
       "paper": "pmid:31354696",
       "quote": "One patient in our cohort was treated with the oral JAK inhibitor ruxolitinib. Treatment was associated with normalization of both STAT1 protein and peak pSTAT1 levels.",
       "polarity": "supports",
-      "subject": "CHEMBL1789941",
+      "subject": "CHEMBL:CHEMBL1789941",
       "predicate": "modulates",
       "object": "mech:STAT1:GoF",
       "variant": "",
@@ -21296,7 +21296,7 @@
       "paper": "pmid:31407334",
       "quote": "Accordingly, administration of the JAK1/2 selective tyrosine kinase inhibitor ruxolitinib reduced proliferation of tumor cells and effectively reduced tumor progression in immunodeficient and immunocompetent mouse models of K-RAS-driven lung AC.",
       "polarity": "supports",
-      "subject": "CHEMBL1789941",
+      "subject": "CHEMBL:CHEMBL1789941",
       "predicate": "treats",
       "object": "text:K-RAS-driven lung adenocarcinoma",
       "variant": "",
@@ -21374,7 +21374,7 @@
       "paper": "pmid:31512162",
       "quote": "Functional testing after treatment confirmed reversal of the STAT1 hyper-phosphorylation and downstream transcriptional activity.",
       "polarity": "supports",
-      "subject": "CHEMBL1789941",
+      "subject": "CHEMBL:CHEMBL1789941",
       "predicate": "modulates",
       "object": "text:STAT1 hyper-phosphorylation",
       "variant": "",
@@ -21387,7 +21387,7 @@
       "paper": "pmid:31512162",
       "quote": "IL-17 and IL-22 production was, however, not restored with jakinib therapy (ruxolitinib), and the patient remained susceptible to opportunistic infection.",
       "polarity": "contradicts",
-      "subject": "CHEMBL1789941",
+      "subject": "CHEMBL:CHEMBL1789941",
       "predicate": "treats",
       "object": "MONDO:0013599",
       "variant": "",
@@ -21452,7 +21452,7 @@
       "paper": "pmid:31516686",
       "quote": "The associations of leukocytosis with clotting risk (in both conditions) and mortality (in PV) have drawn increased attention with the availability of ruxolitinib as a second-line treatment in PV.",
       "polarity": "supports",
-      "subject": "CHEMBL1789941",
+      "subject": "CHEMBL:CHEMBL1789941",
       "predicate": "treats",
       "object": "EFO:0002429",
       "variant": "",
@@ -21595,7 +21595,7 @@
       "paper": "pmid:31866997",
       "quote": "Treatment with Janus kinase 1 and 2 (JAK1/2) inhibitor baricitinib was beneficiary for a vasculitic ulcer, induced hair regrowth and improved overall well-being in one patient.",
       "polarity": "supports",
-      "subject": "CHEMBL2105759",
+      "subject": "CHEMBL:CHEMBL2105759",
       "predicate": "treats",
       "object": "MONDO:0014405",
       "variant": "text:G207E",
@@ -21738,7 +21738,7 @@
       "paper": "pmid:31940699",
       "quote": "Treatment with ruxolitinib was followed by a prompt and sustained recovery.",
       "polarity": "supports",
-      "subject": "CHEMBL1789941",
+      "subject": "CHEMBL:CHEMBL1789941",
       "predicate": "treats",
       "object": "text:USP18 deficiency",
       "variant": "",
@@ -21868,7 +21868,7 @@
       "paper": "pmid:32180118",
       "quote": "We report the potential of JAK1/2 inhibition with ruxolitinib for both CMC and steroid-dependent autoimmunity.",
       "polarity": "supports",
-      "subject": "CHEMBL1789941",
+      "subject": "CHEMBL:CHEMBL1789941",
       "predicate": "treats",
       "object": "MONDO:0013599",
       "variant": "clinvar:144006",
@@ -21881,7 +21881,7 @@
       "paper": "pmid:32180118",
       "quote": "The STAT1 phosphorylation level decreased significantly upon stimulation of patient cells with IFN-γ.",
       "polarity": "supports",
-      "subject": "CHEMBL1789941",
+      "subject": "CHEMBL:CHEMBL1789941",
       "predicate": "modulates",
       "object": "text:STAT1 phosphorylation",
       "variant": "clinvar:144006",
@@ -21894,7 +21894,7 @@
       "paper": "pmid:32180118",
       "quote": "The peripheral IL-17A level did not increase, but the IFN-γ level decreased after 4 months of therapy.",
       "polarity": "supports",
-      "subject": "CHEMBL1789941",
+      "subject": "CHEMBL:CHEMBL1789941",
       "predicate": "modulates",
       "object": "ensembl:ENSG00000111537",
       "variant": "clinvar:144006",
@@ -22037,7 +22037,7 @@
       "paper": "pmid:32679107",
       "quote": "Instead, inhibition of STAT3 activity using the JAK inhibitor ruxolitinib decreases breast cancer invasion in vivo.",
       "polarity": "supports",
-      "subject": "CHEMBL1789941",
+      "subject": "CHEMBL:CHEMBL1789941",
       "predicate": "treats",
       "object": "EFO:1000649",
       "variant": "",
@@ -22297,7 +22297,7 @@
       "paper": "pmid:32873853",
       "quote": "LPS drives neutrophil exhaustion through TICAM2 mediated activation of Src family kinases (SFK) and STAT1, as the application of SFK inhibitor Dasatinib blocks neutrophil exhaustion triggered by the prolonged LPS challenge.",
       "polarity": "supports",
-      "subject": "CHEMBL1421",
+      "subject": "CHEMBL:CHEMBL1421",
       "predicate": "modulates",
       "object": "text:neutrophil exhaustion",
       "variant": "",
@@ -22414,7 +22414,7 @@
       "paper": "pmid:33087723",
       "quote": "Accordingly, patient-derived lymphocytes exhibit increased STAT activation in vitro in response to interferon-γ, IL-2 and IL-4 that is reverted by the JAK1/JAK2 inhibitor ruxolitinib.",
       "polarity": "supports",
-      "subject": "CHEMBL1789941",
+      "subject": "CHEMBL:CHEMBL1789941",
       "predicate": "modulates",
       "object": "text:STAT activation in SOCS1 haploinsufficient patient lymphocytes",
       "variant": "",
@@ -22427,7 +22427,7 @@
       "paper": "pmid:33162515",
       "quote": "Although hydroxyurea (HU) is the most popular agent for PV treatment, the advantages of ruxolitinib, a JAK inhibitor, for patients who are intolerant or resistant to HU were recently reported.",
       "polarity": "supports",
-      "subject": "CHEMBL1789941",
+      "subject": "CHEMBL:CHEMBL1789941",
       "predicate": "treats",
       "object": "EFO:0002429",
       "variant": "",
@@ -22661,7 +22661,7 @@
       "paper": "pmid:33344552",
       "quote": "Therefore, the patient was diagnosed with PMF and received oral ruxolitinib. However, the spleen and hematologic responses were poor.",
       "polarity": "contradicts",
-      "subject": "CHEMBL1789941",
+      "subject": "CHEMBL:CHEMBL1789941",
       "predicate": "treats",
       "object": "EFO:0002430",
       "variant": "",
@@ -22700,7 +22700,7 @@
       "paper": "pmid:33475942",
       "quote": "Ruxolitinib provided favorable responses by controlling candidiasis and autoimmune hemolytic anemia in the patient.",
       "polarity": "supports",
-      "subject": "CHEMBL1789941",
+      "subject": "CHEMBL:CHEMBL1789941",
       "predicate": "treats",
       "object": "MONDO:0013599",
       "variant": "clinvar:144006",
@@ -22713,7 +22713,7 @@
       "paper": "pmid:33475942",
       "quote": "Dysregulation in STAT1 phosphorylation kinetics improved with ruxolitinib treatment and was completely normalized after transplantation.",
       "polarity": "supports",
-      "subject": "CHEMBL1789941",
+      "subject": "CHEMBL:CHEMBL1789941",
       "predicate": "modulates",
       "object": "text:STAT1 phosphorylation kinetics",
       "variant": "clinvar:144006",
@@ -22726,7 +22726,7 @@
       "paper": "pmid:33475942",
       "quote": "TH17 deficiency persisted after ruxolitinib treatment, but normalized following HSCT.",
       "polarity": "contradicts",
-      "subject": "CHEMBL1789941",
+      "subject": "CHEMBL:CHEMBL1789941",
       "predicate": "treats",
       "object": "MONDO:0013599",
       "variant": "clinvar:144006",
@@ -22765,7 +22765,7 @@
       "paper": "pmid:33475942",
       "quote": "Dysregulated gene expression was partially improved with ruxolitinib treatment and normalized after transplantation.",
       "polarity": "supports",
-      "subject": "CHEMBL1789941",
+      "subject": "CHEMBL:CHEMBL1789941",
       "predicate": "modulates",
       "object": "mech:STAT1:GoF",
       "variant": "clinvar:144006",
@@ -22791,7 +22791,7 @@
       "paper": "pmid:33509790",
       "quote": "Targeting the Janus Kinase (JAK)/STAT signaling pathway using the FDA-approved drug ruxolitinib overcame these tumor-protective responses and improved anti-PD-1 therapeutic efficacy.",
       "polarity": "supports",
-      "subject": "CHEMBL1789941",
+      "subject": "CHEMBL:CHEMBL1789941",
       "predicate": "treats",
       "object": "MONDO:0005184",
       "variant": "",
@@ -22843,7 +22843,7 @@
       "paper": "pmid:33517393",
       "quote": "Interestingly, the STAT3 phosphorylation could be inhibited with ruxolitinib as well as tofacitinib, which are clinically approved JAK1 and JAK3 (to lesser extent JAK2 and JAK1) inhibitors, respectively.",
       "polarity": "supports",
-      "subject": "CHEMBL1789941",
+      "subject": "CHEMBL:CHEMBL1789941",
       "predicate": "modulates",
       "object": "text:STAT3 phosphorylation",
       "variant": "text:Tyr186_Tyr190del",
@@ -22856,7 +22856,7 @@
       "paper": "pmid:33517393",
       "quote": "Interestingly, the STAT3 phosphorylation could be inhibited with ruxolitinib as well as tofacitinib, which are clinically approved JAK1 and JAK3 (to lesser extent JAK2 and JAK1) inhibitors, respectively.",
       "polarity": "supports",
-      "subject": "CHEMBL221959",
+      "subject": "CHEMBL:CHEMBL221959",
       "predicate": "modulates",
       "object": "text:STAT3 phosphorylation",
       "variant": "text:Tyr186_Tyr190del",
@@ -22973,7 +22973,7 @@
       "paper": "pmid:33895784",
       "quote": "We carried out a series of high-throughput combination drug screenings and found that ruxolitinib exerted synergy with standard-of-care drugs used in the treatment of ALL.",
       "polarity": "supports",
-      "subject": "CHEMBL1789941",
+      "subject": "CHEMBL:CHEMBL1789941",
       "predicate": "treats",
       "object": "text:CRLF2-rearranged Ph-like acute lymphoblastic leukemia",
       "variant": "",
@@ -22986,7 +22986,7 @@
       "paper": "pmid:33895784",
       "quote": "Based on these findings, we conducted preclinical in vivo drug testing and demonstrated that ruxolitinib enhanced the in vivo efficacy of an induction-type regimen consisting of vincristine, dexamethasone, and L-asparaginase in 2/3 CRLF2-rearranged Ph-like ALL xenografts.",
       "polarity": "supports",
-      "subject": "CHEMBL1789941",
+      "subject": "CHEMBL:CHEMBL1789941",
       "predicate": "treats",
       "object": "text:CRLF2-rearranged Ph-like acute lymphoblastic leukemia",
       "variant": "",
@@ -23285,7 +23285,7 @@
       "paper": "pmid:34396051",
       "quote": "Interestingly, ruxolitinib treatment induced increased phosphorylation of AXL indicating that activation of AXL might mediate resistance to ruxolitinib.",
       "polarity": "supports",
-      "subject": "CHEMBL1789941",
+      "subject": "CHEMBL:CHEMBL1789941",
       "predicate": "modulates",
       "object": "text:AXL phosphorylation",
       "variant": "",
@@ -23298,7 +23298,7 @@
       "paper": "pmid:34396051",
       "quote": "Consistently, the AXL inhibitor bemcentinib exerted additive effects with ruxolitinib via impaired STAT3, STAT5, and AKT signaling.",
       "polarity": "supports",
-      "subject": "CHEMBL3809489",
+      "subject": "CHEMBL:CHEMBL3809489",
       "predicate": "modulates",
       "object": "text:STAT3, STAT5, and AKT signaling",
       "variant": "",
@@ -23324,7 +23324,7 @@
       "paper": "pmid:34396051",
       "quote": "Moreover, bemcentinib treatment normalized red blood cell count and hemoglobin levels in vivo.",
       "polarity": "supports",
-      "subject": "CHEMBL3809489",
+      "subject": "CHEMBL:CHEMBL3809489",
       "predicate": "treats",
       "object": "text:BCR-ABL negative myeloproliferative neoplasms",
       "variant": "",
@@ -23714,7 +23714,7 @@
       "paper": "pmid:35387553",
       "quote": "Clearly, phlebotomy is not able to accomplish these goals, and the ability of cytoreductive agents such as hydroxyurea (HU), to influence these elements of the disease is limited.",
       "polarity": "contradicts",
-      "subject": "CHEMBL467",
+      "subject": "CHEMBL:CHEMBL467",
       "predicate": "treats",
       "object": "EFO:0002429",
       "variant": "",
@@ -23844,7 +23844,7 @@
       "paper": "pmid:35507130",
       "quote": "Ex vivo treatment with the JAK1/2-inhibitor ruxolitinib reduced cytokine responsiveness and normalized STAT1 phosphorylation in DN STAT3 and STAT1 GOF patient' cells.",
       "polarity": "supports",
-      "subject": "CHEMBL1789941",
+      "subject": "CHEMBL:CHEMBL1789941",
       "predicate": "modulates",
       "object": "text:STAT1 phosphorylation in DN STAT3 and STAT1 GOF patient cells",
       "variant": "",
@@ -23883,7 +23883,7 @@
       "paper": "pmid:35507130",
       "quote": "In addition, ex vivo treatment was effective in modulating STAT1 downstream signaling in DN STAT3 patients.",
       "polarity": "supports",
-      "subject": "CHEMBL1789941",
+      "subject": "CHEMBL:CHEMBL1789941",
       "predicate": "modulates",
       "object": "text:STAT1 downstream signaling in DN STAT3 patients",
       "variant": "",
@@ -23922,7 +23922,7 @@
       "paper": "pmid:35689379",
       "quote": "STAT1 activation was not sensitive to ruxolitinib and did not rely on interferon-JAK2 signalling.",
       "polarity": "contradicts",
-      "subject": "CHEMBL1789941",
+      "subject": "CHEMBL:CHEMBL1789941",
       "predicate": "modulates",
       "object": "text:PDGFRB p.Val665Ala-induced STAT1 activation",
       "variant": "text:V665A",
@@ -23935,7 +23935,7 @@
       "paper": "pmid:35689379",
       "quote": "Another tyrosine kinase inhibitor, imatinib, blocked signalling by the p.Val665Ala variant at a higher concentration compared with the wild-type receptor.",
       "polarity": "supports",
-      "subject": "CHEMBL941",
+      "subject": "CHEMBL:CHEMBL941",
       "predicate": "modulates",
       "object": "text:PDGFRB p.Val665Ala signalling",
       "variant": "text:V665A",
@@ -24247,7 +24247,7 @@
       "paper": "pmid:35999022",
       "quote": "A significant clinical improvement was observed after introduction of adjunctive interferon-gamma therapy to her anti-tuberculous medications.",
       "polarity": "supports",
-      "subject": "CHEMBL1201564",
+      "subject": "CHEMBL:CHEMBL1201564",
       "predicate": "treats",
       "object": "MONDO:0012682",
       "variant": "",
@@ -24286,7 +24286,7 @@
       "paper": "pmid:36050429",
       "quote": "In one patient with a remarkable clinical effect of baricitinib treatment, the immune response to C. albicans increased after 7 weeks of treatment.",
       "polarity": "supports",
-      "subject": "CHEMBL2105759",
+      "subject": "CHEMBL:CHEMBL2105759",
       "predicate": "modulates",
       "object": "text:immune response to Candida albicans",
       "variant": "",
@@ -24299,7 +24299,7 @@
       "paper": "pmid:36050429",
       "quote": "Alterations in plasma biomarkers involved downregulation of cellular markers CXCL10, annexin A1, granzyme B, granzyme H, and oncostatin M, whereas FGF21 was the only upregulated marker after 7 weeks.",
       "polarity": "supports",
-      "subject": "CHEMBL2105759",
+      "subject": "CHEMBL:CHEMBL2105759",
       "predicate": "modulates",
       "object": "text:plasma biomarkers (CXCL10, annexin A1, granzyme B, granzyme H, oncostatin M, FGF21)",
       "variant": "",
@@ -24312,7 +24312,7 @@
       "paper": "pmid:36050429",
       "quote": "After 3 months, IFN-ɣ and CXCL10 were downregulated.",
       "polarity": "supports",
-      "subject": "CHEMBL2105759",
+      "subject": "CHEMBL:CHEMBL2105759",
       "predicate": "modulates",
       "object": "ensembl:ENSG00000111537",
       "variant": "",
@@ -24325,7 +24325,7 @@
       "paper": "pmid:36050429",
       "quote": "Detailed analysis of cellular subsets, using CyTOF, revealed increased expression of CD45, CD52, and CD99 in NK cells, reflecting a more functional phenotype.",
       "polarity": "supports",
-      "subject": "CHEMBL2105759",
+      "subject": "CHEMBL:CHEMBL2105759",
       "predicate": "modulates",
       "object": "text:NK cell expression of CD45, CD52, and CD99",
       "variant": "",
@@ -24338,7 +24338,7 @@
       "paper": "pmid:36050429",
       "quote": "Conversely, monocytes and eosinophils downregulated CD16, consistent with reduced inflammation.",
       "polarity": "supports",
-      "subject": "CHEMBL2105759",
+      "subject": "CHEMBL:CHEMBL2105759",
       "predicate": "modulates",
       "object": "text:CD16 expression on monocytes and eosinophils",
       "variant": "",
@@ -24377,7 +24377,7 @@
       "paper": "pmid:36102410",
       "quote": "After eight weeks of treatment, the patient did not improve and was submitted to diagnostic splenectomy.",
       "polarity": "contradicts",
-      "subject": "CHEMBL267345",
+      "subject": "CHEMBL:CHEMBL267345",
       "predicate": "treats",
       "object": "text:visceral leishmaniasis in STAT1 GOF patient",
       "variant": "clinvar:30085",
@@ -24455,7 +24455,7 @@
       "paper": "pmid:36105803",
       "quote": "Furthermore, ruxolitinib may be a viable therapeutic option before HSCT to improve disease management.",
       "polarity": "supports",
-      "subject": "CHEMBL1789941",
+      "subject": "CHEMBL:CHEMBL1789941",
       "predicate": "treats",
       "object": "MONDO:0013599",
       "variant": "clinvar:144005",
@@ -25053,7 +25053,7 @@
       "paper": "pmid:36546480",
       "quote": "Moreover, long-term ruxolitinib treatment of 2 children carrying the JAK1GOF (p.A634D) variant remarkably improved their growth, eosinophilia, and clinical features of allergic inflammation.",
       "polarity": "supports",
-      "subject": "CHEMBL1789941",
+      "subject": "CHEMBL:CHEMBL1789941",
       "predicate": "treats",
       "object": "text:JAK1 GOF",
       "variant": "clinvar:225075",
@@ -25105,7 +25105,7 @@
       "paper": "pmid:36685504",
       "quote": "In this case, therapy with baricitinib effectively blocked IFN-α activation and reduced STAT1 signaling but had no effect on the progression of the neurological disease.",
       "polarity": "supports",
-      "subject": "CHEMBL2105759",
+      "subject": "CHEMBL:CHEMBL2105759",
       "predicate": "modulates",
       "object": "text:STAT1 signaling",
       "variant": "",
@@ -25118,7 +25118,7 @@
       "paper": "pmid:36685504",
       "quote": "In this case, therapy with baricitinib effectively blocked IFN-α activation and reduced STAT1 signaling but had no effect on the progression of the neurological disease.",
       "polarity": "contradicts",
-      "subject": "CHEMBL2105759",
+      "subject": "CHEMBL:CHEMBL2105759",
       "predicate": "treats",
       "object": "MONDO:0014367",
       "variant": "",
@@ -25261,7 +25261,7 @@
       "paper": "pmid:37020552",
       "quote": "Treatment with a JAK-inhibitor (baricitinib) mitigated cardiac inflammation on MRI but was unable to alter fibrosis, possibly due to the diagnostic and therapeutic delay, which finally led to fatal arrhythmia.",
       "polarity": "contradicts",
-      "subject": "CHEMBL2105759",
+      "subject": "CHEMBL:CHEMBL2105759",
       "predicate": "treats",
       "object": "text:STAT1 GOF myocarditis",
       "variant": "",
@@ -25417,7 +25417,7 @@
       "paper": "pmid:37343845",
       "quote": "Administration of baricitinib to patients led to rapid improvement of the disease in all adults and was associated with reduction of systemic inflammation.",
       "polarity": "supports",
-      "subject": "CHEMBL2105759",
+      "subject": "CHEMBL:CHEMBL2105759",
       "predicate": "treats",
       "object": "text:JAK1 gain-of-function autoinflammatory disease",
       "variant": "",
@@ -25443,7 +25443,7 @@
       "paper": "pmid:37343845",
       "quote": "Treatment of patients' cells with baricitinib controlled most of the atypical hyper-phosphorylation of STAT3.",
       "polarity": "supports",
-      "subject": "CHEMBL2105759",
+      "subject": "CHEMBL:CHEMBL2105759",
       "predicate": "modulates",
       "object": "text:STAT3 hyper-phosphorylation",
       "variant": "",
@@ -25495,7 +25495,7 @@
       "paper": "pmid:37358695",
       "quote": "The patient treatment with JAKinib ruxolitinib does not ameliorate the observed neutrophil aberrations.",
       "polarity": "contradicts",
-      "subject": "CHEMBL1789941",
+      "subject": "CHEMBL:CHEMBL1789941",
       "predicate": "treats",
       "object": "MONDO:0013599",
       "variant": "",
@@ -25911,7 +25911,7 @@
       "paper": "pmid:38072195",
       "quote": "Addition of ruxolitinib and baricitinib inhibited STAT1 hyperactivation in STAT1-GoF EPSC in a dose-dependent manner, which was not observed with tofacitinib.",
       "polarity": "contradicts",
-      "subject": "CHEMBL221959",
+      "subject": "CHEMBL:CHEMBL221959",
       "predicate": "modulates",
       "object": "mech:STAT1:GoF",
       "variant": "",
@@ -25989,7 +25989,7 @@
       "paper": "pmid:38351043",
       "quote": "Furthermore, treatment with BMS-986165, a selective TYK2 inhibitor, inhibits the expansion of T-BET+ CTLs, inflammation in β-cells and the onset of autoimmune T1D in NOD mice.",
       "polarity": "supports",
-      "subject": "CHEMBL4435170",
+      "subject": "CHEMBL:CHEMBL4435170",
       "predicate": "treats",
       "object": "EFO:0009756",
       "variant": "",
@@ -26132,7 +26132,7 @@
       "paper": "pmid:38563820",
       "quote": "Finally, treatment of one affected patient with severe atopic dermatitis using the JAK1/JAK2-selective inhibitor, baricitinib, resulted in clinically significant improvement.",
       "polarity": "supports",
-      "subject": "CHEMBL2105759",
+      "subject": "CHEMBL:CHEMBL2105759",
       "predicate": "treats",
       "object": "text:JAK1 GoF variant-associated atopic dermatitis",
       "variant": "",
@@ -26171,7 +26171,7 @@
       "paper": "pmid:38578354",
       "quote": "The JAK inhibitor ruxolitinib significantly reduced the IFNα-induced hyperphosphorylation of STAT1 and reverted the stimulation-induced T-cell apoptosis, in vitro.",
       "polarity": "supports",
-      "subject": "CHEMBL1789941",
+      "subject": "CHEMBL:CHEMBL1789941",
       "predicate": "modulates",
       "object": "text:IFNα-induced STAT1 hyperphosphorylation",
       "variant": "",
@@ -26184,7 +26184,7 @@
       "paper": "pmid:38578354",
       "quote": "In two adult STAT1-GOF patients, the JAKinib treatment ameliorated chronic mucocutaneous candidiasis and lymphopenia.",
       "polarity": "supports",
-      "subject": "CHEMBL1789941",
+      "subject": "CHEMBL:CHEMBL1789941",
       "predicate": "treats",
       "object": "MONDO:0013599",
       "variant": "",
@@ -26197,7 +26197,7 @@
       "paper": "pmid:38578354",
       "quote": "Most STAT1-GOF patients, particularly those who had autoimmunity, presented increased IGS that significantly decreased in the two patients during ruxolitinib treatment.",
       "polarity": "supports",
-      "subject": "CHEMBL1789941",
+      "subject": "CHEMBL:CHEMBL1789941",
       "predicate": "modulates",
       "object": "text:interferon gene signature",
       "variant": "",
@@ -26353,7 +26353,7 @@
       "paper": "pmid:39025985",
       "quote": "High TPO concentrations sustained in vitro PF4 synthesis and secretion in cultured Mks, while Ruxolitinib restrains the abnormal PF4 expression in vivo.",
       "polarity": "supports",
-      "subject": "CHEMBL1789941",
+      "subject": "CHEMBL:CHEMBL1789941",
       "predicate": "modulates",
       "object": "ensembl:ENSG00000163737",
       "variant": "",
@@ -26470,7 +26470,7 @@
       "paper": "pmid:39177867",
       "quote": "Baricitinib showed therapeutic effectiveness without side effects.",
       "polarity": "supports",
-      "subject": "CHEMBL2105759",
+      "subject": "CHEMBL:CHEMBL2105759",
       "predicate": "treats",
       "object": "MONDO:0013599",
       "variant": "",
@@ -26756,7 +26756,7 @@
       "paper": "pmid:39631446",
       "quote": "Ruxolitinib achieved substantial control over the clinical manifestations.",
       "polarity": "supports",
-      "subject": "CHEMBL1789941",
+      "subject": "CHEMBL:CHEMBL1789941",
       "predicate": "treats",
       "object": "EFO:0010647",
       "variant": "",
@@ -26769,7 +26769,7 @@
       "paper": "pmid:39631446",
       "quote": "Importantly, ruxolitinib effectively normalized the previously dysregulated transcriptome profile in PBMCs, bringing it closer to that of healthy controls.",
       "polarity": "supports",
-      "subject": "CHEMBL1789941",
+      "subject": "CHEMBL:CHEMBL1789941",
       "predicate": "modulates",
       "object": "text:dysregulated PBMC transcriptome",
       "variant": "",
@@ -26782,7 +26782,7 @@
       "paper": "pmid:39631446",
       "quote": "This normalization was most striking in the downregulation of STAT3-targeted genes, interferon-related genes, myeloid cell activation, and cytotoxic effector CD8+ T-cell genes, with effects persisting for up to 12 months.",
       "polarity": "supports",
-      "subject": "CHEMBL1789941",
+      "subject": "CHEMBL:CHEMBL1789941",
       "predicate": "modulates",
       "object": "text:STAT3-targeted genes",
       "variant": "",
@@ -26795,7 +26795,7 @@
       "paper": "pmid:39631446",
       "quote": "Posttreatment evaluations demonstrated a notable increase in naive CD4+ and CD8+ T-cell populations, alongside a significant reduction in effector memory T-cell levels.",
       "polarity": "supports",
-      "subject": "CHEMBL1789941",
+      "subject": "CHEMBL:CHEMBL1789941",
       "predicate": "modulates",
       "object": "text:naive and effector memory T-cell populations",
       "variant": "",
@@ -26808,7 +26808,7 @@
       "paper": "pmid:39631446",
       "quote": "Additionally, there was a decrease in levels of circulating T follicular helper cells and double-negative T cells.",
       "polarity": "supports",
-      "subject": "CHEMBL1789941",
+      "subject": "CHEMBL:CHEMBL1789941",
       "predicate": "modulates",
       "object": "text:circulating T follicular helper cells and double-negative T cells",
       "variant": "",
@@ -26821,7 +26821,7 @@
       "paper": "pmid:39631446",
       "quote": "Regulatory T-cell percentages and their canonical markers, which were already reduced before treatment, declined further with ruxolitinib.",
       "polarity": "supports",
-      "subject": "CHEMBL1789941",
+      "subject": "CHEMBL:CHEMBL1789941",
       "predicate": "modulates",
       "object": "text:regulatory T-cell percentages and markers",
       "variant": "",
@@ -27055,7 +27055,7 @@
       "paper": "pmid:40062529",
       "quote": "The latter has shown erythropoietic benefits by suppressing hepcidin expression via activin A receptor type 1 (ACVR1) inhibition, as well as reducing splenomegaly and symptoms.",
       "polarity": "supports",
-      "subject": "CHEMBL1078178",
+      "subject": "CHEMBL:CHEMBL1078178",
       "predicate": "treats",
       "object": "text:myelofibrosis",
       "variant": "",
@@ -27081,7 +27081,7 @@
       "paper": "pmid:40062529",
       "quote": "The latter has shown erythropoietic benefits by suppressing hepcidin expression via activin A receptor type 1 (ACVR1) inhibition, as well as reducing splenomegaly and symptoms.",
       "polarity": "supports",
-      "subject": "CHEMBL1078178",
+      "subject": "CHEMBL:CHEMBL1078178",
       "predicate": "modulates",
       "object": "ensembl:ENSG00000105697",
       "variant": "",
@@ -27367,7 +27367,7 @@
       "paper": "pmid:40246933",
       "quote": "Hydroxyurea or interferons remain the preferred first-line cytoreductive agents, with the JAK1 and JAK2 inhibitor, ruxolitinib, currently approved for the treatment of patients who are resistant to, or intolerant of, hydroxyurea.",
       "polarity": "supports",
-      "subject": "CHEMBL1789941",
+      "subject": "CHEMBL:CHEMBL1789941",
       "predicate": "treats",
       "object": "EFO:0002429",
       "variant": "",
@@ -27523,7 +27523,7 @@
       "paper": "pmid:40704637",
       "quote": "She was started on the JAK inhibitor, ruxolitinib, with clinical improvement.",
       "polarity": "supports",
-      "subject": "CHEMBL1789941",
+      "subject": "CHEMBL:CHEMBL1789941",
       "predicate": "treats",
       "object": "MONDO:0013599",
       "variant": "",
@@ -27601,7 +27601,7 @@
       "paper": "pmid:40829105",
       "quote": "TQ induced loss of viability in cell lines and PD MPN-BP cells, but not in normal CD34+ progenitor cells.",
       "polarity": "supports",
-      "subject": "CHEMBL2107784",
+      "subject": "CHEMBL:CHEMBL2107784",
       "predicate": "treats",
       "object": "text:blastic phase myeloproliferative neoplasm",
       "variant": "",
@@ -27614,7 +27614,7 @@
       "paper": "pmid:40829105",
       "quote": "Monotherapy with TQ significantly improved survival of immune-depleted NOD scid gamma (NSG) mice engrafted with PD xenograft (PDX) cells of MPN-AML.",
       "polarity": "supports",
-      "subject": "CHEMBL2107784",
+      "subject": "CHEMBL:CHEMBL2107784",
       "predicate": "treats",
       "object": "text:MPN-AML",
       "variant": "",
@@ -27653,7 +27653,7 @@
       "paper": "pmid:40829105",
       "quote": "In TQ-treated PD MPN-acute myeloid leukemia (AML) cells, RNA-sequencing analysis showed negative enrichment of the gene sets of MYC and E2F targets, interleukin-6-JAK-STAT3 signaling, and of inflammatory response.",
       "polarity": "supports",
-      "subject": "CHEMBL2107784",
+      "subject": "CHEMBL:CHEMBL2107784",
       "predicate": "modulates",
       "object": "REACT:R-HSA-1059683",
       "variant": "",
@@ -27666,7 +27666,7 @@
       "paper": "pmid:40829105",
       "quote": "In phenotypically defined, PD CD34+ MPN-BP stem progenitor cells, cytometry by time-of-flight analysis showed that TQ reduced expression of proteins including A8, A9, and myeloperoxidase, while increasing expression of Growth Factor Independence 1 (GFI1), p21, and cleaved Poly(ADP-ribose) polymerase (PARP).",
       "polarity": "supports",
-      "subject": "CHEMBL2107784",
+      "subject": "CHEMBL:CHEMBL2107784",
       "predicate": "modulates",
       "object": "text:S100A8, S100A9 and myeloperoxidase expression",
       "variant": "",
@@ -27822,7 +27822,7 @@
       "paper": "pmid:41026300",
       "quote": "Topical application of ruxolitinib demonstrated therapeutic efficacy.",
       "polarity": "supports",
-      "subject": "CHEMBL1789941",
+      "subject": "CHEMBL:CHEMBL1789941",
       "predicate": "treats",
       "object": "MONDO:0013599",
       "variant": "text:V360L",
@@ -27991,7 +27991,7 @@
       "paper": "pmid:41136770",
       "quote": "Furthermore, treatment of two patients with Tofacitinib suppressed JAK1 hyperactivation, normalized plasma cytokine levels and interferon signatures, and significantly improved clinical symptoms.",
       "polarity": "supports",
-      "subject": "CHEMBL221959",
+      "subject": "CHEMBL:CHEMBL221959",
       "predicate": "treats",
       "object": "text:JAK1 gain of function",
       "variant": "",
@@ -28030,7 +28030,7 @@
       "paper": "pmid:41136770",
       "quote": "Furthermore, treatment of two patients with Tofacitinib suppressed JAK1 hyperactivation, normalized plasma cytokine levels and interferon signatures, and significantly improved clinical symptoms.",
       "polarity": "supports",
-      "subject": "CHEMBL221959",
+      "subject": "CHEMBL:CHEMBL221959",
       "predicate": "modulates",
       "object": "mech:JAK1:GoF",
       "variant": "",
@@ -28160,7 +28160,7 @@
       "paper": "pmid:41288843",
       "quote": "Both patients showed significant clinical improvement with the Janus kinase (JAK) inhibitor ruxolitinib.",
       "polarity": "supports",
-      "subject": "CHEMBL1789941",
+      "subject": "CHEMBL:CHEMBL1789941",
       "predicate": "treats",
       "object": "MONDO:0013599",
       "variant": "clinvar:1019308",
@@ -28186,7 +28186,7 @@
       "paper": "pmid:41288843",
       "quote": "However, P1's key biomarkers (STAT1 levels, IFN signature, TNFα, IL-6) remained altered, indicating persistent inflammation despite clinical improvement.",
       "polarity": "contradicts",
-      "subject": "CHEMBL1789941",
+      "subject": "CHEMBL:CHEMBL1789941",
       "predicate": "treats",
       "object": "text:Down syndrome with STAT1 gain-of-function",
       "variant": "clinvar:1019308",
@@ -28355,7 +28355,7 @@
       "paper": "pmid:41902804",
       "quote": "Ruxolitinib, a JAK1/JAK2 inhibitor, is effective for patients intolerant or resistant to hydroxyurea, improving hematocrit control, spleen volume, and symptoms.",
       "polarity": "supports",
-      "subject": "CHEMBL1789941",
+      "subject": "CHEMBL:CHEMBL1789941",
       "predicate": "treats",
       "object": "EFO:0002429",
       "variant": "",
@@ -28433,7 +28433,7 @@
       "paper": "pmid:42319627",
       "quote": "Ruxolitinib was initiated as bridging therapy, resulting in partial clinical improvement, and hematopoietic stem cell transplantation (HSCT) was planned as definitive therapy.",
       "polarity": "supports",
-      "subject": "CHEMBL1789941",
+      "subject": "CHEMBL:CHEMBL1789941",
       "predicate": "treats",
       "object": "MONDO:0013599",
       "variant": "text:T387R",
@@ -28550,7 +28550,7 @@
       "paper": "pmid:42773575",
       "quote": "Ruxolitinib led to clinical improvement and was used as bridging therapy before haematopoietic stem cell transplantation (HSCT).",
       "polarity": "supports",
-      "subject": "CHEMBL1789941",
+      "subject": "CHEMBL:CHEMBL1789941",
       "predicate": "treats",
       "object": "MONDO:0013599",
       "variant": "text:E353K",
@@ -28724,8 +28724,8 @@
       "mention": "JAK inhibitor therapy",
       "proposed": "",
       "confidence": "high",
-      "shortlist": "CHEMBL2103874 | CHEMBL3545215 | CHEMBL3137336 | CHEMBL1232461 | CHEMBL3301625 | CHEMBL4559134 | CHEMBL4285417 | CHEMBL3545155",
-      "reason": "The mention is a drug class (JAK inhibitors), and none of the candidates is a general JAK inhibitor; oclacitinib only matches via the generic synonym 'JAK-I' and is one specific drug."
+      "shortlist": "CHEMBL:CHEMBL2103874 | CHEMBL:CHEMBL3545215 | CHEMBL:CHEMBL3137336 | CHEMBL:CHEMBL1232461 | CHEMBL:CHEMBL3301625 | CHEMBL:CHEMBL4559134 | CHEMBL:CHEMBL4285417 | CHEMBL:CHEMBL3545155",
+      "reason": "The mention refers to the JAK inhibitor drug class (e.g. ruxolitinib), and no candidate fits; oclacitinib is only a veterinary JAK inhibitor whose 'JAK-I' synonym is incidental."
     },
     {
       "claim_id": "c_000019",
@@ -28733,8 +28733,8 @@
       "mention": "hematopoietic stem cell transplantation",
       "proposed": "",
       "confidence": "high",
-      "shortlist": "CHEMBL4594311 | CHEMBL5315099 | CHEMBL2109128 | DRUGBANK:DB13144 | CHEMBL5315093 | DRUGBANK:DB05386 | CHEMBL2107881 | CHEMBL4297954",
-      "reason": "HSCT is a procedure, and none of the candidates (specific gene-therapy products, growth factors) denotes generic hematopoietic stem cell transplantation."
+      "shortlist": "CHEMBL:CHEMBL4594311 | CHEMBL:CHEMBL5315099 | CHEMBL:CHEMBL2109128 | DRUGBANK:DB13144 | CHEMBL:CHEMBL5315093 | DRUGBANK:DB05386 | CHEMBL:CHEMBL2107881 | CHEMBL:CHEMBL4297954",
+      "reason": "The mention is a general transplant procedure, and none of the candidates is that procedure; they are specific gene therapies or cytokine drugs."
     },
     {
       "claim_id": "c_000022",
@@ -28751,8 +28751,8 @@
       "mention": "hematopoietic stem cell transplantation",
       "proposed": "",
       "confidence": "high",
-      "shortlist": "CHEMBL4594311 | CHEMBL5315099 | CHEMBL2109128 | DRUGBANK:DB13144 | CHEMBL5315093 | DRUGBANK:DB05386 | CHEMBL2107881 | CHEMBL4297954",
-      "reason": "HSCT is a procedure, and none of the candidates (gene therapies, growth factors) denotes hematopoietic stem cell transplantation generally."
+      "shortlist": "CHEMBL:CHEMBL4594311 | CHEMBL:CHEMBL5315099 | CHEMBL:CHEMBL2109128 | DRUGBANK:DB13144 | CHEMBL:CHEMBL5315093 | DRUGBANK:DB05386 | CHEMBL:CHEMBL2107881 | CHEMBL:CHEMBL4297954",
+      "reason": "HSCT is a procedure; all candidates are specific drugs or gene-therapy products, none denotes hematopoietic stem cell transplantation generally."
     },
     {
       "claim_id": "c_000023",
@@ -28769,8 +28769,8 @@
       "mention": "antimycobacterial treatment",
       "proposed": "",
       "confidence": "high",
-      "shortlist": "CHEMBL1239 | CHEMBL74",
-      "reason": "Neither benzyl benzoate (a scabicide) nor cromolyn sodium (a mast cell stabilizer) is an antimycobacterial treatment."
+      "shortlist": "CHEMBL:CHEMBL1239 | CHEMBL:CHEMBL74",
+      "reason": "Antimycobacterial treatment is a general therapy class; neither benzyl benzoate (antiparasitic) nor cromolyn sodium (mast cell stabilizer) is an antimycobacterial agent."
     },
     {
       "claim_id": "c_000024",
@@ -28886,8 +28886,8 @@
       "mention": "hematopoietic stem cell transplantation",
       "proposed": "",
       "confidence": "high",
-      "shortlist": "CHEMBL4594311 | CHEMBL5315099 | CHEMBL2109128 | DRUGBANK:DB13144 | CHEMBL5315093 | DRUGBANK:DB05386 | CHEMBL2107881 | CHEMBL4297954",
-      "reason": "The mention is a transplantation procedure, and none of the candidates is that procedure; they are specific drugs, gene therapies or growth factors."
+      "shortlist": "CHEMBL:CHEMBL4594311 | CHEMBL:CHEMBL5315099 | CHEMBL:CHEMBL2109128 | DRUGBANK:DB13144 | CHEMBL:CHEMBL5315093 | DRUGBANK:DB05386 | CHEMBL:CHEMBL2107881 | CHEMBL:CHEMBL4297954",
+      "reason": "The mention is a transplant procedure, and every candidate is a specific drug or gene therapy product rather than HSCT itself."
     },
     {
       "claim_id": "c_000037",
@@ -28913,8 +28913,8 @@
       "mention": "gene therapy",
       "proposed": "",
       "confidence": "high",
-      "shortlist": "DRUGBANK:DB13932 | CHEMBL4594311 | DRUGBANK:DB06379 | DRUGBANK:DB14782 | DRUGBANK:DB13173 | CHEMBL4298008 | CHEMBL90593 | CHEMBL1200381",
-      "reason": "The mention is the general therapeutic modality 'gene therapy', and none of the candidates is that concept; they are specific unrelated drugs or products."
+      "shortlist": "DRUGBANK:DB13932 | CHEMBL:CHEMBL4594311 | DRUGBANK:DB06379 | DRUGBANK:DB14782 | DRUGBANK:DB13173 | CHEMBL:CHEMBL4298008 | CHEMBL:CHEMBL90593 | CHEMBL:CHEMBL1200381",
+      "reason": "The mention is the general therapeutic modality 'gene therapy', and none of the candidates (specific drugs for other diseases or unrelated compounds) denotes it."
     },
     {
       "claim_id": "c_000039",
@@ -28931,8 +28931,8 @@
       "mention": "hematopoietic stem cell transplant",
       "proposed": "",
       "confidence": "high",
-      "shortlist": "CHEMBL4594311 | CHEMBL5315099 | CHEMBL5315093 | CHEMBL2109128 | DRUGBANK:DB13144 | CHEMBL2107881 | DRUGBANK:DB05386 | CHEMBL4297954",
-      "reason": "The mention is a generic transplant procedure, and none of the candidates (gene-therapy products, growth factors, corneal cells) denotes it."
+      "shortlist": "CHEMBL:CHEMBL4594311 | CHEMBL:CHEMBL5315099 | CHEMBL:CHEMBL5315093 | CHEMBL:CHEMBL2109128 | DRUGBANK:DB13144 | CHEMBL:CHEMBL2107881 | DRUGBANK:DB05386 | CHEMBL:CHEMBL4297954",
+      "reason": "The mention is the generic procedure of hematopoietic stem cell transplant, and none of the candidates is that procedure; they are specific gene-therapy products, growth factors, or cell products."
     },
     {
       "claim_id": "c_000042",
@@ -28940,8 +28940,8 @@
       "mention": "gene therapy",
       "proposed": "",
       "confidence": "high",
-      "shortlist": "DRUGBANK:DB13932 | CHEMBL4594311 | DRUGBANK:DB06379 | DRUGBANK:DB14782 | DRUGBANK:DB13173 | CHEMBL4298008 | CHEMBL90593 | CHEMBL1200381",
-      "reason": "The mention is the generic therapy modality for X-linked SCID, and none of the candidates is a gene therapy for that condition or a generic gene therapy concept."
+      "shortlist": "DRUGBANK:DB13932 | CHEMBL:CHEMBL4594311 | DRUGBANK:DB06379 | DRUGBANK:DB14782 | DRUGBANK:DB13173 | CHEMBL:CHEMBL4298008 | CHEMBL:CHEMBL90593 | CHEMBL:CHEMBL1200381",
+      "reason": "The mention is the generic therapeutic modality 'gene therapy', not any specific listed drug (none are an X-linked SCID gene therapy)."
     },
     {
       "claim_id": "c_000043",
@@ -28949,8 +28949,8 @@
       "mention": "bone marrow transplantation",
       "proposed": "",
       "confidence": "high",
-      "shortlist": "CHEMBL4594551 | DRUGBANK:DB11639 | CHEMBL2106566 | CHEMBL2108594 | CHEMBL4650389 | CHEMBL2108518",
-      "reason": "Bone marrow transplantation is a procedure, not any of the listed drugs (BMP proteins, calcium phosphate, decorin, gelatin)."
+      "shortlist": "CHEMBL:CHEMBL4594551 | DRUGBANK:DB11639 | CHEMBL:CHEMBL2106566 | CHEMBL:CHEMBL2108594 | CHEMBL:CHEMBL4650389 | CHEMBL:CHEMBL2108518",
+      "reason": "Bone marrow transplantation is a procedure, and none of the candidates (BMP proteins, calcium phosphate, decorin, gelatin) represent it."
     },
     {
       "claim_id": "c_000044",
@@ -28985,8 +28985,8 @@
       "mention": "hematopoetic stem cell transplantation",
       "proposed": "",
       "confidence": "high",
-      "shortlist": "CHEMBL4594311 | CHEMBL5315099 | CHEMBL5315093 | CHEMBL2109128 | DRUGBANK:DB13144 | CHEMBL2107881 | DRUGBANK:DB05386 | CHEMBL4297954",
-      "reason": "The mention is a general procedure (HSCT), and none of the candidates is a generic hematopoietic stem cell transplantation; they are specific gene therapies or cytokines."
+      "shortlist": "CHEMBL:CHEMBL4594311 | CHEMBL:CHEMBL5315099 | CHEMBL:CHEMBL5315093 | CHEMBL:CHEMBL2109128 | DRUGBANK:DB13144 | CHEMBL:CHEMBL2107881 | DRUGBANK:DB05386 | CHEMBL:CHEMBL4297954",
+      "reason": "The mention is a general procedure (HSCT), and none of the candidates is that procedure; they are specific gene-therapy products or growth factors."
     },
     {
       "claim_id": "c_000048",
@@ -28994,8 +28994,8 @@
       "mention": "selective Jak3 inhibitor",
       "proposed": "",
       "confidence": "high",
-      "shortlist": "CHEMBL3545215 | CHEMBL3301625 | CHEMBL3984425 | CHEMBL3392776 | CHEMBL4285417 | CHEMBL4446378 | CHEMBL1650595 | CHEMBL4297785",
-      "reason": "None of the candidates is a Jak3 inhibitor; BMS-911543 is a JAK2 inhibitor and the others target different proteins."
+      "shortlist": "CHEMBL:CHEMBL3545215 | CHEMBL:CHEMBL3301625 | CHEMBL:CHEMBL3984425 | CHEMBL:CHEMBL3392776 | CHEMBL:CHEMBL4285417 | CHEMBL:CHEMBL4446378 | CHEMBL:CHEMBL1650595 | CHEMBL:CHEMBL4297785",
+      "reason": "None of the candidates is a selective Jak3 inhibitor; they target JAK2, BTK, PI3K-gamma, STAT3, ATR, MCL-1, PDK1 and TIGIT."
     },
     {
       "claim_id": "c_000048",
@@ -29057,8 +29057,8 @@
       "mention": "human cancers",
       "proposed": "",
       "confidence": "high",
-      "shortlist": "CHEMBL2108195 | CHEMBL1201697 | CHEMBL2108319 | CHEMBL1201631 | CHEMBL2108414 | CHEMBL1201599 | CHEMBL2108833 | CHEMBL2108512",
-      "reason": "All candidates are drugs or blood products; none denotes the general disease category 'human cancers'."
+      "shortlist": "CHEMBL:CHEMBL2108195 | CHEMBL:CHEMBL1201697 | CHEMBL:CHEMBL2108319 | CHEMBL:CHEMBL1201631 | CHEMBL:CHEMBL2108414 | CHEMBL:CHEMBL1201599 | CHEMBL:CHEMBL2108833 | CHEMBL:CHEMBL2108512",
+      "reason": "All candidates are drugs or biologics; none represents the disease concept of human cancers."
     },
     {
       "claim_id": "c_000053",
@@ -29120,8 +29120,8 @@
       "mention": "human Fc-IL7 fusion protein",
       "proposed": "",
       "confidence": "medium",
-      "shortlist": "CHEMBL1201571 | CHEMBL4297950 | DRUGBANK:DB00004 | ensembl:ENSG00000104432 | CHEMBL4594364 | DRUGBANK:DB11608 | DRUGBANK:DB15160 | DRUGBANK:DB11607",
-      "reason": "The mention is an Fc-IL7 fusion protein; no candidate drug is that, and the IL7 gene node is a different entity than the fusion protein."
+      "shortlist": "CHEMBL:CHEMBL1201571 | CHEMBL:CHEMBL4297950 | DRUGBANK:DB00004 | ensembl:ENSG00000104432 | CHEMBL:CHEMBL4594364 | DRUGBANK:DB11608 | DRUGBANK:DB15160 | DRUGBANK:DB11607",
+      "reason": "The mention is an Fc-fused IL-7 protein; no candidate drug is Fc-IL7, and the IL7 gene node denotes the gene rather than the fusion protein."
     },
     {
       "claim_id": "c_000056",
@@ -29208,10 +29208,10 @@
       "claim_id": "c_000065",
       "role": "subject",
       "mention": "JAK gene mutations and translocations",
-      "proposed": "mech:JAK1:GoF",
-      "confidence": "low",
-      "shortlist": "ensembl:ENSG00000096968 | ensembl:ENSG00000162434 | ensembl:ENSG00000105639 | CHEMBL2103874 | REACT:R-HSA-8950505 | MONDO:0015688 | EFO:1000508 | MONDO:0013692 | MONDO:0019452 | MONDO:0020526 | MONDO:0021739 | EFO:1000459 | EFO:1000405 | EFO:0000394 | EFO:1002028 | EFO:1000738 | mech:JAK1:GoF | mech:JAK1:LoF | mech:JAK1:DN",
-      "reason": "The mention covers constitutively active mutations across JAK1/2/3, and only the JAK1 GoF mechanism is a close approximation among the candidates."
+      "proposed": "",
+      "confidence": "medium",
+      "shortlist": "ensembl:ENSG00000096968 | ensembl:ENSG00000162434 | ensembl:ENSG00000105639 | CHEMBL:CHEMBL2103874 | REACT:R-HSA-8950505 | MONDO:0015688 | EFO:1000508 | MONDO:0013692 | MONDO:0019452 | MONDO:0020526 | MONDO:0021739 | EFO:1000459 | EFO:1000405 | EFO:0000394 | EFO:1002028 | EFO:1000738 | mech:JAK1:GoF | mech:JAK1:LoF | mech:JAK1:DN",
+      "reason": "The mention covers mutations in the JAK gene family (JAK1, JAK2, JAK3), and no candidate represents that; the JAK1 GoF mechanism and single-gene candidates are too narrow."
     },
     {
       "claim_id": "c_000065",
@@ -29399,8 +29399,8 @@
       "mention": "JAK2 inhibitors",
       "proposed": "",
       "confidence": "medium",
-      "shortlist": "CHEMBL3545215",
-      "reason": "The mention refers to the drug class of JAK2 inhibitors, while the only candidate is one specific JAK2 inhibitor (BMS-911543), which does not fit the class-level context."
+      "shortlist": "CHEMBL:CHEMBL3545215",
+      "reason": "The mention is the drug class 'JAK2 inhibitors', while the only candidate is one specific JAK2 inhibitor (BMS-911543), which does not fit the class-level context."
     },
     {
       "claim_id": "c_000081",
@@ -29417,8 +29417,8 @@
       "mention": "JAK2 inhibitors",
       "proposed": "",
       "confidence": "medium",
-      "shortlist": "CHEMBL3545215",
-      "reason": "The mention is a drug class (JAK2 inhibitors), while the only candidate is a single specific drug (BMS-911543), which is not equivalent."
+      "shortlist": "CHEMBL:CHEMBL3545215",
+      "reason": "The mention is the JAK2 inhibitor drug class, while the only candidate is one specific compound (BMS-911543), which does not fit the class-level context."
     },
     {
       "claim_id": "c_000082",
@@ -29740,18 +29740,18 @@
       "role": "subject",
       "mention": "JAK2 inhibitor",
       "proposed": "",
-      "confidence": "high",
-      "shortlist": "CHEMBL3545215 | CHEMBL3301625 | CHEMBL3265032 | CHEMBL4559134 | CHEMBL4285417 | CHEMBL3137336 | CHEMBL3989970 | CHEMBL1232461",
-      "reason": "The mention refers to the approved JAK2 inhibitor (ruxolitinib) or the class generally; the only JAK2-named candidate, BMS-911543, is an investigational drug, not the approved one."
+      "confidence": "medium",
+      "shortlist": "CHEMBL:CHEMBL3545215 | CHEMBL:CHEMBL3301625 | CHEMBL:CHEMBL3265032 | CHEMBL:CHEMBL4559134 | CHEMBL:CHEMBL4285417 | CHEMBL:CHEMBL3137336 | CHEMBL:CHEMBL3989970 | CHEMBL:CHEMBL1232461",
+      "reason": "The mention refers to the approved JAK2 inhibitor (ruxolitinib) for PMF, which is not among the candidates; BMS-911543 is only an experimental JAK2 inhibitor, not the approved drug."
     },
     {
       "claim_id": "c_000117",
       "role": "subject",
       "mention": "JAK-targeting agents",
       "proposed": "",
-      "confidence": "medium",
-      "shortlist": "CHEMBL2103874 | CHEMBL4297785 | CHEMBL4535757 | DRUGBANK:DB14731 | DRUGBANK:DB15559 | DRUGBANK:DB12718",
-      "reason": "The mention refers to the JAK inhibitor class; the only JAK-related candidate, oclacitinib (synonym JAK-I), is a single veterinary drug and does not fit the class or the myeloproliferative neoplasm context."
+      "confidence": "high",
+      "shortlist": "CHEMBL:CHEMBL2103874 | CHEMBL:CHEMBL4297785 | CHEMBL:CHEMBL4535757 | DRUGBANK:DB14731 | DRUGBANK:DB15559 | DRUGBANK:DB12718",
+      "reason": "The mention is a drug class (JAK inhibitors); no candidate is a general JAK inhibitor class, and oclacitinib is only one specific veterinary JAK inhibitor."
     },
     {
       "claim_id": "c_000117",
@@ -29822,8 +29822,8 @@
       "mention": "JAK inhibitor",
       "proposed": "",
       "confidence": "medium",
-      "shortlist": "CHEMBL2103874 | CHEMBL3545215 | CHEMBL3137336 | CHEMBL1232461 | CHEMBL3301625 | CHEMBL3545155 | CHEMBL4285417 | CHEMBL3265032",
-      "reason": "The mention is a generic JAK inhibitor class; the only candidates with a JAK link (oclacitinib via a 'JAK-I' synonym, BMS-911543 as a JAK2-specific inhibitor) are specific drugs that do not fit the TYK2/pan-JAK context."
+      "shortlist": "CHEMBL:CHEMBL2103874 | CHEMBL:CHEMBL3545215 | CHEMBL:CHEMBL3137336 | CHEMBL:CHEMBL1232461 | CHEMBL:CHEMBL3301625 | CHEMBL:CHEMBL3545155 | CHEMBL:CHEMBL4285417 | CHEMBL:CHEMBL3265032",
+      "reason": "The mention is a generic JAK inhibitor class; no candidate is a specific drug the context identifies (oclacitinib's 'JAK-I' synonym is only a loose match, and BMS-911543 is JAK2-selective, not generic)."
     },
     {
       "claim_id": "c_000125",
@@ -29939,8 +29939,8 @@
       "mention": "STAT3 inactivation in osteoblasts",
       "proposed": "mech:STAT3:LoF",
       "confidence": "medium",
-      "shortlist": "mech:STAT3:DN | mech:STAT3:LoF | ensembl:ENSG00000168610 | mech:STAT3:GoF | CHEMBL3392776 | ensembl:ENSG00000255874 | CHEMBL4084907 | CHEMBL4650283",
-      "reason": "Selective inactivation of STAT3 in osteoblasts is an experimental loss of function, best matched by the STAT3 LoF mechanism, though the gene node is a possible alternative."
+      "shortlist": "mech:STAT3:DN | mech:STAT3:LoF | ensembl:ENSG00000168610 | mech:STAT3:GoF | CHEMBL:CHEMBL3392776 | ensembl:ENSG00000255874 | CHEMBL:CHEMBL4084907 | CHEMBL:CHEMBL4650283",
+      "reason": "Selective inactivation of STAT3 (conditional knockout) in osteoblasts is a loss-of-function mechanism, not dominant negative or the gene itself."
     },
     {
       "claim_id": "c_000134",
@@ -30038,8 +30038,8 @@
       "mention": "IL-21 related defects",
       "proposed": "ensembl:ENSG00000138684",
       "confidence": "medium",
-      "shortlist": "CHEMBL2107855 | ensembl:ENSG00000124391 | ensembl:ENSG00000138684 | ensembl:ENSG00000103522 | MONDO:0015701 | ensembl:ENSG00000127318 | DRUGBANK:DB00038 | ensembl:ENSG00000008517",
-      "reason": "The mention refers to defects in the IL-21 pathway, and the IL21 gene is the closest candidate, though IL21R or a disease node could also fit."
+      "shortlist": "CHEMBL:CHEMBL2107855 | ensembl:ENSG00000124391 | ensembl:ENSG00000138684 | ensembl:ENSG00000103522 | MONDO:0015701 | ensembl:ENSG00000127318 | DRUGBANK:DB00038 | ensembl:ENSG00000008517",
+      "reason": "The mention concerns defects in the IL-21/IL-21R pathway; the IL21 gene is the best fit, though IL21R is also plausible and no disease node is listed."
     },
     {
       "claim_id": "c_000140",
@@ -30065,8 +30065,8 @@
       "mention": "interferon-stimulated genes",
       "proposed": "",
       "confidence": "high",
-      "shortlist": "CHEMBL2108494 | ensembl:ENSG00000111537 | CHEMBL2108506 | DRUGBANK:DB05258 | ensembl:ENSG00000172183 | ensembl:ENSG00000068079 | CHEMBL1201564 | DRUGBANK:DB00033",
-      "reason": "The mention is a general gene category (ISGs), and no candidate represents that class; the candidates are specific genes or interferon drugs."
+      "shortlist": "CHEMBL:CHEMBL2108494 | ensembl:ENSG00000111537 | CHEMBL:CHEMBL2108506 | DRUGBANK:DB05258 | ensembl:ENSG00000172183 | ensembl:ENSG00000068079 | CHEMBL:CHEMBL1201564 | DRUGBANK:DB00033",
+      "reason": "The mention is a general gene class (ISGs), and no candidate represents that class; the candidates are individual genes or interferon drugs."
     },
     {
       "claim_id": "c_000142",
@@ -30088,15 +30088,6 @@
     },
     {
       "claim_id": "c_000144",
-      "role": "subject",
-      "mention": "everolimus",
-      "proposed": "CHEMBL1908360",
-      "confidence": "medium",
-      "shortlist": "CHEMBL1908360 | RXNORM:141704 | mech:JAK2:GoF | mech:JAK2:LoF | mech:JAK2:DN | mech:JAK2:GoF:somatic | clinvar:4075419 | clinvar:2136729 | clinvar:134563 | clinvar:14664 | clinvar:14662",
-      "reason": "The mention is the drug everolimus; CHEMBL and RxNorm nodes are duplicates, and the ChEMBL entry has the fuller synonym list."
-    },
-    {
-      "claim_id": "c_000144",
       "role": "object",
       "mention": "proliferation and clonogenic potential of JAK2 V617F mutated cell lines",
       "proposed": "mech:JAK2:GoF:somatic",
@@ -30108,10 +30099,10 @@
       "claim_id": "c_000145",
       "role": "subject",
       "mention": "everolimus",
-      "proposed": "CHEMBL1908360",
+      "proposed": "CHEMBL:CHEMBL1908360",
       "confidence": "medium",
-      "shortlist": "CHEMBL1908360 | RXNORM:141704",
-      "reason": "Both nodes denote everolimus; the ChEMBL entry is chosen as the richer record, though the RxNorm node is an equivalent duplicate."
+      "shortlist": "CHEMBL:CHEMBL1908360 | RXNORM:141704",
+      "reason": "Both candidates denote the drug everolimus; the ChEMBL node is chosen because it lists the richer synonym set, but the RxNorm node is an equally valid duplicate."
     },
     {
       "claim_id": "c_000145",
@@ -30126,10 +30117,10 @@
       "claim_id": "c_000146",
       "role": "subject",
       "mention": "everolimus",
-      "proposed": "CHEMBL1908360",
+      "proposed": "CHEMBL:CHEMBL1908360",
       "confidence": "medium",
-      "shortlist": "CHEMBL1908360 | RXNORM:141704",
-      "reason": "Both candidates denote everolimus as a drug; the ChEMBL node is the more specific entry with full synonyms, but the RxNorm node is an equivalent duplicate."
+      "shortlist": "CHEMBL:CHEMBL1908360 | RXNORM:141704",
+      "reason": "Both candidates denote everolimus; the ChEMBL node has full synonyms matching the drug, while RxNorm is a near-duplicate, so the choice is not clearly distinguishable."
     },
     {
       "claim_id": "c_000146",
@@ -30146,8 +30137,8 @@
       "mention": "everolimus and ruxolitinib combination",
       "proposed": "",
       "confidence": "medium",
-      "shortlist": "CHEMBL1789941 | CHEMBL1908360 | RXNORM:141704 | CHEMBL1795071 | CHEMBL4594381 | CHEMBL4594382 | CHEMBL4594618 | CHEMBL5315068 | mech:JAK1:GoF | mech:JAK1:LoF | mech:JAK1:DN",
-      "reason": "The mention is a combination of two drugs, and no candidate represents the combination; each candidate covers only one component (everolimus or ruxolitinib)."
+      "shortlist": "CHEMBL:CHEMBL1789941 | CHEMBL:CHEMBL1908360 | RXNORM:141704 | CHEMBL:CHEMBL1795071 | CHEMBL:CHEMBL4594381 | CHEMBL:CHEMBL4594382 | CHEMBL:CHEMBL4594618 | CHEMBL:CHEMBL5315068 | mech:JAK1:GoF | mech:JAK1:LoF | mech:JAK1:DN",
+      "reason": "The mention is a two-drug combination, and no candidate represents the combination; the candidates are only the individual drugs (everolimus, ruxolitinib), so none fits exactly."
     },
     {
       "claim_id": "c_000147",
@@ -30227,8 +30218,8 @@
       "mention": "bone-active medications",
       "proposed": "",
       "confidence": "high",
-      "shortlist": "CHEMBL2106566 | CHEMBL4594551 | CHEMBL4298072 | DRUGBANK:DB11639 | CHEMBL1544 | CHEMBL1034 | CHEMBL2108594 | CHEMBL4650389",
-      "reason": "The mention is a general drug class (e.g., bisphosphonates), and none of the candidates represents that class."
+      "shortlist": "CHEMBL:CHEMBL2106566 | CHEMBL:CHEMBL4594551 | CHEMBL:CHEMBL4298072 | DRUGBANK:DB11639 | CHEMBL:CHEMBL1544 | CHEMBL:CHEMBL1034 | CHEMBL:CHEMBL2108594 | CHEMBL:CHEMBL4650389",
+      "reason": "The mention is a generic drug class (e.g. bisphosphonates), and no candidate denotes that class; the candidates are individual unrelated drugs."
     },
     {
       "claim_id": "c_000157",
@@ -30254,8 +30245,8 @@
       "mention": "combined Hh and JAK pathway inhibition",
       "proposed": "",
       "confidence": "high",
-      "shortlist": "CHEMBL2103874 | CHEMBL2108792 | CHEMBL3545413 | CHEMBL2105233",
-      "reason": "The mention is a combination of Hh and JAK pathway inhibitors, and none of the candidates (oclacitinib, tifacogin, flumatinib, proxibarbal) denotes that combination."
+      "shortlist": "CHEMBL:CHEMBL2103874 | CHEMBL:CHEMBL2108792 | CHEMBL:CHEMBL3545413 | CHEMBL:CHEMBL2105233",
+      "reason": "The mention describes a combination of Hh and JAK pathway inhibitors, and no candidate drug represents that; the candidates match only on synonym fragments."
     },
     {
       "claim_id": "c_000158",
@@ -30272,8 +30263,8 @@
       "mention": "JAK2 inhibitors",
       "proposed": "",
       "confidence": "high",
-      "shortlist": "CHEMBL3545215",
-      "reason": "The mention is a drug class (JAK2 inhibitors), while the sole candidate is one specific drug (BMS-911543), and nothing in the context points to that drug."
+      "shortlist": "CHEMBL:CHEMBL3545215",
+      "reason": "The mention is a drug class (JAK2 inhibitors), and the only candidate is one specific drug (BMS-911543), which does not fit the general context."
     },
     {
       "claim_id": "c_000159",
@@ -30290,8 +30281,8 @@
       "mention": "Hh pathway inhibitors",
       "proposed": "",
       "confidence": "high",
-      "shortlist": "CHEMBL2108792 | CHEMBL3545413 | CHEMBL2105233",
-      "reason": "The mention is a drug class (Hedgehog pathway inhibitors); none of the candidates (tifacogin, flumatinib, proxibarbal) are Hh pathway inhibitors."
+      "shortlist": "CHEMBL:CHEMBL2108792 | CHEMBL:CHEMBL3545413 | CHEMBL:CHEMBL2105233",
+      "reason": "The mention is a drug class (Hedgehog pathway inhibitors), and none of the candidates (tifacogin, flumatinib, proxibarbal) is a Hedgehog inhibitor; the matches are spurious on 'HH' or 'pathway inhibitor'."
     },
     {
       "claim_id": "c_000160",
@@ -30524,8 +30515,8 @@
       "mention": "JAK inhibitors",
       "proposed": "",
       "confidence": "medium",
-      "shortlist": "ensembl:ENSG00000162434 | CHEMBL2103874 | ensembl:ENSG00000105639 | ensembl:ENSG00000096968 | mech:STAT1:GoF | mech:STAT1:LoF | mech:STAT1:DN",
-      "reason": "The mention is a drug class (JAK inhibitors); no candidate is a class node, and the genes, the single drug oclacitinib and STAT1 mechanisms are not equivalent."
+      "shortlist": "ensembl:ENSG00000162434 | CHEMBL:CHEMBL2103874 | ensembl:ENSG00000105639 | ensembl:ENSG00000096968 | mech:STAT1:GoF | mech:STAT1:LoF | mech:STAT1:DN",
+      "reason": "The mention is a drug class (JAK inhibitors); no candidate denotes the class, and oclacitinib, the JAK genes and the STAT1 mechanisms are all different entities."
     },
     {
       "claim_id": "c_000177",
@@ -30614,8 +30605,8 @@
       "mention": "cytokine pathway-targeted treatment",
       "proposed": "",
       "confidence": "high",
-      "shortlist": "CHEMBL4594479 | CHEMBL2108792 | CHEMBL74 | CHEMBL4297595 | CHEMBL1239",
-      "reason": "The mention is a generic cytokine pathway-targeted therapy (e.g., IL-6 blockade) and none of the candidate drugs match it."
+      "shortlist": "CHEMBL:CHEMBL4594479 | CHEMBL:CHEMBL2108792 | CHEMBL:CHEMBL74 | CHEMBL:CHEMBL4297595 | CHEMBL:CHEMBL1239",
+      "reason": "The mention is a generic treatment class (likely an IL-6 pathway inhibitor such as tocilizumab), and none of the candidate drugs match it."
     },
     {
       "claim_id": "c_000186",
@@ -30675,10 +30666,10 @@
       "claim_id": "c_000195",
       "role": "subject",
       "mention": "interferon alfa",
-      "proposed": "CHEMBL2108506",
+      "proposed": "CHEMBL:CHEMBL2108506",
       "confidence": "medium",
-      "shortlist": "CHEMBL2108506 | DRUGBANK:DB05258",
-      "reason": "Both candidates are generic 'interferon alfa' drug nodes; the ChEMBL entry covers the general interferon alfa (alpha) class used in MPNs, though DrugBank is a near-equivalent duplicate."
+      "shortlist": "CHEMBL:CHEMBL2108506 | DRUGBANK:DB05258",
+      "reason": "Both candidates are generic 'interferon alfa' drug nodes; the ChEMBL entry covers the general interferon alfa term (alpha, multiple brands), fitting the generic mention, though DrugBank DB05258 is a near-equivalent."
     },
     {
       "claim_id": "c_000195",
@@ -30695,8 +30686,8 @@
       "mention": "allogeneic stem cell transplantation",
       "proposed": "",
       "confidence": "high",
-      "shortlist": "CHEMBL5315097 | CHEMBL4594311 | CHEMBL2109128 | CHEMBL5315099 | CHEMBL5315093 | DRUGBANK:DB13144 | DRUGBANK:DB12431 | CHEMBL2107881",
-      "reason": "The mention is a transplant procedure, and none of the candidates is that procedure; they are specific gene/cell therapy products or growth factors."
+      "shortlist": "CHEMBL:CHEMBL5315097 | CHEMBL:CHEMBL4594311 | CHEMBL:CHEMBL2109128 | CHEMBL:CHEMBL5315099 | CHEMBL:CHEMBL5315093 | DRUGBANK:DB13144 | DRUGBANK:DB12431 | CHEMBL:CHEMBL2107881",
+      "reason": "The mention is a general transplantation procedure, not any of the listed specific drugs or gene-modified cell products."
     },
     {
       "claim_id": "c_000196",
@@ -30738,10 +30729,10 @@
       "claim_id": "c_000200",
       "role": "subject",
       "mention": "HDAC inhibitors (trichostatin A, ITF2357)",
-      "proposed": "",
+      "proposed": "CHEMBL:CHEMBL99",
       "confidence": "medium",
-      "shortlist": "CHEMBL99 | CHEMBL1801250 | CHEMBL4297366 | ensembl:ENSG00000068024 | CHEMBL4283683 | CHEMBL191482 | CHEMBL4297489 | CHEMBL3693786 | mech:STAT3:GoF | mech:STAT3:LoF | mech:STAT3:DN",
-      "reason": "The mention is the HDAC inhibitor class (trichostatin A, ITF2357); no candidate is the class, and trichostatin alone or other single inhibitors would be only a partial match."
+      "shortlist": "CHEMBL:CHEMBL99 | CHEMBL:CHEMBL1801250 | CHEMBL:CHEMBL4297366 | ensembl:ENSG00000068024 | CHEMBL:CHEMBL4283683 | CHEMBL:CHEMBL191482 | CHEMBL:CHEMBL4297489 | CHEMBL:CHEMBL3693786 | mech:STAT3:GoF | mech:STAT3:LoF | mech:STAT3:DN",
+      "reason": "The mention lists trichostatin A and ITF2357 as HDAC inhibitors; no class node exists and ITF2357 (givinostat) is not a candidate, so trichostatin is the only matching specific drug."
     },
     {
       "claim_id": "c_000200",
@@ -30751,6 +30742,15 @@
       "confidence": "medium",
       "shortlist": "ensembl:ENSG00000168610 | mech:STAT3:GoF | mech:STAT3:DN | mech:STAT3:LoF | REACT:R-HSA-9701898 | REACT:R-HSA-8875791 | REACT:R-HSA-198745 | ensembl:ENSG00000162772",
       "reason": "The mention refers to transcription activity driven by the STAT3 gene product; the gene node is the closest fit, and the mechanism nodes (GoF/DN/LoF) and pathway nodes do not match."
+    },
+    {
+      "claim_id": "c_000201",
+      "role": "subject",
+      "mention": "fludarabine",
+      "proposed": "CHEMBL:CHEMBL1568",
+      "confidence": "medium",
+      "shortlist": "CHEMBL:CHEMBL1096882 | CHEMBL:CHEMBL1568 | mech:STAT3:GoF | mech:STAT3:LoF | mech:STAT3:DN",
+      "reason": "The mention 'fludarabine' matches the parent drug node exactly; the phosphate prodrug node is a close but distinct alternative."
     },
     {
       "claim_id": "c_000201",
@@ -30794,8 +30794,8 @@
       "mention": "antifungals and prophylactic antibiotics",
       "proposed": "",
       "confidence": "high",
-      "shortlist": "CHEMBL1200523 | CHEMBL2105638 | DRUGBANK:DB04978 | DRUGBANK:DB11087 | DRUGBANK:DB00375 | CHEMBL1201638 | CHEMBL5315097 | CHEMBL1201541",
-      "reason": "The mention is a generic grouping of antifungal and antibiotic drug classes, and none of the candidates (cefazolin, delafloxacin, etc.) specifically denotes it."
+      "shortlist": "CHEMBL:CHEMBL1200523 | CHEMBL:CHEMBL2105638 | DRUGBANK:DB04978 | DRUGBANK:DB11087 | DRUGBANK:DB00375 | CHEMBL:CHEMBL1201638 | CHEMBL:CHEMBL5315097 | CHEMBL:CHEMBL1201541",
+      "reason": "The mention is a generic group of antifungal and antibiotic drugs, and none of the candidates (a single cephalosporin, a fluoroquinolone, and unrelated agents) denotes that group."
     },
     {
       "claim_id": "c_000208",
@@ -30830,8 +30830,8 @@
       "mention": "STAT3 polymorphisms",
       "proposed": "ensembl:ENSG00000168610",
       "confidence": "medium",
-      "shortlist": "mech:STAT3:LoF | mech:STAT3:GoF | mech:STAT3:DN | ensembl:ENSG00000168610 | EFO:0010647 | REACT:R-HSA-9701898 | CHEMBL3392776 | REACT:R-HSA-8875791 | Orphanet:2314 | MONDO:0007818 | EFO:0022910 | EFO:0021907 | EFO:0008085 | EFO:0008377 | EFO:0008376",
-      "reason": "Polymorphisms in STAT3 refer to genetic variation in the gene itself, not a specific LoF/GoF mechanism or disease, so the gene node is the best match."
+      "shortlist": "mech:STAT3:LoF | mech:STAT3:GoF | mech:STAT3:DN | ensembl:ENSG00000168610 | EFO:0010647 | REACT:R-HSA-9701898 | CHEMBL:CHEMBL3392776 | REACT:R-HSA-8875791 | Orphanet:2314 | MONDO:0007818 | EFO:0022910 | EFO:0021907 | EFO:0008085 | EFO:0008377 | EFO:0008376",
+      "reason": "Polymorphisms are common variants in the STAT3 gene, not a LoF/GoF mechanism or disease, so the gene node is the best approximation."
     },
     {
       "claim_id": "c_000212",
@@ -30910,9 +30910,9 @@
       "role": "subject",
       "mention": "antifungal treatment",
       "proposed": "",
-      "confidence": "medium",
-      "shortlist": "CHEMBL1559 | CHEMBL74 | CHEMBL1239",
-      "reason": "The mention is a generic antifungal treatment class, and none of the candidates (miconazole nitrate, cromolyn sodium, benzyl benzoate) specifically denotes it."
+      "confidence": "high",
+      "shortlist": "CHEMBL:CHEMBL1559 | CHEMBL:CHEMBL74 | CHEMBL:CHEMBL1239",
+      "reason": "The mention is a generic antifungal treatment class, and none of the candidates (miconazole nitrate, cromolyn sodium, benzyl benzoate) denotes it as a whole."
     },
     {
       "claim_id": "c_000222",
@@ -31100,8 +31100,8 @@
       "mention": "tocilizumab",
       "proposed": "DRUGBANK:DB06273",
       "confidence": "medium",
-      "shortlist": "CHEMBL1237022 | DRUGBANK:DB06273",
-      "reason": "Both nodes denote tocilizumab and the context does not distinguish them; DrugBank's plain name entry is a slightly better fit than the ChEMBL entry with biosimilar code synonyms."
+      "shortlist": "CHEMBL:CHEMBL1237022 | DRUGBANK:DB06273",
+      "reason": "Both nodes are the same drug, tocilizumab; nothing in the context separates them, so DrugBank is a coin-flip pick over ChEMBL."
     },
     {
       "claim_id": "c_000244",
@@ -31244,8 +31244,8 @@
       "mention": "JAK2 inhibitors",
       "proposed": "",
       "confidence": "medium",
-      "shortlist": "CHEMBL3545215",
-      "reason": "The mention refers to the JAK2 inhibitor drug class, while the only candidate is one specific compound (BMS-911543), which the context does not single out."
+      "shortlist": "CHEMBL:CHEMBL3545215",
+      "reason": "The mention is a drug class (JAK2 inhibitors), while the only candidate is a single specific drug, BMS-911543, which the context does not single out."
     },
     {
       "claim_id": "c_000262",
@@ -31262,8 +31262,8 @@
       "mention": "JAK2 inhibitors",
       "proposed": "",
       "confidence": "high",
-      "shortlist": "CHEMBL3545215",
-      "reason": "The mention is the general drug class of JAK2 inhibitors, while the only candidate is one specific investigational drug (BMS-911543), which the context does not single out."
+      "shortlist": "CHEMBL:CHEMBL3545215",
+      "reason": "The mention refers to the JAK2 inhibitor drug class (e.g., ruxolitinib), not specifically BMS-911543, which is a single investigational compound."
     },
     {
       "claim_id": "c_000263",
@@ -31280,8 +31280,8 @@
       "mention": "histone deacetylase and human double minute 2 inhibitors",
       "proposed": "",
       "confidence": "high",
-      "shortlist": "CHEMBL4594561 | DRUGBANK:DB14960 | DRUGBANK:DB15559 | CHEMBL5315097 | DRUGBANK:DB04959 | CHEMBL1200500 | DRUGBANK:DB11330 | DRUGBANK:DB16678",
-      "reason": "The mention is a drug class (HDAC and MDM2 inhibitors), and none of the candidates are HDAC or MDM2 inhibitors."
+      "shortlist": "CHEMBL:CHEMBL4594561 | DRUGBANK:DB14960 | DRUGBANK:DB15559 | CHEMBL:CHEMBL5315097 | DRUGBANK:DB04959 | CHEMBL:CHEMBL1200500 | DRUGBANK:DB11330 | DRUGBANK:DB16678",
+      "reason": "The mention is a class of HDAC and HDM2 inhibitors, and none of the candidates (vaccines, fusion proteins, antibodies, a corticosteroid) are such inhibitors."
     },
     {
       "claim_id": "c_000265",
@@ -31323,19 +31323,19 @@
       "claim_id": "c_000268",
       "role": "subject",
       "mention": "tofacitinib and PF-06651600",
-      "proposed": "CHEMBL221959",
+      "proposed": "",
       "confidence": "medium",
-      "shortlist": "CHEMBL221959 | CHEMBL2103743 | CHEMBL2103874 | CHEMBL2105739 | CHEMBL2105719 | CHEMBL5314649 | CHEMBL2001019 | CHEMBL1201581 | mech:JAK3:GoF | mech:JAK3:LoF | mech:JAK3:DN",
-      "reason": "The mention names two drugs; tofacitinib (CHEMBL221959) is the exact match for the first, while PF-06651600 (ritlecitinib) is only available as a tosylate salt candidate, so tofacitinib is the best single choice."
+      "shortlist": "CHEMBL:CHEMBL221959 | CHEMBL:CHEMBL2103743 | CHEMBL:CHEMBL2103874 | CHEMBL:CHEMBL2105739 | CHEMBL:CHEMBL2105719 | CHEMBL:CHEMBL5314649 | CHEMBL:CHEMBL2001019 | CHEMBL:CHEMBL1201581 | mech:JAK3:GoF | mech:JAK3:LoF | mech:JAK3:DN",
+      "reason": "The mention names two drugs; tofacitinib (CHEMBL221959) fits one, but PF-06651600 (ritlecitinib) is only present as its tosylate salt, so no single candidate covers both."
     },
     {
       "claim_id": "c_000269",
       "role": "subject",
       "mention": "tofacitinib and PF-06651600",
-      "proposed": "CHEMBL221959",
+      "proposed": "CHEMBL:CHEMBL221959",
       "confidence": "medium",
-      "shortlist": "CHEMBL221959 | CHEMBL2103743 | CHEMBL2103874 | CHEMBL2105739 | CHEMBL2105719 | CHEMBL5314649 | CHEMBL2001019 | CHEMBL1201581",
-      "reason": "The mention names two drugs; tofacitinib (CHEMBL221959) is the best match, while PF-06651600 (ritlecitinib) can only be matched to its tosylate salt candidate, so this is a partial match."
+      "shortlist": "CHEMBL:CHEMBL221959 | CHEMBL:CHEMBL2103743 | CHEMBL:CHEMBL2103874 | CHEMBL:CHEMBL2105739 | CHEMBL:CHEMBL2105719 | CHEMBL:CHEMBL5314649 | CHEMBL:CHEMBL2001019 | CHEMBL:CHEMBL1201581",
+      "reason": "The mention names two drugs; tofacitinib (parent) is the best match, while PF-06651600 (ritlecitinib) has only a tosylate salt candidate, so the match is partial."
     },
     {
       "claim_id": "c_000269",
@@ -31415,8 +31415,8 @@
       "mention": "hematopoietic stem cell transplantation",
       "proposed": "",
       "confidence": "high",
-      "shortlist": "CHEMBL4594311 | CHEMBL5315099 | CHEMBL2109128 | DRUGBANK:DB13144 | CHEMBL5315093 | DRUGBANK:DB05386 | CHEMBL2107881 | CHEMBL4297954",
-      "reason": "The mention is a general transplant procedure, and none of the candidates is that procedure; they are specific gene therapy products, growth factors or cell products."
+      "shortlist": "CHEMBL:CHEMBL4594311 | CHEMBL:CHEMBL5315099 | CHEMBL:CHEMBL2109128 | DRUGBANK:DB13144 | CHEMBL:CHEMBL5315093 | DRUGBANK:DB05386 | CHEMBL:CHEMBL2107881 | CHEMBL:CHEMBL4297954",
+      "reason": "The mention is a general procedure (HSCT), and none of the candidates is that procedure; they are specific gene therapies or cytokines."
     },
     {
       "claim_id": "c_000279",
@@ -31478,8 +31478,8 @@
       "mention": "interferon receptor deletion (Ifnar1 or Ifngr1)",
       "proposed": "",
       "confidence": "high",
-      "shortlist": "DRUGBANK:DB00033 | CHEMBL2108509 | DRUGBANK:DB00011 | DRUGBANK:DB05258 | CHEMBL4650474 | CHEMBL1201564 | DRUGBANK:DB00105 | DRUGBANK:DB05472",
-      "reason": "The mention is a genetic deletion of interferon receptor genes (Ifnar1/Ifngr1) in mice, not any of the interferon drug candidates."
+      "shortlist": "DRUGBANK:DB00033 | CHEMBL:CHEMBL2108509 | DRUGBANK:DB00011 | DRUGBANK:DB05258 | CHEMBL:CHEMBL4650474 | CHEMBL:CHEMBL1201564 | DRUGBANK:DB00105 | DRUGBANK:DB05472",
+      "reason": "The mention is a genetic deletion of interferon receptor genes (Ifnar1/Ifngr1), not any interferon drug candidate."
     },
     {
       "claim_id": "c_000282",
@@ -31757,8 +31757,8 @@
       "mention": "JAK inhibitors",
       "proposed": "",
       "confidence": "high",
-      "shortlist": "CHEMBL2103874",
-      "reason": "The mention is the general drug class of JAK inhibitors, while the only candidate is oclacitinib, a single veterinary JAK inhibitor that does not fit the context."
+      "shortlist": "CHEMBL:CHEMBL2103874",
+      "reason": "The mention is the drug class of JAK inhibitors (context cites ruxolitinib), and the only candidate, oclacitinib, is a single veterinary JAK inhibitor, not the class."
     },
     {
       "claim_id": "c_000307",
@@ -31775,8 +31775,8 @@
       "mention": "JAK inhibitors",
       "proposed": "",
       "confidence": "high",
-      "shortlist": "CHEMBL2103874",
-      "reason": "The mention refers to the JAK inhibitor drug class, while the only candidate is oclacitinib, a single veterinary drug that does not fit this context."
+      "shortlist": "CHEMBL:CHEMBL2103874",
+      "reason": "The mention is the general drug class of JAK inhibitors, and the only candidate is oclacitinib, a single veterinary JAK inhibitor that does not fit the myelofibrosis context."
     },
     {
       "claim_id": "c_000308",
@@ -31946,8 +31946,8 @@
       "mention": "hematopoietic stem cell transplantation",
       "proposed": "",
       "confidence": "high",
-      "shortlist": "CHEMBL4594311 | CHEMBL5315099 | CHEMBL2109128 | DRUGBANK:DB13144 | CHEMBL5315093 | DRUGBANK:DB05386 | CHEMBL2107881 | CHEMBL4297954",
-      "reason": "The mention is a general transplant procedure, and none of the candidates (specific gene therapies, growth factors) denotes it."
+      "shortlist": "CHEMBL:CHEMBL4594311 | CHEMBL:CHEMBL5315099 | CHEMBL:CHEMBL2109128 | DRUGBANK:DB13144 | CHEMBL:CHEMBL5315093 | DRUGBANK:DB05386 | CHEMBL:CHEMBL2107881 | CHEMBL:CHEMBL4297954",
+      "reason": "The mention is a general transplant procedure; none of the candidates is hematopoietic stem cell transplantation itself, only specific gene-therapy products or growth factors."
     },
     {
       "claim_id": "c_000327",
@@ -32054,8 +32054,8 @@
       "mention": "hematopoietic stem cell transplantation",
       "proposed": "",
       "confidence": "high",
-      "shortlist": "CHEMBL4594311 | CHEMBL5315099 | CHEMBL2109128 | DRUGBANK:DB13144 | CHEMBL5315093 | DRUGBANK:DB05386 | CHEMBL2107881 | CHEMBL4297954",
-      "reason": "The mention is a general transplant procedure, and none of the candidates (specific gene-therapy products, G-CSF/GM-CSF drugs, FGF-1) denotes it."
+      "shortlist": "CHEMBL:CHEMBL4594311 | CHEMBL:CHEMBL5315099 | CHEMBL:CHEMBL2109128 | DRUGBANK:DB13144 | CHEMBL:CHEMBL5315093 | DRUGBANK:DB05386 | CHEMBL:CHEMBL2107881 | CHEMBL:CHEMBL4297954",
+      "reason": "The mention is a transplant procedure, and none of the candidates is that procedure; they are specific gene-therapy products or cytokines."
     },
     {
       "claim_id": "c_000336",
@@ -32214,10 +32214,10 @@
       "claim_id": "c_000351",
       "role": "subject",
       "mention": "human IL-2",
-      "proposed": "DRUGBANK:DB14865",
+      "proposed": "ensembl:ENSG00000109471",
       "confidence": "medium",
-      "shortlist": "DRUGBANK:DB14865 | ensembl:ENSG00000109471 | CHEMBL1201438 | DRUGBANK:DB12182 | ensembl:ENSG00000100385 | ensembl:ENSG00000104432 | CHEMBL2107855 | CHEMBL4298090",
-      "reason": "The mention is administered human IL-2 protein (via AAV), so a human IL-2 drug node fits best, though the gene IL2 and aldesleukin are plausible alternatives."
+      "shortlist": "DRUGBANK:DB14865 | ensembl:ENSG00000109471 | CHEMBL:CHEMBL1201438 | DRUGBANK:DB12182 | ensembl:ENSG00000100385 | ensembl:ENSG00000104432 | CHEMBL:CHEMBL2107855 | CHEMBL:CHEMBL4298090",
+      "reason": "Mention 'human IL-2' administered via AAV vector is gene-delivered cytokine, best matching the IL2 gene, though drug entries (human interleukin-2) are plausible alternatives."
     },
     {
       "claim_id": "c_000351",
@@ -32270,8 +32270,8 @@
       "mention": "Hematopoietic Stem Cell Transplantation",
       "proposed": "",
       "confidence": "high",
-      "shortlist": "CHEMBL4594311 | CHEMBL5315099 | CHEMBL2109128 | DRUGBANK:DB13144 | CHEMBL5315093 | CHEMBL2107881 | DRUGBANK:DB05386 | CHEMBL4297954",
-      "reason": "HSCT is a procedure, and none of the candidates is a transplantation procedure; they are specific drugs such as gene therapies and growth factors."
+      "shortlist": "CHEMBL:CHEMBL4594311 | CHEMBL:CHEMBL5315099 | CHEMBL:CHEMBL2109128 | DRUGBANK:DB13144 | CHEMBL:CHEMBL5315093 | CHEMBL:CHEMBL2107881 | DRUGBANK:DB05386 | CHEMBL:CHEMBL4297954",
+      "reason": "The mention is a transplantation procedure, not any of the listed drugs (gene therapies or cytokines), so no candidate matches."
     },
     {
       "claim_id": "c_000359",
@@ -32396,8 +32396,8 @@
       "mention": "JAK-STAT signaling activation",
       "proposed": "",
       "confidence": "medium",
-      "shortlist": "ensembl:ENSG00000105639 | ensembl:ENSG00000162434 | REACT:R-HSA-8950505 | ensembl:ENSG00000096968 | CHEMBL2103874 | ensembl:ENSG00000166888 | ensembl:ENSG00000033800 | ensembl:ENSG00000123609 | MONDO:0019452 | MONDO:0020526 | MONDO:0021739 | EFO:1000459 | EFO:1000405 | EFO:0000394 | EFO:1002028 | EFO:1000738 | mech:JAK1:GoF | mech:JAK1:LoF | mech:JAK1:DN",
-      "reason": "The mention is the generic JAK-STAT signaling pathway, and no candidate denotes it; the listed pathway is IL-12-specific and the others are individual genes, drugs or diseases."
+      "shortlist": "ensembl:ENSG00000105639 | ensembl:ENSG00000162434 | REACT:R-HSA-8950505 | ensembl:ENSG00000096968 | CHEMBL:CHEMBL2103874 | ensembl:ENSG00000166888 | ensembl:ENSG00000033800 | ensembl:ENSG00000123609 | MONDO:0019452 | MONDO:0020526 | MONDO:0021739 | EFO:1000459 | EFO:1000405 | EFO:0000394 | EFO:1002028 | EFO:1000738 | mech:JAK1:GoF | mech:JAK1:LoF | mech:JAK1:DN",
+      "reason": "The mention denotes the general JAK-STAT signaling pathway; no candidate matches it, since the only pathway listed is IL-12-specific and the rest are individual genes, drugs, or diseases."
     },
     {
       "claim_id": "c_000372",
@@ -32432,8 +32432,8 @@
       "mention": "Janus kinase inhibitor (jakinib)",
       "proposed": "",
       "confidence": "high",
-      "shortlist": "CHEMBL3545215 | CHEMBL3137336 | CHEMBL4285417 | CHEMBL2108356 | CHEMBL3545155 | CHEMBL3301625 | CHEMBL3651966 | CHEMBL1232461",
-      "reason": "The mention is a drug class (JAK inhibitors), and no candidate is a general JAK inhibitor; BMS-911543 is only one specific JAK2 inhibitor, which does not fit a class-level mention."
+      "shortlist": "CHEMBL:CHEMBL3545215 | CHEMBL:CHEMBL3137336 | CHEMBL:CHEMBL4285417 | CHEMBL:CHEMBL2108356 | CHEMBL:CHEMBL3545155 | CHEMBL:CHEMBL3301625 | CHEMBL:CHEMBL3651966 | CHEMBL:CHEMBL1232461",
+      "reason": "The mention is a drug class (JAK inhibitors), and no candidate is a general JAK inhibitor; BMS-911543 is only one specific JAK2-selective drug."
     },
     {
       "claim_id": "c_000377",
@@ -32475,10 +32475,10 @@
       "claim_id": "c_000384",
       "role": "subject",
       "mention": "ropeginterferon alfa-2b",
-      "proposed": "CHEMBL4297819",
+      "proposed": "CHEMBL:CHEMBL4297819",
       "confidence": "medium",
-      "shortlist": "CHEMBL4297819 | DRUGBANK:DB15119",
-      "reason": "Both candidates denote the same drug (ChEMBL and DrugBank entries); the ChEMBL node lists more synonyms (Besremi, P1101), so I chose it, but the DrugBank node is an equally valid match."
+      "shortlist": "CHEMBL:CHEMBL4297819 | DRUGBANK:DB15119",
+      "reason": "Both the ChEMBL and DrugBank nodes denote ropeginterferon alfa-2b with identical names, so they are near-duplicates; the ChEMBL node was picked because its synonyms (Besremi, P1101) cover the mention, but nothing in the context favors one node over the other."
     },
     {
       "claim_id": "c_000385",
@@ -32720,8 +32720,8 @@
       "mention": "janus kinase inhibitors",
       "proposed": "",
       "confidence": "high",
-      "shortlist": "CHEMBL4285417 | CHEMBL1967878 | CHEMBL2001019 | CHEMBL3651966 | DRUGBANK:DB00013 | CHEMBL1201420 | DRUGBANK:DB13646 | DRUGBANK:DB06226",
-      "reason": "The mention is a drug class (JAK inhibitors) and none of the candidates are JAK inhibitors; they are other kinase inhibitors or urokinase-related drugs."
+      "shortlist": "CHEMBL:CHEMBL4285417 | CHEMBL:CHEMBL1967878 | CHEMBL:CHEMBL2001019 | CHEMBL:CHEMBL3651966 | DRUGBANK:DB00013 | CHEMBL:CHEMBL1201420 | DRUGBANK:DB13646 | DRUGBANK:DB06226",
+      "reason": "The mention is a drug class (JAK inhibitors) and none of the candidates are JAK inhibitors; they are unrelated kinase-targeting or urokinase drugs."
     },
     {
       "claim_id": "c_000409",
@@ -32801,8 +32801,8 @@
       "mention": "hematopoietic stem cell transplant",
       "proposed": "",
       "confidence": "high",
-      "shortlist": "CHEMBL4594311 | CHEMBL5315099 | CHEMBL5315093 | CHEMBL2109128 | DRUGBANK:DB13144 | CHEMBL2107881 | DRUGBANK:DB05386 | CHEMBL4297954",
-      "reason": "The mention is the general HSCT procedure; none of the candidates is a generic transplant, only specific gene therapies or growth factors."
+      "shortlist": "CHEMBL:CHEMBL4594311 | CHEMBL:CHEMBL5315099 | CHEMBL:CHEMBL5315093 | CHEMBL:CHEMBL2109128 | DRUGBANK:DB13144 | CHEMBL:CHEMBL2107881 | DRUGBANK:DB05386 | CHEMBL:CHEMBL4297954",
+      "reason": "HSCT is a general transplant procedure; none of the candidates (specific gene therapies, cell products, or growth factors) denotes it."
     },
     {
       "claim_id": "c_000423",
@@ -32882,8 +32882,8 @@
       "mention": "LPS plus IFN-γ",
       "proposed": "",
       "confidence": "medium",
-      "shortlist": "ensembl:ENSG00000189067 | ensembl:ENSG00000111537 | ensembl:ENSG00000117595 | DRUGBANK:DB00033 | DRUGBANK:DB00008 | CHEMBL1201564 | ensembl:ENSG00000159128 | CHEMBL3990041 | mech:STAT1:GoF | mech:STAT1:LoF | mech:STAT1:DN",
-      "reason": "The mention is a combined LPS plus IFN-γ stimulus; no candidate represents LPS, and IFNG gene or interferon gamma-1b drug only match one component, so none fits."
+      "shortlist": "ensembl:ENSG00000189067 | ensembl:ENSG00000111537 | ensembl:ENSG00000117595 | DRUGBANK:DB00033 | DRUGBANK:DB00008 | CHEMBL:CHEMBL1201564 | ensembl:ENSG00000159128 | CHEMBL:CHEMBL3990041 | mech:STAT1:GoF | mech:STAT1:LoF | mech:STAT1:DN",
+      "reason": "The mention is a combination of LPS (a bacterial endotoxin) and IFN-γ as stimuli; no candidate represents the combination, and the IFNG gene or interferon gamma drugs cover only one component."
     },
     {
       "claim_id": "c_000431",
@@ -32989,9 +32989,9 @@
       "role": "subject",
       "mention": "JAK inhibitors",
       "proposed": "",
-      "confidence": "medium",
-      "shortlist": "CHEMBL2103874",
-      "reason": "The mention is the drug class JAK inhibitors, while the only candidate is oclacitinib, a single veterinary JAK inhibitor that does not fit the context of treating STAT1-GOF patients."
+      "confidence": "high",
+      "shortlist": "CHEMBL:CHEMBL2103874",
+      "reason": "The mention is the drug class JAK inhibitors, while the only candidate is oclacitinib, a single veterinary JAK inhibitor that doesn't fit the context."
     },
     {
       "claim_id": "c_000446",
@@ -33141,10 +33141,10 @@
       "claim_id": "c_000459",
       "role": "subject",
       "mention": "interferon-α",
-      "proposed": "CHEMBL2108506",
+      "proposed": "CHEMBL:CHEMBL2108506",
       "confidence": "medium",
-      "shortlist": "CHEMBL2108494 | CHEMBL2108506 | DRUGBANK:DB05258 | DRUGBANK:DB00105 | CHEMBL2108508 | DRUGBANK:DB00034 | CHEMBL2108510 | DRUGBANK:DB15131",
-      "reason": "Generic 'interferon-α' matches interferon alfa; DB05258 is a near-duplicate, and the specific subtype (2a/2b) is not stated."
+      "shortlist": "CHEMBL:CHEMBL2108494 | CHEMBL:CHEMBL2108506 | DRUGBANK:DB05258 | DRUGBANK:DB00105 | CHEMBL:CHEMBL2108508 | DRUGBANK:DB00034 | CHEMBL:CHEMBL2108510 | DRUGBANK:DB15131",
+      "reason": "Generic 'interferon-α' matches the interferon alfa node; DrugBank DB05258 is a near-equivalent duplicate, and specific subtypes (2a/2b) are not specified."
     },
     {
       "claim_id": "c_000460",
@@ -33278,8 +33278,8 @@
       "mention": "γ-retroviral gene therapy",
       "proposed": "",
       "confidence": "medium",
-      "shortlist": "CHEMBL5315097 | DRUGBANK:DB13932 | DRUGBANK:DB13915 | CHEMBL5315093 | CHEMBL4594618 | CHEMBL4594311 | DRUGBANK:DB13173 | DRUGBANK:DB14782",
-      "reason": "The mention is a generic therapy modality for SCID-X1, and no candidate is a γ-retroviral IL2RG gene therapy; Strimvelis targets ADA-SCID, not SCID-X1."
+      "shortlist": "CHEMBL:CHEMBL5315097 | DRUGBANK:DB13932 | DRUGBANK:DB13915 | CHEMBL:CHEMBL5315093 | CHEMBL:CHEMBL4594618 | CHEMBL:CHEMBL4594311 | DRUGBANK:DB13173 | DRUGBANK:DB14782",
+      "reason": "The mention is a generic therapy modality for SCID-X1; no candidate is a γ-retroviral IL2RG gene therapy (Strimvelis targets ADA-SCID, others are unrelated)."
     },
     {
       "claim_id": "c_000471",
@@ -33287,8 +33287,8 @@
       "mention": "lentiviral gene therapy with low-dose pre-conditioning",
       "proposed": "",
       "confidence": "high",
-      "shortlist": "CHEMBL5315097 | CHEMBL4594311 | CHEMBL1201438 | CHEMBL2108427 | CHEMBL1201460 | CHEMBL3 | CHEMBL496 | CHEMBL1200595",
-      "reason": "The mention is a lentiviral gene therapy approach for SCID-X1; none of the candidates is an SCID-X1 gene therapy (betibeglogene autotemcel is for beta-thalassemia)."
+      "shortlist": "CHEMBL:CHEMBL5315097 | CHEMBL:CHEMBL4594311 | CHEMBL:CHEMBL1201438 | CHEMBL:CHEMBL2108427 | CHEMBL:CHEMBL1201460 | CHEMBL:CHEMBL3 | CHEMBL:CHEMBL496 | CHEMBL:CHEMBL1200595",
+      "reason": "The mention is a lentiviral gene therapy for SCID-X1, and none of the candidates is an SCID-X1 gene therapy; betibeglogene autotemcel treats beta-thalassemia."
     },
     {
       "claim_id": "c_000472",
@@ -33305,8 +33305,8 @@
       "mention": "hematopoietic stem cell transplantation",
       "proposed": "",
       "confidence": "high",
-      "shortlist": "CHEMBL4594311 | CHEMBL5315099 | CHEMBL2109128 | DRUGBANK:DB13144 | CHEMBL5315093 | DRUGBANK:DB05386 | CHEMBL2107881 | CHEMBL4297954",
-      "reason": "The mention is a general transplant procedure, and none of the candidates (gene therapy products, growth factors) denotes hematopoietic stem cell transplantation itself."
+      "shortlist": "CHEMBL:CHEMBL4594311 | CHEMBL:CHEMBL5315099 | CHEMBL:CHEMBL2109128 | DRUGBANK:DB13144 | CHEMBL:CHEMBL5315093 | DRUGBANK:DB05386 | CHEMBL:CHEMBL2107881 | CHEMBL:CHEMBL4297954",
+      "reason": "The mention is a transplant procedure; none of the candidates is that procedure (they are specific gene therapies or growth factor drugs)."
     },
     {
       "claim_id": "c_000475",
@@ -33359,8 +33359,8 @@
       "mention": "hematopoietic stem cell transplantation",
       "proposed": "",
       "confidence": "high",
-      "shortlist": "CHEMBL4594311 | CHEMBL5315099 | CHEMBL2109128 | DRUGBANK:DB13144 | CHEMBL5315093 | DRUGBANK:DB05386 | CHEMBL2107881 | CHEMBL4297954",
-      "reason": "The mention is a transplantation procedure, and none of the candidates (specific gene-therapy products, growth factors) denotes HSCT generally."
+      "shortlist": "CHEMBL:CHEMBL4594311 | CHEMBL:CHEMBL5315099 | CHEMBL:CHEMBL2109128 | DRUGBANK:DB13144 | CHEMBL:CHEMBL5315093 | DRUGBANK:DB05386 | CHEMBL:CHEMBL2107881 | CHEMBL:CHEMBL4297954",
+      "reason": "The mention is a transplant procedure, and none of the candidates is that procedure; they are specific gene-therapy products, growth factors or cell products."
     },
     {
       "claim_id": "c_000483",
@@ -33547,9 +33547,9 @@
       "role": "subject",
       "mention": "JAK inhibitors",
       "proposed": "",
-      "confidence": "high",
-      "shortlist": "CHEMBL2103874",
-      "reason": "The mention is the drug class 'JAK inhibitors', and the only candidate is oclacitinib, a single drug that does not fit the class-level context."
+      "confidence": "medium",
+      "shortlist": "CHEMBL:CHEMBL2103874",
+      "reason": "The mention is the general drug class 'JAK inhibitors', while the only candidate is oclacitinib, a single veterinary JAK inhibitor, so it does not denote the same entity."
     },
     {
       "claim_id": "c_000495",
@@ -33564,19 +33564,19 @@
       "claim_id": "c_000496",
       "role": "subject",
       "mention": "ruxolitinib, baricitinib, or tofacitinib",
-      "proposed": "",
-      "confidence": "medium",
-      "shortlist": "CHEMBL1789941 | CHEMBL221959 | CHEMBL2103743 | CHEMBL1795071 | CHEMBL4594381 | CHEMBL2105759 | CHEMBL4594382 | CHEMBL953",
-      "reason": "The mention lists three separate drugs (ruxolitinib, baricitinib, tofacitinib), so no single candidate node denotes the whole mention."
+      "proposed": "CHEMBL:CHEMBL1789941",
+      "confidence": "low",
+      "shortlist": "CHEMBL:CHEMBL1789941 | CHEMBL:CHEMBL221959 | CHEMBL:CHEMBL2103743 | CHEMBL:CHEMBL1795071 | CHEMBL:CHEMBL4594381 | CHEMBL:CHEMBL2105759 | CHEMBL:CHEMBL4594382 | CHEMBL:CHEMBL953",
+      "reason": "The mention lists three drugs, but the 'treats GOF-STAT1' relation is anchored on ruxolitinib, the first-named drug and the only one that can be picked as a single node; tofacitinib and baricitinib are equally valid."
     },
     {
       "claim_id": "c_000497",
       "role": "subject",
       "mention": "JAK inhibitors",
       "proposed": "",
-      "confidence": "medium",
-      "shortlist": "ensembl:ENSG00000162434 | CHEMBL2103874 | ensembl:ENSG00000105639 | ensembl:ENSG00000096968",
-      "reason": "The mention is a drug class (JAK inhibitors), and no candidate is a class node; the candidates are individual JAK genes or a single veterinary drug (oclacitinib), none of which fits."
+      "confidence": "high",
+      "shortlist": "ensembl:ENSG00000162434 | CHEMBL:CHEMBL2103874 | ensembl:ENSG00000105639 | ensembl:ENSG00000096968",
+      "reason": "The mention is a drug class (JAK inhibitors); candidates are individual JAK genes or a single veterinary drug (oclacitinib), none of which denotes the class."
     },
     {
       "claim_id": "c_000497",
@@ -33645,10 +33645,10 @@
       "claim_id": "c_000502",
       "role": "subject",
       "mention": "single-agent JAK inhibitors",
-      "proposed": "CHEMBL2103874",
-      "confidence": "low",
-      "shortlist": "CHEMBL2103874 | DRUGBANK:DB13881 | CHEMBL4297785 | CHEMBL4594479 | DRUGBANK:DB13646 | CHEMBL4297595 | CHEMBL1646",
-      "reason": "Mention is the JAK inhibitor class; only oclacitinib (synonym JAK-I/JAKI) is a JAK inhibitor among candidates, so it is only an approximation."
+      "proposed": "",
+      "confidence": "high",
+      "shortlist": "CHEMBL:CHEMBL2103874 | DRUGBANK:DB13881 | CHEMBL:CHEMBL4297785 | CHEMBL:CHEMBL4594479 | DRUGBANK:DB13646 | CHEMBL:CHEMBL4297595 | CHEMBL:CHEMBL1646",
+      "reason": "The mention is a drug class (JAK inhibitors), and no candidate is a general JAK inhibitor class; oclacitinib is only matched via a generic synonym 'JAKI' and is a specific drug."
     },
     {
       "claim_id": "c_000502",
@@ -33701,8 +33701,8 @@
       "mention": "allogeneic stem cell transplantation",
       "proposed": "",
       "confidence": "high",
-      "shortlist": "CHEMBL5315097 | CHEMBL4594311 | CHEMBL2109128 | CHEMBL5315099 | CHEMBL5315093 | DRUGBANK:DB13144 | DRUGBANK:DB12431 | CHEMBL2107881",
-      "reason": "The mention is a general transplant procedure, and none of the candidates (specific gene-modified cell products or growth factors) denotes allogeneic stem cell transplantation."
+      "shortlist": "CHEMBL:CHEMBL5315097 | CHEMBL:CHEMBL4594311 | CHEMBL:CHEMBL2109128 | CHEMBL:CHEMBL5315099 | CHEMBL:CHEMBL5315093 | DRUGBANK:DB13144 | DRUGBANK:DB12431 | CHEMBL:CHEMBL2107881",
+      "reason": "The mention is a general transplant procedure, and none of the candidates is that procedure; they are specific gene-modified cell products or growth factors."
     },
     {
       "claim_id": "c_000508",
@@ -33827,8 +33827,8 @@
       "mention": "anti-type I IFN receptor antibodies",
       "proposed": "",
       "confidence": "high",
-      "shortlist": "CHEMBL3990041 | DRUGBANK:DB05396 | DRUGBANK:DB00008 | DRUGBANK:DB00033 | CHEMBL1201564 | DRUGBANK:DB05258 | DRUGBANK:DB00069 | DRUGBANK:DB05472",
-      "reason": "The mention is a class of antibodies blocking the type I IFN receptor (e.g., anifrolumab), whereas all candidates are interferon agonist drugs, not receptor antibodies."
+      "shortlist": "CHEMBL:CHEMBL3990041 | DRUGBANK:DB05396 | DRUGBANK:DB00008 | DRUGBANK:DB00033 | CHEMBL:CHEMBL1201564 | DRUGBANK:DB05258 | DRUGBANK:DB00069 | DRUGBANK:DB05472",
+      "reason": "The mention is an antibody class that blocks the type I IFN receptor (e.g. anifrolumab), but every candidate is an interferon agonist or gene therapy, not a receptor antibody."
     },
     {
       "claim_id": "c_000521",
@@ -33854,8 +33854,8 @@
       "mention": "AXL inhibition",
       "proposed": "",
       "confidence": "medium",
-      "shortlist": "CHEMBL283120 | CHEMBL4594462 | CHEMBL4297987",
-      "reason": "The mention is a generic target-level concept (AXL inhibition), and none of the candidates is a clear match: AXL-1717 is an IGF-1R inhibitor (picropodophyllin) despite its name, while batiraxcept and enapotamab vedotin are specific AXL-targeting agents not named in the context."
+      "shortlist": "CHEMBL:CHEMBL283120 | CHEMBL:CHEMBL4594462 | CHEMBL:CHEMBL4297987",
+      "reason": "The mention is a general target-inhibition concept for AXL, not a specific drug; the candidates are an IGF-1R inhibitor (AXL-1717), an AXL decoy receptor, and an AXL antibody-drug conjugate, none of which fits the context."
     },
     {
       "claim_id": "c_000523",
@@ -33888,10 +33888,10 @@
       "claim_id": "c_000526",
       "role": "subject",
       "mention": "bemcentinib with ruxolitinib",
-      "proposed": "CHEMBL3809489",
+      "proposed": "",
       "confidence": "medium",
-      "shortlist": "CHEMBL3809489 | CHEMBL1789941 | CHEMBL1795071 | CHEMBL4594381 | CHEMBL4594382 | DRUGBANK:DB09077 | DRUGBANK:DB06317 | DRUGBANK:DB06322",
-      "reason": "The mention is a combination of two drugs; bemcentinib is the first named agent, but ruxolitinib is equally a component, so no single candidate fully captures the mention."
+      "shortlist": "CHEMBL:CHEMBL3809489 | CHEMBL:CHEMBL1789941 | CHEMBL:CHEMBL1795071 | CHEMBL:CHEMBL4594381 | CHEMBL:CHEMBL4594382 | DRUGBANK:DB09077 | DRUGBANK:DB06317 | DRUGBANK:DB06322",
+      "reason": "The mention is a combination of two drugs; no single candidate denotes the combination, and choosing either bemcentinib or ruxolitinib alone would only be partial."
     },
     {
       "claim_id": "c_000526",
@@ -34104,10 +34104,10 @@
       "claim_id": "c_000541",
       "role": "subject",
       "mention": "CTLA4 and LRBA defects",
-      "proposed": "MONDO:0014493",
-      "confidence": "low",
-      "shortlist": "ensembl:ENSG00000163599 | CHEMBL1201823 | MONDO:0013863 | MONDO:0013925 | ensembl:ENSG00000249690 | ensembl:ENSG00000198589 | MONDO:0014493 | MONDO:0011116",
-      "reason": "The mention covers both CTLA4 and LRBA defects, but only one disease can be chosen; the CTLA4 haploinsufficiency ALPS node is the best fit and the closest to the ALPS-like context, though it omits the LRBA part."
+      "proposed": "",
+      "confidence": "medium",
+      "shortlist": "ensembl:ENSG00000163599 | CHEMBL:CHEMBL1201823 | MONDO:0013863 | MONDO:0013925 | ensembl:ENSG00000249690 | ensembl:ENSG00000198589 | MONDO:0014493 | MONDO:0011116",
+      "reason": "The mention names two genes' defects together; no single candidate covers both (CTLA4 haploinsufficiency ALPS5 and LRBA deficiency are separate diseases), so none fits exactly."
     },
     {
       "claim_id": "c_000541",
@@ -34205,8 +34205,8 @@
       "mention": "JAK inhibitors (cerdulatinib, ruxolitinib, tofacitinib)",
       "proposed": "",
       "confidence": "medium",
-      "shortlist": "CHEMBL221959 | CHEMBL1789941 | CHEMBL2103743 | ensembl:ENSG00000162434 | ensembl:ENSG00000096968 | CHEMBL2103874 | ensembl:ENSG00000105639 | CHEMBL4594381 | mech:STAT1:GoF | mech:STAT1:LoF | mech:STAT1:DN",
-      "reason": "The mention is a class of JAK inhibitors listing three drugs, and no candidate denotes the class; individual drugs only cover part of it."
+      "shortlist": "CHEMBL:CHEMBL221959 | CHEMBL:CHEMBL1789941 | CHEMBL:CHEMBL2103743 | ensembl:ENSG00000162434 | ensembl:ENSG00000096968 | CHEMBL:CHEMBL2103874 | ensembl:ENSG00000105639 | CHEMBL:CHEMBL4594381 | mech:STAT1:GoF | mech:STAT1:LoF | mech:STAT1:DN",
+      "reason": "The mention is a drug class (JAK inhibitors) naming three drugs; no candidate represents the class, and a single drug such as ruxolitinib would cover only part of it."
     },
     {
       "claim_id": "c_000548",
@@ -34322,8 +34322,8 @@
       "mention": "hematopoietic stem cell transplantation",
       "proposed": "",
       "confidence": "high",
-      "shortlist": "CHEMBL4594311 | CHEMBL5315099 | CHEMBL2109128 | DRUGBANK:DB13144 | CHEMBL5315093 | DRUGBANK:DB05386 | CHEMBL2107881 | CHEMBL4297954",
-      "reason": "The mention is a general transplant procedure, and none of the candidates (specific gene therapies, growth factors, or cell products) denotes HSCT."
+      "shortlist": "CHEMBL:CHEMBL4594311 | CHEMBL:CHEMBL5315099 | CHEMBL:CHEMBL2109128 | DRUGBANK:DB13144 | CHEMBL:CHEMBL5315093 | DRUGBANK:DB05386 | CHEMBL:CHEMBL2107881 | CHEMBL:CHEMBL4297954",
+      "reason": "The mention is a transplant procedure, and none of the candidates (specific gene-therapy products, growth factors) denotes hematopoietic stem cell transplantation generally."
     },
     {
       "claim_id": "c_000558",
@@ -34331,8 +34331,8 @@
       "mention": "novel and repurposed drugs",
       "proposed": "",
       "confidence": "high",
-      "shortlist": "DRUGBANK:DB04978 | DRUGBANK:DB00015 | DRUGBANK:DB15559 | CHEMBL5315068 | CHEMBL5315097 | DRUGBANK:DB14712 | DRUGBANK:DB14960 | CHEMBL4594618 | mech:JAK2:GoF | mech:JAK2:LoF | mech:JAK2:DN | mech:JAK2:GoF:somatic | clinvar:4075419 | clinvar:2136729 | clinvar:134563 | clinvar:14664 | clinvar:14662",
-      "reason": "The mention is a generic phrase for novel and repurposed drugs, not any specific drug, mechanism, or variant among the candidates."
+      "shortlist": "DRUGBANK:DB04978 | DRUGBANK:DB00015 | DRUGBANK:DB15559 | CHEMBL:CHEMBL5315068 | CHEMBL:CHEMBL5315097 | DRUGBANK:DB14712 | DRUGBANK:DB14960 | CHEMBL:CHEMBL4594618 | mech:JAK2:GoF | mech:JAK2:LoF | mech:JAK2:DN | mech:JAK2:GoF:somatic | clinvar:4075419 | clinvar:2136729 | clinvar:134563 | clinvar:14664 | clinvar:14662",
+      "reason": "The mention is a generic phrase for novel and repurposed drugs, and none of the candidates (specific drugs, JAK2 mechanisms, variants) denotes that group."
     },
     {
       "claim_id": "c_000558",
@@ -34348,27 +34348,27 @@
       "role": "subject",
       "mention": "JAK inhibitors",
       "proposed": "",
-      "confidence": "medium",
-      "shortlist": "CHEMBL2103874",
-      "reason": "The mention is the JAK inhibitor drug class (e.g., ruxolitinib in STAT1 GOF), and the only candidate, oclacitinib, is a single veterinary JAK inhibitor that does not fit the context."
+      "confidence": "high",
+      "shortlist": "CHEMBL:CHEMBL2103874",
+      "reason": "The mention is a drug class (JAK inhibitors, used in humans, e.g. ruxolitinib), while the only candidate is oclacitinib, a single veterinary JAK inhibitor, which does not fit."
     },
     {
       "claim_id": "c_000560",
       "role": "subject",
       "mention": "JAK inhibitors",
       "proposed": "",
-      "confidence": "medium",
-      "shortlist": "CHEMBL2103874",
-      "reason": "The mention is a drug class (JAK inhibitors), and the only candidate is oclacitinib, a single JAK inhibitor, which does not fit the context uniquely."
+      "confidence": "high",
+      "shortlist": "CHEMBL:CHEMBL2103874",
+      "reason": "The mention is the JAK inhibitor drug class, and the only candidate is oclacitinib, a single veterinary JAK inhibitor that doesn't fit the STAT1 GOF treatment context."
     },
     {
       "claim_id": "c_000561",
       "role": "subject",
       "mention": "JAK inhibitors",
       "proposed": "",
-      "confidence": "high",
-      "shortlist": "CHEMBL2103874",
-      "reason": "The mention is the drug class JAK inhibitors (JAKinibs), while the only candidate is oclacitinib, a single veterinary JAK inhibitor that does not fit the context."
+      "confidence": "medium",
+      "shortlist": "CHEMBL:CHEMBL2103874",
+      "reason": "The mention is the drug class JAK inhibitors (JAKinibs), while the only candidate is oclacitinib, a single veterinary JAK inhibitor, which does not fit the context."
     },
     {
       "claim_id": "c_000562",
@@ -34376,8 +34376,8 @@
       "mention": "JAK inhibitors",
       "proposed": "",
       "confidence": "high",
-      "shortlist": "CHEMBL2103874",
-      "reason": "The mention refers to the JAK inhibitor drug class, while the only candidate is oclacitinib, a single veterinary JAK inhibitor that does not fit this human STAT1 GOF context."
+      "shortlist": "CHEMBL:CHEMBL2103874",
+      "reason": "The mention is the JAK inhibitor drug class, while the only candidate is oclacitinib, a single veterinary JAK inhibitor that does not fit the context."
     },
     {
       "claim_id": "c_000563",
@@ -34538,8 +34538,8 @@
       "mention": "dasatinib, nilotinib and ponatinib",
       "proposed": "",
       "confidence": "medium",
-      "shortlist": "CHEMBL1421 | CHEMBL1171837 | CHEMBL5314601 | CHEMBL2105708 | CHEMBL255863 | CHEMBL1201740 | CHEMBL5315068 | DRUGBANK:DB04978",
-      "reason": "The mention lists three separate drugs, and no single candidate covers all three; each drug has its own node (dasatinib, nilotinib, ponatinib), so no single node can be chosen."
+      "shortlist": "CHEMBL:CHEMBL1421 | CHEMBL:CHEMBL1171837 | CHEMBL:CHEMBL5314601 | CHEMBL:CHEMBL2105708 | CHEMBL:CHEMBL255863 | CHEMBL:CHEMBL1201740 | CHEMBL:CHEMBL5315068 | DRUGBANK:DB04978",
+      "reason": "The mention lists three separate drugs (dasatinib, nilotinib, ponatinib), so no single candidate node represents all of them."
     },
     {
       "claim_id": "c_000575",
@@ -34635,10 +34635,10 @@
       "claim_id": "c_000586",
       "role": "subject",
       "mention": "tocilizumab",
-      "proposed": "CHEMBL1237022",
+      "proposed": "DRUGBANK:DB06273",
       "confidence": "medium",
-      "shortlist": "CHEMBL1237022 | DRUGBANK:DB06273",
-      "reason": "Both candidates denote tocilizumab; the two nodes are near-duplicates and CHEMBL1237022 is chosen as the one with more synonyms, but nothing in the context distinguishes them."
+      "shortlist": "CHEMBL:CHEMBL1237022 | DRUGBANK:DB06273",
+      "reason": "Both candidates are the same drug (tocilizumab) in different databases; DrugBank is chosen arbitrarily as the canonical node, since the context does not distinguish between them."
     },
     {
       "claim_id": "c_000587",
@@ -34646,8 +34646,8 @@
       "mention": "anti-TNF and anti-IL-1 therapies",
       "proposed": "",
       "confidence": "medium",
-      "shortlist": "CHEMBL3301580 | DRUGBANK:DB00026 | CHEMBL4802208 | CHEMBL2108119 | DRUGBANK:DB15762 | DRUGBANK:DB00005 | DRUGBANK:DB12182 | CHEMBL2109037",
-      "reason": "The mention is a class-level phrase (anti-TNF and anti-IL-1 therapies) and no single candidate drug matches it; etanercept and anakinra are only individual members of those classes."
+      "shortlist": "CHEMBL:CHEMBL3301580 | DRUGBANK:DB00026 | CHEMBL:CHEMBL4802208 | CHEMBL:CHEMBL2108119 | DRUGBANK:DB15762 | DRUGBANK:DB00005 | DRUGBANK:DB12182 | CHEMBL:CHEMBL2109037",
+      "reason": "The mention is a drug class pair (anti-TNF and anti-IL-1 therapies), and no candidate denotes the class; single drugs like etanercept or anakinra cover only part of it."
     },
     {
       "claim_id": "c_000588",
@@ -34789,9 +34789,9 @@
       "role": "subject",
       "mention": "JAK inhibitors",
       "proposed": "",
-      "confidence": "medium",
-      "shortlist": "CHEMBL2103874",
-      "reason": "The mention is the JAK inhibitor drug class, while the only candidate is oclacitinib, a single veterinary JAK inhibitor that does not fit the STAT1 GOF CMC context."
+      "confidence": "high",
+      "shortlist": "CHEMBL:CHEMBL2103874",
+      "reason": "The mention is the JAK inhibitor drug class, while the only candidate is oclacitinib, a single veterinary drug that does not fit the context."
     },
     {
       "claim_id": "c_000601",
@@ -34898,8 +34898,8 @@
       "mention": "JAK inhibition",
       "proposed": "",
       "confidence": "medium",
-      "shortlist": "ensembl:ENSG00000162434 | CHEMBL2103874 | ensembl:ENSG00000105639 | ensembl:ENSG00000096968 | mech:STAT1:GoF | mech:STAT1:LoF | mech:STAT1:DN",
-      "reason": "'JAK inhibition' refers to a therapeutic approach (JAK inhibitors, e.g. ruxolitinib) and no candidate matches; oclacitinib is a veterinary JAK inhibitor mentioned only via a synonym, and the JAK genes and STAT1 mechanisms are different entities."
+      "shortlist": "ensembl:ENSG00000162434 | CHEMBL:CHEMBL2103874 | ensembl:ENSG00000105639 | ensembl:ENSG00000096968 | mech:STAT1:GoF | mech:STAT1:LoF | mech:STAT1:DN",
+      "reason": "\"JAK inhibition\" is a general therapeutic approach (JAK inhibitor class, e.g. ruxolitinib), and no candidate represents it; oclacitinib is one specific veterinary drug and the JAK genes and STAT1 mechanisms are different entities."
     },
     {
       "claim_id": "c_000617",
@@ -35024,8 +35024,8 @@
       "mention": "IL-7",
       "proposed": "",
       "confidence": "high",
-      "shortlist": "DRUGBANK:DB12182 | CHEMBL2107855 | DRUGBANK:DB14865 | DRUGBANK:DB00038 | DRUGBANK:DB00026 | CHEMBL4297771 | CHEMBL2108469 | DRUGBANK:DB12431",
-      "reason": "None of the candidates is IL-7 (cevostamab/IL-7 drug); they are IL-4, IL-21, IL-2, IL-11, IL-1RA, IL-10 and IL-3."
+      "shortlist": "DRUGBANK:DB12182 | CHEMBL:CHEMBL2107855 | DRUGBANK:DB14865 | DRUGBANK:DB00038 | DRUGBANK:DB00026 | CHEMBL:CHEMBL4297771 | CHEMBL:CHEMBL2108469 | DRUGBANK:DB12431",
+      "reason": "None of the candidates is IL-7 (e.g., cyt107/recombinant interleukin-7); they are IL-4, IL-21, IL-2, IL-11, IL-1RA, IL-10, and IL-3."
     },
     {
       "claim_id": "c_000629",
@@ -35042,8 +35042,8 @@
       "mention": "JAK inhibitors",
       "proposed": "",
       "confidence": "high",
-      "shortlist": "CHEMBL2103874",
-      "reason": "The mention is the general class of JAK inhibitors, while the only candidate is oclacitinib, a single veterinary drug that does not fit the context."
+      "shortlist": "CHEMBL:CHEMBL2103874",
+      "reason": "The mention is the JAK inhibitor drug class, while the only candidate is oclacitinib, a single veterinary JAK inhibitor that does not fit the context."
     },
     {
       "claim_id": "c_000631",
@@ -35087,8 +35087,8 @@
       "mention": "bone marrow transplantation",
       "proposed": "",
       "confidence": "high",
-      "shortlist": "CHEMBL4594551 | DRUGBANK:DB11639 | CHEMBL2106566 | CHEMBL2108594 | CHEMBL4650389 | CHEMBL2108518",
-      "reason": "Bone marrow transplantation is a procedure, and none of the candidates (BMP proteins, calcium phosphate, decorin, gelatin) represent it."
+      "shortlist": "CHEMBL:CHEMBL4594551 | DRUGBANK:DB11639 | CHEMBL:CHEMBL2106566 | CHEMBL:CHEMBL2108594 | CHEMBL:CHEMBL4650389 | CHEMBL:CHEMBL2108518",
+      "reason": "Bone marrow transplantation is a procedure, and none of the candidates (BMP drugs, calcium phosphate, decorin, gelatin) represent it."
     },
     {
       "claim_id": "c_000635",
@@ -35113,9 +35113,9 @@
       "role": "subject",
       "mention": "JAK inhibitors",
       "proposed": "",
-      "confidence": "medium",
-      "shortlist": "CHEMBL2103874",
-      "reason": "The mention is the JAK inhibitor drug class, and the only candidate is oclacitinib, a single veterinary JAK inhibitor that does not fit the context of children treated for Aicardi-Goutieres syndrome."
+      "confidence": "high",
+      "shortlist": "CHEMBL:CHEMBL2103874",
+      "reason": "The mention is a drug class, while the only candidate is oclacitinib, a single veterinary JAK inhibitor that does not fit the context of children treated for Aicardi-Goutieres syndrome."
     },
     {
       "claim_id": "c_000639",
@@ -35132,8 +35132,8 @@
       "mention": "JAK2 copy-number loss",
       "proposed": "mech:JAK2:LoF",
       "confidence": "medium",
-      "shortlist": "mech:JAK2:LoF | mech:JAK2:GoF | mech:JAK2:DN | mech:JAK2:GoF:somatic | ensembl:ENSG00000096968 | EFO:0020825 | CHEMBL3545215 | EFO:0004798 | EFO:1000966 | MONDO:0019452 | MONDO:0001198 | EFO:0600000 | EFO:0008254 | EFO:0007003 | MONDO:0021739 | MONDO:0004403",
-      "reason": "Copy-number loss of JAK2 is a loss-of-function mechanism, the closest candidate, though it is not strictly a point-mutation LoF."
+      "shortlist": "mech:JAK2:LoF | mech:JAK2:GoF | mech:JAK2:DN | mech:JAK2:GoF:somatic | ensembl:ENSG00000096968 | EFO:0020825 | CHEMBL:CHEMBL3545215 | EFO:0004798 | EFO:1000966 | MONDO:0019452 | MONDO:0001198 | EFO:0600000 | EFO:0008254 | EFO:0007003 | MONDO:0021739 | MONDO:0004403",
+      "reason": "Copy-number loss of JAK2 is a loss-of-function mechanism, the closest candidate, though it is not exactly a point-mutation LoF."
     },
     {
       "claim_id": "c_000640",
@@ -35420,8 +35420,8 @@
       "mention": "life-threatening COVID-19",
       "proposed": "MONDO:0100096",
       "confidence": "medium",
-      "shortlist": "MONDO:0100096 | MONDO:0100233 | MONDO:0026767 | DRUGBANK:DB11590 | MONDO:0100320 | EFO:0803362 | EFO:0600019 | CHEMBL3301574",
-      "reason": "The mention 'life-threatening COVID-19' denotes severe COVID-19 as a phenotype, best matched by the general COVID-19 node, though the TLR7 LOF note could point to the X-linked immunodeficiency 74 node."
+      "shortlist": "MONDO:0100096 | MONDO:0100233 | MONDO:0026767 | DRUGBANK:DB11590 | MONDO:0100320 | EFO:0803362 | EFO:0600019 | CHEMBL:CHEMBL3301574",
+      "reason": "The mention 'life-threatening COVID-19' is a severity phenotype of COVID-19 itself, so the generic COVID-19 node fits best; the TLR7-deficiency immunodeficiency node is a gene-caused disease, a related but different entity."
     },
     {
       "claim_id": "c_000672",
@@ -35609,8 +35609,8 @@
       "mention": "JAK inhibitors",
       "proposed": "",
       "confidence": "medium",
-      "shortlist": "CHEMBL2103874",
-      "reason": "The mention is the drug class JAK inhibitors, and the only candidate is oclacitinib, a single veterinary JAK inhibitor that does not fit this context."
+      "shortlist": "CHEMBL:CHEMBL2103874",
+      "reason": "The mention is the drug class 'JAK inhibitors', and the only candidate, oclacitinib, is one specific JAK inhibitor, which does not fit the context."
     },
     {
       "claim_id": "c_000689",
@@ -35942,26 +35942,26 @@
       "mention": "JAK inhibitors",
       "proposed": "",
       "confidence": "medium",
-      "shortlist": "CHEMBL2103874",
-      "reason": "The mention is the drug class 'JAK inhibitors', while the only candidate is oclacitinib, a single veterinary JAK inhibitor, which does not fit this STAT1-GOF treatment context."
+      "shortlist": "CHEMBL:CHEMBL2103874",
+      "reason": "The mention is the JAK inhibitor drug class, but the only candidate is oclacitinib, a single veterinary JAK inhibitor, and the context does not specify it."
     },
     {
       "claim_id": "c_000720",
       "role": "subject",
       "mention": "JAK inhibitors",
       "proposed": "",
-      "confidence": "medium",
-      "shortlist": "CHEMBL2103874",
-      "reason": "The mention is the drug class 'JAK inhibitors', and the only candidate is oclacitinib, a single veterinary JAK inhibitor that does not fit the context."
+      "confidence": "high",
+      "shortlist": "CHEMBL:CHEMBL2103874",
+      "reason": "The mention is the drug class JAK inhibitors, while the only candidate is oclacitinib, a single veterinary JAK inhibitor that does not fit the context."
     },
     {
       "claim_id": "c_000721",
       "role": "subject",
       "mention": "JAK inhibitors",
       "proposed": "",
-      "confidence": "medium",
-      "shortlist": "CHEMBL2103874",
-      "reason": "The mention is the JAK inhibitor drug class, but the only candidate is oclacitinib, one specific veterinary JAK inhibitor, which does not fit the context."
+      "confidence": "high",
+      "shortlist": "CHEMBL:CHEMBL2103874",
+      "reason": "The mention is the drug class JAK inhibitors (JAKi), and the only candidate is oclacitinib, a single veterinary JAK inhibitor that does not fit the context."
     },
     {
       "claim_id": "c_000722",
@@ -35987,8 +35987,8 @@
       "mention": "JAK inhibitors",
       "proposed": "",
       "confidence": "high",
-      "shortlist": "CHEMBL2103874",
-      "reason": "The mention refers to the JAK inhibitor drug class, but the only candidate is oclacitinib, a single veterinary JAK inhibitor that does not fit this human clinical context."
+      "shortlist": "CHEMBL:CHEMBL2103874",
+      "reason": "The mention is the JAK inhibitor drug class, while the only candidate is oclacitinib, a single veterinary JAK inhibitor that does not fit the context of patients treated with JAKi."
     },
     {
       "claim_id": "c_000723",
@@ -36005,8 +36005,8 @@
       "mention": "ruxolitinib and baricitinib",
       "proposed": "",
       "confidence": "medium",
-      "shortlist": "CHEMBL1789941 | CHEMBL1795071 | CHEMBL4594381 | CHEMBL4594382 | CHEMBL2105759 | CHEMBL5315068 | CHEMBL4594618 | DRUGBANK:DB15559 | mech:STAT1:GoF | mech:STAT1:LoF | mech:STAT1:DN",
-      "reason": "The mention names two drugs, and no single candidate covers both; ruxolitinib (CHEMBL1789941) and baricitinib (CHEMBL2105759) are separate nodes."
+      "shortlist": "CHEMBL:CHEMBL1789941 | CHEMBL:CHEMBL1795071 | CHEMBL:CHEMBL4594381 | CHEMBL:CHEMBL4594382 | CHEMBL:CHEMBL2105759 | CHEMBL:CHEMBL5315068 | CHEMBL:CHEMBL4594618 | DRUGBANK:DB15559 | mech:STAT1:GoF | mech:STAT1:LoF | mech:STAT1:DN",
+      "reason": "The mention names two drugs, ruxolitinib and baricitinib, and no single candidate covers both; each is a separate node."
     },
     {
       "claim_id": "c_000727",
@@ -36023,8 +36023,8 @@
       "mention": "JAK inhibitors",
       "proposed": "",
       "confidence": "medium",
-      "shortlist": "CHEMBL2103874",
-      "reason": "The mention is the general drug class of JAK inhibitors, while the only candidate is oclacitinib, a single veterinary JAK inhibitor that the context does not single out."
+      "shortlist": "CHEMBL:CHEMBL2103874",
+      "reason": "The mention denotes the JAK inhibitor drug class, while the only candidate is a single drug (oclacitinib, a veterinary JAK inhibitor), and the context does not specify that drug."
     },
     {
       "claim_id": "c_000730",
@@ -36131,8 +36131,8 @@
       "mention": "neutralizing anti-IL-27 autoantibodies",
       "proposed": "ensembl:ENSG00000197272",
       "confidence": "medium",
-      "shortlist": "ensembl:ENSG00000172458 | ensembl:ENSG00000197272 | ensembl:ENSG00000105246 | ensembl:ENSG00000104998 | DRUGBANK:DB05848 | CHEMBL3301580 | DRUGBANK:DB15762 | CHEMBL2108119",
-      "reason": "Autoantibodies target the IL-27 cytokine; IL27 (IL-27 subunit alpha) is the best gene node, though IL-27 is a heterodimer with EBI3 and the mention is an autoantibody rather than the gene itself."
+      "shortlist": "ensembl:ENSG00000172458 | ensembl:ENSG00000197272 | ensembl:ENSG00000105246 | ensembl:ENSG00000104998 | DRUGBANK:DB05848 | CHEMBL:CHEMBL3301580 | DRUGBANK:DB15762 | CHEMBL:CHEMBL2108119",
+      "reason": "Autoantibodies target IL-27 cytokine; IL27 (IL-27 subunit alpha) is the best gene node, though EBI3 also forms IL-27 heterodimer."
     },
     {
       "claim_id": "c_000740",
@@ -36221,17 +36221,17 @@
       "mention": "immunosuppressive drugs (cyclophosphamide, methotrexate, cyclosporine)",
       "proposed": "",
       "confidence": "medium",
-      "shortlist": "CHEMBL160 | CHEMBL1200796 | CHEMBL88 | CHEMBL34259 | RXNORM:6851 | CHEMBL3244648 | CHEMBL376180",
-      "reason": "The mention is a drug class grouping three drugs, so no single candidate drug denotes it."
+      "shortlist": "CHEMBL:CHEMBL160 | CHEMBL:CHEMBL1200796 | CHEMBL:CHEMBL88 | CHEMBL:CHEMBL34259 | RXNORM:6851 | CHEMBL:CHEMBL3244648 | CHEMBL:CHEMBL376180",
+      "reason": "The mention is a group of three drugs, and each candidate matches only one of them, so no single candidate denotes the whole mention."
     },
     {
       "claim_id": "c_000755",
       "role": "subject",
       "mention": "JAK inhibitor",
       "proposed": "",
-      "confidence": "high",
-      "shortlist": "CHEMBL2103874 | CHEMBL3545215 | CHEMBL3137336 | CHEMBL1232461 | CHEMBL3301625 | CHEMBL3545155 | CHEMBL4285417 | CHEMBL3265032",
-      "reason": "The mention is a generic drug class (JAK inhibitor), and no candidate is a general JAK inhibitor class node; oclacitinib only matches via a 'JAK-I' synonym, which is a specific drug."
+      "confidence": "medium",
+      "shortlist": "CHEMBL:CHEMBL2103874 | CHEMBL:CHEMBL3545215 | CHEMBL:CHEMBL3137336 | CHEMBL:CHEMBL1232461 | CHEMBL:CHEMBL3301625 | CHEMBL:CHEMBL3545155 | CHEMBL:CHEMBL4285417 | CHEMBL:CHEMBL3265032",
+      "reason": "The mention is a generic drug class; the candidates are specific drugs (oclacitinib only has a 'JAK-I' synonym), and none is clearly the one intended."
     },
     {
       "claim_id": "c_000755",
@@ -36374,8 +36374,8 @@
       "mention": "systemic anti-infection treatment",
       "proposed": "",
       "confidence": "high",
-      "shortlist": "CHEMBL74 | CHEMBL1239",
-      "reason": "The mention is a generic treatment category, and neither cromolyn sodium nor benzyl benzoate is an anti-infection treatment for BCG disease."
+      "shortlist": "CHEMBL:CHEMBL74 | CHEMBL:CHEMBL1239",
+      "reason": "The mention is a generic treatment category, and neither cromolyn sodium (a mast cell stabilizer) nor benzyl benzoate (a scabicide) is a systemic anti-infection treatment."
     },
     {
       "claim_id": "c_000768",
@@ -36410,8 +36410,8 @@
       "mention": "JAK inhibitor",
       "proposed": "",
       "confidence": "high",
-      "shortlist": "CHEMBL2103874 | CHEMBL3545215 | CHEMBL3137336 | CHEMBL1232461 | CHEMBL3301625 | CHEMBL3545155 | CHEMBL4285417 | CHEMBL3265032",
-      "reason": "The mention is a drug class (JAK inhibitors) and no candidate is a general JAK inhibitor; oclacitinib is only one specific JAK inhibitor that merely has 'JAK-I' as a synonym."
+      "shortlist": "CHEMBL:CHEMBL2103874 | CHEMBL:CHEMBL3545215 | CHEMBL:CHEMBL3137336 | CHEMBL:CHEMBL1232461 | CHEMBL:CHEMBL3301625 | CHEMBL:CHEMBL3545155 | CHEMBL:CHEMBL4285417 | CHEMBL:CHEMBL3265032",
+      "reason": "The mention is a generic JAK inhibitor class; no candidate is a general JAK inhibitor, and the listed drugs (e.g., oclacitinib, a specific JAK inhibitor with a 'JAK-I' synonym) are individual agents, not the class used in STAT3-GOF patients."
     },
     {
       "claim_id": "c_000775",
@@ -36419,8 +36419,8 @@
       "mention": "JAK inhibitor",
       "proposed": "",
       "confidence": "high",
-      "shortlist": "CHEMBL2103874 | CHEMBL3545215 | CHEMBL3137336 | CHEMBL1232461 | CHEMBL3301625 | CHEMBL3545155 | CHEMBL4285417 | CHEMBL3265032",
-      "reason": "The mention is a generic drug class (JAK inhibitors), and no candidate is a general JAK inhibitor class; oclacitinib's synonym 'JAK-I' is a specific drug, not the class."
+      "shortlist": "CHEMBL:CHEMBL2103874 | CHEMBL:CHEMBL3545215 | CHEMBL:CHEMBL3137336 | CHEMBL:CHEMBL1232461 | CHEMBL:CHEMBL3301625 | CHEMBL:CHEMBL3545155 | CHEMBL:CHEMBL4285417 | CHEMBL:CHEMBL3265032",
+      "reason": "The mention is a generic drug class (JAK inhibitors, e.g. ruxolitinib/tofacitinib) and no candidate is a general JAK inhibitor; oclacitinib is only a veterinary JAK inhibitor with an incidental 'JAK-I' synonym."
     },
     {
       "claim_id": "c_000776",
@@ -36428,8 +36428,8 @@
       "mention": "JAK inhibitor",
       "proposed": "",
       "confidence": "high",
-      "shortlist": "CHEMBL2103874 | CHEMBL3545215 | CHEMBL3137336 | CHEMBL1232461 | CHEMBL3301625 | CHEMBL3545155 | CHEMBL4285417 | CHEMBL3265032",
-      "reason": "The mention is a drug class (JAK inhibitors), and no candidate is a general JAK inhibitor class node; oclacitinib is only a single specific drug whose synonym 'JAK-I' is a spurious match."
+      "shortlist": "CHEMBL:CHEMBL2103874 | CHEMBL:CHEMBL3545215 | CHEMBL:CHEMBL3137336 | CHEMBL:CHEMBL1232461 | CHEMBL:CHEMBL3301625 | CHEMBL:CHEMBL3545155 | CHEMBL:CHEMBL4285417 | CHEMBL:CHEMBL3265032",
+      "reason": "The mention is the JAK inhibitor drug class, and no candidate is a class node; oclacitinib is only one specific JAK inhibitor matched through a JAK-I synonym, which does not fit this context."
     },
     {
       "claim_id": "c_000777",
@@ -36437,8 +36437,8 @@
       "mention": "TgIST, GRA16, GRA24, and GRA28",
       "proposed": "",
       "confidence": "high",
-      "shortlist": "DRUGBANK:DB16678 | DRUGBANK:DB15559 | CHEMBL4594618 | CHEMBL5315097 | DRUGBANK:DB04959 | DRUGBANK:DB14960 | CHEMBL2105638 | DRUGBANK:DB00015",
-      "reason": "The mention names Toxoplasma gondii effector proteins, and none of the candidates (all drugs) correspond to them."
+      "shortlist": "DRUGBANK:DB16678 | DRUGBANK:DB15559 | CHEMBL:CHEMBL4594618 | CHEMBL:CHEMBL5315097 | DRUGBANK:DB04959 | DRUGBANK:DB14960 | CHEMBL:CHEMBL2105638 | DRUGBANK:DB00015",
+      "reason": "The mention names Toxoplasma gondii effector proteins (TgIST, GRA16, GRA24, GRA28), and none of the drug candidates correspond to them."
     },
     {
       "claim_id": "c_000777",
@@ -36473,8 +36473,8 @@
       "mention": "MYR translocon complex",
       "proposed": "",
       "confidence": "high",
-      "shortlist": "ensembl:ENSG00000106803 | ensembl:ENSG00000065665 | ensembl:ENSG00000058262 | ensembl:ENSG00000132432 | DRUGBANK:DB15763 | ensembl:ENSG00000213560 | DRUGBANK:DB09139 | CHEMBL4297229",
-      "reason": "The MYR translocon is a Toxoplasma gondii parasite protein complex for effector export, and none of the candidates (human SEC61 genes, drugs, a pseudogene) denote it."
+      "shortlist": "ensembl:ENSG00000106803 | ensembl:ENSG00000065665 | ensembl:ENSG00000058262 | ensembl:ENSG00000132432 | DRUGBANK:DB15763 | ensembl:ENSG00000213560 | DRUGBANK:DB09139 | CHEMBL:CHEMBL4297229",
+      "reason": "The MYR translocon is a Toxoplasma gondii parasite protein complex (MYR1/2/3), not a host SEC61 translocon gene or any listed drug."
     },
     {
       "claim_id": "c_000779",
@@ -36509,8 +36509,8 @@
       "mention": "whole genome sequencing",
       "proposed": "",
       "confidence": "high",
-      "shortlist": "CHEMBL2108414 | CHEMBL2109219 | CHEMBL2109070 | DRUGBANK:DB10805 | CHEMBL2108816 | CHEMBL2108466 | CHEMBL2108113 | CHEMBL599552",
-      "reason": "The mention is a genomic sequencing technique, and none of the candidates (drugs, vaccines, and botanical products matched only on the word 'whole') denote it."
+      "shortlist": "CHEMBL:CHEMBL2108414 | CHEMBL:CHEMBL2109219 | CHEMBL:CHEMBL2109070 | DRUGBANK:DB10805 | CHEMBL:CHEMBL2108816 | CHEMBL:CHEMBL2108466 | CHEMBL:CHEMBL2108113 | CHEMBL:CHEMBL599552",
+      "reason": "The mention is a sequencing technique, and none of the candidates (drugs, vaccines, and botanical products matching only on the word 'whole') denotes it."
     },
     {
       "claim_id": "c_000781",
@@ -36535,9 +36535,9 @@
       "role": "subject",
       "mention": "JAK inhibition",
       "proposed": "",
-      "confidence": "medium",
-      "shortlist": "CHEMBL2103874",
-      "reason": "The mention refers to JAK inhibitors as a drug class or approach, and oclacitinib is a single veterinary JAK inhibitor that does not fit the context."
+      "confidence": "high",
+      "shortlist": "CHEMBL:CHEMBL2103874",
+      "reason": "The mention refers to the JAK inhibitor drug class, while the only candidate is oclacitinib, a single veterinary JAK inhibitor, which does not fit the context."
     },
     {
       "claim_id": "c_000784",
@@ -36554,8 +36554,8 @@
       "mention": "IL-6 signaling blockade",
       "proposed": "",
       "confidence": "medium",
-      "shortlist": "DRUGBANK:DB12182 | DRUGBANK:DB15762 | CHEMBL2108591 | DRUGBANK:DB00026 | DRUGBANK:DB14865 | CHEMBL2108119 | CHEMBL3301580 | CHEMBL2107855",
-      "reason": "The mention is a general mechanism (IL-6 pathway blockade), and no candidate is a clear match; satralizumab and elsilimomab are specific IL-6 pathway drugs but not the generic concept."
+      "shortlist": "DRUGBANK:DB12182 | DRUGBANK:DB15762 | CHEMBL:CHEMBL2108591 | DRUGBANK:DB00026 | DRUGBANK:DB14865 | CHEMBL:CHEMBL2108119 | CHEMBL:CHEMBL3301580 | CHEMBL:CHEMBL2107855",
+      "reason": "The mention is a general IL-6 signaling blockade; satralizumab and elsilimomab are specific IL-6 pathway drugs, but neither is clearly the one meant, and tocilizumab (the typical agent in STAT3 GOF) is not listed."
     },
     {
       "claim_id": "c_000786",
@@ -36563,8 +36563,8 @@
       "mention": "Hematopoietic cell transplantation",
       "proposed": "",
       "confidence": "high",
-      "shortlist": "CHEMBL4594311 | CHEMBL2109128 | CHEMBL5315093 | DRUGBANK:DB13144 | CHEMBL2107881 | CHEMBL4297954 | DRUGBANK:DB05386 | DRUGBANK:DB12431",
-      "reason": "The mention is a transplant procedure, and none of the candidates (gene-therapy products or cytokine drugs) denotes it."
+      "shortlist": "CHEMBL:CHEMBL4594311 | CHEMBL:CHEMBL2109128 | CHEMBL:CHEMBL5315093 | DRUGBANK:DB13144 | CHEMBL:CHEMBL2107881 | CHEMBL:CHEMBL4297954 | DRUGBANK:DB05386 | DRUGBANK:DB12431",
+      "reason": "The mention is a transplant procedure, and none of the candidates (specific gene therapy products or cytokines) denotes it."
     },
     {
       "claim_id": "c_000786",
@@ -36626,8 +36626,8 @@
       "mention": "JAK3 p.Leu401Pro",
       "proposed": "mech:JAK3:LoF",
       "confidence": "medium",
-      "shortlist": "mech:JAK3:GoF | ensembl:ENSG00000105639 | mech:JAK3:DN | mech:JAK3:LoF | MONDO:0010938 | CHEMBL1330596 | CHEMBL1201581 | CHEMBL1200862 | EFO:0005565 | MONDO:0022057 | EFO:1001932 | EFO:1000227 | EFO:1002028 | EFO:0009855 | MONDO:0015678 | MONDO:0012803",
-      "reason": "A homozygous damaging JAK3 variant causing autosomal recessive SCID is a loss-of-function mutation, though the mention is a specific variant rather than the gene or disease node."
+      "shortlist": "mech:JAK3:GoF | ensembl:ENSG00000105639 | mech:JAK3:DN | mech:JAK3:LoF | MONDO:0010938 | CHEMBL:CHEMBL1330596 | CHEMBL:CHEMBL1201581 | CHEMBL:CHEMBL1200862 | EFO:0005565 | MONDO:0022057 | EFO:1001932 | EFO:1000227 | EFO:1002028 | EFO:0009855 | MONDO:0015678 | MONDO:0012803",
+      "reason": "A homozygous damaging JAK3 variant causing SCID is loss-of-function, so the LoF mechanism node fits best, though the gene node is a possible alternative."
     },
     {
       "claim_id": "c_000789",
@@ -36653,8 +36653,8 @@
       "mention": "hematopoietic stem cell transplantation",
       "proposed": "",
       "confidence": "high",
-      "shortlist": "CHEMBL4594311 | CHEMBL5315099 | CHEMBL2109128 | DRUGBANK:DB13144 | CHEMBL5315093 | DRUGBANK:DB05386 | CHEMBL2107881 | CHEMBL4297954",
-      "reason": "HSCT is a procedure, and none of the candidates (gene-therapy products, growth factors) denotes generic hematopoietic stem cell transplantation."
+      "shortlist": "CHEMBL:CHEMBL4594311 | CHEMBL:CHEMBL5315099 | CHEMBL:CHEMBL2109128 | DRUGBANK:DB13144 | CHEMBL:CHEMBL5315093 | DRUGBANK:DB05386 | CHEMBL:CHEMBL2107881 | CHEMBL:CHEMBL4297954",
+      "reason": "HSCT is a procedure, and none of the candidates is a generic hematopoietic stem cell transplantation; they are specific gene therapy products or growth factors."
     },
     {
       "claim_id": "c_000790",
@@ -36732,10 +36732,10 @@
       "claim_id": "c_000798",
       "role": "subject",
       "mention": "cord blood transplantation",
-      "proposed": "CHEMBL4594461",
-      "confidence": "low",
-      "shortlist": "CHEMBL4594461 | CHEMBL2108414 | CHEMBL5315067 | CHEMBL2108195 | CHEMBL4594618 | DRUGBANK:DB15561 | DRUGBANK:DB04679 | DRUGBANK:DB11576",
-      "reason": "Cord blood transplantation is a procedure; the closest candidate is autologous cord blood, but the SCID transplant is likely allogeneic, so it is only an approximation."
+      "proposed": "CHEMBL:CHEMBL4594461",
+      "confidence": "medium",
+      "shortlist": "CHEMBL:CHEMBL4594461 | CHEMBL:CHEMBL2108414 | CHEMBL:CHEMBL5315067 | CHEMBL:CHEMBL2108195 | CHEMBL:CHEMBL4594618 | DRUGBANK:DB15561 | DRUGBANK:DB04679 | DRUGBANK:DB11576",
+      "reason": "Autologous cord blood is the closest candidate to cord blood transplantation, though SCID transplants are typically allogeneic, so it is only an approximation."
     },
     {
       "claim_id": "c_000798",
@@ -36904,9 +36904,9 @@
       "role": "subject",
       "mention": "JAK inhibitors",
       "proposed": "",
-      "confidence": "medium",
-      "shortlist": "ensembl:ENSG00000162434 | CHEMBL2103874 | ensembl:ENSG00000105639 | ensembl:ENSG00000096968",
-      "reason": "The mention is a drug class (JAK inhibitors), and no candidate represents the class; oclacitinib is a single veterinary drug and the others are genes."
+      "confidence": "high",
+      "shortlist": "ensembl:ENSG00000162434 | CHEMBL:CHEMBL2103874 | ensembl:ENSG00000105639 | ensembl:ENSG00000096968",
+      "reason": "The mention is the drug class of JAK inhibitors; the candidates are individual JAK genes or a single veterinary drug (oclacitinib), none of which denotes the class."
     },
     {
       "claim_id": "c_000806",
@@ -36922,9 +36922,9 @@
       "role": "subject",
       "mention": "JAK inhibitors",
       "proposed": "",
-      "confidence": "medium",
-      "shortlist": "CHEMBL2103874",
-      "reason": "The mention is the general drug class 'JAK inhibitors' and the only candidate is oclacitinib, a single veterinary JAK inhibitor that does not fit the CNO treatment context."
+      "confidence": "high",
+      "shortlist": "CHEMBL:CHEMBL2103874",
+      "reason": "The mention is the drug class 'JAK inhibitors', and the only candidate is oclacitinib, a single veterinary JAK inhibitor that does not fit the context."
     },
     {
       "claim_id": "c_000808",
@@ -36950,8 +36950,8 @@
       "mention": "ruxolitinib or tofacitinib with dasatinib",
       "proposed": "",
       "confidence": "medium",
-      "shortlist": "CHEMBL1789941 | CHEMBL221959 | CHEMBL4594381 | CHEMBL1795071 | CHEMBL1421 | CHEMBL2103743 | CHEMBL4594382 | CHEMBL5314601",
-      "reason": "The mention is a combination of three separate drugs (ruxolitinib, tofacitinib, dasatinib), so no single candidate node denotes the whole mention."
+      "shortlist": "CHEMBL:CHEMBL1789941 | CHEMBL:CHEMBL221959 | CHEMBL:CHEMBL4594381 | CHEMBL:CHEMBL1795071 | CHEMBL:CHEMBL1421 | CHEMBL:CHEMBL2103743 | CHEMBL:CHEMBL4594382 | CHEMBL:CHEMBL5314601",
+      "reason": "The mention is a combination of three separate drugs, so no single candidate node denotes it; each drug exists only as its own node."
     },
     {
       "claim_id": "c_000810",
@@ -36966,10 +36966,10 @@
       "claim_id": "c_000811",
       "role": "subject",
       "mention": "JAK inhibitor plus dasatinib combination",
-      "proposed": "CHEMBL1421",
+      "proposed": "CHEMBL:CHEMBL1421",
       "confidence": "medium",
-      "shortlist": "CHEMBL3545215 | CHEMBL1421 | CHEMBL5314601 | CHEMBL2103874 | CHEMBL3137336 | CHEMBL3301625 | CHEMBL3265032 | CHEMBL1232461",
-      "reason": "The mention is a combination; dasatinib is the only specific drug named, while the JAK inhibitor is an unspecified class and no single candidate captures the whole combination."
+      "shortlist": "CHEMBL:CHEMBL3545215 | CHEMBL:CHEMBL1421 | CHEMBL:CHEMBL5314601 | CHEMBL:CHEMBL2103874 | CHEMBL:CHEMBL3137336 | CHEMBL:CHEMBL3301625 | CHEMBL:CHEMBL3265032 | CHEMBL:CHEMBL1232461",
+      "reason": "The mention is a combination, and only dasatinib is a specific named drug; the JAK inhibitor is a class, so the best single match is dasatinib."
     },
     {
       "claim_id": "c_000812",
@@ -36977,8 +36977,8 @@
       "mention": "LCK activation",
       "proposed": "ensembl:ENSG00000182866",
       "confidence": "medium",
-      "shortlist": "ensembl:ENSG00000182866 | EFO:0020826 | ensembl:ENSG00000203896 | MONDO:0014334 | CHEMBL4298008 | EFO:0803076 | REACT:R-HSA-112411 | REACT:R-HSA-110056",
-      "reason": "The mention 'LCK activation' refers to activity of the LCK kinase, so the LCK gene is the best candidate, though no activation-specific node exists."
+      "shortlist": "ensembl:ENSG00000182866 | EFO:0020826 | ensembl:ENSG00000203896 | MONDO:0014334 | CHEMBL:CHEMBL4298008 | EFO:0803076 | REACT:R-HSA-112411 | REACT:R-HSA-110056",
+      "reason": "The mention 'LCK activation' refers to activation of the LCK kinase, so the LCK gene/protein node is the best fit, though no activation-specific node exists."
     },
     {
       "claim_id": "c_000813",
@@ -37022,8 +37022,8 @@
       "mention": "JAK inhibitors",
       "proposed": "",
       "confidence": "high",
-      "shortlist": "CHEMBL2103874",
-      "reason": "The mention refers to the JAK inhibitor drug class in myelofibrosis (e.g., ruxolitinib), while the only candidate is oclacitinib, a single veterinary drug, which does not fit."
+      "shortlist": "CHEMBL:CHEMBL2103874",
+      "reason": "The mention is the drug class of JAK inhibitors (e.g., ruxolitinib), and the only candidate, oclacitinib, is a single veterinary JAK inhibitor that does not fit the myelofibrosis context."
     },
     {
       "claim_id": "c_000817",
@@ -37067,8 +37067,8 @@
       "mention": "targeted biologics",
       "proposed": "",
       "confidence": "high",
-      "shortlist": "CHEMBL4297595",
-      "reason": "'Targeted biologics' is a generic drug class, while lisavanbulin is a specific small-molecule microtubule-targeting agent, not a biologic for Hyper IgE Syndrome."
+      "shortlist": "CHEMBL:CHEMBL4297595",
+      "reason": "'Targeted biologics' is a generic drug class; lisavanbulin is a small-molecule microtubule agent, not a biologic or relevant to Hyper IgE Syndrome."
     },
     {
       "claim_id": "c_000821",
@@ -37103,8 +37103,8 @@
       "mention": "SIN-IL2RG-LV lentiviral gene therapy",
       "proposed": "",
       "confidence": "high",
-      "shortlist": "CHEMBL4594311 | DRUGBANK:DB13932 | DRUGBANK:DB13173 | CHEMBL4298008 | DRUGBANK:DB06379 | DRUGBANK:DB14782 | CHEMBL1200381 | CHEMBL3301668",
-      "reason": "The mention is an experimental X-SCID lentiviral IL2RG gene therapy, and none of the candidates (betibeglogene for beta-thalassemia, voretigene, etc.) is that product."
+      "shortlist": "CHEMBL:CHEMBL4594311 | DRUGBANK:DB13932 | DRUGBANK:DB13173 | CHEMBL:CHEMBL4298008 | DRUGBANK:DB06379 | DRUGBANK:DB14782 | CHEMBL:CHEMBL1200381 | CHEMBL:CHEMBL3301668",
+      "reason": "None of the candidates is an IL2RG lentiviral gene therapy; betibeglogene autotemcel is a lentiviral therapy for beta-globin, a different product."
     },
     {
       "claim_id": "c_000825",
@@ -37211,8 +37211,8 @@
       "mention": "JAK2V617F variant allele frequency",
       "proposed": "",
       "confidence": "high",
-      "shortlist": "CHEMBL1201825 | EFO:0009860 | EFO:0803322 | EFO:0009862 | MONDO:0007403 | EFO:0009861 | EFO:1001233 | EFO:0020678",
-      "reason": "The mention is a JAK2V617F variant allele frequency measure, and none of the candidates (drug, chromosomal aberration frequency, CJD, HLA status) denotes it."
+      "shortlist": "CHEMBL:CHEMBL1201825 | EFO:0009860 | EFO:0803322 | EFO:0009862 | MONDO:0007403 | EFO:0009861 | EFO:1001233 | EFO:0020678",
+      "reason": "None of the candidates denotes JAK2V617F variant allele frequency or the associated JAK2 gain-of-function disease; all are unrelated."
     },
     {
       "claim_id": "c_000837",
@@ -37236,10 +37236,10 @@
       "claim_id": "c_000841",
       "role": "subject",
       "mention": "Fludarabine",
-      "proposed": "CHEMBL1568",
+      "proposed": "CHEMBL:CHEMBL1568",
       "confidence": "medium",
-      "shortlist": "CHEMBL1096882 | CHEMBL1568",
-      "reason": "The mention 'Fludarabine' matches the parent compound exactly, though the phosphate prodrug (CHEMBL1096882) also lists it as a synonym and is the form usually administered."
+      "shortlist": "CHEMBL:CHEMBL1096882 | CHEMBL:CHEMBL1568",
+      "reason": "The mention 'Fludarabine' matches the parent compound node exactly, while the phosphate is a prodrug salt form that also lists 'Fludarabine' as a synonym."
     },
     {
       "claim_id": "c_000841",
@@ -37290,10 +37290,10 @@
       "claim_id": "c_000844",
       "role": "subject",
       "mention": "Fludarabine",
-      "proposed": "CHEMBL1568",
+      "proposed": "CHEMBL:CHEMBL1568",
       "confidence": "medium",
-      "shortlist": "CHEMBL1096882 | CHEMBL1568 | mech:STAT1:GoF | mech:STAT1:LoF | mech:STAT1:DN",
-      "reason": "Mention 'Fludarabine' matches the parent drug CHEMBL1568 exactly, though the phosphate prodrug CHEMBL1096882 also lists it as a synonym."
+      "shortlist": "CHEMBL:CHEMBL1096882 | CHEMBL:CHEMBL1568 | mech:STAT1:GoF | mech:STAT1:LoF | mech:STAT1:DN",
+      "reason": "The mention 'Fludarabine' matches the parent drug node (CHEMBL1568) exactly, though the phosphate prodrug node (CHEMBL1096882) also lists it as a synonym."
     },
     {
       "claim_id": "c_000844",
@@ -37373,8 +37373,8 @@
       "mention": "STAT3 Y360C",
       "proposed": "mech:STAT3:GoF",
       "confidence": "medium",
-      "shortlist": "ensembl:ENSG00000168610 | mech:STAT3:DN | mech:STAT3:GoF | mech:STAT3:LoF | CHEMBL3392776 | ensembl:ENSG00000255874 | ensembl:ENSG00000270607",
-      "reason": "The paper title calls STAT3 Y360C a gain-of-function variant, so the GoF mechanism fits best, though the quoted context describes dominant-negative-like inhibition of wild-type STAT3 nuclear translocation."
+      "shortlist": "ensembl:ENSG00000168610 | mech:STAT3:DN | mech:STAT3:GoF | mech:STAT3:LoF | CHEMBL:CHEMBL3392776 | ensembl:ENSG00000255874 | ensembl:ENSG00000270607",
+      "reason": "The paper title calls STAT3 Y360C a gain-of-function variant, but the context describes it inhibiting wild-type STAT3 nuclear translocation, which is dominant-negative-like, so the mechanism is not certain."
     },
     {
       "claim_id": "c_000849",
@@ -37409,8 +37409,8 @@
       "mention": "HDR-based CRISPR-Cas9 T cell SNV correction",
       "proposed": "",
       "confidence": "high",
-      "shortlist": "CHEMBL4650326 | CHEMBL4802202 | CHEMBL4297922 | CHEMBL4594479 | CHEMBL4298199 | DRUGBANK:DB15395 | CHEMBL4297827 | CHEMBL1201478",
-      "reason": "The mention is a gene-editing method (HDR-based CRISPR-Cas9 SNV correction), not any of the listed drugs, which are unrelated compounds, antibodies, or CAR-T products."
+      "shortlist": "CHEMBL:CHEMBL4650326 | CHEMBL:CHEMBL4802202 | CHEMBL:CHEMBL4297922 | CHEMBL:CHEMBL4594479 | CHEMBL:CHEMBL4298199 | DRUGBANK:DB15395 | CHEMBL:CHEMBL4297827 | CHEMBL:CHEMBL1201478",
+      "reason": "The mention is a gene-editing technique, and none of the candidate drugs (terevalefim, CV-8102, idecabtagene vicleucel, etc.) denotes it."
     },
     {
       "claim_id": "c_000855",
@@ -37418,8 +37418,8 @@
       "mention": "HDR-based CRISPR-Cas9 T cell SNV correction",
       "proposed": "",
       "confidence": "high",
-      "shortlist": "CHEMBL4650326 | ensembl:ENSG00000163600 | ensembl:ENSG00000211689 | ensembl:ENSG00000211716 | ensembl:ENSG00000163519 | ensembl:ENSG00000113263 | ensembl:ENSG00000211695 | ensembl:ENSG00000205274",
-      "reason": "The mention describes a gene-editing method (HDR-based CRISPR-Cas9 SNV correction in T cells), not any listed gene or drug; candidates only match incidental words like 'T cell' or 'SNV'."
+      "shortlist": "CHEMBL:CHEMBL4650326 | ensembl:ENSG00000163600 | ensembl:ENSG00000211689 | ensembl:ENSG00000211716 | ensembl:ENSG00000163519 | ensembl:ENSG00000113263 | ensembl:ENSG00000211695 | ensembl:ENSG00000205274",
+      "reason": "The mention describes a gene-editing method (HDR-based CRISPR-Cas9 SNV correction in T cells), not any listed drug or gene."
     },
     {
       "claim_id": "c_000855",
@@ -37452,10 +37452,10 @@
       "claim_id": "c_000858",
       "role": "subject",
       "mention": "tasquinimod plus ruxolitinib",
-      "proposed": "CHEMBL2107784",
+      "proposed": "",
       "confidence": "medium",
-      "shortlist": "CHEMBL1789941 | CHEMBL2107784 | CHEMBL1795071 | CHEMBL4594381 | CHEMBL4594382 | CHEMBL2108785 | CHEMBL1224 | CHEMBL113",
-      "reason": "The mention is a combination of two drugs; tasquinimod is the primary subject drug, and ruxolitinib is a separate candidate, so tasquinimod is the best single match."
+      "shortlist": "CHEMBL:CHEMBL1789941 | CHEMBL:CHEMBL2107784 | CHEMBL:CHEMBL1795071 | CHEMBL:CHEMBL4594381 | CHEMBL:CHEMBL4594382 | CHEMBL:CHEMBL2108785 | CHEMBL:CHEMBL1224 | CHEMBL:CHEMBL113",
+      "reason": "The mention is a combination of two drugs; no single candidate covers both, and tasquinimod and ruxolitinib are separate nodes."
     },
     {
       "claim_id": "c_000858",
@@ -37472,8 +37472,8 @@
       "mention": "tasquinimod plus ruxolitinib",
       "proposed": "",
       "confidence": "medium",
-      "shortlist": "CHEMBL1789941 | CHEMBL2107784 | CHEMBL1795071 | CHEMBL4594381 | CHEMBL4594382 | CHEMBL2108785 | CHEMBL1224 | CHEMBL113",
-      "reason": "The mention is a combination of two drugs, and no candidate denotes the combination; tasquinimod and ruxolitinib are separate nodes, so linking either one alone would be partial."
+      "shortlist": "CHEMBL:CHEMBL1789941 | CHEMBL:CHEMBL2107784 | CHEMBL:CHEMBL1795071 | CHEMBL:CHEMBL4594381 | CHEMBL:CHEMBL4594382 | CHEMBL:CHEMBL2108785 | CHEMBL:CHEMBL1224 | CHEMBL:CHEMBL113",
+      "reason": "The mention is a combination of two drugs, and no single candidate covers both; tasquinimod and ruxolitinib exist only as separate nodes."
     },
     {
       "claim_id": "c_000859",
@@ -37508,8 +37508,8 @@
       "mention": "JAK inhibitors",
       "proposed": "",
       "confidence": "high",
-      "shortlist": "CHEMBL2103874",
-      "reason": "The mention is the general drug class of JAK inhibitors, and the only candidate is oclacitinib, a single veterinary JAK inhibitor, which is not equivalent to the class."
+      "shortlist": "CHEMBL:CHEMBL2103874",
+      "reason": "The mention is the general drug class of JAK inhibitors, while the only candidate is a single drug (oclacitinib), which does not fit the context."
     },
     {
       "claim_id": "c_000863",
@@ -37679,8 +37679,8 @@
       "mention": "Th17 cells",
       "proposed": "",
       "confidence": "high",
-      "shortlist": "CHEMBL4802259 | CHEMBL3301574 | CHEMBL4650287 | DRUGBANK:DB13881 | DRUGBANK:DB13915 | CHEMBL5095482 | CHEMBL4594618 | CHEMBL5315097",
-      "reason": "Th17 cells are a native T helper cell subset, and none of the candidates is a Th17 cell entity; they are engineered CAR-T or other cell therapy drugs."
+      "shortlist": "CHEMBL:CHEMBL4802259 | CHEMBL:CHEMBL3301574 | CHEMBL:CHEMBL4650287 | DRUGBANK:DB13881 | DRUGBANK:DB13915 | CHEMBL:CHEMBL5095482 | CHEMBL:CHEMBL4594618 | CHEMBL:CHEMBL5315097",
+      "reason": "Th17 cells are a native T helper cell subset, and none of the candidates (CAR-T or other cell-therapy products) denotes that cell type."
     },
     {
       "claim_id": "c_000879",
@@ -37688,8 +37688,8 @@
       "mention": "Th2 cells",
       "proposed": "",
       "confidence": "high",
-      "shortlist": "ensembl:ENSG00000223442 | CHEMBL4802259 | ensembl:ENSG00000213658 | ensembl:ENSG00000086730 | ensembl:ENSG00000112195 | CHEMBL3301574 | CHEMBL4650287 | ensembl:ENSG00000095970",
-      "reason": "The mention refers to the Th2 T helper cell type, which is a cell population and none of the candidates (a lncRNA gene, CAR-T drugs, unrelated genes) denotes it."
+      "shortlist": "ensembl:ENSG00000223442 | CHEMBL:CHEMBL4802259 | ensembl:ENSG00000213658 | ensembl:ENSG00000086730 | ensembl:ENSG00000112195 | CHEMBL:CHEMBL3301574 | CHEMBL:CHEMBL4650287 | ensembl:ENSG00000095970",
+      "reason": "Th2 cells are a T helper cell type, not any of the listed genes or cell-therapy drugs."
     },
     {
       "claim_id": "c_000879",
@@ -37706,8 +37706,8 @@
       "mention": "AARS1 knockdown or LPCAT2-K375 mutation",
       "proposed": "",
       "confidence": "high",
-      "shortlist": "CHEMBL2051955 | CHEMBL168276 | CHEMBL41632 | CHEMBL373742 | CHEMBL953 | CHEMBL1200559 | CHEMBL1544 | DRUGBANK:DB14240",
-      "reason": "The mention describes genetic manipulations (AARS1 knockdown, LPCAT2-K375 mutation), not any of the listed drugs; lactic acid is only tangentially related to lactylation."
+      "shortlist": "CHEMBL:CHEMBL2051955 | CHEMBL:CHEMBL168276 | CHEMBL:CHEMBL41632 | CHEMBL:CHEMBL373742 | CHEMBL:CHEMBL953 | CHEMBL:CHEMBL1200559 | CHEMBL:CHEMBL1544 | DRUGBANK:DB14240",
+      "reason": "The mention is a genetic intervention (AARS1 knockdown or LPCAT2 K375 mutation), not any of the listed drugs."
     },
     {
       "claim_id": "c_000883",
@@ -37777,9 +37777,9 @@
       "role": "subject",
       "mention": "JAK inhibitors",
       "proposed": "",
-      "confidence": "medium",
-      "shortlist": "CHEMBL2103874",
-      "reason": "The mention is the JAK inhibitor drug class, while the only candidate is oclacitinib, a single veterinary JAK inhibitor that does not fit this human STAT1 GOF context."
+      "confidence": "high",
+      "shortlist": "CHEMBL:CHEMBL2103874",
+      "reason": "The mention is the drug class of JAK inhibitors, while the only candidate is oclacitinib, a single veterinary JAK inhibitor that does not fit the clinical context."
     },
     {
       "claim_id": "c_000891",
@@ -37787,8 +37787,8 @@
       "mention": "allogeneic hematopoietic stem cell transplantation",
       "proposed": "",
       "confidence": "high",
-      "shortlist": "CHEMBL5315097 | CHEMBL4594311 | CHEMBL2109128 | CHEMBL5315099 | CHEMBL5315093 | DRUGBANK:DB13144 | DRUGBANK:DB12431 | CHEMBL2107881",
-      "reason": "The mention is a transplant procedure, and none of the candidates (specific gene-modified cell products and growth factors) denotes allogeneic HSCT."
+      "shortlist": "CHEMBL:CHEMBL5315097 | CHEMBL:CHEMBL4594311 | CHEMBL:CHEMBL2109128 | CHEMBL:CHEMBL5315099 | CHEMBL:CHEMBL5315093 | DRUGBANK:DB13144 | DRUGBANK:DB12431 | CHEMBL:CHEMBL2107881",
+      "reason": "The mention is a transplant procedure, and none of the candidates (specific gene therapies or cytokine drugs) represents allogeneic HSCT."
     },
     {
       "claim_id": "c_000892",
@@ -37804,9 +37804,9 @@
       "role": "subject",
       "mention": "JAK inhibitors",
       "proposed": "",
-      "confidence": "medium",
-      "shortlist": "CHEMBL2103874",
-      "reason": "The mention is the JAK inhibitor drug class, but the only candidate is oclacitinib, a single veterinary JAK inhibitor, which does not fit the context."
+      "confidence": "high",
+      "shortlist": "CHEMBL:CHEMBL2103874",
+      "reason": "The mention is a drug class (JAK inhibitors) and the only candidate is oclacitinib, a single veterinary JAK inhibitor that does not fit the context."
     },
     {
       "claim_id": "c_000894",
@@ -38046,19 +38046,19 @@
       "claim_id": "c_000915",
       "role": "subject",
       "mention": "Ropeginterferon alfa-2b",
-      "proposed": "CHEMBL4297819",
+      "proposed": "CHEMBL:CHEMBL4297819",
       "confidence": "medium",
-      "shortlist": "CHEMBL4297819 | DRUGBANK:DB15119",
-      "reason": "Both CHEMBL4297819 and DRUGBANK:DB15119 denote ropeginterferon alfa-2b; CHEMBL lists the exact mention as a synonym, so it is chosen, but the two are near-duplicates and the choice is not clearly better than the DrugBank entry."
+      "shortlist": "CHEMBL:CHEMBL4297819 | DRUGBANK:DB15119",
+      "reason": "Both the ChEMBL and DrugBank nodes denote ropeginterferon alfa-2b with identical names, so they are duplicates and either fits; I chose the ChEMBL node, which lists more synonyms."
     },
     {
       "claim_id": "c_000916",
       "role": "subject",
       "mention": "Ropeginterferon alfa-2b",
-      "proposed": "CHEMBL4297819",
+      "proposed": "DRUGBANK:DB15119",
       "confidence": "medium",
-      "shortlist": "CHEMBL4297819 | DRUGBANK:DB15119 | mech:JAK2:GoF | mech:JAK2:LoF | mech:JAK2:DN | mech:JAK2:GoF:somatic | clinvar:4075419 | clinvar:2136729 | clinvar:134563 | clinvar:14664 | clinvar:14662",
-      "reason": "The mention is the drug ropeginterferon alfa-2b; CHEMBL and DrugBank nodes are equivalent duplicates, and CHEMBL4297819 is chosen with no clear way to prefer it."
+      "shortlist": "CHEMBL:CHEMBL4297819 | DRUGBANK:DB15119 | mech:JAK2:GoF | mech:JAK2:LoF | mech:JAK2:DN | mech:JAK2:GoF:somatic | clinvar:4075419 | clinvar:2136729 | clinvar:134563 | clinvar:14664 | clinvar:14662",
+      "reason": "The mention is the drug ropeginterferon alfa-2b, which appears as near-duplicate nodes in ChEMBL and DrugBank; DrugBank is chosen arbitrarily since both denote the same drug."
     },
     {
       "claim_id": "c_000916",
@@ -38082,10 +38082,10 @@
       "claim_id": "c_000919",
       "role": "subject",
       "mention": "topical ruxolitinib",
-      "proposed": "CHEMBL1789941",
+      "proposed": "CHEMBL:CHEMBL1789941",
       "confidence": "medium",
-      "shortlist": "CHEMBL1789941 | CHEMBL1795071 | CHEMBL4594381 | CHEMBL4594382 | DRUGBANK:DB11300 | CHEMBL2108110 | CHEMBL2108052",
-      "reason": "The mention names ruxolitinib; the topical formulation is Opzelura (ruxolitinib phosphate), but the parent drug node best matches the generic mention."
+      "shortlist": "CHEMBL:CHEMBL1789941 | CHEMBL:CHEMBL1795071 | CHEMBL:CHEMBL4594381 | CHEMBL:CHEMBL4594382 | DRUGBANK:DB11300 | CHEMBL:CHEMBL2108110 | CHEMBL:CHEMBL2108052",
+      "reason": "The mention names ruxolitinib; the parent drug node fits best, though the topical formulation (Opzelura) corresponds to the phosphate salt node."
     },
     {
       "claim_id": "c_000920",
