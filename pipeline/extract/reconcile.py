@@ -166,9 +166,9 @@ class NodeIndex:
 
 
 MECHANISM_HINT = ("The candidates are mechanism classes, not specific molecular effects. Pick the class the "
-                  "described effect belongs to: the direction the claim or quote states or directly implies for "
+                  "described effect belongs to: the direction the claim, quote or paper title states or directly implies for "
                   "this gene or variant (e.g. a finding about a gain-of-function variant belongs to that gene's "
-                  "gain-of-function class). Use 'high' when the claim or quote names the direction.")
+                  "gain-of-function class). Use 'high' when the claim, quote or paper title names the direction.")
 DISEASE_HINT = ("A mention naming a gene's mutation class (e.g. 'X GOF', 'X gain-of-function patients', "
                 "'X LOF') refers to the disease that mutation class causes: pick the Disease candidate caused by "
                 "that gene in that direction, if one is listed.")
@@ -249,6 +249,7 @@ def _disease_extras(mention: str, claim: dict, gene_diseases: dict[str, list[str
 
 def link_claims(claims: list[dict], nodes: list[dict], embed: Embedder | None = None,
                 parser: Parser | None = None, *, gene_diseases: dict[str, list[str]] | None = None,
+                titles: dict[str, str] | None = None,
                 variant_lookup: Callable[[str, str], list[dict]] | None = None,
                 index: NodeIndex | None = None, workers: int = 1) -> tuple[dict, list[dict]]:
     """Returns ({claim_id: {"subject": id|None, "object": id|None, "variant": id|None|""}}, review rows).
@@ -271,9 +272,13 @@ def link_claims(claims: list[dict], nodes: list[dict], embed: Embedder | None = 
             extra: list[str] = []
             if "Disease" in types:
                 extra = _disease_extras(mention, c, gene_diseases)
+            role_ctx = ctx
             if "Mechanism" in types:
                 g = _cluster_symbol(mention, c["subject"], c["object"], c["quote"])
                 extra += [i for i in index.nodes if i.startswith(f"mech:{g}:")] if g else []
+                # The source paper's title often states the direction the abstract sentence leaves implicit.
+                if titles and titles.get(c["paper"]):
+                    role_ctx = f"{ctx}; paper title: {titles[c['paper']]}"
             if "Variant" in types and variant_lookup is not None:
                 m = _PROTEIN_CHANGE.search(c.get("variant") or mention)
                 g = _cluster_symbol(mention, c["subject"], c["object"], c["quote"])
@@ -283,8 +288,8 @@ def link_claims(claims: list[dict], nodes: list[dict], embed: Embedder | None = 
                         extra.append(v["id"])
             # Exact matches need no context, so they share one key across claims.
             key = (role, mention, tuple(sorted(types)), tuple(extra),
-                   "" if len(index.exact_hits(mention, types)) == 1 else ctx)
-            requests.setdefault(key, {"mention": mention, "context": ctx, "types": types, "extra": extra})
+                   "" if len(index.exact_hits(mention, types)) == 1 else role_ctx)
+            requests.setdefault(key, {"mention": mention, "context": role_ctx, "types": types, "extra": extra})
             plan.append((c["id"], role, mention, key))
 
     index.prefetch([(r["mention"], r["types"]) for r in requests.values()
@@ -433,7 +438,9 @@ def main() -> None:
     papers = pubmed["papers"]
     nodes = list(backbone.load_nodes())
     index = NodeIndex(nodes)
+    titles = {(f"pmid:{p['pmid']}" if p["pmid"] else f"doi:{p['doi']}"): p["title"] for p in papers}
     links, review = link_claims(raw["claims"], nodes, index=index, gene_diseases=backbone.gene_linked_diseases(),
+                                titles=titles,
                                 variant_lookup=backbone.clinvar_variants,
                                 workers=int(os.environ.get("ATLAS_LLM_WORKERS", "8")))
     graph_path = build / "graph.json"

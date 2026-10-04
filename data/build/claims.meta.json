@@ -1,5 +1,5 @@
 {
- "built_at": "2026-10-03T22:26:29+00:00",
+ "built_at": "2026-10-04T01:52:29+00:00",
  "resolved_against": "optimuskg backbone",
  "stats": {
   "extraction": {
@@ -13,11 +13,11 @@
   },
   "reconcile": {
    "claims": 935,
-   "fully_resolved": 168,
-   "unresolved_subject_or_object": 757,
-   "unresolved_variant": 10
+   "fully_resolved": 179,
+   "unresolved_subject_or_object": 743,
+   "unresolved_variant": 13
   },
-  "review_rows": 1090
+  "review_rows": 1074
  },
  "nodes": [
   {
@@ -115,31 +115,6 @@
    ],
    "props": {
     "backbone_id": "CHEMBL1789941"
-   }
-  },
-  {
-   "id": "CHEMBL1908360",
-   "type": "Drug",
-   "label": "everolimus",
-   "synonyms": [
-    "40-O-(2-hydroxyethyl)-rapamycin",
-    "42-O-(2-Hydroxyethyl)rapamycin",
-    "Everolimus",
-    "évérolimus",
-    "RAD 666",
-    "RAD-001",
-    "RAD-666",
-    "RAD001",
-    "SDZ-RAD",
-    "Sdz rad",
-    "Afinitor",
-    "Afinitor disperz",
-    "Certican",
-    "Votubia",
-    "Zortress"
-   ],
-   "props": {
-    "backbone_id": "CHEMBL1908360"
    }
   },
   {
@@ -367,15 +342,6 @@
    "synonyms": [],
    "props": {
     "backbone_id": "EFO_0000220"
-   }
-  },
-  {
-   "id": "EFO:0000479",
-   "type": "Disease",
-   "label": "essential thrombocythemia",
-   "synonyms": [],
-   "props": {
-    "backbone_id": "EFO_0000479"
    }
   },
   {
@@ -1712,6 +1678,13 @@
    }
   },
   {
+   "id": "REACT:R-HSA-1059683",
+   "type": "Pathway",
+   "label": "Interleukin-6 signaling",
+   "synonyms": [],
+   "props": {}
+  },
+  {
    "id": "REACT:R-HSA-1266695",
    "type": "Pathway",
    "label": "Interleukin-7 signaling",
@@ -1977,6 +1950,32 @@
    "props": {
     "symbol": "TBX21",
     "backbone_id": "ENSG00000073861"
+   }
+  },
+  {
+   "id": "ensembl:ENSG00000087253",
+   "type": "Gene",
+   "label": "LPCAT2",
+   "synonyms": [
+    "lysophosphatidylcholine acyltransferase 2",
+    "LPCAT2",
+    "AGPAT11",
+    "AYTL1",
+    "LPC acyltransferase 2",
+    "LPCAT-2",
+    "LysoPC acyltransferase 2",
+    "1-AGP acyltransferase 11",
+    "1-AGPAT 11",
+    "Acetyl-CoA:lyso-PAF acetyltransferase",
+    "Lyso-PAF acetyltransferase",
+    "LysoPAFAT",
+    "LPAAT-alpha",
+    "FLJ20481",
+    "LPLAT9"
+   ],
+   "props": {
+    "symbol": "LPCAT2",
+    "backbone_id": "ENSG00000087253"
    }
   },
   {
@@ -2436,6 +2435,32 @@
    }
   },
   {
+   "id": "ensembl:ENSG00000171608",
+   "type": "Gene",
+   "label": "PIK3CD",
+   "synonyms": [
+    "phosphatidylinositol-4,5-bisphosphate 3-kinase catalytic subunit delta",
+    "PIK3CD",
+    "PI3-kinase subunit delta",
+    "PI3K-delta",
+    "PI3Kdelta",
+    "PtdIns-3-kinase subunit delta",
+    "PtdIns-3-kinase subunit p110-delta",
+    "p110delta",
+    "p110D",
+    "APDS",
+    "IMD14",
+    "IMD14A",
+    "IMD14B",
+    "PI3K",
+    "ROCHIS"
+   ],
+   "props": {
+    "symbol": "PIK3CD",
+    "backbone_id": "ENSG00000171608"
+   }
+  },
+  {
    "id": "ensembl:ENSG00000171611",
    "type": "Gene",
    "label": "PTCRA",
@@ -2586,23 +2611,6 @@
     "gene_symbol": "JAK2",
     "direction": "GoF",
     "somatic": true
-   }
-  },
-  {
-   "id": "mech:JAK3:GoF",
-   "type": "Mechanism",
-   "label": "JAK3 gain of function",
-   "synonyms": [
-    "JAK3 GoF",
-    "JAK3 gain of function",
-    "JAK3 gain-of-function",
-    "JAK3 GoF mutations",
-    "gain of function JAK3 mutations",
-    "JAK3 gain of function variants"
-   ],
-   "props": {
-    "gene_symbol": "JAK3",
-    "direction": "GoF"
    }
   },
   {
