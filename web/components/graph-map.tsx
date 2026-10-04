@@ -12,6 +12,7 @@ import { useRouter } from "next/navigation";
 import { useReducedMotion } from "motion/react";
 import type { Graph } from "@/lib/types";
 import { neighborhoodElements } from "@/lib/graph";
+import { displayLabel } from "@/lib/display";
 import { themeOf } from "@/lib/type-theme";
 import {
   beginNodeDrag,
@@ -107,8 +108,9 @@ export function GraphMap({ graph, centerId }: { graph: Graph; centerId: string }
       const theme = themeOf(node.type);
       return {
         id: node.id,
-        label: node.label,
+        label: displayLabel(node.label, node.type),
         type: node.type,
+        detail: ["Variant", "Paper", "Investigator"].includes(node.type),
         clusterColor: colorOf(clusterOf[node.id]),
         typeColor: theme.hex,
         shape: theme.shape,
@@ -373,10 +375,10 @@ export function GraphMap({ graph, centerId }: { graph: Graph; centerId: string }
         </div>}
         <div className="pointer-events-none absolute bottom-4 left-4 rounded-full border border-slate-500/40 bg-slate-950/75 px-3 py-1.5 text-[11px] font-medium text-slate-200 backdrop-blur-sm">Drag nodes · Pan the canvas · Scroll to zoom · Click edges for evidence</div>
       </div>
+      {/* Cluster-id swatch list removed: cluster ids are serial numbers
+          (cl_001…) that mean nothing to a reader. Fill color still encodes
+          cluster membership; the line below explains the encoding. */}
       <div className="mt-4 flex flex-wrap items-center gap-x-5 gap-y-2 rounded-xl border border-slate-200 bg-white px-4 py-3 text-xs text-slate-600">
-        <span className="font-semibold text-slate-800">Map key</span>
-        {legend.clusters.map((cluster) => <span key={cluster.id} className="inline-flex items-center gap-1.5"><span className="size-2.5 rounded-full" style={{ backgroundColor: cluster.color }} />{cluster.id}</span>)}
-        <span className="inline-flex items-center gap-1.5"><span className="size-2.5 rounded-full" style={{ backgroundColor: NO_CLUSTER_COLOR }} />no cluster</span>
         <span className="text-slate-400">Fill = cluster · Shape + outline = type · Dashed = inferred or bridge</span>
         <span className="flex flex-wrap items-center gap-3">
           {legend.types.map((type) => {

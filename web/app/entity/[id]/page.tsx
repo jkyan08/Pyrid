@@ -12,6 +12,7 @@ import { useParams, useSearchParams } from "next/navigation";
 import type { EntityView, ExplainResponse, Graph } from "@/lib/types";
 import { apiEntity, apiExplain, apiGraph, apiMechanismSearch, NotFoundError } from "@/lib/api";
 import { SourceLabel, TypeBadge, TypeGlyph } from "@/components/badges";
+import { displayLabel } from "@/lib/display";
 import { themeOf } from "@/lib/type-theme";
 import { CitationChip, CitationText } from "@/components/citation-text";
 import { CoverageTable } from "@/components/coverage-table";
@@ -145,7 +146,7 @@ function EntityPageView({ id }: { id: string }) {
           <div className="min-w-0">
             <p className={`text-xs font-bold uppercase tracking-[0.16em] ${theme.text}`}>{purpose.eyebrow}</p>
             <h1 className="mt-2 text-2xl font-semibold leading-tight tracking-[-0.035em] text-slate-950 sm:text-4xl">
-              {entity.node.label}
+              {displayLabel(entity.node.label, entity.node.type)}
             </h1>
             <p className="mt-2 max-w-2xl text-sm leading-6 text-slate-600">{purpose.description}</p>
             <div className="mt-4 flex flex-wrap items-center gap-2 text-xs text-slate-600">
@@ -157,9 +158,16 @@ function EntityPageView({ id }: { id: string }) {
                 </span>
               ))}
             </div>
-          {(entity.node.synonyms?.length ?? 0) > 0 && (
+          {((entity.node.synonyms?.length ?? 0) > 0 ||
+            displayLabel(entity.node.label, entity.node.type) !== entity.node.label) && (
             <p className="mt-3 text-xs text-gray-500">
-              Also known as: {entity.node.synonyms!.join(", ")}
+              Also known as:{" "}
+              {[
+                ...(displayLabel(entity.node.label, entity.node.type) !== entity.node.label
+                  ? [entity.node.label]
+                  : []),
+                ...(entity.node.synonyms ?? []),
+              ].join(", ")}
             </p>
           )}
           </div>
