@@ -258,25 +258,26 @@ Raw inputs are always kept in `confidence_basis`.
 
 ### Similarity (`pipeline/graph/similarity.py`)
 
-Between mechanism-level disease entities:
+Between candidate diseases (every Disease node with ≥ 1 mechanism edge or ≥ 1 phenotype that carries information content):
 
 ```
-sim = w_m · mechanism_score          # same pathway step, same direction, same origin
-    + w_p · ic_weighted_phenotype_overlap
-    − w_c · conflict_penalty         # opposite direction on same gene/pathway; germline vs somatic
+score = w_m · mechanism_score          # mean of same_direction, same_origin, shared_pathway (Jaccard of the genes' Reactome/GO pathways)
+      + w_p · phenotype_overlap         # IC-weighted Jaccard over ancestor-closed HPO sets (IC from all 12,882 HPO-annotated diseases)
+      − w_c · conflict_penalty          # 1.0 opposite direction on the same gene · 0.5 opposite direction in a shared pathway · 1.0 germline vs somatic
 ```
 
-Full score breakdown stored on every similarity edge so the UI can say *why* two diseases are neighbours. Penalties are **general rules** documented here — never special-cased for specific genes.
+An unknown origin scores 0 (no evidence of a shared origin), edges need `score ≥ 0.2` (a shared pathway set alone, w_m/3 ≈ 0.17, never makes an edge) and survive if they are in either disease's top 10. Every `similar_to` edge is `inferred`, confidence = 0.5 × score, with the full breakdown (components, weights, shared phenotypes with their IC) in `confidence_basis` so the UI can say *why* two diseases are neighbours. All numbers live in `pipeline/seeds/logic.yaml`; nothing names a gene or disease.
 
 ### Clustering (`pipeline/graph/cluster.py`)
 
-- Leiden on the similarity graph.
-- Re-run at three weightings of (w_m, w_p, w_c); a cluster whose membership holds across all three is `robust`, otherwise `sensitive`.
-- **Ablation:** re-run with penalties off (phenotype + pathway only) and report whether tests 1–3 still pass. _(results to fill)_
+- **Signed Leiden**: positive layer = `similar_to` edges; negative layer = *repulsions*, the candidate pairs whose conflict penalty outweighs their similarity (never exported as edges). `leidenalg` optimises both layers jointly with a fixed seed, so penalised pairs are pushed apart instead of relying on modularity alone.
+- Three weightings (`balanced` 0.5/0.4/0.6 → primary; `phenotype_heavy` 0.35/0.55/0.6; `mechanism_heavy` 0.6/0.25/0.5). A cluster is `robust` when its primary membership matches a cluster in **every** other weighting with Jaccard ≥ 0.8, else `sensitive`. Clusters are a partition over Disease nodes; `why` carries dominant direction/origin, shared pathways, top shared phenotypes by IC and the robustness Jaccards.
+- **Ablation (penalties off, phenotype + pathway only):** ground-truth tests 1–3 **still pass** — the within-group similarity is strong enough that Leiden separates the groups anyway. The penalties still matter for what the atlas shows: with them off, 13 directly conflicting pairs (e.g. STAT1 GoF ↔ STAT1 LoF at score 0.34) become `similar_to` edges and the immunodeficiency cluster absorbs four extra diseases. Reproduce with `uv run python -m pipeline.graph.logic --in data/build/graph.json --out /tmp/g.json --ablation`.
 
 ### Rules (`pipeline/graph/rules.py`)
 
-- Pathway-inhibiting drug → LoF mechanism ⇒ edge with `status: inferred_unsupported`, reason "direction mismatch".
+- **Direction mismatch**: a drug with an `inhibits` edge to gene *g* (directly, or via a pathway it inhibits) gets an edge to every disease whose mechanism on *g* is loss-type (`LoF`, `DN`): `treats`, `inferred_unsupported`, confidence 0.1, reason "direction mismatch". Never added where literature or a backbone indication already asserts a treatment.
+- **Direction match (hypothesis)**: the same scan for `GoF` mechanisms adds a `treats` candidate (inferred, 0.3, labels `candidate`, `hypothesis`) so Priya's ranking can show mechanism-only leads clearly separated from literature-backed ones.
 
 ---
 
@@ -396,9 +397,9 @@ Times are ET on Sat Oct 3 → Sun Oct 4. If we start late, shift proportionally.
   - [ ] ClinicalTrials.gov studies (queries logged, incl. zero hits)
   - [ ] Investigators from author lists; RePORTER grants
   - [ ] `patient_groups.yaml` verified; directory searches logged
-- [ ] **M3 — Graph logic** (~10 PM) · *done when: tests 1–5 and 7 pass*
-  - [ ] `confidence.py`, `similarity.py`, `cluster.py` (×3 weightings), `rules.py`
-  - [ ] Ablation run recorded
+- [x] **M3 — Graph logic** (tests 1–5 and 7 pass against the built graph, 2026-10-03 ~9 PM ET)
+  - [x] `confidence.py`, `similarity.py`, `cluster.py` (×3 weightings, signed Leiden), `rules.py`, orchestrated by `pipeline/graph/logic.py`
+  - [x] Ablation run recorded (§6: tests 1–3 pass with penalties on and off)
 - [ ] **GATE** (10 PM) · *Maria's journey works end to end on the deployed site, with cached explanations*
 - [ ] **M4 — Remaining features** (~1 AM) · *done when: test 6 passes*
   - [ ] `/explain` + validator, `/draft`, `/gaps`, `/mechanism-search`

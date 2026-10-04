@@ -22,6 +22,10 @@ disease_terms:  # matched case-insensitively against Disease label and synonyms
   - immunodeficiency 31B
   - STAT1 deficiency
   - Mendelian susceptibility to mycobacterial diseases
+  # the autosomal dominant (partial) STAT1 deficiency entity as the backbone names it
+  # (docs/optimuskg-spike.md section 4); it carries no seed-gene association that passes the
+  # score rule, so without the name it would be absent and no coverage row would record the gap
+  - Autosomal dominant mendelian susceptibility to mycobacterial diseases due to a partial deficiency
   - T-B+ severe combined immunodeficiency due to JAK3 deficiency
   - X-linked severe combined immunodeficiency
   - X-linked SCID  # the cluster doc's wording; the backbone lists it as a synonym of "gamma chain deficiency"
@@ -45,8 +49,42 @@ thresholds:
   # 0.9485794 (docs/optimuskg-spike.md section 1); Open Targets' indirect associations make the
   # edge set very dense below this.
   disease_gene_min_score: 0.3
-  # Keep a disease-gene edge below the floor when DISGENET is in sources.direct.
+  # Keep a disease-gene edge below the floor when DISGENET is in sources.direct (the loader's
+  # slice floor and the mechanism rules' `below_score_threshold` label; pipeline/graph/mechanisms.py).
   keep_disgenet_direct: true
+
+  # --- Export inclusion rule (pipeline/graph/build.py prune_graph; the single definition is
+  # pipeline.sources.optimuskg.disease_gene_included). The store keeps the wider slice above so
+  # Lane B's resolved endpoints stay resolvable; graph.json keeps a disease-gene edge only when a
+  # curated database is among sources.direct AND evidence_score >= disease_gene_min_score, OR
+  # evidence_score >= disease_gene_high_score. Seed-gene edges are never pruned (a weak one keeps
+  # its `below_score_threshold` label so the UI shows it as weak rather than hiding it).
+  # Names as the backbone spells them in sources.direct; a general list, not a per-gene choice.
+  disease_gene_curated_sources: [DISGENET, ORPHANET, CLINGEN, OMIM]
+  disease_gene_high_score: 0.6
+  # A seed gene pulls in at most this many diseases (ranked by evidence_score after the rule);
+  # seed-term matches and diseases reached by an evidence edge (ClinVar, ClinicalTrials.gov,
+  # claims, patient groups) are anchors regardless. A general cap on backbone density, applied to
+  # every seed gene alike (v0 exported 643 diseases and a 40 MB graph.json; 40 gave 170 diseases
+  # and 10.1 MB, 25 gives ~146 diseases; the budget for web/public/graph.json is 8 MB).
+  max_diseases_per_seed_gene: 25
+  # Per exported disease, keep the top N non-seed genes by evidence_score that pass the rule
+  # (genes referenced by evidence are always kept). Read by the export (build.py); the loader
+  # keeps max_other_genes_per_disease below in the store. 10 kept 447 genes and ~2,970
+  # associated_with edges (2 MB); 5 keeps ~240 genes.
+  max_genes_per_disease: 5
+  # Paper-derived Investigators need at least this many papers (props.n_papers) to be exported;
+  # keep_orcid_investigators: true would also export single-paper authors who carry an ORCID
+  # (a reliably identified person; without one the match is "low", README section 5). 1 would
+  # export everyone with a publishes_on edge; with the 243-paper bundle that is ~1,640 authors
+  # (1,388 with a single paper) and ~3 MB of graph.json (build_report.json "sizes"); the ORCID
+  # exemption alone added 233 single-paper authors and 0.4 MB; 2 papers exported 250 authors and
+  # 1,474 edges (1.0 MB), 3 papers exports ~90 recurring authors and ~760 edges (0.6 MB). So
+  # recurring authors (>= 3 papers in the bundle) are exported and the rest stay in the build
+  # report counts; ORCIDs are kept on the exported nodes. A general rule, applied to every paper
+  # alike. RePORTER investigators (grant PIs) are not affected.
+  min_papers_per_investigator: 3
+  keep_orcid_investigators: false
   # v0 does not expand a pathway to its other member genes.
   max_pathway_members_to_expand: 0
   # How many is_a parent levels above each seed disease to include.

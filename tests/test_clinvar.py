@@ -213,7 +213,11 @@ def coverage(store: Store, entity: str | None = None, source: str | None = None)
         ("10 mg/kg/day", DOSE_PLACEHOLDER),
         ("0.5 mg/m2 every 2 weeks", DOSE_PLACEHOLDER),
         ("200 IU", DOSE_PLACEHOLDER),
-        ("2.5%", DOSE_PLACEHOLDER),
+        # a percentage is a dose only as the strength of a formulation
+        ("0.1% tacrolimus ointment", DOSE_PLACEHOLDER),
+        ("2 % cream twice daily", DOSE_PLACEHOLDER),
+        ("5% w/v solution", DOSE_PLACEHOLDER),
+        ("0.03% ophthalmic solution", DOSE_PLACEHOLDER),
         ("5-10 mg", DOSE_PLACEHOLDER),
         ("1,000 mg BID", DOSE_PLACEHOLDER),
         ("2.5 mcg once daily", DOSE_PLACEHOLDER),
@@ -256,6 +260,11 @@ def test_scrub_doses_removes_amounts_and_frequencies(text: str, expected: str) -
         "Budd-Chiari syndrome",
         "0.00035",
         "Tier I - Strong",
+        # a bare percentage is a statistic, not a dose
+        "2.5%",
+        "comprises about 5% of childhood cases",
+        "asymptomatic presentation in 40% of patients",
+        "10.1111/j.0105-2896.2005.00220.x",  # a DOI
     ],
 )
 def test_scrub_doses_leaves_hgvs_ids_and_plain_text_alone(text: str) -> None:
