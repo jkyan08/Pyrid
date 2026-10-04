@@ -8,6 +8,7 @@
 import { Fragment, useEffect, useState } from "react";
 import { useEvidence } from "./evidence-drawer";
 import { apiGraphCached } from "@/lib/api";
+import { humanizeVariantMentions } from "@/lib/display";
 import { citationLabel } from "@/lib/graph";
 
 const CITATION_RE = /\[([ec]_[A-Za-z0-9_-]+(?:\s*,\s*[ec]_[A-Za-z0-9_-]+)*)\]/g;
@@ -39,7 +40,9 @@ export function CitationChip({ id }: { id: string }) {
   );
 }
 
-export function CitationText({ text }: { text: string }) {
+export function CitationText({ text: rawText }: { text: string }) {
+  // Prose from the API may embed canonical HGVS strings; render them short.
+  const text = humanizeVariantMentions(rawText);
   const parts: React.ReactNode[] = [];
   let last = 0;
   let key = 0;
