@@ -469,6 +469,67 @@ export interface NeighborhoodData {
   degree: Record<string, number>;
 }
 
+export interface DiscoveryRoute {
+  type: "Pathway" | "Gene" | "AnotherGene" | "Disease" | "PatientGroup" | "Registry" | "Study";
+  node: GraphNode;
+  /** Each step preserves the actual edge and its direction in the graph. */
+  steps: { from: GraphNode; edge: GraphEdge; to: GraphNode }[];
+}
+
+/** Short, evidence-carrying routes for the disease-to-action journey. */
+export function discoveryRoutes(graph: Graph, centerId: string): DiscoveryRoute[] {
+  const center = nodeById(graph, centerId);
+  if (!center) return [];
+  const nodes = new Map(graph.nodes.map((node) => [node.id, node]));
+  const adjacent = new Map<string, GraphEdge[]>();
+  for (const edge of graph.edges) {
+    if (!nodes.has(edge.source) || !nodes.has(edge.target)) continue;
+    adjacent.set(edge.source, [...(adjacent.get(edge.source) ?? []), edge]);
+    adjacent.set(edge.target, [...(adjacent.get(edge.target) ?? []), edge]);
+  }
+  const targets = new Set<DiscoveryRoute["type"]>([
+    "Pathway", "Gene", "AnotherGene", "Disease", "PatientGroup", "Registry", "Study",
+  ]);
+  const found = new Map<DiscoveryRoute["type"], DiscoveryRoute>();
+  const visited = new Set([centerId]);
+  const queue: { node: GraphNode; steps: DiscoveryRoute["steps"] }[] = [{ node: center, steps: [] }];
+
+  // A breadth-first walk keeps the route easy to explain. Within a hop,
+  // supported and sourced edges win over weak or unsourced connections.
+  for (let cursor = 0; cursor < queue.length && cursor < 1000; cursor++) {
+    const current = queue[cursor];
+    if (current.steps.length >= 5) continue;
+    const edges = [...(adjacent.get(current.node.id) ?? [])].sort((a, b) => {
+      const score = (e: GraphEdge) =>
+        (e.status === "supported" ? 4 : 0) +
+        ((e.sources?.length ?? 0) > 0 ? 2 : 0) +
+        (e.evidence_class === "inferred" ? 0 : 1);
+      return score(b) - score(a);
+    });
+    for (const edge of edges) {
+      const nextId = edge.source === current.node.id ? edge.target : edge.source;
+      if (visited.has(nextId)) continue;
+      const next = nodes.get(nextId);
+      if (!next) continue;
+      visited.add(nextId);
+      const steps = [...current.steps, { from: current.node, edge, to: next }];
+      if (next.type === "Gene" && found.has("Gene") && !found.has("AnotherGene") &&
+          found.get("Gene")?.node.id !== next.id &&
+          steps.some((step) => step.from.type === "Pathway" || step.to.type === "Pathway")) {
+        found.set("AnotherGene", { type: "AnotherGene", node: next, steps });
+      }
+      if (targets.has(next.type as DiscoveryRoute["type"]) &&
+          next.id !== centerId && !found.has(next.type as DiscoveryRoute["type"])) {
+        found.set(next.type as DiscoveryRoute["type"], {
+          type: next.type as DiscoveryRoute["type"], node: next, steps,
+        });
+      }
+      queue.push({ node: next, steps });
+    }
+  }
+  return [...targets].flatMap((type) => found.get(type) ?? []);
+}
+
 /**
  * BFS neighborhood around `id`, capped at `maxNodes` nodes; only edges whose
  * two endpoints are both inside the neighborhood are returned.
