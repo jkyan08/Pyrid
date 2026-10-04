@@ -397,8 +397,11 @@ def main(argv: list[str] | None = None) -> int:
 
     seeds = config.load_seeds("cluster")
     seeds["mechanisms"] = config.load_seeds("mechanisms")
+    # cluster.yaml's ``patient_groups:`` section holds the resolution knobs (descendant_depth,
+    # max_descendants_per_term); the seed file's rows join them under the same key for the build.
+    pg_options = seeds.get("patient_groups") if isinstance(seeds.get("patient_groups"), dict) else {}
     try:
-        seeds["patient_groups"] = config.load_seeds("patient_groups")
+        seeds["patient_groups"] = {**config.load_seeds("patient_groups"), **pg_options}
     except FileNotFoundError as exc:
         print(f"[export] patient group seeds not found, skipped ({exc})", file=sys.stderr)
 

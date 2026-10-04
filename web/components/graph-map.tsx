@@ -12,6 +12,7 @@ import { useRouter } from "next/navigation";
 import { useReducedMotion } from "motion/react";
 import type { Graph } from "@/lib/types";
 import { neighborhoodElements } from "@/lib/graph";
+import { displayLabel } from "@/lib/display";
 import { themeOf } from "@/lib/type-theme";
 import {
   beginNodeDrag,
@@ -107,8 +108,9 @@ export function GraphMap({ graph, centerId }: { graph: Graph; centerId: string }
       const theme = themeOf(node.type);
       return {
         id: node.id,
-        label: node.label,
+        label: displayLabel(node.label, node.type),
         type: node.type,
+        detail: ["Variant", "Paper", "Investigator"].includes(node.type),
         clusterColor: colorOf(clusterOf[node.id]),
         typeColor: theme.hex,
         shape: theme.shape,

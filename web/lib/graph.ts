@@ -5,6 +5,7 @@
  * only from fields already present in the graph. Nothing is invented.
  */
 
+import { displayLabel } from "./display";
 import type {
   Claim,
   Cluster,
@@ -103,7 +104,10 @@ export function searchGraph(graph: Graph, q: string): SearchResponse {
         const candTokens = new Set(tokenize(cand.text));
         const hits = qTokens.filter((t) => t.length >= 3 && candTokens.has(t));
         const overlap = hits.length / qTokens.length;
-        if (hits.length > 0 && overlap >= 0.3) {
+        // >=2 token hits, or >=50% of the query, must land — a single shared
+        // generic token ("syndrome") is noise, but a multi-symptom query may
+        // legitimately hit each phenotype with only part of its tokens
+        if (hits.length >= 2 || (hits.length > 0 && overlap >= 0.5)) {
           score = 0.3 + 0.5 * overlap;
           kind = "free_text";
           matchedOn = cand.text;
@@ -131,9 +135,45 @@ export function searchGraph(graph: Graph, q: string): SearchResponse {
     if (best) results.push(best);
   }
 
-  results.sort((a, b) => b.score - a.score || a.label.localeCompare(b.label));
-  return { query, results: results.slice(0, 20) };
+  // Mirrors the API: entities outrank literature of equal string quality,
+  // and the list stays siftable (<=3 papers, <=3 investigators, <=24 total).
+  results.sort(
+    (a, b) =>
+      b.score - a.score ||
+      (SEARCH_TYPE_RANK[a.type] ?? 2) - (SEARCH_TYPE_RANK[b.type] ?? 2) ||
+      a.label.localeCompare(b.label)
+  );
+  // default 5 per type keeps one entity class (e.g. hundreds of ClinVar
+  // variants) from flooding out every other kind of match
+  const perTypeCaps: Record<string, number> = { Paper: 3, Investigator: 3 };
+  const seenPerType: Record<string, number> = {};
+  const capped: SearchResult[] = [];
+  for (const r of results) {
+    const count = seenPerType[r.type] ?? 0;
+    if (count >= (perTypeCaps[r.type] ?? 5)) continue;
+    seenPerType[r.type] = count + 1;
+    capped.push(r);
+    if (capped.length >= 24) break;
+  }
+  return { query, results: capped };
 }
+
+/** Equal-quality ordering: core biological entities first, literature last. */
+export const SEARCH_TYPE_RANK: Record<string, number> = {
+  Disease: 0,
+  Gene: 0,
+  Drug: 0,
+  Variant: 1,
+  Mechanism: 1,
+  Phenotype: 1,
+  Pathway: 2,
+  PatientGroup: 2,
+  Registry: 2,
+  Study: 2,
+  Investigator: 3,
+  Paper: 4,
+  Claim: 4,
+};
 
 /* --------------------------- entity view --------------------------- */
 
@@ -171,7 +211,7 @@ export function citationLabel(graph: Graph, id: string): string {
     const edge = edgeById(graph, id);
     if (!edge) return id;
     const target = nodeById(graph, edge.target);
-    return `${humanRelation(edge.relation)} → ${truncate(target?.label ?? edge.target)}`;
+    return `${humanRelation(edge.relation)} → ${truncate(target ? displayLabel(target.label, target.type) : edge.target)}`;
   }
   if (id.startsWith("c_")) {
     const claim = claimById(graph, id);

@@ -46,7 +46,31 @@ Pipeline inside :func:`build`
    parenthetical such as "(umbrella)" and splitting on " / "), coverage rows for every term (hits
    0 when unresolved) and for every directory search the seed file logged (``null`` hits -> 0 with
    the query suffixed " [not executable]"), so "no dedicated group found" is visible as zero-hit
-   searches, never special-cased.
+   searches, never special-cased. A term that matches no Disease is then tried against the
+   Mechanism nodes by normalised label (:func:`normalize_mechanism_term`: lower-case, hyphens and
+   underscores to spaces, "gof" / "lof" / "dn" expanded, a trailing parenthetical dropped): a
+   match gives an Org -> Mechanism edge (observed, :data:`COMMUNITY_MECHANISM_CONFIDENCE`, basis
+   ``resolution: "mechanism label"``). Both rules are general: nothing names a gene, a disease or
+   an organisation. The knobs live in ``pipeline/seeds/cluster.yaml`` under ``patient_groups:``
+   (:data:`DEFAULT_PATIENT_GROUP_OPTIONS`).
+5b. **Propagation** (:func:`propagate_patient_groups`, run AFTER the prune so that it links
+   organisations to diseases already in the export and never pulls a disease in): for every Org ->
+   Mechanism edge, an Org -> Disease edge to each exported Disease with a ``has_mechanism`` edge to
+   that Mechanism (:data:`COMMUNITY_VIA_MECHANISM_CONFIDENCE`, basis ``via_mechanism`` +
+   ``disease_mechanism_edge_confidence``, labels ``via_mechanism`` + ``inferred``); then, for every
+   Org -> Disease edge (exact or via mechanism), edges to the disease's descendants through Disease
+   ``is_a`` edges down to ``descendant_depth`` (:data:`COMMUNITY_VIA_ANCESTOR_CONFIDENCE` minus
+   :data:`COMMUNITY_VIA_ANCESTOR_DEPTH_STEP` per extra level, basis ``via_ancestor`` + ``depth``,
+   labels ``via_ancestor`` + ``inferred``), skipping diseases the organisation already links to and
+   capped at ``max_descendants_per_term`` (the cap is reported when it bites). Both routes are
+   produced by a rule, not read from the organisation's page, so their edges are ``evidence_class``
+   :data:`COMMUNITY_RULE_EVIDENCE_CLASS` (README section 4/6: never above 0.5, status ``supported``,
+   rendered with the badge) and the basis carries ``rule_evidence_class_note``
+   (:data:`COMMUNITY_RULE_EVIDENCE_CLASS_NOTE`); only the exact Org -> Disease and Org -> Mechanism
+   matches stay observed (the verified page names the term). Each seed term's coverage row
+   then counts every disease it reached (direct + via mechanism + via ancestor) and a second row
+   per route (``"<term> [resolution: mechanism label]"`` / ``"<term> [resolution: ancestor]"``)
+   records how the asset was linked; a term that resolves to nothing stays a zero-hit row.
 6. **Pruning** (:func:`prune_graph`, thresholds in ``pipeline/seeds/cluster.yaml``): the store
    keeps a wide slice so that Lane B's resolved endpoints stay resolvable; the export applies the
    stricter inclusion rule :func:`pipeline.sources.optimuskg.disease_gene_included` (a curated
@@ -122,7 +146,14 @@ __all__ = [
     "BASIS_FLOAT_DECIMALS",
     "BELOW_THRESHOLD_LABEL",
     "BuildResult",
+    "COMMUNITY_MECHANISM_CONFIDENCE",
+    "COMMUNITY_RULE_EVIDENCE_CLASS",
+    "COMMUNITY_RULE_EVIDENCE_CLASS_NOTE",
+    "COMMUNITY_VIA_ANCESTOR_CONFIDENCE",
+    "COMMUNITY_VIA_ANCESTOR_DEPTH_STEP",
+    "COMMUNITY_VIA_MECHANISM_CONFIDENCE",
     "DEFAULT_EXPORT_THRESHOLDS",
+    "DEFAULT_PATIENT_GROUP_OPTIONS",
     "EMAIL_PLACEHOLDER",
     "EVIDENCE_MODULE",
     "EXPORT_PROPS_KEEP",
@@ -133,13 +164,20 @@ __all__ = [
     "PRUNE_SOURCE",
     "PatientGroupResult",
     "PruneResult",
+    "RESOLUTION_ANCESTOR",
+    "RESOLUTION_MECHANISM_LABEL",
     "UNSCORED_CONFIDENCE",
     "VARIANT_OF_CONFIDENCE",
+    "VIA_ANCESTOR_LABEL",
+    "VIA_MECHANISM_LABEL",
     "build",
     "build_graph",
     "build_patient_groups",
     "compact_edge",
     "finalize_edges",
+    "normalize_mechanism_term",
+    "patient_group_options",
+    "propagate_patient_groups",
     "prune_graph",
     "score_range",
     "scrub_placeholders",
@@ -168,6 +206,32 @@ PATIENT_GROUP_TERM_SOURCE = "patient_groups.yaml disease term"
 PATIENT_GROUP_SEARCH_PREFIX = "seed:patient_group_search:"
 PATIENT_GROUP_SEED_LICENSE = "team-curated seed file (pipeline/seeds/patient_groups.yaml); every URL fetched on the recorded date"
 NOTE_MAX_CHARS = 400
+# How a patient-group seed term that matched no Disease label / synonym was resolved instead
+# (confidence_basis["resolution"] and the coverage row "<term> [resolution: <value>]").
+RESOLUTION_MECHANISM_LABEL = "mechanism label"
+RESOLUTION_ANCESTOR = "ancestor"
+VIA_MECHANISM_LABEL = "via_mechanism"
+VIA_ANCESTOR_LABEL = "via_ancestor"
+# Org -> Mechanism when the term equals a Mechanism label after normalisation: the organisation's
+# own page names the mechanism, so the edge is observed like the exact Org -> Disease match
+# (conf_rubric.COMMUNITY_EDGE).
+COMMUNITY_MECHANISM_CONFIDENCE = 0.8
+# The two propagation routes of step 5b (Org -> Disease for every disease that carries a named
+# mechanism; Org -> Disease for the descendants of a disease the organisation names) are produced by
+# a general rule, not read from the page, so their edges are evidence_class "inferred": README
+# section 4/6 and pipeline.models.Edge cap an inferred edge at 0.5 (status "supported", rendered
+# with the badge; conf_rubric.INFERRED_LABEL added to attributes.labels like every other inferred
+# edge this module writes). via_mechanism 0.5; via_ancestor 0.45 at depth 1, minus 0.05 per further
+# level (0.40 at depth 2, 0.35 at depth 3). The note goes into every such edge's confidence_basis.
+COMMUNITY_RULE_EVIDENCE_CLASS = "inferred"
+COMMUNITY_RULE_EVIDENCE_CLASS_NOTE = "rule-derived link: inferred (<= 0.5) per README section 4/6"
+COMMUNITY_VIA_MECHANISM_CONFIDENCE = 0.5
+COMMUNITY_VIA_ANCESTOR_CONFIDENCE = 0.45
+COMMUNITY_VIA_ANCESTOR_DEPTH_STEP = 0.05
+# pipeline/seeds/cluster.yaml ``patient_groups:`` (documented there); general knobs, no names.
+DEFAULT_PATIENT_GROUP_OPTIONS: dict[str, Any] = {"descendant_depth": 3, "max_descendants_per_term": 200}
+# Tokens expanded before a seed term is compared with a Mechanism label (normalize_mechanism_term).
+MECHANISM_TOKEN_EXPANSIONS = {"gof": "gain of function", "lof": "loss of function", "dn": "dominant negative"}
 
 REL_ASSOCIATED_WITH = mechanisms.REL_ASSOCIATED_WITH
 REL_HAS_MECHANISM = mechanisms.REL_HAS_MECHANISM
@@ -338,6 +402,11 @@ class PatientGroupResult:
     coverage: list[dict[str, Any]] = field(default_factory=list)
     source: dict[str, str] | None = None
     report: dict[str, Any] = field(default_factory=dict)
+    # (org id, seed term) -> disease ids the term reached, in total and per resolution route
+    # (RESOLUTION_MECHANISM_LABEL / RESOLUTION_ANCESTOR); propagate_patient_groups extends them and
+    # rewrites the coverage rows' hits from them.
+    reached: dict[tuple[str, str], set[str]] = field(default_factory=lambda: defaultdict(set))
+    reached_by: dict[tuple[str, str, str], set[str]] = field(default_factory=lambda: defaultdict(set))
 
 
 @dataclass
@@ -794,19 +863,99 @@ def _term_candidates(term: str) -> list[str]:
     return _dedupe([term, stripped] if stripped and stripped != term else [term])
 
 
+def normalize_mechanism_term(text: Any) -> str:
+    """The form a seed term and a Mechanism label are compared in: a trailing parenthetical
+    ("(umbrella)") dropped, lower-case, hyphens / underscores as spaces, whitespace collapsed and
+    the tokens ``gof`` / ``lof`` / ``dn`` expanded (:data:`MECHANISM_TOKEN_EXPANSIONS`), so
+    "MOCKGENE1 GoF" equals "MOCKGENE1 gain of function"."""
+    t = _TRAILING_PAREN.sub("", str(text or "")).strip().lower()
+    t = re.sub(r"[-_]+", " ", t)
+    return " ".join(MECHANISM_TOKEN_EXPANSIONS.get(tok, tok) for tok in t.split())
+
+
+def patient_group_options(seeds: Mapping[str, Any] | None) -> dict[str, Any]:
+    """The ``patient_groups:`` knobs (``descendant_depth``, ``max_descendants_per_term``) from the
+    seed dict over :data:`DEFAULT_PATIENT_GROUP_OPTIONS`; ``pipeline.export`` merges the
+    cluster.yaml section into the patient-group seed dict, so both carry them."""
+    raw = seeds.get("patient_groups") if isinstance(seeds, Mapping) and isinstance(seeds.get("patient_groups"), Mapping) else {}
+    out = dict(DEFAULT_PATIENT_GROUP_OPTIONS)
+    for key in DEFAULT_PATIENT_GROUP_OPTIONS:
+        if raw.get(key) is not None:
+            out[key] = max(0, int(raw[key]))
+    return out
+
+
+def _org_sources(url: str, name: str, retrieved_at: str) -> list[dict[str, str]]:
+    if url.startswith(("http://", "https://")):
+        return [{"kind": "url", "id": url, "date": retrieved_at}]
+    return [{"kind": "db", "id": f"{PATIENT_GROUP_SOURCE_DB} {name}", "date": retrieved_at}]
+
+
+def _org_edge(
+    org: Mapping[str, Any], target: str, relation: str, conf: float, basis: dict[str, Any], labels: Sequence[str] = (), *, evidence_class: str = "observed"
+) -> dict[str, Any]:
+    """An Org -> ``target`` edge sourced from the organisation's verified URL: observed for an exact
+    match; for a rule-derived route (``evidence_class="inferred"``) the confidence is capped at
+    :data:`conf_rubric.INFERRED_CAP` and :data:`conf_rubric.INFERRED_LABEL` joins the labels."""
+    props = org.get("props") or {}
+    attributes: dict[str, Any] = {"scope": props["scope"]} if props.get("scope") else {}
+    edge_labels = list(labels)
+    if evidence_class == "inferred":
+        conf = conf_rubric.cap_inferred(conf)
+        if conf_rubric.INFERRED_LABEL not in edge_labels:
+            edge_labels.append(conf_rubric.INFERRED_LABEL)
+    if edge_labels:
+        attributes["labels"] = edge_labels
+    return {
+        "source": org["id"],
+        "target": target,
+        "relation": relation,
+        "source_db": PATIENT_GROUP_SOURCE_DB,
+        "evidence_class": evidence_class,
+        "confidence": _round(conf),
+        "confidence_basis": basis,
+        "status": "supported",
+        "sources": _org_sources(str(props.get("url") or ""), str(org.get("label") or ""), str(props.get("verified_retrieved_at") or "")),
+        "supporting": [],
+        "contradicting": [],
+        "attributes": attributes,
+    }
+
+
+def _org_relation(org: Mapping[str, Any]) -> str:
+    return REL_COVERS if org.get("type") == NodeType.Registry.value else REL_SUPPORTS_COMMUNITY
+
+
+def _mechanism_index(nodes: Mapping[str, Mapping[str, Any]]) -> dict[str, list[tuple[str, str, str]]]:
+    """normalised label -> [(mechanism id, label as written, field)] over the Mechanism nodes."""
+    index: dict[str, list[tuple[str, str, str]]] = defaultdict(list)
+    for n in nodes.values():
+        if n.get("type") != NodeType.Mechanism.value:
+            continue
+        for field_name, text in (("label", n.get("label")), *(("synonyms", s) for s in n.get("synonyms") or [])):
+            key = normalize_mechanism_term(text)
+            if key:
+                index[key].append((str(n["id"]), str(text), field_name))
+    return index
+
+
 def build_patient_groups(seeds_pg: Mapping[str, Any] | None, nodes: Mapping[str, Mapping[str, Any]], *, today: str) -> PatientGroupResult:
     """Nodes, edges, coverage rows and the meta source record for the verified patient-group /
     registry seed file (see the module docstring, step 5). ``nodes`` supplies the Disease nodes
-    the seed terms are resolved against."""
+    the seed terms are resolved against and the Mechanism nodes a term that matches no disease is
+    tried against by normalised label (:func:`normalize_mechanism_term`). The disease edges that
+    follow from a mechanism match or from an umbrella disease's descendants are added by
+    :func:`propagate_patient_groups` once the export is pruned."""
     out = PatientGroupResult()
-    if not isinstance(seeds_pg, Mapping):
+    if not isinstance(seeds_pg, Mapping) or not any(k in seeds_pg for k in ("groups", "searches")):
         out.report = {"status": "no patient_groups seeds"}
         return out
     meta = seeds_pg.get("meta") if isinstance(seeds_pg.get("meta"), Mapping) else {}
     seed_date = str(meta.get("date") or "").strip() or today
     diseases = [n for n in nodes.values() if n.get("type") == NodeType.Disease.value]
+    mech_index = _mechanism_index(nodes)
     by_kind: Counter[str] = Counter()
-    resolved_terms = unresolved_terms = 0
+    resolved_terms = unresolved_terms = mechanism_terms = 0
     for row in seeds_pg.get("groups") or []:
         if not isinstance(row, Mapping) or not str(row.get("name") or "").strip():
             continue
@@ -814,7 +963,6 @@ def build_patient_groups(seeds_pg: Mapping[str, Any] | None, nodes: Mapping[str,
         node_id = f"org:{slugify(name)}"
         kind = str(row.get("kind") or "patient_group").strip()
         node_type = NodeType.Registry.value if kind == "registry" else NodeType.PatientGroup.value
-        relation = REL_COVERS if node_type == NodeType.Registry.value else REL_SUPPORTS_COMMUNITY
         verified = row.get("verified") if isinstance(row.get("verified"), Mapping) else {}
         retrieved_at = str(verified.get("retrieved_at") or seed_date)
         url = str(row.get("url") or "").strip()
@@ -827,7 +975,9 @@ def build_patient_groups(seeds_pg: Mapping[str, Any] | None, nodes: Mapping[str,
             "note": _truncate(_normalize_ws(str(verified.get("note") or "")), NOTE_MAX_CHARS),
             "source_of_claim": _normalize_ws(str(row.get("source_of_claim") or "")),
         }
-        out.nodes[node_id] = {"id": node_id, "type": node_type, "label": name, "synonyms": [], "props": props}
+        org = {"id": node_id, "type": node_type, "label": name, "synonyms": [], "props": props}
+        out.nodes[node_id] = org
+        relation = _org_relation(org)
         by_kind[node_type] += 1
         for raw_term in row.get("diseases") or []:
             for term in _seed_terms(raw_term):
@@ -839,35 +989,46 @@ def build_patient_groups(seeds_pg: Mapping[str, Any] | None, nodes: Mapping[str,
                         matched = candidate
                         break
                 out.coverage.append({"entity_id": node_id, "source": PATIENT_GROUP_TERM_SOURCE, "query": term, "date": retrieved_at, "hits": len(hits)})
-                if not hits:
+                out.reached.setdefault((node_id, term), set())
+                if hits:
+                    resolved_terms += 1
+                    for disease_id, how in hits:
+                        out.reached[(node_id, term)].add(disease_id)
+                        existing = next((e for e in out.edges if e["source"] == node_id and e["target"] == disease_id), None)
+                        if existing is not None:  # two seed terms naming the same disease: one edge, both terms recorded
+                            existing["confidence_basis"]["seed_terms"] = _dedupe([*existing["confidence_basis"]["seed_terms"], term])
+                            continue
+                        conf, basis = conf_rubric.community_edge(matched, url, retrieved_at)
+                        basis["matched_field"] = how
+                        basis["seed_terms"] = [term]
+                        out.edges.append(_org_edge(org, disease_id, relation, conf, basis))
+                    continue
+                # no Disease carries the term: a Mechanism label in the same normalised form?
+                mech_hits = _dedupe(mech_index.get(normalize_mechanism_term(term), []))
+                if not mech_hits:
                     unresolved_terms += 1
                     continue
-                resolved_terms += 1
-                for disease_id, how in hits:
-                    existing = next((e for e in out.edges if e["source"] == node_id and e["target"] == disease_id), None)
-                    if existing is not None:  # two seed terms naming the same disease: one edge, both terms recorded
+                mechanism_terms += 1
+                # filled in by propagate_patient_groups: diseases reached through the mechanism
+                out.coverage.append({"entity_id": node_id, "source": PATIENT_GROUP_TERM_SOURCE, "query": f"{term} [resolution: {RESOLUTION_MECHANISM_LABEL}]", "date": retrieved_at, "hits": 0})
+                out.reached_by.setdefault((node_id, term, RESOLUTION_MECHANISM_LABEL), set())
+                for mech_id, label, how in mech_hits:
+                    existing = next((e for e in out.edges if e["source"] == node_id and e["target"] == mech_id), None)
+                    if existing is not None:
                         existing["confidence_basis"]["seed_terms"] = _dedupe([*existing["confidence_basis"]["seed_terms"], term])
                         continue
-                    conf, basis = conf_rubric.community_edge(matched, url, retrieved_at)
-                    basis["matched_field"] = how
-                    basis["seed_terms"] = [term]
-                    sources = [{"kind": "url", "id": url, "date": retrieved_at}] if url.startswith(("http://", "https://")) else [{"kind": "db", "id": f"{PATIENT_GROUP_SOURCE_DB} {name}", "date": retrieved_at}]
-                    out.edges.append(
-                        {
-                            "source": node_id,
-                            "target": disease_id,
-                            "relation": relation,
-                            "source_db": PATIENT_GROUP_SOURCE_DB,
-                            "evidence_class": "observed",
-                            "confidence": conf,
-                            "confidence_basis": basis,
-                            "status": "supported",
-                            "sources": sources,
-                            "supporting": [],
-                            "contradicting": [],
-                            "attributes": {"scope": row.get("scope")} if row.get("scope") else {},
-                        }
-                    )
+                    basis = {
+                        "rule": "community_edge",
+                        "matched_term": term,
+                        "matched_label": label,
+                        "matched_field": how,
+                        "resolution": RESOLUTION_MECHANISM_LABEL,
+                        "normalized": normalize_mechanism_term(term),
+                        "url": url,
+                        "retrieved_at": retrieved_at,
+                        "seed_terms": [term],
+                    }
+                    out.edges.append(_org_edge(org, mech_id, relation, COMMUNITY_MECHANISM_CONFIDENCE, basis))
     searches = 0
     for s in seeds_pg.get("searches") or []:
         if not isinstance(s, Mapping):
@@ -887,12 +1048,164 @@ def build_patient_groups(seeds_pg: Mapping[str, Any] | None, nodes: Mapping[str,
         "groups": len(out.nodes),
         "by_type": dict(sorted(by_kind.items())),
         "edges": len(out.edges),
+        "edges_by_resolution": _edges_by_resolution(out.edges, nodes),
         "terms_resolved": resolved_terms,
+        "terms_resolved_via_mechanism": mechanism_terms,
         "terms_unresolved": unresolved_terms,
         "searches_logged": searches,
         "zero_hit_searches": sum(1 for r in out.coverage if r["entity_id"].startswith(PATIENT_GROUP_SEARCH_PREFIX) and r["hits"] == 0),
     }
     return out
+
+
+def _edges_by_resolution(edges: Iterable[Mapping[str, Any]], nodes: Mapping[str, Mapping[str, Any]]) -> dict[str, int]:
+    """Org -> Disease edges by route (``direct`` / ``via_mechanism`` / ``via_ancestor``) plus the
+    Org -> Mechanism edges (``mechanism``)."""
+    counts: Counter[str] = Counter({"direct": 0, "mechanism": 0, VIA_MECHANISM_LABEL: 0, VIA_ANCESTOR_LABEL: 0})
+    for e in edges:
+        labels = (e.get("attributes") or {}).get("labels") or []
+        if nodes.get(e["target"], {}).get("type") == NodeType.Mechanism.value:
+            counts["mechanism"] += 1
+        elif VIA_MECHANISM_LABEL in labels:
+            counts[VIA_MECHANISM_LABEL] += 1
+        elif VIA_ANCESTOR_LABEL in labels:
+            counts[VIA_ANCESTOR_LABEL] += 1
+        else:
+            counts["direct"] += 1
+    return dict(counts)
+
+
+def _descendants(roots: Iterable[str], children_of: Mapping[str, Sequence[str]], levels: int) -> dict[str, tuple[int, str]]:
+    """Breadth-first down the ``is_a`` tree from ``roots``: ``{descendant: (depth, root)}`` with
+    the shortest depth (ties: the alphabetically first root), roots themselves excluded."""
+    roots = sorted(set(roots))
+    seen: dict[str, tuple[int, str]] = {r: (0, r) for r in roots}
+    frontier = [(r, r) for r in roots]
+    for depth in range(1, max(0, levels) + 1):
+        nxt: list[tuple[str, str]] = []
+        for node, root in frontier:
+            for child in sorted(children_of.get(node, ())):
+                if child not in seen:
+                    seen[child] = (depth, root)
+                    nxt.append((child, root))
+        frontier = nxt
+        if not frontier:
+            break
+    return {d: v for d, v in seen.items() if v[0] > 0}
+
+
+def propagate_patient_groups(
+    result: PatientGroupResult,
+    nodes: Mapping[str, Mapping[str, Any]],
+    edges: dict[tuple[str, str, str], dict[str, Any]],
+    *,
+    options: Mapping[str, Any] | None = None,
+) -> dict[str, Any]:
+    """Module docstring step 5b: link every organisation to the diseases that carry a mechanism it
+    names (``via_mechanism``) and to the descendants of every disease it names (``via_ancestor``),
+    over the EXPORTED ``nodes`` / ``edges`` (call after :func:`prune_graph`; propagation never
+    pulls a disease into the export). New edges go into ``edges`` and ``result.edges``; the seed
+    terms' coverage rows are rewritten with the diseases reached and a row per route is added;
+    ``result.report`` gains ``edges_by_resolution`` and the cap report. Returns the report."""
+    opts = {**DEFAULT_PATIENT_GROUP_OPTIONS, **{k: v for k, v in (options or {}).items() if v is not None}}
+    depth_max = int(opts["descendant_depth"])
+    cap = int(opts["max_descendants_per_term"])
+    orgs = {oid: org for oid, org in result.nodes.items() if oid in nodes}
+    disease_type, mech_type = NodeType.Disease.value, NodeType.Mechanism.value
+
+    # the exported Disease -> Mechanism edges and the Disease is_a tree (child -> parent)
+    mech_diseases: dict[str, list[tuple[str, float]]] = defaultdict(list)
+    children_of: dict[str, list[str]] = defaultdict(list)
+    for (s, t, rel), e in edges.items():
+        if rel == REL_HAS_MECHANISM and nodes.get(s, {}).get("type") == disease_type and nodes.get(t, {}).get("type") == mech_type:
+            mech_diseases[t].append((s, float(e["confidence"])))
+        elif rel == REL_IS_A and nodes.get(s, {}).get("type") == disease_type and nodes.get(t, {}).get("type") == disease_type:
+            children_of[t].append(s)
+
+    def org_edges(target_type: str) -> list[dict[str, Any]]:
+        return [e for e in result.edges if e["source"] in orgs and (e["source"], e["target"], e["relation"]) in edges and nodes.get(e["target"], {}).get("type") == target_type]
+
+    def add(org: Mapping[str, Any], disease_id: str, relation: str, conf: float, basis: dict[str, Any], label: str, route: str) -> None:
+        # both routes are rule-derived: inferred, capped at 0.5 (see COMMUNITY_RULE_EVIDENCE_CLASS)
+        basis["rule_evidence_class_note"] = COMMUNITY_RULE_EVIDENCE_CLASS_NOTE
+        new_edge = _org_edge(org, disease_id, relation, conf, basis, labels=[label], evidence_class=COMMUNITY_RULE_EVIDENCE_CLASS)
+        _merge_edge(edges, new_edge)
+        result.edges.append(new_edge)
+        for term in basis.get("seed_terms") or []:
+            result.reached[(org["id"], term)].add(disease_id)
+            result.reached_by[(org["id"], term, route)].add(disease_id)
+
+    # R-A: the diseases that carry a mechanism the organisation names
+    for e in sorted(org_edges(mech_type), key=lambda e: (e["source"], e["target"])):
+        org = orgs[e["source"]]
+        for disease_id, mech_conf in sorted(mech_diseases.get(e["target"], [])):
+            if (org["id"], disease_id, e["relation"]) in edges:
+                continue  # the organisation already names this disease
+            basis = {
+                "rule": "community_edge",
+                "matched_term": e["confidence_basis"]["matched_term"],
+                "matched_label": e["confidence_basis"]["matched_label"],
+                "resolution": RESOLUTION_MECHANISM_LABEL,
+                "via_mechanism": e["target"],
+                "disease_mechanism_edge_confidence": mech_conf,
+                "url": e["confidence_basis"]["url"],
+                "retrieved_at": e["confidence_basis"]["retrieved_at"],
+                "seed_terms": list(e["confidence_basis"].get("seed_terms") or [e["confidence_basis"]["matched_term"]]),
+            }
+            add(org, disease_id, e["relation"], COMMUNITY_VIA_MECHANISM_CONFIDENCE, basis, VIA_MECHANISM_LABEL, RESOLUTION_MECHANISM_LABEL)
+
+    # R-B: the descendants of every disease the organisation names, grouped per (org, matched term)
+    groups: dict[tuple[str, str, str], dict[str, Any]] = {}
+    for e in org_edges(disease_type):
+        if VIA_ANCESTOR_LABEL in ((e.get("attributes") or {}).get("labels") or []):
+            continue
+        key = (e["source"], e["relation"], str(e["confidence_basis"].get("matched_term") or ""))
+        g = groups.setdefault(key, {"roots": set(), "seed_terms": [], "url": e["confidence_basis"].get("url", ""), "retrieved_at": e["confidence_basis"].get("retrieved_at", "")})
+        g["roots"].add(e["target"])
+        g["seed_terms"] = _dedupe([*g["seed_terms"], *(e["confidence_basis"].get("seed_terms") or [])])
+    cap_hits: list[dict[str, Any]] = []
+    for (org_id, relation, matched_term), g in sorted(groups.items()):
+        org = orgs[org_id]
+        found = _descendants(g["roots"], children_of, depth_max)
+        candidates = [(d, depth, root) for d, (depth, root) in sorted(found.items(), key=lambda x: (x[1][0], x[0])) if (org_id, d, relation) not in edges]
+        if len(candidates) > cap:
+            cap_hits.append({"org": org_id, "matched_term": matched_term, "candidates": len(candidates), "kept": cap})
+            candidates = candidates[:cap]
+        for disease_id, depth, root in candidates:
+            basis = {
+                "rule": "community_edge",
+                "matched_term": matched_term,
+                "resolution": RESOLUTION_ANCESTOR,
+                "via_ancestor": root,
+                "depth": depth,
+                "url": g["url"],
+                "retrieved_at": g["retrieved_at"],
+                "seed_terms": list(g["seed_terms"]),
+            }
+            add(org, disease_id, relation, COMMUNITY_VIA_ANCESTOR_CONFIDENCE - COMMUNITY_VIA_ANCESTOR_DEPTH_STEP * (depth - 1), basis, VIA_ANCESTOR_LABEL, RESOLUTION_ANCESTOR)
+
+    # coverage: each seed term counts every disease it reached; one row per route it was linked by
+    rows = {(r["entity_id"], r["query"]): r for r in result.coverage if r["source"] == PATIENT_GROUP_TERM_SOURCE}
+    for (org_id, term), diseases in result.reached.items():
+        if (org_id, term) in rows:
+            rows[(org_id, term)]["hits"] = len(diseases)
+    for (org_id, term, route), diseases in sorted(result.reached_by.items()):
+        query = f"{term} [resolution: {route}]"
+        row = rows.get((org_id, query))
+        if row is not None:
+            row["hits"] = len(diseases)
+        elif diseases and (org_id, term) in rows:
+            result.coverage.append({**rows[(org_id, term)], "query": query, "hits": len(diseases)})
+    result.report.update(
+        {
+            "edges": len(result.edges),
+            "edges_by_resolution": _edges_by_resolution(result.edges, nodes),
+            "descendant_depth": depth_max,
+            "max_descendants_per_term": cap,
+            "descendant_cap_hits": cap_hits,
+        }
+    )
+    return result.report
 
 
 # --------------------------------------------------------------------------------------
@@ -1372,6 +1685,9 @@ def build(store: Any, seeds: Mapping[str, Any], claims_bundle: Any = None, *, no
     # -- prune ---------------------------------------------------------------------
     pruned = prune_graph(nodes, edges, seeds, thresholds, claim_refs=claim_refs, today=day)
     report["prune"] = pruned.report
+    # -- patient groups, step 5b: mechanism and umbrella routes over the exported graph -----
+    if groups.nodes:
+        report["patient_groups"] = propagate_patient_groups(groups, nodes, edges, options=patient_group_options(seeds))
 
     # -- slim + scrub, then make the claim-bearing edges consistent ----------------
     for n in nodes.values():

@@ -669,12 +669,150 @@ def test_patient_groups_become_nodes_edges_and_coverage(store: Store) -> None:
     blocked = cov["seed:patient_group_search:Mock blocked directory"].searched[0]
     assert blocked.hits == 0 and blocked.query.endswith("[not executable]")
     assert graph.meta.sources[-1].name == "patient group seeds: pipeline/seeds/patient_groups.yaml" and graph.meta.sources[-1].retrieved_at == "2026-10-03"
-    assert result.report["patient_groups"] == {"groups": 3, "by_type": {"PatientGroup": 2, "Registry": 1}, "edges": 3, "terms_resolved": 4, "terms_unresolved": 2, "searches_logged": 3, "zero_hit_searches": 2}
+    assert result.report["patient_groups"] == {
+        "groups": 3,
+        "by_type": {"PatientGroup": 2, "Registry": 1},
+        "edges": 3,
+        "edges_by_resolution": {"direct": 3, "mechanism": 0, "via_mechanism": 0, "via_ancestor": 0},
+        "terms_resolved": 4,
+        "terms_resolved_via_mechanism": 0,
+        "terms_unresolved": 2,
+        "searches_logged": 3,
+        "zero_hit_searches": 2,
+        "descendant_depth": 3,
+        "max_descendants_per_term": 200,
+        "descendant_cap_hits": [],
+    }, "mock:disease:2 is disease 1's PARENT, so the umbrella rule adds nothing here and no resolution rows appear"
+    assert not any("[resolution:" in s.query for s in cov["org:mock-immune-foundation"].searched)
 
 
 def test_build_patient_groups_without_seeds_is_a_no_op() -> None:
     out = b.build_patient_groups(None, {}, today="2026-10-03")
     assert out.nodes == {} and out.edges == [] and out.coverage == [] and out.source is None
+    knobs_only = b.build_patient_groups({"descendant_depth": 1}, {}, today="2026-10-03")
+    assert knobs_only.report == {"status": "no patient_groups seeds"} and knobs_only.source is None, "the cluster.yaml knobs alone are not a seed file"
+
+
+# --- resolution rules: mechanism label (R-A) and umbrella descendants (R-B) ------------------
+
+
+def test_normalize_mechanism_term_and_options() -> None:
+    assert b.normalize_mechanism_term("MOCKGENE1 GoF") == "mockgene1 gain of function"
+    assert b.normalize_mechanism_term("MOCKGENE1-GoF (umbrella)") == "mockgene1 gain of function"
+    assert b.normalize_mechanism_term("  mockgene2_LoF ") == "mockgene2 loss of function"
+    assert b.normalize_mechanism_term("MOCKGENE3 dn") == "mockgene3 dominant negative"
+    assert b.normalize_mechanism_term("MOCKGENE1 somatic gain of function") == "mockgene1 somatic gain of function"
+    assert b.normalize_mechanism_term(None) == ""
+    assert b.patient_group_options({}) == {"descendant_depth": 3, "max_descendants_per_term": 200}
+    assert b.patient_group_options({"patient_groups": {"descendant_depth": 1, "max_descendants_per_term": None, "groups": []}}) == {"descendant_depth": 1, "max_descendants_per_term": 200}
+    assert b.patient_group_options(None) == b.DEFAULT_PATIENT_GROUP_OPTIONS
+
+
+def _group(name: str, terms: list[str], kind: str = "patient_group") -> dict[str, Any]:
+    return {"name": name, "url": f"https://mock.invalid/{b.slugify(name)}", "kind": kind, "diseases": terms, "scope": "umbrella", "verified": {"retrieved_at": "2026-10-02", "method": "webfetch", "note": "ok"}}
+
+
+def test_term_matching_a_mechanism_label_links_the_mechanism_and_its_diseases(store: Store) -> None:
+    # "MOCKGENE1 GoF" matches no Disease label / synonym (disease 1's synonym is spelled out) but
+    # equals the Mechanism label "MOCKGENE1 gain of function" once both are normalised.
+    pg = {"meta": {"date": "2026-10-03"}, "groups": [_group("Mock Mechanism Alliance", ["MOCKGENE1 GoF", "Mock nothing at all"]), _group("Mock Mechanism Registry", ["MOCKGENE1-gof"], kind="registry")], "searches": []}
+    result = b.build(store, {**SEEDS, "patient_groups": pg}, now=NOW)
+    graph = result.graph
+    assert Graph.model_validate(graph.model_dump(mode="json"))
+    idx = graph.node_index()
+    assert idx["mech:MOCKGENE1:GoF"].label == "MOCKGENE1 gain of function"
+
+    mech_edge = edge_between(graph, "org:mock-mechanism-alliance", "mech:MOCKGENE1:GoF", "supports_community")
+    assert mech_edge.evidence_class is EvidenceClass.observed and mech_edge.confidence == 0.8 and mech_edge.status is EdgeStatus.supported
+    assert mech_edge.confidence_basis["matched_term"] == "MOCKGENE1 GoF" and mech_edge.confidence_basis["matched_label"] == "MOCKGENE1 gain of function"
+    assert mech_edge.confidence_basis["resolution"] == "mechanism label" and mech_edge.confidence_basis["url"] == "https://mock.invalid/mock-mechanism-alliance" and mech_edge.confidence_basis["retrieved_at"] == "2026-10-02"
+    assert [s.model_dump() for s in mech_edge.sources] == [{"kind": "url", "id": "https://mock.invalid/mock-mechanism-alliance", "date": "2026-10-02"}]
+
+    via = edge_between(graph, "org:mock-mechanism-alliance", "mock:disease:1", "supports_community")
+    has_mech = edge_between(graph, "mock:disease:1", "mech:MOCKGENE1:GoF", "has_mechanism")
+    assert via.evidence_class is EvidenceClass.inferred and via.confidence == 0.5 and via.status is EdgeStatus.supported, "a rule-derived route is inferred (capped at 0.5)"
+    assert via.attributes["labels"] == ["via_mechanism", INFERRED_LABEL], "the route label plus the badge label every inferred edge carries"
+    assert via.confidence_basis["rule_evidence_class_note"] == b.COMMUNITY_RULE_EVIDENCE_CLASS_NOTE
+    assert via.confidence_basis["via_mechanism"] == "mech:MOCKGENE1:GoF" and via.confidence_basis["disease_mechanism_edge_confidence"] == has_mech.confidence
+    assert via.confidence_basis["resolution"] == "mechanism label" and via.confidence_basis["matched_term"] == "MOCKGENE1 GoF" and via.sources == mech_edge.sources
+    assert maybe_edge(graph, "org:mock-mechanism-alliance", "mock:disease:2", "supports_community") is None, "disease 2 is the parent, not a descendant"
+    # a Registry gets the same route with relation `covers`
+    registry_mech = edge_between(graph, "org:mock-mechanism-registry", "mech:MOCKGENE1:GoF", "covers")
+    assert registry_mech.confidence == 0.8 and registry_mech.evidence_class is EvidenceClass.observed, "the page names the mechanism: observed"
+    registry_via = edge_between(graph, "org:mock-mechanism-registry", "mock:disease:1", "covers")
+    assert registry_via.attributes["labels"] == ["via_mechanism", INFERRED_LABEL] and registry_via.evidence_class is EvidenceClass.inferred and registry_via.confidence == 0.5
+
+    rows = [(s.query, s.hits) for s in graph.meta.coverage["org:mock-mechanism-alliance"].searched]
+    assert rows == [("MOCKGENE1 GoF", 1), ("MOCKGENE1 GoF [resolution: mechanism label]", 1), ("Mock nothing at all", 0)], "the term counts the diseases it reached; the unresolved term stays a zero-hit row"
+    report = result.report["patient_groups"]
+    assert report["edges_by_resolution"] == {"direct": 0, "mechanism": 2, "via_mechanism": 2, "via_ancestor": 0} and report["edges"] == 4
+    assert report["terms_resolved"] == 0 and report["terms_resolved_via_mechanism"] == 2 and report["terms_unresolved"] == 1
+
+
+def populate_tree(store: Store) -> None:
+    """An is_a tree of mock diseases: U > {C1, C2}; C1 > G1 > GG > G4; X unrelated."""
+    labels = {"u": "Mock umbrella U", "c1": "Mock child C1", "c2": "Mock child C2", "g1": "Mock grandchild G1", "gg": "Mock great grandchild GG", "g4": "Mock level four G4", "x": "Mock unrelated X"}
+    store.upsert_nodes([node(f"mock:disease:{k}", "Disease", label, backbone_id=f"D{k.upper()}") for k, label in labels.items()])
+    store.upsert_edges([edge(f"mock:disease:{child}", f"mock:disease:{parent}", "is_a", backbone_relation="PARENT") for child, parent in (("c1", "u"), ("c2", "u"), ("g1", "c1"), ("gg", "g1"), ("g4", "gg"))])
+    store.upsert_source("mock backbone", retrieved_at=TS, license="mock", version="v0", url="", notes={"evidence_score_min": 0.0, "evidence_score_max": 1.0})
+
+
+TREE_SEEDS: dict[str, Any] = {
+    "genes": [],
+    "disease_terms": ["Mock umbrella U", "Mock child C1", "Mock child C2", "Mock grandchild G1", "Mock great grandchild GG", "Mock level four G4", "Mock unrelated X"],
+    "drug_terms": [],
+    "thresholds": {"include_parent_levels": 1},
+}
+TREE_GROUPS: dict[str, Any] = {"meta": {"date": "2026-10-03"}, "groups": [_group("Mock Umbrella Alliance", ["Mock umbrella U", "Mock child C2", "Mock no such disease"])], "searches": []}
+
+
+def _tree_build(tmp_path: Path, **options: Any) -> b.BuildResult:
+    with Store(tmp_path / "evidence.sqlite") as s:
+        populate_tree(s)
+        return b.build(s, {**TREE_SEEDS, "patient_groups": {**TREE_GROUPS, **options}}, now=NOW)
+
+
+def test_umbrella_descendants_get_edges_with_depth_cap_and_direct_dedupe(tmp_path: Path) -> None:
+    result = _tree_build(tmp_path)
+    graph = result.graph
+    assert Graph.model_validate(graph.model_dump(mode="json"))
+    org = "org:mock-umbrella-alliance"
+    assert edge_between(graph, org, "mock:disease:u", "supports_community").confidence == 0.8
+    direct_c2 = edge_between(graph, org, "mock:disease:c2", "supports_community")
+    assert direct_c2.confidence == 0.8 and "labels" not in direct_c2.attributes, "a descendant the organisation names directly keeps its direct edge only"
+    expected = {"mock:disease:c1": (0.45, 1), "mock:disease:g1": (0.4, 2), "mock:disease:gg": (0.35, 3)}
+    for disease_id, (conf, depth) in expected.items():
+        e = edge_between(graph, org, disease_id, "supports_community")
+        assert e.evidence_class is EvidenceClass.inferred and e.status is EdgeStatus.supported and e.confidence == conf, f"{disease_id}: rule-derived, 0.45 - 0.05 x (depth - 1), never above 0.5"
+        assert e.attributes["labels"] == ["via_ancestor", INFERRED_LABEL] and e.attributes["scope"] == "umbrella"
+        assert e.confidence_basis["rule_evidence_class_note"] == b.COMMUNITY_RULE_EVIDENCE_CLASS_NOTE
+        assert e.confidence_basis["via_ancestor"] == "mock:disease:u" and e.confidence_basis["depth"] == depth and e.confidence_basis["matched_term"] == "Mock umbrella U"
+        assert e.confidence_basis["resolution"] == "ancestor" and e.confidence_basis["seed_terms"] == ["Mock umbrella U"]
+        assert [s.model_dump() for s in e.sources] == [{"kind": "url", "id": "https://mock.invalid/mock-umbrella-alliance", "date": "2026-10-02"}]
+    assert maybe_edge(graph, org, "mock:disease:g4", "supports_community") is None, "depth 4 is beyond descendant_depth 3"
+    assert maybe_edge(graph, org, "mock:disease:x", "supports_community") is None
+    assert sum(1 for e in graph.edges if e.source == org) == 5
+
+    rows = [(s.query, s.hits) for s in graph.meta.coverage[org].searched]
+    assert rows == [("Mock umbrella U", 4), ("Mock child C2", 1), ("Mock no such disease", 0), ("Mock umbrella U [resolution: ancestor]", 3)]
+    report = result.report["patient_groups"]
+    assert report["edges_by_resolution"] == {"direct": 2, "mechanism": 0, "via_mechanism": 0, "via_ancestor": 3} and report["edges"] == 5
+    assert report["terms_resolved"] == 2 and report["terms_unresolved"] == 1 and report["descendant_cap_hits"] == []
+    assert result.report["counts"]["edges_by_label"]["via_ancestor"] == 3
+
+
+def test_descendant_depth_and_cap_knobs(tmp_path: Path) -> None:
+    org = "org:mock-umbrella-alliance"
+    shallow = _tree_build(tmp_path / "depth1", descendant_depth=1).graph
+    assert {e.target for e in shallow.edges if e.source == org} == {"mock:disease:u", "mock:disease:c2", "mock:disease:c1"}
+    off = _tree_build(tmp_path / "depth0", descendant_depth=0)
+    assert {e.target for e in off.graph.edges if e.source == org} == {"mock:disease:u", "mock:disease:c2"} and off.report["patient_groups"]["edges_by_resolution"]["via_ancestor"] == 0
+    assert [(s.query, s.hits) for s in off.graph.meta.coverage[org].searched] == [("Mock umbrella U", 1), ("Mock child C2", 1), ("Mock no such disease", 0)], "no route row when the rule added nothing"
+    capped = _tree_build(tmp_path / "cap1", max_descendants_per_term=1)
+    assert {e.target for e in capped.graph.edges if e.source == org} == {"mock:disease:u", "mock:disease:c2", "mock:disease:c1"}, "the nearest descendant is kept first"
+    assert capped.report["patient_groups"]["descendant_cap_hits"] == [{"org": org, "matched_term": "Mock umbrella U", "candidates": 3, "kept": 1}]
+    assert capped.report["patient_groups"]["max_descendants_per_term"] == 1
+    assert [(s.query, s.hits) for s in capped.graph.meta.coverage[org].searched][-1] == ("Mock umbrella U [resolution: ancestor]", 1)
 
 
 # --------------------------------------------------------------------------------------
