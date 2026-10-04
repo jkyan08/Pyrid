@@ -12,11 +12,18 @@ Explanations: $ATLAS_EXPLANATIONS_PATH -> data/build/explanations.json
 
 Indexes are built once at load: nodes/edges/claims/clusters by id, edges by
 endpoint, cluster membership, and a token index for /search. No numpy/polars.
+
+/search is hybrid: lexical label/synonym/token matching, plus (when
+data/build/search_index.json matches this graph and an embeddings key is set)
+semantic matching of natural-language queries (api/semantic.py), plus "related"
+diseases reached from the symptoms a query matches (has_phenotype, expanded to
+more specific HPO terms through is_a, weighted by information content).
 """
 
 from __future__ import annotations
 
 import json
+import math
 import os
 import re
 from collections import defaultdict
@@ -44,6 +51,43 @@ _SEARCH_TYPE_RANK = {
     "Paper": 4,
     "Claim": 4,
 }
+
+
+# semantic matching: cosine floor, and how far below the best hit a result may fall
+_SEM_MIN_SIM = 0.38
+_SEM_BAND = 0.12
+# query words that say which kind of entity the user is after (a small nudge, not a filter)
+_INTENT = {
+    ("drug", "drugs", "medicine", "medicines", "medication", "medications", "treatment", "treatments",
+     "therapy", "therapies", "inhibitor", "inhibitors", "treat"): {"Drug": 0.08, "Mechanism": 0.04},
+    ("group", "groups", "foundation", "organization", "organisation", "support", "families", "family",
+     "community", "charity", "advocacy", "registry"): {"PatientGroup": 0.08, "Registry": 0.08},
+    ("gene", "genes", "mutation", "mutations", "variant", "variants"): {"Gene": 0.05, "Variant": 0.04},
+    ("trial", "trials", "study", "studies"): {"Study": 0.08},
+    ("symptom", "symptoms", "sign", "signs", "keeps", "getting", "has", "having"): {"Phenotype": 0.03},
+}
+
+
+_ID_LIKE_LABEL = re.compile(r"^(CHEMBL|DB)\d+$|[\[\]{}]|\(\d")
+
+
+def _prominence(node: Mapping[str, Any]) -> float:
+    """Small semantic-ranking adjustment so a lay query surfaces approved drugs before
+    unnamed research compounds (labels like 'CHEMBL480411' or IUPAC strings)."""
+    if node.get("type") != "Drug":
+        return 0.0
+    props = node.get("props") or {}
+    if props.get("is_approved"):
+        return 0.06
+    if (props.get("max_phase") or 0) >= 2:
+        return 0.02
+    label = node.get("label", "")
+    return -0.1 if _ID_LIKE_LABEL.search(label) or len(label) > 40 else -0.03
+
+
+def _semantic_score(sim: float) -> float:
+    """Map cosine similarity to the search score scale (exact label = 1.0, free text 0.4-0.8)."""
+    return round(max(0.3, min(0.88, 0.3 + (sim - 0.35) * 2.0)), 4)
 
 
 def _tokens(text: str) -> set[str]:
@@ -148,6 +192,26 @@ class GraphStore:
         for cluster in self.clusters:
             for member in cluster.get("members", []):
                 self._clusters_by_member[member].append(cluster["id"])
+
+        # related-disease expansion: phenotype -> diseases annotated with it; phenotype -> child terms
+        self._diseases_by_phenotype: dict[str, set[str]] = defaultdict(set)
+        self._phenotype_children: dict[str, set[str]] = defaultdict(set)
+        self._disease_children: dict[str, int] = defaultdict(int)
+        self._phenotype_count: dict[str, int] = defaultdict(int)
+        for edge in self.edges:
+            src = self.nodes_by_id.get(edge["source"], {})
+            dst = self.nodes_by_id.get(edge["target"], {})
+            if edge["relation"] == "has_phenotype" and src.get("type") == "Disease":
+                self._diseases_by_phenotype[edge["target"]].add(edge["source"])
+                self._phenotype_count[edge["source"]] += 1
+            elif edge["relation"] == "is_a" and src.get("type") == dst.get("type") == "Phenotype":
+                self._phenotype_children[edge["target"]].add(edge["source"])
+            elif edge["relation"] == "is_a" and src.get("type") == dst.get("type") == "Disease":
+                self._disease_children[edge["target"]] += 1
+
+        # semantic search (attached by create_app; see api/semantic.py)
+        self.semantic = None
+        self.embedder = None
 
         # search rows: (node, lowered label, lowered synonyms, token set per text)
         self._search_rows = []
@@ -277,6 +341,11 @@ class GraphStore:
                     }
                 )
 
+        by_id = {r["id"]: r for r in results}
+        self._merge_semantic(query, by_id)
+        self._merge_related_diseases(by_id)
+        results = list(by_id.values())
+
         # Entities outrank literature of equal string quality (user feedback:
         # "papers first instead of the actual proteins"), and the list stays
         # siftable: <=3 papers, <=3 investigators, <=24 results overall.
@@ -297,3 +366,111 @@ class GraphStore:
             if len(capped) >= 24:
                 break
         return capped
+
+    # ---- semantic + related ------------------------------------------------
+
+    def semantic_ready(self) -> bool:
+        idx = self.semantic
+        return bool(idx is not None and self.embedder is not None
+                    and idx.graph_built_at == (self.data.get("meta") or {}).get("built_at"))
+
+    def _merge_semantic(self, query: str, by_id: dict[str, dict[str, Any]]) -> None:
+        """Add nodes that match the query's meaning. A lexical hit keeps its kind unless the
+        semantic score beats it."""
+        q = query.strip()
+        if len(q) < 3 or not self.semantic_ready():
+            return
+        vector = self.embedder(q, self.semantic.model)
+        if vector is None:
+            return
+        hits = self.semantic.query(vector, k=40, min_sim=_SEM_MIN_SIM)
+        if not hits:
+            return
+        top = hits[0][1]
+        # When the query names something exactly ("ruxolitinib"), meaning-alikes stay below the
+        # name matches instead of tying with them.
+        ceiling = 0.84 if any(r["score"] >= 0.95 for r in by_id.values()) else 0.9
+        words = _tokens(q)
+        boosts: dict[str, float] = {}
+        for keys, bump in _INTENT.items():
+            if words & set(keys):
+                for t, b in bump.items():
+                    boosts[t] = max(boosts.get(t, 0.0), b)
+        for nid, sim in hits:
+            node = self.nodes_by_id.get(nid)
+            if node is None or sim < top - _SEM_BAND:
+                continue
+            score = min(ceiling, _semantic_score(sim) + boosts.get(node.get("type", ""), 0.0) + _prominence(node))
+            prev = by_id.get(nid)
+            if prev is not None and prev["score"] >= score:
+                continue
+            by_id[nid] = {
+                "id": nid,
+                "label": node.get("label", nid),
+                "type": node.get("type", ""),
+                "matched_on": q,
+                "match_kind": "semantic",
+                "resolution": f"related in meaning to your search → {node.get('label', nid)}",
+                "score": float(score),
+            }
+
+    def _merge_related_diseases(self, by_id: dict[str, dict[str, Any]]) -> None:
+        """Diseases that have the symptoms the query matched (Devon's journey: symptoms in
+        plain words -> HPO terms -> the diseases that show them).
+
+        Each matched phenotype counts for diseases annotated with it or with a more specific
+        term (is_a, two levels). Its weight is match strength x information content, so a
+        distinctive, well-matched symptom outweighs a common or loosely matched one. A disease's
+        score reflects how much of the query's symptom weight it covers, discounted when it
+        covers only one of several symptoms, when it is a grouping term (2+ subtypes), or when
+        it is annotated with so many phenotypes that it matches almost anything."""
+        matched = [r for r in by_id.values() if r["type"] == "Phenotype" and r["score"] >= 0.42]
+        matched = sorted(matched, key=lambda r: -r["score"])[:10]
+        if not matched:
+            return
+        weight = {r["id"]: r["score"] * max(float((self.nodes_by_id[r["id"]].get("props") or {}).get("ic") or 0.0), 0.5)
+                  for r in matched}
+        total = sum(weight.values())
+        best_phen = matched[0]["score"]
+        hits: dict[str, set[str]] = defaultdict(set)  # disease -> matched phenotype ids
+        for r in matched:
+            terms, frontier = {r["id"]}, {r["id"]}
+            for _ in range(2):
+                frontier = {c for p in frontier for c in self._phenotype_children.get(p, ())}
+                terms |= frontier
+            for t in terms:
+                for d in self._diseases_by_phenotype.get(t, ()):
+                    hits[d].add(r["id"])
+        labels = {r["id"]: r["label"] for r in matched}
+        for d, phens in hits.items():
+            coverage = sum(weight[p] for p in phens) / total
+            breadth = min(1.0, len(phens) / min(2, len(matched)))
+            score = 0.3 + 0.5 * coverage * breadth + 0.04 * (len(phens) - 1)
+            score *= self._disease_specificity(d)
+            score = round(min(0.86, score, best_phen + 0.15), 4)
+            if score < 0.45:
+                continue
+            prev = by_id.get(d)
+            if prev is not None and prev["score"] >= score:
+                continue
+            node = self.nodes_by_id[d]
+            names = ", ".join(sorted(labels[p] for p in phens))
+            by_id[d] = {
+                "id": d,
+                "label": node.get("label", d),
+                "type": node.get("type", "Disease"),
+                "matched_on": names,
+                "match_kind": "related",
+                "resolution": f"has {len(phens)} of the features you searched for: {names}",
+                "score": float(score),
+            }
+
+    def _disease_specificity(self, disease_id: str) -> float:
+        """1.0 for a specific disease; less for grouping terms and catch-all annotations."""
+        factor = 1.0
+        if self._disease_children.get(disease_id, 0) >= 2:
+            factor *= 0.8
+        n_phen = self._phenotype_count.get(disease_id, 0)
+        if n_phen > 60:
+            factor *= 1.0 / (1.0 + math.log10(n_phen / 60))
+        return factor
