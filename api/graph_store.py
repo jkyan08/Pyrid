@@ -27,6 +27,24 @@ REPO_ROOT = Path(__file__).resolve().parent.parent
 
 _STOPWORDS = {"a", "an", "and", "for", "in", "of", "on", "or", "the", "to", "with"}
 
+# search ordering among equal-quality matches: core biological entities first,
+# then communities/assets, then people, literature last
+_SEARCH_TYPE_RANK = {
+    "Disease": 0,
+    "Gene": 0,
+    "Drug": 0,
+    "Variant": 1,
+    "Mechanism": 1,
+    "Phenotype": 1,
+    "Pathway": 2,
+    "PatientGroup": 2,
+    "Registry": 2,
+    "Study": 2,
+    "Investigator": 3,
+    "Paper": 4,
+    "Claim": 4,
+}
+
 
 def _tokens(text: str) -> set[str]:
     return {t for t in re.findall(r"[a-z0-9]+", text.lower()) if t not in _STOPWORDS}
@@ -226,9 +244,13 @@ class GraphStore:
                 overlap_best: tuple[int, str, set[str]] | None = None
                 for text, tokens in row["token_sets"]:
                     overlap = q_tokens & tokens
-                    if overlap and (
-                        overlap_best is None or len(overlap) > overlap_best[0]
-                    ):
+                    # >=2 token hits, or >=50% of the query, must land — one
+                    # shared generic token ("syndrome") is noise, but a
+                    # multi-symptom query (Devon) may hit each phenotype with
+                    # only part of its tokens
+                    if len(overlap) < 2 and len(overlap) / len(q_tokens) < 0.5:
+                        continue
+                    if overlap_best is None or len(overlap) > overlap_best[0]:
                         overlap_best = (len(overlap), text, overlap)
                 if overlap_best is not None:
                     count, text, overlap = overlap_best
@@ -255,5 +277,23 @@ class GraphStore:
                     }
                 )
 
-        results.sort(key=lambda r: (-r["score"], r["label"]))
-        return results
+        # Entities outrank literature of equal string quality (user feedback:
+        # "papers first instead of the actual proteins"), and the list stays
+        # siftable: <=3 papers, <=3 investigators, <=24 results overall.
+        results.sort(
+            key=lambda r: (-r["score"], _SEARCH_TYPE_RANK.get(r["type"], 2), r["label"])
+        )
+        # default 5 per type keeps one entity class (e.g. 600 ClinVar variants)
+        # from flooding out every other kind of match
+        per_type_caps = {"Paper": 3, "Investigator": 3}
+        seen_per_type: dict[str, int] = {}
+        capped: list[dict[str, Any]] = []
+        for r in results:
+            count = seen_per_type.get(r["type"], 0)
+            if count >= per_type_caps.get(r["type"], 5):
+                continue
+            seen_per_type[r["type"]] = count + 1
+            capped.append(r)
+            if len(capped) >= 24:
+                break
+        return capped
