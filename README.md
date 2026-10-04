@@ -94,7 +94,7 @@ flowchart LR
   GJ --> API[FastAPI api/<br/>Render or Fly]
   Pre --> API
   API -->|/explain /draft live, cached| OAI[OpenAI]
-  API --> Web[Next.js + Cytoscape.js<br/>Vercel]
+  API --> Web[Next.js + D3-force / Canvas<br/>Vercel]
   GJ -.fallback: static files.-> Web
 ```
 
@@ -110,7 +110,7 @@ flowchart LR
 | Graph / clustering | NetworkX, `igraph` + `leidenalg` |
 | Tests | `pytest` |
 | API | FastAPI |
-| Frontend | Next.js (TypeScript), Cytoscape.js |
+| Frontend | Next.js (TypeScript), D3-force + HTML Canvas |
 | Deploy | Vercel (web); Render or Fly (API) |
 
 ### Repo layout
@@ -322,10 +322,10 @@ Test 6 gene: _(to choose from the built graph and document here)_.
 
 ## 10. Frontend
 
-One global search box (disease, gene, symptom, patient group or mechanism, with the synonym match shown, e.g. "matched *CMC* → …") → entity page. **Progressive reveal:** summary first, depth on click. Tabs:
+One global search box (disease, gene, symptom, patient group or mechanism, with the synonym match shown, e.g. "matched *CMC* → …") → entity page. **Progressive reveal:** map first, evidence and actions on click. Tabs:
 
 - **Summary** — three plain-language lines (what is broken, who shares it, what already exists), each linked to its edge.
-- **Map** — Cytoscape. Colour = cluster only. Size = centrality. Dashed = inter-cluster bridge. Opens at cluster level, ≤ ~40 nodes visible.
+- **Map** — D3-force and Canvas. Link springs, many-body repulsion, collision and centering keep a responsive neighborhood; dragging temporarily pins one node and moves nearby nodes. Colour = cluster only. Size = centrality. Dashed = inter-cluster bridge or inferred connection. ≤ ~40 nodes visible.
 - **Evidence drawer** — opens from any edge: relation, evidence-class badge, confidence + basis, quote + link, supporting vs contradicting side by side.
 - **Act** (the brief's "patient action view") — separates viable leads from unsupported links.
   - Assets (registries, natural-history studies, models, biomarkers, clinical studies), each with a verdict (reusable now / adaptable, needs expert review / not transferable), **what differs** between the diseases, and which **biological or eligibility questions** need expert review.
@@ -378,7 +378,7 @@ Times are ET on Sat Oct 3 → Sun Oct 4. If we start late, shift proportionally.
   - [x] Generated mock `data/build/graph.mock.json` via `tests/fixtures/make_mock.py` (`mock:` ids, "Mock " labels, no real IDs/PMIDs)
   - [x] `tests/test_contract.py` passing on the mock
   - [x] `tests/test_ground_truth.py` tests 1–7 as `xfail` (helpers + relation vocabulary in `tests/conftest.py`)
-  - [ ] `web/` Next.js shell rendering the mock in Cytoscape — **moved to Lane C** per [AGENT-SPLIT.md](AGENT-SPLIT.md); builds against the mock
+  - [ ] `web/` Next.js shell rendering the mock as a force graph — **moved to Lane C** per [AGENT-SPLIT.md](AGENT-SPLIT.md); builds against the mock
 - [ ] **M1 — Backbone** (~5 PM) · *done when: frontend renders real data*
   - [ ] OptimusKG spike (45 min) → `docs/optimuskg-spike.md` → go / fallback decision
   - [ ] Cluster genes, diseases, phenotypes, pathways, drugs loaded into SQLite
@@ -416,7 +416,7 @@ The contract is the seam: after M0, each stream works against `graph.json` / the
 | --- | --- | --- | --- |
 | **Data** | `pipeline/sources/`, `pipeline/seeds/`, `pipeline/cache.py`, `pipeline/graph/`, `pipeline/export.py`, `docs/optimuskg-spike.md`, `Makefile` | contract | OptimusKG spike decision; graph v0 |
 | **AI** | `pipeline/extract/`, `api/` explain / draft / search / validator, `eval/` | contract, PubMed abstracts from Data | quote-verified claims for the Section 11 papers |
-| **Frontend** | `web/`, deploy (Vercel + API host) | mock `graph.json` | Cytoscape map + evidence drawer on mock data |
+| **Frontend** | `web/`, deploy (Vercel + API host) | mock `graph.json` | Force map + evidence drawer on mock data |
 | **Story** | README, team video + 1-minute walkthrough, `patient_groups.yaml` verification, demo script, 10x card wording, license table | everything (reads only) | verified patient-group seeds + directory-search log |
 
 Shared: `pipeline/models.py` (contract — change only with sign-off), `tests/`.
