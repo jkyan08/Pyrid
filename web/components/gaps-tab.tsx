@@ -10,7 +10,7 @@ import type { GapsView } from "@/lib/types";
 import { apiGaps } from "@/lib/api";
 import { CitationText } from "./citation-text";
 import { CoverageTable } from "./coverage-table";
-import MotionLoader from "@/components/smoothui/motion-loader";
+import ThinkingDots from "@/components/smoothui/thinking-dots";
 
 export function GapsTab({ entityId }: { entityId: string }) {
   const [gaps, setGaps] = useState<GapsView | null>(null);
@@ -30,11 +30,11 @@ export function GapsTab({ entityId }: { entityId: string }) {
     };
   }, [entityId]);
 
-  if (error) return <p className="text-sm text-red-700">{error}</p>;
+  if (error) return <p className="text-sm text-rust">{error}</p>;
   if (!gaps)
     return (
-      <p className="flex items-center gap-2 text-sm text-gray-400">
-        <MotionLoader variant="orbit" size={18} label="Loading gaps" />
+      <p className="flex items-center gap-2 text-sm text-muted-foreground">
+        <ThinkingDots label="Loading gaps" />
         Loading gaps…
       </p>
     );
@@ -42,9 +42,9 @@ export function GapsTab({ entityId }: { entityId: string }) {
   return (
     <div className="space-y-8">
       {gaps.honest_gap && (
-        <div className="rounded-lg border border-red-200 bg-red-50 p-4">
-          <p className="text-sm font-semibold text-red-800">Honest gap</p>
-          <p className="mt-1 text-sm text-red-700">
+        <div className="rounded-lg border border-rust/30 bg-rust/5 p-4">
+          <p className="text-sm font-semibold text-rust">Honest gap</p>
+          <p className="mt-1 text-sm text-rust/90">
             No supported route exists for this entity in the current graph. The coverage below
             shows exactly what was searched; absence of evidence is reported, never papered over.
           </p>

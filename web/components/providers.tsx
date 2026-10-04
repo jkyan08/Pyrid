@@ -11,7 +11,7 @@ function FallbackBanner() {
   useEffect(() => subscribeApiMode(setMode), []);
   if (mode !== "fallback") return null;
   return (
-    <div className="border-b border-amber-200 bg-amber-50 px-4 py-1.5 text-center text-xs text-amber-900">
+    <div className="border-b border-ochre/30 bg-ochre/10 px-4 py-1.5 text-center text-xs text-ochre">
       Static-fallback mode: the API is unreachable, so views are computed from a bundled graph
       snapshot. Explanations and drafts are cached only.
     </div>
@@ -19,7 +19,7 @@ function FallbackBanner() {
 }
 
 /**
- * Slim amber ribbon (README hard rule 10): shown only when GET /health
+ * Slim ochre ribbon (README hard rule 10): shown only when GET /health
  * answered with mode === "mock". Unreachable /health is a silent no-op —
  * the static-fallback banner above covers that case. Coexists with it.
  */
@@ -41,7 +41,7 @@ function MockDataRibbon() {
   }, []);
   if (!show) return null;
   return (
-    <div className="border-b border-amber-200 bg-amber-50 px-4 py-1.5 text-center text-xs text-amber-900">
+    <div className="border-b border-ochre/30 bg-ochre/10 px-4 py-1.5 text-center text-xs text-ochre">
       Placeholder (mock) data — not sourced
     </div>
   );
