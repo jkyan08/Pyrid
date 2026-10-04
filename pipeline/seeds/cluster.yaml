@@ -104,3 +104,19 @@ thresholds:
 # Used only to label the pathway family in reports and the UI; never used to filter or by tests.
 # Compile with re.IGNORECASE (backbone pathway labels are capitalised, e.g. "Interleukin-6 signaling").
 pathway_family_label_regex: "JAK|STAT|interleukin|interferon|cytokine"
+
+# Gap probe: the "obscure gene with no connections" of ground-truth test 6 (README section 8,
+# docs/test-cluster-desc.md section 8). The PIPELINE chooses it by the general rule below over the
+# whole backbone (pipeline.sources.optimuskg.select_gap_probe); no symbol is written here or in
+# code. "HGNC symbol" means the gene node's properties.symbol is present, differs from its Ensembl
+# id, is unique among gene nodes and the node carries an HGNC xref. The export
+# (pipeline.export.run_gap_probe) writes the gene as a Gene node with props.gap_probe: true, records
+# its four backbone counts (all 0) and live ClinVar / ClinicalTrials.gov / NIH RePORTER lookups as
+# coverage rows (every call cached; ATLAS_OFFLINE=1 replays), and build_report.json "gap_probe"
+# names the chosen symbol for tests/test_ground_truth.py test 6. pipeline/graph/build.py exports
+# the node even though it has no edges, so /entity/<gene id> answers no_supported_route with the
+# searches shown.
+gap_probe:
+  enabled: true
+  rule: "alphabetically first protein-coding HGNC symbol among backbone genes with zero disease_gene, drug_gene, pathway_gene and biological_process_gene rows"
+  biotype: protein_coding
