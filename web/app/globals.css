@@ -71,6 +71,14 @@
   --color-smooth-900: var(--smooth-900);
   --color-smooth-950: var(--smooth-950);
   --color-smooth-1000: var(--smooth-1000);
+  /* Atlas 5-color palette (user-provided) + two derived semantic earth tones. */
+  --color-dust: var(--atlas-dust);
+  --color-sage: var(--atlas-sage);
+  --color-fern: var(--atlas-fern);
+  --color-hunter: var(--atlas-hunter);
+  --color-pine: var(--atlas-pine);
+  --color-rust: var(--atlas-rust);
+  --color-ochre: var(--atlas-ochre);
 }
 
 body {
@@ -78,29 +86,39 @@ body {
 }
 
 :root {
-  /* Atlas brand: keep SmoothUI accents on the app's low-ink sky palette. */
-  --brand: oklch(0.588 0.158 241.966); /* ~sky-600 */
-  --brand-secondary: oklch(0.5 0.134 242.749); /* ~sky-700 */
-  --brand-light: oklch(0.746 0.16 232.661); /* ~sky-400 */
-  --brand-lighter: oklch(0.828 0.111 230.318); /* ~sky-300 */
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
+  /* Atlas palette — the user's 5-color scheme:
+     Dust Grey / Dry Sage / Fern / Hunter Green / Pine Teal. */
+  --atlas-dust: #dad7cd;
+  --atlas-sage: #a3b18a;
+  --atlas-fern: #588157;
+  --atlas-hunter: #3a5a40;
+  --atlas-pine: #344e41;
+  /* Derived semantic earth tones: warnings stay warning-ish, but muted. */
+  --atlas-rust: #9a5141; /* honest gaps, exclusions, errors */
+  --atlas-ochre: #8a6c33; /* cautions, contested evidence */
+  /* SmoothUI brand accents: Hunter Green primary, Fern on hover/active. */
+  --brand: var(--atlas-hunter);
+  --brand-secondary: var(--atlas-fern);
+  --brand-light: #6f9a6e;
+  --brand-lighter: var(--atlas-sage);
+  --background: #f7f6f2; /* Dust Grey tint */
+  --foreground: #2a382f; /* Pine Teal-ish dark ink */
   --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
+  --card-foreground: #2a382f;
   --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
+  --popover-foreground: #2a382f;
+  --primary: var(--atlas-hunter);
   --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
+  --secondary: #eceae2;
+  --secondary-foreground: #2a382f;
+  --muted: #edebe4;
+  --muted-foreground: #6b7265;
+  --accent: #e9ece3;
+  --accent-foreground: #2a382f;
+  --destructive: var(--atlas-rust);
+  --border: #ddd9ce;
+  --input: #d6d2c6;
+  --ring: var(--atlas-fern);
   --chart-1: oklch(0.87 0 0);
   --chart-2: oklch(0.556 0 0);
   --chart-3: oklch(0.439 0 0);
@@ -115,15 +133,15 @@ body {
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
-  --amber: oklch(0.77 0.16 75);
+  --amber: #c2a36b;
   --amber-fg: oklch(0.22 0 0);
-  --amber-hover: oklch(0.71 0.17 70);
-  --blue: oklch(0.62 0.19 256);
+  --amber-hover: #b3945c;
+  --blue: #5c88a5;
   --blue-fg: #fff;
-  --blue-hover: oklch(0.56 0.2 256);
-  --green: oklch(0.7 0.17 152);
+  --blue-hover: #4f7a96;
+  --green: var(--atlas-fern);
   --green-fg: #fff;
-  --green-hover: oklch(0.64 0.18 152);
+  --green-hover: var(--atlas-hunter);
   --smooth-50: oklch(0.99 0 0);
   --smooth-100: oklch(0.972 0 0);
   --smooth-200: oklch(0.945 0 0);
@@ -202,5 +220,30 @@ body {
   }
   html {
     @apply font-sans;
+  }
+}
+
+/* Thinking dots: three small dots pulsing in sequence. Under
+   prefers-reduced-motion the animation stops and the dots read as a
+   static ellipsis. */
+@keyframes thinking-dot {
+  0%,
+  60%,
+  100% {
+    opacity: 0.25;
+  }
+  30% {
+    opacity: 1;
+  }
+}
+
+.thinking-dot {
+  animation: thinking-dot 1.2s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .thinking-dot {
+    animation: none;
+    opacity: 0.7;
   }
 }

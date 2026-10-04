@@ -30,18 +30,18 @@ export function DiscoveryTrail({ graph, centerId, onAct }: {
     <section className="mt-8" aria-labelledby="trail-heading">
       <div className="mb-4 flex flex-wrap items-end justify-between gap-3">
         <div>
-          <p className="text-xs font-bold uppercase tracking-[0.16em] text-sky-700">From the graph</p>
-          <h2 id="trail-heading" className="mt-1 text-2xl font-semibold tracking-tight text-slate-950">Follow the evidence trail</h2>
-          <p className="mt-1 max-w-3xl text-sm leading-6 text-slate-600">
+          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-hunter">From the graph</p>
+          <h2 id="trail-heading" className="mt-1 text-2xl font-semibold tracking-tight text-pine">Follow the evidence trail</h2>
+          <p className="mt-1 max-w-3xl text-sm leading-6 text-muted-foreground">
             Each route is a chain of graph edges. Open an edge to inspect its explanation, sources and any contradictory claims.
           </p>
         </div>
-        <button onClick={onAct} className="rounded-full bg-slate-950 px-5 py-2.5 text-sm font-semibold text-white transition-transform hover:-translate-y-0.5 hover:bg-slate-800 motion-reduce:transform-none">
+        <button onClick={onAct} className="rounded-full bg-hunter px-5 py-2.5 text-sm font-semibold text-white transition-[transform,background-color] hover:-translate-y-0.5 hover:bg-fern motion-reduce:transform-none">
           Check reusable research <span aria-hidden="true">↗</span>
         </button>
       </div>
       {routes.length === 0 ? (
-        <div className="rounded-2xl border border-amber-200 bg-amber-50 p-6 text-sm text-amber-950">
+        <div className="rounded-2xl border border-ochre/30 bg-ochre/10 p-6 text-sm text-ochre">
           No connected pathway, gene, related disease or research asset was found in the current graph. Check the Evidence brief&apos;s Open questions section for the search coverage and a next question to test.
         </div>
       ) : (
@@ -50,31 +50,31 @@ export function DiscoveryTrail({ graph, centerId, onAct }: {
             const theme = themeOf(route.node.type);
             const unsupported = route.steps.some(({ edge }) => edge.status !== "supported");
             return (
-              <article key={route.type} className={`rounded-2xl border border-slate-200 border-l-4 bg-white p-5 shadow-[0_8px_30px_rgba(15,23,42,0.04)] ${theme.accent}`}>
+              <article key={route.type} className={`rounded-2xl border border-dust border-l-4 bg-white p-5 ${theme.accent}`}>
                 <div className="flex items-start gap-3">
                   <span className={`flex size-10 shrink-0 items-center justify-center rounded-xl ${theme.band} ${theme.text}`}>
                     <TypeGlyph type={route.node.type} size={22} />
                   </span>
                   <div className="min-w-0">
-                    <p className="text-[11px] font-bold uppercase tracking-[0.13em] text-slate-500">{ROUTE_COPY[route.type]}</p>
-                    <Link href={`/entity/${encodeURIComponent(route.node.id)}`} className="mt-0.5 block font-semibold leading-snug text-slate-950 underline decoration-slate-200 underline-offset-4 hover:decoration-sky-400">
+                    <p className="text-[11px] font-semibold uppercase tracking-[0.13em] text-muted-foreground">{ROUTE_COPY[route.type]}</p>
+                    <Link href={`/entity/${encodeURIComponent(route.node.id)}`} className="mt-0.5 block font-semibold leading-snug text-pine underline decoration-dust underline-offset-4 hover:decoration-fern">
                       {displayLabel(route.node.label, route.node.type)}
                     </Link>
                   </div>
                 </div>
-                <ol className="mt-4 space-y-2 border-t border-slate-100 pt-3">
+                <ol className="mt-4 space-y-2 border-t border-dust/60 pt-3">
                   {route.steps.map(({ from, edge, to }) => (
-                    <li key={edge.id} className="text-xs leading-5 text-slate-600">
-                      <span className="font-medium text-slate-800">{displayLabel(from.label, from.type)}</span>{" "}
-                      <span className="text-slate-400">→</span>{" "}
-                      <span className="font-medium text-slate-800">{displayLabel(to.label, to.type)}</span>
-                      <button onClick={() => openEvidence(edge.id)} className="mt-1 block text-left font-semibold text-sky-700 underline decoration-sky-200 underline-offset-2 hover:text-sky-900">
+                    <li key={edge.id} className="text-xs leading-5 text-muted-foreground">
+                      <span className="font-medium text-foreground">{displayLabel(from.label, from.type)}</span>{" "}
+                      <span className="text-muted-foreground/70">→</span>{" "}
+                      <span className="font-medium text-foreground">{displayLabel(to.label, to.type)}</span>
+                      <button onClick={() => openEvidence(edge.id)} className="mt-1 block text-left font-semibold text-hunter underline decoration-sage underline-offset-2 hover:text-fern">
                         {edge.relation.replaceAll("_", " ")} · {edge.sources?.length ? `${edge.sources.length} source${edge.sources.length === 1 ? "" : "s"}` : "source missing"} <span aria-hidden="true">↗</span>
                       </button>
                     </li>
                   ))}
                 </ol>
-                {unsupported && <p className="mt-3 rounded-lg bg-amber-50 px-3 py-2 text-xs font-medium text-amber-900">Includes an inferred or unsupported connection. Review before using this route.</p>}
+                {unsupported && <p className="mt-3 rounded-lg bg-ochre/10 px-3 py-2 text-xs font-medium text-ochre">Includes an inferred or unsupported connection. Review before using this route.</p>}
               </article>
             );
           })}
