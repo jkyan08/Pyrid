@@ -331,6 +331,11 @@ def test_loader_layer_edges_are_scored_and_inferred_edges_capped(tmp_path: Path)
     grant = edge_between(graph, "mock:person:1", "mock:gene:1", "has_funded_project")
     assert grant.evidence_class is EvidenceClass.inferred and grant.confidence == 0.4 and grant.confidence_basis["matched_text"] == ["MOCKGENE1"]
     assert ("url", "https://mock.invalid/grant/1") in {(s.kind.value, s.id) for s in grant.sources}
+    # contact routes: a RePORTER PI's project page, on the node (both key names) and on the grant edge; never an address
+    pi = idx["mock:person:1"]
+    assert pi.props["contact_source"] == "https://mock.invalid/grant/1" and pi.props["contact"] == "https://mock.invalid/grant/1" and pi.props["contact_source_kind"] == "reporter_project_page"
+    assert grant.attributes["contact_source"] == "https://mock.invalid/grant/1"
+    assert result.report["contact_routes"]["by_kind"] == {"reporter_project_page": 1} and result.report["contact_routes"]["edges_with_contact_source"] == 1
 
     # Variants: keep_in_graph or somatic block stay, the plain record goes (and so does its edge)
     assert "mock:variant:1" in idx and "mock:variant:3" in idx and "mock:variant:2" not in idx
@@ -570,7 +575,8 @@ def test_prune_keeps_nodes_a_claim_resolved_to(tmp_path: Path) -> None:
     assert [(c.subject, c.object) for c in result.graph.claims] == [("mock:drug:b", "text:a mock condition"), ("text:a mock compound", "mock:disease:b")]
     assert result.report["claims"]["unattached"] == ["c_000001", "c_000002"]
     for entity in ("mock:drug:b", "mock:disease:b"):
-        assert any(r.source == "claims.json endpoint" and r.hits == 0 for r in result.graph.meta.coverage[entity].searched)
+        assert any(r.source == b.CLAIMS_COVERAGE_SOURCE and r.hits == 0 for r in result.graph.meta.coverage[entity].searched)
+    assert b.CLAIMS_COVERAGE_SOURCE == "unresolved literature mention"
 
 
 def test_min_papers_per_investigator_threshold(store: Store, monkeypatch: pytest.MonkeyPatch) -> None:
@@ -601,6 +607,33 @@ def test_min_papers_per_investigator_threshold(store: Store, monkeypatch: pytest
     assert "person:mock-author" not in strict.graph.node_index()
     # with the exemption off the cap is handed to the evidence module too, so its report counts what is exported
     assert [c["investigator_min_papers"] for c in calls] == [1, 1, 1, 2]
+
+
+def test_orcid_investigators_get_their_public_orcid_page_as_contact_route(store: Store, monkeypatch: pytest.MonkeyPatch) -> None:
+    calls: list[dict[str, Any]] = []
+    module = _fake_evidence_module(calls)
+    plain = module.integrate_claims
+
+    def with_orcid(nodes: Any, edges: Any, bundle: Any, *, today: str, scrub: Any, **kwargs: Any) -> Any:
+        out = plain(nodes, edges, bundle, today=today, scrub=scrub, **kwargs)
+        # the same person under an orcid: id (PubMed supplied an ORCID): rename the node and its edges
+        node_ = out.investigator_nodes.pop("person:mock-author")
+        node_["id"] = "orcid:0000-0002-1825-009X"
+        node_["props"]["orcid"] = "0000-0002-1825-009X"
+        out.investigator_nodes[node_["id"]] = node_
+        out.new_edges = {(node_["id"] if s == "person:mock-author" else s, t, r): {**e, "source": node_["id"] if s == "person:mock-author" else s} for (s, t, r), e in out.new_edges.items()}
+        return out
+
+    monkeypatch.setattr(module, "integrate_claims", with_orcid)
+    monkeypatch.setitem(sys.modules, "pipeline.graph.evidence", module)
+    result = b.build(store, SEEDS, _evidence_bundle(), now=NOW)
+    author = result.graph.node_index()["orcid:0000-0002-1825-009X"]
+    assert author.props["contact_source"] == "https://orcid.org/0000-0002-1825-009X" and author.props["contact"] == author.props["contact_source"]
+    assert author.props["contact_source_kind"] == "orcid_public_page"
+    assert edge_between(result.graph, author.id, "mock:disease:1", "publishes_on").attributes["contact_source"] == "https://orcid.org/0000-0002-1825-009X"
+    assert "contact_source" not in edge_between(result.graph, author.id, "mock:paper:1", "author_of").attributes, "only publishes_on / has_funded_project carry the route"
+    assert result.report["contact_routes"]["by_kind"] == {"orcid_public_page": 1} and result.report["contact_routes"]["edges_with_contact_source"] == 1
+    assert "@" not in json.dumps(author.props), "scrubbed, and the ORCID survives the phone scrubber"
 
 
 def test_inferred_text_matches_never_anchor_nodes(tmp_path: Path) -> None:
@@ -682,8 +715,52 @@ def test_patient_groups_become_nodes_edges_and_coverage(store: Store) -> None:
         "descendant_depth": 3,
         "max_descendants_per_term": 200,
         "descendant_cap_hits": [],
-    }, "mock:disease:2 is disease 1's PARENT, so the umbrella rule adds nothing here and no resolution rows appear"
+        "directory_search_gaps": {
+            "rule": "zero-hit directory search attached to every disease a matching seed term reached (query/outcome contains the normalised term)",
+            "rows_attached": 0,
+            "diseases": 0,
+            "by_search": {},
+        },
+    }, "mock:disease:2 is disease 1's PARENT, so the umbrella rule adds nothing here and no resolution rows appear; no search names a seed term"
     assert not any("[resolution:" in s.query for s in cov["org:mock-immune-foundation"].searched)
+    # asset attributes (Act tab): a direct seed match is reusable now, nothing differs, nothing to review
+    assert {k: e.attributes[k] for k in ("verdict", "differs", "needs_review")} == {"verdict": "reusable_now", "differs": [], "needs_review": []}
+    assert edge_between(graph, "org:mock-registry", "mock:disease:1", "covers").attributes["verdict"] == "reusable_now"
+
+
+def test_zero_hit_directory_searches_naming_a_seed_term_reach_its_diseases(store: Store) -> None:
+    pg = {
+        **PATIENT_GROUPS,
+        "searches": [
+            # names the foundation's umbrella term (plural, different case) in the QUERY: attached to every disease the term reached
+            {"directory": "Mock directory A", "url": "https://mock.invalid/a", "query": "MOCK PARENT DISORDER 2s patient organisation", "date": "2026-10-03", "hits": 0, "outcome": "nothing"},
+            # names the dedicated term only in the OUTCOME text, and was not executable (null hits -> 0)
+            {"directory": "Mock directory B", "url": "https://mock.invalid/b", "query": "MOCKGENE1 group", "date": "2026-10-03", "hits": None, "outcome": "Blocked; no Mock immune dysregulation 1 group could be read."},
+            # a zero-hit search naming no seed term: stays a seed:* row only
+            {"directory": "Mock directory C", "url": "https://mock.invalid/c", "query": "some other thing", "date": "2026-10-03", "hits": 0, "outcome": "nothing"},
+            # a search WITH hits naming a seed term: not a gap, not attached
+            {"directory": "Mock directory D", "url": "https://mock.invalid/d", "query": "Mock immune dysregulation 1 group", "date": "2026-10-03", "hits": 2, "outcome": "two leads"},
+            # names the unresolved term of the lonely group: no disease to attach to
+            {"directory": "Mock directory E", "url": "https://mock.invalid/e", "query": "Mock no such disease group", "date": "2026-10-03", "hits": 0, "outcome": "nothing"},
+        ],
+    }
+    result = b.build(store, {**SEEDS, "patient_groups": pg}, now=NOW)
+    cov = result.graph.meta.coverage
+    d1 = [(s.source, s.query, s.hits) for s in cov["mock:disease:1"].searched if s.source.startswith("Mock directory")]
+    d2 = [(s.source, s.query, s.hits) for s in cov["mock:disease:2"].searched if s.source.startswith("Mock directory")]
+    assert d2 == [("Mock directory A", "MOCK PARENT DISORDER 2s patient organisation (https://mock.invalid/a)", 0)], "the umbrella term's disease gets the search that names it (plural tolerated)"
+    assert d1 == [("Mock directory B", "MOCKGENE1 group (https://mock.invalid/b) [not executable]", 0)], "matched through the outcome text; the executed search with hits and the unrelated search are not gaps here"
+    for directory in ("A", "B", "C", "D", "E"):
+        assert f"seed:patient_group_search:Mock directory {directory}" in cov, "the seed:* rows stay"
+    report = result.report["patient_groups"]["directory_search_gaps"]
+    assert report["rows_attached"] == 2 and report["diseases"] == 2
+    assert report["by_search"] == {
+        "seed:patient_group_search:Mock directory A": {"query": "MOCK PARENT DISORDER 2s patient organisation", "matched_terms": ["Mock parent disorder 2", "Mock parent disorder 2 (umbrella)"], "diseases": 1},
+        "seed:patient_group_search:Mock directory B": {"query": "MOCKGENE1 group", "matched_terms": ["Mock immune dysregulation 1"], "diseases": 1},
+    }
+    assert b._term_pattern("myeloproliferative neoplasms (umbrella for the three above)").search("myeloproliferative neoplasm patient organization")
+    assert b._term_pattern("STAT1 gain of function").search("stat1 gain of function patient organization") and not b._term_pattern("STAT1 gain of function").search("STAT1")
+    assert b._term_pattern("") is None
 
 
 def test_build_patient_groups_without_seeds_is_a_no_op() -> None:
@@ -732,6 +809,9 @@ def test_term_matching_a_mechanism_label_links_the_mechanism_and_its_diseases(st
     has_mech = edge_between(graph, "mock:disease:1", "mech:MOCKGENE1:GoF", "has_mechanism")
     assert via.evidence_class is EvidenceClass.inferred and via.confidence == 0.5 and via.status is EdgeStatus.supported, "a rule-derived route is inferred (capped at 0.5)"
     assert via.attributes["labels"] == ["via_mechanism", INFERRED_LABEL], "the route label plus the badge label every inferred edge carries"
+    # Act tab attributes by route: the mechanism match itself is a direct match; the disease reached through it needs an eligibility check
+    assert {k: mech_edge.attributes[k] for k in ("verdict", "differs", "needs_review")} == {"verdict": "reusable_now", "differs": [], "needs_review": []}
+    assert {k: via.attributes[k] for k in ("verdict", "differs", "needs_review")} == {"verdict": "adaptable_needs_review", "differs": ["organisation names the mechanism, not this disease"], "needs_review": ["eligibility"]}
     assert via.confidence_basis["rule_evidence_class_note"] == b.COMMUNITY_RULE_EVIDENCE_CLASS_NOTE
     assert via.confidence_basis["via_mechanism"] == "mech:MOCKGENE1:GoF" and via.confidence_basis["disease_mechanism_edge_confidence"] == has_mech.confidence
     assert via.confidence_basis["resolution"] == "mechanism label" and via.confidence_basis["matched_term"] == "MOCKGENE1 GoF" and via.sources == mech_edge.sources
@@ -789,6 +869,10 @@ def test_umbrella_descendants_get_edges_with_depth_cap_and_direct_dedupe(tmp_pat
         assert e.confidence_basis["via_ancestor"] == "mock:disease:u" and e.confidence_basis["depth"] == depth and e.confidence_basis["matched_term"] == "Mock umbrella U"
         assert e.confidence_basis["resolution"] == "ancestor" and e.confidence_basis["seed_terms"] == ["Mock umbrella U"]
         assert [s.model_dump() for s in e.sources] == [{"kind": "url", "id": "https://mock.invalid/mock-umbrella-alliance", "date": "2026-10-02"}]
+        assert e.attributes["verdict"] == "adaptable_needs_review" and e.attributes["needs_review"] == ["eligibility", "biological"]
+        assert e.attributes["differs"] == [f"organisation serves the umbrella disease Mock umbrella U, {depth} level(s) above"]
+    assert {k: direct_c2.attributes[k] for k in ("verdict", "differs", "needs_review")} == {"verdict": "reusable_now", "differs": [], "needs_review": []}
+    assert b.asset_attributes("via_ancestor", ancestor_label="Mock umbrella U", depth=2)["differs"] == ["organisation serves the umbrella disease Mock umbrella U, 2 level(s) above"]
     assert maybe_edge(graph, org, "mock:disease:g4", "supports_community") is None, "depth 4 is beyond descendant_depth 3"
     assert maybe_edge(graph, org, "mock:disease:x", "supports_community") is None
     assert sum(1 for e in graph.edges if e.source == org) == 5
@@ -973,7 +1057,7 @@ def _fake_evidence_module(calls: list[dict[str, Any]]) -> types.ModuleType:
             paper_nodes=papers,
             investigator_nodes=investigators,
             new_edges=new_edges,
-            coverage_rows=[("claims:unresolved", "claims.json endpoint", "text:some mention", today, 0), {"entity_id": "mock:disease:1", "source": "claims.json endpoint", "query": "mock", "date": today, "hits": 1}],
+            coverage_rows=[("claims:unresolved", "unresolved literature mention", "text:some mention", today, 0), {"entity_id": "mock:disease:1", "source": "unresolved literature mention", "query": "mock", "date": today, "hits": 1}],
             report={"resolved": 5, "unresolved": 1},
         )
 
@@ -1026,8 +1110,11 @@ def test_build_merges_the_evidence_module_result(store: Store, monkeypatch: pyte
     assert result.report["claims"]["attached_to_edges"] == 3 and result.report["claims"]["unattached"] == []
     assert result.report["claim_edges_reconciled"]["claim_ids_removed_from_edges"] == 1
     cov = graph.meta.coverage
-    assert cov["claims:unresolved"].searched[0].model_dump() == {"source": "claims.json endpoint", "query": "text:some mention", "date": "2026-10-03", "hits": 0}
-    assert any(s.source == "claims.json endpoint" for s in cov["mock:disease:1"].searched)
+    assert cov["claims:unresolved"].searched[0].model_dump() == {"source": "unresolved literature mention", "query": "text:some mention", "date": "2026-10-03", "hits": 0}
+    assert any(s.source == "unresolved literature mention" for s in cov["mock:disease:1"].searched)
+    # investigator contact routes: the fake author has neither an orcid: id nor a source_url, so none is guessed
+    assert "contact" not in author.props and "contact_source" not in author.props
+    assert result.report["contact_routes"]["by_kind"] == {"none": 1} and result.report["contact_routes"]["edges_with_contact_source"] == 0
     assert "mock.author@mock.invalid" not in graph.model_dump_json()
     assert result.report["prune"]["diseases"]["anchored_by_evidence"] == 1
 

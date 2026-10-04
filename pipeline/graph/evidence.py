@@ -25,10 +25,33 @@ and the normalised id must be a node; a ``mech:<GENE>:<GoF|LoF|DN>[:somatic]`` i
 when the node does not exist yet (the node is created from the id: label via
 :func:`pipeline.graph.mechanisms.mechanism_label`, props ``gene_symbol`` / ``direction`` /
 ``origin`` (somatic only) / ``gene`` when a Gene node carries the symbol / ``source: "claims"``).
-Every unresolved endpoint becomes a coverage row ``(entity, "claims.json endpoint", <raw
+Every unresolved endpoint becomes a coverage row ``(entity, "unresolved literature mention", <raw
 endpoint>, today, 0)`` where ``entity`` is the resolved other side when there is one, else
 ``claims:unresolved``. A ``claim.variant`` that is not a Variant node is cleared on the exported
 claim (the contract forbids it) and recorded the same way.
+
+Protein-change mentions (general rule, :class:`_MentionResolver`)
+-------------------------------------------------------------------
+A ``text:<mention>`` subject, object or ``variant`` that names a variant by its protein change is
+resolved against the Variant nodes before it is given up on. The mention must carry a
+protein-change token (:data:`PROTEIN_CHANGE_TOKEN`: ``[A-Z]<digits>[A-Z*]`` such as ``R274W`` /
+``K119*``, or ``p.<Xxx><digits><Xxx>`` such as ``p.Arg274Trp``) and must name nothing but the
+variant: every other word is a gene symbol, a zygosity / direction / variant word
+(:data:`VARIANT_MENTION_WORDS`) or another protein-change token (a phrase such as "<variant> allele
+burden" or "<variant>-mutated <disease>" is not the variant and stays unresolved). The token is
+compared verbatim with each Variant node's ``synonyms``, ``props.protein_change`` and
+``props.hgvs_p``, restricted to the variants of the genes the claim names: a gene symbol
+(word-bounded, case-sensitive; only genes that carry Variant nodes) in the claim's mentions or
+quote, the gene of a resolved Gene / Mechanism / Variant endpoint, or the mechanism gene(s) of a
+resolved Disease endpoint. With no gene in the claim the token must be unique across ALL Variant
+nodes. Exactly one candidate (and every token in the mention agreeing on it) resolves the mention:
+the claim's field becomes the Variant node id, the endpoint counts as ``protein_change_token``
+in the resolution report, every edge the claim attaches to records
+``confidence_basis.resolved_mentions[] = {claim, field, resolved_from, resolved_to, method:
+"protein-change token vs ClinVar synonyms"}`` and the normal routes (the variant-specific
+Variant -> Mechanism ``has_mechanism`` route included) run as if Lane B had resolved it. Ambiguous,
+unmatched or over-long mentions stay unresolved with the coverage rows above; the report
+(``claims.variant_mentions``) counts each outcome and lists the resolutions.
 
 Predicate -> edge mapping (shared design C)
 -------------------------------------------
@@ -49,7 +72,12 @@ Predicate          Endpoint types                Edge
 =================  ============================  =======================================================
 
 Any other combination is a mapping gap: the claim stays in ``claims[]`` unattached (listed with
-its reason in the report) and a coverage row names the pair. A NEW edge needs at least one
+its reason in the report) and a coverage row names the pair. A CONTRADICTING claim reaches a
+``has_mechanism`` edge only through the ``has_mechanism`` predicate with that Mechanism node as
+its object: a contradicting ``causes`` / ``associated_with`` claim between a Mechanism and a
+Disease does not land on the disease's mechanism edge (it says nothing about the mechanism
+assignment); it stays unattached, with its reason in the report and a coverage row, counted under
+``claims.contradicting_not_on_mechanism_edge``. A NEW edge needs at least one
 supporting claim; contradicting-only claims against a pair with no edge are unattached too (there
 is no status for "refuted" in the contract). Created edges: ``evidence_class: extracted``,
 ``source_db: claims``, one source per distinct paper (``kind pmid`` / ``doi``, dated by the
@@ -79,7 +107,12 @@ supporting patient-level claim; ``preprint`` when a claim's paper id starts with
 aggregate goes to ``confidence_basis.claims`` (with the ``per_claim`` weights), the status inputs
 to ``confidence_basis.claim_status``; ``attributes.labels`` always lists the full set on every
 edge this module touches. :func:`claim_status` and :func:`aggregate_confidence` remain as thin
-aliases of the rubric functions for callers.
+aliases of the rubric functions for callers. One more rubric rule applies to claim-derived
+(``extracted``) ``has_mechanism`` edges: when every supporting claim is ``in_vitro`` or ``review``
+the edge is labelled ``in_vitro_only`` and capped at 0.5
+(:func:`pipeline.graph.confidence.apply_in_vitro_only`; the uncapped value stays in
+``confidence_basis.in_vitro_only``), so a mechanism asserted only by bench work or a review never
+outranks a patient-level one.
 
 Investigators (shared design E) and Papers (F)
 ----------------------------------------------
@@ -139,6 +172,7 @@ __all__ = [
     "MAX_AFFILIATIONS",
     "PAPER_PROPS_KEEP",
     "PHONE_PLACEHOLDER",
+    "PROTEIN_CHANGE_TOKEN",
     "PUBLISHES_ON_BASE",
     "PUBLISHES_ON_CAP",
     "PUBLISHES_ON_PER_PAPER",
@@ -149,6 +183,9 @@ __all__ = [
     "REL_PUBLISHES_ON",
     "REL_TREATS",
     "Scrubber",
+    "VARIANT_MENTION_HOW",
+    "VARIANT_MENTION_METHOD",
+    "VARIANT_MENTION_WORDS",
     "aggregate_confidence",
     "claim_sources",
     "claim_status",
@@ -185,8 +222,22 @@ PUBLISHES_ON_CAP = 0.9
 MAX_AFFILIATIONS = 5
 ROLE_LABEL_TOPICS = 2
 
-COVERAGE_SOURCE = "claims.json endpoint"
+COVERAGE_SOURCE = "unresolved literature mention"  # pipeline.graph.build.CLAIMS_COVERAGE_SOURCE repeats it
 COVERAGE_UNRESOLVED_ENTITY = "claims:unresolved"
+# Protein-change mentions (module docstring): one-letter "R274W" / "K119*" or three-letter
+# "p.Arg274Trp", bounded by non-alphanumerics so "CD14+" or "JAK2V617F" never yield a token.
+PROTEIN_CHANGE_TOKEN = re.compile(r"(?<![A-Za-z0-9])(?:[A-Z]\d+(?:[A-Z]|\*)|p\.[A-Z][a-z]{2}\d+[A-Z][a-z]{2})(?![A-Za-z0-9])")
+VARIANT_MENTION_METHOD = "protein-change token vs ClinVar synonyms"
+VARIANT_MENTION_HOW = "protein_change_token"  # _Endpoint.how / report bucket for a mention resolved this way
+# Words a variant mention may carry besides the token and a gene symbol (lower-case).
+VARIANT_MENTION_WORDS = frozenset(
+    {
+        "variant", "variants", "mutation", "mutations", "mutant", "mutants", "allele", "alleles", "substitution", "missense",
+        "homozygous", "heterozygous", "homozygosity", "heterozygosity", "germline", "somatic",
+        "gof", "lof", "dn", "gain", "loss", "of", "function", "dominant", "negative", "the", "a", "an",
+    }
+)
+_MENTION_WORD_SPLIT = re.compile(r"[\s,;:/()\[\]\-]+")
 INVESTIGATOR_SOURCE = "pubmed author lists"
 CLAIM_LABELS = frozenset({"promising", "contested", "small_n", "preprint"})
 CURATED_LABEL = "curated_unverified"  # pipeline.graph.mechanisms.CURATED_LABEL; dropped on upgrade
@@ -382,6 +433,123 @@ class _Resolver:
         self.kinds[ep.how] += 1
         return ep
 
+    def recount(self, ep: _Endpoint, how: str) -> None:
+        """An endpoint resolved after the fact (a protein-change mention): move its tally."""
+        self.kinds[ep.how] -= 1
+        if self.kinds[ep.how] <= 0:
+            del self.kinds[ep.how]
+        ep.how = how
+        self.kinds[how] += 1
+
+
+def _symbols_of(node: Mapping[str, Any] | None) -> set[str]:
+    """Gene symbols a Variant / Mechanism / Gene node carries (``props.gene_symbol``,
+    ``props.gene_symbols``, a Gene's ``props.symbol`` or label)."""
+    if node is None:
+        return set()
+    props = node.get("props") or {}
+    out: set[str] = set()
+    for key in ("gene_symbol", "symbol"):
+        value = props.get(key)
+        if isinstance(value, str) and value.strip():
+            out.add(value.strip())
+    for value in props.get("gene_symbols") or []:
+        if isinstance(value, str) and value.strip():
+            out.add(value.strip())
+    if str(node.get("type")) == NodeType.Gene.value and isinstance(node.get("label"), str) and node["label"].strip():
+        out.add(node["label"].strip())
+    return out
+
+
+@dataclass
+class _MentionOutcome:
+    variant_id: str | None
+    reason: str  # resolved | no_protein_change_token | mention_names_more_than_the_variant | no_matching_variant | ambiguous
+    tokens: list[str]
+    genes: list[str]
+    candidates: list[str]
+
+
+class _MentionResolver:
+    """Module docstring, "Protein-change mentions": resolve a ``text:`` mention to the ONE Variant
+    node whose synonyms / protein change carry its protein-change token, restricted to the genes
+    the claim names. Nothing here names a gene or a variant; the vocabulary is read from the
+    Variant and Gene nodes."""
+
+    def __init__(self, nodes: Mapping[str, Mapping[str, Any]], edges: Mapping[tuple[str, str, str], Any]) -> None:
+        self.nodes = nodes
+        self.by_token: dict[str, list[str]] = defaultdict(list)  # synonym / protein change -> variant ids
+        self.variant_genes: dict[str, set[str]] = {}
+        gene_vocab: set[str] = set()
+        for nid, n in nodes.items():
+            if str(n.get("type")) != NodeType.Variant.value:
+                continue
+            props = n.get("props") or {}
+            pool = {s for s in (n.get("synonyms") or []) if isinstance(s, str)} | {props.get("protein_change"), props.get("hgvs_p")}
+            for text in pool:
+                if isinstance(text, str) and text.strip():
+                    self.by_token[text.strip()].append(nid)
+            self.variant_genes[nid] = _symbols_of(n)
+            gene_vocab |= self.variant_genes[nid]
+        # gene symbols that carry Variant nodes, word-bounded and case-sensitive (HGNC spelling)
+        self.gene_vocab = gene_vocab
+        self.gene_pattern = re.compile(r"(?<![A-Za-z0-9])(?:" + "|".join(re.escape(g) for g in sorted(gene_vocab, key=len, reverse=True)) + r")(?![A-Za-z0-9])") if gene_vocab else None
+        # a Disease endpoint names the genes of its mechanism edges (mech:<GENE>:... targets)
+        self.disease_genes: dict[str, set[str]] = defaultdict(set)
+        for (s, t, rel) in edges:
+            if rel == REL_HAS_MECHANISM and t.startswith(MECH_PREFIX):
+                parsed = parse_mechanism_id(t)
+                if parsed is not None and str((nodes.get(s) or {}).get("type")) == NodeType.Disease.value:
+                    self.disease_genes[s].add(parsed[0])
+        self.outcomes: Counter[str] = Counter()
+        self.resolved: list[dict[str, Any]] = []
+
+    def genes_in(self, texts: Iterable[str], endpoints: Iterable[_Endpoint]) -> set[str]:
+        genes: set[str] = set()
+        if self.gene_pattern is not None:
+            for text in texts:
+                genes.update(self.gene_pattern.findall(text or ""))
+        for ep in endpoints:
+            if not ep.resolved:
+                continue
+            node = self.nodes.get(str(ep.node_id))
+            if ep.node_type in (NodeType.Gene.value, NodeType.Mechanism.value, NodeType.Variant.value):
+                genes |= _symbols_of(node)
+                if ep.node_type == NodeType.Mechanism.value:
+                    parsed = parse_mechanism_id(str(ep.node_id))
+                    if parsed is not None:
+                        genes.add(parsed[0])
+            elif ep.node_type == NodeType.Disease.value:
+                genes |= self.disease_genes.get(str(ep.node_id), set())
+        return genes & self.gene_vocab if self.gene_vocab else set()
+
+    def resolve(self, mention: str, genes: set[str]) -> _MentionOutcome:
+        text = mention[len(TEXT_PREFIX):] if mention.startswith(TEXT_PREFIX) else mention
+        tokens = sorted(set(PROTEIN_CHANGE_TOKEN.findall(text)))
+        if not tokens:
+            return self._done(_MentionOutcome(None, "no_protein_change_token", tokens, sorted(genes), []))
+        for word in _MENTION_WORD_SPLIT.split(text):
+            w = word.strip().rstrip(".")
+            if not w or w in tokens or w in self.gene_vocab or w.lower() in VARIANT_MENTION_WORDS:
+                continue
+            return self._done(_MentionOutcome(None, "mention_names_more_than_the_variant", tokens, sorted(genes), []))
+        candidates: set[str] = set()
+        for token in tokens:
+            hits = {v for v in self.by_token.get(token, []) if not genes or (self.variant_genes.get(v, set()) & genes)}
+            if not hits:
+                return self._done(_MentionOutcome(None, "no_matching_variant", tokens, sorted(genes), []))
+            candidates |= hits
+        if len(candidates) != 1:
+            return self._done(_MentionOutcome(None, "ambiguous", tokens, sorted(genes), sorted(candidates)))
+        return self._done(_MentionOutcome(next(iter(candidates)), "resolved", tokens, sorted(genes), sorted(candidates)))
+
+    def _done(self, outcome: _MentionOutcome) -> _MentionOutcome:
+        self.outcomes[outcome.reason] += 1
+        return outcome
+
+    def report(self) -> dict[str, Any]:
+        return {"method": VARIANT_MENTION_METHOD, "outcomes": dict(sorted(self.outcomes.items())), "resolved": list(self.resolved)}
+
 
 # --------------------------------------------------------------------------------------
 # claim-level helpers
@@ -471,8 +639,13 @@ def _attach_or_create(edges: Mapping[tuple[str, str, str], Any], a: str, b: str,
     return _Plan((a, b, relation), True)
 
 
-def _plan(predicate: str, s: _Endpoint, o: _Endpoint, edges: Mapping[tuple[str, str, str], Any]) -> tuple[list[_Plan], str | None]:
-    """``(plans, problem)`` for a claim whose endpoints both resolved."""
+CONTRADICTING_MECHANISM_PROBLEM = "contradicting {predicate} claim does not attach to the has_mechanism edge (only a has_mechanism claim whose object is the Mechanism node does)"
+
+
+def _plan(predicate: str, s: _Endpoint, o: _Endpoint, edges: Mapping[tuple[str, str, str], Any], polarity: str = Polarity.supports.value) -> tuple[list[_Plan], str | None]:
+    """``(plans, problem)`` for a claim whose endpoints both resolved. ``polarity`` matters for one
+    rule (module docstring, predicate mapping): a contradicting claim lands on a ``has_mechanism``
+    edge only through the ``has_mechanism`` predicate with the Mechanism node as its object."""
     st, ot = s.node_type, o.node_type
     sid, oid = str(s.node_id), str(o.node_id)
     T = NodeType
@@ -491,6 +664,8 @@ def _plan(predicate: str, s: _Endpoint, o: _Endpoint, edges: Mapping[tuple[str, 
             if T.Gene in by_type:
                 return [_attach_or_create(edges, disease, by_type[T.Gene], REL_ASSOCIATED_WITH, either=True)], None
             if T.Mechanism in by_type:
+                if polarity == Polarity.contradicts.value:
+                    return [], CONTRADICTING_MECHANISM_PROBLEM.format(predicate=predicate)
                 return [_attach_or_create(edges, disease, by_type[T.Mechanism], REL_HAS_MECHANISM, either=True)], None
             if T.Variant in by_type:
                 return [_attach_or_create(edges, by_type[T.Variant], disease, REL_HAS_CONDITION, either=True)], None
@@ -599,6 +774,8 @@ def _apply_claims(
     attributes["labels"] = merged
     if "preprint" in labels:
         attributes["preprint"] = True
+    # bench work or reviews alone never carry a claim-derived mechanism edge above 0.5
+    conf_rubric.apply_in_vitro_only(edge, sup)
     return outcome
 
 
@@ -944,6 +1121,24 @@ def integrate_claims(
     unresolved_by_prefix: Counter[str] = Counter()
     mapping_gaps: Counter[str] = Counter()
     contradicting_only = 0
+    contradicting_off_mechanism = 0
+    mentions = _MentionResolver(nodes, edges)
+    mention_notes: dict[str, list[dict[str, str]]] = defaultdict(list)  # claim id -> resolved_mentions entries
+
+    def resolve_mention(c: dict[str, Any], field_name: str, ep: _Endpoint, context: Iterable[str], endpoints: Iterable[_Endpoint]) -> _Endpoint:
+        """A ``text:`` endpoint retried as a protein-change mention (module docstring)."""
+        if ep.resolved or ep.how != "text":
+            return ep
+        outcome = mentions.resolve(ep.raw, mentions.genes_in(context, endpoints))
+        if outcome.variant_id is None:
+            return ep
+        resolve.recount(ep, VARIANT_MENTION_HOW)
+        ep.node_id = outcome.variant_id
+        ep.node_type = NodeType.Variant.value
+        note = {"claim": c["id"], "field": field_name, "resolved_from": scrubber(ep.raw), "resolved_to": outcome.variant_id, "method": VARIANT_MENTION_METHOD}
+        mention_notes[c["id"]].append(note)
+        mentions.resolved.append({**note, "tokens": outcome.tokens, "genes": outcome.genes})
+        return ep
 
     for claim in bundle.claims:
         c = claim.model_dump(mode="json")
@@ -954,6 +1149,14 @@ def integrate_claims(
             dropped_quote.append(c["id"])
             continue
         s, o = resolve(c["subject"]), resolve(c["object"])
+        v: _Endpoint | None = resolve(c["variant"]) if c.get("variant") else None
+        # a text: subject / object / variant that names a variant by its protein change: the gene
+        # context is the claim's own text (mentions and quote) plus its resolved endpoints
+        texts = [c["subject"], c["object"], str(c.get("variant") or ""), c["quote"]]
+        s = resolve_mention(c, "subject", s, texts, [o, *([v] if v else [])])
+        o = resolve_mention(c, "object", o, texts, [s, *([v] if v else [])])
+        if v is not None:
+            v = resolve_mention(c, "variant", v, texts, [s, o])
         for ep in (s, o):
             (resolved_by_prefix if ep.resolved else unresolved_by_prefix)[ep.prefix] += 1
         c["subject"] = s.node_id if s.resolved else scrubber(c["subject"])
@@ -964,8 +1167,7 @@ def integrate_claims(
                 if ep.how == "mechanism":
                     ensure_mechanism(str(ep.node_id))
         variant: _Endpoint | None = None
-        if c.get("variant"):
-            v = resolve(c["variant"])
+        if v is not None:
             if v.resolved and v.node_type == NodeType.Variant.value:
                 c["variant"] = v.node_id
                 variant = v
@@ -987,10 +1189,13 @@ def integrate_claims(
             unattached[c["id"]] = "; ".join(reasons)
             plans: list[_Plan] = []
         else:
-            plans, problem = _plan(c["predicate"], s, o, edges)
+            plans, problem = _plan(c["predicate"], s, o, edges, c["polarity"])
             if problem is not None:
                 unattached[c["id"]] = problem
-                mapping_gaps[f"{c['predicate']}: {s.node_type} -> {o.node_type}"] += 1
+                if problem.startswith("contradicting "):
+                    contradicting_off_mechanism += 1
+                else:
+                    mapping_gaps[f"{c['predicate']}: {s.node_type} -> {o.node_type}"] += 1
                 cover(str(s.node_id), f"{c['predicate']} {s.raw} -> {o.raw} [{problem}]")
         # variant-specific route: Variant -> Mechanism carries the claim too (test 7)
         if c["predicate"] == PRED_HAS_MECHANISM and variant is not None and o.resolved and o.node_type == NodeType.Mechanism.value:
@@ -1038,6 +1243,10 @@ def integrate_claims(
             upgrade_outcomes[outcome] += 1
             for c in claims_here:
                 upgraded_by_predicate[c["predicate"]] += 1
+        notes = [n for c in claims_here for n in mention_notes.get(c["id"], [])]
+        if notes:  # how a text: mention of this edge's claims became a Variant node id
+            kept_notes = list(edge["confidence_basis"].get("resolved_mentions") or [])
+            edge["confidence_basis"]["resolved_mentions"] = kept_notes + [n for n in notes if n not in kept_notes]
         for c in claims_here:
             attached.add(c["id"])
             unattached.pop(c["id"], None)
@@ -1066,7 +1275,9 @@ def integrate_claims(
             "unattached_reasons": dict(Counter(re.sub(r"'[^']*'", "'...'", u["reason"]) for u in result.unattached)),
             "dropped_quote_mismatch_after_scrub": dropped_quote,
             "variant_cleared": variant_cleared,
+            "variant_mentions": mentions.report(),
             "contradicting_only_no_edge": contradicting_only,
+            "contradicting_not_on_mechanism_edge": contradicting_off_mechanism,
         },
         "endpoints": {
             "resolved_by_prefix": dict(sorted(resolved_by_prefix.items())),

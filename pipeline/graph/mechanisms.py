@@ -36,6 +36,10 @@ R3  Literature claims (``data/build/claims.json``, :class:`pipeline.models.Claim
     (``attributes.reason``, a seed-only ``attributes.origin``, the seed record in ``sources``,
     kept under ``confidence_basis.db_text.seed_record``) so nothing curated surfaces as sourced
     (hard rule 10); :mod:`pipeline.graph.evidence` applies the same helper on its own upgrade path.
+    A claim-derived edge (created here, or a curated edge upgraded here) whose supporting claims
+    are all ``in_vitro`` / ``review`` is labelled ``in_vitro_only`` and capped at 0.5
+    (:func:`pipeline.graph.confidence.apply_in_vitro_only`); an R1 edge the claims merely enrich
+    keeps its database support and is not capped.
 R4  Curated fallback (``pipeline/seeds/mechanisms.yaml``), only for a (disease, gene) pair that
     R1-R3 left without a mechanism and only when the store associates that gene with that disease:
     ``evidence_class: inferred``, confidence 0.4, ``attributes.labels ["curated_unverified"]``,
@@ -768,7 +772,8 @@ def derive(store: Any, seeds: Mapping[str, Any], claims_bundle: Any = None, *, n
         sources = _claim_sources(claims, papers, claims_bundle.extracted_at)
         if existing is not None:
             prior_basis = dict(existing["confidence_basis"])
-            if supporting and existing["evidence_class"] == "inferred":
+            was_curated = existing["evidence_class"] == "inferred"
+            if supporting and was_curated:
                 # a supporting claim verifies a curated seed: seed-only reason / origin / source go (hard rule 10)
                 strip_curated_provenance(existing, prior_basis)
             existing["evidence_class"] = "extracted"
@@ -788,6 +793,10 @@ def derive(store: Any, seeds: Mapping[str, Any], claims_bundle: Any = None, *, n
                 attrs.pop("labels", None)
             if "preprint" in labels:
                 attrs["preprint"] = True
+            if was_curated:  # the seed is not evidence: the claims are the edge's only support
+                conf_rubric.apply_in_vitro_only(existing, supporting)
+                if attrs.get("labels") == []:
+                    attrs.pop("labels", None)
         else:
             attributes: dict[str, Any] = {}
             if labels:
@@ -798,7 +807,7 @@ def derive(store: Any, seeds: Mapping[str, Any], claims_bundle: Any = None, *, n
                 attributes["origin"] = "somatic"
             if subject in variant_ids and any(c.variant == subject for c in supporting):
                 attributes["labels"] = attributes.get("labels", []) + [VARIANT_SPECIFIC_LABEL]
-            edges[(subject, mech_id, CLAIMS_SOURCE)] = {
+            created = edges[(subject, mech_id, CLAIMS_SOURCE)] = {
                 "source": subject,
                 "target": mech_id,
                 "relation": REL_HAS_MECHANISM,
@@ -812,6 +821,9 @@ def derive(store: Any, seeds: Mapping[str, Any], claims_bundle: Any = None, *, n
                 "contradicting": [c.id for c in contradicting],
                 "attributes": attributes,
             }
+            conf_rubric.apply_in_vitro_only(created, supporting)
+            if created["attributes"].get("labels") == []:
+                created["attributes"].pop("labels", None)
             if subject in diseases and gene is not None and somatic:
                 origins.setdefault((subject, gene.id), "somatic")
         claim_edges += 1
