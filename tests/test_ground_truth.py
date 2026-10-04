@@ -1,10 +1,11 @@
 """Ground-truth tests 1-7 (README section 8; docs/test-cluster-desc.md section 8).
 
 All seven run against the BUILT graph at ``$ATLAS_GRAPH_PATH`` (default
-``data/build/graph.json``) and, for test 6, the FastAPI app in ``api.main``. They are marked
-``xfail(strict=False)`` until the milestone named in each reason lands; remove a marker when
-its test passes. With no built graph the ``built_graph`` fixture fails (never skips), so each
-test shows as an expected failure. ``XPASS`` means the graph already satisfies the test.
+``data/build/graph.json``) and, for test 6, the FastAPI app in ``api.main``. They were written
+first (M0) as ``xfail(strict=False)``; every marker has been removed because all seven pass
+against the built graph (tests 1-5 and 7 since M3, test 6 since the gap probe landed), so a
+regression now fails the suite. With no built graph the ``built_graph`` fixture fails (never
+skips).
 
 No external identifier is hand-typed here. Genes are located by ``props.symbol`` (HGNC
 symbols), mechanisms by the internal ``mech:<GENE>:<GoF|LoF|DN>[:somatic]`` id convention,
@@ -44,9 +45,10 @@ The helpers accept a relation's edge in either direction. Other conventions assu
   disease; the test also accepts Drug -> Mechanism(LoF) edges as the rule's output.
 * A variant-specific route claim sets ``claim.variant`` to the Variant node id (canonical) or
   names the variant (id, label, synonym or ``props.protein_change``) in its subject/object/quote.
-* ``/search?q=<gene>`` answers ``{"status": "no_supported_route", "coverage": [{"source", "query",
-  "date", ...}], "next_question": "..."}`` for a gene with no supported route; the gene symbol
-  comes from ``$ATLAS_TEST6_GENE`` once it has been chosen from the built graph.
+* Test 6: ``/search?q=<gene>`` resolves the symbol and ``/entity/{id}`` answers
+  ``no_supported_route: true`` with ``coverage.searched`` (``source``, ``query``, ``date``,
+  ``hits``) and a ``next_question`` for a gene with no supported route (api/CONTRACT.md); the gene
+  symbol is the pipeline's gap probe from ``build_report.json`` (``$ATLAS_TEST6_GENE`` overrides it).
 """
 
 from __future__ import annotations
@@ -91,9 +93,6 @@ PHENOTYPE_JACCARD_MAX = 0.8
 
 DIRECTION_MISMATCH = "direction mismatch"
 
-M3 = "M3 (graph logic: confidence, similarity, Leiden clustering, rules) has not landed yet"
-M4 = "M4 (API: /search with no_supported_route, coverage and next question) has not landed yet"
-
 
 def _describe(graph, edge) -> str:
     idx = graph.node_index()
@@ -107,7 +106,6 @@ def _describe(graph, edge) -> str:
 # --------------------------------------------------------------------------------------
 
 
-@pytest.mark.xfail(strict=False, reason=f"test 1 (STAT1 GoF vs LoF): {M3}")
 def test_1_stat1_gof_and_lof_land_in_different_clusters(built_graph):
     g = built_graph
     gof = diseases_for_mechanism(g, mechanism(g, "STAT1", "GoF").id)
@@ -142,7 +140,6 @@ def test_1_stat1_gof_and_lof_land_in_different_clusters(built_graph):
 # --------------------------------------------------------------------------------------
 
 
-@pytest.mark.xfail(strict=False, reason=f"test 2 (JAK3 and IL2RG SCID together): {M3}")
 def test_2_jak3_and_il2rg_lof_diseases_share_a_cluster(built_graph):
     g = built_graph
     jak3 = diseases_for_mechanism(g, mechanism(g, "JAK3", "LoF").id)
@@ -162,7 +159,6 @@ def test_2_jak3_and_il2rg_lof_diseases_share_a_cluster(built_graph):
 # --------------------------------------------------------------------------------------
 
 
-@pytest.mark.xfail(strict=False, reason=f"test 3 (somatic JAK2 apart from germline): {M3}")
 def test_3_somatic_jak2_diseases_share_no_cluster_with_germline_diseases(built_graph):
     g = built_graph
     somatic = diseases_for_mechanism(g, mechanism(g, "JAK2", "GoF", somatic=True).id)
@@ -192,7 +188,6 @@ def test_3_somatic_jak2_diseases_share_no_cluster_with_germline_diseases(built_g
 # --------------------------------------------------------------------------------------
 
 
-@pytest.mark.xfail(strict=False, reason=f"test 4 (contested JAK inhibitor -> STAT1 GoF edge): {M3}")
 def test_4_jak_inhibitor_to_stat1_gof_shows_mixed_small_n_evidence(built_graph):
     g = built_graph
     gof = diseases_for_mechanism(g, mechanism(g, "STAT1", "GoF").id)
@@ -225,7 +220,6 @@ def test_4_jak_inhibitor_to_stat1_gof_shows_mixed_small_n_evidence(built_graph):
 # --------------------------------------------------------------------------------------
 
 
-@pytest.mark.xfail(strict=False, reason=f"test 5 (JAK inhibitor -> LoF disease flagged): {M3}")
 def test_5_jak_inhibitor_to_lof_disease_is_inferred_unsupported(built_graph):
     g = built_graph
     idx = g.node_index()
@@ -268,7 +262,6 @@ def test_5_jak_inhibitor_to_lof_disease_is_inferred_unsupported(built_graph):
 # --------------------------------------------------------------------------------------
 
 
-@pytest.mark.xfail(strict=False, reason=f"test 6 (no_supported_route from /search): {M4}")
 def test_6_obscure_gene_returns_no_supported_route():
     try:
         from fastapi.testclient import TestClient
@@ -329,7 +322,6 @@ def test_6_obscure_gene_returns_no_supported_route():
 # --------------------------------------------------------------------------------------
 
 
-@pytest.mark.xfail(strict=False, reason=f"test 7 (distinct STAT1 variants with variant-specific claims): {M3}")
 def test_7_stat1_variants_are_distinct_nodes_with_variant_specific_claims(built_graph):
     g = built_graph
     stat1 = find_gene(g, "STAT1")
