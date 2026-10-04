@@ -15,7 +15,9 @@ from fastapi import FastAPI, HTTPException, Query
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 
-from api import llm_seam
+import os
+
+from api import llm_seam, semantic
 from api.graph_store import (
     GraphStore,
     load_explanations,
@@ -124,10 +126,19 @@ def create_app(
     graph_path: Path | str | None = None,
     explanations_path: Path | str | None = None,
     repo_root: Path | str | None = None,
+    search_index_path: Path | str | None = None,
+    embedder: "semantic.Embedder | None" = None,
 ) -> FastAPI:
     store = GraphStore.load(
         Path(graph_path) if graph_path else resolve_graph_path(repo_root)
     )
+    # Natural-language search (api/semantic.py): used only when the index was built from this
+    # graph (meta.built_at) and an embeddings key is configured; otherwise lexical search only.
+    root = Path(repo_root) if repo_root else Path(__file__).resolve().parent.parent
+    index_path = (search_index_path or os.environ.get("ATLAS_SEARCH_INDEX_PATH")
+                  or root / "data" / "build" / "search_index.json")
+    store.semantic = semantic.SemanticIndex.load(index_path)
+    store.embedder = embedder or semantic.embed_query
     explanations = load_explanations(
         Path(explanations_path)
         if explanations_path
