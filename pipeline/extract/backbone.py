@@ -6,7 +6,7 @@ claim mentions to the same IDs lane A will emit:
 
 - Gene, Disease, Phenotype, Drug, Pathway: read from the OptimusKG node tables in
   ATLAS_RAW_DIR/optimuskg/, IDs normalised per the contract (`ensembl:ENSG...`,
-  underscore CURIEs → colon, `REACT:` and ChEMBL ids as the backbone gives them).
+  underscore CURIEs → colon, ChEMBL ids prefixed `CHEMBL:` as lane A's pipeline/ids.py does).
 - Mechanism: `mech:<GENE>:<GoF|LoF|DN>[:somatic]` for the cluster genes (internal ids).
 - Variant: looked up in ClinVar on demand (`clinvar:<variation id>`).
 
@@ -44,6 +44,12 @@ def norm_curie(raw: str) -> str:
         return raw
     m = re.match(r"^([A-Za-z]+)_(.+)$", raw)
     return f"{m.group(1)}:{m.group(2)}" if m else raw
+
+
+def drug_id(raw: str) -> str:
+    """Lane A's rule (pipeline/ids.py normalize_curie with hint "CHEMBL"): ids with a colon are kept
+    (`DRUGBANK:DB00004`); bare ChEMBL ids get the prefix: `CHEMBL1789941` -> `CHEMBL:CHEMBL1789941`."""
+    return raw if ":" in raw else f"CHEMBL:{raw}"
 
 
 def gene_id(raw: str) -> str:
@@ -94,7 +100,7 @@ def load_nodes() -> tuple[dict, ...]:
         pl.col("properties").struct.field("trade_names"))
     for r in d.iter_rows(named=True):
         if r["name"]:
-            nodes.append({"id": r["id"], "type": "Drug", "label": r["name"].lower(),
+            nodes.append({"id": drug_id(r["id"]), "type": "Drug", "label": r["name"].lower(),
                           "synonyms": _names(r["synonyms"], r["trade_names"]), "props": {"backbone_id": r["id"]}})
 
     p = pl.read_parquet(R / "pathway.parquet", columns=["id", "properties"]).select(

@@ -343,7 +343,9 @@ def test_backbone_id_normalisation_and_mechanisms():
     assert norm_curie("MONDO_0000001") == "MONDO:0000001"
     assert norm_curie("HP_0000001") == "HP:0000001"
     assert norm_curie("REACT:R-HSA-1") == "REACT:R-HSA-1"
-    assert norm_curie("CHEMBL1") == "CHEMBL1"  # ChEMBL ids are kept as the backbone gives them
+    assert norm_curie("CHEMBL1") == "CHEMBL1"
+    from pipeline.extract.backbone import drug_id
+    assert drug_id("CHEMBL1") == "CHEMBL:CHEMBL1" and drug_id("DRUGBANK:DB1") == "DRUGBANK:DB1"  # lane A's rule
     assert gene_id("ENSG00000000001") == "ensembl:ENSG00000000001"
     ids = {n["id"] for n in mechanism_nodes()}
     assert {"mech:STAT1:GoF", "mech:STAT1:LoF", "mech:STAT1:DN", "mech:JAK2:GoF:somatic"} <= ids
