@@ -105,6 +105,39 @@ thresholds:
 # Compile with re.IGNORECASE (backbone pathway labels are capitalised, e.g. "Interleukin-6 signaling").
 pathway_family_label_regex: "JAK|STAT|interleukin|interferon|cytokine"
 
+# Patient-group / registry resolution (pipeline/graph/build.py build_patient_groups and
+# propagate_patient_groups). Every disease term in pipeline/seeds/patient_groups.yaml is first
+# matched case-insensitively against Disease labels and synonyms (a trailing parenthetical such as
+# "(umbrella)" dropped). Two GENERAL rules then apply; neither names a gene, disease or organisation:
+#  - mechanism label: a term that matches no Disease but equals a Mechanism node label after
+#    normalisation (lower-case, hyphens/underscores as spaces, "GoF"/"LoF"/"DN" expanded) links the
+#    organisation to that Mechanism (observed, 0.8: the page names the mechanism) and to every
+#    exported Disease that carries it (inferred, 0.5, labels via_mechanism + inferred, the Disease ->
+#    Mechanism edge's confidence in the basis).
+#    Rationale: a term naming a mechanism serves the diseases that carry it.
+#  - umbrella descendants: every disease an organisation names (directly or via a mechanism) also
+#    links the organisation to the disease's descendants through Disease is_a edges, down to
+#    descendant_depth levels (inferred, 0.45 at depth 1, minus 0.05 per further level, labels
+#    via_ancestor + inferred, the ancestor and depth in the basis); diseases the organisation already
+#    names are skipped. Rationale: umbrella organisations serve the diseases under their umbrella.
+# The exact matches (disease label / synonym, mechanism label) are observed at 0.8 because the
+# verified page literally names the term. The two routes above are produced by a rule, so their
+# edges are evidence_class inferred: README section 4/6 caps an inferred edge at 0.5 (status
+# supported, rendered with the badge) and each carries confidence_basis.rule_evidence_class_note.
+# Both run over the exported graph (after the prune), so they never pull a disease into the export.
+# Each seed term's coverage row counts every disease it reached and a second row per route
+# ("<term> [resolution: mechanism label|ancestor]") says how; a term matching nothing stays a
+# zero-hit row. Edges per route are in build_report.json patient_groups.edges_by_resolution.
+patient_groups:
+  # is_a levels below a named disease that the organisation is linked to (0 disables the rule).
+  # 3 reaches the specific entities two or three ontology steps under an umbrella term while the
+  # confidence (0.45 / 0.40 / 0.35, all inferred) still says how far the link was carried.
+  descendant_depth: 3
+  # Cap on the descendant edges one organisation gets per matched term (a very broad umbrella such
+  # as a whole disease area would otherwise fan out over the export); when the cap bites the build
+  # report lists it under patient_groups.descendant_cap_hits.
+  max_descendants_per_term: 200
+
 # Gap probe: the "obscure gene with no connections" of ground-truth test 6 (README section 8,
 # docs/test-cluster-desc.md section 8). The PIPELINE chooses it by the general rule below over the
 # whole backbone (pipeline.sources.optimuskg.select_gap_probe); no symbol is written here or in
