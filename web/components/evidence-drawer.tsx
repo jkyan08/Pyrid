@@ -23,7 +23,7 @@ import { apiEdge, apiGraph } from "@/lib/api";
 import { displayLabel } from "@/lib/display";
 import { claimById } from "@/lib/graph";
 import SmoothDrawer, { DrawerTitle } from "@/components/smoothui/drawer";
-import MotionLoader from "@/components/smoothui/motion-loader";
+import ThinkingDots from "@/components/smoothui/thinking-dots";
 import { themeOf } from "@/lib/type-theme";
 import { EvidenceClassBadge, StatusChip, TypeGlyph } from "./badges";
 
@@ -87,18 +87,18 @@ export function EvidenceProvider({ children }: { children: ReactNode }) {
           </DrawerTitle>
           <button
             onClick={close}
-            className="rounded border border-gray-200 px-2 py-1 text-xs text-gray-600 hover:bg-gray-50"
+            className="rounded border border-dust px-2 py-1 text-xs text-muted-foreground hover:bg-dust/25"
           >
             Close (esc)
           </button>
         </div>
         {state.kind === "loading" && (
-          <p className="flex items-center gap-2 text-sm text-gray-500">
-            <MotionLoader variant="orbit" size={18} label="Loading evidence" />
+          <p className="flex items-center gap-2 text-sm text-muted-foreground">
+            <ThinkingDots label="Loading evidence" />
             Loading {state.id}…
           </p>
         )}
-        {state.kind === "error" && <p className="text-sm text-red-700">{state.message}</p>}
+        {state.kind === "error" && <p className="text-sm text-rust">{state.message}</p>}
         {state.kind === "edge" && <EdgeEvidence view={state.view} />}
         {state.kind === "claim" && <ClaimCard claim={state.claim} standalone />}
       </SmoothDrawer>
@@ -180,7 +180,7 @@ function EdgeEvidence({ view }: { view: EdgeView }) {
 
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         <div>
-          <h3 className="mb-2 text-xs font-semibold uppercase tracking-wide text-emerald-700">
+          <h3 className="mb-2 text-xs font-semibold uppercase tracking-wide text-hunter">
             Supporting ({view.supporting_claims.length})
           </h3>
           {view.supporting_claims.length === 0 && (
@@ -193,7 +193,7 @@ function EdgeEvidence({ view }: { view: EdgeView }) {
           </div>
         </div>
         <div>
-          <h3 className="mb-2 text-xs font-semibold uppercase tracking-wide text-red-700">
+          <h3 className="mb-2 text-xs font-semibold uppercase tracking-wide text-rust">
             Contradicting ({view.contradicting_claims.length})
           </h3>
           {view.contradicting_claims.length === 0 && (
@@ -218,7 +218,7 @@ function PmidRef({ pmid }: { pmid: string }) {
         href={`https://pubmed.ncbi.nlm.nih.gov/${pmid}/`}
         target="_blank"
         rel="noopener noreferrer"
-        className="text-sky-700 underline decoration-sky-300 underline-offset-2"
+        className="text-hunter underline decoration-sage underline-offset-2 hover:text-fern"
       >
         PMID {pmid}
       </a>
@@ -234,7 +234,7 @@ function SourceRef({ kind, id }: { kind: string; id: string }) {
         href={id}
         target="_blank"
         rel="noopener noreferrer"
-        className="break-all text-sky-700 underline decoration-sky-300 underline-offset-2"
+        className="break-all text-hunter underline decoration-sage underline-offset-2 hover:text-fern"
       >
         {id}
       </a>
@@ -250,7 +250,7 @@ function SourceRef({ kind, id }: { kind: string; id: string }) {
 
 function ClaimCard({ claim, standalone = false }: { claim: Claim; standalone?: boolean }) {
   return (
-    <div className="rounded-md border border-gray-200 bg-gray-50/60 p-3">
+    <div className="rounded-md border border-dust bg-dust/15 p-3">
       {standalone && (
         <p className="mb-2 font-mono text-[11px] text-gray-400">
           {claim.id}
