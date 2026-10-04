@@ -180,6 +180,19 @@ export async function apiGraph(): Promise<Graph> {
   return withFallback(`/graph`, undefined, () => loadStaticGraph());
 }
 
+let graphPromise: Promise<Graph> | null = null;
+
+/** Memoized whole-graph load, shared by lightweight consumers (citation chips). */
+export function apiGraphCached(): Promise<Graph> {
+  if (!graphPromise) {
+    graphPromise = apiGraph();
+    graphPromise.catch(() => {
+      graphPromise = null; // allow retry after a transient failure
+    });
+  }
+  return graphPromise;
+}
+
 export async function apiExplain(ids: string[]): Promise<ExplainResponse> {
   return withFallback(
     `/explain`,
