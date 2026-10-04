@@ -408,6 +408,15 @@ export const STUDY_RANK: Record<string, number> = {
   inferred: 0,
 };
 
+/** Strongest evidence first: study-type rank, then patient count (unknown last). */
+export function sortClaimsByEvidence(claims: Claim[]): Claim[] {
+  return [...claims].sort(
+    (a, b) =>
+      (STUDY_RANK[b.study_type ?? ""] ?? 0) - (STUDY_RANK[a.study_type ?? ""] ?? 0) ||
+      (b.n_patients ?? -1) - (a.n_patients ?? -1)
+  );
+}
+
 function evidenceLevelForEdge(graph: Graph, edge: GraphEdge): string {
   if (edge.evidence_class === "observed") return "observed";
   const types = (edge.supporting ?? [])
