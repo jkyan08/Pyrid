@@ -21,6 +21,9 @@ export interface ForceNode extends SimulationNodeDatum {
   shape: string;
   radius: number;
   degree: number;
+  /** Detail nodes (variants, papers, investigators) only label on hover/focus
+   *  — their canonical names are serial numbers that flood the canvas. */
+  detail?: boolean;
 }
 
 export interface ForceEdge extends SimulationLinkDatum<ForceNode> {
