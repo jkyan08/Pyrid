@@ -1,0 +1,1 @@
+{"header":{"type":"esearch","version":"0.3"},"esearchresult":{"count":"863","retmax":"0","retstart":"0","querykey":"1","webenv":"MCID_6ac156ed2b400ad4630bbacb","idlist":[],"translationset":[],"translationstack":[{"term":"STAT1[gene]","field":"gene","count":"863","explode":"N"},"GROUP"],"querytranslation":"STAT1[gene]"}}

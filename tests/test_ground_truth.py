@@ -51,12 +51,15 @@ The helpers accept a relation's edge in either direction. Other conventions assu
 
 from __future__ import annotations
 
+import json
 import os
+from pathlib import Path
 
 import pytest
 
 from pipeline.models import EdgeStatus, NodeType
 from tests.conftest import (
+    REPO_ROOT,
     JAK_INHIBITOR_LABEL,
     REL_HAS_MECHANISM,
     REL_INHIBITS,
@@ -274,30 +277,48 @@ def test_6_obscure_gene_returns_no_supported_route():
     except Exception as exc:  # noqa: BLE001 - any import problem is the finding
         pytest.fail(f"cannot import the API (api.main:app with fastapi.testclient): {exc!r}")
 
+    # The gene is never hand-typed: the pipeline picks a real, connection-less backbone gene
+    # (the "gap probe", see pipeline/sources/optimuskg.py) and records it in build_report.json;
+    # ATLAS_TEST6_GENE overrides it for ad-hoc runs.
     gene = os.environ.get("ATLAS_TEST6_GENE", "").strip()
     if not gene:
-        pytest.fail(
-            "set ATLAS_TEST6_GENE after choosing the obscure gene "
-            "(README section 8: 'Test 6 gene: to choose from the built graph and document here')"
-        )
+        report_path = Path(os.environ.get("ATLAS_BUILD_REPORT_PATH", "data/build/build_report.json"))
+        if not report_path.is_absolute():
+            report_path = REPO_ROOT / report_path
+        if not report_path.is_file():
+            pytest.fail(f"no built report at {report_path}; run `make data` (test 6 needs the gap-probe gene it records)")
+        gene = str(((json.loads(report_path.read_text()).get("gap_probe") or {}).get("symbol") or "")).strip()
+        if not gene:
+            pytest.fail("build_report.json has no gap_probe.symbol; the build must choose and record the obscure gene")
 
+    # Lane C's API (api/CONTRACT.md): /search resolves the text, /entity/{id} carries the
+    # honest-gap shape: no_supported_route, the coverage record, and a templated next question.
     with TestClient(app) as client:
         resp = client.get("/search", params={"q": gene})
-    assert resp.status_code == 200, f"/search?q={gene} returned HTTP {resp.status_code}: {resp.text[:500]}"
-    body = resp.json()
-    assert isinstance(body, dict), f"/search did not return a JSON object: {body!r}"
+        assert resp.status_code == 200, f"/search?q={gene} returned HTTP {resp.status_code}: {resp.text[:500]}"
+        body = resp.json()
+        results = body.get("results") if isinstance(body, dict) else None
+        assert isinstance(results, list) and results, f"/search?q={gene} resolved nothing: {body!r}"
+        genes = [r for r in results if r.get("type") == "Gene"] or results
+        entity_id = genes[0].get("id")
+        assert isinstance(entity_id, str) and entity_id, f"/search result has no id: {genes[0]!r}"
 
-    assert body.get("status") == "no_supported_route", f"status is {body.get('status')!r}"
+        resp = client.get(f"/entity/{entity_id}")
+    assert resp.status_code == 200, f"/entity/{entity_id} returned HTTP {resp.status_code}: {resp.text[:500]}"
+    ent = resp.json()
+    assert ent.get("no_supported_route") is True, f"no_supported_route is {ent.get('no_supported_route')!r}"
 
-    coverage = body.get("coverage")
-    assert isinstance(coverage, list) and coverage, f"coverage must be a non-empty list, got {coverage!r}"
-    for entry in coverage:
+    coverage = ent.get("coverage")
+    searched = coverage.get("searched") if isinstance(coverage, dict) else None
+    assert isinstance(searched, list) and searched, f"coverage.searched must be a non-empty list, got {coverage!r}"
+    for entry in searched:
         assert isinstance(entry, dict), f"coverage entry is not an object: {entry!r}"
         for key in ("source", "query", "date"):
             value = entry.get(key)
             assert isinstance(value, str) and value.strip(), f"coverage entry lacks a non-empty {key!r}: {entry!r}"
+        assert isinstance(entry.get("hits"), int), f"coverage entry lacks an integer 'hits': {entry!r}"
 
-    next_question = body.get("next_question")
+    next_question = ent.get("next_question")
     assert isinstance(next_question, str) and next_question.strip(), (
         f"next_question must be a non-empty string, got {next_question!r}"
     )

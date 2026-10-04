@@ -1,0 +1,1557 @@
+{
+ "header": {
+  "type": "esummary",
+  "version": "0.3"
+ },
+ "result": {
+  "uids": [
+   "4959183",
+   "30083",
+   "2500092",
+   "59158",
+   "4530519",
+   "2958894",
+   "14662"
+  ],
+  "4959183": {
+   "uid": "4959183",
+   "obj_type": "single nucleotide variant",
+   "accession": "VCV004959183",
+   "accession_version": "VCV004959183.1",
+   "title": "NM_007315.4(STAT1):c.986C>T (p.Pro329Leu)",
+   "variation_set": [
+    {
+     "measure_id": "5070057",
+     "variation_xrefs": [],
+     "variation_name": "NM_007315.4(STAT1):c.986C>T (p.Pro329Leu)",
+     "cdna_change": "c.986C>T",
+     "aliases": [],
+     "variation_loc": [
+      {
+       "status": "current",
+       "assembly_name": "GRCh38",
+       "chr": "2",
+       "band": "2q32.2",
+       "start": "190991279",
+       "stop": "190991279",
+       "inner_start": "",
+       "inner_stop": "",
+       "outer_start": "",
+       "outer_stop": "",
+       "display_start": "190991279",
+       "display_stop": "190991279",
+       "assembly_acc_ver": "GCF_000001405.38",
+       "annotation_release": "",
+       "alt": "",
+       "ref": ""
+      },
+      {
+       "status": "previous",
+       "assembly_name": "GRCh37",
+       "chr": "2",
+       "band": "2q32.2",
+       "start": "191856005",
+       "stop": "191856005",
+       "inner_start": "",
+       "inner_stop": "",
+       "outer_start": "",
+       "outer_stop": "",
+       "display_start": "191856005",
+       "display_stop": "191856005",
+       "assembly_acc_ver": "GCF_000001405.25",
+       "annotation_release": "",
+       "alt": "",
+       "ref": ""
+      }
+     ],
+     "allele_freq_set": [],
+     "variant_type": "single nucleotide variant",
+     "canonical_spdi": "NC_000002.12:190991278:G:A",
+     "common_name": ""
+    }
+   ],
+   "supporting_submissions": {
+    "scv": [
+     "SCV007922732"
+    ],
+    "rcv": [
+     "RCV006944190"
+    ]
+   },
+   "germline_classification": {
+    "description": "Likely pathogenic",
+    "last_evaluated": "2021/04/12 00:00",
+    "review_status": "criteria provided, single submitter",
+    "fda_recognized_database": "",
+    "trait_set": [
+     {
+      "trait_xrefs": [],
+      "trait_name": "STAT1-related disorder"
+     }
+    ]
+   },
+   "clinical_impact_classification": {
+    "description": "",
+    "last_evaluated": "1/01/01 00:00",
+    "review_status": "",
+    "fda_recognized_database": "",
+    "trait_set": []
+   },
+   "oncogenicity_classification": {
+    "description": "",
+    "last_evaluated": "1/01/01 00:00",
+    "review_status": "",
+    "fda_recognized_database": "",
+    "trait_set": []
+   },
+   "record_status": "",
+   "gene_sort": "STAT1",
+   "chr_sort": "02",
+   "location_sort": "00000000000190991279",
+   "variation_set_name": "",
+   "variation_set_id": "",
+   "genes": [
+    {
+     "symbol": "STAT1",
+     "geneid": "6772",
+     "strand": "-",
+     "source": "submitted"
+    }
+   ],
+   "molecular_consequence_list": [
+    "missense variant",
+    "intron variant"
+   ],
+   "protein_change": "P299L, P329L, P296L, P276L, P331L, P341L",
+   "fda_recognized_database": ""
+  },
+  "30083": {
+   "uid": "30083",
+   "obj_type": "single nucleotide variant",
+   "accession": "VCV000030083",
+   "accession_version": "VCV000030083.56",
+   "title": "NM_007315.4(STAT1):c.820C>T (p.Arg274Trp)",
+   "variation_set": [
+    {
+     "measure_id": "39038",
+     "variation_xrefs": [
+      {
+       "db_source": "ClinGen",
+       "db_id": "CA128924"
+      },
+      {
+       "db_source": "UniProtKB",
+       "db_id": "P42224#VAR_065943"
+      },
+      {
+       "db_source": "OMIM",
+       "db_id": "600555.0008"
+      },
+      {
+       "db_source": "dbSNP",
+       "db_id": "387906758"
+      }
+     ],
+     "variation_name": "NM_007315.4(STAT1):c.820C>T (p.Arg274Trp)",
+     "cdna_change": "c.820C>T",
+     "aliases": [],
+     "variation_loc": [
+      {
+       "status": "current",
+       "assembly_name": "GRCh38",
+       "chr": "2",
+       "band": "2q32.2",
+       "start": "190995185",
+       "stop": "190995185",
+       "inner_start": "",
+       "inner_stop": "",
+       "outer_start": "",
+       "outer_stop": "",
+       "display_start": "190995185",
+       "display_stop": "190995185",
+       "assembly_acc_ver": "GCF_000001405.38",
+       "annotation_release": "",
+       "alt": "",
+       "ref": ""
+      },
+      {
+       "status": "previous",
+       "assembly_name": "GRCh37",
+       "chr": "2",
+       "band": "2q32.2",
+       "start": "191859911",
+       "stop": "191859911",
+       "inner_start": "",
+       "inner_stop": "",
+       "outer_start": "",
+       "outer_stop": "",
+       "display_start": "191859911",
+       "display_stop": "191859911",
+       "assembly_acc_ver": "GCF_000001405.25",
+       "annotation_release": "",
+       "alt": "",
+       "ref": ""
+      }
+     ],
+     "allele_freq_set": [],
+     "variant_type": "single nucleotide variant",
+     "canonical_spdi": "NC_000002.12:190995184:G:A",
+     "common_name": ""
+    }
+   ],
+   "supporting_submissions": {
+    "scv": [
+     "SCV000044277",
+     "SCV000255477",
+     "SCV007922740",
+     "SCV004111840",
+     "SCV006310443",
+     "SCV000816604",
+     "SCV002521090",
+     "SCV005090517",
+     "SCV001246320",
+     "SCV007664806"
+    ],
+    "rcv": [
+     "RCV000022986",
+     "RCV000688972",
+     "RCV001090650",
+     "RCV004528131"
+    ]
+   },
+   "germline_classification": {
+    "description": "Pathogenic",
+    "last_evaluated": "2026/08/11 00:00",
+    "review_status": "criteria provided, multiple submitters, no conflicts",
+    "fda_recognized_database": "",
+    "trait_set": [
+     {
+      "trait_xrefs": [],
+      "trait_name": "STAT1-related disorder"
+     },
+     {
+      "trait_xrefs": [
+       {
+        "db_source": "Orphanet",
+        "db_id": "391311"
+       },
+       {
+        "db_source": "MedGen",
+        "db_id": "C3151088"
+       },
+       {
+        "db_source": "MONDO",
+        "db_id": "MONDO:0013427"
+       },
+       {
+        "db_source": "OMIM",
+        "db_id": "613796"
+       }
+      ],
+      "trait_name": "Immunodeficiency 31B"
+     },
+     {
+      "trait_xrefs": [
+       {
+        "db_source": "Orphanet",
+        "db_id": "319595"
+       },
+       {
+        "db_source": "MedGen",
+        "db_id": "C4013950"
+       },
+       {
+        "db_source": "MONDO",
+        "db_id": "MONDO:0013956"
+       },
+       {
+        "db_source": "OMIM",
+        "db_id": "614892"
+       }
+      ],
+      "trait_name": "Mendelian susceptibility to mycobacterial diseases due to partial STAT1 deficiency"
+     },
+     {
+      "trait_xrefs": [
+       {
+        "db_source": "Orphanet",
+        "db_id": "391487"
+       },
+       {
+        "db_source": "MedGen",
+        "db_id": "C3279990"
+       },
+       {
+        "db_source": "MONDO",
+        "db_id": "MONDO:0013599"
+       },
+       {
+        "db_source": "OMIM",
+        "db_id": "614162"
+       }
+      ],
+      "trait_name": "Autoimmune enteropathy and endocrinopathy - susceptibility to chronic infections syndrome"
+     },
+     {
+      "trait_xrefs": [
+       {
+        "db_source": "MedGen",
+        "db_id": "C3661900"
+       }
+      ],
+      "trait_name": "not provided"
+     },
+     {
+      "trait_xrefs": [
+       {
+        "db_source": "Orphanet",
+        "db_id": "391487"
+       },
+       {
+        "db_source": "MedGen",
+        "db_id": "C3279990"
+       },
+       {
+        "db_source": "MONDO",
+        "db_id": "MONDO:0013599"
+       },
+       {
+        "db_source": "OMIM",
+        "db_id": "614162"
+       }
+      ],
+      "trait_name": "Autoimmune enteropathy and endocrinopathy - susceptibility to chronic infections syndrome"
+     }
+    ]
+   },
+   "clinical_impact_classification": {
+    "description": "",
+    "last_evaluated": "1/01/01 00:00",
+    "review_status": "",
+    "fda_recognized_database": "",
+    "trait_set": []
+   },
+   "oncogenicity_classification": {
+    "description": "",
+    "last_evaluated": "1/01/01 00:00",
+    "review_status": "",
+    "fda_recognized_database": "",
+    "trait_set": []
+   },
+   "record_status": "",
+   "gene_sort": "STAT1",
+   "chr_sort": "02",
+   "location_sort": "00000000000190995185",
+   "variation_set_name": "",
+   "variation_set_id": "",
+   "genes": [
+    {
+     "symbol": "STAT1",
+     "geneid": "6772",
+     "strand": "-",
+     "source": "submitted"
+    }
+   ],
+   "molecular_consequence_list": [
+    "missense variant",
+    "intron variant"
+   ],
+   "protein_change": "R274W, R241W, R244W, R276W, R286W",
+   "fda_recognized_database": ""
+  },
+  "2500092": {
+   "uid": "2500092",
+   "obj_type": "single nucleotide variant",
+   "accession": "VCV002500092",
+   "accession_version": "VCV002500092.2",
+   "title": "NM_007315.4(STAT1):c.25C>T (p.Gln9Ter)",
+   "variation_set": [
+    {
+     "measure_id": "2478073",
+     "variation_xrefs": [
+      {
+       "db_source": "ClinGen",
+       "db_id": "CA349928586"
+      },
+      {
+       "db_source": "dbSNP",
+       "db_id": "2470570568"
+      }
+     ],
+     "variation_name": "NM_007315.4(STAT1):c.25C>T (p.Gln9Ter)",
+     "cdna_change": "c.25C>T",
+     "aliases": [],
+     "variation_loc": [
+      {
+       "status": "current",
+       "assembly_name": "GRCh38",
+       "chr": "2",
+       "band": "2q32.2",
+       "start": "191009979",
+       "stop": "191009979",
+       "inner_start": "",
+       "inner_stop": "",
+       "outer_start": "",
+       "outer_stop": "",
+       "display_start": "191009979",
+       "display_stop": "191009979",
+       "assembly_acc_ver": "GCF_000001405.38",
+       "annotation_release": "",
+       "alt": "",
+       "ref": ""
+      },
+      {
+       "status": "previous",
+       "assembly_name": "GRCh37",
+       "chr": "2",
+       "band": "2q32.2",
+       "start": "191874705",
+       "stop": "191874705",
+       "inner_start": "",
+       "inner_stop": "",
+       "outer_start": "",
+       "outer_stop": "",
+       "display_start": "191874705",
+       "display_stop": "191874705",
+       "assembly_acc_ver": "GCF_000001405.25",
+       "annotation_release": "",
+       "alt": "",
+       "ref": ""
+      }
+     ],
+     "allele_freq_set": [
+      {
+       "source": "The Genome Aggregation Database (gnomAD), exomes",
+       "value": "0.00000",
+       "minor_allele": ""
+      }
+     ],
+     "variant_type": "single nucleotide variant",
+     "canonical_spdi": "NC_000002.12:191009978:G:A",
+     "common_name": ""
+    }
+   ],
+   "supporting_submissions": {
+    "scv": [
+     "SCV003920511"
+    ],
+    "rcv": [
+     "RCV003224739"
+    ]
+   },
+   "germline_classification": {
+    "description": "Pathogenic",
+    "last_evaluated": "1/01/01 00:00",
+    "review_status": "criteria provided, single submitter",
+    "fda_recognized_database": "",
+    "trait_set": [
+     {
+      "trait_xrefs": [
+       {
+        "db_source": "Orphanet",
+        "db_id": "391311"
+       },
+       {
+        "db_source": "MedGen",
+        "db_id": "C3151088"
+       },
+       {
+        "db_source": "MONDO",
+        "db_id": "MONDO:0013427"
+       },
+       {
+        "db_source": "OMIM",
+        "db_id": "613796"
+       }
+      ],
+      "trait_name": "Immunodeficiency 31B"
+     },
+     {
+      "trait_xrefs": [
+       {
+        "db_source": "Orphanet",
+        "db_id": "391487"
+       },
+       {
+        "db_source": "MedGen",
+        "db_id": "C3279990"
+       },
+       {
+        "db_source": "MONDO",
+        "db_id": "MONDO:0013599"
+       },
+       {
+        "db_source": "OMIM",
+        "db_id": "614162"
+       }
+      ],
+      "trait_name": "Autoimmune enteropathy and endocrinopathy - susceptibility to chronic infections syndrome"
+     },
+     {
+      "trait_xrefs": [
+       {
+        "db_source": "Orphanet",
+        "db_id": "319595"
+       },
+       {
+        "db_source": "MedGen",
+        "db_id": "C4013950"
+       },
+       {
+        "db_source": "MONDO",
+        "db_id": "MONDO:0013956"
+       },
+       {
+        "db_source": "OMIM",
+        "db_id": "614892"
+       }
+      ],
+      "trait_name": "Mendelian susceptibility to mycobacterial diseases due to partial STAT1 deficiency"
+     }
+    ]
+   },
+   "clinical_impact_classification": {
+    "description": "",
+    "last_evaluated": "1/01/01 00:00",
+    "review_status": "",
+    "fda_recognized_database": "",
+    "trait_set": []
+   },
+   "oncogenicity_classification": {
+    "description": "",
+    "last_evaluated": "1/01/01 00:00",
+    "review_status": "",
+    "fda_recognized_database": "",
+    "trait_set": []
+   },
+   "record_status": "",
+   "gene_sort": "STAT1",
+   "chr_sort": "02",
+   "location_sort": "00000000000191009979",
+   "variation_set_name": "",
+   "variation_set_id": "",
+   "genes": [
+    {
+     "symbol": "STAT1",
+     "geneid": "6772",
+     "strand": "-",
+     "source": "submitted"
+    }
+   ],
+   "molecular_consequence_list": [
+    "nonsense"
+   ],
+   "protein_change": "Q11*, Q9*",
+   "fda_recognized_database": ""
+  },
+  "59158": {
+   "uid": "59158",
+   "obj_type": "copy number gain",
+   "accession": "VCV000059158",
+   "accession_version": "VCV000059158.1",
+   "title": "GRCh38/hg38 2q32.2-37.3(chr2:188818195-242065208)x3",
+   "variation_set": [
+    {
+     "measure_id": "73753",
+     "variation_xrefs": [
+      {
+       "db_source": "dbVar",
+       "db_id": "nssv578833"
+      },
+      {
+       "db_source": "dbVar",
+       "db_id": "nsv531671"
+      }
+     ],
+     "variation_name": "GRCh38/hg38 2q32.2-37.3(chr2:188818195-242065208)x3",
+     "cdna_change": "GRCh38/hg38 2q32.2-37.3(chr2:188818195-242065208)x3",
+     "aliases": [],
+     "variation_loc": [
+      {
+       "status": "current",
+       "assembly_name": "GRCh38",
+       "chr": "2",
+       "band": "2q32.2-37.3",
+       "start": "188818195",
+       "stop": "242065208",
+       "inner_start": "188818195",
+       "inner_stop": "242065208",
+       "outer_start": "",
+       "outer_stop": "",
+       "display_start": "188818195",
+       "display_stop": "242065208",
+       "assembly_acc_ver": "GCF_000001405.38",
+       "annotation_release": "",
+       "alt": "",
+       "ref": ""
+      },
+      {
+       "status": "previous",
+       "assembly_name": "GRCh37",
+       "chr": "2",
+       "band": "2q32.2-37.3",
+       "start": "189682921",
+       "stop": "243007359",
+       "inner_start": "189682921",
+       "inner_stop": "243007359",
+       "outer_start": "",
+       "outer_stop": "",
+       "display_start": "189682921",
+       "display_stop": "243007359",
+       "assembly_acc_ver": "GCF_000001405.25",
+       "annotation_release": "",
+       "alt": "",
+       "ref": ""
+      },
+      {
+       "status": "previous",
+       "assembly_name": "NCBI36",
+       "chr": "2",
+       "band": "2q32.2-37.3",
+       "start": "189391166",
+       "stop": "242656032",
+       "inner_start": "189391166",
+       "inner_stop": "242656032",
+       "outer_start": "",
+       "outer_stop": "",
+       "display_start": "189391166",
+       "display_stop": "242656032",
+       "assembly_acc_ver": "GCF_000001405.12",
+       "annotation_release": "",
+       "alt": "",
+       "ref": ""
+      }
+     ],
+     "allele_freq_set": [],
+     "variant_type": "copy number gain",
+     "canonical_spdi": "",
+     "common_name": ""
+    }
+   ],
+   "supporting_submissions": {
+    "scv": [
+     "SCV000080312"
+    ],
+    "rcv": [
+     "RCV000052958"
+    ]
+   },
+   "germline_classification": {
+    "description": "Pathogenic",
+    "last_evaluated": "2011/08/12 00:00",
+    "review_status": "criteria provided, single submitter",
+    "fda_recognized_database": "",
+    "trait_set": [
+     {
+      "trait_xrefs": [],
+      "trait_name": "See cases"
+     }
+    ]
+   },
+   "clinical_impact_classification": {
+    "description": "",
+    "last_evaluated": "1/01/01 00:00",
+    "review_status": "",
+    "fda_recognized_database": "",
+    "trait_set": []
+   },
+   "oncogenicity_classification": {
+    "description": "",
+    "last_evaluated": "1/01/01 00:00",
+    "review_status": "",
+    "fda_recognized_database": "",
+    "trait_set": []
+   },
+   "record_status": "",
+   "gene_sort": "AAMP",
+   "chr_sort": "02",
+   "location_sort": "00000000000188818195",
+   "variation_set_name": "",
+   "variation_set_id": "",
+   "genes": [
+    {
+     "symbol": "AAMP",
+     "geneid": "14",
+     "strand": "-",
+     "source": "submitted"
+    },
+    {
+     "symbol": "ABCA12",
+     "geneid": "26154",
+     "strand": "-",
+     "source": "submitted"
+    },
+    {
+     "symbol": "ABCB6",
+     "geneid": "10058",
+     "strand": "-",
+     "source": "submitted"
+    },
+    {
+     "symbol": "ABI2",
+     "geneid": "10152",
+     "strand": "+",
+     "source": "submitted"
+    },
+    {
+     "symbol": "ACADL",
+     "geneid": "33",
+     "strand": "-",
+     "source": "submitted"
+    }
+   ],
+   "molecular_consequence_list": [],
+   "protein_change": "",
+   "fda_recognized_database": ""
+  },
+  "4530519": {
+   "uid": "4530519",
+   "obj_type": "single nucleotide variant",
+   "accession": "VCV004530519",
+   "accession_version": "VCV004530519.1",
+   "title": "NM_004972.4(JAK2):c.2049A>T (p.Arg683Ser)",
+   "variation_set": [
+    {
+     "measure_id": "362833",
+     "variation_xrefs": [
+      {
+       "db_source": "dbSNP",
+       "db_id": "1057519723"
+      }
+     ],
+     "variation_name": "NM_004972.4(JAK2):c.2049A>T (p.Arg683Ser)",
+     "cdna_change": "c.2049A>T",
+     "aliases": [],
+     "variation_loc": [
+      {
+       "status": "current",
+       "assembly_name": "GRCh38",
+       "chr": "9",
+       "band": "9p24.1",
+       "start": "5078362",
+       "stop": "5078362",
+       "inner_start": "",
+       "inner_stop": "",
+       "outer_start": "",
+       "outer_stop": "",
+       "display_start": "5078362",
+       "display_stop": "5078362",
+       "assembly_acc_ver": "GCF_000001405.38",
+       "annotation_release": "",
+       "alt": "",
+       "ref": ""
+      },
+      {
+       "status": "previous",
+       "assembly_name": "GRCh37",
+       "chr": "9",
+       "band": "9p24.1",
+       "start": "5078362",
+       "stop": "5078362",
+       "inner_start": "",
+       "inner_stop": "",
+       "outer_start": "",
+       "outer_stop": "",
+       "display_start": "5078362",
+       "display_stop": "5078362",
+       "assembly_acc_ver": "GCF_000001405.25",
+       "annotation_release": "",
+       "alt": "",
+       "ref": ""
+      }
+     ],
+     "allele_freq_set": [],
+     "variant_type": "single nucleotide variant",
+     "canonical_spdi": "NC_000009.12:5078361:A:T",
+     "common_name": ""
+    }
+   ],
+   "supporting_submissions": {
+    "scv": [
+     "SCV007105444"
+    ],
+    "rcv": [
+     "RCV006255008"
+    ]
+   },
+   "germline_classification": {
+    "description": "",
+    "last_evaluated": "1/01/01 00:00",
+    "review_status": "",
+    "fda_recognized_database": "",
+    "trait_set": []
+   },
+   "clinical_impact_classification": {
+    "description": "Tier I - Strong",
+    "last_evaluated": "2024/04/24 00:00",
+    "review_status": "criteria provided, single submitter",
+    "fda_recognized_database": "",
+    "trait_set": [
+     {
+      "trait_xrefs": [
+       {
+        "db_source": "Orphanet",
+        "db_id": "99860"
+       },
+       {
+        "db_source": "MedGen",
+        "db_id": "C0349636"
+       },
+       {
+        "db_source": "MONDO",
+        "db_id": "MONDO:0020511"
+       },
+       {
+        "db_source": "Human Phenotype Ontology",
+        "db_id": "HP:0004812"
+       }
+      ],
+      "trait_name": "Precursor B-cell acute lymphoblastic leukemia"
+     }
+    ]
+   },
+   "oncogenicity_classification": {
+    "description": "",
+    "last_evaluated": "1/01/01 00:00",
+    "review_status": "",
+    "fda_recognized_database": "",
+    "trait_set": []
+   },
+   "record_status": "",
+   "gene_sort": "INSL6",
+   "chr_sort": "09",
+   "location_sort": "00000000000005078362",
+   "variation_set_name": "",
+   "variation_set_id": "",
+   "genes": [
+    {
+     "symbol": "INSL6",
+     "geneid": "11172",
+     "strand": "-",
+     "source": "submitted"
+    },
+    {
+     "symbol": "JAK2",
+     "geneid": "3717",
+     "strand": "+",
+     "source": "submitted"
+    }
+   ],
+   "molecular_consequence_list": [
+    "missense variant",
+    "non-coding transcript variant"
+   ],
+   "protein_change": "R683S, R278S, R534S",
+   "fda_recognized_database": ""
+  },
+  "2958894": {
+   "uid": "2958894",
+   "obj_type": "single nucleotide variant",
+   "accession": "VCV002958894",
+   "accession_version": "VCV002958894.6",
+   "title": "NM_004972.4(JAK2):c.2599C>T (p.Arg867Trp)",
+   "variation_set": [
+    {
+     "measure_id": "3122695",
+     "variation_xrefs": [
+      {
+       "db_source": "ClinGen",
+       "db_id": "CA4972201"
+      },
+      {
+       "db_source": "dbSNP",
+       "db_id": "768465183"
+      }
+     ],
+     "variation_name": "NM_004972.4(JAK2):c.2599C>T (p.Arg867Trp)",
+     "cdna_change": "c.2599C>T",
+     "aliases": [],
+     "variation_loc": [
+      {
+       "status": "current",
+       "assembly_name": "GRCh38",
+       "chr": "9",
+       "band": "9p24.1",
+       "start": "5089701",
+       "stop": "5089701",
+       "inner_start": "",
+       "inner_stop": "",
+       "outer_start": "",
+       "outer_stop": "",
+       "display_start": "5089701",
+       "display_stop": "5089701",
+       "assembly_acc_ver": "GCF_000001405.38",
+       "annotation_release": "",
+       "alt": "",
+       "ref": ""
+      },
+      {
+       "status": "previous",
+       "assembly_name": "GRCh37",
+       "chr": "9",
+       "band": "9p24.1",
+       "start": "5089701",
+       "stop": "5089701",
+       "inner_start": "",
+       "inner_stop": "",
+       "outer_start": "",
+       "outer_stop": "",
+       "display_start": "5089701",
+       "display_stop": "5089701",
+       "assembly_acc_ver": "GCF_000001405.25",
+       "annotation_release": "",
+       "alt": "",
+       "ref": ""
+      }
+     ],
+     "allele_freq_set": [
+      {
+       "source": "Exome Aggregation Consortium (ExAC)",
+       "value": "0.00001",
+       "minor_allele": ""
+      },
+      {
+       "source": "The Genome Aggregation Database (gnomAD), exomes",
+       "value": "0.00000",
+       "minor_allele": ""
+      }
+     ],
+     "variant_type": "single nucleotide variant",
+     "canonical_spdi": "NC_000009.12:5089700:C:T",
+     "common_name": ""
+    }
+   ],
+   "supporting_submissions": {
+    "scv": [
+     "SCV005386463",
+     "SCV005094162",
+     "SCV004617301"
+    ],
+    "rcv": [
+     "RCV003817117",
+     "RCV004673981"
+    ]
+   },
+   "germline_classification": {
+    "description": "Uncertain significance",
+    "last_evaluated": "2025/12/11 00:00",
+    "review_status": "criteria provided, multiple submitters, no conflicts",
+    "fda_recognized_database": "",
+    "trait_set": [
+     {
+      "trait_xrefs": [
+       {
+        "db_source": "MedGen",
+        "db_id": "C3661900"
+       }
+      ],
+      "trait_name": "not provided"
+     }
+    ]
+   },
+   "clinical_impact_classification": {
+    "description": "",
+    "last_evaluated": "1/01/01 00:00",
+    "review_status": "",
+    "fda_recognized_database": "",
+    "trait_set": []
+   },
+   "oncogenicity_classification": {
+    "description": "Uncertain significance",
+    "last_evaluated": "2025/03/04 00:00",
+    "review_status": "criteria provided, single submitter",
+    "fda_recognized_database": "",
+    "trait_set": [
+     {
+      "trait_xrefs": [
+       {
+        "db_source": "MedGen",
+        "db_id": "C0027651"
+       },
+       {
+        "db_source": "MeSH",
+        "db_id": "D009369"
+       },
+       {
+        "db_source": "MONDO",
+        "db_id": "MONDO:0005070"
+       },
+       {
+        "db_source": "Human Phenotype Ontology",
+        "db_id": "HP:0002664"
+       },
+       {
+        "db_source": "Human Phenotype Ontology",
+        "db_id": "HP:0003008"
+       },
+       {
+        "db_source": "Human Phenotype Ontology",
+        "db_id": "HP:0006741"
+       }
+      ],
+      "trait_name": "Neoplasm"
+     }
+    ]
+   },
+   "record_status": "",
+   "gene_sort": "INSL6",
+   "chr_sort": "09",
+   "location_sort": "00000000000005089701",
+   "variation_set_name": "",
+   "variation_set_id": "",
+   "genes": [
+    {
+     "symbol": "INSL6",
+     "geneid": "11172",
+     "strand": "-",
+     "source": "submitted"
+    },
+    {
+     "symbol": "JAK2",
+     "geneid": "3717",
+     "strand": "+",
+     "source": "submitted"
+    }
+   ],
+   "molecular_consequence_list": [
+    "missense variant",
+    "non-coding transcript variant"
+   ],
+   "protein_change": "R462W, R718W, R867W",
+   "fda_recognized_database": ""
+  },
+  "14662": {
+   "uid": "14662",
+   "obj_type": "single nucleotide variant",
+   "accession": "VCV000014662",
+   "accession_version": "VCV000014662.142",
+   "title": "NM_004972.4(JAK2):c.1849G>T (p.Val617Phe)",
+   "variation_set": [
+    {
+     "measure_id": "29701",
+     "variation_xrefs": [
+      {
+       "db_source": "Genetic Testing Registry (GTR)",
+       "db_id": "GTR000593856"
+      },
+      {
+       "db_source": "Genetic Testing Registry (GTR)",
+       "db_id": "GTR000603933"
+      },
+      {
+       "db_source": "Genetic Testing Registry (GTR)",
+       "db_id": "GTR000614917"
+      },
+      {
+       "db_source": "UniProtKB",
+       "db_id": "O60674#VAR_032697"
+      },
+      {
+       "db_source": "ClinGen",
+       "db_id": "CA124183"
+      },
+      {
+       "db_source": "OMIM",
+       "db_id": "147796.0001"
+      },
+      {
+       "db_source": "dbSNP",
+       "db_id": "77375493"
+      },
+      {
+       "db_source": "Genetic Testing Registry (GTR)",
+       "db_id": "GTR000056468"
+      },
+      {
+       "db_source": "Genetic Testing Registry (GTR)",
+       "db_id": "GTR000569848"
+      },
+      {
+       "db_source": "Genetic Testing Registry (GTR)",
+       "db_id": "GTR000593854"
+      },
+      {
+       "db_source": "Genetic Testing Registry (GTR)",
+       "db_id": "GTR000593855"
+      }
+     ],
+     "variation_name": "NM_004972.4(JAK2):c.1849G>T (p.Val617Phe)",
+     "cdna_change": "c.1849G>T",
+     "aliases": [],
+     "variation_loc": [
+      {
+       "status": "current",
+       "assembly_name": "GRCh38",
+       "chr": "9",
+       "band": "9p24.1",
+       "start": "5073770",
+       "stop": "5073770",
+       "inner_start": "",
+       "inner_stop": "",
+       "outer_start": "",
+       "outer_stop": "",
+       "display_start": "5073770",
+       "display_stop": "5073770",
+       "assembly_acc_ver": "GCF_000001405.38",
+       "annotation_release": "",
+       "alt": "",
+       "ref": ""
+      },
+      {
+       "status": "previous",
+       "assembly_name": "GRCh37",
+       "chr": "9",
+       "band": "9p24.1",
+       "start": "5073770",
+       "stop": "5073770",
+       "inner_start": "",
+       "inner_stop": "",
+       "outer_start": "",
+       "outer_stop": "",
+       "display_start": "5073770",
+       "display_stop": "5073770",
+       "assembly_acc_ver": "GCF_000001405.25",
+       "annotation_release": "",
+       "alt": "",
+       "ref": ""
+      }
+     ],
+     "allele_freq_set": [
+      {
+       "source": "The Genome Aggregation Database (gnomAD), exomes",
+       "value": "0.00035",
+       "minor_allele": ""
+      },
+      {
+       "source": "The Genome Aggregation Database (gnomAD)",
+       "value": "0.00036",
+       "minor_allele": ""
+      },
+      {
+       "source": "The Genome Aggregation Database (gnomAD)",
+       "value": "0.00037",
+       "minor_allele": ""
+      },
+      {
+       "source": "Exome Aggregation Consortium (ExAC)",
+       "value": "0.00068",
+       "minor_allele": ""
+      }
+     ],
+     "variant_type": "single nucleotide variant",
+     "canonical_spdi": "NC_000009.12:5073769:G:T",
+     "common_name": ""
+    }
+   ],
+   "supporting_submissions": {
+    "scv": [
+     "SCV003831788",
+     "SCV006325264",
+     "SCV005905726",
+     "SCV001249759",
+     "SCV000894475",
+     "SCV002037447",
+     "SCV003835086",
+     "SCV000036034",
+     "SCV000043916",
+     "SCV000036036",
+     "SCV000043917",
+     "SCV000036037",
+     "SCV000036038",
+     "SCV005328481",
+     "SCV005351640",
+     "SCV006106468",
+     "SCV005415821",
+     "SCV002307245",
+     "SCV007651306",
+     "SCV000839961",
+     "SCV002036319",
+     "SCV002765070",
+     "SCV004806756",
+     "SCV001162249",
+     "SCV001162250",
+     "SCV001162251",
+     "SCV002320869",
+     "SCV004175181",
+     "SCV001825403",
+     "SCV007113990",
+     "SCV007134199"
+    ],
+    "rcv": [
+     "RCV000015769",
+     "RCV000015770",
+     "RCV000015771",
+     "RCV000015772",
+     "RCV000022628",
+     "RCV000022627",
+     "RCV000427081",
+     "RCV000763621",
+     "RCV001003803",
+     "RCV001003804",
+     "RCV001092995",
+     "RCV004751211"
+    ]
+   },
+   "germline_classification": {
+    "description": "Pathogenic/Likely pathogenic",
+    "last_evaluated": "2026/07/07 00:00",
+    "review_status": "criteria provided, multiple submitters, no conflicts",
+    "fda_recognized_database": "",
+    "trait_set": [
+     {
+      "trait_xrefs": [],
+      "trait_name": "JAK2-related disorder"
+     },
+     {
+      "trait_xrefs": [
+       {
+        "db_source": "MedGen",
+        "db_id": "C3281125"
+       },
+       {
+        "db_source": "MONDO",
+        "db_id": "MONDO:0013794"
+       },
+       {
+        "db_source": "OMIM",
+        "db_id": "614521"
+       }
+      ],
+      "trait_name": "Thrombocythemia 3"
+     },
+     {
+      "trait_xrefs": [
+       {
+        "db_source": "Orphanet",
+        "db_id": "824"
+       },
+       {
+        "db_source": "MedGen",
+        "db_id": "C0001815"
+       },
+       {
+        "db_source": "MeSH",
+        "db_id": "D055728"
+       },
+       {
+        "db_source": "MONDO",
+        "db_id": "MONDO:0009692"
+       },
+       {
+        "db_source": "OMIM",
+        "db_id": "254450"
+       }
+      ],
+      "trait_name": "Primary myelofibrosis"
+     },
+     {
+      "trait_xrefs": [
+       {
+        "db_source": "Orphanet",
+        "db_id": "90042"
+       },
+       {
+        "db_source": "MedGen",
+        "db_id": "C4551637"
+       },
+       {
+        "db_source": "MONDO",
+        "db_id": "MONDO:0007572"
+       },
+       {
+        "db_source": "OMIM",
+        "db_id": "133100"
+       }
+      ],
+      "trait_name": "Primary familial polycythemia due to EPO receptor mutation"
+     },
+     {
+      "trait_xrefs": [
+       {
+        "db_source": "Orphanet",
+        "db_id": "131"
+       },
+       {
+        "db_source": "MedGen",
+        "db_id": "C0856761"
+       },
+       {
+        "db_source": "MONDO",
+        "db_id": "MONDO:0010947"
+       },
+       {
+        "db_source": "OMIM",
+        "db_id": "600880"
+       },
+       {
+        "db_source": "Human Phenotype Ontology",
+        "db_id": "HP:0002639"
+       }
+      ],
+      "trait_name": "Budd-Chiari syndrome"
+     },
+     {
+      "trait_xrefs": [
+       {
+        "db_source": "Orphanet",
+        "db_id": "519"
+       },
+       {
+        "db_source": "MedGen",
+        "db_id": "C0023467"
+       },
+       {
+        "db_source": "MeSH",
+        "db_id": "D015470"
+       },
+       {
+        "db_source": "MONDO",
+        "db_id": "MONDO:0018874"
+       },
+       {
+        "db_source": "OMIM",
+        "db_id": "601626"
+       },
+       {
+        "db_source": "Human Phenotype Ontology",
+        "db_id": "HP:0004808"
+       },
+       {
+        "db_source": "Human Phenotype Ontology",
+        "db_id": "HP:0001914"
+       },
+       {
+        "db_source": "Human Phenotype Ontology",
+        "db_id": "HP:0004843"
+       },
+       {
+        "db_source": "Human Phenotype Ontology",
+        "db_id": "HP:0005516"
+       },
+       {
+        "db_source": "Human Phenotype Ontology",
+        "db_id": "HP:0006724"
+       },
+       {
+        "db_source": "Human Phenotype Ontology",
+        "db_id": "HP:0006728"
+       }
+      ],
+      "trait_name": "Acute myeloid leukemia"
+     },
+     {
+      "trait_xrefs": [
+       {
+        "db_source": "Orphanet",
+        "db_id": "729"
+       },
+       {
+        "db_source": "MedGen",
+        "db_id": "C0032463"
+       },
+       {
+        "db_source": "MeSH",
+        "db_id": "D011087"
+       },
+       {
+        "db_source": "MONDO",
+        "db_id": "MONDO:0009891"
+       },
+       {
+        "db_source": "OMIM",
+        "db_id": "263300"
+       }
+      ],
+      "trait_name": "Acquired polycythemia vera"
+     },
+     {
+      "trait_xrefs": [
+       {
+        "db_source": "Orphanet",
+        "db_id": "90042"
+       },
+       {
+        "db_source": "MedGen",
+        "db_id": "C4551637"
+       },
+       {
+        "db_source": "MONDO",
+        "db_id": "MONDO:0007572"
+       },
+       {
+        "db_source": "OMIM",
+        "db_id": "133100"
+       }
+      ],
+      "trait_name": "Primary familial polycythemia due to EPO receptor mutation"
+     },
+     {
+      "trait_xrefs": [
+       {
+        "db_source": "MedGen",
+        "db_id": "C3661900"
+       }
+      ],
+      "trait_name": "not provided"
+     },
+     {
+      "trait_xrefs": [
+       {
+        "db_source": "Orphanet",
+        "db_id": "824"
+       },
+       {
+        "db_source": "MedGen",
+        "db_id": "C0001815"
+       },
+       {
+        "db_source": "MeSH",
+        "db_id": "D055728"
+       },
+       {
+        "db_source": "MONDO",
+        "db_id": "MONDO:0009692"
+       },
+       {
+        "db_source": "OMIM",
+        "db_id": "254450"
+       }
+      ],
+      "trait_name": "Primary myelofibrosis"
+     },
+     {
+      "trait_xrefs": [
+       {
+        "db_source": "MedGen",
+        "db_id": "C3281125"
+       },
+       {
+        "db_source": "MONDO",
+        "db_id": "MONDO:0013794"
+       },
+       {
+        "db_source": "OMIM",
+        "db_id": "614521"
+       }
+      ],
+      "trait_name": "Thrombocythemia 3"
+     },
+     {
+      "trait_xrefs": [
+       {
+        "db_source": "Orphanet",
+        "db_id": "729"
+       },
+       {
+        "db_source": "MedGen",
+        "db_id": "C0032463"
+       },
+       {
+        "db_source": "MeSH",
+        "db_id": "D011087"
+       },
+       {
+        "db_source": "MONDO",
+        "db_id": "MONDO:0009891"
+       },
+       {
+        "db_source": "OMIM",
+        "db_id": "263300"
+       }
+      ],
+      "trait_name": "Acquired polycythemia vera"
+     },
+     {
+      "trait_xrefs": [
+       {
+        "db_source": "Orphanet",
+        "db_id": "519"
+       },
+       {
+        "db_source": "MedGen",
+        "db_id": "C0023467"
+       },
+       {
+        "db_source": "MeSH",
+        "db_id": "D015470"
+       },
+       {
+        "db_source": "MONDO",
+        "db_id": "MONDO:0018874"
+       },
+       {
+        "db_source": "OMIM",
+        "db_id": "601626"
+       },
+       {
+        "db_source": "Human Phenotype Ontology",
+        "db_id": "HP:0004808"
+       },
+       {
+        "db_source": "Human Phenotype Ontology",
+        "db_id": "HP:0001914"
+       },
+       {
+        "db_source": "Human Phenotype Ontology",
+        "db_id": "HP:0004843"
+       },
+       {
+        "db_source": "Human Phenotype Ontology",
+        "db_id": "HP:0005516"
+       },
+       {
+        "db_source": "Human Phenotype Ontology",
+        "db_id": "HP:0006724"
+       },
+       {
+        "db_source": "Human Phenotype Ontology",
+        "db_id": "HP:0006728"
+       }
+      ],
+      "trait_name": "Acute myeloid leukemia"
+     }
+    ]
+   },
+   "clinical_impact_classification": {
+    "description": "",
+    "last_evaluated": "1/01/01 00:00",
+    "review_status": "",
+    "fda_recognized_database": "",
+    "trait_set": []
+   },
+   "oncogenicity_classification": {
+    "description": "",
+    "last_evaluated": "1/01/01 00:00",
+    "review_status": "",
+    "fda_recognized_database": "",
+    "trait_set": []
+   },
+   "record_status": "",
+   "gene_sort": "INSL6",
+   "chr_sort": "09",
+   "location_sort": "00000000000005073770",
+   "variation_set_name": "",
+   "variation_set_id": "",
+   "genes": [
+    {
+     "symbol": "INSL6",
+     "geneid": "11172",
+     "strand": "-",
+     "source": "submitted"
+    },
+    {
+     "symbol": "JAK2",
+     "geneid": "3717",
+     "strand": "+",
+     "source": "submitted"
+    }
+   ],
+   "molecular_consequence_list": [
+    "missense variant",
+    "non-coding transcript variant"
+   ],
+   "protein_change": "V617F, V212F, V468F",
+   "fda_recognized_database": ""
+  }
+ }
+}

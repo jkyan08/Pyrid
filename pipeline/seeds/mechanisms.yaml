@@ -1,0 +1,113 @@
+# Curated mechanism fallback, transcribed from the table in docs/test-cluster-desc.md section 3
+# ("Genes and diseases in the cluster"): one row per gene + direction, in table order.
+#
+# NAMES ONLY (README hard rule 2): HGNC symbols, mechanism directions (GoF | LoF | DN), origin
+# (germline | somatic) and the disease wording of that table. No identifiers.
+#
+# A disease_terms entry is either a bare name (wording from the section 3 table) or a mapping
+# {term: <name>, from: <where that wording was seen>} when the name comes from somewhere else;
+# the pipeline copies `from` into the edge's confidence_basis.disease_term_from so the edge
+# never claims table provenance for wording the table does not contain.
+#
+# Used ONLY by pipeline.graph.mechanisms rule R4: when no database text rule (R1/R2) and no
+# literature claim (R3) assigns a mechanism to a (disease, gene) pair. Edges made from a row here
+# are evidence_class "inferred", confidence 0.4, attributes.labels ["curated_unverified"],
+# attributes.reason "curated seed from cluster doc (<cluster_doc_confidence>)".
+#
+# cluster_doc_confidence copies the doc's tag for that row. "Retrieved" = seen in a source during
+# the team's literature check; "Background" = domain knowledge not yet verified against a source.
+# README hard rule 10: Background facts never appear as sourced until retrieved.
+
+source: docs/test-cluster-desc.md (section 3 table)
+# Date the table was transcribed into this file; graph.json cites it as the retrieved_at of the
+# "curated mechanism seeds" source record (a date, not an identifier).
+transcribed_at: "2026-10-03"
+
+mechanisms:
+  - gene: STAT1
+    direction: GoF
+    origin: germline
+    disease_terms:
+      - chronic mucocutaneous candidiasis
+      # Not table wording: the backbone's node for the autosomal dominant STAT1 GoF form of CMC
+      # is named by its OMIM-style synonym (docs/optimuskg-spike.md section 4, "STAT1 GoF"); the
+      # bare CMC name above matches only the multi-gene umbrella node.
+      - term: immunodeficiency 31C
+        from: "backbone exact_synonym of the STAT1 GoF disease node, seen in docs/optimuskg-spike.md section 4 (not in the section 3 table)"
+    cluster_doc_confidence: Retrieved
+    note: "Germline, heterozygous. Chronic mucocutaneous candidiasis with infection, autoimmunity and vascular features; broad phenotype."
+
+  - gene: STAT1
+    direction: LoF
+    origin: germline
+    disease_terms:
+      - susceptibility to mycobacterial disease
+    cluster_doc_confidence: Retrieved
+    note: "Germline. Susceptibility to mycobacterial disease, osteomyelitis, respiratory and herpesvirus infections."
+
+  - gene: JAK3
+    direction: LoF
+    origin: germline
+    disease_terms:
+      - autosomal recessive severe combined immunodeficiency
+    cluster_doc_confidence: Background
+    note: "Germline, recessive. Autosomal recessive severe combined immunodeficiency (SCID), T-negative B-positive NK-negative."
+
+  - gene: IL2RG
+    direction: LoF
+    origin: germline
+    disease_terms:
+      - X-linked SCID
+    cluster_doc_confidence: Background
+    note: "Germline, X-linked. X-linked SCID with a similar immunophenotype to JAK3 deficiency (JAK3 signals through the chain IL2RG encodes)."
+
+  - gene: JAK2
+    direction: GoF
+    origin: somatic
+    disease_terms:
+      - polycythemia vera
+      - essential thrombocythemia
+      - primary myelofibrosis
+    cluster_doc_confidence: Background
+    note: "Somatic. Gain of function (V617F)."
+
+  - gene: STAT3
+    direction: DN
+    origin: germline
+    disease_terms:
+      - autosomal dominant hyper-IgE syndrome
+    cluster_doc_confidence: Background
+    note: "Germline. Table wording is 'Dominant-negative / loss of function'; recorded as DN, the doc's third mechanism class distinct from simple LoF (section 2)."
+
+  - gene: STAT3
+    direction: GoF
+    origin: germline
+    disease_terms:
+      - STAT3 gain of function
+      - early-onset multi-organ autoimmunity and lymphoproliferation
+    cluster_doc_confidence: Background
+    note: "Germline. Early-onset multi-organ autoimmunity and lymphoproliferation. The doc adds that the Immune Deficiency Foundation has a handbook chapter on STAT1 and STAT3 gain of function (Retrieved)."
+
+  - gene: JAK1
+    direction: LoF
+    origin: germline
+    disease_terms:
+      - rare immunodeficiency with mycobacterial susceptibility
+    cluster_doc_confidence: Background
+    note: "Germline. Low confidence, very few reported patients."
+
+  - gene: JAK1
+    direction: GoF
+    origin: germline
+    disease_terms:
+      - rare immune dysregulation with eosinophilia
+    cluster_doc_confidence: Background
+    note: "Germline. Low confidence, very few reported patients."
+
+  - gene: TYK2
+    direction: LoF
+    origin: germline
+    disease_terms:
+      - recessive infection susceptibility
+    cluster_doc_confidence: Background
+    note: "Germline. Loss of function (rare recessive). The table also says common variants modulate autoimmune and infection risk; that is not a GoF/LoF/DN mechanism and has no row here. Verify direction of common-variant effects."
