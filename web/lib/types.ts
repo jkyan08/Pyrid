@@ -115,7 +115,9 @@ export interface SearchResult {
   label: string;
   type: NodeType;
   matched_on: string;
-  match_kind: "label" | "synonym" | "free_text";
+  // "semantic": matched by meaning (natural-language query); "related": a disease that has
+  // the symptoms the query matched (api/graph_store.py). The resolution line explains both.
+  match_kind: "label" | "synonym" | "free_text" | "semantic" | "related";
   resolution: string;
   score: number;
 }

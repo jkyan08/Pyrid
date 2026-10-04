@@ -44,6 +44,25 @@ CORS is enabled for all origins (demo). Unknown ids → 404 `{"detail": ...}`.
 **Documented choice (CONTRACT leaves it open):** `GET /search?q=` with an
 empty/blank `q` returns `200 {"query": "", "results": []}`, not 422.
 
+### Natural-language search
+
+`/search` is hybrid. Every query gets lexical matching (label, synonym, shared words). On top:
+
+- **Semantic** (`match_kind: "semantic"`): the query is embedded and compared with
+  `data/build/search_index.json`, so "my son keeps getting thrush and has thyroid problems" or
+  "medicines that block JAK" find candidiasis, hypothyroidism or JAK inhibitors without sharing
+  words with them. Needs one embeddings call per query (cached in memory):
+  `OPENAI_API_KEY` and/or `OPENROUTER_API_KEY` in the API's environment (tried in turn; the
+  working one is remembered). The index must have been built from the served `graph.json`
+  (`meta.built_at`); otherwise it is ignored.
+- **Related** (`match_kind: "related"`, no API): diseases that have the symptoms the query
+  matched, including more specific HPO terms (`is_a`), weighted by information content and
+  discounted for grouping terms and catch-all annotations. The `resolution` line says which
+  symptoms matched ("has 2 of the features you searched for: …").
+
+No key, `ATLAS_OFFLINE=1`, or a failed call: lexical + related only, never an error.
+Rebuild the index after `make data`: `make search-index`.
+
 ## LLM seam
 
 `/explain` and `/draft` try, in order: `pipeline.llm.explain/draft` (evidence
