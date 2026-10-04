@@ -205,6 +205,9 @@ function drawGraph(state: GraphCanvasState): void {
   for (const node of state.nodes) {
     const focused = node.id === state.centerId;
     const hovered = node.id === state.hoveredNodeId;
+    // detail nodes (variants/papers/investigators) never label from zoom or
+    // degree — their serial-number names flood the canvas
+    if (node.detail && !focused && !hovered) continue;
     if (!focused && !hovered && !(state.view.k >= 0.88 && node.degree >= 4) && state.view.k < 1.45) continue;
     const point = screenPoint(state, node);
     const label = node.label.length > 29 ? `${node.label.slice(0, 28)}…` : node.label;
