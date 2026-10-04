@@ -337,6 +337,51 @@ def _gene_mechanism_mismatches(links: dict, index: NodeIndex) -> list[dict]:
     return review
 
 
+DECISIONS = REPO_ROOT / "data" / "review_decisions.csv"
+PRIORITY = REPO_ROOT / "data" / "review_priority.csv"
+
+
+def apply_review_decisions(links: dict, review: list[dict], decisions: list[dict], known: set[str]) -> tuple[list[dict], int]:
+    """Apply human decisions: rows with decision `accept` set (claim_id, role) to node_id. Only
+    ids the index knows are applied. Returns (remaining review rows, number applied)."""
+    applied = set()
+    for d in decisions:
+        if d.get("decision", "").strip().lower() != "accept":
+            continue
+        cid, role, nid = d["claim_id"], d["role"], d["node_id"].strip()
+        if cid in links and role in ("subject", "object", "variant") and nid in known:
+            links[cid][role] = nid
+            applied.add((cid, role))
+    return [r for r in review if (r["claim_id"], r["role"]) not in applied], len(applied)
+
+
+def review_priority(review: list[dict], raw: dict, index: NodeIndex) -> list[dict]:
+    """Pending proposals worth a human look: a proposed node exists and it, or the claim, touches a
+    cluster gene's mechanism or disease. Grouped by (mention, role, proposed node), ranked by how
+    many claims accepting it would affect; one row per claim so decisions apply per claim."""
+    from pipeline.extract.backbone import CLUSTER_GENES
+
+    def relevant(r):
+        n = index.nodes.get(r["proposed"])
+        if not n:
+            return False
+        c = raw[r["claim_id"]]
+        text = f"{n['label']} {' '.join(n.get('synonyms', [])[:6])} {c['subject']} {c['object']}"
+        return r["proposed"].startswith("mech:") or any(g in text for g in CLUSTER_GENES)
+
+    rows = [r for r in review if r["proposed"] and r["confidence"] in ("medium", "low") and relevant(r)]
+    groups: dict[tuple, list[dict]] = {}
+    for r in rows:
+        groups.setdefault((r["mention"], r["role"], r["proposed"]), []).append(r)
+    out = []
+    for (mention, role, nid), rs in sorted(groups.items(), key=lambda kv: -len(kv[1])):
+        for r in rs:
+            out.append({"decision": "", "claim_id": r["claim_id"], "role": role, "mention": mention, "node_id": nid,
+                        "node_label": index.nodes[nid]["label"], "claims_in_group": len(rs),
+                        "model_reason": r["reason"], "quote": raw[r["claim_id"]]["quote"]})
+    return out
+
+
 def check_against_graph(links: dict, graph_ids: set[str]) -> list[dict]:
     """Null out resolved ids that graph.json lacks (Variant ids excepted: lane A may not
     have loaded that ClinVar record yet). Returns review rows for each."""
@@ -443,8 +488,14 @@ def main() -> None:
                                 titles=titles,
                                 variant_lookup=backbone.clinvar_variants,
                                 workers=int(os.environ.get("ATLAS_LLM_WORKERS", "8")))
+    n_applied = 0
+    if DECISIONS.exists():
+        review, n_applied = apply_review_decisions(links, review, list(csv.DictReader(DECISIONS.open())),
+                                                   set(index.nodes))
     graph_path = build / "graph.json"
-    if graph_path.exists():
+    if graph_path.exists() and os.environ.get("ATLAS_RECHECK_GRAPH") == "1":
+        # Opt-in: graph.json is now built *from* claims.json (pipeline/export.py), so re-checking against
+        # it would drop every newly resolved id. Use when a lane-A graph built independently exists.
         review += check_against_graph(links, {n["id"] for n in json.loads(graph_path.read_text())["nodes"]})
     claims, paper_nodes, counts = contract_claims(raw["claims"], links, papers)
     gene_ids = {n["label"]: n["id"] for n in nodes if n["type"] == "Gene" and n["label"] in backbone.CLUSTER_GENES}
@@ -462,14 +513,23 @@ def main() -> None:
     (build / "claims.meta.json").write_text(json.dumps({
         "built_at": dt.datetime.now(dt.timezone.utc).isoformat(timespec="seconds"),
         "resolved_against": "optimuskg backbone" + (" + graph.json" if graph_path.exists() else ""),
-        "stats": {"extraction": raw["stats"], "reconcile": counts, "review_rows": len(review)},
+        "stats": {"extraction": raw["stats"], "reconcile": counts, "review_rows": len(review),
+                  "human_decisions_applied": n_applied},
         "nodes": [index.nodes[i] for i in referenced],
     }, indent=1, ensure_ascii=False))
+    raw_by_id = {c["id"]: c for c in raw["claims"]}
+    prio = review_priority(review, raw_by_id, index)
+    with PRIORITY.open("w", newline="") as f:
+        w = csv.DictWriter(f, fieldnames=["decision", "claim_id", "role", "mention", "node_id", "node_label",
+                                          "claims_in_group", "model_reason", "quote"])
+        w.writeheader()
+        w.writerows(prio)
     with open(REPO_ROOT / "data" / "review_queue.csv", "w", newline="") as f:
         w = csv.DictWriter(f, fieldnames=["claim_id", "role", "mention", "proposed", "confidence", "shortlist", "reason"])
         w.writeheader()
         w.writerows(review)
-    print(f"reconcile: {counts}; review rows: {len(review)}", file=sys.stderr)
+    print(f"reconcile: {counts}; review rows: {len(review)}; human decisions applied: {n_applied}; "
+          f"priority review rows: {len(prio)}", file=sys.stderr)
 
 
 if __name__ == "__main__":

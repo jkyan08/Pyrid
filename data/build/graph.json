@@ -1,6 +1,6 @@
 {
   "meta": {
-    "built_at": "2026-10-04T01:53:00Z",
+    "built_at": "2026-10-04T02:12:48Z",
     "sources": [
       {
         "name": "PubMed abstracts via lane B extraction (model claude-sonnet-5-5; 935 kept claims, 192 fully resolved against the backbone and exported; unresolved mentions are NOT bridged)",

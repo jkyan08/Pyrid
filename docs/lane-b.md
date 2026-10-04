@@ -87,3 +87,11 @@ Symptom → HPO for Devon: `NodeIndex(graph["nodes"], types={"Phenotype"})` and 
   and `ATLAS_LLM_WORKERS` (default 16) sets concurrency.
 - All 7 Section 11 papers resolve to PMIDs by title. The NK-cell bioRxiv preprint has a published JACI version,
   so it resolves via PubMed; the bioRxiv path remains as fallback.
+
+## Human review (low-confidence links)
+
+`reconcile` never puts a medium/low-confidence link in the graph. It writes `data/review_priority.csv`: pending
+proposals that touch cluster mechanisms or cluster genes' diseases, grouped and ranked by how many claims each
+would unlock, with the model's reason and the quote. To approve: copy rows into `data/review_decisions.csv`
+(same columns) with `decision` = `accept`, then rerun `reconcile`, `make data`, and `python -m pipeline.llm.explain`.
+Only `accept` rows for ids the index knows are applied; the count is in `claims.meta.json` → `stats`.

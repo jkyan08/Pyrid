@@ -419,3 +419,15 @@ def test_demo_entities_and_precompute_keys():
         mp.undo()
     assert set(out) == {"n:disX", "n:disY", "n:drugA", "n:geneG", "draft:n:disX"}
     assert all(r["text"] and r["citations"] for r in out.values())
+
+
+def test_human_review_decisions_apply_only_accepts_and_known_ids():
+    from pipeline.extract.reconcile import apply_review_decisions
+    links = {"c_1": {"subject": "a", "object": None, "variant": ""}, "c_2": {"subject": "a", "object": None, "variant": ""}}
+    review = [{"claim_id": "c_1", "role": "object"}, {"claim_id": "c_2", "role": "object"}]
+    decisions = [{"decision": "accept", "claim_id": "c_1", "role": "object", "node_id": "MONDO:1"},
+                 {"decision": "reject", "claim_id": "c_2", "role": "object", "node_id": "MONDO:1"},
+                 {"decision": "accept", "claim_id": "c_2", "role": "object", "node_id": "invented:9"}]
+    rest, n = apply_review_decisions(links, review, decisions, known={"MONDO:1"})
+    assert n == 1 and links["c_1"]["object"] == "MONDO:1" and links["c_2"]["object"] is None
+    assert rest == [{"claim_id": "c_2", "role": "object"}]
