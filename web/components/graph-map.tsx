@@ -32,11 +32,15 @@ import {
   zoomGraphAt,
 } from "./graph-canvas";
 import type { GraphCanvasState } from "./graph-canvas";
+import ThinkingDots from "@/components/smoothui/thinking-dots";
 import { TypeGlyph } from "./badges";
 import { useEvidence } from "./evidence-drawer";
 
-const CLUSTER_COLORS = ["#7c93c4", "#6fb3a0", "#d99a6c", "#c290bd", "#a3b86c", "#d4bd68"];
-const NO_CLUSTER_COLOR = "#8d9aaf";
+// Cluster fills harmonized with the atlas palette: sage, teal-green, ochre,
+// clay, stone-blue and olive — earth tones that stay mutually distinguishable
+// on the dark pine canvas.
+const CLUSTER_COLORS = ["#a3b18a", "#74a589", "#c2a36b", "#b98a6e", "#7e99ad", "#9a9b6d"];
+const NO_CLUSTER_COLOR = "#8a9589";
 
 interface Runtime {
   canvas: GraphCanvasState;
@@ -336,25 +340,25 @@ export function GraphMap({ graph, centerId }: { graph: Graph; centerId: string }
     <div>
       <div className="mb-3 flex flex-wrap items-center justify-between gap-3">
         <div>
-          <p className="text-xs font-bold uppercase tracking-[0.15em] text-sky-700">Living evidence map</p>
-          <p className="mt-1 text-sm text-slate-600">Drag a node to feel its links pull nearby evidence into place.</p>
+          <p className="text-xs font-semibold uppercase tracking-[0.15em] text-hunter">Living evidence map</p>
+          <p className="mt-1 text-sm text-muted-foreground">Drag a node to feel its links pull nearby evidence into place.</p>
         </div>
         <div className="flex flex-wrap items-center gap-2">
-          <label htmlFor="force-strength" className="text-xs font-medium text-slate-600">Repulsion</label>
-          <select id="force-strength" value={repulsion} onChange={(event) => changeRepulsion(Number(event.target.value))} className="rounded-lg border border-slate-200 bg-white px-2.5 py-2 text-xs font-medium text-slate-700 shadow-sm focus:outline-none focus:ring-2 focus:ring-sky-400">
+          <label htmlFor="force-strength" className="text-xs font-medium text-muted-foreground">Repulsion</label>
+          <select id="force-strength" value={repulsion} onChange={(event) => changeRepulsion(Number(event.target.value))} className="rounded-lg border border-dust bg-white px-2.5 py-2 text-xs font-medium text-foreground focus:outline-none focus:ring-2 focus:ring-fern">
             <option value={110}>Compact</option>
             <option value={230}>Balanced</option>
             <option value={390}>Spacious</option>
           </select>
-          <button onClick={reheat} disabled={!ready} className="rounded-lg border border-slate-200 bg-white px-3 py-2 text-xs font-semibold text-slate-700 shadow-sm transition-colors hover:bg-slate-50 disabled:opacity-50">Reheat graph</button>
-          <button onClick={() => { const state = runtimeRef.current?.canvas; if (state) fitGraph(state); }} disabled={!ready} className="rounded-lg border border-slate-200 bg-white px-3 py-2 text-xs font-semibold text-slate-700 shadow-sm transition-colors hover:bg-slate-50 disabled:opacity-50">Fit to view</button>
-          <div className="flex overflow-hidden rounded-lg border border-slate-200 bg-white shadow-sm">
-            <button onClick={() => zoom(1.25)} disabled={!ready} aria-label="Zoom in" className="px-3 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-50 disabled:opacity-50">+</button>
-            <button onClick={() => zoom(0.8)} disabled={!ready} aria-label="Zoom out" className="border-l border-slate-200 px-3 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-50 disabled:opacity-50">−</button>
+          <button onClick={reheat} disabled={!ready} className="rounded-lg border border-dust bg-white px-3 py-2 text-xs font-medium text-foreground transition-colors hover:bg-dust/25 disabled:opacity-50">Reheat graph</button>
+          <button onClick={() => { const state = runtimeRef.current?.canvas; if (state) fitGraph(state); }} disabled={!ready} className="rounded-lg border border-dust bg-white px-3 py-2 text-xs font-medium text-foreground transition-colors hover:bg-dust/25 disabled:opacity-50">Fit to view</button>
+          <div className="flex overflow-hidden rounded-lg border border-dust bg-white">
+            <button onClick={() => zoom(1.25)} disabled={!ready} aria-label="Zoom in" className="px-3 py-2 text-sm font-medium text-foreground hover:bg-dust/25 disabled:opacity-50">+</button>
+            <button onClick={() => zoom(0.8)} disabled={!ready} aria-label="Zoom out" className="border-l border-dust px-3 py-2 text-sm font-medium text-foreground hover:bg-dust/25 disabled:opacity-50">−</button>
           </div>
         </div>
       </div>
-      <div className="relative overflow-hidden rounded-[1.5rem] border border-slate-700/60 bg-[#142033] bg-[radial-gradient(circle_at_50%_45%,#243951_0%,#142033_70%,#0c1627_100%)] shadow-[0_18px_55px_rgba(15,23,42,0.18)]">
+      <div className="relative overflow-hidden rounded-[1.5rem] border border-pine/60 bg-[#1d2b24]">
         <canvas
           ref={canvasRef}
           className="h-[64vh] min-h-[520px] w-full touch-none lg:h-[76vh] lg:max-h-[900px]"
@@ -366,20 +370,20 @@ export function GraphMap({ graph, centerId }: { graph: Graph; centerId: string }
           onPointerCancel={(event) => finishPointer(event, true)}
           onPointerLeave={() => { if (!pointerRef.current) clearHover(); }}
         />
-        {!ready && !error && <p className="pointer-events-none absolute inset-0 flex items-center justify-center text-sm text-slate-200">Arranging the evidence network…</p>}
-        {error && <p className="absolute inset-0 flex items-center justify-center text-sm text-rose-200">{error}</p>}
-        {ready && legend.count === 0 && <p className="pointer-events-none absolute inset-0 flex items-center justify-center text-sm text-slate-200">No graph nodes are available for this entity.</p>}
-        {hover && <div className="pointer-events-none absolute z-10 max-w-[220px] rounded-xl border border-slate-500/50 bg-slate-950/95 px-3 py-2 text-xs text-white shadow-xl" style={{ left: Math.max(8, hover.x), top: hover.y }}>
+        {!ready && !error && <p className="pointer-events-none absolute inset-0 flex items-center justify-center gap-2 text-sm text-dust"><ThinkingDots label="Arranging the evidence network" className="text-sage" />Arranging the evidence network…</p>}
+        {error && <p className="absolute inset-0 flex items-center justify-center text-sm text-[#e3b5a6]">{error}</p>}
+        {ready && legend.count === 0 && <p className="pointer-events-none absolute inset-0 flex items-center justify-center text-sm text-dust">No graph nodes are available for this entity.</p>}
+        {hover && <div className="pointer-events-none absolute z-10 max-w-[220px] rounded-xl border border-sage/30 bg-[#142019]/95 px-3 py-2 text-xs text-white" style={{ left: Math.max(8, hover.x), top: hover.y }}>
           <p className="font-semibold leading-5">{hover.title}</p>
-          <p className="mt-0.5 text-slate-300">{hover.detail}</p>
+          <p className="mt-0.5 text-dust">{hover.detail}</p>
         </div>}
-        <div className="pointer-events-none absolute bottom-4 left-4 rounded-full border border-slate-500/40 bg-slate-950/75 px-3 py-1.5 text-[11px] font-medium text-slate-200 backdrop-blur-sm">Drag nodes · Pan the canvas · Scroll to zoom · Click edges for evidence</div>
+        <div className="pointer-events-none absolute bottom-4 left-4 rounded-full border border-sage/25 bg-[#142019]/75 px-3 py-1.5 text-[11px] font-medium text-dust backdrop-blur-sm">Drag nodes · Pan the canvas · Scroll to zoom · Click edges for evidence</div>
       </div>
       {/* Cluster-id swatch list removed: cluster ids are serial numbers
           (cl_001…) that mean nothing to a reader. Fill color still encodes
           cluster membership; the line below explains the encoding. */}
-      <div className="mt-4 flex flex-wrap items-center gap-x-5 gap-y-2 rounded-xl border border-slate-200 bg-white px-4 py-3 text-xs text-slate-600">
-        <span className="text-slate-400">Fill = cluster · Shape + outline = type · Dashed = inferred or bridge</span>
+      <div className="mt-4 flex flex-wrap items-center gap-x-5 gap-y-2 rounded-xl border border-dust bg-white px-4 py-3 text-xs text-muted-foreground">
+        <span className="text-muted-foreground/80">Fill = cluster · Shape + outline = type · Dashed = inferred or bridge</span>
         <span className="flex flex-wrap items-center gap-3">
           {legend.types.map((type) => {
             const theme = themeOf(type);

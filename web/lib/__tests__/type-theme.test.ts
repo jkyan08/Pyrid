@@ -99,7 +99,7 @@ describe("evidenceLevelChipClass", () => {
 
   it("scales from observed/trial (strongest) down to inferred (weakest)", () => {
     expect(evidenceLevelChipClass("observed")).toBe(evidenceLevelChipClass("trial"));
-    expect(evidenceLevelChipClass("observed")).toContain("emerald");
+    expect(evidenceLevelChipClass("observed")).toContain("fern");
     expect(evidenceLevelChipClass("in_vitro")).not.toBe(evidenceLevelChipClass("observed"));
     expect(evidenceLevelChipClass("inferred")).toContain("gray");
     expect(evidenceLevelChipClass("not_a_level")).toBe(evidenceLevelChipClass("inferred"));

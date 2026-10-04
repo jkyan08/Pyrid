@@ -32,7 +32,7 @@ export function CitationChip({ id }: { id: string }) {
   return (
     <button
       onClick={() => openEvidence(id)}
-      className={`mx-0.5 inline-block rounded border border-gray-300 bg-gray-50 px-1.5 py-0 align-baseline text-[11px] text-gray-600 transition-colors hover:border-sky-300 hover:bg-sky-50 hover:text-sky-800 animate-in fade-in zoom-in-95 duration-300 motion-reduce:animate-none ${label ? "" : "font-mono"}`}
+      className={`mx-0.5 inline-block rounded border border-dust bg-dust/20 px-1.5 py-0 align-baseline text-[11px] text-muted-foreground transition-colors hover:border-fern/50 hover:bg-fern/10 hover:text-hunter animate-in fade-in zoom-in-95 duration-300 motion-reduce:animate-none ${label ? "" : "font-mono"}`}
       title={`Open evidence (${id})`}
     >
       {label ?? id}

@@ -55,8 +55,8 @@ export function TypeBadge({ type }: { type: string }) {
 }
 
 const EVIDENCE_COLORS: Record<string, string> = {
-  observed: "bg-emerald-50 text-emerald-800 border-emerald-200",
-  extracted: "bg-sky-50 text-sky-800 border-sky-200",
+  observed: "bg-fern/10 text-hunter border-fern/30",
+  extracted: "bg-sage/20 text-pine border-sage/50",
   inferred: "bg-gray-100 text-gray-600 border-gray-300",
 };
 
@@ -87,11 +87,11 @@ export function EvidenceLevelChip({ level }: { level: string }) {
 }
 
 const STATUS_COLORS: Record<string, string> = {
-  supported: "bg-emerald-50 text-emerald-800 border-emerald-200",
-  promising: "bg-emerald-50 text-emerald-800 border-emerald-200",
-  contested: "bg-amber-50 text-amber-800 border-amber-200",
-  small_n: "bg-orange-50 text-orange-800 border-orange-200",
-  inferred_unsupported: "bg-red-50 text-red-700 border-red-200",
+  supported: "bg-fern/10 text-hunter border-fern/30",
+  promising: "bg-fern/10 text-hunter border-fern/30",
+  contested: "bg-ochre/10 text-ochre border-ochre/30",
+  small_n: "bg-ochre/15 text-ochre border-ochre/40",
+  inferred_unsupported: "bg-rust/10 text-rust border-rust/30",
 };
 
 export function StatusChip({ label }: { label: string }) {
@@ -106,12 +106,12 @@ export function StatusChip({ label }: { label: string }) {
 }
 
 const VERDICT_LABELS: Record<string, { text: string; cls: string }> = {
-  reusable_now: { text: "reusable now", cls: "bg-emerald-50 text-emerald-800 border-emerald-200" },
+  reusable_now: { text: "reusable now", cls: "bg-fern/10 text-hunter border-fern/30" },
   adaptable_needs_expert_review: {
     text: "adaptable, needs expert review",
-    cls: "bg-amber-50 text-amber-800 border-amber-200",
+    cls: "bg-ochre/10 text-ochre border-ochre/30",
   },
-  not_transferable: { text: "not transferable", cls: "bg-red-50 text-red-700 border-red-200" },
+  not_transferable: { text: "not transferable", cls: "bg-rust/10 text-rust border-rust/30" },
 };
 
 /** Tolerates absent/unknown verdicts (renders nothing or the raw value). */
