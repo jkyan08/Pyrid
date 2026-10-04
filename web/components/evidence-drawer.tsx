@@ -21,7 +21,7 @@ import {
 import type { Claim, EdgeView } from "@/lib/types";
 import { apiEdge, apiGraph } from "@/lib/api";
 import { displayLabel } from "@/lib/display";
-import { claimById } from "@/lib/graph";
+import { claimById, sortClaimsByEvidence } from "@/lib/graph";
 import SmoothDrawer, { DrawerTitle } from "@/components/smoothui/drawer";
 import ThinkingDots from "@/components/smoothui/thinking-dots";
 import { themeOf } from "@/lib/type-theme";
@@ -187,7 +187,7 @@ function EdgeEvidence({ view }: { view: EdgeView }) {
             <p className="text-xs text-gray-400">No supporting claims on this edge.</p>
           )}
           <div className="space-y-3">
-            {view.supporting_claims.map((c) => (
+            {sortClaimsByEvidence(view.supporting_claims).map((c) => (
               <ClaimCard key={c.id} claim={c} />
             ))}
           </div>
@@ -200,7 +200,7 @@ function EdgeEvidence({ view }: { view: EdgeView }) {
             <p className="text-xs text-gray-400">No contradicting claims on this edge.</p>
           )}
           <div className="space-y-3">
-            {view.contradicting_claims.map((c) => (
+            {sortClaimsByEvidence(view.contradicting_claims).map((c) => (
               <ClaimCard key={c.id} claim={c} />
             ))}
           </div>
