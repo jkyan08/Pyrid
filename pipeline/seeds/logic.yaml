@@ -1,0 +1,122 @@
+# Graph-logic constants (README section 6: similarity, clustering, rules).
+#
+# NAMES AND NUMBERS ONLY. Every value here is a general weight, threshold or switch read by
+# pipeline/graph/similarity.py, cluster.py, rules.py and logic.py through
+# pipeline.config.load_seeds("logic"). Nothing in this file, or in the modules that read it,
+# names a gene, a disease, a drug or an identifier: the penalties below are general rules
+# (README section 6 "Penalties are general rules ... never special-cased") and the ground-truth
+# tests must pass or fail on those rules alone. Changing a number here changes the build; the
+# full breakdown of every inferred edge (weights included) is written to its confidence_basis.
+
+# The (w_m, w_p, w_c) weightings Leiden is re-run at (README section 6 "Clustering"). The FIRST
+# entry is the primary weighting: its similarity edges are exported and its partition is the
+# clusters[] list; the others only decide `robust` (membership held across all weightings).
+#   sim = w_m * mechanism_score + w_p * phenotype_overlap - w_c * conflict_penalty
+weightings:
+  - {name: balanced, w_m: 0.5, w_p: 0.4, w_c: 0.6}
+  - {name: phenotype_heavy, w_m: 0.35, w_p: 0.55, w_c: 0.6}
+  - {name: mechanism_heavy, w_m: 0.6, w_p: 0.25, w_c: 0.5}
+
+similarity:
+  # A pair becomes a similar_to edge only when its score reaches min_score ...
+  # Two diseases that merely share a pathway set (every component but shared_pathway at 0) score
+  # w_m * 1/3 (0.167 at the primary weighting); min_score sits above that so an edge always needs
+  # mechanism agreement or phenotype overlap on top. At 0.15 the slice collapsed into one hairball
+  # per seed gene because almost every disease reaches the same seed-gene pathways.
+  min_score: 0.2
+  # ... and the edge is among the top_k_per_disease highest-scoring edges of EITHER endpoint
+  # (0 disables the cap; a null keeps the module default, 10).
+  top_k_per_disease: 10
+  # mechanism_score is the mean of these components, each in [0, 1]:
+  #   same_direction  1 when the two diseases share a mechanism direction (GoF / LoF / DN), else 0
+  #   same_origin     1 when both origins are known and shared, unknown_origin_score when either
+  #                   is unknown, 0 when both are known and disjoint
+  #   shared_pathway  Jaccard of the pathway sets reached through the diseases' associated genes
+  #                   (associated_with -> in_pathway); 0 when either set is empty
+  mechanism_components: [same_direction, same_origin, shared_pathway]
+  # 0: an unknown origin is no evidence of a shared origin (symmetric with same_direction, which
+  # is 0 when either disease has no mechanism). A positive value here lets a disease of unknown
+  # origin bridge germline and somatic diseases, which the germline_vs_somatic penalty cannot see.
+  unknown_origin_score: 0.0
+  # Phenotype sets are closed upward through Phenotype is_a edges (child -> parent) before the
+  # information-content-weighted Jaccard is taken ("ancestors"); "none" compares the annotated
+  # terms only.
+  phenotype_closure: ancestors
+  # Weight of a phenotype whose node carries no props.ic (0 = it does not count).
+  ic_missing_weight: 0.0
+  # Mechanism directions that oppose each other: a gain direction on one disease against a loss
+  # direction on the other is an "opposite direction" (see conflict below).
+  gain_directions: [GoF]
+  loss_directions: [LoF, DN]
+  # Disease-gene associations carrying any of these attributes.labels are ignored when the
+  # pathway sets are built (the backbone loader keeps sub-threshold associations for display).
+  association_exclude_labels: [below_score_threshold]
+  # How many shared phenotypes (highest IC first) are listed in confidence_basis.
+  top_shared_phenotypes: 5
+
+# conflict_penalty = sum(weight * component); each component is 0 or 1 for the pair:
+#   opposite_direction_same_gene     one disease has a gain-direction mechanism on a gene and the
+#                                    other a loss-direction mechanism on the SAME gene
+#   opposite_direction_same_pathway  opposite directions (any genes) and shared_pathway > 0
+#   germline_vs_somatic              both origins known and disjoint (germline vs somatic)
+# The ablation (README section 6) sets all three weights to 0.
+conflict:
+  opposite_direction_same_gene: 1.0
+  opposite_direction_same_pathway: 0.5
+  germline_vs_somatic: 1.0
+
+clustering:
+  method: leiden
+  objective: modularity
+  resolution: 1.0
+  seed: 7
+  # Leiden iterations per run; -1 iterates until no further improvement (still deterministic
+  # under the seed above).
+  n_iterations: -1
+  # A primary cluster is `robust` when its member set has Jaccard >= robust_min_jaccard with some
+  # cluster of EVERY other weighting's partition.
+  robust_min_jaccard: 0.8
+  # Candidate diseases with no similarity edge become one-member clusters (clusters are a
+  # partition over Disease nodes, pipeline/models.py "Clusters").
+  singleton_clusters: true
+  # Penalised pairs (score < 0: the conflict penalty outweighs the similarity) carry no edge, and
+  # they also REPEL: Leiden is optimised over the positive edges (layer weight +1) and the
+  # penalised pairs (layer weight -repulsion_weight, weight = -score), leidenalg's negative-links
+  # recipe. Without this, two conflicting diseases can still be pulled into one cluster through
+  # third diseases that resemble both. 0 switches the signed layer off. The ablation (conflict
+  # weights 0) produces no penalised pairs, so it also runs without the layer.
+  repulsion_weight: 1.0
+
+rules:
+  # Drug inhibiting a gene (or a pathway containing it) linked to a disease whose mechanism on
+  # that gene is a loss direction: Drug -> Disease `treats`, status inferred_unsupported,
+  # reason "direction mismatch".
+  direction_mismatch:
+    confidence: 0.1
+    loss_directions: [LoF, DN]
+  # Same scan for gain-direction mechanisms with no existing treats edge: a labelled hypothesis
+  # (status supported, evidence_class inferred, never a lead).
+  direction_match_candidate:
+    confidence: 0.3
+    enabled: true
+    # Mechanism directions an inhibitor opposes (the "gain" side of the scan).
+    gain_directions: [GoF]
+  # When enabled, a drug that inhibits a pathway also counts as inhibiting every gene in it, at
+  # confidence * confidence_factor.
+  pathway_level:
+    enabled: true
+    confidence_factor: 0.5
+  # Drug -> Disease relations that mean the graph already speaks about the pair (any evidence
+  # class): neither rule adds an edge where one exists. Edges an earlier rules run emitted
+  # (sources[].id "rules:*") never count, so re-running over the rules' own output is idempotent.
+  existing_treatment_relations: [treats, indicated_for, contraindicated_for]
+
+candidates:
+  # Similarity and clustering run over Disease nodes that have >= 1 has_mechanism edge or >= 1
+  # has_phenotype edge to a Phenotype carrying props.ic. When false every Disease node is a
+  # candidate.
+  require_mechanism_or_phenotype: true
+  # Hard cap on the candidate set (pairwise scoring is O(n^2)). When exceeded, mechanism-bearing
+  # diseases are kept first, then the highest-degree diseases (edges touching the node), ties by
+  # id; the drop is recorded in the run report.
+  max_diseases: 400

@@ -1,5 +1,5 @@
 {
-  "built_at": "2026-10-04T01:45:51+00:00",
+  "built_at": "2026-10-04T02:33:24+00:00",
   "thresholds": {
     "disease_gene_min_score": 0.3,
     "keep_disgenet_direct": true,
@@ -21,7 +21,7 @@
     "max_drugs_per_disease": 25
   },
   "mechanisms": {
-    "diseases_considered": 643,
+    "diseases_considered": 644,
     "diseases_with_associated_genes": 643,
     "assignments": 14,
     "mechanism_nodes": 9,
@@ -179,7 +179,7 @@
         "recessive infection susceptibility": []
       }
     },
-    "coverage_rows": 642,
+    "coverage_rows": 643,
     "thresholds": {
       "disease_gene_min_score": 0.3,
       "keep_disgenet_direct": true,
@@ -364,37 +364,67 @@
         "inferred->extracted": 2,
         "observed": 6
       },
-      "investigator_edges": 5067
+      "investigator_edges": 860
     },
     "mechanism_nodes_created": [
       "mech:JAK1:GoF",
       "mech:JAK3:GoF",
       "mech:TYK2:GoF"
     ],
-    "mechanism_nodes_created_without_edges": [],
+    "mechanism_nodes_created_without_edges": [
+      "mech:TYK2:GoF"
+    ],
+    "variant_mechanism_routes": {
+      "clinvar:1019308": [
+        "mech:STAT1:GoF"
+      ],
+      "clinvar:137869": [
+        "mech:TYK2:LoF"
+      ],
+      "clinvar:144005": [
+        "mech:STAT1:GoF"
+      ],
+      "clinvar:144006": [
+        "mech:STAT1:GoF"
+      ],
+      "clinvar:14662": [
+        "mech:JAK2:GoF:somatic"
+      ],
+      "clinvar:30085": [
+        "mech:STAT1:GoF"
+      ],
+      "clinvar:3776300": [
+        "mech:STAT1:GoF"
+      ],
+      "clinvar:650110": [
+        "mech:STAT1:GoF"
+      ]
+    },
     "papers": {
       "in_bundle": 243,
       "exported": 243,
       "preprints": 0
     },
     "investigators": {
-      "total": 2429,
-      "exported": 1638,
+      "total": 2363,
+      "exported": 97,
       "with_orcid": 339,
-      "min_papers": 1,
-      "below_min_papers": 0,
+      "merged_by_name": 66,
+      "ambiguous_names": {},
+      "min_papers": 3,
+      "below_min_papers": 2266,
       "merged_into_existing_nodes": 0,
       "skipped_id_collision": 0,
       "skipped_nameless": 0,
-      "author_of_edges": 2101,
-      "publishes_on_edges": 2966
+      "author_of_edges": 448,
+      "publishes_on_edges": 412
     },
     "scrubbed": {
-      "emails": 0,
+      "emails": 302,
       "phones": 0,
-      "dose_fields_changed": 380
+      "dose_fields_changed": 3
     },
-    "scrubbed_emails": 0,
+    "scrubbed_emails": 302,
     "coverage_rows": 1005
   },
   "patient_groups": {
@@ -426,10 +456,10 @@
     },
     "inclusion_rule": "direct source in [CLINGEN, DISGENET, OMIM, ORPHANET] and evidence_score >= 0.3, or evidence_score >= 0.6",
     "nodes_before": {
-      "Disease": 643,
+      "Disease": 644,
       "Drug": 2038,
       "Gene": 2688,
-      "Investigator": 1788,
+      "Investigator": 247,
       "Mechanism": 12,
       "Paper": 243,
       "Pathway": 335,
@@ -440,10 +470,10 @@
       "Variant": 6521
     },
     "nodes_after": {
-      "Disease": 146,
-      "Drug": 104,
-      "Gene": 240,
-      "Investigator": 203,
+      "Disease": 147,
+      "Drug": 107,
+      "Gene": 248,
+      "Investigator": 209,
       "Mechanism": 11,
       "Paper": 243,
       "Pathway": 335,
@@ -456,18 +486,18 @@
     "nodes_dropped": {
       "Disease": {
         "n": 497,
-        "reason": "not anchored by a seed gene (inclusion rule / max_diseases_per_seed_gene), a seed term or an evidence edge"
+        "reason": "not anchored by a seed gene (inclusion rule / max_diseases_per_seed_gene), a seed term, an evidence edge or a claim"
       },
       "Drug": {
-        "n": 1934,
-        "reason": "no edge to a seed gene, no seed drug term, not referenced by evidence"
+        "n": 1931,
+        "reason": "no edge to a seed gene, no seed drug term, not referenced by evidence or a claim"
       },
       "Gene": {
-        "n": 2448,
-        "reason": "not a seed gene, not referenced by evidence, beyond max_genes_per_disease or below the inclusion rule"
+        "n": 2440,
+        "reason": "not a seed gene, not referenced by evidence or a claim, beyond max_genes_per_disease or below the inclusion rule"
       },
       "Investigator": {
-        "n": 1585,
+        "n": 38,
         "reason": "no surviving edge, or fewer than min_papers_per_investigator (3) papers"
       },
       "Mechanism": {
@@ -485,7 +515,7 @@
     },
     "edges_before": {
       "associated_with": 17949,
-      "author_of": 2101,
+      "author_of": 448,
       "contraindicated_for": 210,
       "covers": 1,
       "evaluates": 76,
@@ -499,9 +529,9 @@
       "in_pathway": 552,
       "indicated_for": 5771,
       "inhibits": 94,
-      "is_a": 3847,
+      "is_a": 3848,
       "modulates": 6,
-      "publishes_on": 2966,
+      "publishes_on": 412,
       "studies": 74,
       "supports_community": 16,
       "targets": 30,
@@ -509,22 +539,22 @@
       "variant_of": 7153
     },
     "edges_after": {
-      "associated_with": 2068,
-      "author_of": 395,
+      "associated_with": 2084,
+      "author_of": 448,
       "covers": 1,
       "evaluates": 76,
       "has_clinical_course": 32,
       "has_condition": 725,
-      "has_funded_project": 355,
+      "has_funded_project": 356,
       "has_inheritance": 54,
       "has_mechanism": 30,
       "has_phenotype": 678,
       "in_pathway": 552,
-      "indicated_for": 356,
+      "indicated_for": 366,
       "inhibits": 94,
-      "is_a": 1558,
+      "is_a": 1559,
       "modulates": 6,
-      "publishes_on": 368,
+      "publishes_on": 412,
       "studies": 74,
       "supports_community": 16,
       "targets": 30,
@@ -532,59 +562,61 @@
       "variant_of": 622
     },
     "edges_dropped_by_relation": {
-      "associated_with": 15881,
-      "author_of": 1706,
+      "associated_with": 15865,
       "contraindicated_for": 210,
       "has_clinical_course": 48,
       "has_clinical_modifier": 1,
       "has_condition": 7171,
-      "has_funded_project": 183,
+      "has_funded_project": 182,
       "has_inheritance": 94,
       "has_mechanism": 1,
       "has_phenotype": 779,
-      "indicated_for": 5415,
+      "indicated_for": 5405,
       "is_a": 2289,
-      "publishes_on": 2598,
       "variant_of": 6531
     },
     "associated_with_below_inclusion_rule": 7509,
     "diseases": {
       "direct_via_seed_genes": 82,
       "capped_away_per_seed_gene": 184,
-      "term_matched": 12,
+      "term_matched": 13,
       "anchored_by_evidence": 55,
-      "kept": 146
+      "claim_referenced": 33,
+      "kept": 147
     },
     "genes": {
       "seed": 7,
-      "anchored_by_evidence": 12,
+      "anchored_by_evidence": 22,
+      "claim_referenced": 18,
       "capped_away_per_disease": 1533,
-      "kept": 240
+      "kept": 248
     },
     "drugs": {
-      "kept": 104
+      "kept": 107,
+      "anchored_by_evidence": 45,
+      "claim_referenced": 12
     },
     "variants": {
       "kept": 610,
       "claim_referenced": 15
     },
     "investigators": {
-      "before": 1788,
-      "below_min_papers": 1547,
-      "kept": 203
+      "before": 247,
+      "below_min_papers": 0,
+      "kept": 209
     },
     "go_in_pathway_edges_dropped_non_seed_gene": 0
   },
   "counts": {
-    "nodes": 2884,
-    "edges": 8376,
+    "nodes": 2902,
+    "edges": 8501,
     "claims": 935,
-    "clusters": 116,
+    "clusters": 117,
     "nodes_by_type": {
-      "Disease": 146,
-      "Drug": 104,
-      "Gene": 240,
-      "Investigator": 203,
+      "Disease": 147,
+      "Drug": 107,
+      "Gene": 248,
+      "Investigator": 209,
       "Mechanism": 11,
       "Paper": 243,
       "Pathway": 335,
@@ -595,22 +627,22 @@
       "Variant": 610
     },
     "edges_by_relation": {
-      "associated_with": 2068,
-      "author_of": 395,
+      "associated_with": 2084,
+      "author_of": 448,
       "covers": 1,
       "evaluates": 76,
       "has_clinical_course": 32,
       "has_condition": 725,
-      "has_funded_project": 355,
+      "has_funded_project": 356,
       "has_inheritance": 54,
       "has_mechanism": 30,
       "has_phenotype": 678,
       "in_pathway": 552,
-      "indicated_for": 356,
+      "indicated_for": 366,
       "inhibits": 94,
-      "is_a": 1558,
+      "is_a": 1559,
       "modulates": 6,
-      "publishes_on": 368,
+      "publishes_on": 412,
       "similar_to": 78,
       "studies": 74,
       "supports_community": 16,
@@ -620,14 +652,14 @@
     },
     "edges_by_evidence_class": {
       "extracted": 50,
-      "inferred": 637,
-      "observed": 7689
+      "inferred": 638,
+      "observed": 7813
     },
     "edges_by_status": {
       "contested": 2,
       "inferred_unsupported": 104,
       "small_n": 17,
-      "supported": 8253
+      "supported": 8378
     },
     "edges_by_label": {
       "below_score_threshold": 397,
@@ -638,7 +670,7 @@
       "direction_match": 97,
       "direction_mismatch": 104,
       "hypothesis": 97,
-      "inferred": 355,
+      "inferred": 356,
       "inferred_unsupported": 104,
       "promising": 29,
       "similarity": 78,
@@ -657,9 +689,9 @@
       "is_a_edges_child_ic_below_parent": 32
     },
     "coverage": {
-      "entities": 944,
-      "searches": 2497,
-      "zero_hit_searches": 1631,
+      "entities": 946,
+      "searches": 2502,
+      "zero_hit_searches": 1634,
       "by_source": {
         "ClinVar esearch": 11,
         "ClinVar esummary": 7,
@@ -681,12 +713,12 @@
         "NORD (rarediseases.org) — on-site search, MPN groups": 1,
         "NORD (rarediseases.org) — via web search engine, domain-restricted": 1,
         "OptimusKG biological_process_gene": 7,
-        "OptimusKG disease": 15,
-        "OptimusKG disease_disease": 146,
+        "OptimusKG disease": 16,
+        "OptimusKG disease_disease": 147,
         "OptimusKG disease_gene": 7,
-        "OptimusKG disease_phenotype": 146,
+        "OptimusKG disease_phenotype": 147,
         "OptimusKG drug": 5,
-        "OptimusKG drug_disease": 146,
+        "OptimusKG drug_disease": 147,
         "OptimusKG drug_gene": 7,
         "OptimusKG gene": 7,
         "OptimusKG pathway_gene": 7,
@@ -697,7 +729,7 @@
         "Web search engine (general) — SCID group resolution": 1,
         "build prune": 73,
         "claims.json endpoint": 1005,
-        "mechanism rules": 146,
+        "mechanism rules": 147,
         "patient_groups.yaml disease term": 16,
         "pubmed": 24
       }
@@ -741,15 +773,15 @@
     ]
   },
   "sizes": {
-    "total_bytes": 7698486,
-    "total_mb": 7.7,
+    "total_bytes": 7788830,
+    "total_mb": 7.79,
     "nodes_by_type": {
-      "Disease": 81911,
-      "Drug": 49831,
-      "Gene": 73628,
-      "Investigator": 260682,
+      "Disease": 82658,
+      "Drug": 51751,
+      "Gene": 76089,
+      "Investigator": 279086,
       "Mechanism": 2107,
-      "Paper": 527505,
+      "Paper": 525739,
       "Pathway": 160962,
       "PatientGroup": 4764,
       "Phenotype": 313116,
@@ -758,22 +790,22 @@
       "Variant": 452711
     },
     "edges_by_relation": {
-      "associated_with": 1173012,
-      "author_of": 146727,
+      "associated_with": 1181638,
+      "author_of": 176312,
       "covers": 586,
       "evaluates": 54518,
       "has_clinical_course": 19082,
       "has_condition": 519615,
-      "has_funded_project": 300791,
+      "has_funded_project": 301623,
       "has_inheritance": 30152,
-      "has_mechanism": 39486,
-      "has_phenotype": 388146,
+      "has_mechanism": 39954,
+      "has_phenotype": 388081,
       "in_pathway": 262803,
-      "indicated_for": 209030,
+      "indicated_for": 214643,
       "inhibits": 54085,
-      "is_a": 593568,
+      "is_a": 593962,
       "modulates": 5392,
-      "publishes_on": 182782,
+      "publishes_on": 205287,
       "similar_to": 146964,
       "studies": 49212,
       "supports_community": 9010,
@@ -781,9 +813,9 @@
       "treats": 259677,
       "variant_of": 306521
     },
-    "claims": 405255,
-    "meta": 361027,
-    "graph_json_bytes": 7700156
+    "claims": 404079,
+    "meta": 361868,
+    "graph_json_bytes": 7790519
   },
   "edges_dropped_dangling": [],
   "edges_below_threshold": 1704,
@@ -793,6 +825,11 @@
     "edges_dropped_without_claims": []
   },
   "coverage_rows_dropped_for_pruned_entities": 7899,
+  "scrub_placeholders": {
+    "emails_removed": 36,
+    "phones_removed": 0,
+    "doses_removed": 93
+  },
   "claims": {
     "in_bundle": 935,
     "in_graph": 935,
@@ -1632,6 +1669,9 @@
       "Mendelian susceptibility to mycobacterial diseases": [
         "Orphanet:748"
       ],
+      "Autosomal dominant mendelian susceptibility to mycobacterial diseases due to a partial deficiency": [
+        "Orphanet:319543"
+      ],
       "T-B+ severe combined immunodeficiency due to JAK3 deficiency": [
         "MONDO:0010938"
       ],
@@ -1693,7 +1733,7 @@
   "graph_path": "/Users/jonathanyan/Desktop/projects/Pyrid/.claude/worktrees/lane-graph/data/build/graph.json",
   "store_path": "/Users/jonathanyan/Desktop/projects/Pyrid/.claude/worktrees/lane-graph/data/build/evidence.sqlite",
   "claims_bundle": "/Users/jonathanyan/Desktop/projects/Pyrid/.claude/worktrees/lane-graph/data/build/claims.json",
-  "offline": false,
+  "offline": true,
   "loaders": {
     "pipeline.sources.optimuskg": {
       "status": "ok",
@@ -1800,6 +1840,9 @@
             "Mendelian susceptibility to mycobacterial diseases": [
               "Orphanet:748"
             ],
+            "Autosomal dominant mendelian susceptibility to mycobacterial diseases due to a partial deficiency": [
+              "Orphanet:319543"
+            ],
             "T-B+ severe combined immunodeficiency due to JAK3 deficiency": [
               "MONDO:0010938"
             ],
@@ -1850,9 +1893,9 @@
         "diseases": {
           "passing_before_specificity": 830,
           "direct": 334,
-          "term_matched": 12,
+          "term_matched": 13,
           "parents": 307,
-          "included": 643
+          "included": 644
         },
         "disease_gene_rows": {
           "before_cap": 436487,
@@ -1869,13 +1912,13 @@
         },
         "nodes_by_type": {
           "Gene": 2688,
-          "Disease": 643,
+          "Disease": 644,
           "Phenotype": 1968,
           "Pathway": 335,
           "Drug": 2038
         },
         "edges_by_relation": {
-          "is_a": 3847,
+          "is_a": 3848,
           "associated_with": 17949,
           "has_inheritance": 148,
           "has_phenotype": 1444,
@@ -1946,7 +1989,7 @@
           "DRUG_CENTRAL": {
             "version": "",
             "license": "UNVERIFIED (per-source terms not fetched; docs/optimuskg-spike.md section 5)",
-            "direct": 2106,
+            "direct": 2107,
             "indirect": 0
           },
           "EMA": {
@@ -2000,13 +2043,13 @@
           "MONDO": {
             "version": "",
             "license": "UNVERIFIED (per-source terms not fetched; docs/optimuskg-spike.md section 5)",
-            "direct": 643,
+            "direct": 644,
             "indirect": 0
           },
           "OPEN_TARGETS": {
             "version": "",
             "license": "UNVERIFIED (per-source terms not fetched; docs/optimuskg-spike.md section 5)",
-            "direct": 34566,
+            "direct": 34568,
             "indirect": 0
           },
           "ORPHANET": {
@@ -2070,23 +2113,23 @@
           }
         },
         "cleared_previous_run": {
-          "nodes": 7672,
-          "edges": 30126,
-          "coverage": 1984
+          "nodes": 7673,
+          "edges": 30127,
+          "coverage": 1988
         },
         "timings_s": {
-          "clear_previous": 0.518,
-          "genes": 1.007,
-          "disease_gene_seed": 0.679,
-          "disease_terms": 0.158,
-          "diseases": 0.194,
-          "disease_gene_included": 3.684,
-          "phenotypes": 0.218,
-          "pathways": 0.062,
-          "drugs": 0.755,
-          "write": 0.365,
-          "resolve_files": 0.317,
-          "total": 8.023
+          "clear_previous": 0.469,
+          "genes": 1.009,
+          "disease_gene_seed": 0.7,
+          "disease_terms": 0.162,
+          "diseases": 0.201,
+          "disease_gene_included": 3.938,
+          "phenotypes": 0.227,
+          "pathways": 0.064,
+          "drugs": 0.862,
+          "write": 0.376,
+          "resolve_files": 0.311,
+          "total": 8.393
         }
       }
     },
@@ -2237,7 +2280,7 @@
         "requests": 87,
         "requests_from_cache": 87,
         "backbone_present": true,
-        "elapsed_s": 2.84
+        "elapsed_s": 2.96
       }
     },
     "pipeline.sources.ctgov": {
@@ -2912,18 +2955,18 @@
         "grants_with_pmids": 92,
         "errors": [],
         "retrieved_at": "2026-10-03T21:41:37+00:00",
-        "seconds": 27.59
+        "seconds": 27.66
       }
     }
   },
   "store_counts": {
-    "nodes": 14397,
-    "edges": 45862,
-    "coverage": 8622,
+    "nodes": 14398,
+    "edges": 45863,
+    "coverage": 8626,
     "sources": 5,
     "hpo_ic": 19677,
     "nodes_by_type": {
-      "Disease": 643,
+      "Disease": 644,
       "Drug": 2038,
       "Gene": 2688,
       "Investigator": 150,
@@ -2945,7 +2988,7 @@
       "in_pathway": 552,
       "indicated_for": 5771,
       "inhibits": 94,
-      "is_a": 3847,
+      "is_a": 3848,
       "studies": 74,
       "targets": 30,
       "variant_of": 7153
@@ -3164,14 +3207,14 @@
     }
   ],
   "timings_seconds": {
-    "pipeline.sources.optimuskg": 8.023,
-    "pipeline.sources.hpo": 0.58,
-    "pipeline.sources.clinvar": 2.859,
-    "pipeline.sources.ctgov": 0.164,
-    "pipeline.sources.reporter": 27.591,
-    "build": 3.673,
-    "graph_logic": 1.098,
-    "write_and_reload": 0.215,
-    "total": 44.256
+    "pipeline.sources.optimuskg": 8.393,
+    "pipeline.sources.hpo": 0.626,
+    "pipeline.sources.clinvar": 2.985,
+    "pipeline.sources.ctgov": 0.173,
+    "pipeline.sources.reporter": 27.66,
+    "build": 3.723,
+    "graph_logic": 1.174,
+    "write_and_reload": 0.225,
+    "total": 45.005
   }
 }

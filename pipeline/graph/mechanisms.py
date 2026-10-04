@@ -31,13 +31,20 @@ R2  Origin from the same text: somatic / acquired / clonal -> ``somatic``; autos
 R3  Literature claims (``data/build/claims.json``, :class:`pipeline.models.ClaimsBundle`) with
     predicate ``has_mechanism`` whose subject is a Disease or Variant node in the store and whose
     object is a mechanism id add or upgrade the edge to ``evidence_class: extracted`` with the
-    claim confidence rubric and supporting / contradicting lists.
+    claim confidence rubric and supporting / contradicting lists. When the upgraded edge was a
+    curated R4 edge, :func:`strip_curated_provenance` removes what only the seed row asserted
+    (``attributes.reason``, a seed-only ``attributes.origin``, the seed record in ``sources``,
+    kept under ``confidence_basis.db_text.seed_record``) so nothing curated surfaces as sourced
+    (hard rule 10); :mod:`pipeline.graph.evidence` applies the same helper on its own upgrade path.
 R4  Curated fallback (``pipeline/seeds/mechanisms.yaml``), only for a (disease, gene) pair that
     R1-R3 left without a mechanism and only when the store associates that gene with that disease:
     ``evidence_class: inferred``, confidence 0.4, ``attributes.labels ["curated_unverified"]``,
     ``attributes.reason "curated seed from cluster doc (<tag>)"``. The asserting source of such an
     edge is the seed file (``sources[0]`` = ``"<seed source> <GENE>:<DIR>"`` dated
-    ``transcribed_at``), the disease record it attaches to is listed second. A seed
+    ``transcribed_at``), the disease record it attaches to is listed second. The seed supplies the
+    direction; the ORIGIN is read from the disease's own text first (R2, recorded as
+    ``origin_rule`` / ``origin_source: "disease text"``) and taken from the seed row only when the
+    text decides nothing (``origin_source: "seed row"``). A seed
     ``disease_terms`` entry is a name or a mapping ``{term, from}``; ``from`` (where the wording
     was seen) is copied into ``confidence_basis.disease_term_from``. When R1 already assigned the
     same gene a different direction the curated row is NOT applied and a coverage row says so.
@@ -74,6 +81,7 @@ __all__ = [
     "CLAIMS_SOURCE",
     "CURATED_CONFIDENCE",
     "CURATED_LABEL",
+    "CURATED_RULE",
     "DIRECTION_LABEL",
     "MechanismResult",
     "REL_ASSOCIATED_WITH",
@@ -86,6 +94,8 @@ __all__ = [
     "derive_mechanisms",
     "mechanism_label",
     "resolve_terms",
+    "seed_source_record",
+    "strip_curated_provenance",
 ]
 
 REL_ASSOCIATED_WITH = "associated_with"
@@ -94,6 +104,8 @@ RULE_SOURCE = "mechanism rules"  # coverage source and source_db of R1/R2/R4 edg
 CLAIMS_SOURCE = "claims"  # source_db of edges that exist only because of R3
 CURATED_CONFIDENCE = 0.4
 CURATED_LABEL = "curated_unverified"
+CURATED_RULE = "R4.curated"  # confidence_basis.rule of a curated fallback edge
+CURATED_SEED_FALLBACK_NAME = "curated mechanism seeds"  # seed record name when the seed file has no ``source``
 TEXT_RULE_CONFIDENCE_ONE_FIELD = 0.6
 TEXT_RULE_CONFIDENCE_BOTH_FIELDS = 0.7
 VARIANT_SPECIFIC_LABEL = "variant_specific"
@@ -262,6 +274,40 @@ def _disease_fields(node: Mapping[str, Any]) -> list[tuple[str, str]]:
     if isinstance(description, str) and description.strip():
         fields.append((DESCRIPTION_FIELD, description))
     return fields
+
+
+def seed_source_record(seed_source: str, symbol: str, direction: str, seed_date: str) -> dict[str, str]:
+    """The ``Edge.sources`` entry that names the curated seed row as the asserting source of an
+    R4 edge: ``"<seed source> <GENE>:<DIR>"`` dated by the seed file's transcription date."""
+    return {"kind": "db", "id": f"{seed_source or CURATED_SEED_FALLBACK_NAME} {symbol}:{direction}", "date": seed_date}
+
+
+def strip_curated_provenance(edge: dict[str, Any], prior_basis: dict[str, Any]) -> dict[str, Any]:
+    """Hard rule 10 on upgrade: when a curated (R4) ``inferred`` edge becomes ``extracted`` because
+    a claim supports it, the seed-only attributes must not survive as if they were sourced.
+    ``attributes.reason`` ("curated seed from cluster doc ...") is removed; ``attributes.origin``
+    is kept only when the mechanism id itself is somatic or a text rule (``prior_basis.origin_rule``,
+    R1/R2) supplied it, never when the seed row alone did; the seed record leaves ``sources`` (which
+    then lists only retrieved records: the disease record and the papers) and is kept in
+    ``prior_basis["seed_record"]`` so the provenance stays auditable. Mutates and returns ``edge``.
+    A non-curated prior basis is left alone."""
+    if prior_basis.get("rule") != CURATED_RULE:
+        return edge
+    attributes = edge.setdefault("attributes", {})
+    attributes.pop("reason", None)
+    parsed = parse_mechanism_id(str(edge.get("target", "")))
+    somatic = bool(parsed and parsed[2])
+    if not somatic and not prior_basis.get("origin_rule"):
+        attributes.pop("origin", None)
+    prefix = f"{prior_basis.get('seed_source') or CURATED_SEED_FALLBACK_NAME} "
+    kept: list[dict[str, Any]] = []
+    for s in edge.get("sources") or []:
+        if s.get("kind") == "db" and str(s.get("id", "")).startswith(prefix) and "seed_record" not in prior_basis:
+            prior_basis["seed_record"] = dict(s)
+        else:
+            kept.append(s)
+    edge["sources"] = kept
+    return edge
 
 
 def mechanism_label(symbol: str, direction: str, somatic: bool) -> str:
@@ -616,7 +662,7 @@ def derive(store: Any, seeds: Mapping[str, Any], claims_bundle: Any = None, *, n
                     gap(disease_id, f"mechanism: curated {symbol} {direction} skipped, store does not associate {symbol} with {diseases[disease_id]['label']}")
                     continue
                 basis = {
-                    "rule": "R4.curated",
+                    "rule": CURATED_RULE,
                     "seed_source": seed_source,
                     "seed_row": {k: row[k] for k in ("gene", "direction", "origin", "cluster_doc_confidence", "note") if k in row},
                     "disease_term": term,
@@ -625,10 +671,21 @@ def derive(store: Any, seeds: Mapping[str, Any], claims_bundle: Any = None, *, n
                 }
                 if term_from.get(term):
                     basis["disease_term_from"] = term_from[term]
+                # The seed supplies the DIRECTION; the ORIGIN is read from the disease's own text
+                # first (R2, a database fact that survives a later upgrade) and from the seed row
+                # only when the text decides nothing (seed-only: dropped if a claim upgrades the edge).
+                text_origin, origin_matches, _origin_problem = _decide(_find_matches(_disease_fields(diseases[disease_id]), "origin"), "origins")
+                if text_origin is not None:
+                    o = _match_summary(origin_matches)
+                    basis.update({"origin_rule": o["rule"], "origin_matched_text": o["matched_text"], "origin_field": o["field"], "origin_source": "disease text"})
+                    edge_origin: str | None = text_origin
+                else:
+                    edge_origin = origin if origin in ("germline", "somatic") else None
+                    basis.update({"origin_rule": None, "origin_source": "seed row" if edge_origin else None})
                 attributes = {"labels": [CURATED_LABEL], "reason": f"curated seed from cluster doc ({tag})"}
-                if origin in ("germline", "somatic"):
-                    attributes["origin"] = origin
-                a = _Assignment(disease_id, gene, direction, origin if origin in ("germline", "somatic") else None, "inferred", conf_rubric.cap_inferred(CURATED_CONFIDENCE), basis, attributes)
+                if edge_origin:
+                    attributes["origin"] = edge_origin
+                a = _Assignment(disease_id, gene, direction, edge_origin, "inferred", conf_rubric.cap_inferred(CURATED_CONFIDENCE), basis, attributes)
                 assignments[(disease_id, gene.id)] = a
                 curated.append(a)
                 by_rule["R4.curated"] += 1
@@ -659,7 +716,7 @@ def derive(store: Any, seeds: Mapping[str, Any], claims_bundle: Any = None, *, n
         disease_record = {"kind": "db", "id": str(backbone), "date": str(disease.get("retrieved_at") or stamp)}
         if a.evidence_class == "inferred":
             # The assertion comes from the curated seed file; the disease record only supplied the name match.
-            sources = [{"kind": "db", "id": f"{seed_source or 'curated mechanism seeds'} {a.gene.symbol}:{a.direction}", "date": seed_date}, disease_record]
+            sources = [seed_source_record(seed_source, a.gene.symbol, a.direction, seed_date), disease_record]
         else:
             sources = [disease_record]
         edges[(disease_id, mech_id, a.source_db)] = {
@@ -710,17 +767,25 @@ def derive(store: Any, seeds: Mapping[str, Any], claims_bundle: Any = None, *, n
         claim_basis = {"rule": "R3.claims", "claims": per_claim, **status_basis}
         sources = _claim_sources(claims, papers, claims_bundle.extracted_at)
         if existing is not None:
+            prior_basis = dict(existing["confidence_basis"])
+            if supporting and existing["evidence_class"] == "inferred":
+                # a supporting claim verifies a curated seed: seed-only reason / origin / source go (hard rule 10)
+                strip_curated_provenance(existing, prior_basis)
             existing["evidence_class"] = "extracted"
             existing["confidence"] = max(float(existing["confidence"]), claim_conf)
-            existing["confidence_basis"] = {**claim_basis, "db_text": existing["confidence_basis"]}
+            existing["confidence_basis"] = {**claim_basis, "db_text": prior_basis}
             existing["sources"] = existing["sources"] + [s for s in sources if s not in existing["sources"]]
             existing["supporting"] = [c.id for c in supporting]
             existing["contradicting"] = [c.id for c in contradicting]
             existing["status"] = status
             attrs = existing["attributes"]
             merged = list(attrs.get("labels", [])) + [l for l in labels if l not in attrs.get("labels", [])]
+            if supporting:  # a supporting claim verifies a curated seed: the edge is extracted, not curated_unverified
+                merged = [l for l in merged if l != CURATED_LABEL]
             if merged:
                 attrs["labels"] = merged
+            else:
+                attrs.pop("labels", None)
             if "preprint" in labels:
                 attrs["preprint"] = True
         else:

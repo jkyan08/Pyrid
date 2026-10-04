@@ -137,7 +137,16 @@ _RANGE = rf"{_NUM}(?:\s*(?:-|–|to)\s*{_NUM})?"
 # spell it). Multi-letter units are case-insensitive; longest spellings first.
 _UNITS_ATTACHED = (
     r"(?i:international\s+units?|milligrams?|micrograms?|millilit(?:er|re)s?|grams?|units?|tablets?|capsules?|"
-    r"mcg|µg|μg|ug|mg|ml|iu)|%"
+    r"mcg|µg|μg|ug|mg|ml|iu)"
+)
+# A bare percentage is a statistic ("comprises about 5% of cases", "response in 40% of patients"),
+# not a dose, and stays. A percentage IS a dose when it states the strength of a formulation
+# ("0.1% ointment", "2% cream", "0.1% tacrolimus ointment", "5 % w/v solution"): number, %,
+# optional w/v / v/v, up to three words (drug or route name), then a formulation word.
+_PERCENT_FORMULATION = (
+    rf"(?<![A-Za-z0-9.:_/-])(?:{_RANGE})\s*%\s*(?:\(?[wv]/[wv]\)?\s*)?"
+    r"(?:[A-Za-z][A-Za-z-]*\s+){0,3}"
+    r"(?i:cream|ointment|gel|solution|lotion|drops|spray|foam|shampoo|paste|suspension|emulsion|infusion)\b"
 )
 # Single-letter units need whitespace before them and stay case-sensitive, so HGVS bases
 # ("c.1915-11G>A"), gene names ("IL2RG") and "the 3 G proteins" are never mistaken for a dose.
@@ -156,14 +165,16 @@ _FREQUENCY = (
     # "q8h" / "q12h" stay lower-case only: an upper-case Q<pos>H is a Gln->His protein-change token.
     r"|\bq\d{1,3}h\b"
 )
-_DOSE_RE = re.compile(f"{_DOSE_AMOUNT}|{_FREQUENCY}")
+_DOSE_RE = re.compile(f"{_DOSE_AMOUNT}|{_PERCENT_FORMULATION}|{_FREQUENCY}")
 _PLACEHOLDER_RUN = re.compile(rf"{re.escape(DOSE_PLACEHOLDER)}(?:[\s,;/]+{re.escape(DOSE_PLACEHOLDER)})+")
 
 
 def scrub_doses(text: Any) -> Any:
-    """Replace dose amounts (``5 mg``, ``10 mg/kg/day``, ``200 IU``, ``2.5%``, ``5-10 mg``) and dosing
-    frequencies (``twice daily``, ``every 2 weeks``, ``BID``, ``q8h``) with ``[dose removed]``.
-    Non-string input is returned unchanged. Consecutive placeholders collapse into one."""
+    """Replace dose amounts (``5 mg``, ``10 mg/kg/day``, ``200 IU``, ``5-10 mg``), formulation
+    strengths (``0.1% ointment``, ``2% cream``) and dosing frequencies (``twice daily``, ``every 2
+    weeks``, ``BID``, ``q8h``) with ``[dose removed]``. A bare percentage ("about 5% of cases") is a
+    statistic, not a dose, and is left alone. Non-string input is returned unchanged. Consecutive
+    placeholders collapse into one."""
     if not isinstance(text, str) or not text:
         return text
     out = _DOSE_RE.sub(DOSE_PLACEHOLDER, text)

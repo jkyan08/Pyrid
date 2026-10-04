@@ -1277,3 +1277,38 @@ def test_live_metadata_lists_every_needed_file() -> None:
     assert set(NEEDED_FILES) <= set(info.files)
     assert all(len(info.files[p].md5) == 32 for p in NEEDED_FILES)
     assert info.license_name
+
+
+# --------------------------------------------------------------------------------------
+# export inclusion rule (shared with pipeline.graph.build.prune_graph)
+# --------------------------------------------------------------------------------------
+
+
+@pytest.mark.parametrize(
+    ("props", "expected"),
+    [
+        ({"evidence_score": 0.8, "sources": OT_DISGENET}, True),  # curated and above the floor
+        ({"evidence_score": 0.35, "sources": DISGENET_ONLY}, True),  # curated, just above the floor
+        ({"evidence_score": 0.1, "sources": DISGENET_ONLY}, False),  # curated but below the floor
+        ({"evidence_score": 0.5, "sources": OT}, False),  # above the floor, not curated, below the high score
+        ({"evidence_score": 0.6, "sources": OT}, True),  # the high score admits an edge on its own
+        ({"evidence_score": 0.9}, True),  # no sources at all, high score
+        ({"evidence_score": 0.4, "sources": {"direct": ["orphanet"], "indirect": []}}, True),  # names compare case-insensitively
+        ({"evidence_score": 0.4, "sources": ["CLINGEN"]}, True),  # a plain list counts as direct sources
+        ({"evidence_score": 0.4, "sources": {"direct": [], "indirect": ["DISGENET"]}}, False),  # indirect sources do not count
+        ({}, True),  # not an OptimusKG aggregate (no score): included
+        ({"evidence_score": "not a number"}, True),
+    ],
+)
+def test_disease_gene_included_rule(props: dict[str, Any], expected: bool) -> None:
+    assert optimuskg.disease_gene_included(props, {"disease_gene_min_score": 0.3, "disease_gene_high_score": 0.6}) is expected
+    assert optimuskg.disease_gene_included(props) is expected, "the defaults are the documented thresholds"
+
+
+def test_disease_gene_included_reads_the_configured_sources_and_scores() -> None:
+    t = {"disease_gene_min_score": 0.2, "disease_gene_high_score": 0.95, "disease_gene_curated_sources": ["MOCK_CURATED"]}
+    assert optimuskg.disease_gene_included({"evidence_score": 0.25, "sources": {"direct": ["MOCK_CURATED"]}}, t) is True
+    assert optimuskg.disease_gene_included({"evidence_score": 0.9, "sources": DISGENET_ONLY}, t) is False, "DISGENET is no longer curated and 0.9 is below the high score"
+    assert optimuskg.inclusion_rule_text(t) == "direct source in [MOCK_CURATED] and evidence_score >= 0.2, or evidence_score >= 0.95"
+    assert optimuskg.inclusion_rule_text() == "direct source in [CLINGEN, DISGENET, OMIM, ORPHANET] and evidence_score >= 0.3, or evidence_score >= 0.6"
+    assert optimuskg.DEFAULT_CURATED_SOURCES == ("DISGENET", "ORPHANET", "CLINGEN", "OMIM") and optimuskg.DEFAULT_HIGH_SCORE == 0.6
