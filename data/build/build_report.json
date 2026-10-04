@@ -1,10 +1,21 @@
 {
-  "built_at": "2026-10-03T23:49:19+00:00",
+  "built_at": "2026-10-04T01:45:51+00:00",
   "thresholds": {
     "disease_gene_min_score": 0.3,
     "keep_disgenet_direct": true,
-    "max_pathway_members_to_expand": 0,
+    "disease_gene_curated_sources": [
+      "DISGENET",
+      "ORPHANET",
+      "CLINGEN",
+      "OMIM"
+    ],
+    "disease_gene_high_score": 0.6,
+    "max_diseases_per_seed_gene": 25,
+    "max_genes_per_disease": 5,
     "include_parent_levels": 1,
+    "min_papers_per_investigator": 3,
+    "keep_orcid_investigators": false,
+    "max_pathway_members_to_expand": 0,
     "disease_gene_most_specific": true,
     "max_other_genes_per_disease": 25,
     "max_drugs_per_disease": 25
@@ -14,15 +25,107 @@
     "diseases_with_associated_genes": 643,
     "assignments": 14,
     "mechanism_nodes": 9,
-    "mechanism_edges": 14,
+    "mechanism_edges": 23,
     "by_rule": {
       "R1.gof": 1,
       "R1.lof.deficiency": 7,
+      "R3.claims": 13,
       "R4.curated": 6
     },
     "curated_edges": 6,
-    "claim_edges": 0,
-    "claims_unlinked": [],
+    "claim_edges": 13,
+    "claims_unlinked": [
+      "c_000002",
+      "c_000014",
+      "c_000016",
+      "c_000017",
+      "c_000035",
+      "c_000045",
+      "c_000059",
+      "c_000066",
+      "c_000072",
+      "c_000074",
+      "c_000077",
+      "c_000078",
+      "c_000083",
+      "c_000102",
+      "c_000125",
+      "c_000129",
+      "c_000136",
+      "c_000141",
+      "c_000148",
+      "c_000165",
+      "c_000169",
+      "c_000178",
+      "c_000180",
+      "c_000189",
+      "c_000198",
+      "c_000202",
+      "c_000209",
+      "c_000214",
+      "c_000236",
+      "c_000247",
+      "c_000250",
+      "c_000266",
+      "c_000287",
+      "c_000288",
+      "c_000294",
+      "c_000333",
+      "c_000342",
+      "c_000347",
+      "c_000395",
+      "c_000403",
+      "c_000407",
+      "c_000429",
+      "c_000446",
+      "c_000456",
+      "c_000460",
+      "c_000461",
+      "c_000463",
+      "c_000468",
+      "c_000489",
+      "c_000510",
+      "c_000513",
+      "c_000514",
+      "c_000515",
+      "c_000528",
+      "c_000533",
+      "c_000535",
+      "c_000536",
+      "c_000548",
+      "c_000553",
+      "c_000566",
+      "c_000572",
+      "c_000576",
+      "c_000585",
+      "c_000592",
+      "c_000626",
+      "c_000651",
+      "c_000662",
+      "c_000681",
+      "c_000692",
+      "c_000705",
+      "c_000708",
+      "c_000733",
+      "c_000738",
+      "c_000739",
+      "c_000741",
+      "c_000761",
+      "c_000778",
+      "c_000788",
+      "c_000799",
+      "c_000815",
+      "c_000818",
+      "c_000827",
+      "c_000864",
+      "c_000867",
+      "c_000869",
+      "c_000870",
+      "c_000887",
+      "c_000922",
+      "c_000933",
+      "c_000935"
+    ],
     "seed_term_resolution": {
       "seed:mechanism:STAT1:GoF": {
         "chronic mucocutaneous candidiasis": [
@@ -80,6 +183,17 @@
     "thresholds": {
       "disease_gene_min_score": 0.3,
       "keep_disgenet_direct": true,
+      "disease_gene_curated_sources": [
+        "DISGENET",
+        "ORPHANET",
+        "CLINGEN",
+        "OMIM"
+      ],
+      "disease_gene_high_score": 0.6,
+      "max_diseases_per_seed_gene": 25,
+      "max_genes_per_disease": 5,
+      "min_papers_per_investigator": 3,
+      "keep_orcid_investigators": false,
       "max_pathway_members_to_expand": 0,
       "include_parent_levels": 1,
       "disease_gene_most_specific": true,
@@ -92,78 +206,507 @@
     "max": 0.9485794097813081,
     "how": "sources.notes of 'OptimusKG'"
   },
-  "counts": {
-    "nodes": 7681,
-    "edges": 30140,
-    "claims": 0,
-    "clusters": 0,
-    "nodes_by_type": {
+  "evidence": {
+    "how": "pipeline.graph.evidence.integrate_claims",
+    "claims": {
+      "in_bundle": 935,
+      "in_graph": 935,
+      "attached": 145,
+      "unattached": 790,
+      "unattached_reasons": {
+        "subject '...' unresolved (text)": 160,
+        "object '...' unresolved (text)": 254,
+        "subject '...' unresolved (text); object '...' unresolved (text)": 266,
+        "object '...' unresolved (missing)": 22,
+        "subject '...' unresolved (text); object '...' unresolved (missing)": 38,
+        "subject '...' unresolved (missing); object '...' unresolved (text)": 39,
+        "subject '...' unresolved (missing)": 4,
+        "only contradicting claims for CHEMBL:CHEMBL1789941 -modulates-> mech:JAK2:GoF:somatic and no existing edge": 1,
+        "only contradicting claims for CHEMBL:CHEMBL1789941 -treats-> EFO:0002430 and no existing edge": 1,
+        "only contradicting claims for CHEMBL:CHEMBL467 -treats-> EFO:0002429 and no existing edge": 1,
+        "no edge mapping for associated_with between Pathway and Disease": 1,
+        "only contradicting claims for CHEMBL:CHEMBL221959 -modulates-> mech:STAT1:GoF and no existing edge": 1,
+        "no edge mapping for has_mechanism between Gene and Mechanism": 2
+      },
+      "dropped_quote_mismatch_after_scrub": [],
+      "variant_cleared": [
+        "c_000232",
+        "c_000279",
+        "c_000281",
+        "c_000282",
+        "c_000288",
+        "c_000291",
+        "c_000329",
+        "c_000330",
+        "c_000331",
+        "c_000332",
+        "c_000333",
+        "c_000393",
+        "c_000394",
+        "c_000395",
+        "c_000411",
+        "c_000488",
+        "c_000489",
+        "c_000490",
+        "c_000491",
+        "c_000492",
+        "c_000543",
+        "c_000544",
+        "c_000545",
+        "c_000571",
+        "c_000572",
+        "c_000573",
+        "c_000574",
+        "c_000575",
+        "c_000589",
+        "c_000702",
+        "c_000765",
+        "c_000766",
+        "c_000767",
+        "c_000768",
+        "c_000787",
+        "c_000788",
+        "c_000789",
+        "c_000790",
+        "c_000797",
+        "c_000798",
+        "c_000799",
+        "c_000800",
+        "c_000801",
+        "c_000802",
+        "c_000803",
+        "c_000804",
+        "c_000827",
+        "c_000845",
+        "c_000846",
+        "c_000847",
+        "c_000848",
+        "c_000849",
+        "c_000871",
+        "c_000872",
+        "c_000873",
+        "c_000874",
+        "c_000875",
+        "c_000876",
+        "c_000920",
+        "c_000921",
+        "c_000922",
+        "c_000923",
+        "c_000924",
+        "c_000927",
+        "c_000929",
+        "c_000933",
+        "c_000934",
+        "c_000935"
+      ],
+      "contradicting_only_no_edge": 4
+    },
+    "endpoints": {
+      "resolved_by_prefix": {
+        "CHEMBL (bare)": 116,
+        "EFO": 74,
+        "HP": 36,
+        "MONDO": 205,
+        "Orphanet": 5,
+        "REACT": 1,
+        "clinvar": 33,
+        "ensembl": 36,
+        "mech": 238
+      },
+      "unresolved_by_prefix": {
+        "CHEMBL (bare)": 7,
+        "DRUGBANK": 1,
+        "EFO": 8,
+        "HP": 14,
+        "MONDO": 46,
+        "ensembl": 27,
+        "text": 1023
+      },
+      "resolution_how": {
+        "exact": 707,
+        "mechanism": 3,
+        "missing": 103,
+        "normalized": 116,
+        "text": 1091
+      },
+      "mapping_gaps": {
+        "associated_with: Pathway -> Disease": 1,
+        "has_mechanism: Gene -> Mechanism": 2
+      }
+    },
+    "edges": {
+      "created_by_relation": {
+        "has_condition": 1,
+        "has_mechanism": 8,
+        "has_phenotype": 13,
+        "modulates": 6,
+        "treats": 7
+      },
+      "upgraded_by_relation": {
+        "associated_with": 3,
+        "has_mechanism": 17,
+        "has_phenotype": 1
+      },
+      "created_by_predicate": {
+        "associated_with": 2,
+        "causes": 10,
+        "has_phenotype": 23,
+        "modulates": 8,
+        "treats": 29
+      },
+      "upgraded_by_predicate": {
+        "causes": 25,
+        "has_mechanism": 46,
+        "has_phenotype": 2
+      },
+      "upgrade_outcomes": {
+        "extracted": 13,
+        "inferred->extracted": 2,
+        "observed": 6
+      },
+      "investigator_edges": 5067
+    },
+    "mechanism_nodes_created": [
+      "mech:JAK1:GoF",
+      "mech:JAK3:GoF",
+      "mech:TYK2:GoF"
+    ],
+    "mechanism_nodes_created_without_edges": [],
+    "papers": {
+      "in_bundle": 243,
+      "exported": 243,
+      "preprints": 0
+    },
+    "investigators": {
+      "total": 2429,
+      "exported": 1638,
+      "with_orcid": 339,
+      "min_papers": 1,
+      "below_min_papers": 0,
+      "merged_into_existing_nodes": 0,
+      "skipped_id_collision": 0,
+      "skipped_nameless": 0,
+      "author_of_edges": 2101,
+      "publishes_on_edges": 2966
+    },
+    "scrubbed": {
+      "emails": 0,
+      "phones": 0,
+      "dose_fields_changed": 380
+    },
+    "scrubbed_emails": 0,
+    "coverage_rows": 1005
+  },
+  "patient_groups": {
+    "groups": 7,
+    "by_type": {
+      "PatientGroup": 6,
+      "Registry": 1
+    },
+    "edges": 17,
+    "terms_resolved": 15,
+    "terms_unresolved": 1,
+    "searches_logged": 13,
+    "zero_hit_searches": 12
+  },
+  "prune": {
+    "thresholds": {
+      "disease_gene_curated_sources": [
+        "DISGENET",
+        "ORPHANET",
+        "CLINGEN",
+        "OMIM"
+      ],
+      "disease_gene_high_score": 0.6,
+      "max_diseases_per_seed_gene": 25,
+      "max_genes_per_disease": 5,
+      "include_parent_levels": 1,
+      "min_papers_per_investigator": 3,
+      "keep_orcid_investigators": false
+    },
+    "inclusion_rule": "direct source in [CLINGEN, DISGENET, OMIM, ORPHANET] and evidence_score >= 0.3, or evidence_score >= 0.6",
+    "nodes_before": {
       "Disease": 643,
       "Drug": 2038,
       "Gene": 2688,
-      "Mechanism": 9,
+      "Investigator": 1788,
+      "Mechanism": 12,
+      "Paper": 243,
       "Pathway": 335,
-      "Phenotype": 1968
+      "PatientGroup": 6,
+      "Phenotype": 1968,
+      "Registry": 1,
+      "Study": 54,
+      "Variant": 6521
     },
-    "edges_by_relation": {
+    "nodes_after": {
+      "Disease": 146,
+      "Drug": 104,
+      "Gene": 240,
+      "Investigator": 203,
+      "Mechanism": 11,
+      "Paper": 243,
+      "Pathway": 335,
+      "PatientGroup": 6,
+      "Phenotype": 931,
+      "Registry": 1,
+      "Study": 54,
+      "Variant": 610
+    },
+    "nodes_dropped": {
+      "Disease": {
+        "n": 497,
+        "reason": "not anchored by a seed gene (inclusion rule / max_diseases_per_seed_gene), a seed term or an evidence edge"
+      },
+      "Drug": {
+        "n": 1934,
+        "reason": "no edge to a seed gene, no seed drug term, not referenced by evidence"
+      },
+      "Gene": {
+        "n": 2448,
+        "reason": "not a seed gene, not referenced by evidence, beyond max_genes_per_disease or below the inclusion rule"
+      },
+      "Investigator": {
+        "n": 1585,
+        "reason": "no surviving edge, or fewer than min_papers_per_investigator (3) papers"
+      },
+      "Mechanism": {
+        "n": 1,
+        "reason": "no surviving edge"
+      },
+      "Phenotype": {
+        "n": 1037,
+        "reason": "not annotated to an exported disease (nor an ancestor of one)"
+      },
+      "Variant": {
+        "n": 5911,
+        "reason": "not keep_in_graph, no somatic block, not referenced by a claim"
+      }
+    },
+    "edges_before": {
       "associated_with": 17949,
+      "author_of": 2101,
       "contraindicated_for": 210,
+      "covers": 1,
+      "evaluates": 76,
       "has_clinical_course": 80,
       "has_clinical_modifier": 1,
+      "has_condition": 7896,
+      "has_funded_project": 538,
       "has_inheritance": 148,
-      "has_mechanism": 14,
-      "has_phenotype": 1444,
+      "has_mechanism": 31,
+      "has_phenotype": 1457,
       "in_pathway": 552,
       "indicated_for": 5771,
       "inhibits": 94,
       "is_a": 3847,
-      "targets": 30
+      "modulates": 6,
+      "publishes_on": 2966,
+      "studies": 74,
+      "supports_community": 16,
+      "targets": 30,
+      "treats": 7,
+      "variant_of": 7153
+    },
+    "edges_after": {
+      "associated_with": 2068,
+      "author_of": 395,
+      "covers": 1,
+      "evaluates": 76,
+      "has_clinical_course": 32,
+      "has_condition": 725,
+      "has_funded_project": 355,
+      "has_inheritance": 54,
+      "has_mechanism": 30,
+      "has_phenotype": 678,
+      "in_pathway": 552,
+      "indicated_for": 356,
+      "inhibits": 94,
+      "is_a": 1558,
+      "modulates": 6,
+      "publishes_on": 368,
+      "studies": 74,
+      "supports_community": 16,
+      "targets": 30,
+      "treats": 7,
+      "variant_of": 622
+    },
+    "edges_dropped_by_relation": {
+      "associated_with": 15881,
+      "author_of": 1706,
+      "contraindicated_for": 210,
+      "has_clinical_course": 48,
+      "has_clinical_modifier": 1,
+      "has_condition": 7171,
+      "has_funded_project": 183,
+      "has_inheritance": 94,
+      "has_mechanism": 1,
+      "has_phenotype": 779,
+      "indicated_for": 5415,
+      "is_a": 2289,
+      "publishes_on": 2598,
+      "variant_of": 6531
+    },
+    "associated_with_below_inclusion_rule": 7509,
+    "diseases": {
+      "direct_via_seed_genes": 82,
+      "capped_away_per_seed_gene": 184,
+      "term_matched": 12,
+      "anchored_by_evidence": 55,
+      "kept": 146
+    },
+    "genes": {
+      "seed": 7,
+      "anchored_by_evidence": 12,
+      "capped_away_per_disease": 1533,
+      "kept": 240
+    },
+    "drugs": {
+      "kept": 104
+    },
+    "variants": {
+      "kept": 610,
+      "claim_referenced": 15
+    },
+    "investigators": {
+      "before": 1788,
+      "below_min_papers": 1547,
+      "kept": 203
+    },
+    "go_in_pathway_edges_dropped_non_seed_gene": 0
+  },
+  "counts": {
+    "nodes": 2884,
+    "edges": 8376,
+    "claims": 935,
+    "clusters": 116,
+    "nodes_by_type": {
+      "Disease": 146,
+      "Drug": 104,
+      "Gene": 240,
+      "Investigator": 203,
+      "Mechanism": 11,
+      "Paper": 243,
+      "Pathway": 335,
+      "PatientGroup": 6,
+      "Phenotype": 931,
+      "Registry": 1,
+      "Study": 54,
+      "Variant": 610
+    },
+    "edges_by_relation": {
+      "associated_with": 2068,
+      "author_of": 395,
+      "covers": 1,
+      "evaluates": 76,
+      "has_clinical_course": 32,
+      "has_condition": 725,
+      "has_funded_project": 355,
+      "has_inheritance": 54,
+      "has_mechanism": 30,
+      "has_phenotype": 678,
+      "in_pathway": 552,
+      "indicated_for": 356,
+      "inhibits": 94,
+      "is_a": 1558,
+      "modulates": 6,
+      "publishes_on": 368,
+      "similar_to": 78,
+      "studies": 74,
+      "supports_community": 16,
+      "targets": 30,
+      "treats": 208,
+      "variant_of": 622
     },
     "edges_by_evidence_class": {
-      "inferred": 6,
-      "observed": 30134
+      "extracted": 50,
+      "inferred": 637,
+      "observed": 7689
     },
     "edges_by_status": {
-      "supported": 30140
+      "contested": 2,
+      "inferred_unsupported": 104,
+      "small_n": 17,
+      "supported": 8253
     },
     "edges_by_label": {
-      "below_score_threshold": 1704,
-      "conflicting_assertions": 45,
-      "curated_unverified": 6
+      "below_score_threshold": 397,
+      "candidate": 97,
+      "conflicting_assertions": 4,
+      "contested": 2,
+      "curated_unverified": 3,
+      "direction_match": 97,
+      "direction_mismatch": 104,
+      "hypothesis": 97,
+      "inferred": 355,
+      "inferred_unsupported": 104,
+      "promising": 29,
+      "similarity": 78,
+      "small_n": 18,
+      "variant_specific": 9
     },
     "edges_with_origin": {
-      "germline": 19,
-      "somatic": 3
+      "germline": 17,
+      "somatic": 4
     },
     "phenotype_ic": {
-      "nodes": 1968,
-      "nodes_without_ic": 47,
-      "is_a_edges": 2979,
-      "is_a_edges_with_ic_on_both_ends": 2932,
-      "is_a_edges_child_ic_below_parent": 68
+      "nodes": 931,
+      "nodes_without_ic": 32,
+      "is_a_edges": 1378,
+      "is_a_edges_with_ic_on_both_ends": 1346,
+      "is_a_edges_child_ic_below_parent": 32
     },
     "coverage": {
-      "entities": 684,
-      "searches": 2630,
-      "zero_hit_searches": 1535,
+      "entities": 944,
+      "searches": 2497,
+      "zero_hit_searches": 1631,
       "by_source": {
+        "ClinVar esearch": 11,
+        "ClinVar esummary": 7,
+        "ClinVar esummary protein_change": 4,
+        "ClinVar trait link": 610,
+        "ClinicalTrials.gov": 54,
+        "ClinicalTrials.gov studies": 22,
+        "EURORDIS — on-site search": 1,
+        "Genetic Alliance (US) — Disease InfoSearch": 1,
+        "Genetic Alliance UK — on-site search": 1,
+        "Global Genes — on-site search": 1,
+        "Global Genes — via web search engine, domain-restricted": 1,
         "HPO hp.json": 1,
         "HPO phenotype.hpoa": 3,
+        "NIH RePORTER project links": 6,
+        "NIH RePORTER projects": 6,
+        "NIH RePORTER publications": 3,
+        "NORD (rarediseases.org) — on-site search": 1,
+        "NORD (rarediseases.org) — on-site search, MPN groups": 1,
+        "NORD (rarediseases.org) — via web search engine, domain-restricted": 1,
         "OptimusKG biological_process_gene": 7,
         "OptimusKG disease": 15,
-        "OptimusKG disease_disease": 643,
+        "OptimusKG disease_disease": 146,
         "OptimusKG disease_gene": 7,
-        "OptimusKG disease_phenotype": 643,
+        "OptimusKG disease_phenotype": 146,
         "OptimusKG drug": 5,
-        "OptimusKG drug_disease": 643,
+        "OptimusKG drug_disease": 146,
         "OptimusKG drug_gene": 7,
         "OptimusKG gene": 7,
         "OptimusKG pathway_gene": 7,
-        "mechanism rules": 642
+        "Orphanet — disease search (current site)": 1,
+        "Orphanet — legacy Disease_Search.php": 1,
+        "Rare Disease UK — locating its directory": 1,
+        "RareConnect (stretch)": 1,
+        "Web search engine (general) — SCID group resolution": 1,
+        "build prune": 73,
+        "claims.json endpoint": 1005,
+        "mechanism rules": 146,
+        "patient_groups.yaml disease term": 16,
+        "pubmed": 24
       }
     },
     "sources": [
+      "ClinVar",
+      "ClinicalTrials.gov",
       "HPO",
+      "NIH RePORTER",
       "OptimusKG",
       "OptimusKG upstream: ATC",
       "OptimusKG upstream: BGEE",
@@ -192,17 +735,861 @@
       "OptimusKG upstream: REACTOME",
       "OptimusKG upstream: UNIPROT",
       "OptimusKG upstream: USAN",
-      "curated mechanism seeds: docs/test-cluster-desc.md (section 3 table)"
+      "curated mechanism seeds: docs/test-cluster-desc.md (section 3 table)",
+      "claims bundle (data/build/claims.json)",
+      "patient group seeds: pipeline/seeds/patient_groups.yaml"
     ]
+  },
+  "sizes": {
+    "total_bytes": 7698486,
+    "total_mb": 7.7,
+    "nodes_by_type": {
+      "Disease": 81911,
+      "Drug": 49831,
+      "Gene": 73628,
+      "Investigator": 260682,
+      "Mechanism": 2107,
+      "Paper": 527505,
+      "Pathway": 160962,
+      "PatientGroup": 4764,
+      "Phenotype": 313116,
+      "Registry": 841,
+      "Study": 131625,
+      "Variant": 452711
+    },
+    "edges_by_relation": {
+      "associated_with": 1173012,
+      "author_of": 146727,
+      "covers": 586,
+      "evaluates": 54518,
+      "has_clinical_course": 19082,
+      "has_condition": 519615,
+      "has_funded_project": 300791,
+      "has_inheritance": 30152,
+      "has_mechanism": 39486,
+      "has_phenotype": 388146,
+      "in_pathway": 262803,
+      "indicated_for": 209030,
+      "inhibits": 54085,
+      "is_a": 593568,
+      "modulates": 5392,
+      "publishes_on": 182782,
+      "similar_to": 146964,
+      "studies": 49212,
+      "supports_community": 9010,
+      "targets": 13751,
+      "treats": 259677,
+      "variant_of": 306521
+    },
+    "claims": 405255,
+    "meta": 361027,
+    "graph_json_bytes": 7700156
   },
   "edges_dropped_dangling": [],
   "edges_below_threshold": 1704,
   "edges_with_relation_conflict": 45,
+  "claim_edges_reconciled": {
+    "claim_ids_removed_from_edges": 0,
+    "edges_dropped_without_claims": []
+  },
+  "coverage_rows_dropped_for_pruned_entities": 7899,
   "claims": {
-    "in_bundle": 0,
-    "in_graph": 0,
-    "attached_to_edges": 0,
-    "unattached": [],
+    "in_bundle": 935,
+    "in_graph": 935,
+    "attached_to_edges": 145,
+    "unattached": [
+      "c_000002",
+      "c_000003",
+      "c_000004",
+      "c_000005",
+      "c_000006",
+      "c_000007",
+      "c_000010",
+      "c_000014",
+      "c_000016",
+      "c_000017",
+      "c_000018",
+      "c_000019",
+      "c_000021",
+      "c_000022",
+      "c_000023",
+      "c_000024",
+      "c_000025",
+      "c_000026",
+      "c_000028",
+      "c_000029",
+      "c_000031",
+      "c_000032",
+      "c_000033",
+      "c_000034",
+      "c_000035",
+      "c_000036",
+      "c_000037",
+      "c_000038",
+      "c_000039",
+      "c_000040",
+      "c_000042",
+      "c_000043",
+      "c_000044",
+      "c_000045",
+      "c_000047",
+      "c_000048",
+      "c_000049",
+      "c_000050",
+      "c_000051",
+      "c_000052",
+      "c_000053",
+      "c_000054",
+      "c_000055",
+      "c_000056",
+      "c_000057",
+      "c_000058",
+      "c_000059",
+      "c_000060",
+      "c_000061",
+      "c_000062",
+      "c_000065",
+      "c_000066",
+      "c_000068",
+      "c_000069",
+      "c_000070",
+      "c_000071",
+      "c_000072",
+      "c_000073",
+      "c_000074",
+      "c_000076",
+      "c_000077",
+      "c_000078",
+      "c_000079",
+      "c_000080",
+      "c_000081",
+      "c_000082",
+      "c_000083",
+      "c_000084",
+      "c_000085",
+      "c_000086",
+      "c_000087",
+      "c_000088",
+      "c_000089",
+      "c_000090",
+      "c_000091",
+      "c_000092",
+      "c_000093",
+      "c_000094",
+      "c_000095",
+      "c_000096",
+      "c_000097",
+      "c_000099",
+      "c_000100",
+      "c_000102",
+      "c_000103",
+      "c_000104",
+      "c_000105",
+      "c_000106",
+      "c_000107",
+      "c_000108",
+      "c_000109",
+      "c_000110",
+      "c_000111",
+      "c_000112",
+      "c_000114",
+      "c_000115",
+      "c_000116",
+      "c_000117",
+      "c_000118",
+      "c_000119",
+      "c_000120",
+      "c_000122",
+      "c_000123",
+      "c_000124",
+      "c_000125",
+      "c_000126",
+      "c_000127",
+      "c_000128",
+      "c_000129",
+      "c_000130",
+      "c_000131",
+      "c_000132",
+      "c_000133",
+      "c_000134",
+      "c_000135",
+      "c_000136",
+      "c_000137",
+      "c_000138",
+      "c_000139",
+      "c_000140",
+      "c_000141",
+      "c_000142",
+      "c_000143",
+      "c_000144",
+      "c_000145",
+      "c_000146",
+      "c_000147",
+      "c_000148",
+      "c_000151",
+      "c_000153",
+      "c_000154",
+      "c_000155",
+      "c_000156",
+      "c_000157",
+      "c_000158",
+      "c_000159",
+      "c_000160",
+      "c_000161",
+      "c_000162",
+      "c_000163",
+      "c_000164",
+      "c_000165",
+      "c_000166",
+      "c_000167",
+      "c_000168",
+      "c_000169",
+      "c_000170",
+      "c_000171",
+      "c_000172",
+      "c_000173",
+      "c_000174",
+      "c_000175",
+      "c_000176",
+      "c_000177",
+      "c_000178",
+      "c_000179",
+      "c_000180",
+      "c_000181",
+      "c_000182",
+      "c_000184",
+      "c_000185",
+      "c_000186",
+      "c_000187",
+      "c_000189",
+      "c_000190",
+      "c_000191",
+      "c_000192",
+      "c_000193",
+      "c_000194",
+      "c_000195",
+      "c_000196",
+      "c_000197",
+      "c_000198",
+      "c_000199",
+      "c_000200",
+      "c_000201",
+      "c_000202",
+      "c_000204",
+      "c_000205",
+      "c_000206",
+      "c_000208",
+      "c_000209",
+      "c_000210",
+      "c_000211",
+      "c_000212",
+      "c_000213",
+      "c_000214",
+      "c_000215",
+      "c_000219",
+      "c_000220",
+      "c_000221",
+      "c_000222",
+      "c_000223",
+      "c_000225",
+      "c_000226",
+      "c_000228",
+      "c_000229",
+      "c_000231",
+      "c_000232",
+      "c_000233",
+      "c_000234",
+      "c_000235",
+      "c_000236",
+      "c_000239",
+      "c_000240",
+      "c_000241",
+      "c_000243",
+      "c_000244",
+      "c_000245",
+      "c_000246",
+      "c_000247",
+      "c_000248",
+      "c_000250",
+      "c_000252",
+      "c_000253",
+      "c_000254",
+      "c_000255",
+      "c_000256",
+      "c_000257",
+      "c_000258",
+      "c_000259",
+      "c_000262",
+      "c_000263",
+      "c_000264",
+      "c_000265",
+      "c_000266",
+      "c_000267",
+      "c_000268",
+      "c_000269",
+      "c_000270",
+      "c_000271",
+      "c_000272",
+      "c_000275",
+      "c_000276",
+      "c_000277",
+      "c_000278",
+      "c_000279",
+      "c_000280",
+      "c_000281",
+      "c_000282",
+      "c_000283",
+      "c_000284",
+      "c_000285",
+      "c_000286",
+      "c_000287",
+      "c_000288",
+      "c_000289",
+      "c_000290",
+      "c_000291",
+      "c_000292",
+      "c_000293",
+      "c_000294",
+      "c_000295",
+      "c_000296",
+      "c_000297",
+      "c_000298",
+      "c_000299",
+      "c_000300",
+      "c_000302",
+      "c_000303",
+      "c_000305",
+      "c_000306",
+      "c_000307",
+      "c_000308",
+      "c_000309",
+      "c_000310",
+      "c_000311",
+      "c_000312",
+      "c_000313",
+      "c_000316",
+      "c_000318",
+      "c_000319",
+      "c_000320",
+      "c_000321",
+      "c_000322",
+      "c_000323",
+      "c_000325",
+      "c_000327",
+      "c_000328",
+      "c_000331",
+      "c_000333",
+      "c_000334",
+      "c_000335",
+      "c_000336",
+      "c_000337",
+      "c_000339",
+      "c_000341",
+      "c_000342",
+      "c_000343",
+      "c_000344",
+      "c_000345",
+      "c_000346",
+      "c_000347",
+      "c_000348",
+      "c_000349",
+      "c_000350",
+      "c_000351",
+      "c_000352",
+      "c_000353",
+      "c_000354",
+      "c_000355",
+      "c_000356",
+      "c_000358",
+      "c_000359",
+      "c_000360",
+      "c_000361",
+      "c_000362",
+      "c_000363",
+      "c_000364",
+      "c_000367",
+      "c_000368",
+      "c_000371",
+      "c_000372",
+      "c_000373",
+      "c_000376",
+      "c_000377",
+      "c_000380",
+      "c_000381",
+      "c_000382",
+      "c_000384",
+      "c_000385",
+      "c_000386",
+      "c_000389",
+      "c_000391",
+      "c_000392",
+      "c_000393",
+      "c_000394",
+      "c_000395",
+      "c_000396",
+      "c_000398",
+      "c_000399",
+      "c_000400",
+      "c_000402",
+      "c_000403",
+      "c_000404",
+      "c_000405",
+      "c_000406",
+      "c_000407",
+      "c_000408",
+      "c_000409",
+      "c_000410",
+      "c_000411",
+      "c_000413",
+      "c_000416",
+      "c_000420",
+      "c_000421",
+      "c_000422",
+      "c_000423",
+      "c_000424",
+      "c_000425",
+      "c_000426",
+      "c_000427",
+      "c_000428",
+      "c_000429",
+      "c_000430",
+      "c_000431",
+      "c_000432",
+      "c_000433",
+      "c_000436",
+      "c_000437",
+      "c_000438",
+      "c_000443",
+      "c_000444",
+      "c_000445",
+      "c_000446",
+      "c_000447",
+      "c_000448",
+      "c_000449",
+      "c_000450",
+      "c_000451",
+      "c_000452",
+      "c_000453",
+      "c_000454",
+      "c_000455",
+      "c_000456",
+      "c_000457",
+      "c_000459",
+      "c_000460",
+      "c_000461",
+      "c_000462",
+      "c_000463",
+      "c_000464",
+      "c_000465",
+      "c_000467",
+      "c_000468",
+      "c_000469",
+      "c_000470",
+      "c_000471",
+      "c_000472",
+      "c_000473",
+      "c_000474",
+      "c_000475",
+      "c_000476",
+      "c_000477",
+      "c_000478",
+      "c_000480",
+      "c_000482",
+      "c_000483",
+      "c_000485",
+      "c_000487",
+      "c_000488",
+      "c_000489",
+      "c_000490",
+      "c_000491",
+      "c_000492",
+      "c_000493",
+      "c_000494",
+      "c_000495",
+      "c_000496",
+      "c_000497",
+      "c_000498",
+      "c_000499",
+      "c_000500",
+      "c_000501",
+      "c_000502",
+      "c_000503",
+      "c_000504",
+      "c_000505",
+      "c_000507",
+      "c_000508",
+      "c_000509",
+      "c_000510",
+      "c_000511",
+      "c_000513",
+      "c_000514",
+      "c_000515",
+      "c_000516",
+      "c_000517",
+      "c_000518",
+      "c_000519",
+      "c_000520",
+      "c_000521",
+      "c_000522",
+      "c_000523",
+      "c_000524",
+      "c_000525",
+      "c_000526",
+      "c_000527",
+      "c_000528",
+      "c_000530",
+      "c_000531",
+      "c_000532",
+      "c_000533",
+      "c_000534",
+      "c_000535",
+      "c_000536",
+      "c_000537",
+      "c_000538",
+      "c_000539",
+      "c_000540",
+      "c_000541",
+      "c_000542",
+      "c_000543",
+      "c_000544",
+      "c_000545",
+      "c_000546",
+      "c_000547",
+      "c_000548",
+      "c_000549",
+      "c_000550",
+      "c_000551",
+      "c_000552",
+      "c_000553",
+      "c_000554",
+      "c_000555",
+      "c_000556",
+      "c_000557",
+      "c_000558",
+      "c_000559",
+      "c_000560",
+      "c_000561",
+      "c_000562",
+      "c_000563",
+      "c_000564",
+      "c_000565",
+      "c_000566",
+      "c_000567",
+      "c_000568",
+      "c_000569",
+      "c_000570",
+      "c_000571",
+      "c_000572",
+      "c_000573",
+      "c_000574",
+      "c_000575",
+      "c_000576",
+      "c_000577",
+      "c_000578",
+      "c_000579",
+      "c_000580",
+      "c_000582",
+      "c_000584",
+      "c_000585",
+      "c_000586",
+      "c_000587",
+      "c_000588",
+      "c_000589",
+      "c_000590",
+      "c_000591",
+      "c_000592",
+      "c_000593",
+      "c_000594",
+      "c_000595",
+      "c_000596",
+      "c_000597",
+      "c_000600",
+      "c_000601",
+      "c_000602",
+      "c_000604",
+      "c_000605",
+      "c_000606",
+      "c_000608",
+      "c_000609",
+      "c_000610",
+      "c_000611",
+      "c_000613",
+      "c_000615",
+      "c_000616",
+      "c_000617",
+      "c_000618",
+      "c_000620",
+      "c_000621",
+      "c_000622",
+      "c_000623",
+      "c_000624",
+      "c_000625",
+      "c_000626",
+      "c_000627",
+      "c_000628",
+      "c_000629",
+      "c_000630",
+      "c_000631",
+      "c_000632",
+      "c_000633",
+      "c_000634",
+      "c_000635",
+      "c_000637",
+      "c_000638",
+      "c_000639",
+      "c_000640",
+      "c_000641",
+      "c_000642",
+      "c_000643",
+      "c_000644",
+      "c_000645",
+      "c_000646",
+      "c_000647",
+      "c_000648",
+      "c_000649",
+      "c_000650",
+      "c_000651",
+      "c_000652",
+      "c_000654",
+      "c_000656",
+      "c_000658",
+      "c_000660",
+      "c_000661",
+      "c_000662",
+      "c_000663",
+      "c_000665",
+      "c_000666",
+      "c_000667",
+      "c_000668",
+      "c_000669",
+      "c_000671",
+      "c_000672",
+      "c_000673",
+      "c_000674",
+      "c_000675",
+      "c_000676",
+      "c_000678",
+      "c_000679",
+      "c_000680",
+      "c_000681",
+      "c_000682",
+      "c_000683",
+      "c_000684",
+      "c_000685",
+      "c_000686",
+      "c_000687",
+      "c_000688",
+      "c_000689",
+      "c_000690",
+      "c_000691",
+      "c_000692",
+      "c_000693",
+      "c_000695",
+      "c_000697",
+      "c_000698",
+      "c_000699",
+      "c_000700",
+      "c_000701",
+      "c_000702",
+      "c_000703",
+      "c_000704",
+      "c_000705",
+      "c_000706",
+      "c_000707",
+      "c_000708",
+      "c_000709",
+      "c_000710",
+      "c_000711",
+      "c_000712",
+      "c_000713",
+      "c_000714",
+      "c_000715",
+      "c_000716",
+      "c_000717",
+      "c_000718",
+      "c_000719",
+      "c_000720",
+      "c_000721",
+      "c_000722",
+      "c_000723",
+      "c_000725",
+      "c_000726",
+      "c_000727",
+      "c_000729",
+      "c_000730",
+      "c_000731",
+      "c_000732",
+      "c_000733",
+      "c_000735",
+      "c_000736",
+      "c_000737",
+      "c_000738",
+      "c_000739",
+      "c_000740",
+      "c_000741",
+      "c_000742",
+      "c_000743",
+      "c_000744",
+      "c_000745",
+      "c_000746",
+      "c_000748",
+      "c_000749",
+      "c_000751",
+      "c_000752",
+      "c_000753",
+      "c_000755",
+      "c_000757",
+      "c_000758",
+      "c_000759",
+      "c_000760",
+      "c_000761",
+      "c_000762",
+      "c_000763",
+      "c_000764",
+      "c_000765",
+      "c_000766",
+      "c_000767",
+      "c_000768",
+      "c_000770",
+      "c_000772",
+      "c_000774",
+      "c_000775",
+      "c_000776",
+      "c_000777",
+      "c_000778",
+      "c_000779",
+      "c_000780",
+      "c_000781",
+      "c_000782",
+      "c_000783",
+      "c_000784",
+      "c_000785",
+      "c_000786",
+      "c_000787",
+      "c_000788",
+      "c_000789",
+      "c_000790",
+      "c_000792",
+      "c_000793",
+      "c_000794",
+      "c_000795",
+      "c_000796",
+      "c_000797",
+      "c_000798",
+      "c_000799",
+      "c_000800",
+      "c_000801",
+      "c_000802",
+      "c_000803",
+      "c_000804",
+      "c_000805",
+      "c_000806",
+      "c_000807",
+      "c_000808",
+      "c_000809",
+      "c_000810",
+      "c_000811",
+      "c_000812",
+      "c_000813",
+      "c_000814",
+      "c_000815",
+      "c_000817",
+      "c_000818",
+      "c_000819",
+      "c_000820",
+      "c_000821",
+      "c_000822",
+      "c_000823",
+      "c_000824",
+      "c_000825",
+      "c_000826",
+      "c_000827",
+      "c_000828",
+      "c_000829",
+      "c_000830",
+      "c_000831",
+      "c_000832",
+      "c_000835",
+      "c_000837",
+      "c_000839",
+      "c_000840",
+      "c_000841",
+      "c_000842",
+      "c_000843",
+      "c_000844",
+      "c_000846",
+      "c_000847",
+      "c_000848",
+      "c_000849",
+      "c_000853",
+      "c_000854",
+      "c_000855",
+      "c_000856",
+      "c_000857",
+      "c_000858",
+      "c_000859",
+      "c_000860",
+      "c_000861",
+      "c_000862",
+      "c_000863",
+      "c_000864",
+      "c_000865",
+      "c_000866",
+      "c_000867",
+      "c_000869",
+      "c_000870",
+      "c_000872",
+      "c_000874",
+      "c_000875",
+      "c_000876",
+      "c_000877",
+      "c_000878",
+      "c_000879",
+      "c_000881",
+      "c_000882",
+      "c_000883",
+      "c_000884",
+      "c_000885",
+      "c_000886",
+      "c_000887",
+      "c_000888",
+      "c_000890",
+      "c_000891",
+      "c_000892",
+      "c_000893",
+      "c_000894",
+      "c_000895",
+      "c_000896",
+      "c_000897",
+      "c_000898",
+      "c_000901",
+      "c_000902",
+      "c_000903",
+      "c_000904",
+      "c_000905",
+      "c_000906",
+      "c_000907",
+      "c_000908",
+      "c_000909",
+      "c_000910",
+      "c_000911",
+      "c_000912",
+      "c_000915",
+      "c_000916",
+      "c_000917",
+      "c_000919",
+      "c_000921",
+      "c_000922",
+      "c_000923",
+      "c_000924",
+      "c_000926",
+      "c_000927",
+      "c_000930",
+      "c_000933",
+      "c_000934",
+      "c_000935"
+    ],
+    "variant_unresolved": [],
     "dropped": []
   },
   "seed_resolution": {
@@ -299,10 +1686,14 @@
       "drug_terms": []
     }
   },
+  "graph_logic": {
+    "status": "applied",
+    "report": null
+  },
   "graph_path": "/Users/jonathanyan/Desktop/projects/Pyrid/.claude/worktrees/lane-graph/data/build/graph.json",
   "store_path": "/Users/jonathanyan/Desktop/projects/Pyrid/.claude/worktrees/lane-graph/data/build/evidence.sqlite",
-  "claims_bundle": "none",
-  "offline": true,
+  "claims_bundle": "/Users/jonathanyan/Desktop/projects/Pyrid/.claude/worktrees/lane-graph/data/build/claims.json",
+  "offline": false,
   "loaders": {
     "pipeline.sources.optimuskg": {
       "status": "ok",
@@ -333,6 +1724,17 @@
         "thresholds": {
           "disease_gene_min_score": 0.3,
           "keep_disgenet_direct": true,
+          "disease_gene_curated_sources": [
+            "DISGENET",
+            "ORPHANET",
+            "CLINGEN",
+            "OMIM"
+          ],
+          "disease_gene_high_score": 0.6,
+          "max_diseases_per_seed_gene": 25,
+          "max_genes_per_disease": 5,
+          "min_papers_per_investigator": 3,
+          "keep_orcid_investigators": false,
           "max_pathway_members_to_expand": 0,
           "include_parent_levels": 1,
           "disease_gene_most_specific": true,
@@ -673,18 +2075,18 @@
           "coverage": 1984
         },
         "timings_s": {
-          "clear_previous": 0.216,
-          "genes": 0.97,
-          "disease_gene_seed": 0.783,
-          "disease_terms": 0.202,
-          "diseases": 0.217,
-          "disease_gene_included": 4.834,
-          "phenotypes": 0.238,
-          "pathways": 0.069,
-          "drugs": 0.939,
-          "write": 0.386,
-          "resolve_files": 0.333,
-          "total": 9.268
+          "clear_previous": 0.518,
+          "genes": 1.007,
+          "disease_gene_seed": 0.679,
+          "disease_terms": 0.158,
+          "diseases": 0.194,
+          "disease_gene_included": 3.684,
+          "phenotypes": 0.218,
+          "pathways": 0.062,
+          "drugs": 0.755,
+          "write": 0.365,
+          "resolve_files": 0.317,
+          "total": 8.023
         }
       }
     },
@@ -717,41 +2119,862 @@
           "distinct_diseases": 12865
         }
       }
+    },
+    "pipeline.sources.clinvar": {
+      "status": "ok",
+      "summary": {
+        "source": "ClinVar",
+        "version": "Build260929-0200.1",
+        "retrieved_at": "2026-10-03T21:31:51+00:00",
+        "genes": [
+          "STAT1",
+          "STAT3",
+          "JAK1",
+          "JAK2",
+          "JAK3",
+          "TYK2",
+          "IL2RG"
+        ],
+        "records": 6521,
+        "records_by_gene_sum": 6521,
+        "excluded_cnv": 405,
+        "kept_in_graph": 593,
+        "variant_of_edges": 7153,
+        "has_condition_edges": 7895,
+        "unlinked_genes": 237,
+        "unlinked_conditions": 1793,
+        "skipped_traits": 2741,
+        "variants_with_linked_condition": 3618,
+        "by_gene": {
+          "STAT1": {
+            "esearch_count": 863,
+            "records": 835,
+            "excluded_cnv": 28,
+            "record_errors": 0,
+            "kept_in_graph": 106,
+            "page_failures": 0,
+            "esearch_error": null
+          },
+          "STAT3": {
+            "esearch_count": 997,
+            "records": 990,
+            "excluded_cnv": 7,
+            "record_errors": 0,
+            "kept_in_graph": 108,
+            "page_failures": 0,
+            "esearch_error": null
+          },
+          "JAK1": {
+            "esearch_count": 922,
+            "records": 893,
+            "excluded_cnv": 29,
+            "record_errors": 0,
+            "kept_in_graph": 4,
+            "page_failures": 0,
+            "esearch_error": null
+          },
+          "JAK2": {
+            "esearch_count": 817,
+            "records": 638,
+            "excluded_cnv": 179,
+            "record_errors": 0,
+            "kept_in_graph": 9,
+            "page_failures": 0,
+            "esearch_error": null
+          },
+          "JAK3": {
+            "esearch_count": 1438,
+            "records": 1426,
+            "excluded_cnv": 12,
+            "record_errors": 0,
+            "kept_in_graph": 145,
+            "page_failures": 0,
+            "esearch_error": null
+          },
+          "TYK2": {
+            "esearch_count": 1183,
+            "records": 1164,
+            "excluded_cnv": 19,
+            "record_errors": 0,
+            "kept_in_graph": 50,
+            "page_failures": 0,
+            "esearch_error": null
+          },
+          "IL2RG": {
+            "esearch_count": 706,
+            "records": 575,
+            "excluded_cnv": 131,
+            "record_errors": 0,
+            "kept_in_graph": 171,
+            "page_failures": 0,
+            "esearch_error": null
+          }
+        },
+        "variant_terms": {
+          "STAT1:R274W": {
+            "stored_hits": 1,
+            "live_esearch_hits": 2,
+            "live_query": "STAT1[gene] AND R274W"
+          },
+          "STAT1:T419R": {
+            "stored_hits": 1,
+            "live_esearch_hits": 1,
+            "live_query": "STAT1[gene] AND T419R"
+          },
+          "STAT1:N574I": {
+            "stored_hits": 0,
+            "live_esearch_hits": 0,
+            "live_query": "STAT1[gene] AND N574I"
+          },
+          "STAT1:R321": {
+            "stored_hits": 1,
+            "live_esearch_hits": 1,
+            "live_query": "STAT1[gene] AND R321"
+          }
+        },
+        "page_failures": [],
+        "errors": [],
+        "requests": 87,
+        "requests_from_cache": 87,
+        "backbone_present": true,
+        "elapsed_s": 2.84
+      }
+    },
+    "pipeline.sources.ctgov": {
+      "status": "ok",
+      "summary": {
+        "source": "ClinicalTrials.gov",
+        "api_version": "2.0.5",
+        "data_timestamp": "2026-10-02T09:00:04",
+        "retrieved_at": "2026-10-03T21:34:57+00:00",
+        "queries": [
+          {
+            "label": "stat1-gof",
+            "params": "query.term=%22STAT1+gain+of+function%22&countTotal=true&pageSize=50",
+            "total_count": 3,
+            "total_count_from": "totalCount",
+            "fetched": 3,
+            "pages": 1,
+            "truncated": false,
+            "date": "2026-10-03",
+            "coverage_entities": [
+              "seed:ctgov_query:stat1-gof"
+            ],
+            "nct_ids": [
+              "NCT07261891",
+              "NCT05561985",
+              "NCT07670156"
+            ]
+          },
+          {
+            "label": "cmc",
+            "params": "query.cond=%22chronic+mucocutaneous+candidiasis%22&countTotal=true&pageSize=50",
+            "total_count": 5,
+            "total_count_from": "totalCount",
+            "fetched": 5,
+            "pages": 1,
+            "truncated": false,
+            "date": "2026-10-03",
+            "coverage_entities": [
+              "seed:ctgov_query:cmc",
+              "MONDO:0015279"
+            ],
+            "nct_ids": [
+              "NCT01842386",
+              "NCT03059992",
+              "NCT02629419",
+              "NCT03800056",
+              "NCT01386437"
+            ]
+          },
+          {
+            "label": "ruxolitinib-stat1",
+            "params": "query.intr=ruxolitinib&query.term=EXPANSION%5BNone%5DSTAT1&countTotal=true&pageSize=50",
+            "total_count": 0,
+            "total_count_from": "totalCount",
+            "fetched": 0,
+            "pages": 1,
+            "truncated": false,
+            "date": "2026-10-03",
+            "coverage_entities": [
+              "seed:ctgov_query:ruxolitinib-stat1",
+              "CHEMBL:CHEMBL1789941",
+              "ensembl:ENSG00000115415"
+            ],
+            "nct_ids": []
+          },
+          {
+            "label": "jak-inhibitor-pid",
+            "params": "query.cond=%22primary+immunodeficiency%22&query.intr=JAK+inhibitor&countTotal=true&pageSize=50",
+            "total_count": 1,
+            "total_count_from": "totalCount",
+            "fetched": 1,
+            "pages": 1,
+            "truncated": false,
+            "date": "2026-10-03",
+            "coverage_entities": [
+              "seed:ctgov_query:jak-inhibitor-pid",
+              "MONDO:0003778"
+            ],
+            "nct_ids": [
+              "NCT07261891"
+            ]
+          },
+          {
+            "label": "hyper-ige",
+            "params": "query.cond=%22hyper+IgE+syndrome%22&countTotal=true&pageSize=50",
+            "total_count": 14,
+            "total_count_from": "totalCount",
+            "fetched": 14,
+            "pages": 1,
+            "truncated": false,
+            "date": "2026-10-03",
+            "coverage_entities": [
+              "seed:ctgov_query:hyper-ige"
+            ],
+            "nct_ids": [
+              "NCT00005933",
+              "NCT00006150",
+              "NCT00527878",
+              "NCT00260702",
+              "NCT00033982",
+              "NCT02996448",
+              "NCT01852370",
+              "NCT02228941",
+              "NCT04897113",
+              "NCT02629419",
+              "NCT01953016",
+              "NCT00001515",
+              "NCT01176006",
+              "NCT07262983"
+            ]
+          },
+          {
+            "label": "scid-jak3",
+            "params": "query.cond=%22severe+combined+immunodeficiency%22&query.term=EXPANSION%5BNone%5DJAK3&countTotal=true&pageSize=50",
+            "total_count": 1,
+            "total_count_from": "totalCount",
+            "fetched": 1,
+            "pages": 1,
+            "truncated": false,
+            "date": "2026-10-03",
+            "coverage_entities": [
+              "seed:ctgov_query:scid-jak3",
+              "MONDO:0015974",
+              "ensembl:ENSG00000105639"
+            ],
+            "nct_ids": [
+              "NCT03619551"
+            ]
+          },
+          {
+            "label": "stat3-gof",
+            "params": "query.term=%22STAT3+gain+of+function%22&countTotal=true&pageSize=50",
+            "total_count": 1,
+            "total_count_from": "totalCount",
+            "fetched": 1,
+            "pages": 1,
+            "truncated": false,
+            "date": "2026-10-03",
+            "coverage_entities": [
+              "seed:ctgov_query:stat3-gof"
+            ],
+            "nct_ids": [
+              "NCT07670156"
+            ]
+          },
+          {
+            "label": "pv-ruxolitinib",
+            "params": "query.cond=%22polycythemia+vera%22&query.intr=ruxolitinib&countTotal=true&pageSize=20",
+            "total_count": 80,
+            "total_count_from": "totalCount",
+            "fetched": 20,
+            "pages": 1,
+            "truncated": true,
+            "date": "2026-10-03",
+            "coverage_entities": [
+              "seed:ctgov_query:pv-ruxolitinib",
+              "EFO:0002429",
+              "CHEMBL:CHEMBL1789941"
+            ],
+            "nct_ids": [
+              "NCT03878199",
+              "NCT01730248",
+              "NCT06516406",
+              "NCT04884191",
+              "NCT02226172",
+              "NCT07722611",
+              "NCT01969838",
+              "NCT04551053",
+              "NCT01732445",
+              "NCT04354727",
+              "NCT00509899",
+              "NCT02267278",
+              "NCT02038036",
+              "NCT01375140",
+              "NCT05548062",
+              "NCT06327100",
+              "NCT01392443",
+              "NCT01433445",
+              "NCT01348490",
+              "NCT02912884"
+            ]
+          },
+          {
+            "label": "et-ruxolitinib",
+            "params": "query.cond=%22essential+thrombocythemia%22&query.intr=ruxolitinib&countTotal=true&pageSize=20",
+            "total_count": 71,
+            "total_count_from": "totalCount",
+            "fetched": 20,
+            "pages": 1,
+            "truncated": true,
+            "date": "2026-10-03",
+            "coverage_entities": [
+              "seed:ctgov_query:et-ruxolitinib",
+              "EFO:0000479",
+              "CHEMBL:CHEMBL1789941"
+            ],
+            "nct_ids": [
+              "NCT03878199",
+              "NCT01730248",
+              "NCT06516406",
+              "NCT04884191",
+              "NCT06770842",
+              "NCT06034002",
+              "NCT01558739",
+              "NCT02226172",
+              "NCT01969838",
+              "NCT04551053",
+              "NCT01732445",
+              "NCT00509899",
+              "NCT02267278",
+              "NCT01375140",
+              "NCT06327100",
+              "NCT01392443",
+              "NCT01433445",
+              "NCT01348490",
+              "NCT02912884",
+              "NCT04485260"
+            ]
+          },
+          {
+            "label": "pmf-ruxolitinib",
+            "params": "query.cond=%22primary+myelofibrosis%22&query.intr=ruxolitinib&countTotal=true&pageSize=20",
+            "total_count": 139,
+            "total_count_from": "totalCount",
+            "fetched": 20,
+            "pages": 1,
+            "truncated": true,
+            "date": "2026-10-03",
+            "coverage_entities": [
+              "seed:ctgov_query:pmf-ruxolitinib",
+              "EFO:0002430",
+              "CHEMBL:CHEMBL1789941"
+            ],
+            "nct_ids": [
+              "NCT05423691",
+              "NCT03878199",
+              "NCT01730248",
+              "NCT02251821",
+              "NCT06516406",
+              "NCT04562870",
+              "NCT05665192",
+              "NCT04884191",
+              "NCT06770842",
+              "NCT06034002",
+              "NCT01558739",
+              "NCT02226172",
+              "NCT01969838",
+              "NCT04562389",
+              "NCT04217356",
+              "NCT04551053",
+              "NCT01732445",
+              "NCT07498205",
+              "NCT03069326",
+              "NCT04354727"
+            ]
+          }
+        ],
+        "studies": 54,
+        "nodes": 54,
+        "edges": 150,
+        "edges_by_relation": {
+          "studies": 74,
+          "evaluates": 76
+        },
+        "coverage_rows": 76,
+        "unlinked": {
+          "nct:NCT00001515": {
+            "unlinked_conditions": [
+              "Bronchogenic Carcinoma",
+              "Chronic Granulomatous Disease",
+              "Mycobacterium Infection",
+              "Wegener's Granulomatosis"
+            ],
+            "unlinked_interventions": [
+              "virtual bronchoscopy"
+            ]
+          },
+          "nct:NCT00005933": {
+            "unlinked_conditions": [
+              "Chediak Higashi Syndrome",
+              "Chronic Granulomatous Disease"
+            ]
+          },
+          "nct:NCT00006150": {
+            "unlinked_conditions": [
+              "Infections",
+              "Pneumonia",
+              "Immune System Diseases",
+              "STAT3 Transcription Factor"
+            ]
+          },
+          "nct:NCT00033982": {
+            "unlinked_conditions": [
+              "Granulomatous Disease, Chronic",
+              "Infection"
+            ]
+          },
+          "nct:NCT00260702": {
+            "unlinked_interventions": [
+              "Omalizumab (Xolair)"
+            ]
+          },
+          "nct:NCT00527878": {
+            "unlinked_conditions": [
+              "Immune Deficiency"
+            ],
+            "unlinked_interventions": [
+              "Placebo"
+            ]
+          },
+          "nct:NCT01176006": {
+            "unlinked_conditions": [
+              "DOCK8 Deficiency"
+            ],
+            "unlinked_interventions": [
+              "Reduced-intensity hematopoietic stem cell",
+              "Fludarabine(Fludara, Berlex Laboratories)",
+              "Cyclophosphamide(CTX, Cytoxan)",
+              "Total Body Irradiation (TBI)",
+              "Busulfan (Busulfex)",
+              "Donor peripheral blood stem cell mobiliation and collection",
+              "Bone Marrow Harvest Procedure"
+            ]
+          },
+          "nct:NCT01348490": {
+            "unlinked_conditions": [
+              "MPN (Myeloproliferative Neoplasms)"
+            ]
+          },
+          "nct:NCT01375140": {
+            "unlinked_conditions": [
+              "Myeloproliferative Diseases"
+            ]
+          },
+          "nct:NCT01386437": {
+            "unlinked_conditions": [
+              "Invasive Aspergillosis",
+              "CARD9",
+              "APECED"
+            ]
+          },
+          "nct:NCT01392443": {
+            "unlinked_conditions": [
+              "Primary Myelofibrosis (MF)",
+              "Post-Polycythemia Vera (PV) MF",
+              "Post-Essential Thrombocythemia (ET) MF"
+            ]
+          },
+          "nct:NCT01433445": {
+            "unlinked_conditions": [
+              "Idiopathic Myelofibrosis",
+              "Post Essential Thrombocythemia Myelofibrosis",
+              "Post Polycythemia-Vera Myelofibrosis"
+            ]
+          },
+          "nct:NCT01558739": {
+            "unlinked_conditions": [
+              "Primary Myelofibrosis (PMF)",
+              "Post Polycythaemia Myelofibrosis (PPV MF)",
+              "Post Essential Thrombocythaemia Myelofibrosis (PET-MF)"
+            ]
+          },
+          "nct:NCT01730248": {
+            "unlinked_interventions": [
+              "BKM120"
+            ]
+          },
+          "nct:NCT01732445": {
+            "unlinked_conditions": [
+              "Anemia",
+              "Secondary Myelofibrosis"
+            ],
+            "unlinked_interventions": [
+              "danazol",
+              "quality-of-life assessment",
+              "questionnaire administration"
+            ]
+          },
+          "nct:NCT01842386": {
+            "unlinked_conditions": [
+              "Pulmonary Alveolar Proteinosis (PAP)",
+              "Severe Mucocutaneous Candidiasis"
+            ]
+          },
+          "nct:NCT01852370": {
+            "unlinked_conditions": [
+              "Severe Combined Immunodeficiency (SCID)",
+              "Immunodeficiency With Predominant T-cell Defect, Unspecified",
+              "Severe Chronic Neutropenia",
+              "Chronic Granulomatous Disease (CGD)",
+              "Hyper IgE Syndromes",
+              "Hyper IgM Deficiencies",
+              "Wiskott-Aldrich Syndrome",
+              "Mendelian Susceptibility to Mycobacterial Disease",
+              "Common Variable Immune Deficiency (CVID)"
+            ],
+            "unlinked_interventions": [
+              "CD3/CD19 negative allogeneic hematopoietic stem cells"
+            ]
+          },
+          "nct:NCT01953016": {
+            "unlinked_conditions": [
+              "Primary Immunodeficiencies",
+              "APECED",
+              "CGD",
+              "Wiskott-Aldrich Syndrome"
+            ]
+          },
+          "nct:NCT01969838": {
+            "unlinked_conditions": [
+              "Post-Polycythemia Vera Myelofibrosis",
+              "Post-Essential Thrombocythemia Myelofibrosis"
+            ],
+            "unlinked_interventions": [
+              "Placebo to match momelotinib",
+              "Placebo to match ruxolitinib"
+            ]
+          },
+          "nct:NCT02038036": {
+            "unlinked_interventions": [
+              "Best Available Therapy"
+            ]
+          },
+          "nct:NCT02226172": {
+            "unlinked_conditions": [
+              "Primary Myelofibrosis; Post-polycythemia Vera Myelofibrosis; Post-essential Thrombocythemia Myelofibrosis"
+            ],
+            "unlinked_interventions": [
+              "Glasdegib (PF-04449913)",
+              "Placebo"
+            ]
+          },
+          "nct:NCT02251821": {
+            "unlinked_conditions": [
+              "Secondary Myelofibrosis"
+            ],
+            "unlinked_interventions": [
+              "Allogeneic Hematopoietic Stem Cell Transplantation",
+              "Laboratory Biomarker Analysis",
+              "Total-Body Irradiation",
+              "Umbilical Cord Blood Transplantation"
+            ]
+          },
+          "nct:NCT02267278": {
+            "unlinked_conditions": [
+              "Myeloproliferative Diseases"
+            ],
+            "unlinked_interventions": [
+              "Questionnaire"
+            ]
+          },
+          "nct:NCT02629419": {
+            "unlinked_conditions": [
+              "Candidiasis, Chronic Mucocutaneous"
+            ]
+          },
+          "nct:NCT02912884": {
+            "unlinked_conditions": [
+              "Thrombocythemia, Essential"
+            ],
+            "unlinked_interventions": [
+              "No cytoreductive vs cytoreductive drugs"
+            ]
+          },
+          "nct:NCT02996448": {
+            "unlinked_conditions": [
+              "Autosomal-dominant Hyper-IgE Syndrome"
+            ],
+            "unlinked_interventions": [
+              "NDV-3A"
+            ]
+          },
+          "nct:NCT03059992": {
+            "unlinked_conditions": [
+              "Invasive Candidiasis",
+              "Mucocutaneous Candidiasis",
+              "Coccidioidomycosis",
+              "Histoplasmosis",
+              "Blastomycosis",
+              "Chronic Pulmonary Aspergillosis",
+              "Allergic Bronchopulmonary Aspergillosis",
+              "Invasive Pulmonary Aspergillosis",
+              "Recurrent Vulvovaginal Candidiasis",
+              "Other Emerging Fungi"
+            ],
+            "unlinked_interventions": [
+              "Ibrexafungerp"
+            ]
+          },
+          "nct:NCT03619551": {
+            "unlinked_interventions": [
+              "Cell processing for TCRαβ+/CD19+ depletion"
+            ]
+          },
+          "nct:NCT03800056": {
+            "unlinked_conditions": [
+              "Polyendocrinopathies, Autoimmune"
+            ]
+          },
+          "nct:NCT03878199": {
+            "unlinked_conditions": [
+              "Myeloproliferative Neoplasm"
+            ],
+            "unlinked_interventions": [
+              "Allogeneic Hematopoietic Stem Cell Transplantation",
+              "Liposome-encapsulated Daunorubicin-Cytarabine"
+            ]
+          },
+          "nct:NCT04217356": {
+            "unlinked_conditions": [
+              "High-Risk Cancer",
+              "Bone Marrow Cancer"
+            ],
+            "unlinked_interventions": [
+              "Hematopoietic stem cell transplant"
+            ]
+          },
+          "nct:NCT04354727": {
+            "unlinked_interventions": [
+              "APG-1252"
+            ]
+          },
+          "nct:NCT04551053": {
+            "unlinked_conditions": [
+              "Post Essential Thrombocythemia Myelofibrosis",
+              "Post Polycythemia Vera Myelofibrosis"
+            ],
+            "unlinked_interventions": [
+              "placebo"
+            ]
+          },
+          "nct:NCT04562389": {
+            "unlinked_interventions": [
+              "Placebo"
+            ]
+          },
+          "nct:NCT04562870": {
+            "unlinked_interventions": [
+              "Physician's Choice Treatment"
+            ]
+          },
+          "nct:NCT04884191": {
+            "unlinked_conditions": [
+              "Post-Polycythemia Vera Myelofibrosis",
+              "Post- Essential Thrombocythemia Myelofibrosis"
+            ]
+          },
+          "nct:NCT04897113": {
+            "unlinked_conditions": [
+              "Hypercholesterolemia",
+              "Hyperbilirubinemia",
+              "Hyper IgE Syndrome",
+              "Hyper Beta Lipoproteinemia",
+              "Hyper Eosinophilic Syndrome",
+              "Hyper-LDL-cholesterolemia",
+              "Gout",
+              "Diabetes",
+              "Nervous System Diseases",
+              "Neuromuscular Diseases",
+              "Cardiovascular Diseases",
+              "Urologic Diseases"
+            ],
+            "unlinked_interventions": [
+              "plasma exchange with albumin",
+              "plasma exchange without albumin"
+            ]
+          },
+          "nct:NCT05423691": {
+            "unlinked_interventions": [
+              "CK0804"
+            ]
+          },
+          "nct:NCT05561985": {
+            "unlinked_conditions": [
+              "STAT1 Gain-of-Function Disease"
+            ]
+          },
+          "nct:NCT06034002": {
+            "unlinked_interventions": [
+              "INCA033989"
+            ]
+          },
+          "nct:NCT06327100": {
+            "unlinked_conditions": [
+              "Post-polycythemia Vera Myelofibrosis",
+              "Post-Essential Thrombocytosis Myelofibrosis"
+            ],
+            "unlinked_interventions": [
+              "Tasquinimod"
+            ]
+          },
+          "nct:NCT06516406": {
+            "unlinked_conditions": [
+              "Secondary Myelofibrosis"
+            ]
+          },
+          "nct:NCT06770842": {
+            "unlinked_conditions": [
+              "Primary Myelofibrosis (PMF)",
+              "Post Polycythemia Myelofibrosis (PPV MF)",
+              "Post Essential Thrombocythaemia Myelofibrosis (PET-MF)"
+            ],
+            "unlinked_interventions": [
+              "Ropeginterferon alfa-2b (BESREMi®)"
+            ]
+          },
+          "nct:NCT07261891": {
+            "unlinked_conditions": [
+              "Primary Immunodeficiency Diseases (PID)"
+            ],
+            "unlinked_interventions": [
+              "blood sampling"
+            ]
+          },
+          "nct:NCT07262983": {
+            "unlinked_conditions": [
+              "Hyper IgE Syndrome From STAT3 Mutation",
+              "Job s Syndrome",
+              "Atopic Dermatitis"
+            ]
+          },
+          "nct:NCT07498205": {
+            "unlinked_conditions": [
+              "Myelofibrosis (MF)"
+            ]
+          },
+          "nct:NCT07670156": {
+            "unlinked_conditions": [
+              "JAK1 GOF",
+              "STAT1 GOF",
+              "STAT3 GOF",
+              "STAT5B GOF",
+              "STAT6 GOF"
+            ],
+            "unlinked_interventions": [
+              "Placebo"
+            ]
+          }
+        },
+        "errors": []
+      }
+    },
+    "pipeline.sources.reporter": {
+      "status": "ok",
+      "summary": {
+        "source": "NIH RePORTER",
+        "fiscal_years": [
+          2022,
+          2023,
+          2024,
+          2025,
+          2026,
+          2027
+        ],
+        "totals": {
+          "STAT1 gain of function": 135,
+          "chronic mucocutaneous candidiasis": 18,
+          "inborn errors of immunity": 387,
+          "JAK3 severe combined immunodeficiency": 30,
+          "STAT3 gain of function": 187,
+          "hyper IgE syndrome": 83
+        },
+        "records_seen": 208,
+        "grants": 127,
+        "grants_without_pi": [],
+        "skipped_pis": 0,
+        "investigators": 150,
+        "links": 538,
+        "linked_grants": 114,
+        "unlinked_grants": 13,
+        "pmids": 2579,
+        "grants_with_pmids": 92,
+        "errors": [],
+        "retrieved_at": "2026-10-03T21:41:37+00:00",
+        "seconds": 27.59
+      }
     }
   },
   "store_counts": {
-    "nodes": 7672,
-    "edges": 30126,
-    "coverage": 1988,
-    "sources": 2,
+    "nodes": 14397,
+    "edges": 45862,
+    "coverage": 8622,
+    "sources": 5,
     "hpo_ic": 19677,
     "nodes_by_type": {
       "Disease": 643,
       "Drug": 2038,
       "Gene": 2688,
+      "Investigator": 150,
       "Pathway": 335,
-      "Phenotype": 1968
+      "Phenotype": 1968,
+      "Study": 54,
+      "Variant": 6521
     },
     "edges_by_relation": {
       "associated_with": 17949,
       "contraindicated_for": 210,
+      "evaluates": 76,
       "has_clinical_course": 80,
       "has_clinical_modifier": 1,
+      "has_condition": 7895,
+      "has_funded_project": 538,
       "has_inheritance": 148,
       "has_phenotype": 1444,
       "in_pathway": 552,
       "indicated_for": 5771,
       "inhibits": 94,
       "is_a": 3847,
-      "targets": 30
+      "studies": 74,
+      "targets": 30,
+      "variant_of": 7153
     }
   },
   "source_versions": [
+    {
+      "name": "ClinVar",
+      "version": "Build260929-0200.1",
+      "retrieved_at": "2026-10-03T21:31:51+00:00",
+      "license": "Public domain (NCBI); see https://www.ncbi.nlm.nih.gov/home/about/policies/"
+    },
+    {
+      "name": "ClinicalTrials.gov",
+      "version": "2026-10-02T09:00:04",
+      "retrieved_at": "2026-10-03T21:34:57+00:00",
+      "license": "ClinicalTrials.gov Terms and Conditions (https://clinicaltrials.gov/about-site/terms-conditions, last updated 2023-01-31): a US Government database available to all requesters at no charge, without warranties. Any publication or distribution must attribute the source as ClinicalTrials.gov, keep the data current, clearly display the date the data were processed by ClinicalTrials.gov (dataTimestamp / versionHolder), and state any modifications made. No proprietary rights may be asserted over the database. Email addresses extracted from the database must not be used for marketing or other promotional purposes. Data may carry an international copyright outside the US."
+    },
     {
       "name": "HPO",
       "version": "2026-09-02",
       "retrieved_at": "2026-10-03T21:19:47+00:00",
       "license": "HPO custom (cite, show version, don't alter; IEA rows: OMIM reuse caveat)"
+    },
+    {
+      "name": "NIH RePORTER",
+      "version": "2026-10-03",
+      "retrieved_at": "2026-10-03T21:41:37+00:00",
+      "license": "Public domain (U.S. Government work); RePORTER data access policy — see docs/source-apis.md (UNVERIFIED wording)"
     },
     {
       "name": "OptimusKG",
@@ -926,13 +3149,29 @@
       "version": "",
       "retrieved_at": "2026-10-03",
       "license": "team-authored project document (docs/test-cluster-desc.md); not a licensed database"
+    },
+    {
+      "name": "claims bundle (data/build/claims.json)",
+      "version": "claude-sonnet-5-5",
+      "retrieved_at": "2026-10-03T21:26:24+00:00",
+      "license": "PubMed abstracts: public (NCBI / NLM terms), see README section 5"
+    },
+    {
+      "name": "patient group seeds: pipeline/seeds/patient_groups.yaml",
+      "version": "",
+      "retrieved_at": "2026-10-03",
+      "license": "team-curated seed file (pipeline/seeds/patient_groups.yaml); every URL fetched on the recorded date"
     }
   ],
   "timings_seconds": {
-    "pipeline.sources.optimuskg": 9.268,
-    "pipeline.sources.hpo": 0.592,
-    "build": 2.797,
-    "write_and_reload": 1.029,
-    "total": 13.693
+    "pipeline.sources.optimuskg": 8.023,
+    "pipeline.sources.hpo": 0.58,
+    "pipeline.sources.clinvar": 2.859,
+    "pipeline.sources.ctgov": 0.164,
+    "pipeline.sources.reporter": 27.591,
+    "build": 3.673,
+    "graph_logic": 1.098,
+    "write_and_reload": 0.215,
+    "total": 44.256
   }
 }
