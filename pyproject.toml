@@ -34,8 +34,9 @@ dev = [
 package = false
 
 [tool.pytest.ini_options]
-testpaths = ["tests"]
+testpaths = ["tests", "api/tests"]
 pythonpath = ["."]
 addopts = "-ra"
+markers = ["network: hits a live service; set ATLAS_NETWORK_TESTS=1 to run"]
 # pytest-timeout: a hung test fails instead of stalling CI. Override per test with @pytest.mark.timeout(n).
 timeout = 120

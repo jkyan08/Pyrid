@@ -357,8 +357,9 @@ def test_mech_endpoint_creates_the_mechanism_node(integrated) -> None:
     assert node["type"] == "Mechanism" and node["label"] == "MOCKGENE2 loss of function"
     assert node["props"] == {"gene_symbol": "MOCKGENE2", "direction": "LoF", "source": "claims", "gene": "mock:gene:2"}
     e = res.new_edges[("mock:disease:2", "mech:MOCKGENE2:LoF", "has_mechanism")]
-    assert e["supporting"] == ["c_000007"] and e["status"] == "supported" and e["attributes"]["labels"] == [], "a review is not patient-level"
+    assert e["supporting"] == ["c_000007"] and e["status"] == "supported" and e["attributes"]["labels"] == ["in_vitro_only"], "a review is not patient-level: no 'promising', and the review-only rule labels the edge"
     assert e["confidence"] == pytest.approx(0.5)
+    assert e["confidence_basis"]["in_vitro_only"] == {"study_types": ["review"], "cap": 0.5, "uncapped_confidence": pytest.approx(0.5)}
 
 
 def test_inferred_edge_with_support_becomes_extracted(integrated) -> None:
@@ -576,3 +577,186 @@ def test_slugify_and_aggregate_confidence() -> None:
     assert conf == 0.0 and basis["max_supporting_weight"] is None
     conf, _ = ev.aggregate_confidence([1.0, 1.0, 1.0], 0)
     assert conf == 1.0
+
+
+# --------------------------------------------------------------------------------------
+# general rules added 2026-10-04: contradicting claims on mechanism edges, protein-change
+# mentions, in-vitro-only mechanism edges
+# --------------------------------------------------------------------------------------
+
+
+def _mini_bundle(quotes: dict[str, str], claims: list[dict[str, Any]]) -> ClaimsBundle:
+    abstract = " ".join(quotes.values())
+    paper = {"id": MOCK_PAPER, "type": "Paper", "label": "Mock paper one", "synonyms": [], "props": {"title": "Mock paper one", "abstract": abstract, "year": 2020, "authors": [AUTHOR_FOUR]}}
+    return ClaimsBundle.model_validate({"extracted_at": TS, "model": "mock-model", "papers": [paper], "claims": claims})
+
+
+def _mini_claim(n: int, quote: str, subject: str, predicate: str, obj: str, *, polarity: str = "supports", study_type: str = "case_report", n_patients: int | None = None, variant: str = "") -> dict[str, Any]:
+    return {"id": f"c_{n:06d}", "pmid": "", "paper": MOCK_PAPER, "quote": quote, "polarity": polarity, "subject": subject, "predicate": predicate, "object": obj, "variant": variant, "study_type": study_type, "n_patients": n_patients}
+
+
+def test_contradicting_claims_reach_a_mechanism_edge_only_through_has_mechanism() -> None:
+    nodes, edges = drafts()
+    q = {
+        "con_causes": "Mock drug pharmacodynamics looked different in patient cells.",
+        "con_mech": "Mock disease one does not show the MOCKGENE1 route in this series.",
+        "sup_causes": "The mock gain of function route causes mock disease one.",
+    }
+    bundle_ = _mini_bundle(
+        q,
+        [
+            # a contradicting claim phrased as `causes` between the Mechanism and the Disease: NOT on the mechanism edge
+            _mini_claim(1, q["con_causes"], "mech:MOCKGENE1:GoF", "causes", "mock:disease:1", polarity="contradicts", study_type="cohort", n_patients=14),
+            # a contradicting has_mechanism claim whose object IS the Mechanism node: attaches
+            _mini_claim(2, q["con_mech"], "mock:disease:1", "has_mechanism", "mech:MOCKGENE1:GoF", polarity="contradicts", study_type="case_series", n_patients=3),
+            # a supporting `causes` claim still attaches in either orientation
+            _mini_claim(3, q["sup_causes"], "mech:MOCKGENE1:GoF", "causes", "mock:disease:1", study_type="review"),
+        ],
+    )
+    res = ev.integrate_claims(nodes, edges, bundle_, today=TODAY)
+    e = edges[("mock:disease:1", "mech:MOCKGENE1:GoF", "has_mechanism")]
+    assert e["supporting"] == ["c_000003"] and e["contradicting"] == ["c_000002"] and e["status"] == "contested"
+    reasons = {u["id"]: u["reason"] for u in res.unattached}
+    assert reasons == {"c_000001": ev.CONTRADICTING_MECHANISM_PROBLEM.format(predicate="causes")}
+    assert res.report["claims"]["contradicting_not_on_mechanism_edge"] == 1 and res.report["endpoints"]["mapping_gaps"] == {}, "not a mapping gap: the pair maps, the polarity does not"
+    assert any(e_ == "mech:MOCKGENE1:GoF" and "contradicting causes claim" in q_ for e_, s_, q_, _, _ in res.coverage_rows if s_ == ev.COVERAGE_SOURCE), "the failed link is a coverage row"
+    assert ev.COVERAGE_SOURCE == "unresolved literature mention"
+    assert next(c for c in res.claims if c["id"] == "c_000001")["polarity"] == "contradicts", "the claim stays in claims[]"
+    merged_graph(nodes, edges, res)
+
+
+def _mention_drafts() -> tuple[dict[str, dict[str, Any]], dict[tuple[str, str, str], dict[str, Any]]]:
+    nodes, edges = drafts()
+    variants = [
+        _node("mock:variant:a", "Variant", "Mock variant A (p.Arg274Trp)", ["p.Arg274Trp", "MOCKGENE1 R274W"], protein_change="R274W", hgvs_p="p.Arg274Trp", gene_symbol="MOCKGENE1", gene_symbols=["MOCKGENE1"]),
+        _node("mock:variant:b", "Variant", "Mock variant B (p.Arg274Trp)", ["p.Arg274Trp"], protein_change="R274W", gene_symbol="MOCKGENE2"),  # same token, other gene
+        _node("mock:variant:c", "Variant", "Mock variant C", ["T419R"], protein_change="T419R", gene_symbols=["MOCKGENE1"]),
+        _node("mock:variant:d", "Variant", "Mock variant D", [], protein_change="P1104A", gene_symbol="MOCKGENE1"),
+        _node("mock:variant:e", "Variant", "Mock variant E", [], protein_change="P1104A", gene_symbol="MOCKGENE1"),  # ambiguous within the gene
+        _node("mock:variant:f", "Variant", "Mock variant F", ["V617F"], protein_change="V617F", gene_symbol="MOCKGENE2"),  # unique across all variants
+    ]
+    for v in variants:
+        nodes[v["id"]] = v
+    return nodes, edges
+
+
+def test_protein_change_mentions_resolve_to_exactly_one_variant_of_the_named_gene() -> None:
+    nodes, edges = _mention_drafts()
+    q = {
+        "s_named": "The MOCKGENE1 R274W change drives the route.",
+        "v_mech": "Mock disease one carries the route in one patient.",
+        "v_disease": "Mock-inib helped the mock patient.",
+        "v_nogene": "Mock-inib changed the mock pathway.",
+        "v_wrong": "Mock-inib treated another mock patient.",
+        "v_unique": "Mock-inib touched the pathway again.",
+        "ambig": "Homozygosity was seen in two mock patients.",
+        "phrase": "Mock-inib modulates mutated cell lines.",
+        "two": "Two changes showed the mock phenotype.",
+        "causes": "The other change was found in mock disease one.",
+    }
+    bundle_ = _mini_bundle(
+        q,
+        [
+            # subject and variant both name MOCKGENE1 R274W: the gene in the mention picks variant A over B
+            _mini_claim(1, q["s_named"], "text:MOCKGENE1 R274W", "has_mechanism", "mech:MOCKGENE1:GoF", variant="text:R274W", n_patients=1),
+            # bare token; the gene comes from the Mechanism endpoint (and the Disease's mechanism edge)
+            _mini_claim(2, q["v_mech"], "mock:disease:1", "has_mechanism", "mech:MOCKGENE1:GoF", variant="text:R274W", n_patients=1),
+            # bare token; the gene comes from the Disease endpoint's mechanism edge only
+            _mini_claim(3, q["v_disease"], "CHEMBL0", "treats", "mock:disease:1", variant="text:R274W", n_patients=1),
+            # bare token, no gene anywhere: R274W exists in two genes -> ambiguous, stays unresolved
+            _mini_claim(4, q["v_nogene"], "CHEMBL0", "modulates", "mock:pathway:1", variant="text:R274W", study_type="in_vitro"),
+            # the named gene (via the disease) has no such variant: unresolved, never the other gene's variant
+            _mini_claim(5, q["v_wrong"], "CHEMBL0", "treats", "mock:disease:1", variant="text:V617F", n_patients=1),
+            # no gene anywhere and the token is unique across all Variant nodes: resolves
+            _mini_claim(6, q["v_unique"], "CHEMBL0", "modulates", "mock:pathway:1", variant="text:V617F", study_type="in_vitro"),
+            # two variants of the named gene carry the token: ambiguous
+            _mini_claim(7, q["ambig"], "text:MOCKGENE1 P1104A homozygosity", "causes", "mock:disease:1", variant="text:P1104A", n_patients=2),
+            # a phrase that merely contains a variant is not the variant
+            _mini_claim(8, q["phrase"], "CHEMBL0", "modulates", "text:MOCKGENE1 T419R-mutated cell lines", study_type="in_vitro"),
+            # two tokens naming two variants: ambiguous
+            _mini_claim(9, q["two"], "text:MOCKGENE1 T419R and R274W", "has_phenotype", "mock:phenotype:1", n_patients=2),
+            # a resolved Variant subject takes the normal {Variant, Disease} route (has_condition)
+            _mini_claim(10, q["causes"], "text:MOCKGENE1 T419R", "causes", "mock:disease:1", n_patients=1),
+        ],
+    )
+    res = ev.integrate_claims(nodes, edges, bundle_, today=TODAY)
+    claims = by_id(res)
+    assert claims["c_000001"]["subject"] == "mock:variant:a" and claims["c_000001"]["variant"] == "mock:variant:a"
+    assert claims["c_000002"]["variant"] == "mock:variant:a" and claims["c_000003"]["variant"] == "mock:variant:a"
+    assert claims["c_000004"]["variant"] == "" and claims["c_000005"]["variant"] == "" and claims["c_000007"]["variant"] == ""
+    assert claims["c_000006"]["variant"] == "mock:variant:f"
+    assert claims["c_000007"]["subject"] == "text:MOCKGENE1 P1104A homozygosity" and claims["c_000008"]["object"] == "text:MOCKGENE1 T419R-mutated cell lines"
+    assert claims["c_000009"]["subject"] == "text:MOCKGENE1 T419R and R274W" and claims["c_000010"]["subject"] == "mock:variant:c"
+    # the variant-specific route ran for the resolved mentions
+    route = res.new_edges[("mock:variant:a", "mech:MOCKGENE1:GoF", "has_mechanism")]
+    assert route["supporting"] == ["c_000001", "c_000002"] and "variant_specific" in route["attributes"]["labels"]
+    notes = route["confidence_basis"]["resolved_mentions"]
+    assert {(n["claim"], n["field"], n["resolved_from"], n["resolved_to"]) for n in notes} == {
+        ("c_000001", "subject", "text:MOCKGENE1 R274W", "mock:variant:a"),
+        ("c_000001", "variant", "text:R274W", "mock:variant:a"),
+        ("c_000002", "variant", "text:R274W", "mock:variant:a"),
+    }
+    assert all(n["method"] == ev.VARIANT_MENTION_METHOD for n in notes)
+    condition = res.new_edges[("mock:variant:c", "mock:disease:1", "has_condition")]
+    assert condition["supporting"] == ["c_000010"] and condition["confidence_basis"]["resolved_mentions"][0]["resolved_to"] == "mock:variant:c"
+    # unresolved mentions keep today's coverage rows and reasons
+    rows = {(e, q_) for e, s, q_, _, _ in res.coverage_rows if s == ev.COVERAGE_SOURCE}
+    assert (DRUG, "text:R274W [claim variant is not a Variant node]") in rows and (DRUG, "text:V617F [claim variant is not a Variant node]") in rows, "keyed by the resolved subject, as today"
+    assert ("mock:disease:1", "text:MOCKGENE1 P1104A homozygosity") in rows and (DRUG, "text:MOCKGENE1 T419R-mutated cell lines") in rows
+    assert sorted(res.report["claims"]["variant_cleared"]) == ["c_000004", "c_000005", "c_000007"]
+    report = res.report["claims"]["variant_mentions"]
+    assert report["method"] == ev.VARIANT_MENTION_METHOD
+    assert report["outcomes"] == {"ambiguous": 3, "mention_names_more_than_the_variant": 2, "no_matching_variant": 1, "resolved": 6}, (
+        "ambiguous: R274W with no gene, P1104A twice (subject and variant); more than the variant: the -mutated phrase and the two-token 'and' mention; V617F against the wrong gene"
+    )
+    assert [(r["claim"], r["field"], r["resolved_to"]) for r in report["resolved"]] == [
+        ("c_000001", "subject", "mock:variant:a"),
+        ("c_000001", "variant", "mock:variant:a"),
+        ("c_000002", "variant", "mock:variant:a"),
+        ("c_000003", "variant", "mock:variant:a"),
+        ("c_000006", "variant", "mock:variant:f"),
+        ("c_000010", "subject", "mock:variant:c"),
+    ]
+    assert res.report["endpoints"]["resolution_how"][ev.VARIANT_MENTION_HOW] == 6, "every field resolved this way (2 subjects + 4 variant fields) moves from the 'text' tally"
+    assert res.report["endpoints"]["resolved_by_prefix"]["text"] == 2, "the subject / object tallies count the two resolved subjects"
+    merged_graph(nodes, edges, res)
+
+
+def test_protein_change_token_shape() -> None:
+    hits = ev.PROTEIN_CHANGE_TOKEN.findall("STAT1 R274W, K119*, p.Arg274Trp and p.Lys119Ter; not CD14+, JAK2V617F, L106VfsTer42, c.820C>T, HP:0001548, IL17A or Stat1-/-")
+    assert hits == ["R274W", "K119*", "p.Arg274Trp", "p.Lys119Ter"]
+
+
+def test_in_vitro_only_mechanism_edges_are_labelled_and_capped() -> None:
+    nodes, edges = drafts()
+    q = {
+        "vitro": "MOCKGENE2 loss of function in mock cells.",
+        "review": "A mock review summarises MOCKGENE2 loss of function.",
+        "vitro2": "MOCKGENE2 loss of function in other mock cells.",
+        "patient": "One mock patient carried the MOCKGENE2 route.",
+        "obs_review": "A mock review repeats the MOCKGENE1 route.",
+    }
+    bundle_ = _mini_bundle(
+        q,
+        [
+            # a new disease -> mechanism edge from two non-patient claims: capped at 0.5 and labelled
+            _mini_claim(1, q["vitro"], "mock:disease:1", "has_mechanism", "mech:MOCKGENE2:LoF", study_type="in_vitro"),
+            _mini_claim(2, q["review"], "mock:disease:1", "has_mechanism", "mech:MOCKGENE2:LoF", study_type="review"),
+            # a second new edge with a patient-level claim among the support: untouched
+            _mini_claim(3, q["vitro2"], "mock:disease:2", "has_mechanism", "mech:MOCKGENE2:LoF", study_type="in_vitro"),
+            _mini_claim(4, q["patient"], "mock:disease:2", "has_mechanism", "mech:MOCKGENE2:LoF", study_type="case_report", n_patients=1),
+            # a review on the OBSERVED R1 edge: the database still supports it, no cap
+            _mini_claim(5, q["obs_review"], "mock:disease:1", "has_mechanism", "mech:MOCKGENE1:GoF", study_type="review"),
+        ],
+    )
+    res = ev.integrate_claims(nodes, edges, bundle_, today=TODAY)
+    capped = res.new_edges[("mock:disease:1", "mech:MOCKGENE2:LoF", "has_mechanism")]
+    assert capped["evidence_class"] == "extracted" and capped["confidence"] == pytest.approx(0.5), "review 0.5 + 0.05 for the second claim = 0.55, capped"
+    assert capped["attributes"]["labels"] == ["in_vitro_only"]
+    assert capped["confidence_basis"]["in_vitro_only"] == {"study_types": ["in_vitro", "review"], "cap": 0.5, "uncapped_confidence": pytest.approx(0.55)}
+    assert capped["confidence_basis"]["claims"]["literature_confidence"] == pytest.approx(0.55), "the aggregate itself is unchanged"
+    mixed = res.new_edges[("mock:disease:2", "mech:MOCKGENE2:LoF", "has_mechanism")]
+    assert "in_vitro_only" not in mixed["attributes"]["labels"] and "in_vitro_only" not in mixed["confidence_basis"] and mixed["confidence"] == pytest.approx(0.45)
+    observed = edges[("mock:disease:1", "mech:MOCKGENE1:GoF", "has_mechanism")]
+    assert observed["evidence_class"] == "observed" and observed["confidence"] == 0.6 and "in_vitro_only" not in observed["attributes"].get("labels", [])
+    merged_graph(nodes, edges, res)

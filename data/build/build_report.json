@@ -1,5 +1,5 @@
 {
-  "built_at": "2026-10-04T04:17:54+00:00",
+  "built_at": "2026-10-04T06:15:17+00:00",
   "thresholds": {
     "disease_gene_min_score": 0.3,
     "keep_disgenet_direct": true,
@@ -211,12 +211,12 @@
     "claims": {
       "in_bundle": 935,
       "in_graph": 935,
-      "attached": 145,
-      "unattached": 790,
+      "attached": 147,
+      "unattached": 788,
       "unattached_reasons": {
-        "subject '...' unresolved (text)": 160,
-        "object '...' unresolved (text)": 254,
-        "subject '...' unresolved (text); object '...' unresolved (text)": 266,
+        "subject '...' unresolved (text)": 158,
+        "object '...' unresolved (text)": 261,
+        "subject '...' unresolved (text); object '...' unresolved (text)": 259,
         "object '...' unresolved (missing)": 22,
         "subject '...' unresolved (text); object '...' unresolved (missing)": 38,
         "subject '...' unresolved (missing); object '...' unresolved (text)": 39,
@@ -299,7 +299,143 @@
         "c_000934",
         "c_000935"
       ],
-      "contradicting_only_no_edge": 4
+      "variant_mentions": {
+        "method": "protein-change token vs ClinVar synonyms",
+        "outcomes": {
+          "ambiguous": 2,
+          "mention_names_more_than_the_variant": 23,
+          "no_matching_variant": 69,
+          "no_protein_change_token": 988,
+          "resolved": 9
+        },
+        "resolved": [
+          {
+            "claim": "c_000161",
+            "field": "subject",
+            "resolved_from": "text:JAK2 V617F",
+            "resolved_to": "clinvar:14662",
+            "method": "protein-change token vs ClinVar synonyms",
+            "tokens": [
+              "V617F"
+            ],
+            "genes": [
+              "INSL6",
+              "JAK2"
+            ]
+          },
+          {
+            "claim": "c_000175",
+            "field": "subject",
+            "resolved_from": "text:JAK2 V617F",
+            "resolved_to": "clinvar:14662",
+            "method": "protein-change token vs ClinVar synonyms",
+            "tokens": [
+              "V617F"
+            ],
+            "genes": [
+              "INSL6",
+              "JAK2"
+            ]
+          },
+          {
+            "claim": "c_000319",
+            "field": "subject",
+            "resolved_from": "text:JAK2 V617F",
+            "resolved_to": "clinvar:14662",
+            "method": "protein-change token vs ClinVar synonyms",
+            "tokens": [
+              "V617F"
+            ],
+            "genes": [
+              "INSL6",
+              "JAK1",
+              "JAK2"
+            ]
+          },
+          {
+            "claim": "c_000337",
+            "field": "subject",
+            "resolved_from": "text:JAK2 V617F",
+            "resolved_to": "clinvar:14662",
+            "method": "protein-change token vs ClinVar synonyms",
+            "tokens": [
+              "V617F"
+            ],
+            "genes": [
+              "INSL6",
+              "JAK2"
+            ]
+          },
+          {
+            "claim": "c_000382",
+            "field": "subject",
+            "resolved_from": "text:JAK2 V617F",
+            "resolved_to": "clinvar:14662",
+            "method": "protein-change token vs ClinVar synonyms",
+            "tokens": [
+              "V617F"
+            ],
+            "genes": [
+              "INSL6",
+              "JAK2"
+            ]
+          },
+          {
+            "claim": "c_000907",
+            "field": "subject",
+            "resolved_from": "text:STAT1 GOF T385M",
+            "resolved_to": "clinvar:144006",
+            "method": "protein-change token vs ClinVar synonyms",
+            "tokens": [
+              "T385M"
+            ],
+            "genes": [
+              "STAT1"
+            ]
+          },
+          {
+            "claim": "c_000908",
+            "field": "subject",
+            "resolved_from": "text:STAT1 GOF R274Q",
+            "resolved_to": "clinvar:30085",
+            "method": "protein-change token vs ClinVar synonyms",
+            "tokens": [
+              "R274Q"
+            ],
+            "genes": [
+              "STAT1"
+            ]
+          },
+          {
+            "claim": "c_000910",
+            "field": "subject",
+            "resolved_from": "text:STAT1 GOF T385M",
+            "resolved_to": "clinvar:144006",
+            "method": "protein-change token vs ClinVar synonyms",
+            "tokens": [
+              "T385M"
+            ],
+            "genes": [
+              "STAT1"
+            ]
+          },
+          {
+            "claim": "c_000926",
+            "field": "subject",
+            "resolved_from": "text:STAT1 GOF p.Leu400Pro",
+            "resolved_to": "clinvar:3776300",
+            "method": "protein-change token vs ClinVar synonyms",
+            "tokens": [
+              "p.Leu400Pro"
+            ],
+            "genes": [
+              "STAT1"
+            ]
+          }
+        ]
+      },
+      "contradicting_only_no_edge": 4,
+      "contradicting_not_on_mechanism_edge": 0
     },
     "endpoints": {
       "resolved_by_prefix": {
@@ -311,7 +447,8 @@
         "REACT": 1,
         "clinvar": 33,
         "ensembl": 36,
-        "mech": 238
+        "mech": 238,
+        "text": 9
       },
       "unresolved_by_prefix": {
         "CHEMBL (bare)": 7,
@@ -320,14 +457,15 @@
         "HP": 14,
         "MONDO": 46,
         "ensembl": 27,
-        "text": 1023
+        "text": 1014
       },
       "resolution_how": {
         "exact": 707,
         "mechanism": 3,
         "missing": 103,
         "normalized": 116,
-        "text": 1091
+        "protein_change_token": 9,
+        "text": 1082
       },
       "mapping_gaps": {
         "associated_with: Pathway -> Disease": 1,
@@ -336,7 +474,7 @@
     },
     "edges": {
       "created_by_relation": {
-        "has_condition": 1,
+        "has_condition": 2,
         "has_mechanism": 8,
         "has_phenotype": 13,
         "modulates": 6,
@@ -348,7 +486,7 @@
         "has_phenotype": 1
       },
       "created_by_predicate": {
-        "associated_with": 2,
+        "associated_with": 4,
         "causes": 10,
         "has_phenotype": 23,
         "modulates": 8,
@@ -425,7 +563,7 @@
       "dose_fields_changed": 3
     },
     "scrubbed_emails": 302,
-    "coverage_rows": 1005
+    "coverage_rows": 999
   },
   "patient_groups": {
     "groups": 7,
@@ -447,7 +585,70 @@
     "zero_hit_searches": 12,
     "descendant_depth": 3,
     "max_descendants_per_term": 200,
-    "descendant_cap_hits": []
+    "descendant_cap_hits": [],
+    "directory_search_gaps": {
+      "rule": "zero-hit directory search attached to every disease a matching seed term reached (query/outcome contains the normalised term)",
+      "rows_attached": 28,
+      "diseases": 10,
+      "by_search": {
+        "seed:patient_group_search:EURORDIS — on-site search": {
+          "query": "STAT1 gain of function",
+          "matched_terms": [
+            "STAT1 gain of function"
+          ],
+          "diseases": 3
+        },
+        "seed:patient_group_search:Genetic Alliance (US) — Disease InfoSearch": {
+          "query": "STAT1 gain of function",
+          "matched_terms": [
+            "STAT1 gain of function"
+          ],
+          "diseases": 3
+        },
+        "seed:patient_group_search:Global Genes — on-site search": {
+          "query": "STAT1 gain of function",
+          "matched_terms": [
+            "STAT1 gain of function"
+          ],
+          "diseases": 3
+        },
+        "seed:patient_group_search:Global Genes — via web search engine, domain-restricted": {
+          "query": "STAT1 gain of function",
+          "matched_terms": [
+            "STAT1 gain of function"
+          ],
+          "diseases": 3
+        },
+        "seed:patient_group_search:NORD (rarediseases.org) — on-site search": {
+          "query": "STAT1 gain of function",
+          "matched_terms": [
+            "STAT1 gain of function"
+          ],
+          "diseases": 3
+        },
+        "seed:patient_group_search:NORD (rarediseases.org) — on-site search, MPN groups": {
+          "query": "myeloproliferative neoplasm patient organization",
+          "matched_terms": [
+            "myeloproliferative neoplasms (umbrella for the three above)"
+          ],
+          "diseases": 7
+        },
+        "seed:patient_group_search:NORD (rarediseases.org) — via web search engine, domain-restricted": {
+          "query": "STAT1 gain of function patient organization",
+          "matched_terms": [
+            "STAT1 gain of function"
+          ],
+          "diseases": 3
+        },
+        "seed:patient_group_search:Orphanet — disease search (current site)": {
+          "query": "STAT1 gain of function",
+          "matched_terms": [
+            "STAT1 gain of function"
+          ],
+          "diseases": 3
+        }
+      }
+    }
   },
   "prune": {
     "thresholds": {
@@ -531,7 +732,7 @@
       "evaluates": 76,
       "has_clinical_course": 80,
       "has_clinical_modifier": 1,
-      "has_condition": 7896,
+      "has_condition": 7897,
       "has_funded_project": 538,
       "has_inheritance": 148,
       "has_mechanism": 31,
@@ -554,7 +755,7 @@
       "covers": 1,
       "evaluates": 76,
       "has_clinical_course": 32,
-      "has_condition": 725,
+      "has_condition": 726,
       "has_funded_project": 356,
       "has_inheritance": 54,
       "has_mechanism": 30,
@@ -620,9 +821,18 @@
     },
     "go_in_pathway_edges_dropped_non_seed_gene": 0
   },
+  "contact_routes": {
+    "rule": "orcid: id -> public ORCID page; else props.source_url (RePORTER project page); never an e-mail or phone",
+    "by_kind": {
+      "none": 64,
+      "orcid_public_page": 33,
+      "reporter_project_page": 112
+    },
+    "edges_with_contact_source": 519
+  },
   "counts": {
     "nodes": 2903,
-    "edges": 8535,
+    "edges": 8536,
     "claims": 935,
     "clusters": 117,
     "nodes_by_type": {
@@ -645,7 +855,7 @@
       "covers": 3,
       "evaluates": 76,
       "has_clinical_course": 32,
-      "has_condition": 725,
+      "has_condition": 726,
       "has_funded_project": 356,
       "has_inheritance": 54,
       "has_mechanism": 30,
@@ -664,7 +874,7 @@
       "variant_of": 622
     },
     "edges_by_evidence_class": {
-      "extracted": 50,
+      "extracted": 51,
       "inferred": 671,
       "observed": 7814
     },
@@ -672,7 +882,7 @@
       "contested": 2,
       "inferred_unsupported": 104,
       "small_n": 17,
-      "supported": 8412
+      "supported": 8413
     },
     "edges_by_label": {
       "below_score_threshold": 397,
@@ -683,12 +893,13 @@
       "direction_match": 97,
       "direction_mismatch": 104,
       "hypothesis": 97,
+      "in_vitro_only": 11,
       "inferred": 389,
       "inferred_unsupported": 104,
       "promising": 29,
       "similarity": 78,
       "small_n": 18,
-      "variant_specific": 9,
+      "variant_specific": 10,
       "via_ancestor": 30,
       "via_mechanism": 3
     },
@@ -705,8 +916,8 @@
     },
     "coverage": {
       "entities": 947,
-      "searches": 2517,
-      "zero_hit_searches": 1639,
+      "searches": 2539,
+      "zero_hit_searches": 1661,
       "by_source": {
         "ClinVar esearch": 12,
         "ClinVar esummary": 7,
@@ -714,19 +925,19 @@
         "ClinVar trait link": 610,
         "ClinicalTrials.gov": 54,
         "ClinicalTrials.gov studies": 23,
-        "EURORDIS — on-site search": 1,
-        "Genetic Alliance (US) — Disease InfoSearch": 1,
+        "EURORDIS — on-site search": 4,
+        "Genetic Alliance (US) — Disease InfoSearch": 4,
         "Genetic Alliance UK — on-site search": 1,
-        "Global Genes — on-site search": 1,
-        "Global Genes — via web search engine, domain-restricted": 1,
+        "Global Genes — on-site search": 4,
+        "Global Genes — via web search engine, domain-restricted": 4,
         "HPO hp.json": 1,
         "HPO phenotype.hpoa": 3,
         "NIH RePORTER project links": 6,
         "NIH RePORTER projects": 7,
         "NIH RePORTER publications": 3,
-        "NORD (rarediseases.org) — on-site search": 1,
-        "NORD (rarediseases.org) — on-site search, MPN groups": 1,
-        "NORD (rarediseases.org) — via web search engine, domain-restricted": 1,
+        "NORD (rarediseases.org) — on-site search": 4,
+        "NORD (rarediseases.org) — on-site search, MPN groups": 8,
+        "NORD (rarediseases.org) — via web search engine, domain-restricted": 4,
         "OptimusKG biological_process_gene": 8,
         "OptimusKG disease": 16,
         "OptimusKG disease_disease": 147,
@@ -737,16 +948,16 @@
         "OptimusKG drug_gene": 8,
         "OptimusKG gene": 7,
         "OptimusKG pathway_gene": 8,
-        "Orphanet — disease search (current site)": 1,
+        "Orphanet — disease search (current site)": 4,
         "Orphanet — legacy Disease_Search.php": 1,
         "Rare Disease UK — locating its directory": 1,
         "RareConnect (stretch)": 1,
         "Web search engine (general) — SCID group resolution": 1,
         "build prune": 73,
-        "claims.json endpoint": 1005,
         "mechanism rules": 147,
         "patient_groups.yaml disease term": 24,
-        "pubmed": 24
+        "pubmed": 24,
+        "unresolved literature mention": 999
       }
     },
     "sources": [
@@ -788,13 +999,13 @@
     ]
   },
   "sizes": {
-    "total_bytes": 7816701,
-    "total_mb": 7.82,
+    "total_bytes": 7898233,
+    "total_mb": 7.9,
     "nodes_by_type": {
       "Disease": 82658,
       "Drug": 51751,
       "Gene": 76647,
-      "Investigator": 279086,
+      "Investigator": 303827,
       "Mechanism": 2107,
       "Paper": 525739,
       "Pathway": 160962,
@@ -807,30 +1018,30 @@
     "edges_by_relation": {
       "associated_with": 1181638,
       "author_of": 176312,
-      "covers": 2087,
+      "covers": 2497,
       "evaluates": 54518,
       "has_clinical_course": 19082,
-      "has_condition": 519615,
-      "has_funded_project": 301623,
+      "has_condition": 520980,
+      "has_funded_project": 326187,
       "has_inheritance": 30152,
-      "has_mechanism": 39954,
+      "has_mechanism": 41093,
       "has_phenotype": 388081,
       "in_pathway": 262803,
       "indicated_for": 214643,
       "inhibits": 54085,
       "is_a": 593962,
       "modulates": 5392,
-      "publishes_on": 205287,
+      "publishes_on": 214415,
       "similar_to": 146964,
       "studies": 49212,
-      "supports_community": 32885,
+      "supports_community": 39409,
       "targets": 13751,
       "treats": 259677,
       "variant_of": 306521
     },
-    "claims": 404079,
-    "meta": 363770,
-    "graph_json_bytes": 7818390
+    "claims": 404039,
+    "meta": 377470,
+    "graph_json_bytes": 7899978
   },
   "edges_dropped_dangling": [],
   "edges_below_threshold": 1704,
@@ -848,7 +1059,7 @@
   "claims": {
     "in_bundle": 935,
     "in_graph": 935,
-    "attached_to_edges": 145,
+    "attached_to_edges": 147,
     "unattached": [
       "c_000002",
       "c_000003",
@@ -1134,7 +1345,6 @@
       "c_000334",
       "c_000335",
       "c_000336",
-      "c_000337",
       "c_000339",
       "c_000341",
       "c_000342",
@@ -1168,7 +1378,6 @@
       "c_000377",
       "c_000380",
       "c_000381",
-      "c_000382",
       "c_000384",
       "c_000385",
       "c_000386",
@@ -1808,7 +2017,7 @@
     "zero_hit_searches": 6,
     "errors": [],
     "stale_probe_nodes_removed": [],
-    "seconds": 3.069
+    "seconds": 2.213
   },
   "graph_path": "/Users/jonathanyan/Desktop/projects/Pyrid/.claude/worktrees/lane-graph/data/build/graph.json",
   "store_path": "/Users/jonathanyan/Desktop/projects/Pyrid/.claude/worktrees/lane-graph/data/build/evidence.sqlite",
@@ -2198,18 +2407,18 @@
           "coverage": 1992
         },
         "timings_s": {
-          "clear_previous": 0.514,
-          "genes": 1.088,
-          "disease_gene_seed": 0.94,
-          "disease_terms": 0.205,
-          "diseases": 0.24,
-          "disease_gene_included": 4.993,
-          "phenotypes": 0.25,
-          "pathways": 0.071,
-          "drugs": 0.908,
-          "write": 0.52,
-          "resolve_files": 0.368,
-          "total": 10.221
+          "clear_previous": 0.503,
+          "genes": 0.991,
+          "disease_gene_seed": 0.723,
+          "disease_terms": 0.158,
+          "diseases": 0.209,
+          "disease_gene_included": 4.331,
+          "phenotypes": 0.225,
+          "pathways": 0.061,
+          "drugs": 0.768,
+          "write": 0.363,
+          "resolve_files": 0.318,
+          "total": 8.722
         }
       }
     },
@@ -2360,7 +2569,7 @@
         "requests": 87,
         "requests_from_cache": 87,
         "backbone_present": true,
-        "elapsed_s": 3.55
+        "elapsed_s": 3.04
       }
     },
     "pipeline.sources.ctgov": {
@@ -3035,7 +3244,7 @@
         "grants_with_pmids": 92,
         "errors": [],
         "retrieved_at": "2026-10-03T21:41:37+00:00",
-        "seconds": 34.04
+        "seconds": 27.51
       }
     }
   },
@@ -3287,15 +3496,15 @@
     }
   ],
   "timings_seconds": {
-    "pipeline.sources.optimuskg": 10.221,
-    "pipeline.sources.hpo": 0.756,
-    "pipeline.sources.clinvar": 3.57,
-    "pipeline.sources.ctgov": 0.199,
-    "pipeline.sources.reporter": 34.043,
-    "gap_probe": 3.07,
-    "build": 4.602,
-    "graph_logic": 1.287,
-    "write_and_reload": 0.412,
-    "total": 58.22
+    "pipeline.sources.optimuskg": 8.722,
+    "pipeline.sources.hpo": 0.584,
+    "pipeline.sources.clinvar": 3.065,
+    "pipeline.sources.ctgov": 0.178,
+    "pipeline.sources.reporter": 27.513,
+    "gap_probe": 2.213,
+    "build": 3.69,
+    "graph_logic": 1.104,
+    "write_and_reload": 0.32,
+    "total": 47.445
   }
 }

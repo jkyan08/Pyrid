@@ -32,6 +32,12 @@ Rubric (the numbers are documented, general rules; none depends on a specific ge
   ``max(observed confidence, claim confidence)``, except that a database fact contradicted by every
   claim is multiplied by 0.7.
 * :func:`cap_inferred`: inferred edges never exceed 0.5 (``pipeline.models.Edge`` enforces it).
+* :func:`in_vitro_only`: a claim-derived (``extracted``) ``has_mechanism`` edge whose SUPPORTING
+  claims are all non-patient studies (``in_vitro`` / ``review``, the complement of
+  :data:`PATIENT_LEVEL_STUDY_TYPES`) is labelled :data:`IN_VITRO_ONLY_LABEL` and capped at
+  :data:`IN_VITRO_ONLY_CAP` (0.5) by :func:`apply_in_vitro_only`; the uncapped value stays in the
+  basis. The rule is applied by :mod:`pipeline.graph.evidence`, the R3 path of
+  :mod:`pipeline.graph.mechanisms` and the build's reconcile step, never to an observed edge.
 * :func:`status_from_claims`: the status/label conventions of the README section 6 table (shared
   design D, the single definition for every claim-bearing edge): ``contested`` iff both polarities;
   ``small_n`` decided only by patient-level claims that report an ``n``; ``promising`` with >= 1
@@ -74,6 +80,8 @@ __all__ = [
     "GO_UNKNOWN",
     "INFERRED_CAP",
     "INFERRED_LABEL",
+    "IN_VITRO_ONLY_CAP",
+    "IN_VITRO_ONLY_LABEL",
     "ONTOLOGY_IS_A",
     "PATIENT_LEVEL_STUDY_TYPES",
     "PHENOTYPE_DEFAULT",
@@ -89,6 +97,7 @@ __all__ = [
     "TEXT_MENTION",
     "VARIANT_OF",
     "aggregate_claim_confidence",
+    "apply_in_vitro_only",
     "apply_relation_conflict",
     "cap_inferred",
     "claim_confidence",
@@ -101,6 +110,7 @@ __all__ = [
     "funded_project",
     "go_annotation",
     "has_relation_conflict",
+    "in_vitro_only",
     "ontology_is_a",
     "reactome_pathway",
     "sources_direct",
@@ -172,6 +182,10 @@ STUDY_TYPE_UNKNOWN = 0.3
 # Study types that describe patients; in_vitro and review carry no n and never count toward small-n.
 PATIENT_LEVEL_STUDY_TYPES = frozenset({"trial", "cohort", "case_series", "case_report"})
 SMALL_N = 10
+# A claim-derived has_mechanism edge supported ONLY by non-patient studies (in vitro work, reviews)
+# carries this label and never exceeds this confidence (README section 6, "Claim-backed edges").
+IN_VITRO_ONLY_LABEL = "in_vitro_only"
+IN_VITRO_ONLY_CAP = 0.5
 
 
 # --------------------------------------------------------------------------------------
@@ -432,6 +446,43 @@ def _claim_field(claim: Any, name: str) -> Any:
     if isinstance(claim, Mapping):
         return claim.get(name)
     return getattr(claim, name, None)
+
+
+def _study_type(claim: Any) -> str:
+    study_type = _claim_field(claim, "study_type")
+    return str(getattr(study_type, "value", study_type))
+
+
+def in_vitro_only(supporting: Iterable[Any]) -> bool:
+    """True when there is at least one supporting claim and none of them is a patient-level
+    study (every supporting claim is ``in_vitro`` or ``review``)."""
+    sup = list(supporting)
+    return bool(sup) and all(_study_type(c) not in PATIENT_LEVEL_STUDY_TYPES for c in sup)
+
+
+def apply_in_vitro_only(edge: dict[str, Any], supporting: Iterable[Any]) -> bool:
+    """The :data:`IN_VITRO_ONLY_LABEL` rule on a claim-derived (``extracted``) ``has_mechanism``
+    edge dict, recomputed from scratch over ``supporting`` (Claim models or dicts): when the
+    support is in-vitro / review only, the label joins ``attributes.labels``, the confidence is
+    capped at :data:`IN_VITRO_ONLY_CAP` and ``confidence_basis.in_vitro_only`` keeps the uncapped
+    value and the study types; otherwise a stale label / basis entry is removed. Observed and
+    inferred edges and other relations are left alone. Returns whether the rule fired."""
+    attributes = edge.setdefault("attributes", {})
+    labels = [l for l in (attributes.get("labels") or []) if l != IN_VITRO_ONLY_LABEL]
+    basis = edge.setdefault("confidence_basis", {})
+    fired = edge.get("relation") == "has_mechanism" and edge.get("evidence_class") == "extracted" and in_vitro_only(supporting)
+    if fired:
+        labels.append(IN_VITRO_ONLY_LABEL)
+        uncapped = float(edge.get("confidence") or 0.0)
+        edge["confidence"] = min(uncapped, IN_VITRO_ONLY_CAP)
+        basis["in_vitro_only"] = {"study_types": sorted({_study_type(c) for c in supporting}), "cap": IN_VITRO_ONLY_CAP, "uncapped_confidence": uncapped}
+    else:
+        basis.pop("in_vitro_only", None)
+    if labels:
+        attributes["labels"] = labels
+    elif "labels" in attributes:
+        attributes["labels"] = []
+    return fired
 
 
 def _claim_weight(claim: Any) -> dict[str, Any]:

@@ -1,7 +1,7 @@
 # Rare Disease Atlas: JAK-STAT MVP
 #
 #   make data    rebuild data/build/graph.json (uses data/cache/ when present)
-#   make test    contract + ground-truth tests
+#   make test    contract + ground-truth + unit tests (tests/) and the API tests (api/tests), offline
 #   make dev     API on :8000 and, if web/package.json exists, the Next.js dev server
 #   make schema  regenerate docs/graph.schema.json from pipeline/models.py
 
@@ -17,8 +17,10 @@ help:
 data:
 	$(UV) run python -m pipeline.export
 
+# ATLAS_OFFLINE=1: every test replays caches and fixtures; nothing hits a live service. Tests that
+# need one are marked `network` (pyproject.toml) and run only with ATLAS_NETWORK_TESTS=1.
 test:
-	$(UV) run pytest -q
+	ATLAS_OFFLINE=1 $(UV) run pytest -q tests api/tests
 
 schema:
 	$(UV) run python -m pipeline.schema

@@ -469,6 +469,33 @@ def test_r3_claims_add_and_upgrade_edges(store: Store) -> None:
     assert r.report["claim_edges"] == 3 and r.report["by_rule"]["R3.claims"] == 3
     # disease 7 now has a mechanism node even though no text rule fired
     assert any(n["id"] == "mech:MOCKGENE4:LoF" for n in r.nodes)
+    assert all("in_vitro_only" not in e["attributes"].get("labels", []) for e in r.edges if e["source"] != "mock:variant:1"), "patient-level support: the in-vitro rule is silent"
+    assert variant["attributes"]["labels"] == ["variant_specific", "in_vitro_only"] and variant["confidence_basis"]["in_vitro_only"]["study_types"] == ["in_vitro"]
+
+
+def test_r3_in_vitro_or_review_only_edges_are_labelled_and_capped(store: Store) -> None:
+    row = {"gene": "MOCKGENE2", "direction": "DN", "origin": "germline", "disease_terms": ["mock disorder with loss of function 4"], "cluster_doc_confidence": "Background", "note": "mock"}
+    bundle = _bundle(
+        [
+            # a new disease -> mechanism edge from two reviews: 0.5 + 0.05 = 0.55 before the cap
+            _claim("c_000001", "mock:disease:7", "mech:MOCKGENE4:LoF", "supports", "Mock sentence A about the mock mechanism.", "review", None),
+            _claim("c_000002", "mock:disease:7", "mech:MOCKGENE4:LoF", "supports", "Mock sentence B about the mock variant.", "review", None),
+            # the curated (inferred) edge of disease 4 upgraded by an in-vitro claim only
+            _claim("c_000003", "mock:disease:4", "mech:MOCKGENE2:DN", "supports", "Mock sentence A about the mock mechanism.", "in_vitro", None),
+            # the R1 (observed) edge of disease 1 enriched by a review: database support stays, no cap
+            _claim("c_000004", "mock:disease:1", "mech:MOCKGENE1:GoF", "supports", "Mock sentence A about the mock mechanism.", "review", None),
+        ]
+    )
+    r = mech.derive(store, seeds([row]), bundle, now=NOW)
+    new = edge_for(r, "mock:disease:7", "mech:MOCKGENE4:LoF")
+    assert new["evidence_class"] == "extracted" and new["confidence"] == 0.5 and new["attributes"]["labels"] == ["in_vitro_only"]
+    assert new["confidence_basis"]["in_vitro_only"] == {"study_types": ["review"], "cap": 0.5, "uncapped_confidence": 0.5}, "R3 takes the best single claim weight (0.5); the cap is recorded even when it does not bite"
+    curated = edge_for(r, "mock:disease:4", "mech:MOCKGENE2:DN")
+    assert curated["evidence_class"] == "extracted" and curated["confidence"] == 0.4 and curated["attributes"]["labels"] == ["in_vitro_only"], "max(curated 0.4, in_vitro 0.3) stays under the 0.5 cap; the label still says what the only support is"
+    assert "curated_unverified" not in curated["attributes"]["labels"] and curated["confidence_basis"]["in_vitro_only"]["study_types"] == ["in_vitro"]
+    observed = edge_for(r, "mock:disease:1", "mech:MOCKGENE1:GoF")
+    assert observed["evidence_class"] == "extracted" and observed["confidence"] == 0.6 and "in_vitro_only" not in observed["attributes"].get("labels", []), "max(R1 0.6, review 0.5); the text rule is independent support"
+    assert "in_vitro_only" not in observed["confidence_basis"]
 
 
 # --------------------------------------------------------------------------------------
