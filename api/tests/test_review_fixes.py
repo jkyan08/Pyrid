@@ -154,10 +154,14 @@ def test_llm_seam_logs_warning_when_module_broken(caplog, monkeypatch):
     assert any("pipeline.llm" in r.message for r in caplog.records)
 
 
-def test_llm_seam_silent_when_module_absent(caplog, monkeypatch):
-    monkeypatch.delitem(sys.modules, "pipeline.llm", raising=False)
-    monkeypatch.delitem(sys.modules, "pipeline", raising=False)
-    monkeypatch.syspath_prepend(str(FIXTURE_GRAPH.parent))  # nowhere to import pipeline from
+def test_llm_seam_quiet_when_live_returns_none(caplog, monkeypatch):
+    """Lane B's contract: explain/draft return None unless the model produced
+    validated text — None is the documented quiet 'no live answer', not an error."""
+    quiet = types.ModuleType("pipeline.llm")
+    quiet.explain = lambda ids, graph: None
+    pipeline_pkg = types.ModuleType("pipeline")
+    monkeypatch.setitem(sys.modules, "pipeline", pipeline_pkg)
+    monkeypatch.setitem(sys.modules, "pipeline.llm", quiet)
 
     with caplog.at_level("WARNING"):
         assert llm_seam.try_live_explain(["x"], {}) is None
