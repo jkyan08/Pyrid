@@ -122,8 +122,10 @@ def _anthropic():
     global _anthropic_client
     if _anthropic_client is None:
         import anthropic  # not in M0's pyproject yet: run with `uv run --with anthropic`
-        # The SDK retries 429/5xx/connection errors itself with backoff.
-        _anthropic_client = anthropic.Anthropic(max_retries=6)
+        # The SDK retries 429/5xx/connection/timeout errors itself with backoff. A per-request timeout
+        # (default 180 s; the SDK's is 10 min) keeps one stalled generation from holding a worker.
+        _anthropic_client = anthropic.Anthropic(max_retries=4,
+                                                timeout=float(os.environ.get("ATLAS_LLM_TIMEOUT", "180")))
     return _anthropic_client
 
 

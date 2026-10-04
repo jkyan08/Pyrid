@@ -198,19 +198,26 @@ def cache_key(ids: list[str] | str, kind: str = "explain") -> str:
 JOURNEYS: dict[str, list[list[str]]] = {}
 
 
-ENTITY_TYPES = {"Disease", "Mechanism", "Variant", "Drug", "Phenotype", "Gene", "Pathway", "Registry", "PatientGroup"}
-AUTHORSHIP = {"author_of", "works_on"}
+ALWAYS = {"Disease", "Mechanism", "Drug", "Registry", "PatientGroup"}
+IF_CLAIM_BACKED = {"Variant", "Phenotype", "Gene", "Pathway"}
+AUTHORSHIP = {"author_of", "works_on", "publishes_on"}
 
 
 def demo_entities(graph: dict) -> list[str]:
-    """Every entity node with at least one evidence edge (authorship edges don't count): the set
-    `/explain` can be asked about on the demo site, which covers every journey in README §11."""
+    """The entities `/explain` is asked about on the demo journeys (README §11): every disease,
+    mechanism, drug, patient group and registry with an evidence edge, plus variants, phenotypes,
+    genes and pathways that sit on a claim-backed edge. Lane A's graph has ~2,400 entities with
+    edges; explaining all of them is cost without demo value."""
     types = {n["id"]: n["type"] for n in graph["nodes"]}
     ids = set()
     for e in graph["edges"]:
         if e["relation"] in AUTHORSHIP:
             continue
-        ids |= {i for i in (e["source"], e["target"]) if types.get(i) in ENTITY_TYPES}
+        claim_backed = bool(e.get("supporting") or e.get("contradicting"))
+        for i in (e["source"], e["target"]):
+            t = types.get(i)
+            if t in ALWAYS or (t in IF_CLAIM_BACKED and claim_backed):
+                ids.add(i)
     return sorted(ids)
 
 

@@ -1073,3 +1073,60 @@ c_000935,subject,JAK3 Cys759Arg,ensembl:ENSG00000105639,medium,ensembl:ENSG00000
 c_000935,object,high constitutive JAK3 tyrosine phosphorylation unresponsive to regulation,mech:JAK3:LoF,medium,mech:JAK3:GoF | mech:JAK3:LoF | mech:JAK3:DN,"The paper title frames Cys759Arg as causing JAK3-deficient SCID (loss of function), even though the quote describes high constitutive phosphorylation that is unresponsive to regulation."
 c_000935,variant,C759R,,low,,no candidates
 c_000705,subject,,ensembl:ENSG00000111537,high,,gene mismatch: ensembl:ENSG00000111537 (IFNG) linked to mech:STAT1:GoF (STAT1)
+c_000037,object,severe combined immunodeficiency disease,MONDO:0015974,high,,grouping disease (11 subtypes) cannot carry one gene's mechanism
+c_000038,object,severe combined immunodeficiency,MONDO:0015974,high,,grouping disease (11 subtypes) cannot carry one gene's mechanism
+c_000044,object,severe combined immunodeficiency,MONDO:0015974,high,,grouping disease (11 subtypes) cannot carry one gene's mechanism
+c_000046,object,severe combined immunodeficiency,MONDO:0015974,high,,grouping disease (11 subtypes) cannot carry one gene's mechanism
+c_000051,object,human skeletal dysplasias,EFO:0005571,high,,grouping disease (45 subtypes) cannot carry one gene's mechanism
+c_000063,object,immunodeficiency,MONDO:0021094,high,,grouping disease (59 subtypes) cannot carry one gene's mechanism
+c_000064,object,immunodeficiency,MONDO:0021094,high,,grouping disease (59 subtypes) cannot carry one gene's mechanism
+c_000067,object,severe combined immunodeficiency,MONDO:0015974,high,,grouping disease (11 subtypes) cannot carry one gene's mechanism
+c_000107,object,chronic mucocutaneous candidiasis,MONDO:0015279,high,,grouping disease (3 subtypes) cannot carry one gene's mechanism
+c_000115,object,chronic mucocutaneous candidiasis,MONDO:0015279,high,,grouping disease (3 subtypes) cannot carry one gene's mechanism
+c_000131,object,localized chronic mucocutaneous candidiasis,MONDO:0015279,high,,grouping disease (3 subtypes) cannot carry one gene's mechanism
+c_000149,object,chronic mucocutaneous candidiasis,MONDO:0015279,high,,grouping disease (3 subtypes) cannot carry one gene's mechanism
+c_000192,object,Candida infection,MONDO:0002026,high,,grouping disease (3 subtypes) cannot carry one gene's mechanism
+c_000203,object,chronic mucocutaneous candidiasis,MONDO:0015279,high,,grouping disease (3 subtypes) cannot carry one gene's mechanism
+c_000234,object,combined immunodeficiency,MONDO:0015131,high,,grouping disease (15 subtypes) cannot carry one gene's mechanism
+c_000248,object,chronic mucocutaneous candidiasis disease (CMCD),MONDO:0015279,high,,grouping disease (3 subtypes) cannot carry one gene's mechanism
+c_000270,object,chronic mucocutaneous candidiasis,MONDO:0015279,high,,grouping disease (3 subtypes) cannot carry one gene's mechanism
+c_000271,object,chronic mucocutaneous candidiasis disease,MONDO:0015279,high,,grouping disease (3 subtypes) cannot carry one gene's mechanism
+c_000284,object,primary immunodeficiency,MONDO:0003778,high,,grouping disease (44 subtypes) cannot carry one gene's mechanism
+c_000285,object,immunodeficiency,MONDO:0021094,high,,grouping disease (59 subtypes) cannot carry one gene's mechanism
+c_000314,object,chronic mucocutaneous candidiasis,MONDO:0015279,high,,grouping disease (3 subtypes) cannot carry one gene's mechanism
+c_000317,object,chronic mucocutaneous candidiasis,MONDO:0015279,high,,grouping disease (3 subtypes) cannot carry one gene's mechanism
+c_000326,object,hyper IgE syndrome,MONDO:0018037,high,,grouping disease (6 subtypes) cannot carry one gene's mechanism
+c_000332,object,chronic mucocutaneous candidiasis,MONDO:0015279,high,,grouping disease (3 subtypes) cannot carry one gene's mechanism
+c_000334,object,Mendelian susceptibility to mycobacterial disease (MSMD),Orphanet:748,high,,grouping disease (3 subtypes) cannot carry one gene's mechanism
+c_000344,object,Mendelian susceptibility to mycobacterial disease,Orphanet:748,high,,grouping disease (3 subtypes) cannot carry one gene's mechanism
+c_000352,object,GVHD,MONDO:0013730,high,,grouping disease (2 subtypes) cannot carry one gene's mechanism
+c_000354,object,SCID,MONDO:0015974,high,,grouping disease (11 subtypes) cannot carry one gene's mechanism
+c_000355,object,SCID,MONDO:0015974,high,,grouping disease (11 subtypes) cannot carry one gene's mechanism
+c_000387,object,chronic mucocutaneous candidiasis,MONDO:0015279,high,,grouping disease (3 subtypes) cannot carry one gene's mechanism
+c_000401,object,chronic mucocutaneous candidiasis,MONDO:0015279,high,,grouping disease (3 subtypes) cannot carry one gene's mechanism
+c_000411,object,tuberculosis,MONDO:0018076,high,,grouping disease (4 subtypes) cannot carry one gene's mechanism
+c_000413,object,tuberculosis,MONDO:0018076,high,,grouping disease (4 subtypes) cannot carry one gene's mechanism
+c_000418,object,chronic mucocutaneous candidiasis,MONDO:0015279,high,,grouping disease (3 subtypes) cannot carry one gene's mechanism
+c_000420,object,SCID,MONDO:0015974,high,,grouping disease (11 subtypes) cannot carry one gene's mechanism
+c_000434,object,severe combined immunodeficiency,MONDO:0015974,high,,grouping disease (11 subtypes) cannot carry one gene's mechanism
+c_000435,object,severe combined immunodeficiency,MONDO:0015974,high,,grouping disease (11 subtypes) cannot carry one gene's mechanism
+c_000440,object,chronic mucocutaneous candidiasis,MONDO:0015279,high,,grouping disease (3 subtypes) cannot carry one gene's mechanism
+c_000450,object,T- B+ SCID,MONDO:0044200,high,,grouping disease (10 subtypes) cannot carry one gene's mechanism
+c_000452,object,T- B+ SCID,MONDO:0044200,high,,grouping disease (10 subtypes) cannot carry one gene's mechanism
+c_000472,object,T-cell acute lymphoblastic leukemia,EFO:0000209,high,,grouping disease (4 subtypes) cannot carry one gene's mechanism
+c_000529,object,hyper-IgE syndrome,MONDO:0018037,high,,grouping disease (6 subtypes) cannot carry one gene's mechanism
+c_000625,object,severe combined immunodeficiency,MONDO:0015974,high,,grouping disease (11 subtypes) cannot carry one gene's mechanism
+c_000627,object,acute lymphoblastic leukemia,EFO:0000220,high,,grouping disease (11 subtypes) cannot carry one gene's mechanism
+c_000637,object,severe combined immunodeficiency,MONDO:0015974,high,,grouping disease (11 subtypes) cannot carry one gene's mechanism
+c_000678,object,hyper-IgE syndrome,MONDO:0018037,high,,grouping disease (6 subtypes) cannot carry one gene's mechanism
+c_000682,object,hyper-IgE syndrome,MONDO:0018037,high,,grouping disease (6 subtypes) cannot carry one gene's mechanism
+c_000684,object,immunodeficiency,MONDO:0021094,high,,grouping disease (59 subtypes) cannot carry one gene's mechanism
+c_000713,object,Hyper IgE Syndromes,MONDO:0018037,high,,grouping disease (6 subtypes) cannot carry one gene's mechanism
+c_000728,object,chronic mucocutaneous candidiasis,MONDO:0015279,high,,grouping disease (3 subtypes) cannot carry one gene's mechanism
+c_000734,object,type 1 diabetes,MONDO:0005147,high,,grouping disease (3 subtypes) cannot carry one gene's mechanism
+c_000756,object,skin inflammation,MONDO:0002406,high,,grouping disease (27 subtypes) cannot carry one gene's mechanism
+c_000773,object,chronic mucocutaneous candidiasis,MONDO:0015279,high,,grouping disease (3 subtypes) cannot carry one gene's mechanism
+c_000826,object,severe combined immunodeficiency,MONDO:0015974,high,,grouping disease (11 subtypes) cannot carry one gene's mechanism
+c_000829,object,SCID,MONDO:0015974,high,,grouping disease (11 subtypes) cannot carry one gene's mechanism
+c_000862,object,inborn errors of immunity,MONDO:0003778,high,,grouping disease (44 subtypes) cannot carry one gene's mechanism
+c_000872,object,chronic mucocutaneous candidiasis,MONDO:0015279,high,,grouping disease (3 subtypes) cannot carry one gene's mechanism

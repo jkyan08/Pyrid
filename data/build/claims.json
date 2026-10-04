@@ -16956,7 +16956,7 @@
       "polarity": "supports",
       "subject": "text:defects in cytokine signalling pathways",
       "predicate": "causes",
-      "object": "MONDO:0015974",
+      "object": "text:severe combined immunodeficiency disease",
       "variant": "",
       "study_type": "review",
       "n_patients": null
@@ -16969,7 +16969,7 @@
       "polarity": "supports",
       "subject": "text:IL2RG, ARTEMIS, RAG1, RAG2, ADA, CD45, JAK3, and IL7R mutations",
       "predicate": "causes",
-      "object": "MONDO:0015974",
+      "object": "text:severe combined immunodeficiency",
       "variant": "",
       "study_type": "review",
       "n_patients": null
@@ -17047,7 +17047,7 @@
       "polarity": "supports",
       "subject": "text:mutations in nine different genes",
       "predicate": "causes",
-      "object": "MONDO:0015974",
+      "object": "text:severe combined immunodeficiency",
       "variant": "",
       "study_type": "review",
       "n_patients": null
@@ -17073,7 +17073,7 @@
       "polarity": "supports",
       "subject": "mech:JAK3:LoF",
       "predicate": "causes",
-      "object": "MONDO:0015974",
+      "object": "text:severe combined immunodeficiency",
       "variant": "",
       "study_type": "review",
       "n_patients": null
@@ -17138,7 +17138,7 @@
       "polarity": "supports",
       "subject": "text:FGFR1, FGFR2 and FGFR3 point mutations",
       "predicate": "causes",
-      "object": "EFO:0005571",
+      "object": "text:human skeletal dysplasias",
       "variant": "",
       "study_type": "review",
       "n_patients": null
@@ -17294,7 +17294,7 @@
       "polarity": "supports",
       "subject": "mech:JAK3:LoF",
       "predicate": "causes",
-      "object": "MONDO:0021094",
+      "object": "text:immunodeficiency",
       "variant": "",
       "study_type": "review",
       "n_patients": null
@@ -17307,7 +17307,7 @@
       "polarity": "supports",
       "subject": "mech:TYK2:LoF",
       "predicate": "causes",
-      "object": "MONDO:0021094",
+      "object": "text:immunodeficiency",
       "variant": "",
       "study_type": "review",
       "n_patients": null
@@ -17346,7 +17346,7 @@
       "polarity": "supports",
       "subject": "mech:JAK3:LoF",
       "predicate": "causes",
-      "object": "MONDO:0015974",
+      "object": "text:severe combined immunodeficiency",
       "variant": "",
       "study_type": "review",
       "n_patients": null
@@ -17866,7 +17866,7 @@
       "polarity": "supports",
       "subject": "text:T(H)17 deficiency",
       "predicate": "causes",
-      "object": "MONDO:0015279",
+      "object": "text:chronic mucocutaneous candidiasis",
       "variant": "",
       "study_type": "review",
       "n_patients": null
@@ -17970,7 +17970,7 @@
       "polarity": "supports",
       "subject": "text:IL-17RA deficiency and IL-17F deficiency",
       "predicate": "causes",
-      "object": "MONDO:0015279",
+      "object": "text:chronic mucocutaneous candidiasis",
       "variant": "",
       "study_type": "review",
       "n_patients": null
@@ -18178,7 +18178,7 @@
       "polarity": "supports",
       "subject": "text:impaired TH17 immunity (HIES, AIRE, STAT1, IL17R defects)",
       "predicate": "causes",
-      "object": "MONDO:0015279",
+      "object": "text:localized chronic mucocutaneous candidiasis",
       "variant": "",
       "study_type": "review",
       "n_patients": null
@@ -18412,7 +18412,7 @@
       "polarity": "supports",
       "subject": "mech:STAT1:GoF",
       "predicate": "causes",
-      "object": "MONDO:0015279",
+      "object": "text:chronic mucocutaneous candidiasis",
       "variant": "",
       "study_type": "case_series",
       "n_patients": 10
@@ -18971,7 +18971,7 @@
       "polarity": "supports",
       "subject": "text:anti-IL-17A antibodies",
       "predicate": "causes",
-      "object": "MONDO:0002026",
+      "object": "text:Candida infection",
       "variant": "",
       "study_type": "review",
       "n_patients": null
@@ -19114,7 +19114,7 @@
       "polarity": "supports",
       "subject": "mech:STAT1:GoF",
       "predicate": "causes",
-      "object": "MONDO:0015279",
+      "object": "text:chronic mucocutaneous candidiasis",
       "variant": "",
       "study_type": "case_report",
       "n_patients": 1
@@ -19517,7 +19517,7 @@
       "polarity": "supports",
       "subject": "mech:STAT1:GoF",
       "predicate": "causes",
-      "object": "MONDO:0015131",
+      "object": "text:combined immunodeficiency",
       "variant": "",
       "study_type": "case_series",
       "n_patients": 2
@@ -19699,7 +19699,7 @@
       "polarity": "supports",
       "subject": "text:AR IL-17 receptor A, IL-17 receptor C and ACT1 deficiencies, and AD IL-17F deficiency",
       "predicate": "causes",
-      "object": "MONDO:0015279",
+      "object": "text:chronic mucocutaneous candidiasis disease (CMCD)",
       "variant": "",
       "study_type": "review",
       "n_patients": null
@@ -19985,7 +19985,7 @@
       "polarity": "supports",
       "subject": "text:impairment of IL-17 immunity",
       "predicate": "causes",
-      "object": "MONDO:0015279",
+      "object": "text:chronic mucocutaneous candidiasis",
       "variant": "",
       "study_type": "review",
       "n_patients": null
@@ -19998,7 +19998,7 @@
       "polarity": "supports",
       "subject": "text:germline mutations in IL-17 signaling genes",
       "predicate": "causes",
-      "object": "MONDO:0015279",
+      "object": "text:chronic mucocutaneous candidiasis disease",
       "variant": "",
       "study_type": "review",
       "n_patients": null
@@ -20167,7 +20167,7 @@
       "polarity": "supports",
       "subject": "text:gain-of-function mutations",
       "predicate": "causes",
-      "object": "MONDO:0003778",
+      "object": "text:primary immunodeficiency",
       "variant": "",
       "study_type": "review",
       "n_patients": null
@@ -20180,7 +20180,7 @@
       "polarity": "supports",
       "subject": "text:gain-of-function mutations",
       "predicate": "causes",
-      "object": "MONDO:0021094",
+      "object": "text:immunodeficiency",
       "variant": "",
       "study_type": "review",
       "n_patients": null
@@ -20557,7 +20557,7 @@
       "polarity": "supports",
       "subject": "mech:STAT1:GoF",
       "predicate": "causes",
-      "object": "MONDO:0015279",
+      "object": "text:chronic mucocutaneous candidiasis",
       "variant": "",
       "study_type": "case_series",
       "n_patients": null
@@ -20596,7 +20596,7 @@
       "polarity": "supports",
       "subject": "mech:STAT1:GoF",
       "predicate": "causes",
-      "object": "MONDO:0015279",
+      "object": "text:chronic mucocutaneous candidiasis",
       "variant": "",
       "study_type": "case_series",
       "n_patients": 3
@@ -20713,7 +20713,7 @@
       "polarity": "supports",
       "subject": "mech:STAT3:LoF",
       "predicate": "causes",
-      "object": "MONDO:0018037",
+      "object": "text:hyper IgE syndrome",
       "variant": "",
       "study_type": "review",
       "n_patients": null
@@ -20791,7 +20791,7 @@
       "polarity": "supports",
       "subject": "mech:STAT1:GoF",
       "predicate": "causes",
-      "object": "MONDO:0015279",
+      "object": "text:chronic mucocutaneous candidiasis",
       "variant": "text:L206P",
       "study_type": "case_report",
       "n_patients": 1
@@ -20817,7 +20817,7 @@
       "polarity": "supports",
       "subject": "text:TYK2 and STAT1 defects",
       "predicate": "causes",
-      "object": "Orphanet:748",
+      "object": "text:Mendelian susceptibility to mycobacterial disease (MSMD)",
       "variant": "",
       "study_type": "review",
       "n_patients": null
@@ -20947,7 +20947,7 @@
       "polarity": "supports",
       "subject": "text:inborn errors of IFN-γ immunity",
       "predicate": "causes",
-      "object": "Orphanet:748",
+      "object": "text:Mendelian susceptibility to mycobacterial disease",
       "variant": "",
       "study_type": "review",
       "n_patients": null
@@ -21051,7 +21051,7 @@
       "polarity": "supports",
       "subject": "ensembl:ENSG00000109471",
       "predicate": "causes",
-      "object": "MONDO:0013730",
+      "object": "text:GVHD",
       "variant": "",
       "study_type": "in_vitro",
       "n_patients": null
@@ -21077,7 +21077,7 @@
       "polarity": "supports",
       "subject": "text:IL2RG defects",
       "predicate": "causes",
-      "object": "MONDO:0015974",
+      "object": "text:SCID",
       "variant": "",
       "study_type": "cohort",
       "n_patients": 9
@@ -21090,7 +21090,7 @@
       "polarity": "supports",
       "subject": "text:JAK3 defects",
       "predicate": "causes",
-      "object": "MONDO:0015974",
+      "object": "text:SCID",
       "variant": "",
       "study_type": "cohort",
       "n_patients": 9
@@ -21506,7 +21506,7 @@
       "polarity": "supports",
       "subject": "mech:STAT1:GoF",
       "predicate": "causes",
-      "object": "MONDO:0015279",
+      "object": "text:chronic mucocutaneous candidiasis",
       "variant": "",
       "study_type": "case_report",
       "n_patients": 1
@@ -21688,7 +21688,7 @@
       "polarity": "supports",
       "subject": "mech:STAT1:GoF",
       "predicate": "causes",
-      "object": "MONDO:0015279",
+      "object": "text:chronic mucocutaneous candidiasis",
       "variant": "",
       "study_type": "in_vitro",
       "n_patients": null
@@ -21818,7 +21818,7 @@
       "polarity": "supports",
       "subject": "text:TYK2 P1104A homozygosity",
       "predicate": "causes",
-      "object": "MONDO:0018076",
+      "object": "text:tuberculosis",
       "variant": "text:P1104A",
       "study_type": "review",
       "n_patients": null
@@ -21844,7 +21844,7 @@
       "polarity": "supports",
       "subject": "text:autosomal recessive complete TYK2 deficiency",
       "predicate": "causes",
-      "object": "MONDO:0018076",
+      "object": "text:tuberculosis",
       "variant": "",
       "study_type": "review",
       "n_patients": null
@@ -21909,7 +21909,7 @@
       "polarity": "supports",
       "subject": "mech:STAT1:GoF",
       "predicate": "causes",
-      "object": "MONDO:0015279",
+      "object": "text:chronic mucocutaneous candidiasis",
       "variant": "",
       "study_type": "case_report",
       "n_patients": null
@@ -21935,7 +21935,7 @@
       "polarity": "supports",
       "subject": "mech:JAK3:LoF",
       "predicate": "causes",
-      "object": "MONDO:0015974",
+      "object": "text:SCID",
       "variant": "",
       "study_type": "review",
       "n_patients": null
@@ -22117,7 +22117,7 @@
       "polarity": "supports",
       "subject": "ensembl:ENSG00000147168",
       "predicate": "causes",
-      "object": "MONDO:0015974",
+      "object": "text:severe combined immunodeficiency",
       "variant": "",
       "study_type": "review",
       "n_patients": null
@@ -22130,7 +22130,7 @@
       "polarity": "supports",
       "subject": "ensembl:ENSG00000105639",
       "predicate": "causes",
-      "object": "MONDO:0015974",
+      "object": "text:severe combined immunodeficiency",
       "variant": "",
       "study_type": "review",
       "n_patients": null
@@ -22195,7 +22195,7 @@
       "polarity": "supports",
       "subject": "mech:STAT1:GoF",
       "predicate": "causes",
-      "object": "MONDO:0015279",
+      "object": "text:chronic mucocutaneous candidiasis",
       "variant": "",
       "study_type": "review",
       "n_patients": null
@@ -22325,7 +22325,7 @@
       "polarity": "supports",
       "subject": "text:JAK3 variants",
       "predicate": "causes",
-      "object": "MONDO:0044200",
+      "object": "text:T- B+ SCID",
       "variant": "",
       "study_type": "case_series",
       "n_patients": 20
@@ -22351,7 +22351,7 @@
       "polarity": "supports",
       "subject": "text:IL2RG variants",
       "predicate": "causes",
-      "object": "MONDO:0044200",
+      "object": "text:T- B+ SCID",
       "variant": "",
       "study_type": "case_series",
       "n_patients": 20
@@ -22611,7 +22611,7 @@
       "polarity": "supports",
       "subject": "text:γ-retroviral gene therapy",
       "predicate": "causes",
-      "object": "EFO:0000209",
+      "object": "text:T-cell acute lymphoblastic leukemia",
       "variant": "",
       "study_type": "review",
       "n_patients": null
@@ -23352,7 +23352,7 @@
       "polarity": "supports",
       "subject": "mech:STAT3:DN",
       "predicate": "causes",
-      "object": "MONDO:0018037",
+      "object": "text:hyper-IgE syndrome",
       "variant": "",
       "study_type": "review",
       "n_patients": null
@@ -24600,7 +24600,7 @@
       "polarity": "supports",
       "subject": "text:IL-7 pathway deficiency",
       "predicate": "causes",
-      "object": "MONDO:0015974",
+      "object": "text:severe combined immunodeficiency",
       "variant": "",
       "study_type": "review",
       "n_patients": null
@@ -24626,7 +24626,7 @@
       "polarity": "supports",
       "subject": "text:IL-7 receptor pathway mutations",
       "predicate": "causes",
-      "object": "EFO:0000220",
+      "object": "text:acute lymphoblastic leukemia",
       "variant": "",
       "study_type": "review",
       "n_patients": null
@@ -24756,7 +24756,7 @@
       "polarity": "supports",
       "subject": "text:JAK3 mutations",
       "predicate": "causes",
-      "object": "MONDO:0015974",
+      "object": "text:severe combined immunodeficiency",
       "variant": "",
       "study_type": "review",
       "n_patients": null
@@ -25289,7 +25289,7 @@
       "polarity": "supports",
       "subject": "text:biallelic complete LOF variants of ZNF341",
       "predicate": "causes",
-      "object": "MONDO:0018037",
+      "object": "text:hyper-IgE syndrome",
       "variant": "",
       "study_type": "review",
       "n_patients": null
@@ -25341,7 +25341,7 @@
       "polarity": "contradicts",
       "subject": "text:STAT3 haploinsufficiency",
       "predicate": "causes",
-      "object": "MONDO:0018037",
+      "object": "text:hyper-IgE syndrome",
       "variant": "",
       "study_type": "review",
       "n_patients": null
@@ -25367,7 +25367,7 @@
       "polarity": "contradicts",
       "subject": "text:JAK/STAT loss-of-function mutations",
       "predicate": "causes",
-      "object": "MONDO:0021094",
+      "object": "text:immunodeficiency",
       "variant": "",
       "study_type": "review",
       "n_patients": null
@@ -25744,7 +25744,7 @@
       "polarity": "supports",
       "subject": "text:STAT3 mutations",
       "predicate": "causes",
-      "object": "MONDO:0018037",
+      "object": "text:Hyper IgE Syndromes",
       "variant": "",
       "study_type": "review",
       "n_patients": null
@@ -25939,7 +25939,7 @@
       "polarity": "supports",
       "subject": "mech:STAT1:GoF",
       "predicate": "causes",
-      "object": "MONDO:0015279",
+      "object": "text:chronic mucocutaneous candidiasis",
       "variant": "",
       "study_type": "review",
       "n_patients": null
@@ -26017,7 +26017,7 @@
       "polarity": "supports",
       "subject": "ensembl:ENSG00000105397",
       "predicate": "causes",
-      "object": "MONDO:0005147",
+      "object": "text:type 1 diabetes",
       "variant": "",
       "study_type": "in_vitro",
       "n_patients": null
@@ -26303,7 +26303,7 @@
       "polarity": "supports",
       "subject": "mech:STAT3:GoF",
       "predicate": "causes",
-      "object": "MONDO:0002406",
+      "object": "text:skin inflammation",
       "variant": "clinvar:224844",
       "study_type": "in_vitro",
       "n_patients": null
@@ -26524,7 +26524,7 @@
       "polarity": "supports",
       "subject": "mech:STAT1:GoF",
       "predicate": "causes",
-      "object": "MONDO:0015279",
+      "object": "text:chronic mucocutaneous candidiasis",
       "variant": "",
       "study_type": "case_series",
       "n_patients": null
@@ -27213,7 +27213,7 @@
       "polarity": "supports",
       "subject": "text:JAK3 c.1914G>T (p.L638=) and c.1048C>T (p.R350W) compound heterozygous variants",
       "predicate": "causes",
-      "object": "MONDO:0015974",
+      "object": "text:severe combined immunodeficiency",
       "variant": "",
       "study_type": "case_report",
       "n_patients": 1
@@ -27252,7 +27252,7 @@
       "polarity": "supports",
       "subject": "text:JAK3 variants",
       "predicate": "causes",
-      "object": "MONDO:0015974",
+      "object": "text:SCID",
       "variant": "",
       "study_type": "case_report",
       "n_patients": 1
@@ -27681,7 +27681,7 @@
       "polarity": "supports",
       "subject": "text:JAK/STAT pathway gain- or loss-of-function mutations",
       "predicate": "causes",
-      "object": "MONDO:0003778",
+      "object": "text:inborn errors of immunity",
       "variant": "",
       "study_type": "review",
       "n_patients": null
@@ -27811,7 +27811,7 @@
       "polarity": "supports",
       "subject": "mech:STAT1:GoF",
       "predicate": "causes",
-      "object": "MONDO:0015279",
+      "object": "text:chronic mucocutaneous candidiasis",
       "variant": "text:V360L",
       "study_type": "case_report",
       "n_patients": 1
@@ -38302,6 +38302,519 @@
       "confidence": "high",
       "shortlist": "",
       "reason": "gene mismatch: ensembl:ENSG00000111537 (IFNG) linked to mech:STAT1:GoF (STAT1)"
+    },
+    {
+      "claim_id": "c_000037",
+      "role": "object",
+      "mention": "severe combined immunodeficiency disease",
+      "proposed": "MONDO:0015974",
+      "confidence": "high",
+      "shortlist": "",
+      "reason": "grouping disease (11 subtypes) cannot carry one gene's mechanism"
+    },
+    {
+      "claim_id": "c_000038",
+      "role": "object",
+      "mention": "severe combined immunodeficiency",
+      "proposed": "MONDO:0015974",
+      "confidence": "high",
+      "shortlist": "",
+      "reason": "grouping disease (11 subtypes) cannot carry one gene's mechanism"
+    },
+    {
+      "claim_id": "c_000044",
+      "role": "object",
+      "mention": "severe combined immunodeficiency",
+      "proposed": "MONDO:0015974",
+      "confidence": "high",
+      "shortlist": "",
+      "reason": "grouping disease (11 subtypes) cannot carry one gene's mechanism"
+    },
+    {
+      "claim_id": "c_000046",
+      "role": "object",
+      "mention": "severe combined immunodeficiency",
+      "proposed": "MONDO:0015974",
+      "confidence": "high",
+      "shortlist": "",
+      "reason": "grouping disease (11 subtypes) cannot carry one gene's mechanism"
+    },
+    {
+      "claim_id": "c_000051",
+      "role": "object",
+      "mention": "human skeletal dysplasias",
+      "proposed": "EFO:0005571",
+      "confidence": "high",
+      "shortlist": "",
+      "reason": "grouping disease (45 subtypes) cannot carry one gene's mechanism"
+    },
+    {
+      "claim_id": "c_000063",
+      "role": "object",
+      "mention": "immunodeficiency",
+      "proposed": "MONDO:0021094",
+      "confidence": "high",
+      "shortlist": "",
+      "reason": "grouping disease (59 subtypes) cannot carry one gene's mechanism"
+    },
+    {
+      "claim_id": "c_000064",
+      "role": "object",
+      "mention": "immunodeficiency",
+      "proposed": "MONDO:0021094",
+      "confidence": "high",
+      "shortlist": "",
+      "reason": "grouping disease (59 subtypes) cannot carry one gene's mechanism"
+    },
+    {
+      "claim_id": "c_000067",
+      "role": "object",
+      "mention": "severe combined immunodeficiency",
+      "proposed": "MONDO:0015974",
+      "confidence": "high",
+      "shortlist": "",
+      "reason": "grouping disease (11 subtypes) cannot carry one gene's mechanism"
+    },
+    {
+      "claim_id": "c_000107",
+      "role": "object",
+      "mention": "chronic mucocutaneous candidiasis",
+      "proposed": "MONDO:0015279",
+      "confidence": "high",
+      "shortlist": "",
+      "reason": "grouping disease (3 subtypes) cannot carry one gene's mechanism"
+    },
+    {
+      "claim_id": "c_000115",
+      "role": "object",
+      "mention": "chronic mucocutaneous candidiasis",
+      "proposed": "MONDO:0015279",
+      "confidence": "high",
+      "shortlist": "",
+      "reason": "grouping disease (3 subtypes) cannot carry one gene's mechanism"
+    },
+    {
+      "claim_id": "c_000131",
+      "role": "object",
+      "mention": "localized chronic mucocutaneous candidiasis",
+      "proposed": "MONDO:0015279",
+      "confidence": "high",
+      "shortlist": "",
+      "reason": "grouping disease (3 subtypes) cannot carry one gene's mechanism"
+    },
+    {
+      "claim_id": "c_000149",
+      "role": "object",
+      "mention": "chronic mucocutaneous candidiasis",
+      "proposed": "MONDO:0015279",
+      "confidence": "high",
+      "shortlist": "",
+      "reason": "grouping disease (3 subtypes) cannot carry one gene's mechanism"
+    },
+    {
+      "claim_id": "c_000192",
+      "role": "object",
+      "mention": "Candida infection",
+      "proposed": "MONDO:0002026",
+      "confidence": "high",
+      "shortlist": "",
+      "reason": "grouping disease (3 subtypes) cannot carry one gene's mechanism"
+    },
+    {
+      "claim_id": "c_000203",
+      "role": "object",
+      "mention": "chronic mucocutaneous candidiasis",
+      "proposed": "MONDO:0015279",
+      "confidence": "high",
+      "shortlist": "",
+      "reason": "grouping disease (3 subtypes) cannot carry one gene's mechanism"
+    },
+    {
+      "claim_id": "c_000234",
+      "role": "object",
+      "mention": "combined immunodeficiency",
+      "proposed": "MONDO:0015131",
+      "confidence": "high",
+      "shortlist": "",
+      "reason": "grouping disease (15 subtypes) cannot carry one gene's mechanism"
+    },
+    {
+      "claim_id": "c_000248",
+      "role": "object",
+      "mention": "chronic mucocutaneous candidiasis disease (CMCD)",
+      "proposed": "MONDO:0015279",
+      "confidence": "high",
+      "shortlist": "",
+      "reason": "grouping disease (3 subtypes) cannot carry one gene's mechanism"
+    },
+    {
+      "claim_id": "c_000270",
+      "role": "object",
+      "mention": "chronic mucocutaneous candidiasis",
+      "proposed": "MONDO:0015279",
+      "confidence": "high",
+      "shortlist": "",
+      "reason": "grouping disease (3 subtypes) cannot carry one gene's mechanism"
+    },
+    {
+      "claim_id": "c_000271",
+      "role": "object",
+      "mention": "chronic mucocutaneous candidiasis disease",
+      "proposed": "MONDO:0015279",
+      "confidence": "high",
+      "shortlist": "",
+      "reason": "grouping disease (3 subtypes) cannot carry one gene's mechanism"
+    },
+    {
+      "claim_id": "c_000284",
+      "role": "object",
+      "mention": "primary immunodeficiency",
+      "proposed": "MONDO:0003778",
+      "confidence": "high",
+      "shortlist": "",
+      "reason": "grouping disease (44 subtypes) cannot carry one gene's mechanism"
+    },
+    {
+      "claim_id": "c_000285",
+      "role": "object",
+      "mention": "immunodeficiency",
+      "proposed": "MONDO:0021094",
+      "confidence": "high",
+      "shortlist": "",
+      "reason": "grouping disease (59 subtypes) cannot carry one gene's mechanism"
+    },
+    {
+      "claim_id": "c_000314",
+      "role": "object",
+      "mention": "chronic mucocutaneous candidiasis",
+      "proposed": "MONDO:0015279",
+      "confidence": "high",
+      "shortlist": "",
+      "reason": "grouping disease (3 subtypes) cannot carry one gene's mechanism"
+    },
+    {
+      "claim_id": "c_000317",
+      "role": "object",
+      "mention": "chronic mucocutaneous candidiasis",
+      "proposed": "MONDO:0015279",
+      "confidence": "high",
+      "shortlist": "",
+      "reason": "grouping disease (3 subtypes) cannot carry one gene's mechanism"
+    },
+    {
+      "claim_id": "c_000326",
+      "role": "object",
+      "mention": "hyper IgE syndrome",
+      "proposed": "MONDO:0018037",
+      "confidence": "high",
+      "shortlist": "",
+      "reason": "grouping disease (6 subtypes) cannot carry one gene's mechanism"
+    },
+    {
+      "claim_id": "c_000332",
+      "role": "object",
+      "mention": "chronic mucocutaneous candidiasis",
+      "proposed": "MONDO:0015279",
+      "confidence": "high",
+      "shortlist": "",
+      "reason": "grouping disease (3 subtypes) cannot carry one gene's mechanism"
+    },
+    {
+      "claim_id": "c_000334",
+      "role": "object",
+      "mention": "Mendelian susceptibility to mycobacterial disease (MSMD)",
+      "proposed": "Orphanet:748",
+      "confidence": "high",
+      "shortlist": "",
+      "reason": "grouping disease (3 subtypes) cannot carry one gene's mechanism"
+    },
+    {
+      "claim_id": "c_000344",
+      "role": "object",
+      "mention": "Mendelian susceptibility to mycobacterial disease",
+      "proposed": "Orphanet:748",
+      "confidence": "high",
+      "shortlist": "",
+      "reason": "grouping disease (3 subtypes) cannot carry one gene's mechanism"
+    },
+    {
+      "claim_id": "c_000352",
+      "role": "object",
+      "mention": "GVHD",
+      "proposed": "MONDO:0013730",
+      "confidence": "high",
+      "shortlist": "",
+      "reason": "grouping disease (2 subtypes) cannot carry one gene's mechanism"
+    },
+    {
+      "claim_id": "c_000354",
+      "role": "object",
+      "mention": "SCID",
+      "proposed": "MONDO:0015974",
+      "confidence": "high",
+      "shortlist": "",
+      "reason": "grouping disease (11 subtypes) cannot carry one gene's mechanism"
+    },
+    {
+      "claim_id": "c_000355",
+      "role": "object",
+      "mention": "SCID",
+      "proposed": "MONDO:0015974",
+      "confidence": "high",
+      "shortlist": "",
+      "reason": "grouping disease (11 subtypes) cannot carry one gene's mechanism"
+    },
+    {
+      "claim_id": "c_000387",
+      "role": "object",
+      "mention": "chronic mucocutaneous candidiasis",
+      "proposed": "MONDO:0015279",
+      "confidence": "high",
+      "shortlist": "",
+      "reason": "grouping disease (3 subtypes) cannot carry one gene's mechanism"
+    },
+    {
+      "claim_id": "c_000401",
+      "role": "object",
+      "mention": "chronic mucocutaneous candidiasis",
+      "proposed": "MONDO:0015279",
+      "confidence": "high",
+      "shortlist": "",
+      "reason": "grouping disease (3 subtypes) cannot carry one gene's mechanism"
+    },
+    {
+      "claim_id": "c_000411",
+      "role": "object",
+      "mention": "tuberculosis",
+      "proposed": "MONDO:0018076",
+      "confidence": "high",
+      "shortlist": "",
+      "reason": "grouping disease (4 subtypes) cannot carry one gene's mechanism"
+    },
+    {
+      "claim_id": "c_000413",
+      "role": "object",
+      "mention": "tuberculosis",
+      "proposed": "MONDO:0018076",
+      "confidence": "high",
+      "shortlist": "",
+      "reason": "grouping disease (4 subtypes) cannot carry one gene's mechanism"
+    },
+    {
+      "claim_id": "c_000418",
+      "role": "object",
+      "mention": "chronic mucocutaneous candidiasis",
+      "proposed": "MONDO:0015279",
+      "confidence": "high",
+      "shortlist": "",
+      "reason": "grouping disease (3 subtypes) cannot carry one gene's mechanism"
+    },
+    {
+      "claim_id": "c_000420",
+      "role": "object",
+      "mention": "SCID",
+      "proposed": "MONDO:0015974",
+      "confidence": "high",
+      "shortlist": "",
+      "reason": "grouping disease (11 subtypes) cannot carry one gene's mechanism"
+    },
+    {
+      "claim_id": "c_000434",
+      "role": "object",
+      "mention": "severe combined immunodeficiency",
+      "proposed": "MONDO:0015974",
+      "confidence": "high",
+      "shortlist": "",
+      "reason": "grouping disease (11 subtypes) cannot carry one gene's mechanism"
+    },
+    {
+      "claim_id": "c_000435",
+      "role": "object",
+      "mention": "severe combined immunodeficiency",
+      "proposed": "MONDO:0015974",
+      "confidence": "high",
+      "shortlist": "",
+      "reason": "grouping disease (11 subtypes) cannot carry one gene's mechanism"
+    },
+    {
+      "claim_id": "c_000440",
+      "role": "object",
+      "mention": "chronic mucocutaneous candidiasis",
+      "proposed": "MONDO:0015279",
+      "confidence": "high",
+      "shortlist": "",
+      "reason": "grouping disease (3 subtypes) cannot carry one gene's mechanism"
+    },
+    {
+      "claim_id": "c_000450",
+      "role": "object",
+      "mention": "T- B+ SCID",
+      "proposed": "MONDO:0044200",
+      "confidence": "high",
+      "shortlist": "",
+      "reason": "grouping disease (10 subtypes) cannot carry one gene's mechanism"
+    },
+    {
+      "claim_id": "c_000452",
+      "role": "object",
+      "mention": "T- B+ SCID",
+      "proposed": "MONDO:0044200",
+      "confidence": "high",
+      "shortlist": "",
+      "reason": "grouping disease (10 subtypes) cannot carry one gene's mechanism"
+    },
+    {
+      "claim_id": "c_000472",
+      "role": "object",
+      "mention": "T-cell acute lymphoblastic leukemia",
+      "proposed": "EFO:0000209",
+      "confidence": "high",
+      "shortlist": "",
+      "reason": "grouping disease (4 subtypes) cannot carry one gene's mechanism"
+    },
+    {
+      "claim_id": "c_000529",
+      "role": "object",
+      "mention": "hyper-IgE syndrome",
+      "proposed": "MONDO:0018037",
+      "confidence": "high",
+      "shortlist": "",
+      "reason": "grouping disease (6 subtypes) cannot carry one gene's mechanism"
+    },
+    {
+      "claim_id": "c_000625",
+      "role": "object",
+      "mention": "severe combined immunodeficiency",
+      "proposed": "MONDO:0015974",
+      "confidence": "high",
+      "shortlist": "",
+      "reason": "grouping disease (11 subtypes) cannot carry one gene's mechanism"
+    },
+    {
+      "claim_id": "c_000627",
+      "role": "object",
+      "mention": "acute lymphoblastic leukemia",
+      "proposed": "EFO:0000220",
+      "confidence": "high",
+      "shortlist": "",
+      "reason": "grouping disease (11 subtypes) cannot carry one gene's mechanism"
+    },
+    {
+      "claim_id": "c_000637",
+      "role": "object",
+      "mention": "severe combined immunodeficiency",
+      "proposed": "MONDO:0015974",
+      "confidence": "high",
+      "shortlist": "",
+      "reason": "grouping disease (11 subtypes) cannot carry one gene's mechanism"
+    },
+    {
+      "claim_id": "c_000678",
+      "role": "object",
+      "mention": "hyper-IgE syndrome",
+      "proposed": "MONDO:0018037",
+      "confidence": "high",
+      "shortlist": "",
+      "reason": "grouping disease (6 subtypes) cannot carry one gene's mechanism"
+    },
+    {
+      "claim_id": "c_000682",
+      "role": "object",
+      "mention": "hyper-IgE syndrome",
+      "proposed": "MONDO:0018037",
+      "confidence": "high",
+      "shortlist": "",
+      "reason": "grouping disease (6 subtypes) cannot carry one gene's mechanism"
+    },
+    {
+      "claim_id": "c_000684",
+      "role": "object",
+      "mention": "immunodeficiency",
+      "proposed": "MONDO:0021094",
+      "confidence": "high",
+      "shortlist": "",
+      "reason": "grouping disease (59 subtypes) cannot carry one gene's mechanism"
+    },
+    {
+      "claim_id": "c_000713",
+      "role": "object",
+      "mention": "Hyper IgE Syndromes",
+      "proposed": "MONDO:0018037",
+      "confidence": "high",
+      "shortlist": "",
+      "reason": "grouping disease (6 subtypes) cannot carry one gene's mechanism"
+    },
+    {
+      "claim_id": "c_000728",
+      "role": "object",
+      "mention": "chronic mucocutaneous candidiasis",
+      "proposed": "MONDO:0015279",
+      "confidence": "high",
+      "shortlist": "",
+      "reason": "grouping disease (3 subtypes) cannot carry one gene's mechanism"
+    },
+    {
+      "claim_id": "c_000734",
+      "role": "object",
+      "mention": "type 1 diabetes",
+      "proposed": "MONDO:0005147",
+      "confidence": "high",
+      "shortlist": "",
+      "reason": "grouping disease (3 subtypes) cannot carry one gene's mechanism"
+    },
+    {
+      "claim_id": "c_000756",
+      "role": "object",
+      "mention": "skin inflammation",
+      "proposed": "MONDO:0002406",
+      "confidence": "high",
+      "shortlist": "",
+      "reason": "grouping disease (27 subtypes) cannot carry one gene's mechanism"
+    },
+    {
+      "claim_id": "c_000773",
+      "role": "object",
+      "mention": "chronic mucocutaneous candidiasis",
+      "proposed": "MONDO:0015279",
+      "confidence": "high",
+      "shortlist": "",
+      "reason": "grouping disease (3 subtypes) cannot carry one gene's mechanism"
+    },
+    {
+      "claim_id": "c_000826",
+      "role": "object",
+      "mention": "severe combined immunodeficiency",
+      "proposed": "MONDO:0015974",
+      "confidence": "high",
+      "shortlist": "",
+      "reason": "grouping disease (11 subtypes) cannot carry one gene's mechanism"
+    },
+    {
+      "claim_id": "c_000829",
+      "role": "object",
+      "mention": "SCID",
+      "proposed": "MONDO:0015974",
+      "confidence": "high",
+      "shortlist": "",
+      "reason": "grouping disease (11 subtypes) cannot carry one gene's mechanism"
+    },
+    {
+      "claim_id": "c_000862",
+      "role": "object",
+      "mention": "inborn errors of immunity",
+      "proposed": "MONDO:0003778",
+      "confidence": "high",
+      "shortlist": "",
+      "reason": "grouping disease (44 subtypes) cannot carry one gene's mechanism"
+    },
+    {
+      "claim_id": "c_000872",
+      "role": "object",
+      "mention": "chronic mucocutaneous candidiasis",
+      "proposed": "MONDO:0015279",
+      "confidence": "high",
+      "shortlist": "",
+      "reason": "grouping disease (3 subtypes) cannot carry one gene's mechanism"
     }
   ],
   "coverage": {
