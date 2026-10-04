@@ -189,7 +189,7 @@ Defined as Pydantic models in `pipeline/models.py`; JSON Schema generated to `do
 - `Claim.paper` (required) is the `Paper` node id; `pmid` is `""` for preprints. Every Paper node referenced by a claim carries `props.abstract`, so the quote check (hard rule 5) is enforced by `Graph.load` itself, not only in tests.
 - `status` is the single dominant value; `attributes.labels` carries the full display set (vocabulary in §6). Inferred edges that no rule flags use `status: supported` and must be rendered with the `evidence_class` badge; only rule violations use `inferred_unsupported`.
 - Disease/Phenotype/Pathway ids are colon CURIEs (`MONDO:…`, `HP:…`, `EFO:…`, `Orphanet:…`); the backbone's underscore spelling is kept in `props.backbone_id`.
-- Relation vocabulary (the frontend and tests build against it; constants in `tests/conftest.py`): `associated_with` (Disease→Gene, `attributes.origin`), `has_mechanism` (Disease→Mechanism and Variant→Mechanism), `has_phenotype`, `in_pathway`, `variant_of`, `inhibits` (Drug→Gene/Pathway), `treats` (Drug→Disease), `similar_to` (Disease→Disease, inferred, score breakdown in `confidence_basis`); plus `author_of`, `extracted_from`, `covers`, `supports_community`, `studies`, `evaluates` for the paper/asset layers.
+- Relation vocabulary (the frontend and tests build against it; constants in `tests/conftest.py`). Backbone: `associated_with` (Disease→Gene, `attributes.origin`), `has_mechanism` (Disease→Mechanism and Variant→Mechanism), `has_phenotype` (Disease→Phenotype, HPO aspect P only; other aspects are `has_inheritance`, `has_clinical_course`, `has_clinical_modifier`, `has_medical_history`), `is_a` (child→parent for phenotypes and diseases), `in_pathway` (Gene→Pathway; Reactome and GO processes), `inhibits` / `targets` (Drug→Gene), `indicated_for` / `contraindicated_for` (Drug→Disease, backbone). Variants: `variant_of` (Variant→Gene), `has_condition` (Variant→Disease, ClinVar). Studies: `studies` (Study→Disease), `evaluates` (Study→Drug), `mentions` (Study→Gene, inferred). People: `author_of` (Investigator→Paper), `publishes_on` (Investigator→Disease/Mechanism, aggregated authorship), `has_funded_project` (Investigator→Gene/Disease, RePORTER text match, inferred). Communities: `supports_community` (PatientGroup→Disease), `covers` (Registry→Disease). Literature: `treats` (Drug→Disease, claim-backed or rule-inferred), `modulates` (Drug→Gene/Pathway/Mechanism). Analytics: `similar_to` (Disease→Disease, inferred, score breakdown in `confidence_basis`).
 - Asset edges carry `attributes.verdict` (`reusable_now | adaptable_needs_review | not_transferable`), `attributes.differs: [...]`, `attributes.needs_review: ["biological" | "eligibility"]`. Investigator contact routes are `attributes.contact_source` (a public URL), never a guessed address.
 - Clusters are a partition over Disease nodes (members may also list the mechanism and variant nodes that travel with a disease); `robust` means the membership held across all three Leiden weightings.
 - Lane B → Lane A handoff is `data/build/claims.json`, validated by `ClaimsBundle` in `pipeline/models.py` (papers with abstracts, quote-verified claims with resolved node ids or `text:` mentions, unresolved rows, PubMed coverage).
@@ -249,7 +249,12 @@ Raw inputs are always kept in `confidence_basis`.
 | `relation_conflict` set | Downgrade; surface conflicting assertions in the evidence drawer |
 | Extracted claims | trial > cohort > case series > case report > in vitro; verified quote required |
 | Treatment edges | Aggregate claims. Supporting + contradicting both present → `contested` (dominant `status`). Every **patient-level** study behind the edge (trial, cohort, case series, case report) has < 10 patients → `small_n`; in-vitro and review claims carry no patients and never count toward n. The full label set goes in `attributes.labels` from the vocabulary `promising` (≥1 supporting clinical claim), `contested`, `small_n`, `preprint` (≥1 claim from a preprint); the UI renders e.g. "promising, contested, small-n" |
-| Inferred edges (rules / similarity) | Capped at 0.5; always labeled inferred |
+| ClinVar variant edges | `variant_of` 0.95 (ClinVar gene annotation). `has_condition` from the review status: practice guideline 1.0 · expert panel 0.9 · multiple submitters, no conflicts 0.8 · single submitter 0.6 · conflicting interpretations 0.4 · no assertion criteria 0.3; classification and last-evaluated date kept in the basis |
+| Registry / directory records | ClinicalTrials.gov `studies` / `evaluates` 0.8 (registry record, data-processed date in basis); patient-group `supports_community` / `covers` 0.8 (URL fetched on the recorded date) |
+| Text-matched links | `mentions` (study found by a gene-term query) 0.3 and `has_funded_project` (RePORTER title/abstract match) 0.4 — both inferred, matched text in the basis |
+| Authorship | `author_of` 0.9 (PubMed record); `publishes_on` min(0.9, 0.3 + 0.1 × papers) with the paper ids in the basis; people without an ORCID are flagged `match_confidence: low` |
+| Claim-backed edges | Per-claim weight by study type (trial 1.0 · cohort 0.8 · case series 0.6 · case report 0.4 · in vitro 0.3 · review 0.5). Edge confidence = min(1, best supporting weight + 0.05 × (supporting − 1)) × (1 − 0.3 × min(1, contradicting ⁄ supporting)); an observed edge with claims takes the max of its database and claim confidence |
+| Inferred edges (rules / similarity) | Capped at 0.5; always labeled inferred. Similarity edges carry 0.5 × score; `direction mismatch` rule edges 0.1 (× 0.5 when the link is only pathway-level); direction-match candidates 0.3 |
 
 ### Similarity (`pipeline/graph/similarity.py`)
 
@@ -379,11 +384,11 @@ Times are ET on Sat Oct 3 → Sun Oct 4. If we start late, shift proportionally.
   - [x] `tests/test_contract.py` passing on the mock
   - [x] `tests/test_ground_truth.py` tests 1–7 as `xfail` (helpers + relation vocabulary in `tests/conftest.py`)
   - [ ] `web/` Next.js shell rendering the mock in Cytoscape — **moved to Lane C** per [AGENT-SPLIT.md](AGENT-SPLIT.md); builds against the mock
-- [ ] **M1 — Backbone** (~5 PM) · *done when: frontend renders real data*
-  - [ ] OptimusKG spike (45 min) → `docs/optimuskg-spike.md` → go / fallback decision
-  - [ ] Cluster genes, diseases, phenotypes, pathways, drugs loaded into SQLite
-  - [ ] HPO information content over all annotated diseases
-  - [ ] `export.py` writes graph v0; frontend switched from mock to real
+- [x] **M1 — Backbone** (graph v0 built 2026-10-03 ~6 PM ET) · *done when: frontend renders real data*
+  - [x] OptimusKG spike → `docs/optimuskg-spike.md` → **GO** (both exit criteria met; client bypassed because Dataverse 403s the default Python user agent)
+  - [x] Cluster genes, diseases, phenotypes, pathways, drugs loaded into SQLite (`data/build/evidence.sqlite`, rebuilt by `make data`)
+  - [x] HPO information content over all 12,882 annotated diseases (Phenotypic-abnormality subtree; inheritance/course terms are separate relations)
+  - [x] `export.py` writes graph v0; frontend switch to real data is Lane C's at the M1 sync point
 - [ ] **M2 — New layers** (~9 PM) · *done when: all layers in the graph*
   - [ ] ClinVar variants (incl. required STAT1 variants) + mechanism nodes
   - [ ] PubMed: Section 11 papers resolved; abstracts fetched (caps enforced)
