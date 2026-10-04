@@ -1,5 +1,5 @@
 {
-  "built_at": "2026-10-04T03:12:13+00:00",
+  "built_at": "2026-10-04T04:17:54+00:00",
   "thresholds": {
     "disease_gene_min_score": 0.3,
     "keep_disgenet_direct": true,
@@ -433,11 +433,21 @@
       "PatientGroup": 6,
       "Registry": 1
     },
-    "edges": 17,
+    "edges": 51,
+    "edges_by_resolution": {
+      "direct": 17,
+      "mechanism": 1,
+      "via_mechanism": 3,
+      "via_ancestor": 30
+    },
     "terms_resolved": 15,
-    "terms_unresolved": 1,
+    "terms_resolved_via_mechanism": 1,
+    "terms_unresolved": 0,
     "searches_logged": 13,
-    "zero_hit_searches": 12
+    "zero_hit_searches": 12,
+    "descendant_depth": 3,
+    "max_descendants_per_term": 200,
+    "descendant_cap_hits": []
   },
   "prune": {
     "thresholds": {
@@ -533,7 +543,7 @@
       "modulates": 6,
       "publishes_on": 412,
       "studies": 74,
-      "supports_community": 16,
+      "supports_community": 17,
       "targets": 30,
       "treats": 7,
       "variant_of": 7153
@@ -556,7 +566,7 @@
       "modulates": 6,
       "publishes_on": 412,
       "studies": 74,
-      "supports_community": 16,
+      "supports_community": 17,
       "targets": 30,
       "treats": 7,
       "variant_of": 622
@@ -612,7 +622,7 @@
   },
   "counts": {
     "nodes": 2903,
-    "edges": 8501,
+    "edges": 8535,
     "claims": 935,
     "clusters": 117,
     "nodes_by_type": {
@@ -632,7 +642,7 @@
     "edges_by_relation": {
       "associated_with": 2084,
       "author_of": 448,
-      "covers": 1,
+      "covers": 3,
       "evaluates": 76,
       "has_clinical_course": 32,
       "has_condition": 725,
@@ -648,21 +658,21 @@
       "publishes_on": 412,
       "similar_to": 78,
       "studies": 74,
-      "supports_community": 16,
+      "supports_community": 48,
       "targets": 30,
       "treats": 208,
       "variant_of": 622
     },
     "edges_by_evidence_class": {
       "extracted": 50,
-      "inferred": 638,
-      "observed": 7813
+      "inferred": 671,
+      "observed": 7814
     },
     "edges_by_status": {
       "contested": 2,
       "inferred_unsupported": 104,
       "small_n": 17,
-      "supported": 8378
+      "supported": 8412
     },
     "edges_by_label": {
       "below_score_threshold": 397,
@@ -673,12 +683,14 @@
       "direction_match": 97,
       "direction_mismatch": 104,
       "hypothesis": 97,
-      "inferred": 356,
+      "inferred": 389,
       "inferred_unsupported": 104,
       "promising": 29,
       "similarity": 78,
       "small_n": 18,
-      "variant_specific": 9
+      "variant_specific": 9,
+      "via_ancestor": 30,
+      "via_mechanism": 3
     },
     "edges_with_origin": {
       "germline": 17,
@@ -693,8 +705,8 @@
     },
     "coverage": {
       "entities": 947,
-      "searches": 2509,
-      "zero_hit_searches": 1640,
+      "searches": 2517,
+      "zero_hit_searches": 1639,
       "by_source": {
         "ClinVar esearch": 12,
         "ClinVar esummary": 7,
@@ -733,7 +745,7 @@
         "build prune": 73,
         "claims.json endpoint": 1005,
         "mechanism rules": 147,
-        "patient_groups.yaml disease term": 16,
+        "patient_groups.yaml disease term": 24,
         "pubmed": 24
       }
     },
@@ -776,8 +788,8 @@
     ]
   },
   "sizes": {
-    "total_bytes": 7790126,
-    "total_mb": 7.79,
+    "total_bytes": 7816701,
+    "total_mb": 7.82,
     "nodes_by_type": {
       "Disease": 82658,
       "Drug": 51751,
@@ -795,7 +807,7 @@
     "edges_by_relation": {
       "associated_with": 1181638,
       "author_of": 176312,
-      "covers": 586,
+      "covers": 2087,
       "evaluates": 54518,
       "has_clinical_course": 19082,
       "has_condition": 519615,
@@ -811,14 +823,14 @@
       "publishes_on": 205287,
       "similar_to": 146964,
       "studies": 49212,
-      "supports_community": 9010,
+      "supports_community": 32885,
       "targets": 13751,
       "treats": 259677,
       "variant_of": 306521
     },
     "claims": 404079,
-    "meta": 362605,
-    "graph_json_bytes": 7791815
+    "meta": 363770,
+    "graph_json_bytes": 7818390
   },
   "edges_dropped_dangling": [],
   "edges_below_threshold": 1704,
@@ -1796,7 +1808,7 @@
     "zero_hit_searches": 6,
     "errors": [],
     "stale_probe_nodes_removed": [],
-    "seconds": 2.315
+    "seconds": 3.069
   },
   "graph_path": "/Users/jonathanyan/Desktop/projects/Pyrid/.claude/worktrees/lane-graph/data/build/graph.json",
   "store_path": "/Users/jonathanyan/Desktop/projects/Pyrid/.claude/worktrees/lane-graph/data/build/evidence.sqlite",
@@ -2186,18 +2198,18 @@
           "coverage": 1992
         },
         "timings_s": {
-          "clear_previous": 0.586,
-          "genes": 1.12,
-          "disease_gene_seed": 0.796,
-          "disease_terms": 0.172,
-          "diseases": 0.247,
-          "disease_gene_included": 4.527,
-          "phenotypes": 0.227,
-          "pathways": 0.079,
-          "drugs": 0.8,
-          "write": 0.369,
-          "resolve_files": 0.32,
-          "total": 9.314
+          "clear_previous": 0.514,
+          "genes": 1.088,
+          "disease_gene_seed": 0.94,
+          "disease_terms": 0.205,
+          "diseases": 0.24,
+          "disease_gene_included": 4.993,
+          "phenotypes": 0.25,
+          "pathways": 0.071,
+          "drugs": 0.908,
+          "write": 0.52,
+          "resolve_files": 0.368,
+          "total": 10.221
         }
       }
     },
@@ -2348,7 +2360,7 @@
         "requests": 87,
         "requests_from_cache": 87,
         "backbone_present": true,
-        "elapsed_s": 3.58
+        "elapsed_s": 3.55
       }
     },
     "pipeline.sources.ctgov": {
@@ -3023,7 +3035,7 @@
         "grants_with_pmids": 92,
         "errors": [],
         "retrieved_at": "2026-10-03T21:41:37+00:00",
-        "seconds": 27.64
+        "seconds": 34.04
       }
     }
   },
@@ -3275,15 +3287,15 @@
     }
   ],
   "timings_seconds": {
-    "pipeline.sources.optimuskg": 9.314,
-    "pipeline.sources.hpo": 0.625,
-    "pipeline.sources.clinvar": 3.601,
-    "pipeline.sources.ctgov": 0.191,
-    "pipeline.sources.reporter": 27.645,
-    "gap_probe": 2.315,
-    "build": 3.875,
-    "graph_logic": 1.156,
-    "write_and_reload": 0.331,
-    "total": 49.113
+    "pipeline.sources.optimuskg": 10.221,
+    "pipeline.sources.hpo": 0.756,
+    "pipeline.sources.clinvar": 3.57,
+    "pipeline.sources.ctgov": 0.199,
+    "pipeline.sources.reporter": 34.043,
+    "gap_probe": 3.07,
+    "build": 4.602,
+    "graph_logic": 1.287,
+    "write_and_reload": 0.412,
+    "total": 58.22
   }
 }
