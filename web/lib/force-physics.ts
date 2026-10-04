@@ -77,17 +77,17 @@ export function connectedWithin(links: ForceEdge[], startId: string, hops: numbe
 /** One persistent simulation. D3 mutates node positions and link endpoints. */
 export function createForcePhysics(nodes: ForceNode[], links: ForceEdge[], repulsion: number): ForcePhysics {
   const locality: ForcePhysics["locality"] = { active: null };
-  const charge = forceManyBody<ForceNode>().strength(-repulsion).distanceMax(750);
+  const charge = forceManyBody<ForceNode>().strength(-repulsion).distanceMax(850);
   const springs = forceLink<ForceNode, ForceEdge>(links)
     .id((node) => node.id)
-    .distance((link) => link.dashed ? 150 : 120)
+    .distance((link) => link.dashed ? 170 : 135)
     .strength((link) => link.muted ? 0.12 : 0.24 + 0.12 * link.confidence);
 
   const simulation = forceSimulation<ForceNode, ForceEdge>(nodes)
     .force("links", springs)
     .force("charge", charge)
     .force("center", forceCenter<ForceNode>(0, 0).strength(0.035))
-    .force("collision", forceCollide<ForceNode>().radius((node) => node.radius + 17).strength(0.9))
+    .force("collision", forceCollide<ForceNode>().radius((node) => node.radius + 20).strength(0.9))
     // While a node is dragged, distant nodes keep most of their current
     // configuration. Immediate and two-hop neighbors retain full response.
     .force("drag-locality", () => {

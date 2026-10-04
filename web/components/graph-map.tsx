@@ -81,7 +81,7 @@ export function GraphMap({ graph, centerId }: { graph: Graph; centerId: string }
   const reducedMotion = Boolean(useReducedMotion());
   const [ready, setReady] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [repulsion, setRepulsion] = useState(230);
+  const [repulsion, setRepulsion] = useState(280);
   const [hover, setHover] = useState<HoverInfo | null>(null);
   const [legend, setLegend] = useState<{ clusters: { id: string; color: string }[]; types: string[]; count: number }>({
     clusters: [], types: [], count: 0,
@@ -346,9 +346,9 @@ export function GraphMap({ graph, centerId }: { graph: Graph; centerId: string }
         <div className="flex flex-wrap items-center gap-2">
           <label htmlFor="force-strength" className="text-xs font-medium text-muted-foreground">Repulsion</label>
           <select id="force-strength" value={repulsion} onChange={(event) => changeRepulsion(Number(event.target.value))} className="rounded-lg border border-dust bg-white px-2.5 py-2 text-xs font-medium text-foreground focus:outline-none focus:ring-2 focus:ring-fern">
-            <option value={110}>Compact</option>
-            <option value={230}>Balanced</option>
-            <option value={390}>Spacious</option>
+            <option value={140}>Compact</option>
+            <option value={280}>Balanced</option>
+            <option value={460}>Spacious</option>
           </select>
           <button onClick={reheat} disabled={!ready} className="rounded-lg border border-dust bg-white px-3 py-2 text-xs font-medium text-foreground transition-colors hover:bg-dust/25 disabled:opacity-50">Reheat graph</button>
           <button onClick={() => { const state = runtimeRef.current?.canvas; if (state) fitGraph(state); }} disabled={!ready} className="rounded-lg border border-dust bg-white px-3 py-2 text-xs font-medium text-foreground transition-colors hover:bg-dust/25 disabled:opacity-50">Fit to view</button>
