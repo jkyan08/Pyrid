@@ -24,7 +24,7 @@ import AnimatedTabs from "@/components/smoothui/animated-tabs";
 import MotionLoader from "@/components/smoothui/motion-loader";
 import SmoothButton from "@/components/smoothui/smooth-button";
 
-type Tab = "summary" | "map" | "act" | "gaps";
+type Tab = "summary" | "map" | "act";
 
 const ENTITY_PURPOSE: Record<string, { eyebrow: string; description: string }> = {
   Disease: { eyebrow: "Disease dossier", description: "Trace the mechanism, related conditions and research partners around this disease." },
@@ -121,9 +121,8 @@ function EntityPageView({ id }: { id: string }) {
 
   const tabs: { key: Tab; label: string }[] = [
     { key: "map", label: "Explore connections" },
-    { key: "summary", label: "Evidence brief" },
+    { key: "summary", label: "Evidence brief & open questions" },
     { key: "act", label: "Research action" },
-    { key: "gaps", label: "Open questions" },
   ];
 
   const theme = themeOf(entity.node.type);
@@ -184,10 +183,26 @@ function EntityPageView({ id }: { id: string }) {
         />
       </div>
 
-      {tab === "summary" && <div className="max-w-4xl rounded-2xl border border-slate-200 bg-white p-6 sm:p-8"><SummaryTab entity={entity} /></div>}
+      {tab === "summary" && (
+        <div className="max-w-4xl space-y-6">
+          <div className="rounded-2xl border border-slate-200 bg-white p-6 sm:p-8">
+            <SummaryTab entity={entity} />
+          </div>
+          <section className="rounded-2xl border border-slate-200 bg-white p-6 sm:p-8">
+            <h2 className="text-xs font-bold uppercase tracking-[0.15em] text-slate-500">
+              Open questions
+            </h2>
+            <p className="mt-1 text-sm text-slate-500">
+              What was searched, what evidence is missing, and what would change the answer.
+            </p>
+            <div className="mt-5">
+              <GapsTab entityId={entity.node.id} />
+            </div>
+          </section>
+        </div>
+      )}
       {tab === "map" && <MapTab centerId={entity.node.id} onAct={() => setTab("act")} />}
       {tab === "act" && <div className="max-w-5xl"><ActTab entity={entity} /></div>}
-      {tab === "gaps" && <div className="max-w-5xl"><GapsTab entityId={entity.node.id} /></div>}
     </div>
   );
 }

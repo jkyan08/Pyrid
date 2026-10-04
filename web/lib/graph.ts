@@ -160,6 +160,28 @@ function humanRelation(rel: string): string {
   return rel.replace(/_/g, " ");
 }
 
+/**
+ * Human-readable label for a citation chip: edges render as
+ * "relation → target label", claims as "PMID <n>" (or "<study type> claim"
+ * when the pmid is not a real numeric PMID). Unknown ids fall back to the id.
+ */
+export function citationLabel(graph: Graph, id: string): string {
+  const truncate = (s: string, max = 32) => (s.length > max ? `${s.slice(0, max)}…` : s);
+  if (id.startsWith("e_")) {
+    const edge = edgeById(graph, id);
+    if (!edge) return id;
+    const target = nodeById(graph, edge.target);
+    return `${humanRelation(edge.relation)} → ${truncate(target?.label ?? edge.target)}`;
+  }
+  if (id.startsWith("c_")) {
+    const claim = claimById(graph, id);
+    if (!claim) return id;
+    if (/^\d+$/.test(claim.pmid ?? "")) return `PMID ${claim.pmid}`;
+    return `${humanRelation(claim.study_type ?? "extracted")} claim`;
+  }
+  return id;
+}
+
 function neighborPhrase(selfLabel: string, n: Neighbor): string {
   const rel = humanRelation(n.edge.relation);
   return n.direction === "out"
