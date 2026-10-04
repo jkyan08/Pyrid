@@ -309,32 +309,32 @@ def create_app(
             labels = _edge_labels(edge_item)
             if edge_item.get("status") == "contested" or "contested" in labels:
                 missing.append(
-                    f"Edge {edge_item['id']} ({edge_item['relation']}) is contested: "
+                    f"The [{edge_item['id']}] ({edge_item['relation']}) evidence is contested: "
                     f"{len(edge_item.get('supporting', []))} supporting vs "
                     f"{len(edge_item.get('contradicting', []))} contradicting claims."
                 )
                 would_change.append(
                     f"A larger or independent study would resolve the contested "
-                    f"edge {edge_item['id']}."
+                    f"evidence [{edge_item['id']}]."
                 )
             if "small_n" in labels:
                 missing.append(
-                    f"Edge {edge_item['id']} is labeled small_n: its supporting "
+                    f"The [{edge_item['id']}] evidence is small_n: its supporting "
                     "evidence comes only from small studies."
                 )
                 would_change.append(
                     f"Evidence from a larger cohort would remove the small_n "
-                    f"label on edge {edge_item['id']}."
+                    f"label [{edge_item['id']}]."
                 )
             if edge_item.get("status") == "inferred_unsupported":
                 reason = (edge_item.get("confidence_basis") or {}).get(
                     "reason", "no direct evidence"
                 )
                 missing.append(
-                    f"Edge {edge_item['id']} is inferred_unsupported ({reason})."
+                    f"The [{edge_item['id']}] link is an unsupported inference ({reason})."
                 )
                 would_change.append(
-                    f"Direct evidence for edge {edge_item['id']} would change its status."
+                    f"Direct evidence would change the status of [{edge_item['id']}]."
                 )
 
         honest_gap = not store.has_supported_edge(entity_id)
