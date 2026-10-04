@@ -17,6 +17,7 @@ import { useRouter } from "next/navigation";
 import { motion, useReducedMotion } from "motion/react";
 import type { SearchResult } from "@/lib/types";
 import { apiSearch } from "@/lib/api";
+import { SEARCH_TYPE_RANK } from "@/lib/graph";
 import { themeOf } from "@/lib/type-theme";
 import AnimatedInput from "@/components/smoothui/animated-input";
 import MotionLoader from "@/components/smoothui/motion-loader";
@@ -93,9 +94,15 @@ export function SearchBox({
               is invented to fill the gap.
             </li>
           )}
-          {results.map((r, i) => {
-            const theme = themeOf(r.type);
-            return (
+          {groupResults(results).map(({ heading, items }) => (
+            <li key={heading} className="bg-white">
+              <p className="bg-slate-50/80 px-4 py-1.5 text-[10px] font-bold uppercase tracking-[0.14em] text-slate-400">
+                {heading}
+              </p>
+              <ul className="divide-y divide-gray-100">
+                {items.map(({ r, i }) => {
+                  const theme = themeOf(r.type);
+                  return (
               <motion.li
                 key={r.id}
                 initial={
@@ -139,10 +146,36 @@ export function SearchBox({
                   </span>
                 </button>
               </motion.li>
-            );
-          })}
+                  );
+                })}
+              </ul>
+            </li>
+          ))}
         </ul>
       )}
     </div>
   );
+}
+
+/**
+ * Group ranked results into labeled sections (entities first, literature
+ * last) so a long list reads in siftable chunks instead of one flat flood.
+ */
+function groupResults(results: SearchResult[]) {
+  const groups: { heading: string; items: { r: SearchResult; i: number }[] }[] = [];
+  const byHeading = new Map<string, { r: SearchResult; i: number }[]>();
+  const order = results
+    .map((r, i) => ({ r, i, rank: SEARCH_TYPE_RANK[r.type] ?? 2 }))
+    .sort((a, b) => a.rank - b.rank || a.i - b.i);
+  for (const { r, i } of order) {
+    const heading = themeOf(r.type).label;
+    let bucket = byHeading.get(heading);
+    if (!bucket) {
+      bucket = [];
+      byHeading.set(heading, bucket);
+      groups.push({ heading, items: bucket });
+    }
+    bucket.push({ r, i });
+  }
+  return groups;
 }
