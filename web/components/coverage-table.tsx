@@ -28,7 +28,7 @@ export function CoverageTable({ coverage }: { coverage: CoverageEntry | null }) 
               <td className="py-2 pr-4 text-gray-700">{s.source}</td>
               <td className="py-2 pr-4 text-gray-700">“{s.query}”</td>
               <td className="py-2 pr-4 text-gray-500">{s.date ?? "—"}</td>
-              <td className={`py-2 ${s.hits === 0 ? "font-medium text-red-700" : "text-gray-700"}`}>
+              <td className={`py-2 ${s.hits === 0 ? "font-medium text-rust" : "text-gray-700"}`}>
                 {s.hits}
               </td>
             </tr>

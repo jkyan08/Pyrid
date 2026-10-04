@@ -5,8 +5,8 @@
  * patient group or mechanism. Debounced GET /search; each result shows the
  * label, a type badge and the resolution line.
  *
- * Styled with SmoothUI: AnimatedInput (floating label) for the box, a
- * MotionLoader while searching, and a staggered motion entrance for result
+ * Styled with SmoothUI: AnimatedInput (floating label) for the box,
+ * ThinkingDots while searching, and a staggered motion entrance for result
  * rows (disabled under prefers-reduced-motion). Result rows carry the
  * type-theme left accent + glyph so a Drug hit reads differently from a
  * Disease hit at a glance. `hero` renders the larger home-page variant.
@@ -21,7 +21,7 @@ import { SEARCH_TYPE_RANK } from "@/lib/graph";
 import { displayLabel } from "@/lib/display";
 import { themeOf } from "@/lib/type-theme";
 import AnimatedInput from "@/components/smoothui/animated-input";
-import MotionLoader from "@/components/smoothui/motion-loader";
+import ThinkingDots from "@/components/smoothui/thinking-dots";
 import { TypeBadge, TypeGlyph } from "./badges";
 
 export function SearchBox({
@@ -73,20 +73,20 @@ export function SearchBox({
         placeholder="disease, gene, variant, symptom, patient group or mechanism…"
         inputClassName={
           hero
-            ? "rounded-xl px-5 py-4 text-lg shadow-md shadow-sky-100/60 placeholder:text-gray-400"
-            : "rounded-lg px-4 py-3 text-base shadow-sm placeholder:text-gray-400"
+            ? "rounded-xl px-5 py-4 text-lg placeholder:text-gray-400"
+            : "rounded-lg px-4 py-3 text-base placeholder:text-gray-400"
         }
       />
       {busy && (
-        <p className="mt-3 flex items-center gap-2 text-xs text-gray-400">
-          <MotionLoader variant="dot-ring" size={16} label="Searching" />
+        <p className="mt-3 flex items-center gap-2 text-xs text-muted-foreground">
+          <ThinkingDots label="Searching" />
           Searching…
         </p>
       )}
       {results !== null && !busy && (
         <ul
-          className={`mt-4 divide-y divide-gray-100 overflow-hidden border border-gray-200 ${
-            hero ? "rounded-xl shadow-sm" : "rounded-lg"
+          className={`mt-4 divide-y divide-dust/60 overflow-hidden border border-dust ${
+            hero ? "rounded-xl" : "rounded-lg"
           }`}
         >
           {results.length === 0 && (
@@ -97,10 +97,10 @@ export function SearchBox({
           )}
           {groupResults(results).map(({ heading, items }) => (
             <li key={heading} className="bg-white">
-              <p className="bg-slate-50/80 px-4 py-1.5 text-[10px] font-bold uppercase tracking-[0.14em] text-slate-400">
+              <p className="bg-dust/25 px-4 py-1.5 text-[10px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">
                 {heading}
               </p>
-              <ul className="divide-y divide-gray-100">
+              <ul className="divide-y divide-dust/60">
                 {items.map(({ r, i }) => {
                   const theme = themeOf(r.type);
                   return (
@@ -123,7 +123,7 @@ export function SearchBox({
               >
                 <button
                   onClick={() => router.push(`/entity/${encodeURIComponent(r.id)}`)}
-                  className={`flex w-full items-start gap-3 border-l-4 px-4 text-left hover:bg-gray-50 ${theme.accent} ${
+                  className={`flex w-full items-start gap-3 border-l-4 px-4 text-left hover:bg-dust/20 ${theme.accent} ${
                     hero ? "py-4" : "py-3"
                   }`}
                 >
