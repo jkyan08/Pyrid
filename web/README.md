@@ -1,7 +1,7 @@
 # web/ — Rare Disease Atlas frontend
 
 Next.js (App Router, TypeScript, Tailwind) frontend for the atlas. Consumes the
-lane-C API (see `../api/CONTRACT.md`) with a static-file fallback. UI components
+Atlas API (see `../api/CONTRACT.md`) with a static-file fallback. UI components
 are styled with [SmoothUI](https://smoothui.dev) (motion-animated, shadcn
 registry `@smoothui/*`, vendored under `components/smoothui/`); all animations
 respect `prefers-reduced-motion`.

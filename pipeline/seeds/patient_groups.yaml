@@ -1,4 +1,4 @@
-# Hand-curated patient-group / registry seed file (lane C).
+# Hand-curated patient-group / registry seed file.
 # README hard rule 2: names and search terms only — the pipeline resolves IDs.
 # Every row in `groups` was verified by fetching its URL on meta.date.
 # Every directory search is logged in `searches`, including zero hits and
@@ -7,7 +7,7 @@
 # `outcome`. null hits = the search could not be executed/read.
 
 meta:
-  curated_by: "lane-c"
+  curated_by: "team"
   date: "2026-10-03"
   rule: "every group row verified by fetching url on date; searches logged including zero hits"
 
@@ -364,7 +364,7 @@ gaps:
       - "MPN Research Foundation homepage fetch (2026-10-03)"
       - "MPN Advocacy & Education International homepage fetch (2026-10-03)"
     next_step: >-
-      Lane A/B: connect MPN diseases to the JAK2 somatic mechanism node via
+      Connect MPN diseases to the JAK2 somatic mechanism node via
       retrieved sources (ClinVar/PubMed), then attach these groups to the
       disease nodes by plain-language disease name.
 

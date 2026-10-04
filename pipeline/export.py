@@ -343,6 +343,15 @@ def gap_probe_from_store(store: Store) -> dict[str, Any]:
     }
 
 
+def _repo_relative(path: str | Path) -> str:
+    """A path as recorded in build_report.json: relative to the repo root when it lies inside it,
+    so the committed report carries no machine-specific prefix."""
+    try:
+        return Path(path).resolve().relative_to(config.REPO_ROOT.resolve()).as_posix()
+    except ValueError:
+        return str(path)
+
+
 def _load_claims(path: Path | None, *, disabled: bool) -> tuple[ClaimsBundle | None, str]:
     if disabled:
         return None, "disabled (--no-claims)"
@@ -468,9 +477,9 @@ def main(argv: list[str] | None = None) -> int:
         "sizes": {**sizes(graph), "graph_json_bytes": out_path.stat().st_size},
         "graph_logic": logic_report,
         "gap_probe": gap_probe,
-        "graph_path": str(out_path),
-        "store_path": str(store_path),
-        "claims_bundle": claims_source,
+        "graph_path": _repo_relative(out_path),
+        "store_path": _repo_relative(store_path),
+        "claims_bundle": _repo_relative(claims_source),
         "offline": offline,
         "loaders": loaders,
         "store_counts": store_counts,

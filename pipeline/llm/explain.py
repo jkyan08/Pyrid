@@ -1,7 +1,7 @@
 """Cited plain-language explanations of a node set or path (README Section 7, use 3).
 
 `explain(ids, graph)` is a pure function of its inputs (plus the on-disk LLM
-cache). Lane C's `/explain` route calls it; it never touches HTTP routing.
+cache). The API's `/explain` route calls it; it never touches HTTP routing.
 
 Flow: build a compact context from the subgraph → structured-output call →
 validator → one retry with the errors → templated fallback. The fallback is
@@ -133,7 +133,7 @@ def _fallback(sub: dict) -> list[dict]:
 
 
 def _result(mode: str, sentences: list[dict], errors: list) -> dict:
-    """`text` and `citations` are what lane C's API reads; `sentences` keeps the per-sentence cites."""
+    """`text` and `citations` are what the API reads; `sentences` keeps the per-sentence cites."""
     citations = list(dict.fromkeys(c for s in sentences for c in s["cites"]))
     return {"mode": mode, "text": render(sentences), "citations": citations, "sentences": sentences, "errors": errors}
 
@@ -172,7 +172,7 @@ def generate_cited(system: str, task: str, sub: dict, fallback: Callable[[dict],
 def explain(ids: list[str], graph: dict, *, parser: Parser | None = None, fallback: bool = False) -> dict | None:
     """Cited plain-language explanation of `ids`.
 
-    By default returns None unless the model produced validated cited text, so lane C's
+    By default returns None unless the model produced validated cited text, so the API's
     `/explain` chain falls through to its precomputed explanations and its own fallback
     (api/llm_seam.py treats a dict with `text` as a live answer). `fallback=True` (used by
     `precompute`) returns the validated template instead, or mode `empty` when there is
@@ -186,15 +186,15 @@ def explain(ids: list[str], graph: dict, *, parser: Parser | None = None, fallba
 
 
 def cache_key(ids: list[str] | str, kind: str = "explain") -> str:
-    """Key in explanations.json. Lane C looks explanations up by the first requested id, so a
+    """Key in explanations.json. The API looks explanations up by the first requested id, so a
     single-entity explanation is keyed by that id; a path is its ids joined with '|'.
     Drafts are keyed 'draft:<key>'."""
     key = ids if isinstance(ids, str) else "|".join(ids)
     return key if kind == "explain" else f"{kind}:{key}"
 
 
-# Demo journeys to precompute. Filled with node/edge IDs once graph v0 lands
-# (sync point 1); `journeys.json` beside graph.json overrides this.
+# Demo journeys to precompute (node/edge IDs from the built graph); `journeys.json`
+# beside graph.json overrides this.
 JOURNEYS: dict[str, list[list[str]]] = {}
 
 

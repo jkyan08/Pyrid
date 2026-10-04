@@ -1,4 +1,4 @@
-"""Lane B unit tests. No network and no OpenAI calls: the LLM and embedder are faked."""
+"""Evidence pipeline unit tests. No network and no OpenAI calls: the LLM and embedder are faked."""
 from __future__ import annotations
 
 import pytest
@@ -302,11 +302,11 @@ def test_coverage_keyed_by_entity():
         Coverage.model_validate(v)
 
 
-# --- lane C seam ----------------------------------------------------------------------
+# --- API seam -------------------------------------------------------------------------
 
-def test_lane_c_seam_shapes(monkeypatch):
+def test_api_seam_shapes(monkeypatch):
     """Mirrors api/llm_seam.py: attribute lookup on the package; a validated LLM answer comes back
-    with `text` + `citations`; a provider failure or empty subgraph returns None so lane C falls
+    with `text` + `citations`; a provider failure or empty subgraph returns None so the API falls
     through to its precomputed explanations and fallback."""
     import importlib
 
@@ -329,7 +329,7 @@ def test_lane_c_seam_shapes(monkeypatch):
     assert llm.explain(["x"], {}) is None
 
 
-def test_cache_key_matches_lane_c_lookup():
+def test_cache_key_matches_api_lookup():
     from pipeline.llm.explain import cache_key
     assert cache_key(["n:disX"]) == "n:disX"
     assert cache_key(["n:a", "n:b"]) == "n:a|n:b"

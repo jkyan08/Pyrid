@@ -1,5 +1,5 @@
 {
-  "built_at": "2026-10-04T06:15:17+00:00",
+  "built_at": "2026-10-04T07:51:23+00:00",
   "thresholds": {
     "disease_gene_min_score": 0.3,
     "keep_disgenet_direct": true,
@@ -2017,11 +2017,11 @@
     "zero_hit_searches": 6,
     "errors": [],
     "stale_probe_nodes_removed": [],
-    "seconds": 2.213
+    "seconds": 2.454
   },
-  "graph_path": "/Users/jonathanyan/Desktop/projects/Pyrid/.claude/worktrees/lane-graph/data/build/graph.json",
-  "store_path": "/Users/jonathanyan/Desktop/projects/Pyrid/.claude/worktrees/lane-graph/data/build/evidence.sqlite",
-  "claims_bundle": "/Users/jonathanyan/Desktop/projects/Pyrid/.claude/worktrees/lane-graph/data/build/claims.json",
+  "graph_path": "data/build/graph.json",
+  "store_path": "data/build/evidence.sqlite",
+  "claims_bundle": "data/build/claims.json",
   "offline": true,
   "loaders": {
     "pipeline.sources.optimuskg": {
@@ -2407,18 +2407,18 @@
           "coverage": 1992
         },
         "timings_s": {
-          "clear_previous": 0.503,
-          "genes": 0.991,
-          "disease_gene_seed": 0.723,
-          "disease_terms": 0.158,
-          "diseases": 0.209,
-          "disease_gene_included": 4.331,
-          "phenotypes": 0.225,
-          "pathways": 0.061,
-          "drugs": 0.768,
-          "write": 0.363,
-          "resolve_files": 0.318,
-          "total": 8.722
+          "clear_previous": 0.579,
+          "genes": 1.063,
+          "disease_gene_seed": 0.764,
+          "disease_terms": 0.178,
+          "diseases": 0.411,
+          "disease_gene_included": 4.907,
+          "phenotypes": 0.327,
+          "pathways": 0.067,
+          "drugs": 1.203,
+          "write": 0.411,
+          "resolve_files": 0.325,
+          "total": 10.333
         }
       }
     },
@@ -2569,7 +2569,7 @@
         "requests": 87,
         "requests_from_cache": 87,
         "backbone_present": true,
-        "elapsed_s": 3.04
+        "elapsed_s": 4.74
       }
     },
     "pipeline.sources.ctgov": {
@@ -3244,7 +3244,7 @@
         "grants_with_pmids": 92,
         "errors": [],
         "retrieved_at": "2026-10-03T21:41:37+00:00",
-        "seconds": 27.51
+        "seconds": 29.63
       }
     }
   },
@@ -3496,15 +3496,15 @@
     }
   ],
   "timings_seconds": {
-    "pipeline.sources.optimuskg": 8.722,
-    "pipeline.sources.hpo": 0.584,
-    "pipeline.sources.clinvar": 3.065,
-    "pipeline.sources.ctgov": 0.178,
-    "pipeline.sources.reporter": 27.513,
-    "gap_probe": 2.213,
-    "build": 3.69,
-    "graph_logic": 1.104,
-    "write_and_reload": 0.32,
-    "total": 47.445
+    "pipeline.sources.optimuskg": 10.333,
+    "pipeline.sources.hpo": 0.993,
+    "pipeline.sources.clinvar": 4.771,
+    "pipeline.sources.ctgov": 0.334,
+    "pipeline.sources.reporter": 29.642,
+    "gap_probe": 2.455,
+    "build": 4.48,
+    "graph_logic": 1.254,
+    "write_and_reload": 0.355,
+    "total": 54.722
   }
 }

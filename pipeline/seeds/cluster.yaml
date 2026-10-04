@@ -55,10 +55,11 @@ thresholds:
 
   # --- Export inclusion rule (pipeline/graph/build.py prune_graph; the single definition is
   # pipeline.sources.optimuskg.disease_gene_included). The store keeps the wider slice above so
-  # Lane B's resolved endpoints stay resolvable; graph.json keeps a disease-gene edge only when a
-  # curated database is among sources.direct AND evidence_score >= disease_gene_min_score, OR
-  # evidence_score >= disease_gene_high_score. Seed-gene edges are never pruned (a weak one keeps
-  # its `below_score_threshold` label so the UI shows it as weak rather than hiding it).
+  # the evidence pipeline's resolved endpoints stay resolvable; graph.json keeps a disease-gene
+  # edge only when a curated database is among sources.direct AND evidence_score >=
+  # disease_gene_min_score, OR evidence_score >= disease_gene_high_score. Seed-gene edges are never
+  # pruned (a weak one keeps its `below_score_threshold` label so the UI shows it as weak rather
+  # than hiding it).
   # Names as the backbone spells them in sources.direct; a general list, not a per-gene choice.
   disease_gene_curated_sources: [DISGENET, ORPHANET, CLINGEN, OMIM]
   disease_gene_high_score: 0.6

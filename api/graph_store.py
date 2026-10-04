@@ -5,7 +5,7 @@ Loader fallback chain (api/CONTRACT.md "Graph loading"), first existing wins:
 1. $ATLAS_GRAPH_PATH (env override; skipped when empty or missing)
 2. <repo>/data/build/graph.json          (real, M1+)
 3. <repo>/data/build/graph.mock.json     (M0 mock)
-4. <repo>/api/fixtures/graph.mock.json   (lane C dev fixture)
+4. <repo>/api/fixtures/graph.mock.json   (API dev fixture)
 
 Explanations: $ATLAS_EXPLANATIONS_PATH -> data/build/explanations.json
 -> api/fixtures/explanations.mock.json (or None — explanations are optional).

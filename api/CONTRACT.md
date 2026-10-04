@@ -1,7 +1,7 @@
-# Lane C internal contract: API shapes (api/ ↔ web/)
+# API contract (api/ ↔ web/)
 
 The graph data contract is README §4 (frozen at M0, owned by `pipeline/models.py`).
-This file defines only **lane C's** seam: what the FastAPI app returns and what the
+This file defines only the API ↔ web seam: what the FastAPI app returns and what the
 Next.js app consumes. Both sides must tolerate extra/missing optional fields —
 M0 may settle open contract questions differently.
 
@@ -14,7 +14,7 @@ Resolve the graph file as the first existing of:
 3. `<repo>/api/fixtures/graph.demo.mock.json` (demo dataset modeling the finished
    product; all sources DEMO-labeled, name contains "mock" so the ribbon stays on)
 4. `<repo>/data/build/graph.mock.json` (M0 mock)
-5. `<repo>/api/fixtures/graph.mock.json` (lane C dev fixture — placeholder only)
+5. `<repo>/api/fixtures/graph.mock.json` (API dev fixture — placeholder only)
 
 Precomputed explanations: `$ATLAS_EXPLANATIONS_PATH` → `data/build/explanations.json`
 → `api/fixtures/explanations.demo.mock.json` → `api/fixtures/explanations.mock.json`.
@@ -23,16 +23,16 @@ The API exposes which file it loaded via `GET /health` → `{"status": "ok",
 "graph_path": "...", "graph_built_at": "...", "nodes": N, "edges": N, "mode": "real" | "mock"}`
 (`mode: "mock"` when the resolved path contains `mock`).
 
-## LLM seam (lane B's code; never implemented here)
+## LLM seam (evidence-pipeline code; never implemented here)
 
 `/explain` and `/draft` try, in order:
-1. `pipeline.llm.explain` / `pipeline.llm.draft` (import at call time; lane B owns these,
+1. `pipeline.llm.explain` / `pipeline.llm.draft` (import at call time; part of the evidence pipeline,
    signature `explain(ids: list[str], graph: dict) -> dict` returning `{text, citations}`),
 2. the precomputed explanations file,
 3. a templated fallback built only from edge/claim fields already in the graph.
 
 Response always includes `source: "live" | "precomputed" | "fallback"` so the UI can
-label degraded mode ("cached only"). Never error because OpenAI/lane B is unavailable.
+label degraded mode ("cached only"). Never error because OpenAI/`pipeline.llm` is unavailable.
 
 ## Endpoints
 
@@ -59,8 +59,8 @@ Entire loaded graph verbatim (for Cytoscape map + static-fallback parity).
 }
 ```
 Searches labels + synonyms of every node type (disease, gene, variant, symptom/phenotype,
-patient group, mechanism). Case-insensitive token overlap is enough until lane B's
-reconcile exists. Parity rules (both sides): substring matches require a query of
+patient group, mechanism). Case-insensitive token overlap is enough until the evidence
+pipeline's reconcile exists. Parity rules (both sides): substring matches require a query of
 ≥3 chars; exact matches any length.
 
 ### GET /entity/{id}

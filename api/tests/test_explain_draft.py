@@ -57,7 +57,7 @@ def test_explain_live_when_pipeline_llm_importable(client, monkeypatch):
 
 def test_explain_broken_pipeline_llm_never_500(client, monkeypatch):
     def boom(ids, graph):
-        raise RuntimeError("lane B exploded")
+        raise RuntimeError("explain backend exploded")
 
     mod = types.ModuleType("pipeline.llm")
     mod.explain = boom

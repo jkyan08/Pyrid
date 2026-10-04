@@ -1,5 +1,5 @@
 /**
- * TypeScript mirror of the graph.json contract (README §4) and the lane-C
+ * TypeScript mirror of the graph.json contract (README §4) and the Atlas
  * API shapes (api/CONTRACT.md). Both sides tolerate extra/missing optional
  * fields, so almost everything beyond ids is optional here.
  */

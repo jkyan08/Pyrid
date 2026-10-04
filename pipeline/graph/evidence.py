@@ -1,4 +1,6 @@
-"""Literature claims -> graph edges, Paper nodes and Investigator nodes (Lane B -> Lane A seam).
+"""Literature claims -> graph edges, Paper nodes and Investigator nodes.
+
+This is the evidence-pipeline -> graph-build seam.
 
 :func:`integrate_claims` takes the build's DRAFT nodes and edges (plain dicts shaped like
 :class:`pipeline.models.Node` / ``Edge`` inputs; edges carry no ``id`` and are keyed by
@@ -49,8 +51,8 @@ the claim's field becomes the Variant node id, the endpoint counts as ``protein_
 in the resolution report, every edge the claim attaches to records
 ``confidence_basis.resolved_mentions[] = {claim, field, resolved_from, resolved_to, method:
 "protein-change token vs ClinVar synonyms"}`` and the normal routes (the variant-specific
-Variant -> Mechanism ``has_mechanism`` route included) run as if Lane B had resolved it. Ambiguous,
-unmatched or over-long mentions stay unresolved with the coverage rows above; the report
+Variant -> Mechanism ``has_mechanism`` route included) run as if reconcile had resolved it.
+Ambiguous, unmatched or over-long mentions stay unresolved with the coverage rows above; the report
 (``claims.variant_mentions``) counts each outcome and lists the resolutions.
 
 Predicate -> edge mapping (shared design C)

@@ -1,7 +1,7 @@
 """OptimusKG backbone loader: Harvard Dataverse download + Polars slice into the evidence store.
 
 Everything here follows docs/optimuskg-spike.md (the verified facts about the dataset) and the
-shared design in AGENT-SPLIT.md / pipeline/store.py. Two halves:
+shared design in pipeline/store.py. Two halves:
 
 1. **Obtain the stratified Parquet files** (:func:`resolve_files`). The dataset file list is
    read from the Dataverse native API through :class:`pipeline.cache.CachedHttp` (cached JSON;
@@ -62,7 +62,7 @@ shared design in AGENT-SPLIT.md / pipeline/store.py. Two halves:
    * DRG-GEN edges of the seed genes, DRG-DIS edges of the included diseases, the drug nodes,
      and drug nodes matching a seed ``drug_term``.
 
-   Hierarchy direction (spike section 3, second reviewer): the backbone stores PARENT edges as
+   Hierarchy direction (spike section 3): the backbone stores PARENT edges as
    ``from`` = parent, ``to`` = child. They are flipped on load to CHILD -> PARENT ``is_a`` with
    ``props.backbone_relation = "PARENT"``.
 
@@ -109,8 +109,8 @@ so changing a threshold cannot leave stale nodes or edges behind.
 
 Export inclusion rule
 ---------------------
-The store keeps the wide slice above (so that Lane B's reconciler, which resolves mentions
-against the store's nodes, keeps finding its endpoints); ``pipeline.graph.build`` exports a
+The store keeps the wide slice above (so that the evidence pipeline's reconciler, which resolves
+mentions against the store's nodes, keeps finding its endpoints); ``pipeline.graph.build`` exports a
 compact graph by applying :func:`disease_gene_included`, the stricter rule defined here next to
 the slice floor so the two definitions sit together: a disease-gene edge is included when a
 curated database is among ``sources.direct`` (``disease_gene_curated_sources``, default

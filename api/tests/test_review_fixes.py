@@ -142,7 +142,7 @@ def test_llm_seam_logs_warning_when_module_broken(caplog, monkeypatch):
     broken = types.ModuleType("pipeline.llm")
 
     def explain(ids, graph):  # pragma: no cover - raises immediately
-        raise RuntimeError("boom from lane B")
+        raise RuntimeError("boom from pipeline.llm")
 
     broken.explain = explain
     pipeline_pkg = types.ModuleType("pipeline")
@@ -155,7 +155,7 @@ def test_llm_seam_logs_warning_when_module_broken(caplog, monkeypatch):
 
 
 def test_llm_seam_quiet_when_live_returns_none(caplog, monkeypatch):
-    """Lane B's contract: explain/draft return None unless the model produced
+    """pipeline.llm's contract: explain/draft return None unless the model produced
     validated text — None is the documented quiet 'no live answer', not an error."""
     quiet = types.ModuleType("pipeline.llm")
     quiet.explain = lambda ids, graph: None

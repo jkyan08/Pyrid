@@ -1,9 +1,9 @@
 # ClinVar (NCBI E-utilities) fixtures
 
-**Capture date: 2026-10-03** (recon pass, no API key). Every file is a verbatim excerpt of a real
-response recorded under `scratchpad/recon/`; the only edits are the truncations listed below.
+**Capture date: 2026-10-03** (no API key). Every file is a verbatim excerpt of a real
+response captured that day; the only edits are the truncations listed below.
 ClinVar build seen in the responses: einfo `dbbuild` `Build260929-0200.1`, `lastupdate` `2026/09/29 05:12`,
-`count` `4647675`. Field semantics come from `docs/source-apis.md` §1 and `docs/recon/clinvar.md`.
+`count` `4647675`. Field semantics: `docs/source-apis.md` §1.
 
 Base URL for every E-utility below: `https://eutils.ncbi.nlm.nih.gov/entrez/eutils/`.
 `curl` needs `-g` (globoff) or `%5B`/`%5D`, otherwise `[gene]` is eaten as a shell glob.

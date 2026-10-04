@@ -74,7 +74,7 @@ const STOPWORDS = new Set(["and", "or", "the", "a", "an", "of", "with", "in", "m
  * Case-insensitive search over labels + synonyms of every node type.
  * Exact/substring hits on a label or synonym win; otherwise token overlap
  * counts as a free-text match (per CONTRACT: token overlap is enough until
- * lane B's reconcile exists).
+ * the evidence pipeline's reconcile exists).
  */
 export function searchGraph(graph: Graph, q: string): SearchResponse {
   const query = q.trim();
@@ -437,7 +437,7 @@ function mechanismDirection(mech: GraphNode): string | null {
 const COMMUNITY_TYPES = new Set(["PatientGroup", "Registry"]);
 
 /** Mechanism↔disease link relations (mirrors api/main.py): "causes" is the
- * lane-C fixture vocabulary, "has_mechanism" the M0 mock vocabulary. */
+ * API fixture vocabulary, "has_mechanism" the M0 mock vocabulary. */
 const MECHANISM_LINK_RELATIONS = new Set(["causes", "has_mechanism"]);
 
 /**

@@ -1,9 +1,6 @@
 # Source API cheat sheet — ClinVar, ClinicalTrials.gov, NIH RePORTER, HPO/MONDO/HGNC/Reactome/GO
 
-**Verified live on 2026-10-03.** Every fact below comes from the recon notes and their "Re-run check (second reviewer)" sections (re-run corrections override the original text). Nothing here is from memory; items the notes left **UNVERIFIED** are kept as such.
-
-Notes (prefix `docs/recon/`):
-`clinvar.md` · `ctgov.md` · `reporter.md` · `hpo_mondo_fallback.md`. Raw captures sit next to them (`rerun_clinvar/`, `rerun/`, `rerun_reporter/`, `rerun_hpo/`, `samples/`).
+Facts below were verified against the live APIs on 2026-10-03. Nothing here is from memory; anything that could not be checked is marked **UNVERIFIED**.
 
 ---
 
@@ -91,7 +88,7 @@ VCV XML (efetch) adds per-transcript `HGVSlist/HGVS Type="coding"` → `Nucleoti
 ### 1d. Rate limits / terms
 
 - Without key: >3 E-utility requests/s per IP → error (all E-utilities combined — PubMed calls share the budget). `api_key` parameter → 10 req/s per key (NCBI Insights post, fetched). README `NCBI_API_KEY`. 429/over-limit payload format not provoked (UNVERIFIED). Use ≥0.34 s between calls.
-- License/terms: not captured in the recon notes — fill in before the README license table is finalised.
+- License/terms: not captured — fill in before the README license table is finalised.
 
 ---
 
@@ -140,7 +137,7 @@ Trimmed real record (`GET /studies/NCT07670156`, 16,939 B full):
  "hasResults":false}
 ```
 
-**The six required searches (live totals, reproduced on re-run):**
+**The six required searches (live totals):**
 
 | # | Query | totalCount | NCT ids (status) |
 |---|---|---|---|
@@ -250,7 +247,7 @@ Publications `criteria` accepts exactly `pmids` (`[int]`), `appl_ids` (`[int]`),
 | Source link | `project_detail_url` | well-formed; `meta.properties.URL` is malformed (`https:/…`) |
 | Publications | none on project record | hop via `core_project_num` → `/v2/publications/search` |
 
-`include_fields`/`exclude_fields` values must be **PascalCase**: verified `ApplId, ProjectNum, ProjectTitle, FiscalYear, CoreProjectNum, ContactPiName, PrincipalInvestigators, AgencyIcAdmin, IsActive, AwardAmount, SubprojectId, AbstractText, PhrText, Terms, PrefTerms, Organization, AgencyIcFundings, FullStudySection, ProjectNumSplit, GeoLatLon, ProgramOfficers`. Full mapping in `reporter.md` §10 (from the Data Elements PDF).
+`include_fields`/`exclude_fields` values must be **PascalCase**: verified `ApplId, ProjectNum, ProjectTitle, FiscalYear, CoreProjectNum, ContactPiName, PrincipalInvestigators, AgencyIcAdmin, IsActive, AwardAmount, SubprojectId, AbstractText, PhrText, Terms, PrefTerms, Organization, AgencyIcFundings, FullStudySection, ProjectNumSplit, GeoLatLon, ProgramOfficers`. The full field-name mapping is in the Data Elements PDF linked above.
 
 ### 3c. Gotchas
 
@@ -323,7 +320,7 @@ Other verified one-liners: `curl -sL -r 21817215-21915518 https://purl.obolibrar
 3. **`ORPHA:` vs `Orphanet:`**: hpoa writes `ORPHA:1334`, MONDO/SSSOM write `Orphanet:1334`. Normalise before joining. `OMIM:` matches. `DECIPHER:` (47 diseases) has no MONDO mapping.
 4. **Use `mondo.sssom.tsv` for OMIM/Orphanet→MONDO** (12.5 MB), not `mondo.json` (103 MB). Both maps are functions (unique target). It lives on `master` — pin by sha256 + retrieval date.
 5. **`hp.json` edge key is `sub`, not `subj`** (the obographs README writes `subj`). Filter `meta.deprecated == true`; follow `IAO_0100001` for replacements. `hp.obo` (10.4 MB) suffices for labels + `is_a`.
-6. **hpoa layout**: `OMIM:` rows (with DECIPHER near 16 MB) fill bytes 0 → ~21 MB; `ORPHA:` rows ~22 MB → end (the original note had this backwards). Range requests work (206) through the redirect chain.
+6. **hpoa layout**: `OMIM:` rows (with DECIPHER near 16 MB) fill bytes 0 → ~21 MB; `ORPHA:` rows ~22 MB → end. Range requests work (206) through the redirect chain.
 7. **Reactome human block**: `Ensembl2Reactome.txt` is sorted by col 1, so human rows are one contiguous block at **bytes 40,875,195–49,383,298** (8,508,104 B) of `https://download.reactome.org/97/Ensembl2Reactome.txt` — one `curl -r 40875195-49383298`. Offsets are v97-specific (`last-modified: Wed, 24 Jun 2026`); recompute per release. Or use the per-gene API (7 calls for the cluster).
 8. **No literal "JAK-STAT signaling" human pathway in Reactome v97.** Closest: `R-HSA-8950505` Gene and protein expression by JAK-STAT signaling after Interleukin-12 stimulation (← `R-HSA-9020591` ← `R-HSA-447115` ← `R-HSA-449147` Signaling by Interleukins ← `R-HSA-1280215` ← `R-HSA-168256`). Also `R-HSA-913531` Interferon Signaling (4 children incl. `R-HSA-877300`, `R-HSA-909733`), `R-HSA-451927`, `R-HSA-6783589`, `R-HSA-1266695`, `R-HSA-1059683`, `R-HSA-9645135`, `R-HSA-198745`, `R-HSA-8875791`. Model our own `Pathway` node linking to these with provenance.
 9. IC over all diseases: 12,882 diseases; use `aspect == P`, propagate `is_a`, treat `qualifier == NOT`, `0/n` and `HP:0040285` as excluded; collapse OMIM/Orphanet duplicates via SSSOM if it matters.
@@ -333,7 +330,7 @@ Other verified one-liners: `curl -sL -r 21817215-21915518 https://purl.obolibrar
 ### 4d. Rate limits / licenses (quoted pages fetched 2026-10-03)
 
 - No rate limits stated for any of these downloads; only HTTP etiquette. GitHub asset CDN rejects suffix ranges (501).
-- HPO: custom license (above). MONDO: CC BY 4.0 (`LICENSE` "Attribution 4.0 International"; cite Vasilevsky et al., Genetics 2026, iyaf215). HGNC: CC0 ("any form of reuse of the content is permitted"; attribution recommended). Reactome: data CC0 ("Attribution is encouraged but not required"; illustrations CC BY 4.0, software Apache 2.0). GO: CC BY 4.0 ("the particular release is mentioned"; cite Ashburner 2000 + GO Consortium NAR `gkaf1292`, dated 2025 Dec 18 on the re-run of the citation page).
+- HPO: custom license (above). MONDO: CC BY 4.0 (`LICENSE` "Attribution 4.0 International"; cite Vasilevsky et al., Genetics 2026, iyaf215). HGNC: CC0 ("any form of reuse of the content is permitted"; attribution recommended). Reactome: data CC0 ("Attribution is encouraged but not required"; illustrations CC BY 4.0, software Apache 2.0). GO: CC BY 4.0 ("the particular release is mentioned"; cite Ashburner 2000 + GO Consortium NAR `gkaf1292`, dated 2025 Dec 18 on the citation page).
 
 ---
 
@@ -341,7 +338,7 @@ Other verified one-liners: `curl -sL -r 21817215-21915518 https://purl.obolibrar
 
 | Source | Version / date observed (2026-10-03) | License / terms | What we use it for |
 |---|---|---|---|
-| ClinVar (E-utilities) | `Build260929-0200.1`; einfo lastupdate 2026/09/29; 6,924 cluster Variation IDs | Not captured in notes; 3 req/s without key, 10 req/s with `api_key` | Variant nodes (id, HGVS, protein change, germline/somatic classification, review status, conditions with MONDO/OMIM/Orphanet/MedGen/HPO ids, xrefs, SCV/RCV); elink → PubMed |
+| ClinVar (E-utilities) | `Build260929-0200.1`; einfo lastupdate 2026/09/29; 6,924 cluster Variation IDs | Not captured; 3 req/s without key, 10 req/s with `api_key` | Variant nodes (id, HGVS, protein change, germline/somatic classification, review status, conditions with MONDO/OMIM/Orphanet/MedGen/HPO ids, xrefs, SCV/RCV); elink → PubMed |
 | ClinicalTrials.gov API v2 | `apiVersion 2.0.5`, `dataTimestamp 2026-10-02T09:00:04`, `versionHolder 2026-10-02` | US Gov T&C (2023-01-31): attribute, keep current, show processed date, state modifications, **no email marketing**; no rate limit stated | Study nodes for the six cluster queries (incl. NCT07670156, NCT05561985, NCT07261891, NCT07262983); MeSH ids; PMID references |
 | NIH RePORTER API v2 | API 2.0 (`api-supported-versions: 2.0`); docs last-modified 2026-09-25 | "available to all public users"; Data Access Policy UNVERIFIED; ≤1 req/s requested, ~200/min per bucket | Grant / investigator / funder nodes (`appl_id`, `core_project_num`, `profile_id`, `agency_ic_admin`), grant↔PMID edges via `/v2/publications/search` |
 | HPO (`phenotype.hpoa`, gene files, `hp.json`/`hp.obo`) | release `v2026-09-01`; hpoa `#version: 2026-09-02` | HPO custom (cite, show version, don't alter; IEA rows: OMIM reuse caveat) | Disease–phenotype edges (12,882 diseases), phenotype IC, gene–disease edges, HPO labels/hierarchy |

@@ -21,7 +21,7 @@ What it does
    (``award_amount_total``, ``fiscal_years``, ``agency``, ``matched_text``). Projects with no
    match are kept in ``props.unlinked_projects`` and counted in a coverage row per query.
 4. ``POST /v2/publications/search`` with the deduped ``core_project_nums`` in batches gives
-   ``props.projects[].pmids`` (strings) so Lane B can join to Paper nodes.
+   ``props.projects[].pmids`` (strings) so grants can be joined to Paper nodes.
 5. A ``sources`` row ``"NIH RePORTER"`` with the retrieval date as version.
 
 Hard rules honoured here: every HTTP call goes through :class:`pipeline.cache.CachedHttp` with

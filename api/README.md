@@ -1,4 +1,4 @@
-# Atlas API (lane C)
+# Atlas API
 
 FastAPI app serving the knowledge graph per [`api/CONTRACT.md`](CONTRACT.md)
 (the spec for every endpoint shape). The graph data contract itself is README
@@ -26,7 +26,7 @@ First existing file wins:
 1. `$ATLAS_GRAPH_PATH` (env override; empty or missing paths are skipped)
 2. `data/build/graph.json` (real, M1+)
 3. `data/build/graph.mock.json` (M0 mock)
-4. `api/fixtures/graph.mock.json` (lane C dev fixture — placeholder only)
+4. `api/fixtures/graph.mock.json` (API dev fixture — placeholder only)
 
 Explanations: `$ATLAS_EXPLANATIONS_PATH` → `data/build/explanations.json` →
 `api/fixtures/explanations.mock.json`. `GET /health` reports which file was
@@ -46,8 +46,8 @@ empty/blank `q` returns `200 {"query": "", "results": []}`, not 422.
 
 ## LLM seam
 
-`/explain` and `/draft` try, in order: `pipeline.llm.explain/draft` (lane B,
-imported at call time — a missing or broken module never 500s), then the
+`/explain` and `/draft` try, in order: `pipeline.llm.explain/draft` (evidence
+pipeline, imported at call time — a missing or broken module never 500s), then the
 precomputed explanations file (keyed by `ids[0]`), then a templated fallback
 built only from edge/claim fields already in the graph. The response's
 `source` field (`live | precomputed | fallback`) tells the UI when it is in

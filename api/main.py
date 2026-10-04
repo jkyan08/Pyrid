@@ -1,4 +1,4 @@
-"""Rare Disease Atlas API (lane C) — FastAPI app per api/CONTRACT.md.
+"""Rare Disease Atlas API — FastAPI app per api/CONTRACT.md.
 
 Research navigation, not medical advice. No dosing information anywhere.
 Drafts are drafts; nothing is ever sent.
@@ -136,7 +136,7 @@ def create_app(
 
     app = FastAPI(
         title="Rare Disease Atlas API",
-        description=f"JAK-STAT MVP (lane C). {FOOTER}",
+        description=f"JAK-STAT MVP. {FOOTER}",
         version="0.1.0",
     )
     app.add_middleware(
@@ -361,10 +361,10 @@ def create_app(
 
         seen: set[str] = set()
         for edge_item in store.edges:
-            # "causes" (lane-C fixture) or "has_mechanism" (M0 mock vocabulary)
+            # "causes" (API dev fixture) or "has_mechanism" (M0 mock vocabulary)
             if edge_item.get("relation") not in ("causes", "has_mechanism"):
                 continue
-            # accept either edge orientation (lane A's convention is not frozen)
+            # accept either edge orientation (the graph build's convention is not frozen)
             src = store.nodes_by_id.get(edge_item["source"])
             tgt = store.nodes_by_id.get(edge_item["target"])
             if src is None or tgt is None:

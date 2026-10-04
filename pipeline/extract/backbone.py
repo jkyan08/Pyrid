@@ -1,8 +1,8 @@
-"""Candidate nodes for `reconcile`, built without waiting for lane A's graph.
+"""Candidate nodes for `reconcile`, built without waiting for the graph build.
 
-The contract fixes node ID formats (pipeline/models.py "ID conventions") and M0's
-OptimusKG spike fixes which backbone files lane A loads, so lane B can resolve
-claim mentions to the same IDs lane A will emit:
+The contract fixes node ID formats (pipeline/models.py "ID conventions") and the
+OptimusKG spike fixes which backbone files the graph pipeline loads, so the evidence
+pipeline can resolve claim mentions to the same IDs the graph build will emit:
 
 - Gene, Disease, Phenotype, Drug, Pathway: read from the OptimusKG node tables in
   ATLAS_RAW_DIR/optimuskg/, IDs normalised per the contract (`ensembl:ENSG...`,

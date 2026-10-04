@@ -1,5 +1,5 @@
 {
-  "_comment": "Demo precomputed explanations for the modeled journeys (Maria/Devon/Priya shapes). Every sentence cites edge/claim ids present in graph.demo.mock.json. Replaced by data/build/explanations.json (lane B) automatically.",
+  "_comment": "Demo precomputed explanations for the modeled journeys (Maria/Devon/Priya shapes). Every sentence cites edge/claim ids present in graph.demo.mock.json. Replaced by data/build/explanations.json (evidence pipeline) automatically.",
   "demo:disease:stat1-gof": {
     "text": "STAT1 gain-of-function syndrome is driven by overactive STAT1 signaling [e_1011]. It clusters with STAT3 gain-of-function syndrome because both share the same pathway step and direction [e_1040], while STAT1 loss-of-function disease sits in a different cluster despite the same gene name [e_1012]. Treatment evidence for ruxolitinib is mixed: supporting and contradicting reports sit side by side, all from small studies [e_1020, c_1001, c_1002, c_1003]. The USIDNET registry and IDF materials are existing assets, with eligibility questions flagged for expert review [e_1043, e_1044].",
     "citations": ["e_1011", "e_1040", "e_1012", "e_1020", "c_1001", "c_1002", "c_1003", "e_1043", "e_1044"],

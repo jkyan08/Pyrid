@@ -923,7 +923,7 @@ def _bundle() -> ClaimsBundle:
 
 @pytest.fixture
 def no_evidence_module(monkeypatch: pytest.MonkeyPatch) -> None:
-    """Force the legacy path even when the parallel lane's pipeline.graph.evidence exists."""
+    """Force the legacy path even when pipeline.graph.evidence exists."""
     monkeypatch.setattr(b, "_load_integrate_claims", lambda: None)
 
 

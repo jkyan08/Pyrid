@@ -1,5 +1,5 @@
 /**
- * API client for the lane-C FastAPI app (api/CONTRACT.md), with a static-file
+ * API client for the Atlas FastAPI app (api/CONTRACT.md), with a static-file
  * fallback: when the API is unreachable, the raw graph bundled into
  * web/public/ (by scripts/copy-fixtures.mjs) is loaded once and all views are
  * computed client-side by the pure functions in lib/graph.ts. Explain/draft

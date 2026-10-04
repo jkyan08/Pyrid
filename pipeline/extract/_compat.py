@@ -1,6 +1,6 @@
-"""Lane B's single point of contact with M0's shared cache (`pipeline/cache.py`).
+"""The evidence pipeline's single point of contact with the shared cache (`pipeline/cache.py`).
 
-Thin wrappers so lane B modules keep a small, stable call surface:
+Thin wrappers so evidence-pipeline modules keep a small, stable call surface:
 `cached` / `cache_lookup` over `DiskCache`, and `http_get` over the shared
 rate-limited `CachedHttp` client (NCBI limits and the API key are handled there).
 """

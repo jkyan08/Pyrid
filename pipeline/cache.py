@@ -16,7 +16,7 @@ of the canonical JSON serialisation of the request description (:func:`request_k
 holds ``{"namespace", "key", "request", "status", "retrieved_at", "response"}``.
 
 ``ATLAS_CACHE_DIR`` defaults to ``data/cache``; a relative value is resolved against the repo
-root (the parent of this package), so several worktrees can point at one absolute path and
+root (the parent of this package), so several checkouts can point at one absolute path and
 share a cache. Keys are content hashes and writes are atomic, so concurrent writers are safe.
 
 Three layers
@@ -29,8 +29,8 @@ Three layers
     limiter. NCBI E-utilities are limited to 3 req/s, or 10 req/s when ``NCBI_API_KEY`` is set,
     in which case the key is appended as the ``api_key`` parameter automatically.
 :func:`llm_cached`
-    The hook lane B wraps its model calls in, under namespace ``"llm"``. This module does not
-    import ``openai``.
+    The hook the evidence pipeline wraps its model calls in, under namespace ``"llm"``. This
+    module does not import ``openai``.
 
 Secrets (``Authorization``-style headers, ``api_key`` parameters) are stripped from the request
 description, so they are neither part of the key nor written to disk.
@@ -760,9 +760,10 @@ def llm_cached(
 
     ``request`` must hold everything that determines the answer: ``model``, ``messages`` or
     ``input``, ``response_format`` or the JSON schema, ``temperature`` (plus ``seed`` or tools
-    when used). Lane B builds it from the same dict it passes to the client. The result must be
-    JSON-serialisable (a pydantic response object is accepted and stored as ``model_dump``); the
-    value returned is always the plain JSON data, so a miss and a later hit look identical.
+    when used). ``pipeline.llm.client`` builds it from the same dict it passes to the client.
+    The result must be JSON-serialisable (a pydantic response object is accepted and stored as
+    ``model_dump``); the value returned is always the plain JSON data, so a miss and a later hit
+    look identical.
     Offline, a miss raises :class:`CacheMissOffline`. A provider exception propagates and nothing
     is stored. For the ``retrieved_at`` of a hit, use ``DiskCache().get("llm", request)``.
     """

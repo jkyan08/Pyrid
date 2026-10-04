@@ -48,7 +48,7 @@ DEFAULT_GRAPH_PATH = "data/build/graph.json"
 DEFAULT_MOCK_GRAPH_PATH = "data/build/graph.mock.json"
 
 # --------------------------------------------------------------------------------------
-# Relation names (the contract Lane A emits; same vocabulary as data/build/graph.mock.json)
+# Relation names (the contract the graph build emits; same vocabulary as data/build/graph.mock.json)
 # --------------------------------------------------------------------------------------
 
 REL_HAS_MECHANISM = "has_mechanism"  # Disease -> Mechanism (attributes.origin); Variant -> Mechanism

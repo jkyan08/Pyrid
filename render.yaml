@@ -1,4 +1,4 @@
-# Render blueprint for the Atlas API (lane C: deploy).
+# Render blueprint for the Atlas API.
 # Web (Next.js) deploys to Vercel separately — point its NEXT_PUBLIC_API_URL at this service.
 # Fallback mode (README §3): if this deploy is blocked, the web app serves the graph +
 # precomputed explanations as static files and labels LLM features "cached only".

@@ -1,8 +1,8 @@
 """Paths, environment switches and seed loading shared by every pipeline module.
 
 Every path is resolved once at import time against ``REPO_ROOT`` (the parent of ``pipeline/``),
-after :mod:`pipeline.cache` has loaded ``.env``, so a worktree can point ``ATLAS_CACHE_DIR`` and
-``ATLAS_RAW_DIR`` at shared absolute directories (AGENT-SPLIT.md "shared cache directory").
+after :mod:`pipeline.cache` has loaded ``.env``, so parallel checkouts can share one cache/raw
+directory by pointing ``ATLAS_CACHE_DIR`` and ``ATLAS_RAW_DIR`` at shared absolute paths.
 
 ===============  ======================  ==========================================
 Constant         Environment variable    Default (relative paths resolve to REPO_ROOT)

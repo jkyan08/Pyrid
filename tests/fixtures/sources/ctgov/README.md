@@ -1,9 +1,7 @@
 # ClinicalTrials.gov API v2 fixtures
 
-**Capture date: 2026-10-03** (UTC ~19:22–19:50), by the recon documented in `docs/recon/ctgov.md`
-(raw captures in the recon scratchpad; the "Re-run check (second reviewer)" pass re-fetched every
-file ~19:40–19:50 UTC and found the four study records, `metadata.json` and `enums.json` md5-identical
-to the first capture). Server state at capture: `apiVersion` **2.0.5**, `dataTimestamp`
+**Capture date: 2026-10-03** (UTC ~19:22–19:50); a second fetch at ~19:40–19:50 UTC returned the four study records,
+`metadata.json` and `enums.json` md5-identical to the first capture. Server state at capture: `apiVersion` **2.0.5**, `dataTimestamp`
 **2026-10-02T09:00:04**, every record's `derivedSection.miscInfoModule.versionHolder` = `"2026-10-02"`.
 No API key exists or was used. Base URL `https://clinicaltrials.gov/api/v2`.
 
@@ -12,7 +10,7 @@ Every file is a **verbatim excerpt** of a real response. Values were never edite
 
 ## Files
 
-| Fixture | Raw recon file | Exact command / URL | Truncated | Scrubbed |
+| Fixture | Raw capture file | Exact command / URL | Truncated | Scrubbed |
 | --- | --- | --- | --- | --- |
 | `version.json` | `version.json` | `curl -s https://clinicaltrials.gov/api/v2/version` | nothing (71 B verbatim) | nothing |
 | `search_page.json` | `page1.json` (byte-identical to `rerun/pg1.json`) | `curl -sG 'https://clinicaltrials.gov/api/v2/studies' --data-urlencode 'query.cond="hyper IgE syndrome"' --data-urlencode 'fields=NCTId' --data-urlencode 'pageSize=5' --data-urlencode 'countTotal=true'` | `studies[]` 5 → 2 (kept NCT00005933, NCT00006150). `totalCount` (14), `nextPageToken` and key order kept exactly as returned; raw line layout kept | nothing |
@@ -34,7 +32,7 @@ Every file is a **verbatim excerpt** of a real response. Values were never edite
 
 ### Not included (and why)
 
-- `search1.json` and `searches_3.json` in the recon directory are **NIH RePORTER** `/v2/projects/search`
+- `search1.json` and `searches_3.json` among the raw captures are **NIH RePORTER** `/v2/projects/search`
   responses (`meta.search_id`, `results[].appl_id`), not ClinicalTrials.gov. They belong to the
   `reporter` fixtures, not here.
 - `search_areas.json` (25,359 B, `GET /studies/search-areas`): not needed by the parser; what each

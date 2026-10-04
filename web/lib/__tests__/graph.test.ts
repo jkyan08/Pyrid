@@ -297,7 +297,7 @@ describe("mechanismSearch relation filter (API parity)", () => {
         evidence_class: "observed",
         status: "supported",
       },
-      // Same disease linked again via the lane-C vocabulary → deduped
+      // Same disease linked again via the API fixture vocabulary → deduped
       {
         id: "m3",
         source: "mech:G1:GoF",

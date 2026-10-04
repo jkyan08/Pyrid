@@ -2,7 +2,7 @@
 
 Endpoints: ``GET https://clinicaltrials.gov/api/v2/version`` (data timestamp) and
 ``GET /api/v2/studies`` (search with ``fields``), exactly as verified in docs/source-apis.md
-section 2 and docs/recon/ctgov.md on 2026-10-03. Fixtures: tests/fixtures/sources/ctgov/.
+section 2 on 2026-10-03. Fixtures: tests/fixtures/sources/ctgov/.
 Single-study fetches (``GET /studies/{nctId}``) are not needed: every search page already returns
 the requested fields in the nested record shape.
 

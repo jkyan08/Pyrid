@@ -17,7 +17,7 @@ journey: pass `types={"Phenotype"}`.
 Run: `python -m pipeline.extract.reconcile` links claim subjects, objects and
 variants in `data/build/claims.raw.json` to the backbone node index
 (`pipeline/extract/backbone.py`: the same OptimusKG files and contract ID formats
-lane A uses), so it does not wait for graph v0. If `data/build/graph.json` exists,
+the graph pipeline uses), so it does not wait for a built graph. If `data/build/graph.json` exists,
 every resolved id must also exist there; ids it lacks go to the review queue. Writes:
 
 - `data/build/claims.json`: the `ClaimsBundle` handoff (pipeline/models.py): every
@@ -25,7 +25,7 @@ every resolved id must also exist there; ids it lacks go to the review queue. Wr
   reconciler was not confident, the Paper nodes (abstracts + author dicts), the
   unresolved rows, and PubMed coverage;
 - `data/build/claims.meta.json`: run stats and every node the claims reference
-  (ClinVar variants and mech: nodes included) for lane A to add if missing;
+  (ClinVar variants and mech: nodes included) for the graph build to add if missing;
 - `data/review_queue.csv`: every mention that did not resolve with high confidence.
 """
 from __future__ import annotations
@@ -195,7 +195,7 @@ def link(mention: str, index: NodeIndex, *, context: str = "", parser: Parser | 
     shortlist += [i for i in extra if i in index.nodes and i not in shortlist]
     if not shortlist:
         return Link(mention, None, "none", "low", [], "no candidates")
-    # Picking from a shortlist needs little reasoning: run Claude at low effort by default.
+    # Picking from a shortlist needs little reasoning: run the model at low effort by default.
     parser = parser or (lambda system, user, schema: client.parse(system, user, schema, effort="low"))
     user = (f"[{PROMPT_VERSION}]\nMention: {mention}\n"
             + (f"Context: {context}\n" if context else "")
@@ -219,7 +219,7 @@ def accepted(l: Link) -> bool:
 
 
 ANY = {"Gene", "Variant", "Mechanism", "Disease", "Phenotype", "Drug", "Pathway"}
-# predicate → (subject types, object types). Matches how lane A builds edges from claims
+# predicate → (subject types, object types). Matches how the graph build makes edges from claims
 # (test 4: Drug → Disease treats edges; test 7: Variant → Mechanism has_mechanism edges).
 ROLE_TYPES: dict[str, tuple[set[str], set[str]]] = {
     "treats": ({"Drug"}, {"Disease"}),
@@ -333,8 +333,8 @@ def _gene_mechanism_mismatches(links: dict, index: NodeIndex) -> list[dict]:
 
 
 def check_against_graph(links: dict, graph_ids: set[str]) -> list[dict]:
-    """Null out resolved ids that graph.json lacks (Variant ids excepted: lane A may not
-    have loaded that ClinVar record yet). Returns review rows for each."""
+    """Null out resolved ids that graph.json lacks (Variant ids excepted: the graph build may
+    not have loaded that ClinVar record yet). Returns review rows for each."""
     review = []
     for cid, row in links.items():
         for role, nid in row.items():

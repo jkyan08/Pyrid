@@ -2,7 +2,7 @@
 
 `draft(ids, graph)` returns a draft whose every sentence cites an edge or claim
 from the input, validated exactly like `explain`. Drafts are never sent
-(hard rule 7); the returned dict says so and lane C must show it.
+(hard rule 7); the returned dict says so and the API must show it.
 """
 from __future__ import annotations
 
@@ -42,7 +42,7 @@ def _fallback(sub: dict) -> list[dict]:
 
 def draft(ids: list[str] | str, graph: dict, focus: str | None = None, *, parser: Parser | None = None,
           fallback: bool = False) -> dict | None:
-    """`ids` may be one entity id (lane C's `/draft` passes `entity_id`) or a list of ids.
+    """`ids` may be one entity id (the API's `/draft` passes `entity_id`) or a list of ids.
     `focus` optionally names what the proposal should centre on (e.g. "treatment_response").
     Like `explain`, returns None unless the model produced validated text, unless `fallback=True`."""
     ids = [ids] if isinstance(ids, str) else ids

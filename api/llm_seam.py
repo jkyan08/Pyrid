@@ -1,6 +1,6 @@
 """LLM seam (api/CONTRACT.md "LLM seam").
 
-Lane B owns pipeline/llm/*; this module only *tries* to import it at call
+pipeline/llm/* belongs to the evidence pipeline; this module only *tries* to import it at call
 time and otherwise builds templated fallbacks from fields already in the
 loaded graph. A missing or broken pipeline.llm must never cause a 500.
 
@@ -24,14 +24,14 @@ logger = logging.getLogger("api.llm_seam")
 def _live_call(func_name: str, *args: Any, **kwargs: Any) -> dict[str, Any] | None:
     """Call pipeline.llm.<func_name> if importable; None on any failure.
 
-    An absent module is the expected pre-merge state and stays silent; a
+    An absent module is an expected state and stays silent; a
     module that is present but broken gets a warning so a 3 AM wiring bug is
-    distinguishable from "lane B not merged yet" (eng-review R3).
+    distinguishable from "pipeline.llm not installed" (eng-review R3).
     """
     try:
         module = importlib.import_module("pipeline.llm")
     except ModuleNotFoundError:
-        return None  # lane B not merged yet — expected, silent
+        return None  # pipeline.llm absent — expected, silent
     except Exception:
         logger.warning("pipeline.llm failed to import; using fallback", exc_info=True)
         return None
@@ -45,7 +45,7 @@ def _live_call(func_name: str, *args: Any, **kwargs: Any) -> dict[str, Any] | No
         logger.warning("pipeline.llm.%s raised; using fallback", func_name, exc_info=True)
         return None
     if result is None:
-        # lane B's documented contract: None == no validated live answer (e.g. no
+        # pipeline.llm's documented contract: None == no validated live answer (e.g. no
         # model key configured) — quiet, expected; the caller falls back.
         return None
     if not isinstance(result, dict) or "text" not in result:
@@ -61,7 +61,7 @@ def try_live_explain(ids: list[str], graph: dict[str, Any]) -> dict[str, Any] | 
 def try_live_draft(
     entity_id: str, graph: dict[str, Any], focus: str | None = None
 ) -> dict[str, Any] | None:
-    # Lane B's draft signature is not frozen yet: try with focus, then without.
+    # The draft signature is not frozen yet: try with focus, then without.
     result = _live_call("draft", entity_id, graph, focus=focus)
     if result is None:
         result = _live_call("draft", entity_id, graph)

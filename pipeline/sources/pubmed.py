@@ -1,4 +1,4 @@
-"""PubMed (and bioRxiv) retrieval for lane B.
+"""PubMed (and bioRxiv) retrieval for the evidence pipeline.
 
 Resolves the Section 11 papers by title (seeds hold titles and search terms, never
 IDs), runs capped topic searches over the cluster, fetches abstracts and author

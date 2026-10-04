@@ -698,12 +698,12 @@ def schema_json(indent: int = 2) -> str:
 
 
 # --------------------------------------------------------------------------------------
-# Lane B -> Lane A handoff: data/build/claims.json
+# Evidence-pipeline -> graph-build handoff: data/build/claims.json
 # --------------------------------------------------------------------------------------
 
 
 class ClaimsBundle(_Strict):
-    """What the evidence lane (PubMed fetch + OpenAI extraction + reconciliation) hands to the
+    """What the evidence pipeline (PubMed fetch + OpenAI extraction + reconciliation) hands to the
     graph build, written to ``data/build/claims.json``.
 
     * ``papers``: the ``Paper`` nodes the claims come from. Every paper referenced by a claim

@@ -1,8 +1,6 @@
 # OptimusKG spike — decision record
 
-Spike performed 2026-10-03 by read-only probing; see notes path for raw evidence:
-`docs/recon/optimuskg.md`
-(original notes plus the "Re-run check (second reviewer)" section at the end, whose corrections override the original text; raw responses, scripts and sample Parquet files sit in `recon/` and `recon/rerun_optimuskg/`). Every fact below comes from those notes. **VERIFIED** = seen in a live response that day (and re-run by the second reviewer ~2 h later); **UNVERIFIED** = not checked.
+Spike performed 2026-10-03 by read-only probing of the Dataverse API, the Parquet files and the `optimuskg` client. Facts below were verified against the live APIs on 2026-10-03. **VERIFIED** = seen in a live response that day; **UNVERIFIED** = not checked.
 
 Dataset observed: Harvard Dataverse `doi:10.7910/DVN/IYNGEV`, version **3.2**, released 2026-09-09. Time box per README §5: 45 min.
 
@@ -14,7 +12,7 @@ Both README §5 exit criteria pass. The HPO/MONDO/HGNC/Reactome/GO raw-file fall
 
 ### Exit criterion 1 — STAT1, STAT3, JAK1, JAK2, JAK3, TYK2, IL2RG each resolve to a single gene node: PASS
 
-Source: `nodes/gene.parquet` (61,306 rows). Exact match on `properties.symbol` returned exactly one node per symbol; no other node lists any of the seven as a `symbol_synonyms[].label` (395 symbols in the file are shared by >1 node, none of ours). VERIFIED by both reviewers.
+Source: `nodes/gene.parquet` (61,306 rows). Exact match on `properties.symbol` returned exactly one node per symbol; no other node lists any of the seven as a `symbol_synonyms[].label` (395 symbols in the file are shared by >1 node, none of ours). VERIFIED.
 
 | symbol | node `id` (Ensembl gene id, no prefix) | `properties.name` | HGNC xref | notable `symbol_synonyms` / `obsolete_symbols` |
 |---|---|---|---|---|
@@ -30,7 +28,7 @@ How the identity data is stored: the HGNC symbol is `properties.symbol`; the HGN
 
 ### Exit criterion 2 — cluster diseases have disease–phenotype edges: PASS with caveats
 
-Source: `nodes/disease.parquet` (36,753 rows) searched over `name`, `*_synonyms`, `description`; counts from `edges/disease_phenotype.parquet` (`DIS-PHE PHENOTYPE_PRESENT`). All counts reproduced exactly by the second reviewer.
+Source: `nodes/disease.parquet` (36,753 rows) searched over `name`, `*_synonyms`, `description`; counts from `edges/disease_phenotype.parquet` (`DIS-PHE PHENOTYPE_PRESENT`). All counts VERIFIED.
 
 | disease node `id` | name | DIS-PHE edges | role in cluster |
 |---|---|---:|---|
@@ -60,11 +58,11 @@ Source: `nodes/disease.parquet` (36,753 rows) searched over `name`, `*_synonyms`
 
 **Dataset.** Harvard Dataverse `doi:10.7910/DVN/IYNGEV` (`data.persistentUrl` https://doi.org/10.7910/DVN/IYNGEV; dataset `data.id` 13645730), version 3.2, `releaseTime 2026-09-09T04:14:10Z`, 41 Parquet files, 822,113,189 bytes total, all `restricted=False`, `contentType application/octet-stream`, no per-file persistentId. **No API token is needed** (`fileAccessRequest: True` is irrelevant because no file is restricted). VERIFIED.
 
-**File listing (Dataverse native API).** `https://dataverse.harvard.edu/api/datasets/:persistentId/?persistentId=doi:10.7910/DVN/IYNGEV` → JSON with `latestVersion.versionNumber`/`versionMinorNumber` (3 / 2), `latestVersion.license`, and `latestVersion.files[]` carrying `directoryLabel` (`nodes`, `edges` or absent), `dataFile.id`, `dataFile.filename`, `dataFile.filesize`, `dataFile.md5` and `checksum {type: MD5, value}`. Saved copy: `recon/dataverse_dataset.json` (39 KB).
+**File listing (Dataverse native API).** `https://dataverse.harvard.edu/api/datasets/:persistentId/?persistentId=doi:10.7910/DVN/IYNGEV` → JSON with `latestVersion.versionNumber`/`versionMinorNumber` (3 / 2), `latestVersion.license`, and `latestVersion.files[]` carrying `directoryLabel` (`nodes`, `edges` or absent), `dataFile.id`, `dataFile.filename`, `dataFile.filesize`, `dataFile.md5` and `checksum {type: MD5, value}` (the response is ~39 KB).
 
 **Per-file download.** `https://dataverse.harvard.edu/api/access/datafile/<dataFile.id>` → HTTP 303 to a pre-signed S3 URL (`https://dvn-cloud-iqss.s3.amazonaws.com/10.7910/DVN/IYNGEV/<key>?X-Amz-...&X-Amz-Expires=3600`, valid 3600 s) → 200. `Accept-Ranges: bytes`; HTTP Range requests work (`Range: bytes=0-7` → 206). **A HEAD on the presigned URL returns 403** (S3 signatures are method-specific): use GET + Range to probe, or read `filesize` from the dataset JSON. Multi-file zip bundle `https://dataverse.harvard.edu/api/access/datafiles/<id>,<id>` works with no token for a 2-file test (directory labels preserved); whether it has a size cap for our 158 MB set is UNVERIFIED.
 
-**User-Agent gotcha (VERIFIED, reproduced 3× by the first reviewer and 2× by the second).** Harvard Dataverse's WAF returns **HTTP 403** (Apache "Forbidden" HTML) to the default `python-requests/*` and `Python-urllib/*` User-Agents on `/api/datasets/*` only — the metadata endpoint the `optimuskg` client calls first. `/api/access/datafile/<id>` is **not** blocked. So out of the box `optimuskg.get_file(...)` fails with `requests.exceptions.HTTPError: 403 Client Error: Forbidden for url: https://dataverse.harvard.edu/api/datasets/:persistentId/?persistentId=doi%3A10.7910%2FDVN%2FIYNGEV`. `curl` (default UA), `-A ""` and `-A "optimuskg/1.0.0"` all get 200. Fix if the client is used:
+**User-Agent gotcha (VERIFIED, reproduced 5×).** Harvard Dataverse's WAF returns **HTTP 403** (Apache "Forbidden" HTML) to the default `python-requests/*` and `Python-urllib/*` User-Agents on `/api/datasets/*` only — the metadata endpoint the `optimuskg` client calls first. `/api/access/datafile/<id>` is **not** blocked. So out of the box `optimuskg.get_file(...)` fails with `requests.exceptions.HTTPError: 403 Client Error: Forbidden for url: https://dataverse.harvard.edu/api/datasets/:persistentId/?persistentId=doi%3A10.7910%2FDVN%2FIYNGEV`. `curl` (default UA), `-A ""` and `-A "optimuskg/1.0.0"` all get 200. Fix if the client is used:
 
 ```python
 import requests.utils
@@ -74,9 +72,9 @@ import optimuskg  # must come after the patch
 
 After the patch `get_file`, `fetch_metadata()` (version `3.2`, 41 files) and `load_parquet("nodes/pathway.parquet", columns=["id"])` all succeed; cache layout `<cache_dir>/doi_10_7910_DVN_IYNGEV/3.2/nodes/pathway.parquet`. **Any hand-rolled `requests` code in `pipeline/cache.py` must also set a non-default `User-Agent` or it will 403 on the metadata endpoint.**
 
-**Files we need (stratified Parquet only; never the unified `nodes.parquet` 116 MB / `edges.parquet` 180 MB).** Ids and sizes from the dataset JSON, re-checked one by one by the second reviewer. The notes transcribe md5s for two files only; every file's md5 is in `dataFile.md5` of the dataset JSON.
+**Files we need (stratified Parquet only; never the unified `nodes.parquet` 116 MB / `edges.parquet` 180 MB).** Ids and sizes from the dataset JSON, checked one by one. md5s are transcribed below for two files only; every file's md5 is in `dataFile.md5` of the dataset JSON.
 
-| need | file | `dataFile.id` | bytes | md5 (where in notes) |
+| need | file | `dataFile.id` | bytes | md5 (where transcribed) |
 |---|---|---:|---:|---|
 | gene nodes | `nodes/gene.parquet` | 14220882 | 43,261,973 | `edf81a21db68658381c063e21d1080d2` |
 | disease nodes | `nodes/disease.parquet` | 14220892 | 2,968,496 | — |
@@ -96,7 +94,7 @@ After the patch `get_file`, `fetch_metadata()` (version `3.2`, 41 files) and `lo
 | optional: Reactome hierarchy | `edges/pathway_pathway.parquet` | 14220906 | 19,052 | — |
 | **core + optional (15 files)** | | | **160,202,282 (160.2 MB)** | |
 
-Without `nodes/drug.parquet` (33 MB, dominated by two base64 MOL/image columns) the core set is 125,437,793 bytes; the ruxolitinib node can instead be read with a column projection (0.99 MB fetched instead of 33 MB). The second reviewer md5-checked all 12 Dataverse-origin files in `recon/parquet/` against `dataFile.md5`: all match.
+Without `nodes/drug.parquet` (33 MB, dominated by two base64 MOL/image columns) the core set is 125,437,793 bytes; the ruxolitinib node can instead be read with a column projection (0.99 MB fetched instead of 33 MB). All 12 downloaded Dataverse files were md5-checked against `dataFile.md5`: all match.
 
 **Recommended approach: download the stratified files directly over HTTP (curl, or `requests` with a custom UA) and read them with Polars or pyarrow; do not depend on the `optimuskg` client.** Reasons (all observed): (1) the client is ~250 lines doing metadata GET → id lookup → `GET /api/access/datafile/<id>` → `pl.read_parquet`, and we already have the ids, so the metadata call can be skipped entirely; (2) it 403s out of the box (above); (3) it pins `polars>=1.19` **and** `networkx>=3.0` into `pyproject.toml`/`uv.lock`; (4) it always downloads whole files, whereas Range + column projection reads all gene ids/symbols/xrefs/synonyms in 3.3 MB of the 43 MB file and row-group pruning by disease id works on DIS-GEN (footer stats; file sorted by `from`); (5) direct download gives the md5 for integrity checks and the version/`releaseTime` for the README license table.
 
@@ -114,7 +112,7 @@ genes = pl.read_parquet("nodes/gene.parquet", columns=["id","properties"]).selec
 cluster = genes.filter(pl.col("symbol").is_in(["STAT1","STAT3","JAK1","JAK2","JAK3","TYK2","IL2RG"]))
 dg = pl.scan_parquet("edges/disease_gene.parquet").filter(pl.col("to").is_in(cluster["id"])).collect()  # lazy scan avoids materialising 9.7M rows
 ```
-Polars `scan_parquet` + filter performance on the 73 MB DIS-GEN file is UNVERIFIED (polars was not in the anaconda env; pyarrow `ParquetFile.iter_batches` is the fallback). Range-read scripts (`scripts/range_footer.py`, `range_cols.py`, `range_stats.py`, `range_disgen_for_diseases.py` in the recon dir) implement a `pa.PythonFile` over HTTP Range on the presigned URL with pyarrow 19.
+Polars `scan_parquet` + filter performance on the 73 MB DIS-GEN file is UNVERIFIED (polars was not in the anaconda env; pyarrow `ParquetFile.iter_batches` is the fallback). The footer statistics and column projections above were read through a `pa.PythonFile` over HTTP Range on the presigned URL with pyarrow 19.
 
 **Client facts, for the record.** PyPI `optimuskg` 1.0.0 (both releases 0.1.0 and 1.0.0 uploaded 2026-04-17; `requires_python >=3.12`; deps `networkx>=3.0, platformdirs>=4.0.0, polars>=1.19.0, pyarrow>=19.0.0, requests>=2.32.3`; wheel ~10 KB). Public API: `get_file`, `load_parquet` (extra kwargs go to `pl.read_parquet`), `load_graph`, `load_networkx`, `set/get_cache_dir` (env `OPTIMUSKG_CACHE_DIR`), `set/get_doi`, `set/get_server`. **No filter/query API** — filtering is plain Polars. `optimuskg.__version__` reports `"0.1.0"` while `importlib.metadata.version` says `"1.0.0"`. Never call `load_graph`/`load_networkx` (190k nodes, 21M edges, several GB). If the client is used anyway: patch the UA before `import optimuskg`, set `OPTIMUSKG_CACHE_DIR` to the shared cache dir, never call `load_graph`.
 
@@ -131,7 +129,7 @@ Polars `scan_parquet` + filter performance on the 73 MB DIS-GEN file is UNVERIFI
 - `PWY` (2,805): `REACT:R-HSA-1059683` — **colon** CURIE.
 - `BPO` (25,754): `GO_0000002`.
 - `DRG` (18,640): bare `CHEMBL1789941`; 2,758 `DRUGBANK…`, 62 `RXNORM…`.
-- **Three HP spellings inside `edges/disease_phenotype.parquet`** (second reviewer): `to` column `HP_…`; `frequency` values `HP_0040283` (underscore); `onset`/`modifiers` values `HP:0003577` / `HP:0012825` (colon).
+- **Three HP spellings inside `edges/disease_phenotype.parquet`**: `to` column `HP_…`; `frequency` values `HP_0040283` (underscore); `onset`/`modifiers` values `HP:0003577` / `HP:0012825` (colon).
 
 **Where symbol / synonyms / xrefs / description live:**
 - Gene: `properties.symbol`, `.name`, `.symbol_synonyms[] {label, source}`, `.obsolete_symbols`, `.name_synonyms`, `.xrefs[] {id, source}` (sources: PDB 120,205 · InterPro 89,213 · Reactome 46,618 · HGNC 41,270 · DrugBank 27,955 · ProjectScore 7,186 · ChEMBL 4,867 · signalP 3,686), `.function_descriptions`, `.sources {direct, indirect}`.
@@ -142,11 +140,11 @@ Polars `scan_parquet` + filter performance on the 73 MB DIS-GEN file is UNVERIFI
 **Edge columns per file:**
 - **`DIS-GEN ASSOCIATED_WITH`** (`edges/disease_gene.parquet`, 9,734,774 rows, `undirected=True`, `from`=disease, `to`=Ensembl, sorted by `from`, 80 row groups × 122,880): `evidence_score: double` **0.0009095–0.9485794, nulls 0**; `evidence_count: int64` 1–197,300, nulls 0; `disgenet_score` 0.3–1.0, **null on 9,463,636 rows (97.2 %)**; `number_of_pmids: int16` 0–136 (same null count); `number_of_snps` 0–2258; `year_initial` '1940'–'2020' and `year_final` '1966'–'2020' (**strings**, null on 9,465,027 rows); `disease_specificity_index` 0.231–1.0; `disease_pleiotropy_index` 0.038–0.962; `evidence_index` -0.0–1.0; `sources.direct` ∈ {`DISGENET`, `OPEN_TARGETS`}, `sources.indirect` seen: CTD, ORPHANET, GENOMICS_ENGLAND, UNIPROT, CGI. The DisGeNET v7.0 fields are null unless DisGeNET contributed. **No `references`, `relation_assertions`, `relation_conflict`, `evidence_type` on DIS-GEN.**
 - **`DIS-PHE PHENOTYPE_PRESENT`** (157,144; `from` ∈ `MONDO_` 119,497 / `Orphanet_` 29,653 / `EFO_` 7,994; `to` = `HP_…`; `sources.direct=['OPEN_TARGETS']`, `indirect=['HPO']`): `aspect` (P 142,204 · C 7,438 · I 7,370 · M 95 · H 37), `bio_curation` (e.g. `"HPO:iea[2009-02-17];HPO:skoehler[2012-10-17]"`), `evidence_type` (`["PCS"]` 98,848 · `["IEA"]` 33,132 · `["TAS"]` 21,954 · mixed lists 1,442/1,065/353), `frequency` (92,565 `n/m` ratio strings; 4,274 HPO frequency terms as `HP_0040283` 3,044 · `HP_0040282` 570 · `HP_0040284` 461 · `HP_0040281` 162 · `HP_0040280` 37; 146 percentages like `'10%'`; empty on 65,753 edges), `modifiers`, `onset` (`["HP:0003577"]` 945; empty 154,018), `qualifier_not` (all False), `references` (e.g. `["OMIM:151400"]`, `["PMID:21700266"]`, ISBN), `sexes` (MALE/FEMALE/empty), `sources`, `relation_assertions` (e.g. `[{'source': 'OPEN_TARGETS', 'relation': 'PHENOTYPE_PRESENT'}]`), `relation_conflict` (all False). Phenotype information content can be computed from this file (157k annotations over ~all HPO-annotated diseases).
-- **`BPO-GEN INTERACTS_WITH`** (158,410; `from`=`GO_…`, `to`=Ensembl): `evidence: list<str>` = GO evidence codes, `eco_ids` (e.g. `ECO:0000265`, `ECO:0000314`), `gene_product` (UniProt acc), `sources` (`indirect` carries the reference, e.g. `PMID:9924029`, `GO_REF:0000024`). Per-element code totals (second reviewer): IEA 92,673 · IDA 27,948 · IBA 24,580 · IMP 19,509 · ISS 18,346 · TAS 11,071 · NAS 6,360 · IGI 1,460 (the original's "IEA 63,886 · IDA 17,001 …" counted edges whose list is exactly `[X]`).
+- **`BPO-GEN INTERACTS_WITH`** (158,410; `from`=`GO_…`, `to`=Ensembl): `evidence: list<str>` = GO evidence codes, `eco_ids` (e.g. `ECO:0000265`, `ECO:0000314`), `gene_product` (UniProt acc), `sources` (`indirect` carries the reference, e.g. `PMID:9924029`, `GO_REF:0000024`). Per-element code totals: IEA 92,673 · IDA 27,948 · IBA 24,580 · IMP 19,509 · ISS 18,346 · TAS 11,071 · NAS 6,360 · IGI 1,460 (counting only edges whose list is exactly `[X]` gives the smaller "IEA 63,886 · IDA 17,001 …").
 - **`PWY-GEN INTERACTS_WITH`** (46,977; `from`=`REACT:…`, `to`=Ensembl; `sources.direct=['OPEN_TARGETS']`, `indirect=['REACTOME']`): `properties = {sources}` only.
 - **`DRG-GEN`** (36,611; directed; `from`=drug, `to`=Ensembl; 33 relations: TARGET 13,459 · INHIBITOR 5,956 · ENZYME 5,301 · TRANSPORTER · ANTAGONIST · AGONIST · BLOCKER …): `source_ids`, `source_urls`, `mechanisms_of_action`, `sources`, `relation_assertions`, `relation_conflict` (True on 2 rows).
 - **`DRG-DIS`** (70,380; `to` ∈ `EFO_` 49,666 / `MONDO_` 19,847 / `Orphanet_` / `MP_` / `DOID_`; INDICATION 58,174 · CONTRAINDICATION 11,379 · OFF_LABEL_USE 827): `sources`, `structure_id`, `drug_disease_id`, `reference_ids` (NCT ids with `sources.indirect=['CLINICAL_TRIALS']`, ATC codes, or a DailyMed set-id GUID), `highest_clinical_trial_phase: double`, `relation_assertions`, `relation_conflict` (True on 573 rows).
-- **`DIS-DIS PARENT`** (47,892; directed; `sources.direct=['OPEN_TARGETS']`) and **`PHE-PHE PARENT`** (26,121; directed; `sources.direct` HPO on 24,862 edges, OPEN_TARGETS on 1,259): `properties = {sources}` only. **Direction — corrected by the second reviewer: `from` = parent, `to` = child** (read "`from` is PARENT of `to`"). Evidence: `from == 'MONDO_0015279'` → `to` ∈ {`MONDO_0013140`, `MONDO_0013500`, `MONDO_0013599`} (CMC's children); `to == 'MONDO_0015279'` ← `from` ∈ {`MONDO_0003778`, `MONDO_0100118`} (its parents); `from == 'HP_0000001'` ('All') fans out and nothing has `to == 'HP_0000001'`; the broadest terms have the highest out-degree. The docs never state the direction. **To roll phenotypes up from the children of X: select rows where `from == X` and take `to`.**
+- **`DIS-DIS PARENT`** (47,892; directed; `sources.direct=['OPEN_TARGETS']`) and **`PHE-PHE PARENT`** (26,121; directed; `sources.direct` HPO on 24,862 edges, OPEN_TARGETS on 1,259): `properties = {sources}` only. **Direction: `from` = parent, `to` = child** (read "`from` is PARENT of `to`"). Evidence: `from == 'MONDO_0015279'` → `to` ∈ {`MONDO_0013140`, `MONDO_0013500`, `MONDO_0013599`} (CMC's children); `to == 'MONDO_0015279'` ← `from` ∈ {`MONDO_0003778`, `MONDO_0100118`} (its parents); `from == 'HP_0000001'` ('All') fans out and nothing has `to == 'HP_0000001'`; the broadest terms have the highest out-degree. The docs never state the direction. **To roll phenotypes up from the children of X: select rows where `from == X` and take `to`.**
 
 | property | DIS-GEN | DIS-PHE | BPO-GEN | DRG-GEN | DRG-DIS | PWY-GEN / PHE-PHE / DIS-DIS |
 |---|---|---|---|---|---|---|
@@ -172,11 +170,11 @@ Counts caveat: `skills/optimuskg/reference/graph-schema.md` is a stale snapshot 
 - **X-SCID = `EFO_0005555`** 'gamma chain deficiency' (22 DIS-PHE; `xrefs = []`; description starts "Severe combined immunodeficiency (SCID) due to gamma chain deficiency, also called SCID-X1…"; `related_synonyms` `['X-linked SCID', 'severe combined immunodeficiency, X-linked', 'SCIDX', 'immunodeficiency 4', 'SCID, X-linked', 'X-SCID', …]`). **No disease node's text contains the string `IL2RG`** (0 hits over name, description, all synonym lists, concept_names, snomed_full_names), so IL2RG → X-SCID must be mapped via the gene's `symbol_synonyms` `IMD4` / `SCIDX` / `CIDX` ↔ the disease's `related_synonyms` 'immunodeficiency 4' / 'SCIDX', **not** via a gene-symbol text search. `EFO_0005555` shares exactly the same two parents as `MONDO_0010938`. (Test 2.)
 - **HIES = `MONDO_0007818`** hyper-IgE recurrent infection syndrome 1, AD (53 DIS-PHE; STAT3 DN; `xrefs` incl. OMIM:146840, OMIM:147060, Orphanet:2314); parent `MONDO_0018037` hyper-IgE syndrome (0).
 - **STAT3 GoF = `EFO_0010647`** (0 DIS-PHE; parents `EFO_0000508`, `EFO_0005140` only) — a node exists but phenotypes must come from elsewhere.
-- **PV / ET / PMF = `EFO_0002429` (20) / `EFO_0000479` (10) / `EFO_0002430` (11)**; all three have `xrefs = []`, so OMIM/Orphanet cross-walks for them must come from another source. PV's parents are `EFO_0004251` myeloproliferative disorder (0 DIS-PHE) and `EFO_0002428` chronic myeloproliferative disorder (4); their `xrefs` were not recorded in the notes (UNVERIFIED). (Test 3.)
+- **PV / ET / PMF = `EFO_0002429` (20) / `EFO_0000479` (10) / `EFO_0002430` (11)**; all three have `xrefs = []`, so OMIM/Orphanet cross-walks for them must come from another source. PV's parents are `EFO_0004251` myeloproliferative disorder (0 DIS-PHE) and `EFO_0002428` chronic myeloproliferative disorder (4); their `xrefs` were not recorded (UNVERIFIED). (Test 3.)
 - **TYK2 = `MONDO_0012682`** immunodeficiency 35 (7 DIS-PHE; OMIM:611521).
 - **JAK1: no disease node mentions JAK1** (0 hits). Only DIS-GEN associations exist (e.g. PV → JAK1 `evidence_score` 0.5391). Record as a coverage gap in `meta.coverage`.
 - **Ruxolitinib drug node `CHEMBL1789941`**: `name 'RUXOLITINIB'`, `type 'Small molecule'`, `is_approved True`, `trade_names ['Jakavi']`, `synonyms ['Ruxolitinib','INC-424','INC424','INCB-018424','INCB-18424','INCB018424']`, `source_ids ['66919','DB08877']` (DrugCentral, DrugBank), `sources.direct ['DRUG_BANK','DRUG_CENTRAL','OPEN_TARGETS']`.
-  - **DRG-GEN (3 edges):** → JAK2 `INHIBITOR` (`mechanisms_of_action ['Tyrosine-protein kinase JAK2 inhibitor']`), → JAK1 `INHIBITOR` (`['Tyrosine-protein kinase JAK1 inhibitor']`; per-edge values differ, second reviewer), both with `source_urls ['http://www.accessdata.fda.gov/drugsatfda_docs/label/2012/202192s001lbl.pdf']`, `sources {direct: ['DRUG_BANK','OPEN_TARGETS'], indirect: ['FDA']}`; → `ENSG00000160868` `ENZYME` (DrugBank only, lists null). **`drug_gene` has no STAT1 edges at all** (cluster-gene DRG-GEN edges: JAK2 39, JAK1 29, JAK3 25, TYK2 18, IL2RG 10, STAT3 3, STAT1 0). Ruxolitinib's targets in the backbone are JAK1/JAK2 only. (Tests 4, 5 and the `rules.py` direction-mismatch rule.)
+  - **DRG-GEN (3 edges):** → JAK2 `INHIBITOR` (`mechanisms_of_action ['Tyrosine-protein kinase JAK2 inhibitor']`), → JAK1 `INHIBITOR` (`['Tyrosine-protein kinase JAK1 inhibitor']`; per-edge values differ), both with `source_urls ['http://www.accessdata.fda.gov/drugsatfda_docs/label/2012/202192s001lbl.pdf']`, `sources {direct: ['DRUG_BANK','OPEN_TARGETS'], indirect: ['FDA']}`; → `ENSG00000160868` `ENZYME` (DrugBank only, lists null). **`drug_gene` has no STAT1 edges at all** (cluster-gene DRG-GEN edges: JAK2 39, JAK1 29, JAK3 25, TYK2 18, IL2RG 10, STAT3 3, STAT1 0). Ruxolitinib's targets in the backbone are JAK1/JAK2 only. (Tests 4, 5 and the `rules.py` direction-mismatch rule.)
   - **DRG-DIS (66 edges):** → `EFO_0000479` ET `INDICATION`, `highest_clinical_trial_phase 2.0`, `reference_ids ['NCT01392443','NCT02577926','NCT03878199']`; → `EFO_0002429` PV `INDICATION` phase 3.0; → `EFO_0002430` PMF `INDICATION` phase 4.0 (`sources.indirect ['DAILY_MED']`, `reference_ids` a DailyMed set-id GUID). **Nothing links ruxolitinib to STAT1 GoF / CMC** — expected; that edge is the literature layer's job (test 4).
 - **DIS-GEN density from Open Targets — threshold required.** Open Targets' aggregated/indirect associations make DIS-GEN very dense: CMC `MONDO_0015279` has 468 gene edges (STAT1 0.7443 / `evidence_count` 737 / `disgenet_score` 0.5 / 1 pmid / 2011–2020, sources OPEN_TARGETS+DISGENET, indirect CTD; but also TYK2 0.003, STAT3 0.0209, JAK3 0.0374, IL2RG 0.0314); JAK3-SCID 701 edges (JAK3 0.8389 / 1172 / 0.6 / 6 pmids / 1995–2004, indirect CTD, GENOMICS_ENGLAND, ORPHANET, UNIPROT; IL2RG 0.0774 OT-only); PV 1,157 edges (JAK2 0.8015 / disgenet 1.0 / 12 pmids; JAK1 0.5391); HIES1 only 3 edges (STAT3 0.7044, OT-only). **Threshold on `evidence_score` and/or require `DISGENET` in `sources.direct` before treating an edge as a "known gene".** DisGeNET is v7.0 (January 2020), so `year_final` ≤ 2020.
 - **Pathways / GO:** 174 PWY-GEN edges touch the 7 genes (e.g. `REACT:R-HSA-1059683` 'Interleukin-6 signaling' ↔ JAK1/JAK2/TYK2/STAT1/STAT3; `REACT:R-HSA-1169408` 'ISG15 antiviral mechanism' ↔ STAT1/JAK1). 378 BPO-GEN edges touch them (JAK2 111, STAT3 104, STAT1 51, JAK3 34, JAK1 28, TYK2 27, IL2RG 23).
@@ -192,7 +190,7 @@ Counts caveat: `skills/optimuskg/reference/graph-schema.md` is a stale snapshot 
 - **DrugBank**: loaded by the pipeline from `data/landing/drugbank/full database.xml` (v5-1-13 per `vocabulary.yml`); appears in the released Parquet as `sources.direct` value `DRUG_BANK` (DRG-GEN, DRG-DIS, drug nodes) and `xrefs.source='DrugBank'` on genes. DrugBank's own license terms were not fetched: **UNVERIFIED**.
 - **HPO**: embedded in every phenotype node, `properties.ontology.license = 'https://hpo.jax.org/app/license'`, version 2025-05-06. GO nodes embed an `ontology` struct too.
 - Other `sources.direct`/`indirect` values seen: OPEN_TARGETS, BGEE, MONDO, DRUG_CENTRAL, ONSIDES, HPO, MEDDRA, GO, REACTOME, CTD, ORPHANET, GENOMICS_ENGLAND, UNIPROT, CGI, FDA, DAILY_MED, PUBMED, CLINICAL_TRIALS, ATC. Per-source terms UNVERIFIED (not fetched).
-- **Citation** (BibTeX from the repo `README.md` lines 147–153, VERIFIED by the second reviewer):
+- **Citation** (BibTeX from the repo `README.md` lines 147–153, VERIFIED):
 
 ```bibtex
 @article{vittor2026optimuskg, title={OptimusKG: Unifying biomedical knowledge in a modern multimodal graph}, author={Vittor, Lucas and Noori, Ayush and Arango, Iñaki and Polonuer, Joaquín and Rodriques, Sam and White, Andrew and Clifton, David A. and Zitnik, Marinka}, journal={In review}, year={2026}}
@@ -201,9 +199,9 @@ Counts caveat: `skills/optimuskg/reference/graph-schema.md` is a stale snapshot 
 
 ---
 
-## 6. Open items / UNVERIFIED (carried over from the notes)
+## 6. Open items / UNVERIFIED
 
-**UNVERIFIED after both passes:**
+**UNVERIFIED:**
 1. Whether the `/api/access/datafiles/<id,id,…>` zip bundle has a size cap for the full 158 MB set (only a 2-small-file bundle was tested).
 2. DrugBank's own license terms, and every other upstream source's terms (not fetched).
 3. Polars `scan_parquet` + filter performance on the 73 MB DIS-GEN file (not run; pyarrow `iter_batches` is the fallback).

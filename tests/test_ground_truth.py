@@ -11,8 +11,8 @@ No external identifier is hand-typed here. Genes are located by ``props.symbol``
 symbols), mechanisms by the internal ``mech:<GENE>:<GoF|LoF|DN>[:somatic]`` id convention,
 and everything else by node type, label regex or by following edges.
 
-Relation contract (what Lane A's export must emit; the helpers in tests/conftest.py rely on it)
-----------------------------------------------------------------------------------------------
+Relation contract (what the graph export must emit; the helpers in tests/conftest.py rely on it)
+------------------------------------------------------------------------------------------------
 
 Same vocabulary as ``data/build/graph.mock.json`` (which the frontend builds against):
 
@@ -284,7 +284,7 @@ def test_6_obscure_gene_returns_no_supported_route():
         if not gene:
             pytest.fail("build_report.json has no gap_probe.symbol; the build must choose and record the obscure gene")
 
-    # Lane C's API (api/CONTRACT.md): /search resolves the text, /entity/{id} carries the
+    # The API (api/CONTRACT.md): /search resolves the text, /entity/{id} carries the
     # honest-gap shape: no_supported_route, the coverage record, and a templated next question.
     with TestClient(app) as client:
         resp = client.get("/search", params={"q": gene})

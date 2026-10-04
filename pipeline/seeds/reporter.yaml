@@ -25,7 +25,7 @@ search:
 
 # Values of include_fields are PascalCase data-element names (snake_case values are silently
 # accepted by the API and return {} for every record). Verified live or taken from the Data
-# Elements PDF mapping in docs/recon/reporter.md §10.
+# Elements PDF mapping (see docs/source-apis.md section 3b).
 include_fields:
   - ApplId
   - ProjectNum
@@ -44,7 +44,7 @@ include_fields:
   - Terms
   # Raw rubric inputs stored under props.projects[] (is_active, activity_code, award_type,
   # opportunity_number); a field that is not requested here comes back null for every record.
-  # IsActive verified live; the other three are the PDF mapping (docs/recon/reporter.md §10).
+  # IsActive verified live; the other three are the Data Elements PDF mapping.
   - IsActive
   - ActivityCode
   - AwardType

@@ -1,4 +1,4 @@
-"""Cached OpenAI calls shared by lane B (extract, reconcile, explain, draft).
+"""Cached OpenAI calls shared by the evidence pipeline (extract, reconcile, explain, draft).
 
 Model names come from OPENAI_MODEL / OPENAI_EMBED_MODEL (hard rule 9). Every call
 is cached on disk keyed by a hash of the full request (hard rule 6), so re-runs
@@ -121,7 +121,7 @@ _anthropic_client = None
 def _anthropic():
     global _anthropic_client
     if _anthropic_client is None:
-        import anthropic  # not in M0's pyproject yet: run with `uv run --with anthropic`
+        import anthropic  # not in pyproject.toml: run with `uv run --with anthropic`
         # The SDK retries 429/5xx/connection errors itself with backoff.
         _anthropic_client = anthropic.Anthropic(max_retries=6)
     return _anthropic_client

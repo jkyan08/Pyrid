@@ -89,8 +89,9 @@ Pipeline inside :func:`build`
    contract's name), ``props.contact`` (the key the Act tab reads) and ``attributes.contact_source``
    on the person's ``publishes_on`` / ``has_funded_project`` edges.
 6. **Pruning** (:func:`prune_graph`, thresholds in ``pipeline/seeds/cluster.yaml``): the store
-   keeps a wide slice so that Lane B's resolved endpoints stay resolvable; the export applies the
-   stricter inclusion rule :func:`pipeline.sources.optimuskg.disease_gene_included` (a curated
+   keeps a wide slice so that the evidence pipeline's resolved endpoints stay resolvable; the
+   export applies the stricter inclusion rule
+   :func:`pipeline.sources.optimuskg.disease_gene_included` (a curated
    direct source AND ``evidence_score >= disease_gene_min_score``, OR ``evidence_score >=
    disease_gene_high_score``), caps the diseases a seed gene pulls in
    (``max_diseases_per_seed_gene``, by score) and the other genes per disease

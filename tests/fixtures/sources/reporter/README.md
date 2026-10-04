@@ -1,14 +1,13 @@
 # NIH RePORTER API v2 — recorded fixtures
 
-**Capture date: 2026-10-03** (re-run session 19:44–19:50 UTC documented in
-`docs/recon/reporter.md` → "Re-run check (second reviewer)"; the raw bodies sat in the recon
-scratchpad as `rerun_reporter/<tag>.json` with response headers in `hdr_<tag>.txt`).
+**Capture date: 2026-10-03** (second capture session, 19:44–19:50 UTC; raw bodies were saved with their response
+headers).
 Cheat sheet: `docs/source-apis.md` §3.
 
 Every file here is a **verbatim excerpt of a real API response**. The only edits allowed were
 (a) truncating long arrays to a few representative items and (b) scrubbing e-mail addresses and
 phone numbers. No value inside any record was changed. Nothing was fetched from the network to
-build this directory. The fixtures come from the *re-run*, so `meta.search_id` values differ from
+build this directory. The fixtures come from the second session, so `meta.search_id` values differ from
 the ones quoted for the original session in the cheat sheet (e.g. `MAcLaHzK70mk5XV6Nt2gUQ` here vs
 `hsvM8Uq3M06EHdOGjeKNCA` in §3a) — totals, record identities and field paths are identical.
 
@@ -62,8 +61,8 @@ cheat sheet (`full_name` double space when `middle_name` is `""`, trailing space
 ### `projects_search_empty.json` — zero hits are HTTP 200, not 404
 
 ```bash
-# Endpoint + body as recorded in the recon note (§3.6 / R.2). The note recorded only
-# search_text; offset/limit are confirmed by the response meta; operator/search_field were NOT
+# Endpoint + body as recorded at capture time. Only
+# search_text was recorded; offset/limit are confirmed by the response meta; operator/search_field were NOT
 # recorded for this call and are the §3 template values (the only ones used in that session).
 curl -sS -X POST "https://api.reporter.nih.gov/v2/projects/search" -H "Content-Type: application/json" \
   -d '{"criteria":{"advanced_text_search":{"operator":"and","search_field":"projecttitle,terms,abstracttext","search_text":"qzxv9876nonexistentterm"}},"offset":0,"limit":3}'
@@ -117,8 +116,8 @@ limit message) and `offset` 10000 on publications
 ### `error_400_model_binding.json` — type error (JSON array of strings, HTML-entity-escaped)
 
 ```bash
-# Endpoint + body exactly as recorded in the recon note (R.2): pm_id sent as a bare string
-# instead of ["28139313"]. The note wrote the trailing top-level keys literally as `,...}` (not
+# Endpoint + body exactly as recorded at capture time: pm_id sent as a bare string
+# instead of ["28139313"]. The capture wrote the trailing top-level keys literally as `,...}` (not
 # recorded), so this is the recorded prefix, not a complete replayable body.
 curl -sS -X POST "https://api.reporter.nih.gov/v2/projects/search" -H "Content-Type: application/json" \
   -d '{"criteria":{"publications_search":{"pm_id":"28139313"}},...}'

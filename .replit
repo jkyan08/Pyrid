@@ -1,4 +1,4 @@
-# Replit config for the Rare Disease Atlas (lane C deploy).
+# Replit config for the Rare Disease Atlas (API + web deploy).
 # One app serves both: FastAPI on 127.0.0.1:8000 (internal) and Next.js on the
 # exposed port, with Next rewriting /api/* to the internal API (same-origin).
 # NEXT_PUBLIC_API_URL=/api is inlined into the web build (see web/next.config.ts).

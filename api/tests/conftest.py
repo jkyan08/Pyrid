@@ -1,4 +1,4 @@
-"""Shared fixtures for the lane-C API tests.
+"""Shared fixtures for the API tests.
 
 All tests run against the committed dev fixture (api/fixtures/*.mock.json)
 plus throwaway graphs generated inside tmp dirs. Nothing here ever writes
