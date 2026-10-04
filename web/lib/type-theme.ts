@@ -7,8 +7,8 @@
  *  - label: human-readable name
  *  - badge/text/accent/band: light-ink Tailwind classes (literal strings so
  *    Tailwind v4 can see them)
- *  - hex: a saturated color for cytoscape borders + legend marks
- *  - shape: the cytoscape node shape (fill stays CLUSTER-colored; shape and
+ *  - hex: a saturated color for graph outlines + legend marks
+ *  - shape: the Canvas node shape (fill stays CLUSTER-colored; shape and
  *    border encode the TYPE, per README §10 "colour = cluster only")
  *  - glyph: hand-drawn inline-SVG inner markup for a 24×24 viewBox
  *    (stroke="currentColor" is applied by the <TypeGlyph> wrapper)
@@ -31,9 +31,9 @@ export interface TypeTheme {
   accent: string;
   /** Tinted header-band classes: background tint + border. */
   band: string;
-  /** Saturated hex for cytoscape node borders and legend marks. */
+  /** Saturated hex for graph node outlines and legend marks. */
   hex: string;
-  /** Cytoscape node shape (type is encoded as shape + border, never fill). */
+  /** Canvas node shape (type is encoded as shape + border, never fill). */
   shape: string;
   /** Inline SVG inner markup, 24×24 viewBox, stroked with currentColor. */
   glyph: string;

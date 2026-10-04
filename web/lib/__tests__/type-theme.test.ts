@@ -17,33 +17,20 @@ function nodeTypeLiteralsFromSource(): string[] {
   return Array.from(union[1].matchAll(/"([^"]+)"/g), (m) => m[1]);
 }
 
-// Shapes cytoscape actually supports (subset we allow ourselves).
-const CYTOSCAPE_SHAPES = new Set([
+// Shapes implemented by the Canvas graph renderer.
+const CANVAS_SHAPES = new Set([
   "ellipse",
-  "triangle",
   "round-triangle",
   "rectangle",
   "round-rectangle",
-  "bottom-round-rectangle",
   "cut-rectangle",
   "barrel",
   "rhomboid",
-  "right-rhomboid",
   "diamond",
-  "round-diamond",
-  "pentagon",
   "round-pentagon",
   "hexagon",
-  "round-hexagon",
-  "concave-hexagon",
-  "heptagon",
-  "round-heptagon",
-  "octagon",
-  "round-octagon",
   "star",
   "tag",
-  "round-tag",
-  "vee",
 ]);
 
 describe("type-theme completeness", () => {
@@ -85,9 +72,9 @@ describe("type-theme completeness", () => {
     expect(unique(entries.map((t) => t.glyph))).toBe(true);
   });
 
-  it("uses only valid cytoscape node shapes", () => {
+  it("uses only shapes implemented by the Canvas renderer", () => {
     for (const [type, theme] of Object.entries(TYPE_THEMES)) {
-      expect(CYTOSCAPE_SHAPES.has(theme.shape), `invalid shape "${theme.shape}" for ${type}`).toBe(
+      expect(CANVAS_SHAPES.has(theme.shape), `invalid shape "${theme.shape}" for ${type}`).toBe(
         true
       );
     }

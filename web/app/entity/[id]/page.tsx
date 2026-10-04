@@ -8,9 +8,9 @@
  */
 
 import { useEffect, useState } from "react";
-import { useParams } from "next/navigation";
+import { useParams, useSearchParams } from "next/navigation";
 import type { EntityView, ExplainResponse, Graph } from "@/lib/types";
-import { apiEntity, apiExplain, apiGraph, NotFoundError } from "@/lib/api";
+import { apiEntity, apiExplain, apiGraph, apiMechanismSearch, NotFoundError } from "@/lib/api";
 import { SourceLabel, TypeBadge, TypeGlyph } from "@/components/badges";
 import { themeOf } from "@/lib/type-theme";
 import { CitationChip, CitationText } from "@/components/citation-text";
@@ -18,11 +18,62 @@ import { CoverageTable } from "@/components/coverage-table";
 import { ActTab } from "@/components/act-tab";
 import { GapsTab } from "@/components/gaps-tab";
 import { GraphMap } from "@/components/graph-map";
+import { DiscoveryTrail } from "@/components/discovery-trail";
+import { SearchBox } from "@/components/search-box";
 import AnimatedTabs from "@/components/smoothui/animated-tabs";
 import MotionLoader from "@/components/smoothui/motion-loader";
 import SmoothButton from "@/components/smoothui/smooth-button";
 
-type Tab = "summary" | "map" | "act" | "gaps";
+type Tab = "summary" | "map" | "act";
+
+const ENTITY_PURPOSE: Record<string, { eyebrow: string; description: string }> = {
+  Disease: { eyebrow: "Disease dossier", description: "Trace the mechanism, related conditions and research partners around this disease." },
+  Gene: { eyebrow: "Gene explorer", description: "See how this gene connects to pathways, variants and disease mechanisms." },
+  Variant: { eyebrow: "Variant evidence", description: "Follow this specific variant to its mechanism and clinical evidence." },
+  Mechanism: { eyebrow: "Mechanism explorer", description: "Compare the diseases and interventions connected by the same biological direction." },
+  Pathway: { eyebrow: "Pathway map", description: "Explore the genes and disease mechanisms that meet at this pathway." },
+  Phenotype: { eyebrow: "Clinical feature", description: "Find conditions linked by this observed feature and inspect the supporting evidence." },
+  PatientGroup: { eyebrow: "Patient community", description: "See the conditions and research assets connected to this community." },
+  Registry: { eyebrow: "Research asset · registry", description: "Check linked conditions, reuse potential and eligibility questions." },
+  Study: { eyebrow: "Research asset · study", description: "Review study links and what would need to change for another condition." },
+  Drug: { eyebrow: "Intervention evidence", description: "Check target direction, disease links and the evidence behind each connection." },
+  Investigator: { eyebrow: "Research collaborator", description: "Trace the studies, papers and conditions linked to this investigator." },
+  Paper: { eyebrow: "Source publication", description: "Inspect the claims and connections grounded in this publication." },
+  Claim: { eyebrow: "Evidence claim", description: "Follow the exact assertion to its source and connected entities." },
+};
+
+const ENTITY_FACETS: Record<string, { label: string; types: string[] }[]> = {
+  Disease: [
+    { label: "mechanisms", types: ["Mechanism"] },
+    { label: "genes & pathways", types: ["Gene", "Pathway"] },
+    { label: "communities & assets", types: ["PatientGroup", "Registry", "Study"] },
+  ],
+  Gene: [
+    { label: "variants", types: ["Variant"] },
+    { label: "pathways", types: ["Pathway"] },
+    { label: "diseases", types: ["Disease"] },
+  ],
+  Mechanism: [
+    { label: "diseases", types: ["Disease"] },
+    { label: "genes & variants", types: ["Gene", "Variant"] },
+    { label: "interventions", types: ["Drug"] },
+  ],
+  Registry: [
+    { label: "covered diseases", types: ["Disease"] },
+    { label: "communities", types: ["PatientGroup"] },
+    { label: "studies", types: ["Study"] },
+  ],
+  Study: [
+    { label: "studied diseases", types: ["Disease"] },
+    { label: "interventions", types: ["Drug"] },
+    { label: "investigators", types: ["Investigator"] },
+  ],
+  PatientGroup: [
+    { label: "diseases", types: ["Disease"] },
+    { label: "registries", types: ["Registry"] },
+    { label: "studies", types: ["Study"] },
+  ],
+};
 
 export default function EntityPage() {
   const params = useParams<{ id: string }>();
@@ -35,7 +86,7 @@ export default function EntityPage() {
 function EntityPageView({ id }: { id: string }) {
   const [entity, setEntity] = useState<EntityView | null>(null);
   const [error, setError] = useState<string | null>(null);
-  const [tab, setTab] = useState<Tab>("summary");
+  const [tab, setTab] = useState<Tab>("map");
 
   useEffect(() => {
     let cancelled = false;
@@ -69,49 +120,60 @@ function EntityPageView({ id }: { id: string }) {
   }
 
   const tabs: { key: Tab; label: string }[] = [
-    { key: "summary", label: "Summary" },
-    { key: "map", label: "Map" },
-    { key: "act", label: "Act" },
-    { key: "gaps", label: "Gaps" },
+    { key: "map", label: "Explore connections" },
+    { key: "summary", label: "Evidence brief & open questions" },
+    { key: "act", label: "Research action" },
   ];
 
   const theme = themeOf(entity.node.type);
+  const purpose = ENTITY_PURPOSE[entity.node.type] ?? { eyebrow: `${theme.label} record`, description: "Explore this entity's connections and inspect their evidence." };
+  const facets = ENTITY_FACETS[entity.node.type];
+  const facetCounts = facets?.map((facet) => ({
+    label: facet.label,
+    count: entity.neighbors.filter(({ node }) => facet.types.includes(node.type)).length,
+  })).filter((facet) => facet.count > 0);
 
   return (
-    <div className="space-y-6">
-      {/* Type-tinted header band: a Drug page is instantly distinct from a
-          Disease page (accent border, tint and a big hand-drawn glyph). */}
+    <div className="space-y-7">
       <header
-        className={`flex items-start gap-4 rounded-xl border border-l-4 px-5 py-4 ${theme.band} ${theme.accent}`}
+        className={`relative grid gap-7 overflow-visible rounded-3xl border border-l-[6px] px-6 py-7 shadow-[0_12px_35px_rgba(15,23,42,0.04)] sm:px-8 lg:grid-cols-[minmax(0,1fr)_minmax(280px,420px)] lg:items-center ${theme.band} ${theme.accent}`}
       >
-        <span
-          className={`mt-0.5 flex h-12 w-12 shrink-0 items-center justify-center rounded-lg border border-white/80 bg-white/90 shadow-sm ${theme.text}`}
-        >
-          <TypeGlyph type={entity.node.type} size={28} />
-        </span>
-        <div className="min-w-0 space-y-1.5">
-          <div className="flex flex-wrap items-center gap-2">
-            <h1 className="text-xl font-semibold tracking-tight text-gray-900 sm:text-2xl">
+        <div className="flex min-w-0 items-start gap-5">
+          <span className={`flex size-16 shrink-0 items-center justify-center rounded-2xl border border-white/80 bg-white/90 shadow-sm ${theme.text}`}>
+            <TypeGlyph type={entity.node.type} size={36} />
+          </span>
+          <div className="min-w-0">
+            <p className={`text-xs font-bold uppercase tracking-[0.16em] ${theme.text}`}>{purpose.eyebrow}</p>
+            <h1 className="mt-2 text-2xl font-semibold leading-tight tracking-[-0.035em] text-slate-950 sm:text-4xl">
               {entity.node.label}
             </h1>
-            <TypeBadge type={entity.node.type} />
-          </div>
+            <p className="mt-2 max-w-2xl text-sm leading-6 text-slate-600">{purpose.description}</p>
+            <div className="mt-4 flex flex-wrap items-center gap-2 text-xs text-slate-600">
+              <TypeBadge type={entity.node.type} />
+              <span className="rounded-full border border-white bg-white/75 px-2.5 py-1">{entity.neighbors.length} direct connections</span>
+              {facetCounts?.map((facet) => (
+                <span key={facet.label} className="rounded-full border border-white bg-white/75 px-2.5 py-1">
+                  <strong className="text-slate-900">{facet.count}</strong> direct {facet.label}
+                </span>
+              ))}
+            </div>
           {(entity.node.synonyms?.length ?? 0) > 0 && (
-            <p className="text-xs text-gray-500">
+            <p className="mt-3 text-xs text-gray-500">
               Also known as: {entity.node.synonyms!.join(", ")}
             </p>
           )}
-          {entity.cluster_ids.length > 0 && (
-            <p className="text-xs text-gray-400">
-              Cluster: {entity.cluster_ids.join(", ")}
-            </p>
-          )}
+          </div>
+        </div>
+        <div className="rounded-2xl border border-white/80 bg-white/80 p-4 shadow-sm">
+          <p className="mb-2 text-[11px] font-bold uppercase tracking-[0.14em] text-slate-500">Explore another name</p>
+          <SearchBox />
         </div>
       </header>
 
+      <ExcludedNotice id={entity.node.id} />
       {entity.no_supported_route && <HonestGapBanner entity={entity} />}
 
-      <div className="overflow-x-auto">
+      <div className="overflow-x-auto border-b border-slate-200">
         <AnimatedTabs
           tabs={tabs.map((t) => ({ id: t.key, label: t.label }))}
           activeTab={tab}
@@ -121,16 +183,48 @@ function EntityPageView({ id }: { id: string }) {
         />
       </div>
 
-      {tab === "summary" && <SummaryTab entity={entity} />}
-      {tab === "map" && (
-        /* The map breaks out of the text column: centered, up to max-w-6xl
-           (min with the viewport so no horizontal scroll appears). */
-        <div className="relative left-1/2 w-[min(72rem,calc(100vw-2rem))] -translate-x-1/2">
-          <MapTab centerId={entity.node.id} />
+      {tab === "summary" && (
+        <div className="max-w-4xl space-y-6">
+          <div className="rounded-2xl border border-slate-200 bg-white p-6 sm:p-8">
+            <SummaryTab entity={entity} />
+          </div>
+          <section className="rounded-2xl border border-slate-200 bg-white p-6 sm:p-8">
+            <h2 className="text-xs font-bold uppercase tracking-[0.15em] text-slate-500">
+              Open questions
+            </h2>
+            <p className="mt-1 text-sm text-slate-500">
+              What was searched, what evidence is missing, and what would change the answer.
+            </p>
+            <div className="mt-5">
+              <GapsTab entityId={entity.node.id} />
+            </div>
+          </section>
         </div>
       )}
-      {tab === "act" && <ActTab entity={entity} />}
-      {tab === "gaps" && <GapsTab entityId={entity.node.id} />}
+      {tab === "map" && <MapTab centerId={entity.node.id} onAct={() => setTab("act")} />}
+      {tab === "act" && <div className="max-w-5xl"><ActTab entity={entity} /></div>}
+    </div>
+  );
+}
+
+function ExcludedNotice({ id }: { id: string }) {
+  const [notice, setNotice] = useState<{ direction: string; reason: string } | null>(null);
+  const direction = useSearchParams().get("excluded");
+  useEffect(() => {
+    if (direction !== "dampen" && direction !== "boost") return;
+    let cancelled = false;
+    apiMechanismSearch(direction).then((data) => {
+      const match = data.excluded.find((item) => item.node.id === id);
+      if (!cancelled && match) setNotice({ direction, reason: match.reason });
+    }).catch(() => {});
+    return () => { cancelled = true; };
+  }, [id, direction]);
+  if (!notice || notice.direction !== direction) return null;
+  return (
+    <div className="rounded-2xl border border-rose-200 bg-rose-50 px-5 py-4 text-rose-950" role="status">
+      <p className="text-xs font-bold uppercase tracking-[0.15em] text-rose-700">Excluded from {notice.direction} candidates</p>
+      <p className="mt-1 text-sm font-medium">{notice.reason}</p>
+      <p className="mt-1 text-xs text-rose-800">This is an exclusion for the selected intervention direction, not a research lead.</p>
     </div>
   );
 }
@@ -217,7 +311,7 @@ function ExplainPanel({ entityId }: { entityId: string }) {
 }
 
 /** Map tab lazy-loads the whole graph (live /graph or the static bundle). */
-function MapTab({ centerId }: { centerId: string }) {
+function MapTab({ centerId, onAct }: { centerId: string; onAct: () => void }) {
   const [graph, setGraph] = useState<Graph | null>(null);
   const [error, setError] = useState<string | null>(null);
 
@@ -243,5 +337,5 @@ function MapTab({ centerId }: { centerId: string }) {
         Loading map…
       </p>
     );
-  return <GraphMap graph={graph} centerId={centerId} />;
+  return <><GraphMap graph={graph} centerId={centerId} /><DiscoveryTrail graph={graph} centerId={centerId} onAct={onAct} /></>;
 }

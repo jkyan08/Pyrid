@@ -38,12 +38,15 @@ npm run dev        # predev copies the graph fixture into public/, then starts :
 
 - `/` — one global search box (disease, gene, variant, free-text symptom,
   patient group, mechanism) with resolution lines.
-- `/entity/[id]` — tabs: Summary (cited plain-language lines), Map (Cytoscape
-  neighborhood, color = cluster only, size = connectivity, dashed = bridge or
-  inferred), Act (assets with verdicts / what differs / expert-review flags,
+- `/entity/[id]` — opens on Map (D3-force + Canvas neighborhood with link
+  springs, many-body repulsion, collision and centering; drag temporarily pins
+  one node and moves nearby nodes without rebuilding the simulation; pan,
+  zoom, reheat and fit controls). Fill = cluster only, size = connectivity,
+  dashed = bridge or inferred. Evidence brief has cited plain-language lines;
+  Research action has assets with verdicts / what differs / expert-review flags,
   investigators with public contact routes only, Draft button — output labeled
-  "Draft only — never sent"), Gaps (coverage incl. zero-hit rows, missing
-  evidence, what would change). Entities with no supported route show the
+  "Draft only — never sent". Open questions shows coverage incl. zero-hit rows, missing
+  evidence and what would change. Entities with no supported route show the
   honest-gap state prominently.
 - `/mechanism` — dampen/boost mechanism search with an Excluded-with-reason
   section.
