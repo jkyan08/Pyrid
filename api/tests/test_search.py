@@ -39,8 +39,9 @@ def test_free_text_multi_token_hits_phenotype(client):
     assert "mock:phenotype:1" in ids
     hit = next(r for r in body["results"] if r["id"] == "mock:phenotype:1")
     assert hit["match_kind"] == "free_text"
-    # the phenotype with 2 overlapping tokens outranks the one with 1
-    assert ids.index("mock:phenotype:1") < ids.index("mock:phenotype:2")
+    # a single overlapping token out of three ("thyroid") is below the 50%
+    # relevance threshold and no longer listed (search-ranking feedback)
+    assert "mock:phenotype:2" not in ids
 
 
 def test_empty_query_returns_empty_results(client):

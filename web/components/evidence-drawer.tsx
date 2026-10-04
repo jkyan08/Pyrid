@@ -20,6 +20,7 @@ import {
 } from "react";
 import type { Claim, EdgeView } from "@/lib/types";
 import { apiEdge, apiGraph } from "@/lib/api";
+import { displayLabel } from "@/lib/display";
 import { claimById } from "@/lib/graph";
 import SmoothDrawer, { DrawerTitle } from "@/components/smoothui/drawer";
 import MotionLoader from "@/components/smoothui/motion-loader";
@@ -119,7 +120,7 @@ function EdgeEvidence({ view }: { view: EdgeView }) {
             size={16}
             className={`shrink-0 ${themeOf(view.source_node?.type).text}`}
           />
-          <span>{view.source_node?.label ?? edge.source}</span>
+          <span>{view.source_node ? displayLabel(view.source_node.label, view.source_node.type) : edge.source}</span>
           <span className="mx-0.5 inline-flex items-center gap-1 rounded-full border border-gray-200 bg-gray-50 px-2 py-0.5 text-xs font-normal text-gray-600">
             {edge.relation.replace(/_/g, " ")}
             <span aria-hidden="true">→</span>
@@ -129,7 +130,7 @@ function EdgeEvidence({ view }: { view: EdgeView }) {
             size={16}
             className={`shrink-0 ${themeOf(view.target_node?.type).text}`}
           />
-          <span>{view.target_node?.label ?? edge.target}</span>
+          <span>{view.target_node ? displayLabel(view.target_node.label, view.target_node.type) : edge.target}</span>
         </p>
         <p className="mt-1 font-mono text-[11px] text-gray-400">{edge.id}</p>
       </div>
