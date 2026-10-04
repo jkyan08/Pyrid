@@ -14,6 +14,7 @@ import type { DraftResponse, EntityView } from "@/lib/types";
 import { apiDraft } from "@/lib/api";
 import { CitationChip } from "./citation-text";
 import { useEvidence } from "./evidence-drawer";
+import { displayLabel } from "@/lib/display";
 import { themeOf } from "@/lib/type-theme";
 import { SourceLabel, TypeBadge, TypeGlyph, VerdictChip } from "./badges";
 import SmoothButton from "@/components/smoothui/smooth-button";
@@ -83,7 +84,7 @@ function AssetsSection({ entity }: { entity: EntityView }) {
             >
               <div className="flex flex-wrap items-center gap-2">
                 <TypeGlyph type={node.type} size={15} className={theme.text} />
-                <span className="text-sm font-medium text-gray-900">{node.label}</span>
+                <span className="text-sm font-medium text-gray-900">{displayLabel(node.label, node.type)}</span>
                 <TypeBadge type={node.type} />
                 <VerdictChip verdict={typeof attrs.verdict === "string" ? attrs.verdict : undefined} />
                 <button
@@ -166,7 +167,7 @@ function InvestigatorsSection({ entity }: { entity: EntityView }) {
             >
               <div className="flex flex-wrap items-center gap-2">
                 <TypeGlyph type={node.type} size={15} className={theme.text} />
-                <span className="text-sm font-medium text-gray-900">{node.label}</span>
+                <span className="text-sm font-medium text-gray-900">{displayLabel(node.label, node.type)}</span>
                 {affiliation && <span className="text-xs text-gray-500">{affiliation}</span>}
                 <button
                   onClick={() => openEvidence(edge.id)}

@@ -6,6 +6,7 @@ import { discoveryRoutes } from "@/lib/graph";
 import { themeOf } from "@/lib/type-theme";
 import { TypeGlyph } from "./badges";
 import { useEvidence } from "./evidence-drawer";
+import { displayLabel } from "@/lib/display";
 
 const ROUTE_COPY: Record<string, string> = {
   Pathway: "Disrupted biology",
@@ -57,16 +58,16 @@ export function DiscoveryTrail({ graph, centerId, onAct }: {
                   <div className="min-w-0">
                     <p className="text-[11px] font-bold uppercase tracking-[0.13em] text-slate-500">{ROUTE_COPY[route.type]}</p>
                     <Link href={`/entity/${encodeURIComponent(route.node.id)}`} className="mt-0.5 block font-semibold leading-snug text-slate-950 underline decoration-slate-200 underline-offset-4 hover:decoration-sky-400">
-                      {route.node.label}
+                      {displayLabel(route.node.label, route.node.type)}
                     </Link>
                   </div>
                 </div>
                 <ol className="mt-4 space-y-2 border-t border-slate-100 pt-3">
                   {route.steps.map(({ from, edge, to }) => (
                     <li key={edge.id} className="text-xs leading-5 text-slate-600">
-                      <span className="font-medium text-slate-800">{from.label}</span>{" "}
+                      <span className="font-medium text-slate-800">{displayLabel(from.label, from.type)}</span>{" "}
                       <span className="text-slate-400">→</span>{" "}
-                      <span className="font-medium text-slate-800">{to.label}</span>
+                      <span className="font-medium text-slate-800">{displayLabel(to.label, to.type)}</span>
                       <button onClick={() => openEvidence(edge.id)} className="mt-1 block text-left font-semibold text-sky-700 underline decoration-sky-200 underline-offset-2 hover:text-sky-900">
                         {edge.relation.replaceAll("_", " ")} · {edge.sources?.length ? `${edge.sources.length} source${edge.sources.length === 1 ? "" : "s"}` : "source missing"} <span aria-hidden="true">↗</span>
                       </button>
