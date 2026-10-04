@@ -1,5 +1,5 @@
 {
-  "built_at": "2026-10-04T03:20:25+00:00",
+  "built_at": "2026-10-04T03:12:13+00:00",
   "thresholds": {
     "disease_gene_min_score": 0.3,
     "keep_disgenet_direct": true,
@@ -25,19 +25,20 @@
     "diseases_with_associated_genes": 643,
     "assignments": 14,
     "mechanism_nodes": 9,
-    "mechanism_edges": 24,
+    "mechanism_edges": 23,
     "by_rule": {
       "R1.gof": 1,
       "R1.lof.deficiency": 7,
-      "R3.claims": 14,
+      "R3.claims": 13,
       "R4.curated": 6
     },
     "curated_edges": 6,
-    "claim_edges": 14,
+    "claim_edges": 13,
     "claims_unlinked": [
       "c_000002",
       "c_000014",
       "c_000016",
+      "c_000017",
       "c_000035",
       "c_000045",
       "c_000059",
@@ -210,24 +211,22 @@
     "claims": {
       "in_bundle": 935,
       "in_graph": 935,
-      "attached": 127,
-      "unattached": 808,
+      "attached": 145,
+      "unattached": 790,
       "unattached_reasons": {
-        "subject '...' unresolved (text)": 126,
-        "object '...' unresolved (text)": 276,
-        "object '...' unresolved (missing)": 24,
-        "subject '...' unresolved (text); object '...' unresolved (text)": 296,
-        "subject '...' unresolved (missing); object '...' unresolved (text)": 38,
-        "subject '...' unresolved (missing)": 6,
-        "subject '...' unresolved (text); object '...' unresolved (missing)": 31,
+        "subject '...' unresolved (text)": 160,
+        "object '...' unresolved (text)": 254,
+        "subject '...' unresolved (text); object '...' unresolved (text)": 266,
+        "object '...' unresolved (missing)": 22,
+        "subject '...' unresolved (text); object '...' unresolved (missing)": 38,
+        "subject '...' unresolved (missing); object '...' unresolved (text)": 39,
+        "subject '...' unresolved (missing)": 4,
         "only contradicting claims for CHEMBL:CHEMBL1789941 -modulates-> mech:JAK2:GoF:somatic and no existing edge": 1,
         "only contradicting claims for CHEMBL:CHEMBL1789941 -treats-> EFO:0002430 and no existing edge": 1,
         "only contradicting claims for CHEMBL:CHEMBL467 -treats-> EFO:0002429 and no existing edge": 1,
-        "no edge mapping for associated_with between Disease and Disease": 1,
         "no edge mapping for associated_with between Pathway and Disease": 1,
         "only contradicting claims for CHEMBL:CHEMBL221959 -modulates-> mech:STAT1:GoF and no existing edge": 1,
-        "no edge mapping for has_mechanism between Gene and Mechanism": 4,
-        "subject '...' unresolved (missing); object '...' unresolved (missing)": 1
+        "no edge mapping for has_mechanism between Gene and Mechanism": 2
       },
       "dropped_quote_mismatch_after_scrub": [],
       "variant_cleared": [
@@ -304,70 +303,72 @@
     },
     "endpoints": {
       "resolved_by_prefix": {
-        "CHEMBL": 116,
-        "EFO": 75,
+        "CHEMBL (bare)": 116,
+        "EFO": 74,
         "HP": 36,
-        "MONDO": 157,
-        "Orphanet": 3,
-        "REACT": 2,
-        "clinvar": 32,
-        "ensembl": 38,
-        "mech": 246
+        "MONDO": 205,
+        "Orphanet": 5,
+        "REACT": 1,
+        "clinvar": 33,
+        "ensembl": 36,
+        "mech": 238
       },
       "unresolved_by_prefix": {
-        "CHEMBL": 6,
+        "CHEMBL (bare)": 7,
         "DRUGBANK": 1,
-        "EFO": 7,
+        "EFO": 8,
         "HP": 14,
-        "MONDO": 42,
-        "ensembl": 31,
-        "text": 1064
+        "MONDO": 46,
+        "ensembl": 27,
+        "text": 1023
       },
       "resolution_how": {
-        "exact": 785,
-        "mechanism": 2,
-        "missing": 101,
-        "text": 1132
+        "exact": 707,
+        "mechanism": 3,
+        "missing": 103,
+        "normalized": 116,
+        "text": 1091
       },
       "mapping_gaps": {
-        "associated_with: Disease -> Disease": 1,
         "associated_with: Pathway -> Disease": 1,
-        "has_mechanism: Gene -> Mechanism": 4
+        "has_mechanism: Gene -> Mechanism": 2
       }
     },
     "edges": {
       "created_by_relation": {
         "has_condition": 1,
-        "has_mechanism": 2,
+        "has_mechanism": 8,
         "has_phenotype": 13,
-        "modulates": 5,
+        "modulates": 6,
         "treats": 7
       },
       "upgraded_by_relation": {
+        "associated_with": 3,
         "has_mechanism": 17,
-        "has_phenotype": 2
+        "has_phenotype": 1
       },
       "created_by_predicate": {
         "associated_with": 2,
-        "causes": 3,
+        "causes": 10,
         "has_phenotype": 23,
-        "modulates": 7,
+        "modulates": 8,
         "treats": 29
       },
       "upgraded_by_predicate": {
-        "causes": 12,
-        "has_mechanism": 48,
-        "has_phenotype": 3
+        "causes": 25,
+        "has_mechanism": 46,
+        "has_phenotype": 2
       },
       "upgrade_outcomes": {
-        "extracted": 14,
-        "inferred->extracted": 1,
-        "observed": 4
+        "extracted": 13,
+        "inferred->extracted": 2,
+        "observed": 6
       },
-      "investigator_edges": 811
+      "investigator_edges": 860
     },
     "mechanism_nodes_created": [
       "mech:JAK1:GoF",
+      "mech:JAK3:GoF",
       "mech:TYK2:GoF"
     ],
     "mechanism_nodes_created_without_edges": [
@@ -389,9 +390,6 @@
       "clinvar:14662": [
         "mech:JAK2:GoF:somatic"
       ],
-      "clinvar:30083": [
-        "mech:STAT1:GoF"
-      ],
       "clinvar:30085": [
         "mech:STAT1:GoF"
       ],
@@ -409,7 +407,7 @@
     },
     "investigators": {
       "total": 2363,
-      "exported": 95,
+      "exported": 97,
       "with_orcid": 339,
       "merged_by_name": 66,
       "ambiguous_names": {},
@@ -418,8 +416,8 @@
       "merged_into_existing_nodes": 0,
       "skipped_id_collision": 0,
       "skipped_nameless": 0,
-      "author_of_edges": 442,
-      "publishes_on_edges": 369
+      "author_of_edges": 448,
+      "publishes_on_edges": 412
     },
     "scrubbed": {
       "emails": 302,
@@ -427,7 +425,7 @@
       "dose_fields_changed": 3
     },
     "scrubbed_emails": 302,
-    "coverage_rows": 1019
+    "coverage_rows": 1005
   },
   "patient_groups": {
     "groups": 7,
@@ -460,9 +458,9 @@
     "nodes_before": {
       "Disease": 644,
       "Drug": 2038,
-      "Gene": 2688,
-      "Investigator": 245,
-      "Mechanism": 11,
+      "Gene": 2689,
+      "Investigator": 247,
+      "Mechanism": 12,
       "Paper": 243,
       "Pathway": 335,
       "PatientGroup": 6,
@@ -472,22 +470,22 @@
       "Variant": 6521
     },
     "nodes_after": {
-      "Disease": 143,
+      "Disease": 147,
       "Drug": 107,
-      "Gene": 248,
-      "Investigator": 207,
-      "Mechanism": 10,
+      "Gene": 249,
+      "Investigator": 209,
+      "Mechanism": 11,
       "Paper": 243,
       "Pathway": 335,
       "PatientGroup": 6,
-      "Phenotype": 899,
+      "Phenotype": 931,
       "Registry": 1,
       "Study": 54,
       "Variant": 610
     },
     "nodes_dropped": {
       "Disease": {
-        "n": 501,
+        "n": 497,
         "reason": "not anchored by a seed gene (inclusion rule / max_diseases_per_seed_gene), a seed term, an evidence edge or a claim"
       },
       "Drug": {
@@ -496,7 +494,7 @@
       },
       "Gene": {
         "n": 2440,
-        "reason": "not a seed gene, not referenced by evidence or a claim, beyond max_genes_per_disease or below the inclusion rule"
+        "reason": "not a seed gene, not the gap probe, not referenced by evidence or a claim, beyond max_genes_per_disease or below the inclusion rule"
       },
       "Investigator": {
         "n": 38,
@@ -507,7 +505,7 @@
         "reason": "no surviving edge"
       },
       "Phenotype": {
-        "n": 1069,
+        "n": 1037,
         "reason": "not annotated to an exported disease (nor an ancestor of one)"
       },
       "Variant": {
@@ -517,7 +515,7 @@
     },
     "edges_before": {
       "associated_with": 17949,
-      "author_of": 442,
+      "author_of": 448,
       "contraindicated_for": 210,
       "covers": 1,
       "evaluates": 76,
@@ -526,14 +524,14 @@
       "has_condition": 7896,
       "has_funded_project": 538,
       "has_inheritance": 148,
-      "has_mechanism": 26,
+      "has_mechanism": 31,
       "has_phenotype": 1457,
       "in_pathway": 552,
       "indicated_for": 5771,
       "inhibits": 94,
       "is_a": 3848,
-      "modulates": 5,
-      "publishes_on": 369,
+      "modulates": 6,
+      "publishes_on": 412,
       "studies": 74,
       "supports_community": 16,
       "targets": 30,
@@ -541,22 +539,22 @@
       "variant_of": 7153
     },
     "edges_after": {
-      "associated_with": 2026,
-      "author_of": 442,
+      "associated_with": 2084,
+      "author_of": 448,
       "covers": 1,
       "evaluates": 76,
-      "has_clinical_course": 31,
+      "has_clinical_course": 32,
       "has_condition": 725,
-      "has_funded_project": 349,
-      "has_inheritance": 53,
-      "has_mechanism": 25,
-      "has_phenotype": 665,
+      "has_funded_project": 356,
+      "has_inheritance": 54,
+      "has_mechanism": 30,
+      "has_phenotype": 678,
       "in_pathway": 552,
-      "indicated_for": 347,
+      "indicated_for": 366,
       "inhibits": 94,
-      "is_a": 1506,
-      "modulates": 5,
-      "publishes_on": 369,
+      "is_a": 1559,
+      "modulates": 6,
+      "publishes_on": 412,
       "studies": 74,
       "supports_community": 16,
       "targets": 30,
@@ -564,17 +562,17 @@
       "variant_of": 622
     },
     "edges_dropped_by_relation": {
-      "associated_with": 15923,
+      "associated_with": 15865,
       "contraindicated_for": 210,
-      "has_clinical_course": 49,
+      "has_clinical_course": 48,
       "has_clinical_modifier": 1,
       "has_condition": 7171,
-      "has_funded_project": 189,
-      "has_inheritance": 95,
+      "has_funded_project": 182,
+      "has_inheritance": 94,
       "has_mechanism": 1,
-      "has_phenotype": 792,
-      "indicated_for": 5424,
-      "is_a": 2342,
+      "has_phenotype": 779,
+      "indicated_for": 5405,
+      "is_a": 2289,
       "variant_of": 6531
     },
     "associated_with_below_inclusion_rule": 7509,
@@ -582,16 +580,19 @@
       "direct_via_seed_genes": 82,
       "capped_away_per_seed_gene": 184,
       "term_matched": 13,
-      "anchored_by_evidence": 52,
-      "claim_referenced": 25,
-      "kept": 143
+      "anchored_by_evidence": 55,
+      "claim_referenced": 33,
+      "kept": 147
     },
     "genes": {
       "seed": 7,
-      "anchored_by_evidence": 23,
-      "claim_referenced": 19,
-      "capped_away_per_disease": 1507,
-      "kept": 248
+      "anchored_by_evidence": 22,
+      "claim_referenced": 18,
+      "gap_probe": [
+        "ensembl:ENSG00000285292"
+      ],
+      "capped_away_per_disease": 1533,
+      "kept": 249
     },
     "drugs": {
       "kept": 107,
@@ -603,104 +604,104 @@
       "claim_referenced": 15
     },
     "investigators": {
-      "before": 245,
+      "before": 247,
       "below_min_papers": 0,
-      "kept": 207
+      "kept": 209
     },
     "go_in_pathway_edges_dropped_non_seed_gene": 0
   },
   "counts": {
-    "nodes": 2863,
-    "edges": 8229,
+    "nodes": 2903,
+    "edges": 8501,
     "claims": 935,
     "clusters": 117,
     "nodes_by_type": {
-      "Disease": 143,
+      "Disease": 147,
       "Drug": 107,
-      "Gene": 248,
-      "Investigator": 207,
-      "Mechanism": 10,
+      "Gene": 249,
+      "Investigator": 209,
+      "Mechanism": 11,
       "Paper": 243,
       "Pathway": 335,
       "PatientGroup": 6,
-      "Phenotype": 899,
+      "Phenotype": 931,
       "Registry": 1,
       "Study": 54,
       "Variant": 610
     },
     "edges_by_relation": {
-      "associated_with": 2026,
-      "author_of": 442,
+      "associated_with": 2084,
+      "author_of": 448,
       "covers": 1,
       "evaluates": 76,
-      "has_clinical_course": 31,
+      "has_clinical_course": 32,
       "has_condition": 725,
-      "has_funded_project": 349,
-      "has_inheritance": 53,
-      "has_mechanism": 25,
-      "has_phenotype": 665,
+      "has_funded_project": 356,
+      "has_inheritance": 54,
+      "has_mechanism": 30,
+      "has_phenotype": 678,
       "in_pathway": 552,
-      "indicated_for": 347,
+      "indicated_for": 366,
       "inhibits": 94,
-      "is_a": 1506,
-      "modulates": 5,
-      "publishes_on": 369,
-      "similar_to": 61,
+      "is_a": 1559,
+      "modulates": 6,
+      "publishes_on": 412,
+      "similar_to": 78,
       "studies": 74,
       "supports_community": 16,
       "targets": 30,
-      "treats": 160,
+      "treats": 208,
       "variant_of": 622
     },
     "edges_by_evidence_class": {
-      "extracted": 43,
-      "inferred": 567,
-      "observed": 7619
+      "extracted": 50,
+      "inferred": 638,
+      "observed": 7813
     },
     "edges_by_status": {
       "contested": 2,
-      "inferred_unsupported": 58,
-      "small_n": 16,
-      "supported": 8153
+      "inferred_unsupported": 104,
+      "small_n": 17,
+      "supported": 8378
     },
     "edges_by_label": {
-      "below_score_threshold": 379,
-      "candidate": 95,
+      "below_score_threshold": 397,
+      "candidate": 97,
       "conflicting_assertions": 4,
       "contested": 2,
-      "curated_unverified": 4,
-      "direction_match": 95,
-      "direction_mismatch": 58,
-      "hypothesis": 95,
-      "inferred": 349,
-      "inferred_unsupported": 58,
-      "promising": 26,
-      "similarity": 61,
-      "small_n": 17,
-      "variant_specific": 10
+      "curated_unverified": 3,
+      "direction_match": 97,
+      "direction_mismatch": 104,
+      "hypothesis": 97,
+      "inferred": 356,
+      "inferred_unsupported": 104,
+      "promising": 29,
+      "similarity": 78,
+      "small_n": 18,
+      "variant_specific": 9
     },
     "edges_with_origin": {
       "germline": 17,
       "somatic": 4
     },
     "phenotype_ic": {
-      "nodes": 899,
+      "nodes": 931,
       "nodes_without_ic": 32,
-      "is_a_edges": 1331,
-      "is_a_edges_with_ic_on_both_ends": 1299,
-      "is_a_edges_child_ic_below_parent": 30
+      "is_a_edges": 1378,
+      "is_a_edges_with_ic_on_both_ends": 1346,
+      "is_a_edges_child_ic_below_parent": 32
     },
     "coverage": {
-      "entities": 943,
-      "searches": 2497,
-      "zero_hit_searches": 1639,
+      "entities": 947,
+      "searches": 2509,
+      "zero_hit_searches": 1640,
       "by_source": {
-        "ClinVar esearch": 11,
+        "ClinVar esearch": 12,
         "ClinVar esummary": 7,
         "ClinVar esummary protein_change": 4,
         "ClinVar trait link": 610,
         "ClinicalTrials.gov": 54,
-        "ClinicalTrials.gov studies": 22,
+        "ClinicalTrials.gov studies": 23,
         "EURORDIS — on-site search": 1,
         "Genetic Alliance (US) — Disease InfoSearch": 1,
         "Genetic Alliance UK — on-site search": 1,
@@ -709,29 +710,29 @@
         "HPO hp.json": 1,
         "HPO phenotype.hpoa": 3,
         "NIH RePORTER project links": 6,
-        "NIH RePORTER projects": 6,
+        "NIH RePORTER projects": 7,
         "NIH RePORTER publications": 3,
         "NORD (rarediseases.org) — on-site search": 1,
         "NORD (rarediseases.org) — on-site search, MPN groups": 1,
         "NORD (rarediseases.org) — via web search engine, domain-restricted": 1,
-        "OptimusKG biological_process_gene": 7,
+        "OptimusKG biological_process_gene": 8,
         "OptimusKG disease": 16,
-        "OptimusKG disease_disease": 143,
-        "OptimusKG disease_gene": 7,
-        "OptimusKG disease_phenotype": 143,
+        "OptimusKG disease_disease": 147,
+        "OptimusKG disease_gene": 8,
+        "OptimusKG disease_phenotype": 147,
         "OptimusKG drug": 5,
-        "OptimusKG drug_disease": 143,
-        "OptimusKG drug_gene": 7,
+        "OptimusKG drug_disease": 147,
+        "OptimusKG drug_gene": 8,
         "OptimusKG gene": 7,
-        "OptimusKG pathway_gene": 7,
+        "OptimusKG pathway_gene": 8,
         "Orphanet — disease search (current site)": 1,
         "Orphanet — legacy Disease_Search.php": 1,
         "Rare Disease UK — locating its directory": 1,
         "RareConnect (stretch)": 1,
         "Web search engine (general) — SCID group resolution": 1,
-        "build prune": 70,
-        "claims.json endpoint": 1019,
-        "mechanism rules": 143,
+        "build prune": 73,
+        "claims.json endpoint": 1005,
+        "mechanism rules": 147,
         "patient_groups.yaml disease term": 16,
         "pubmed": 24
       }
@@ -775,49 +776,49 @@
     ]
   },
   "sizes": {
-    "total_bytes": 7572286,
-    "total_mb": 7.57,
+    "total_bytes": 7790126,
+    "total_mb": 7.79,
     "nodes_by_type": {
-      "Disease": 79795,
+      "Disease": 82658,
       "Drug": 51751,
-      "Gene": 76184,
-      "Investigator": 278038,
-      "Mechanism": 1920,
+      "Gene": 76647,
+      "Investigator": 279086,
+      "Mechanism": 2107,
       "Paper": 525739,
       "Pathway": 160962,
       "PatientGroup": 4764,
-      "Phenotype": 301614,
+      "Phenotype": 313116,
       "Registry": 841,
       "Study": 131625,
       "Variant": 452711
     },
     "edges_by_relation": {
-      "associated_with": 1146049,
-      "author_of": 173966,
+      "associated_with": 1181638,
+      "author_of": 176312,
       "covers": 586,
       "evaluates": 54518,
-      "has_clinical_course": 18507,
+      "has_clinical_course": 19082,
       "has_condition": 519615,
-      "has_funded_project": 295767,
-      "has_inheritance": 29533,
-      "has_mechanism": 33804,
-      "has_phenotype": 381678,
+      "has_funded_project": 301623,
+      "has_inheritance": 30152,
+      "has_mechanism": 39954,
+      "has_phenotype": 388081,
       "in_pathway": 262803,
-      "indicated_for": 203892,
+      "indicated_for": 214643,
       "inhibits": 54085,
-      "is_a": 573766,
-      "modulates": 4545,
-      "publishes_on": 185009,
-      "similar_to": 118187,
+      "is_a": 593962,
+      "modulates": 5392,
+      "publishes_on": 205287,
+      "similar_to": 146964,
       "studies": 49212,
       "supports_community": 9010,
       "targets": 13751,
-      "treats": 198345,
+      "treats": 259677,
       "variant_of": 306521
     },
-    "claims": 404894,
-    "meta": 360835,
-    "graph_json_bytes": 7573963
+    "claims": 404079,
+    "meta": 362605,
+    "graph_json_bytes": 7791815
   },
   "edges_dropped_dangling": [],
   "edges_below_threshold": 1704,
@@ -826,16 +827,16 @@
     "claim_ids_removed_from_edges": 0,
     "edges_dropped_without_claims": []
   },
-  "coverage_rows_dropped_for_pruned_entities": 7915,
+  "coverage_rows_dropped_for_pruned_entities": 7899,
   "scrub_placeholders": {
-    "emails_removed": 34,
+    "emails_removed": 36,
     "phones_removed": 0,
     "doses_removed": 93
   },
   "claims": {
     "in_bundle": 935,
     "in_graph": 935,
-    "attached_to_edges": 127,
+    "attached_to_edges": 145,
     "unattached": [
       "c_000002",
       "c_000003",
@@ -845,6 +846,8 @@
       "c_000007",
       "c_000010",
       "c_000014",
+      "c_000016",
+      "c_000017",
       "c_000018",
       "c_000019",
       "c_000021",
@@ -869,7 +872,6 @@
       "c_000043",
       "c_000044",
       "c_000045",
-      "c_000046",
       "c_000047",
       "c_000048",
       "c_000049",
@@ -886,11 +888,8 @@
       "c_000060",
       "c_000061",
       "c_000062",
-      "c_000063",
-      "c_000064",
       "c_000065",
       "c_000066",
-      "c_000067",
       "c_000068",
       "c_000069",
       "c_000070",
@@ -967,7 +966,6 @@
       "c_000146",
       "c_000147",
       "c_000148",
-      "c_000149",
       "c_000151",
       "c_000153",
       "c_000154",
@@ -1002,6 +1000,7 @@
       "c_000184",
       "c_000185",
       "c_000186",
+      "c_000187",
       "c_000189",
       "c_000190",
       "c_000191",
@@ -1016,7 +1015,6 @@
       "c_000200",
       "c_000201",
       "c_000202",
-      "c_000203",
       "c_000204",
       "c_000205",
       "c_000206",
@@ -1109,9 +1107,7 @@
       "c_000311",
       "c_000312",
       "c_000313",
-      "c_000314",
       "c_000316",
-      "c_000317",
       "c_000318",
       "c_000319",
       "c_000320",
@@ -1119,17 +1115,16 @@
       "c_000322",
       "c_000323",
       "c_000325",
-      "c_000326",
       "c_000327",
       "c_000328",
       "c_000331",
-      "c_000332",
       "c_000333",
       "c_000334",
       "c_000335",
       "c_000336",
       "c_000337",
       "c_000339",
+      "c_000341",
       "c_000342",
       "c_000343",
       "c_000344",
@@ -1165,7 +1160,6 @@
       "c_000384",
       "c_000385",
       "c_000386",
-      "c_000387",
       "c_000389",
       "c_000391",
       "c_000392",
@@ -1176,7 +1170,6 @@
       "c_000398",
       "c_000399",
       "c_000400",
-      "c_000401",
       "c_000402",
       "c_000403",
       "c_000404",
@@ -1189,7 +1182,6 @@
       "c_000411",
       "c_000413",
       "c_000416",
-      "c_000418",
       "c_000420",
       "c_000421",
       "c_000422",
@@ -1204,12 +1196,9 @@
       "c_000431",
       "c_000432",
       "c_000433",
-      "c_000434",
-      "c_000435",
       "c_000436",
       "c_000437",
       "c_000438",
-      "c_000440",
       "c_000443",
       "c_000444",
       "c_000445",
@@ -1239,6 +1228,7 @@
       "c_000471",
       "c_000472",
       "c_000473",
+      "c_000474",
       "c_000475",
       "c_000476",
       "c_000477",
@@ -1287,7 +1277,6 @@
       "c_000526",
       "c_000527",
       "c_000528",
-      "c_000529",
       "c_000530",
       "c_000531",
       "c_000532",
@@ -1408,7 +1397,6 @@
       "c_000661",
       "c_000662",
       "c_000663",
-      "c_000664",
       "c_000665",
       "c_000666",
       "c_000667",
@@ -1467,13 +1455,11 @@
       "c_000725",
       "c_000726",
       "c_000727",
-      "c_000728",
       "c_000729",
       "c_000730",
       "c_000731",
       "c_000732",
       "c_000733",
-      "c_000734",
       "c_000735",
       "c_000736",
       "c_000737",
@@ -1492,7 +1478,6 @@
       "c_000752",
       "c_000753",
       "c_000755",
-      "c_000756",
       "c_000757",
       "c_000758",
       "c_000759",
@@ -1507,7 +1492,6 @@
       "c_000768",
       "c_000770",
       "c_000772",
-      "c_000773",
       "c_000774",
       "c_000775",
       "c_000776",
@@ -1592,7 +1576,6 @@
       "c_000865",
       "c_000866",
       "c_000867",
-      "c_000868",
       "c_000869",
       "c_000870",
       "c_000872",
@@ -1750,9 +1733,74 @@
     "status": "applied",
     "report": null
   },
-  "graph_path": "/Users/albertcao/Developer/Personal/Pyrid-evidence/data/build/graph.json",
-  "store_path": "/Users/albertcao/Developer/Personal/Pyrid-evidence/data/build/evidence.sqlite",
-  "claims_bundle": "/Users/albertcao/Developer/Personal/Pyrid-evidence/data/build/claims.json",
+  "gap_probe": {
+    "enabled": true,
+    "status": "ok",
+    "symbol": "ABCF2-H2BK1",
+    "gene_id": "ensembl:ENSG00000285292",
+    "backbone_id": "ENSG00000285292",
+    "name": "ABCF2-H2BK1 readthrough",
+    "biotype": "protein_coding",
+    "rule": "alphabetically first protein-coding HGNC symbol among backbone genes with zero disease_gene, drug_gene, pathway_gene and biological_process_gene rows",
+    "candidates": 58,
+    "counts": {
+      "disease_gene": 0,
+      "drug_gene": 0,
+      "pathway_gene": 0,
+      "biological_process_gene": 0
+    },
+    "searches": [
+      {
+        "source": "OptimusKG disease_gene",
+        "query": "ABCF2-H2BK1",
+        "date": "2026-10-03",
+        "hits": 0
+      },
+      {
+        "source": "OptimusKG drug_gene",
+        "query": "ABCF2-H2BK1",
+        "date": "2026-10-03",
+        "hits": 0
+      },
+      {
+        "source": "OptimusKG pathway_gene",
+        "query": "ABCF2-H2BK1",
+        "date": "2026-10-03",
+        "hits": 0
+      },
+      {
+        "source": "OptimusKG biological_process_gene",
+        "query": "ABCF2-H2BK1",
+        "date": "2026-10-03",
+        "hits": 0
+      },
+      {
+        "source": "ClinVar esearch",
+        "query": "ABCF2-H2BK1[gene]",
+        "date": "2026-10-04",
+        "hits": 76
+      },
+      {
+        "source": "ClinicalTrials.gov studies",
+        "query": "query.term=EXPANSION%5BNone%5DABCF2-H2BK1&countTotal=true&pageSize=1",
+        "date": "2026-10-04",
+        "hits": 0
+      },
+      {
+        "source": "NIH RePORTER projects",
+        "query": "ABCF2-H2BK1",
+        "date": "2026-10-04",
+        "hits": 0
+      }
+    ],
+    "zero_hit_searches": 6,
+    "errors": [],
+    "stale_probe_nodes_removed": [],
+    "seconds": 2.315
+  },
+  "graph_path": "/Users/jonathanyan/Desktop/projects/Pyrid/.claude/worktrees/lane-graph/data/build/graph.json",
+  "store_path": "/Users/jonathanyan/Desktop/projects/Pyrid/.claude/worktrees/lane-graph/data/build/evidence.sqlite",
+  "claims_bundle": "/Users/jonathanyan/Desktop/projects/Pyrid/.claude/worktrees/lane-graph/data/build/claims.json",
   "offline": true,
   "loaders": {
     "pipeline.sources.optimuskg": {
@@ -1763,23 +1811,23 @@
           "version": "3.2",
           "release_time": "2026-09-09T04:14:10Z",
           "license": "CC BY-NC-SA 4.0",
-          "retrieved_at": "2026-10-04T02:45:17+00:00"
+          "retrieved_at": "2026-10-03T21:26:39+00:00"
         },
         "files": {
-          "nodes/gene.parquet": "/Users/albertcao/Developer/Personal/Pyrid/data/raw/optimuskg/3.2/nodes/gene.parquet",
-          "nodes/disease.parquet": "/Users/albertcao/Developer/Personal/Pyrid/data/raw/optimuskg/3.2/nodes/disease.parquet",
-          "nodes/phenotype.parquet": "/Users/albertcao/Developer/Personal/Pyrid/data/raw/optimuskg/3.2/nodes/phenotype.parquet",
-          "nodes/pathway.parquet": "/Users/albertcao/Developer/Personal/Pyrid/data/raw/optimuskg/3.2/nodes/pathway.parquet",
-          "nodes/biological_process.parquet": "/Users/albertcao/Developer/Personal/Pyrid/data/raw/optimuskg/3.2/nodes/biological_process.parquet",
-          "nodes/drug.parquet": "/Users/albertcao/Developer/Personal/Pyrid/data/raw/optimuskg/3.2/nodes/drug.parquet",
-          "edges/disease_gene.parquet": "/Users/albertcao/Developer/Personal/Pyrid/data/raw/optimuskg/3.2/edges/disease_gene.parquet",
-          "edges/disease_phenotype.parquet": "/Users/albertcao/Developer/Personal/Pyrid/data/raw/optimuskg/3.2/edges/disease_phenotype.parquet",
-          "edges/phenotype_phenotype.parquet": "/Users/albertcao/Developer/Personal/Pyrid/data/raw/optimuskg/3.2/edges/phenotype_phenotype.parquet",
-          "edges/disease_disease.parquet": "/Users/albertcao/Developer/Personal/Pyrid/data/raw/optimuskg/3.2/edges/disease_disease.parquet",
-          "edges/pathway_gene.parquet": "/Users/albertcao/Developer/Personal/Pyrid/data/raw/optimuskg/3.2/edges/pathway_gene.parquet",
-          "edges/biological_process_gene.parquet": "/Users/albertcao/Developer/Personal/Pyrid/data/raw/optimuskg/3.2/edges/biological_process_gene.parquet",
-          "edges/drug_gene.parquet": "/Users/albertcao/Developer/Personal/Pyrid/data/raw/optimuskg/3.2/edges/drug_gene.parquet",
-          "edges/drug_disease.parquet": "/Users/albertcao/Developer/Personal/Pyrid/data/raw/optimuskg/3.2/edges/drug_disease.parquet"
+          "nodes/gene.parquet": "/Users/jonathanyan/Desktop/projects/Pyrid/data/raw/optimuskg/3.2/nodes/gene.parquet",
+          "nodes/disease.parquet": "/Users/jonathanyan/Desktop/projects/Pyrid/data/raw/optimuskg/3.2/nodes/disease.parquet",
+          "nodes/phenotype.parquet": "/Users/jonathanyan/Desktop/projects/Pyrid/data/raw/optimuskg/3.2/nodes/phenotype.parquet",
+          "nodes/pathway.parquet": "/Users/jonathanyan/Desktop/projects/Pyrid/data/raw/optimuskg/3.2/nodes/pathway.parquet",
+          "nodes/biological_process.parquet": "/Users/jonathanyan/Desktop/projects/Pyrid/data/raw/optimuskg/3.2/nodes/biological_process.parquet",
+          "nodes/drug.parquet": "/Users/jonathanyan/Desktop/projects/Pyrid/data/raw/optimuskg/3.2/nodes/drug.parquet",
+          "edges/disease_gene.parquet": "/Users/jonathanyan/Desktop/projects/Pyrid/data/raw/optimuskg/3.2/edges/disease_gene.parquet",
+          "edges/disease_phenotype.parquet": "/Users/jonathanyan/Desktop/projects/Pyrid/data/raw/optimuskg/3.2/edges/disease_phenotype.parquet",
+          "edges/phenotype_phenotype.parquet": "/Users/jonathanyan/Desktop/projects/Pyrid/data/raw/optimuskg/3.2/edges/phenotype_phenotype.parquet",
+          "edges/disease_disease.parquet": "/Users/jonathanyan/Desktop/projects/Pyrid/data/raw/optimuskg/3.2/edges/disease_disease.parquet",
+          "edges/pathway_gene.parquet": "/Users/jonathanyan/Desktop/projects/Pyrid/data/raw/optimuskg/3.2/edges/pathway_gene.parquet",
+          "edges/biological_process_gene.parquet": "/Users/jonathanyan/Desktop/projects/Pyrid/data/raw/optimuskg/3.2/edges/biological_process_gene.parquet",
+          "edges/drug_gene.parquet": "/Users/jonathanyan/Desktop/projects/Pyrid/data/raw/optimuskg/3.2/edges/drug_gene.parquet",
+          "edges/drug_disease.parquet": "/Users/jonathanyan/Desktop/projects/Pyrid/data/raw/optimuskg/3.2/edges/drug_disease.parquet"
         },
         "thresholds": {
           "disease_gene_min_score": 0.3,
@@ -2133,23 +2181,23 @@
           }
         },
         "cleared_previous_run": {
-          "nodes": 7673,
+          "nodes": 7674,
           "edges": 30127,
-          "coverage": 1988
+          "coverage": 1992
         },
         "timings_s": {
-          "clear_previous": 0.42,
-          "genes": 0.61,
-          "disease_gene_seed": 0.4,
-          "disease_terms": 0.181,
-          "diseases": 0.212,
-          "disease_gene_included": 4.066,
-          "phenotypes": 0.198,
-          "pathways": 0.054,
-          "drugs": 0.676,
-          "write": 0.324,
-          "resolve_files": 0.206,
-          "total": 7.407
+          "clear_previous": 0.586,
+          "genes": 1.12,
+          "disease_gene_seed": 0.796,
+          "disease_terms": 0.172,
+          "diseases": 0.247,
+          "disease_gene_included": 4.527,
+          "phenotypes": 0.227,
+          "pathways": 0.079,
+          "drugs": 0.8,
+          "write": 0.369,
+          "resolve_files": 0.32,
+          "total": 9.314
         }
       }
     },
@@ -2159,8 +2207,8 @@
         "source": "HPO",
         "version": "2026-09-02",
         "hp_json_version": "2026-09-01",
-        "directory": "/Users/albertcao/Developer/Personal/Pyrid/data/raw/hpo/2026-09-02",
-        "retrieved_at": "2026-10-04T02:45:27+00:00",
+        "directory": "/Users/jonathanyan/Desktop/projects/Pyrid/data/raw/hpo/2026-09-02",
+        "retrieved_at": "2026-10-03T21:19:47+00:00",
         "n_total": 12865,
         "n_terms": 19677,
         "stats": {
@@ -2188,7 +2236,7 @@
       "summary": {
         "source": "ClinVar",
         "version": "Build260929-0200.1",
-        "retrieved_at": "2026-10-04T02:46:57+00:00",
+        "retrieved_at": "2026-10-03T21:31:51+00:00",
         "genes": [
           "STAT1",
           "STAT3",
@@ -2300,7 +2348,7 @@
         "requests": 87,
         "requests_from_cache": 87,
         "backbone_present": true,
-        "elapsed_s": 3.06
+        "elapsed_s": 3.58
       }
     },
     "pipeline.sources.ctgov": {
@@ -2309,7 +2357,7 @@
         "source": "ClinicalTrials.gov",
         "api_version": "2.0.5",
         "data_timestamp": "2026-10-02T09:00:04",
-        "retrieved_at": "2026-10-04T02:46:57+00:00",
+        "retrieved_at": "2026-10-03T21:34:57+00:00",
         "queries": [
           {
             "label": "stat1-gof",
@@ -2319,7 +2367,7 @@
             "fetched": 3,
             "pages": 1,
             "truncated": false,
-            "date": "2026-10-04",
+            "date": "2026-10-03",
             "coverage_entities": [
               "seed:ctgov_query:stat1-gof"
             ],
@@ -2337,7 +2385,7 @@
             "fetched": 5,
             "pages": 1,
             "truncated": false,
-            "date": "2026-10-04",
+            "date": "2026-10-03",
             "coverage_entities": [
               "seed:ctgov_query:cmc",
               "MONDO:0015279"
@@ -2358,7 +2406,7 @@
             "fetched": 0,
             "pages": 1,
             "truncated": false,
-            "date": "2026-10-04",
+            "date": "2026-10-03",
             "coverage_entities": [
               "seed:ctgov_query:ruxolitinib-stat1",
               "CHEMBL:CHEMBL1789941",
@@ -2374,7 +2422,7 @@
             "fetched": 1,
             "pages": 1,
             "truncated": false,
-            "date": "2026-10-04",
+            "date": "2026-10-03",
             "coverage_entities": [
               "seed:ctgov_query:jak-inhibitor-pid",
               "MONDO:0003778"
@@ -2391,7 +2439,7 @@
             "fetched": 14,
             "pages": 1,
             "truncated": false,
-            "date": "2026-10-04",
+            "date": "2026-10-03",
             "coverage_entities": [
               "seed:ctgov_query:hyper-ige"
             ],
@@ -2420,7 +2468,7 @@
             "fetched": 1,
             "pages": 1,
             "truncated": false,
-            "date": "2026-10-04",
+            "date": "2026-10-03",
             "coverage_entities": [
               "seed:ctgov_query:scid-jak3",
               "MONDO:0015974",
@@ -2438,7 +2486,7 @@
             "fetched": 1,
             "pages": 1,
             "truncated": false,
-            "date": "2026-10-04",
+            "date": "2026-10-03",
             "coverage_entities": [
               "seed:ctgov_query:stat3-gof"
             ],
@@ -2454,7 +2502,7 @@
             "fetched": 20,
             "pages": 1,
             "truncated": true,
-            "date": "2026-10-04",
+            "date": "2026-10-03",
             "coverage_entities": [
               "seed:ctgov_query:pv-ruxolitinib",
               "EFO:0002429",
@@ -2491,7 +2539,7 @@
             "fetched": 20,
             "pages": 1,
             "truncated": true,
-            "date": "2026-10-04",
+            "date": "2026-10-03",
             "coverage_entities": [
               "seed:ctgov_query:et-ruxolitinib",
               "EFO:0000479",
@@ -2528,7 +2576,7 @@
             "fetched": 20,
             "pages": 1,
             "truncated": true,
-            "date": "2026-10-04",
+            "date": "2026-10-03",
             "coverage_entities": [
               "seed:ctgov_query:pmf-ruxolitinib",
               "EFO:0002430",
@@ -2971,24 +3019,24 @@
         "links": 538,
         "linked_grants": 114,
         "unlinked_grants": 13,
-        "pmids": 2572,
+        "pmids": 2579,
         "grants_with_pmids": 92,
         "errors": [],
-        "retrieved_at": "2026-10-04T02:47:13+00:00",
-        "seconds": 31.77
+        "retrieved_at": "2026-10-03T21:41:37+00:00",
+        "seconds": 27.64
       }
     }
   },
   "store_counts": {
-    "nodes": 14398,
+    "nodes": 14399,
     "edges": 45863,
-    "coverage": 8626,
+    "coverage": 8633,
     "sources": 5,
     "hpo_ic": 19677,
     "nodes_by_type": {
       "Disease": 644,
       "Drug": 2038,
-      "Gene": 2688,
+      "Gene": 2689,
       "Investigator": 150,
       "Pathway": 335,
       "Phenotype": 1968,
@@ -3018,193 +3066,193 @@
     {
       "name": "ClinVar",
       "version": "Build260929-0200.1",
-      "retrieved_at": "2026-10-04T02:46:57+00:00",
+      "retrieved_at": "2026-10-03T21:31:51+00:00",
       "license": "Public domain (NCBI); see https://www.ncbi.nlm.nih.gov/home/about/policies/"
     },
     {
       "name": "ClinicalTrials.gov",
       "version": "2026-10-02T09:00:04",
-      "retrieved_at": "2026-10-04T02:46:57+00:00",
+      "retrieved_at": "2026-10-03T21:34:57+00:00",
       "license": "ClinicalTrials.gov Terms and Conditions (https://clinicaltrials.gov/about-site/terms-conditions, last updated 2023-01-31): a US Government database available to all requesters at no charge, without warranties. Any publication or distribution must attribute the source as ClinicalTrials.gov, keep the data current, clearly display the date the data were processed by ClinicalTrials.gov (dataTimestamp / versionHolder), and state any modifications made. No proprietary rights may be asserted over the database. Email addresses extracted from the database must not be used for marketing or other promotional purposes. Data may carry an international copyright outside the US."
     },
     {
       "name": "HPO",
       "version": "2026-09-02",
-      "retrieved_at": "2026-10-04T02:45:27+00:00",
+      "retrieved_at": "2026-10-03T21:19:47+00:00",
       "license": "HPO custom (cite, show version, don't alter; IEA rows: OMIM reuse caveat)"
     },
     {
       "name": "NIH RePORTER",
-      "version": "2026-10-04",
-      "retrieved_at": "2026-10-04T02:47:13+00:00",
+      "version": "2026-10-03",
+      "retrieved_at": "2026-10-03T21:41:37+00:00",
       "license": "Public domain (U.S. Government work); RePORTER data access policy — see docs/source-apis.md (UNVERIFIED wording)"
     },
     {
       "name": "OptimusKG",
       "version": "3.2",
-      "retrieved_at": "2026-10-04T02:45:17+00:00",
+      "retrieved_at": "2026-10-03T21:26:39+00:00",
       "license": "CC BY-NC-SA 4.0"
     },
     {
       "name": "OptimusKG upstream: ATC",
       "version": "",
-      "retrieved_at": "2026-10-04T02:45:17+00:00",
+      "retrieved_at": "2026-10-03T21:26:39+00:00",
       "license": "UNVERIFIED (per-source terms not fetched; docs/optimuskg-spike.md section 5)"
     },
     {
       "name": "OptimusKG upstream: BGEE",
       "version": "",
-      "retrieved_at": "2026-10-04T02:45:17+00:00",
+      "retrieved_at": "2026-10-03T21:26:39+00:00",
       "license": "UNVERIFIED (per-source terms not fetched; docs/optimuskg-spike.md section 5)"
     },
     {
       "name": "OptimusKG upstream: CGI",
       "version": "",
-      "retrieved_at": "2026-10-04T02:45:17+00:00",
+      "retrieved_at": "2026-10-03T21:26:39+00:00",
       "license": "UNVERIFIED (per-source terms not fetched; docs/optimuskg-spike.md section 5)"
     },
     {
       "name": "OptimusKG upstream: CLINGEN",
       "version": "",
-      "retrieved_at": "2026-10-04T02:45:17+00:00",
+      "retrieved_at": "2026-10-03T21:26:39+00:00",
       "license": "UNVERIFIED (per-source terms not fetched; docs/optimuskg-spike.md section 5)"
     },
     {
       "name": "OptimusKG upstream: CLINICAL_TRIALS",
       "version": "",
-      "retrieved_at": "2026-10-04T02:45:17+00:00",
+      "retrieved_at": "2026-10-03T21:26:39+00:00",
       "license": "UNVERIFIED (per-source terms not fetched; docs/optimuskg-spike.md section 5)"
     },
     {
       "name": "OptimusKG upstream: CTD",
       "version": "",
-      "retrieved_at": "2026-10-04T02:45:17+00:00",
+      "retrieved_at": "2026-10-03T21:26:39+00:00",
       "license": "UNVERIFIED (per-source terms not fetched; docs/optimuskg-spike.md section 5)"
     },
     {
       "name": "OptimusKG upstream: DAILY_MED",
       "version": "",
-      "retrieved_at": "2026-10-04T02:45:17+00:00",
+      "retrieved_at": "2026-10-03T21:26:39+00:00",
       "license": "UNVERIFIED (per-source terms not fetched; docs/optimuskg-spike.md section 5)"
     },
     {
       "name": "OptimusKG upstream: DISGENET",
       "version": "7.0",
-      "retrieved_at": "2026-10-04T02:45:17+00:00",
+      "retrieved_at": "2026-10-03T21:26:39+00:00",
       "license": "CC BY-NC-SA 4.0 (DisGeNET v7.0, January 2020; verified in docs/optimuskg-spike.md section 5)"
     },
     {
       "name": "OptimusKG upstream: DRUG_BANK",
       "version": "",
-      "retrieved_at": "2026-10-04T02:45:17+00:00",
+      "retrieved_at": "2026-10-03T21:26:39+00:00",
       "license": "UNVERIFIED (DrugBank's own terms were not fetched; docs/optimuskg-spike.md section 5)"
     },
     {
       "name": "OptimusKG upstream: DRUG_CENTRAL",
       "version": "",
-      "retrieved_at": "2026-10-04T02:45:17+00:00",
+      "retrieved_at": "2026-10-03T21:26:39+00:00",
       "license": "UNVERIFIED (per-source terms not fetched; docs/optimuskg-spike.md section 5)"
     },
     {
       "name": "OptimusKG upstream: EMA",
       "version": "",
-      "retrieved_at": "2026-10-04T02:45:17+00:00",
+      "retrieved_at": "2026-10-03T21:26:39+00:00",
       "license": "UNVERIFIED (per-source terms not fetched; docs/optimuskg-spike.md section 5)"
     },
     {
       "name": "OptimusKG upstream: EXPERT",
       "version": "",
-      "retrieved_at": "2026-10-04T02:45:17+00:00",
+      "retrieved_at": "2026-10-03T21:26:39+00:00",
       "license": "UNVERIFIED (per-source terms not fetched; docs/optimuskg-spike.md section 5)"
     },
     {
       "name": "OptimusKG upstream: FDA",
       "version": "",
-      "retrieved_at": "2026-10-04T02:45:17+00:00",
+      "retrieved_at": "2026-10-03T21:26:39+00:00",
       "license": "UNVERIFIED (per-source terms not fetched; docs/optimuskg-spike.md section 5)"
     },
     {
       "name": "OptimusKG upstream: GENOMICS_ENGLAND",
       "version": "",
-      "retrieved_at": "2026-10-04T02:45:17+00:00",
+      "retrieved_at": "2026-10-03T21:26:39+00:00",
       "license": "UNVERIFIED (per-source terms not fetched; docs/optimuskg-spike.md section 5)"
     },
     {
       "name": "OptimusKG upstream: GO",
       "version": "2025-07-22",
-      "retrieved_at": "2026-10-04T02:45:17+00:00",
+      "retrieved_at": "2026-10-03T21:26:39+00:00",
       "license": "Gene Ontology license: http://creativecommons.org/licenses/by/4.0/ (as embedded in OptimusKG, version 2025-07-22)"
     },
     {
       "name": "OptimusKG upstream: HPO",
       "version": "2025-05-06",
-      "retrieved_at": "2026-10-04T02:45:17+00:00",
+      "retrieved_at": "2026-10-03T21:26:39+00:00",
       "license": "Human Phenotype Ontology license: https://hpo.jax.org/app/license (as embedded in OptimusKG, version 2025-05-06)"
     },
     {
       "name": "OptimusKG upstream: INN",
       "version": "",
-      "retrieved_at": "2026-10-04T02:45:17+00:00",
+      "retrieved_at": "2026-10-03T21:26:39+00:00",
       "license": "UNVERIFIED (per-source terms not fetched; docs/optimuskg-spike.md section 5)"
     },
     {
       "name": "OptimusKG upstream: MEDDRA",
       "version": "",
-      "retrieved_at": "2026-10-04T02:45:17+00:00",
+      "retrieved_at": "2026-10-03T21:26:39+00:00",
       "license": "UNVERIFIED (per-source terms not fetched; docs/optimuskg-spike.md section 5)"
     },
     {
       "name": "OptimusKG upstream: MONDO",
       "version": "",
-      "retrieved_at": "2026-10-04T02:45:17+00:00",
+      "retrieved_at": "2026-10-03T21:26:39+00:00",
       "license": "UNVERIFIED (per-source terms not fetched; docs/optimuskg-spike.md section 5)"
     },
     {
       "name": "OptimusKG upstream: OPEN_TARGETS",
       "version": "",
-      "retrieved_at": "2026-10-04T02:45:17+00:00",
+      "retrieved_at": "2026-10-03T21:26:39+00:00",
       "license": "UNVERIFIED (per-source terms not fetched; docs/optimuskg-spike.md section 5)"
     },
     {
       "name": "OptimusKG upstream: ORPHANET",
       "version": "",
-      "retrieved_at": "2026-10-04T02:45:17+00:00",
+      "retrieved_at": "2026-10-03T21:26:39+00:00",
       "license": "UNVERIFIED (per-source terms not fetched; docs/optimuskg-spike.md section 5)"
     },
     {
       "name": "OptimusKG upstream: OTHER",
       "version": "",
-      "retrieved_at": "2026-10-04T02:45:17+00:00",
+      "retrieved_at": "2026-10-03T21:26:39+00:00",
       "license": "UNVERIFIED (per-source terms not fetched; docs/optimuskg-spike.md section 5)"
     },
     {
       "name": "OptimusKG upstream: PSYGENET",
       "version": "",
-      "retrieved_at": "2026-10-04T02:45:17+00:00",
+      "retrieved_at": "2026-10-03T21:26:39+00:00",
       "license": "UNVERIFIED (per-source terms not fetched; docs/optimuskg-spike.md section 5)"
     },
     {
       "name": "OptimusKG upstream: PUBMED",
       "version": "",
-      "retrieved_at": "2026-10-04T02:45:17+00:00",
+      "retrieved_at": "2026-10-03T21:26:39+00:00",
       "license": "UNVERIFIED (per-source terms not fetched; docs/optimuskg-spike.md section 5)"
     },
     {
       "name": "OptimusKG upstream: REACTOME",
       "version": "",
-      "retrieved_at": "2026-10-04T02:45:17+00:00",
+      "retrieved_at": "2026-10-03T21:26:39+00:00",
       "license": "UNVERIFIED (per-source terms not fetched; docs/optimuskg-spike.md section 5)"
     },
     {
       "name": "OptimusKG upstream: UNIPROT",
       "version": "",
-      "retrieved_at": "2026-10-04T02:45:17+00:00",
+      "retrieved_at": "2026-10-03T21:26:39+00:00",
       "license": "UNVERIFIED (per-source terms not fetched; docs/optimuskg-spike.md section 5)"
     },
     {
       "name": "OptimusKG upstream: USAN",
       "version": "",
-      "retrieved_at": "2026-10-04T02:45:17+00:00",
+      "retrieved_at": "2026-10-03T21:26:39+00:00",
       "license": "UNVERIFIED (per-source terms not fetched; docs/optimuskg-spike.md section 5)"
     },
     {
@@ -3227,14 +3275,15 @@
     }
   ],
   "timings_seconds": {
-    "pipeline.sources.optimuskg": 7.407,
-    "pipeline.sources.hpo": 0.497,
-    "pipeline.sources.clinvar": 3.082,
-    "pipeline.sources.ctgov": 0.182,
-    "pipeline.sources.reporter": 31.77,
-    "build": 4.328,
-    "graph_logic": 1.328,
-    "write_and_reload": 0.274,
-    "total": 48.9
+    "pipeline.sources.optimuskg": 9.314,
+    "pipeline.sources.hpo": 0.625,
+    "pipeline.sources.clinvar": 3.601,
+    "pipeline.sources.ctgov": 0.191,
+    "pipeline.sources.reporter": 27.645,
+    "gap_probe": 2.315,
+    "build": 3.875,
+    "graph_logic": 1.156,
+    "write_and_reload": 0.331,
+    "total": 49.113
   }
 }
