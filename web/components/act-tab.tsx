@@ -18,6 +18,7 @@ import { displayLabel } from "@/lib/display";
 import { themeOf } from "@/lib/type-theme";
 import { SourceLabel, TypeBadge, TypeGlyph, VerdictChip } from "./badges";
 import SmoothButton from "@/components/smoothui/smooth-button";
+import ThinkingDots from "@/components/smoothui/thinking-dots";
 
 /** Shared card entrance: subtle rise+fade, off under prefers-reduced-motion. */
 function CardLi({
@@ -80,7 +81,7 @@ function AssetsSection({ entity }: { entity: EntityView }) {
             <CardLi
               key={edge.id}
               index={index}
-              className={`rounded-lg border border-gray-200 border-l-4 p-4 ${theme.accent}`}
+              className={`rounded-lg border border-dust border-l-4 bg-white p-4 ${theme.accent}`}
             >
               <div className="flex flex-wrap items-center gap-2">
                 <TypeGlyph type={node.type} size={15} className={theme.text} />
@@ -89,7 +90,7 @@ function AssetsSection({ entity }: { entity: EntityView }) {
                 <VerdictChip verdict={typeof attrs.verdict === "string" ? attrs.verdict : undefined} />
                 <button
                   onClick={() => openEvidence(edge.id)}
-                  className="ml-auto font-mono text-[11px] text-gray-400 underline decoration-gray-300 underline-offset-2 hover:text-sky-700"
+                  className="ml-auto font-mono text-[11px] text-gray-400 underline decoration-dust underline-offset-2 hover:text-hunter"
                   title="Open the evidence for this connection"
                 >
                   {edge.id}
@@ -101,7 +102,7 @@ function AssetsSection({ entity }: { entity: EntityView }) {
                     href={url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="break-all text-sky-700 underline decoration-sky-300 underline-offset-2"
+                    className="break-all text-hunter underline decoration-sage underline-offset-2 hover:text-fern"
                   >
                     {url}
                   </a>
@@ -127,7 +128,7 @@ function AssetsSection({ entity }: { entity: EntityView }) {
                   {needsReview.map((r) => (
                     <span
                       key={r}
-                      className="rounded-full border border-amber-200 bg-amber-50 px-2 py-0.5 text-[11px] font-medium text-amber-900"
+                      className="rounded-full border border-ochre/30 bg-ochre/10 px-2 py-0.5 text-[11px] font-medium text-ochre"
                     >
                       {r} question
                     </span>
@@ -163,7 +164,7 @@ function InvestigatorsSection({ entity }: { entity: EntityView }) {
             <CardLi
               key={edge.id}
               index={index}
-              className={`rounded-lg border border-gray-200 border-l-4 p-4 ${theme.accent}`}
+              className={`rounded-lg border border-dust border-l-4 bg-white p-4 ${theme.accent}`}
             >
               <div className="flex flex-wrap items-center gap-2">
                 <TypeGlyph type={node.type} size={15} className={theme.text} />
@@ -171,7 +172,7 @@ function InvestigatorsSection({ entity }: { entity: EntityView }) {
                 {affiliation && <span className="text-xs text-gray-500">{affiliation}</span>}
                 <button
                   onClick={() => openEvidence(edge.id)}
-                  className="ml-auto font-mono text-[11px] text-gray-400 underline decoration-gray-300 underline-offset-2 hover:text-sky-700"
+                  className="ml-auto font-mono text-[11px] text-gray-400 underline decoration-dust underline-offset-2 hover:text-hunter"
                 >
                   {edge.id}
                 </button>
@@ -183,7 +184,7 @@ function InvestigatorsSection({ entity }: { entity: EntityView }) {
                     href={contact}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="break-all text-sky-700 underline decoration-sky-300 underline-offset-2"
+                    className="break-all text-hunter underline decoration-sage underline-offset-2 hover:text-fern"
                   >
                     {contact}
                   </a>
@@ -225,17 +226,24 @@ function NextStepSection({ entity }: { entity: EntityView }) {
       </p>
       <SmoothButton
         onClick={makeDraft}
-        loading={busy}
+        disabled={busy}
         variant="outline"
-        className="mt-3 text-gray-800 hover:bg-gray-50"
+        className="mt-3 text-foreground hover:bg-dust/30"
       >
-        {busy ? "Drafting…" : "Draft outreach proposal"}
+        {busy ? (
+          <span className="inline-flex items-center gap-2">
+            <ThinkingDots label="Drafting" />
+            Drafting…
+          </span>
+        ) : (
+          "Draft outreach proposal"
+        )}
       </SmoothButton>
-      {error && <p className="mt-2 text-sm text-red-700">{error}</p>}
+      {error && <p className="mt-2 text-sm text-rust">{error}</p>}
       {draft && (
-        <div className="mt-4 rounded-lg border border-gray-300 bg-gray-50/70 p-4">
+        <div className="mt-4 rounded-lg border border-dust bg-dust/15 p-4">
           <div className="mb-2 flex flex-wrap items-center gap-2">
-            <span className="rounded-full border border-red-200 bg-red-50 px-2 py-0.5 text-[11px] font-semibold text-red-800">
+            <span className="rounded-full border border-rust/30 bg-rust/10 px-2 py-0.5 text-[11px] font-semibold text-rust">
               Draft only — never sent
             </span>
             <SourceLabel source={draft.source} />
@@ -277,7 +285,7 @@ function TenXCard({ entity }: { entity: EntityView }) {
     return null;
   }
   return (
-    <section className="rounded-lg border border-gray-200 p-4">
+    <section className="rounded-lg border border-dust bg-white p-4">
       <h3 className="mb-3 text-sm font-semibold text-gray-900">10× route</h3>
       <dl className="space-y-2 text-sm text-gray-700">
         {card.milestone && (

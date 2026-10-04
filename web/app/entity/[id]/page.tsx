@@ -22,7 +22,7 @@ import { GraphMap } from "@/components/graph-map";
 import { DiscoveryTrail } from "@/components/discovery-trail";
 import { SearchBox } from "@/components/search-box";
 import AnimatedTabs from "@/components/smoothui/animated-tabs";
-import MotionLoader from "@/components/smoothui/motion-loader";
+import ThinkingDots from "@/components/smoothui/thinking-dots";
 import SmoothButton from "@/components/smoothui/smooth-button";
 
 type Tab = "summary" | "map" | "act";
@@ -109,12 +109,12 @@ function EntityPageView({ id }: { id: string }) {
   }, [id]);
 
   if (error) {
-    return <p className="py-10 text-center text-sm text-red-700">{error}</p>;
+    return <p className="py-10 text-center text-sm text-rust">{error}</p>;
   }
   if (!entity) {
     return (
-      <p className="flex items-center justify-center gap-2 py-10 text-center text-sm text-gray-400">
-        <MotionLoader variant="orbit" size={18} label="Loading entity" />
+      <p className="flex items-center justify-center gap-2 py-10 text-center text-sm text-muted-foreground">
+        <ThinkingDots label="Loading entity" />
         Loading entity…
       </p>
     );
@@ -137,24 +137,24 @@ function EntityPageView({ id }: { id: string }) {
   return (
     <div className="space-y-7">
       <header
-        className={`relative grid gap-7 overflow-visible rounded-3xl border border-l-[6px] px-6 py-7 shadow-[0_12px_35px_rgba(15,23,42,0.04)] sm:px-8 lg:grid-cols-[minmax(0,1fr)_minmax(280px,420px)] lg:items-center ${theme.band} ${theme.accent}`}
+        className={`relative grid gap-7 overflow-visible rounded-2xl border border-dust border-l-4 bg-white px-6 py-7 sm:px-8 lg:grid-cols-[minmax(0,1fr)_minmax(280px,420px)] lg:items-center ${theme.accent}`}
       >
         <div className="flex min-w-0 items-start gap-5">
-          <span className={`flex size-16 shrink-0 items-center justify-center rounded-2xl border border-white/80 bg-white/90 shadow-sm ${theme.text}`}>
+          <span className={`flex size-16 shrink-0 items-center justify-center rounded-2xl border border-dust/70 bg-dust/20 ${theme.text}`}>
             <TypeGlyph type={entity.node.type} size={36} />
           </span>
           <div className="min-w-0">
-            <p className={`text-xs font-bold uppercase tracking-[0.16em] ${theme.text}`}>{purpose.eyebrow}</p>
-            <h1 className="mt-2 text-2xl font-semibold leading-tight tracking-[-0.035em] text-slate-950 sm:text-4xl">
+            <p className={`text-xs font-semibold uppercase tracking-[0.16em] ${theme.text}`}>{purpose.eyebrow}</p>
+            <h1 className="mt-2 text-2xl font-semibold leading-tight tracking-[-0.035em] text-pine sm:text-4xl">
               {displayLabel(entity.node.label, entity.node.type)}
             </h1>
-            <p className="mt-2 max-w-2xl text-sm leading-6 text-slate-600">{purpose.description}</p>
-            <div className="mt-4 flex flex-wrap items-center gap-2 text-xs text-slate-600">
+            <p className="mt-2 max-w-2xl text-sm leading-6 text-muted-foreground">{purpose.description}</p>
+            <div className="mt-4 flex flex-wrap items-center gap-2 text-xs text-muted-foreground">
               <TypeBadge type={entity.node.type} />
-              <span className="rounded-full border border-white bg-white/75 px-2.5 py-1">{entity.neighbors.length} direct connections</span>
+              <span className="rounded-full border border-dust/70 bg-dust/20 px-2.5 py-1">{entity.neighbors.length} direct connections</span>
               {facetCounts?.map((facet) => (
-                <span key={facet.label} className="rounded-full border border-white bg-white/75 px-2.5 py-1">
-                  <strong className="text-slate-900">{facet.count}</strong> direct {facet.label}
+                <span key={facet.label} className="rounded-full border border-dust/70 bg-dust/20 px-2.5 py-1">
+                  <strong className="text-pine">{facet.count}</strong> direct {facet.label}
                 </span>
               ))}
             </div>
@@ -172,8 +172,8 @@ function EntityPageView({ id }: { id: string }) {
           )}
           </div>
         </div>
-        <div className="rounded-2xl border border-white/80 bg-white/80 p-4 shadow-sm">
-          <p className="mb-2 text-[11px] font-bold uppercase tracking-[0.14em] text-slate-500">Explore another name</p>
+        <div className="rounded-2xl border border-dust/70 bg-dust/10 p-4">
+          <p className="mb-2 text-[11px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">Explore another name</p>
           <SearchBox />
         </div>
       </header>
@@ -181,26 +181,26 @@ function EntityPageView({ id }: { id: string }) {
       <ExcludedNotice id={entity.node.id} />
       {entity.no_supported_route && <HonestGapBanner entity={entity} />}
 
-      <div className="overflow-x-auto border-b border-slate-200">
+      <div className="overflow-x-auto border-b border-dust">
         <AnimatedTabs
           tabs={tabs.map((t) => ({ id: t.key, label: t.label }))}
           activeTab={tab}
           onChange={(id) => setTab(id as Tab)}
           variant="underline"
-          className="w-full min-w-max border-gray-200"
+          className="w-full min-w-max border-dust"
         />
       </div>
 
       {tab === "summary" && (
         <div className="max-w-4xl space-y-6">
-          <div className="rounded-2xl border border-slate-200 bg-white p-6 sm:p-8">
+          <div className="rounded-2xl border border-dust bg-white p-6 sm:p-8">
             <SummaryTab entity={entity} />
           </div>
-          <section className="rounded-2xl border border-slate-200 bg-white p-6 sm:p-8">
-            <h2 className="text-xs font-bold uppercase tracking-[0.15em] text-slate-500">
+          <section className="rounded-2xl border border-dust bg-white p-6 sm:p-8">
+            <h2 className="text-xs font-semibold uppercase tracking-[0.15em] text-muted-foreground">
               Open questions
             </h2>
-            <p className="mt-1 text-sm text-slate-500">
+            <p className="mt-1 text-sm text-muted-foreground">
               What was searched, what evidence is missing, and what would change the answer.
             </p>
             <div className="mt-5">
@@ -229,10 +229,10 @@ function ExcludedNotice({ id }: { id: string }) {
   }, [id, direction]);
   if (!notice || notice.direction !== direction) return null;
   return (
-    <div className="rounded-2xl border border-rose-200 bg-rose-50 px-5 py-4 text-rose-950" role="status">
-      <p className="text-xs font-bold uppercase tracking-[0.15em] text-rose-700">Excluded from {notice.direction} candidates</p>
+    <div className="rounded-2xl border border-rust/25 bg-rust/5 px-5 py-4 text-rust" role="status">
+      <p className="text-xs font-semibold uppercase tracking-[0.15em] text-rust">Excluded from {notice.direction} candidates</p>
       <p className="mt-1 text-sm font-medium">{notice.reason}</p>
-      <p className="mt-1 text-xs text-rose-800">This is an exclusion for the selected intervention direction, not a research lead.</p>
+      <p className="mt-1 text-xs text-rust/80">This is an exclusion for the selected intervention direction, not a research lead.</p>
     </div>
   );
 }
@@ -240,12 +240,12 @@ function ExcludedNotice({ id }: { id: string }) {
 /** Prominent honest-gap state (ground-truth test 6). */
 function HonestGapBanner({ entity }: { entity: EntityView }) {
   return (
-    <div className="rounded-lg border border-red-200 bg-red-50 p-5">
-      <p className="text-sm font-semibold text-red-800">No supported route</p>
+    <div className="rounded-lg border border-rust/30 bg-rust/5 p-5">
+      <p className="text-sm font-semibold text-rust">No supported route</p>
       {entity.next_question && (
-        <p className="mt-2 text-sm leading-relaxed text-red-700">{entity.next_question}</p>
+        <p className="mt-2 text-sm leading-relaxed text-rust/90">{entity.next_question}</p>
       )}
-      <div className="mt-4 rounded-md border border-red-100 bg-white p-3">
+      <div className="mt-4 rounded-md border border-rust/15 bg-white p-3">
         <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-gray-500">
           What was searched
         </p>
@@ -289,15 +289,22 @@ function ExplainPanel({ entityId }: { entityId: string }) {
     <div>
       <SmoothButton
         onClick={explain}
-        loading={busy}
+        disabled={busy}
         variant="outline"
-        className="text-gray-800 hover:bg-gray-50"
+        className="text-foreground hover:bg-dust/30"
       >
-        {busy ? "Explaining…" : "Explain this entity"}
+        {busy ? (
+          <span className="inline-flex items-center gap-2">
+            <ThinkingDots label="Explaining" />
+            Explaining…
+          </span>
+        ) : (
+          "Explain this entity"
+        )}
       </SmoothButton>
-      {error && <p className="mt-2 text-sm text-red-700">{error}</p>}
+      {error && <p className="mt-2 text-sm text-rust">{error}</p>}
       {explanation && (
-        <div className="mt-4 rounded-lg border border-gray-200 bg-gray-50/60 p-4">
+        <div className="mt-4 rounded-lg border border-dust bg-dust/15 p-4">
           <div className="mb-2">
             <SourceLabel source={explanation.source} />
           </div>
@@ -337,11 +344,11 @@ function MapTab({ centerId, onAct }: { centerId: string; onAct: () => void }) {
     };
   }, []);
 
-  if (error) return <p className="text-sm text-red-700">{error}</p>;
+  if (error) return <p className="text-sm text-rust">{error}</p>;
   if (!graph)
     return (
-      <p className="flex items-center gap-2 text-sm text-gray-400">
-        <MotionLoader variant="orbit" size={18} label="Loading map" />
+      <p className="flex items-center gap-2 text-sm text-muted-foreground">
+        <ThinkingDots label="Loading map" />
         Loading map…
       </p>
     );

@@ -159,7 +159,7 @@ function drawGraph(state: GraphCanvasState): void {
     ctx.beginPath();
     ctx.moveTo(source.x ?? 0, source.y ?? 0);
     ctx.lineTo(target.x ?? 0, target.y ?? 0);
-    ctx.strokeStyle = emphasized ? "#8edcff" : edge.muted ? "#8193a8" : "#8faac0";
+    ctx.strokeStyle = emphasized ? "#cfe3bd" : edge.muted ? "#77856f" : "#90a084";
     ctx.globalAlpha = emphasized ? 0.95 : edge.muted ? 0.28 : 0.42;
     ctx.lineWidth = emphasized ? 2.4 : 0.9 + edge.confidence * 0.75;
     ctx.setLineDash(edge.dashed ? [5, 5] : []);
@@ -178,7 +178,7 @@ function drawGraph(state: GraphCanvasState): void {
     });
     ctx.save();
     if (focused || hovered) {
-      ctx.shadowColor = focused ? "#38bdf8" : node.typeColor;
+      ctx.shadowColor = focused ? "#a3b18a" : node.typeColor;
       ctx.shadowBlur = focused ? 22 : 15;
     }
     traceNode(ctx, node);
@@ -186,13 +186,13 @@ function drawGraph(state: GraphCanvasState): void {
     ctx.globalAlpha = focused || hovered || adjacent ? 1 : 0.86;
     ctx.fill();
     ctx.shadowBlur = 0;
-    ctx.strokeStyle = focused ? "#e0f2fe" : node.typeColor;
+    ctx.strokeStyle = focused ? "#f1f0e9" : node.typeColor;
     ctx.lineWidth = focused ? 3.2 : hovered ? 3 : 2;
     ctx.stroke();
     if (focused) {
       ctx.beginPath();
       ctx.arc(node.x ?? 0, node.y ?? 0, node.radius + 8, 0, Math.PI * 2);
-      ctx.strokeStyle = "rgba(125,211,252,0.45)";
+      ctx.strokeStyle = "rgba(163,177,138,0.5)";
       ctx.lineWidth = 1.5;
       ctx.stroke();
     }
@@ -215,8 +215,8 @@ function drawGraph(state: GraphCanvasState): void {
     ctx.textAlign = "center";
     ctx.textBaseline = "top";
     ctx.lineWidth = 4;
-    ctx.strokeStyle = "#152235";
-    ctx.fillStyle = focused || hovered ? "#ffffff" : "#cbd5e1";
+    ctx.strokeStyle = "#17221c";
+    ctx.fillStyle = focused || hovered ? "#ffffff" : "#ccd4c6";
     const y = point.y + node.radius * state.view.k + 8;
     ctx.strokeText(label, point.x, y);
     ctx.fillText(label, point.x, y);
