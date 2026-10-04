@@ -63,7 +63,11 @@ Pipeline inside :func:`build`
    overlap needs them), GO processes only for seed genes, Studies and Papers all, Investigators
    with at least one surviving edge. Edges below the inclusion rule are not exported and are
    counted per exported disease as coverage rows (source ``"build prune"``); every dropped node
-   group is a ``source:build`` coverage row and a report entry.
+   group is a ``source:build`` coverage row and a report entry. One documented exemption: a Gene
+   whose ``props.gap_probe`` is true (the connection-less gene ``pipeline.export.run_gap_probe``
+   chose for ground-truth test 6 by the rule in ``cluster.yaml``) is exported WITHOUT edges, so
+   its coverage rows reach ``meta.coverage`` and the API answers ``no_supported_route`` with the
+   searches shown (api/CONTRACT.md); no other edgeless node survives.
 7. **Slimming and scrubbing**: ``props`` are reduced to :data:`EXPORT_PROPS_KEEP` per node type
    (long descriptions truncated, Gene xrefs filtered to HGNC / OMIM / UniProt, Paper authors as
    plain names), synonyms capped at :data:`MAX_SYNONYMS`, and every exported string (labels,
@@ -122,6 +126,7 @@ __all__ = [
     "EMAIL_PLACEHOLDER",
     "EVIDENCE_MODULE",
     "EXPORT_PROPS_KEEP",
+    "GAP_PROBE_PROP",
     "HPO_ANNOTATION_RELATIONS",
     "MAX_SYNONYMS",
     "PHONE_PLACEHOLDER",
@@ -200,6 +205,8 @@ EVIDENCE_CLASS_RANK = {"inferred": 0, "observed": 1, "extracted": 2}
 # resolved side was pruned; the API serves coverage-only ids as honest gaps, api/CONTRACT.md).
 COVERAGE_KEEP_PREFIXES = ("seed:", "source:", "claims:", "mech:")
 CLAIMS_COVERAGE_SOURCE = "claims.json endpoint"  # pipeline.graph.evidence.COVERAGE_SOURCE
+# A Gene node carrying this prop (true) is the gap probe: exported without edges (prune_graph).
+GAP_PROBE_PROP = optimuskg.GAP_PROBE_PROP
 
 # Export-time pruning thresholds (pipeline/seeds/cluster.yaml documents them); general rules only.
 DEFAULT_EXPORT_THRESHOLDS: dict[str, Any] = {
@@ -221,7 +228,11 @@ DEFAULT_EXPORT_THRESHOLDS: dict[str, Any] = {
 # Registry, Claim). Type-specific reshaping (Gene xrefs, Drug aliases, Study eligibility, Paper
 # authors, Investigator projects) is in :func:`slim_node`.
 EXPORT_PROPS_KEEP: dict[str, dict[str, int | None]] = {
-    "Gene": {"symbol": None, "name": None, "biotype": None, "xrefs": None, "backbone_id": None},
+    "Gene": {
+        "symbol": None, "name": None, "biotype": None, "xrefs": None, "backbone_id": None,
+        # the gap probe's marker, the rule that chose it and its (zero) backbone counts
+        GAP_PROBE_PROP: None, f"{GAP_PROBE_PROP}_rule": None, f"{GAP_PROBE_PROP}_counts": None,
+    },
     "Disease": {"name": None, "description": 500, "xrefs": None, "backbone_id": None, "ontology": None, "therapeutic_areas": None},
     "Phenotype": {"ic": None, "ic_n_diseases": None, "ic_n_total": None, "backbone_id": None, "description": 300},
     "Drug": {"name": None, "max_phase": None, "drug_type": None, "backbone_id": None, "description": 300, "is_approved": None},
@@ -1016,8 +1027,10 @@ def prune_graph(
             parents_of[child].append(parent)
     keep_diseases = anchors | _ancestors(anchors, parents_of, int(t["include_parent_levels"]))
     # 6. genes: seed genes, evidence-referenced genes (a claim-bearing edge or a resolved claim
-    # endpoint, like Variants in step 8), top N other genes per kept disease
-    keep_genes = set(seed_genes) | (referenced & genes)
+    # endpoint, like Variants in step 8), top N other genes per kept disease, and the gap probe
+    # (module docstring step 6: the one node exported without edges, so its coverage stays visible)
+    gap_probes = {g for g in genes if nodes[g]["props"].get(GAP_PROBE_PROP) is True}
+    keep_genes = set(seed_genes) | (referenced & genes) | gap_probes
     cap_g = int(t["max_genes_per_disease"])
     others: dict[str, list[tuple[float, str]]] = defaultdict(list)
     for key, ok in assoc_ok.items():
@@ -1093,7 +1106,7 @@ def prune_graph(
 
     reasons: dict[str, str] = {
         "Disease": "not anchored by a seed gene (inclusion rule / max_diseases_per_seed_gene), a seed term, an evidence edge or a claim",
-        "Gene": "not a seed gene, not referenced by evidence or a claim, beyond max_genes_per_disease or below the inclusion rule",
+        "Gene": "not a seed gene, not the gap probe, not referenced by evidence or a claim, beyond max_genes_per_disease or below the inclusion rule",
         "Drug": "no edge to a seed gene, no seed drug term, not referenced by evidence or a claim",
         "Variant": "not keep_in_graph, no somatic block, not referenced by a claim",
         "Phenotype": "not annotated to an exported disease (nor an ancestor of one)",
@@ -1126,7 +1139,7 @@ def prune_graph(
         "edges_dropped_by_relation": dict(sorted(dropped_edges.items())),
         "associated_with_below_inclusion_rule": sum(below.values()),
         "diseases": {"direct_via_seed_genes": len(direct), "capped_away_per_seed_gene": capped_away, "term_matched": len(term_diseases), "anchored_by_evidence": len(referenced & diseases), "claim_referenced": len(claim_backbone & diseases), "kept": len(keep_diseases)},
-        "genes": {"seed": len(seed_genes), "anchored_by_evidence": len(referenced & genes), "claim_referenced": len(claim_backbone & genes), "capped_away_per_disease": genes_capped_away, "kept": len(keep_genes)},
+        "genes": {"seed": len(seed_genes), "anchored_by_evidence": len(referenced & genes), "claim_referenced": len(claim_backbone & genes), "gap_probe": sorted(gap_probes), "capped_away_per_disease": genes_capped_away, "kept": len(keep_genes)},
         "drugs": {"kept": len(keep_drugs), "anchored_by_evidence": len(referenced & drugs), "claim_referenced": len(claim_backbone & drugs)},
         "variants": {"kept": len(keep_variants), "claim_referenced": len(claim_refs & variants)},
         "investigators": {"before": len(investigators), "below_min_papers": len(few_papers), "kept": len(investigators & keep)},
