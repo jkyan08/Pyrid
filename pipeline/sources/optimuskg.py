@@ -107,6 +107,18 @@ The loader owns every row it writes (``nodes.source`` / ``edges.source_db`` = ``
 coverage sources starting with ``OptimusKG``): a run first removes the rows of the previous run,
 so changing a threshold cannot leave stale nodes or edges behind.
 
+Export inclusion rule
+---------------------
+The store keeps the wide slice above (so that Lane B's reconciler, which resolves mentions
+against the store's nodes, keeps finding its endpoints); ``pipeline.graph.build`` exports a
+compact graph by applying :func:`disease_gene_included`, the stricter rule defined here next to
+the slice floor so the two definitions sit together: a disease-gene edge is included when a
+curated database is among ``sources.direct`` (``disease_gene_curated_sources``, default
+:data:`DEFAULT_CURATED_SOURCES`) AND ``evidence_score >= disease_gene_min_score``, OR when
+``evidence_score >= disease_gene_high_score`` (default :data:`DEFAULT_HIGH_SCORE`). An edge
+without an ``evidence_score`` (not an OptimusKG aggregate) is included. The thresholds live in
+``pipeline/seeds/cluster.yaml``.
+
 No identifier value is written in this module; only formats and names (README hard rule 2).
 """
 
@@ -136,6 +148,8 @@ from pipeline.store import Store
 __all__ = [
     "ASPECT_RELATIONS",
     "ChecksumMismatch",
+    "DEFAULT_CURATED_SOURCES",
+    "DEFAULT_HIGH_SCORE",
     "DatasetFile",
     "DatasetInfo",
     "GeneResolutionError",
@@ -150,11 +164,13 @@ __all__ = [
     "cap_drugs_per_disease",
     "cap_other_genes",
     "clear_previous",
+    "disease_gene_included",
     "download_file",
     "drug_disease_relation",
     "drug_gene_relation",
     "ensure_files",
     "fetch_dataset",
+    "inclusion_rule_text",
     "load",
     "md5_of",
     "most_specific",
@@ -278,6 +294,11 @@ PROPS_DROP: dict[str, frozenset[str]] = {
 DEFAULT_MOST_SPECIFIC = True
 DEFAULT_MAX_OTHER_GENES = 25
 DEFAULT_MAX_DRUGS = 25
+# Export inclusion rule (module docstring "Export inclusion rule"): curated direct sources, as the
+# backbone spells them in `sources.direct`, and the score that admits an edge on its own.
+DEFAULT_CURATED_SOURCES: tuple[str, ...] = ("DISGENET", "ORPHANET", "CLINGEN", "OMIM")
+DEFAULT_HIGH_SCORE = 0.6
+DEFAULT_MIN_SCORE = 0.3
 # Drug -> disease relations in the order a capped list prefers them.
 DRUG_DISEASE_ORDER = {"INDICATION": 0, "OFF_LABEL_USE": 1, CONTRAINDICATION: 2}
 
@@ -714,6 +735,48 @@ def _passes_expr(thresholds: Mapping[str, Any]) -> pl.Expr:
     if thresholds.get("keep_disgenet_direct"):
         expr = expr | _prop("sources").struct.field("direct").list.contains(DISGENET)
     return expr
+
+
+def _curated_sources(thresholds: Mapping[str, Any]) -> set[str]:
+    raw = thresholds.get("disease_gene_curated_sources")
+    names = raw if isinstance(raw, (list, tuple, set)) else DEFAULT_CURATED_SOURCES
+    return {str(s).strip().upper() for s in names if str(s).strip()}
+
+
+def disease_gene_included(props: Mapping[str, Any], thresholds: Mapping[str, Any] | None = None) -> bool:
+    """The EXPORT inclusion rule for a disease-gene edge (module docstring): a curated database
+    among ``sources.direct`` AND ``evidence_score >= disease_gene_min_score``, OR
+    ``evidence_score >= disease_gene_high_score``. ``sources`` may be the backbone struct
+    (``{"direct": [...], "indirect": [...]}``) or a plain list. No ``evidence_score`` -> included
+    (the edge is not an OptimusKG aggregate)."""
+    t = thresholds or {}
+    raw_score = props.get("evidence_score")
+    if raw_score is None or isinstance(raw_score, bool):
+        return True
+    try:
+        score = float(raw_score)
+    except (TypeError, ValueError):
+        return True
+    min_score = float(t.get("disease_gene_min_score", DEFAULT_MIN_SCORE))
+    high_score = float(t.get("disease_gene_high_score", DEFAULT_HIGH_SCORE))
+    if score >= high_score:
+        return True
+    if score < min_score:
+        return False
+    sources = props.get("sources")
+    direct = sources.get("direct") if isinstance(sources, Mapping) else sources
+    direct_names = {str(s).strip().upper() for s in (direct or []) if isinstance(s, str)}
+    return bool(direct_names & _curated_sources(t))
+
+
+def inclusion_rule_text(thresholds: Mapping[str, Any] | None = None) -> str:
+    """One line describing :func:`disease_gene_included` with the thresholds in force."""
+    t = thresholds or {}
+    curated = ", ".join(sorted(_curated_sources(t)))
+    return (
+        f"direct source in [{curated}] and evidence_score >= {float(t.get('disease_gene_min_score', DEFAULT_MIN_SCORE))}, "
+        f"or evidence_score >= {float(t.get('disease_gene_high_score', DEFAULT_HIGH_SCORE))}"
+    )
 
 
 def drug_gene_relation(relation: str | None, props: Mapping[str, Any]) -> str:

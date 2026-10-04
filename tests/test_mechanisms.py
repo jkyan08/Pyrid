@@ -348,6 +348,56 @@ def test_coverage_rows_are_dated_by_the_disease_text_not_the_build(tmp_path: Pat
     assert by_entity["seed:mechanism:MOCKGENE9:GoF"] == "2026-12-24", "seed-key rows have no node and carry the build day"
 
 
+def test_r4_edge_verified_by_a_claim_loses_its_seed_only_provenance(store: Store) -> None:
+    """Hard rule 10: once a supporting claim upgrades a curated edge to ``extracted``, the seed
+    row's reason, its germline origin and the seed-file source must not surface as sourced."""
+    row = {"gene": "MOCKGENE2", "direction": "DN", "origin": "germline", "disease_terms": ["mock disorder with loss of function 4"], "cluster_doc_confidence": "Background", "note": "mock"}
+    bundle = _bundle([_claim("c_000001", "mock:disease:4", "mech:MOCKGENE2:DN", "supports", "Mock sentence A about the mock mechanism.", "cohort", 12)])
+    r = mech.derive(store, seeds([row]), bundle, now=NOW)
+    e = edge_for(r, "mock:disease:4", "mech:MOCKGENE2:DN")
+    assert e["evidence_class"] == "extracted" and e["confidence"] == 0.8 and e["status"] == "supported" and e["supporting"] == ["c_000001"]
+    assert e["attributes"] == {"labels": ["promising"]}, "no reason, no seed-only origin, no curated_unverified"
+    assert e["sources"] == [{"kind": "db", "id": "MOCKDIS_4", "date": TS}, {"kind": "db", "id": "mock:paper:1", "date": "2026"}], "retrieved records only"
+    prior = e["confidence_basis"]["db_text"]
+    assert prior["rule"] == "R4.curated" and prior["seed_record"] == {"kind": "db", "id": "mock seed file MOCKGENE2:DN", "date": SEED_DATE}
+    assert r.report["curated_edges"] == 1 and r.report["by_rule"] == {**{k: v for k, v in r.report["by_rule"].items() if k not in ("R3.claims", "R4.curated")}, "R3.claims": 1, "R4.curated": 1}
+    # the Background origin still never reaches the observed disease-gene edge
+    assert ("mock:disease:4", "mock:gene:2") not in r.origins
+
+
+def test_r4_origin_comes_from_the_disease_text_before_the_seed_row(store: Store) -> None:
+    """The seed supplies the direction only: disease 7 ("Mock X-linked disorder") says germline in
+    its own text, so the curated row's (deliberately wrong) somatic origin is not used, and the
+    text-derived origin survives a claim upgrade as a database fact."""
+    row = {"gene": "MOCKGENE4", "direction": "LoF", "origin": "somatic", "disease_terms": ["Mock immunodeficiency 7"], "cluster_doc_confidence": "Background", "note": "mock"}
+    r = mech.derive(store, seeds([row]), now=NOW)
+    e = edge_for(r, "mock:disease:7", "mech:MOCKGENE4:LoF")
+    b = e["confidence_basis"]
+    assert e["attributes"]["origin"] == "germline" and b["origin_rule"] == "R2.germline" and b["origin_matched_text"] == ["X-linked"] and b["origin_source"] == "disease text"
+    assert ("mock:disease:7", "mock:gene:4") not in r.origins, "the direction is still curated: nothing propagates onto the observed disease-gene edge"
+    # disease 4 has no origin wording: the seed row's origin is the fallback and says so
+    row4 = {"gene": "MOCKGENE2", "direction": "DN", "origin": "germline", "disease_terms": ["mock disorder with loss of function 4"], "cluster_doc_confidence": "Background", "note": "mock"}
+    e4 = edge_for(mech.derive(store, seeds([row4]), now=NOW), "mock:disease:4", "mech:MOCKGENE2:DN")
+    assert e4["attributes"]["origin"] == "germline" and e4["confidence_basis"]["origin_rule"] is None and e4["confidence_basis"]["origin_source"] == "seed row"
+    # upgraded by a claim: the text-derived origin stays, the seed-only reason and source go
+    bundle = _bundle([_claim("c_000001", "mock:disease:7", "mech:MOCKGENE4:LoF", "supports", "Mock sentence A about the mock mechanism.", "case_series", 4)])
+    up = edge_for(mech.derive(store, seeds([row]), bundle, now=NOW), "mock:disease:7", "mech:MOCKGENE4:LoF")
+    assert up["evidence_class"] == "extracted" and up["attributes"] == {"origin": "germline", "labels": ["promising", "small_n"]}
+    assert [s["id"] for s in up["sources"]] == ["MOCKDIS_7", "mock:paper:1"] and up["confidence_basis"]["db_text"]["seed_record"]["id"] == "mock seed file MOCKGENE4:LoF"
+
+
+def test_strip_curated_provenance_keeps_a_somatic_or_text_derived_origin() -> None:
+    somatic = {"target": "mech:MOCKGENE5:GoF:somatic", "attributes": {"origin": "somatic", "reason": "curated seed from cluster doc (Background)", "labels": ["curated_unverified"]}, "sources": [mech.seed_source_record("", "MOCKGENE5", "GoF", SEED_DATE), {"kind": "db", "id": "MOCKDIS_6", "date": TS}]}
+    prior = {"rule": "R4.curated", "seed_source": ""}
+    mech.strip_curated_provenance(somatic, prior)
+    assert somatic["attributes"] == {"origin": "somatic", "labels": ["curated_unverified"]}, "the mechanism id itself says somatic"
+    assert somatic["sources"] == [{"kind": "db", "id": "MOCKDIS_6", "date": TS}] and prior["seed_record"] == {"kind": "db", "id": "curated mechanism seeds MOCKGENE5:GoF", "date": SEED_DATE}
+    text_rule = {"target": "mech:MOCKGENE3:LoF", "attributes": {"origin": "germline"}, "sources": [{"kind": "db", "id": "MOCKDIS_2", "date": TS}]}
+    untouched = dict(text_rule["attributes"])
+    mech.strip_curated_provenance(text_rule, {"rule": "R1.lof", "origin_rule": "R2.germline"})
+    assert text_rule["attributes"] == untouched and text_rule["sources"][0]["id"] == "MOCKDIS_2", "a non-curated prior basis is left alone"
+
+
 def test_r4_without_seed_rows_is_skipped(store: Store) -> None:
     r = mech.derive(store, seeds(None), now=NOW)
     assert r.report["curated_edges"] == 0 and "R4.curated" not in r.report["by_rule"]
@@ -398,7 +448,7 @@ def test_r3_claims_add_and_upgrade_edges(store: Store) -> None:
     assert new["evidence_class"] == "extracted" and new["source_db"] == mech.CLAIMS_SOURCE
     assert new["confidence"] == 0.6 and new["status"] == "small_n"
     assert new["supporting"] == ["c_000001"] and new["contradicting"] == []
-    assert new["attributes"] == {"labels": ["promising", "small_n", "preprint"], "preprint": True}
+    assert new["attributes"] == {"labels": ["promising", "small_n"]}, "a mock paper without a pmid is not a doi: preprint (shared design D)"
     assert new["sources"] == [{"kind": "db", "id": "mock:paper:1", "date": "2026"}]
     assert new["confidence_basis"]["rule"] == "R3.claims" and new["confidence_basis"]["claims"][0]["study_type"] == "case_series"
 
@@ -407,7 +457,7 @@ def test_r3_claims_add_and_upgrade_edges(store: Store) -> None:
     assert upgraded["confidence"] == 0.8, "max(R1 0.6, cohort 0.8)"
     assert upgraded["supporting"] == ["c_000002"] and upgraded["contradicting"] == ["c_000003"]
     assert upgraded["confidence_basis"]["db_text"]["rule"] == "R1.gof"
-    assert upgraded["attributes"]["labels"] == ["promising", "contested", "preprint"] and upgraded["attributes"]["preprint"] is True
+    assert upgraded["attributes"]["labels"] == ["promising", "contested"] and "preprint" not in upgraded["attributes"]
     assert upgraded["sources"][0]["kind"] == "db" and upgraded["sources"][0]["id"] == "MOCKDIS_1"
 
     variant = edge_for(r, "mock:variant:1", "mech:MOCKGENE1:GoF")

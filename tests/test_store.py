@@ -453,6 +453,14 @@ def test_cluster_seeds_shape() -> None:
         "disease_gene_most_specific": True,
         "max_other_genes_per_disease": 25,
         "max_drugs_per_disease": 25,
+        # export inclusion rule and caps (pipeline/graph/build.py prune_graph)
+        "disease_gene_curated_sources": ["DISGENET", "ORPHANET", "CLINGEN", "OMIM"],
+        "disease_gene_high_score": 0.6,
+        # tightened for the 8 MB graph.json budget (cluster.yaml documents the measured effect)
+        "max_diseases_per_seed_gene": 25,
+        "max_genes_per_disease": 5,
+        "min_papers_per_investigator": 3,
+        "keep_orcid_investigators": False,
     }
     family = re.compile(seeds["pathway_family_label_regex"], re.IGNORECASE)
     assert family.search("Interleukin-6 signaling")
