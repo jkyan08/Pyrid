@@ -44,6 +44,10 @@ def _live_call(func_name: str, *args: Any, **kwargs: Any) -> dict[str, Any] | No
     except Exception:
         logger.warning("pipeline.llm.%s raised; using fallback", func_name, exc_info=True)
         return None
+    if result is None:
+        # lane B's documented contract: None == no validated live answer (e.g. no
+        # model key configured) — quiet, expected; the caller falls back.
+        return None
     if not isinstance(result, dict) or "text" not in result:
         logger.warning("pipeline.llm.%s returned a malformed result; using fallback", func_name)
         return None
