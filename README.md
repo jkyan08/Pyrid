@@ -4,6 +4,8 @@
 
 A knowledge graph and web app that helps a patient group facing an untreated rare disease find who shares their disease's biology, what useful work already exists, and what to do next — with every connection backed by a source, and an honest "we don't know" where the evidence runs out.
 
+**Live demo:** https://pyridrare-disease-atlasrare-disease-atlas.replit.app
+
 Built for Hack-Nation's 7th Global AI Hackathon, Challenge 05: *AI Atlas for the World's Rare Diseases* (OpenAI × Buffalo Initiative).
 
 > **Research navigation, not medical advice.** The atlas contains no dosing information. Outreach drafts are drafts; nothing is ever sent.
@@ -29,7 +31,7 @@ We test the idea on one compact, well-understood family of diseases — the **JA
 
 ## Try it
 
-Run it locally (see [Run it](#run-it)), then follow one of these journeys.
+Open the [live demo](https://pyridrare-disease-atlasrare-disease-atlas.replit.app) or run it locally (see [Run it](#run-it)), then follow one of these journeys.
 
 **Maria — patient-group leader.** Her child carries a STAT1 gain-of-function variant.
 1. Search **`STAT1 T419R`** (or `STAT1 R274Q`): the variant links to its mechanism, *STAT1 gain of function*, through variant-specific literature claims.
